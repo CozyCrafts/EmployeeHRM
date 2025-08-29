@@ -262,7 +262,7 @@ Partial Class EmployeeManagement_frm
         Label1.AutoSize = True
         Label1.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label1.ForeColor = Color.Black
-        Label1.Location = New Point(124, 46)
+        Label1.Location = New Point(129, 46)
         Label1.Name = "Label1"
         Label1.Size = New Size(161, 27)
         Label1.TabIndex = 13
@@ -273,7 +273,7 @@ Partial Class EmployeeManagement_frm
         Label5.AutoSize = True
         Label5.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label5.ForeColor = Color.Black
-        Label5.Location = New Point(690, 42)
+        Label5.Location = New Point(704, 42)
         Label5.Name = "Label5"
         Label5.Size = New Size(88, 27)
         Label5.TabIndex = 14
@@ -284,7 +284,7 @@ Partial Class EmployeeManagement_frm
         Label6.AutoSize = True
         Label6.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label6.ForeColor = Color.Black
-        Label6.Location = New Point(149, 90)
+        Label6.Location = New Point(154, 90)
         Label6.Name = "Label6"
         Label6.Size = New Size(136, 27)
         Label6.TabIndex = 15
@@ -295,7 +295,7 @@ Partial Class EmployeeManagement_frm
         Label12.AutoSize = True
         Label12.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label12.ForeColor = Color.Black
-        Label12.Location = New Point(15, 130)
+        Label12.Location = New Point(21, 130)
         Label12.Name = "Label12"
         Label12.Size = New Size(270, 27)
         Label12.TabIndex = 19
@@ -343,7 +343,7 @@ Partial Class EmployeeManagement_frm
         Label21.AutoSize = True
         Label21.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label21.ForeColor = Color.Black
-        Label21.Location = New Point(110, 179)
+        Label21.Location = New Point(117, 179)
         Label21.Name = "Label21"
         Label21.Size = New Size(175, 27)
         Label21.TabIndex = 38
@@ -361,7 +361,7 @@ Partial Class EmployeeManagement_frm
         Label20.AutoSize = True
         Label20.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label20.ForeColor = Color.Black
-        Label20.Location = New Point(178, 219)
+        Label20.Location = New Point(186, 219)
         Label20.Name = "Label20"
         Label20.Size = New Size(107, 27)
         Label20.TabIndex = 36
@@ -379,7 +379,7 @@ Partial Class EmployeeManagement_frm
         Label16.AutoSize = True
         Label16.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label16.ForeColor = Color.Black
-        Label16.Location = New Point(638, 175)
+        Label16.Location = New Point(651, 175)
         Label16.Name = "Label16"
         Label16.Size = New Size(142, 27)
         Label16.TabIndex = 34
@@ -394,7 +394,7 @@ Partial Class EmployeeManagement_frm
         ' 
         ' TextBox6
         ' 
-        TextBox6.Location = New Point(786, 133)
+        TextBox6.Location = New Point(788, 133)
         TextBox6.Name = "TextBox6"
         TextBox6.Size = New Size(143, 26)
         TextBox6.TabIndex = 32
@@ -415,7 +415,7 @@ Partial Class EmployeeManagement_frm
         Label11.AutoSize = True
         Label11.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label11.ForeColor = Color.Black
-        Label11.Location = New Point(715, 132)
+        Label11.Location = New Point(727, 132)
         Label11.Name = "Label11"
         Label11.Size = New Size(65, 27)
         Label11.TabIndex = 29
@@ -423,7 +423,7 @@ Partial Class EmployeeManagement_frm
         ' 
         ' TextBox5
         ' 
-        TextBox5.Location = New Point(786, 90)
+        TextBox5.Location = New Point(788, 90)
         TextBox5.Name = "TextBox5"
         TextBox5.Size = New Size(365, 26)
         TextBox5.TabIndex = 28
@@ -433,7 +433,7 @@ Partial Class EmployeeManagement_frm
         Label10.AutoSize = True
         Label10.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label10.ForeColor = Color.Black
-        Label10.Location = New Point(651, 89)
+        Label10.Location = New Point(664, 89)
         Label10.Name = "Label10"
         Label10.Size = New Size(128, 27)
         Label10.TabIndex = 27
@@ -455,7 +455,7 @@ Partial Class EmployeeManagement_frm
         ' 
         ' TextBox1
         ' 
-        TextBox1.Location = New Point(786, 45)
+        TextBox1.Location = New Point(788, 45)
         TextBox1.Name = "TextBox1"
         TextBox1.Size = New Size(365, 26)
         TextBox1.TabIndex = 24
@@ -625,7 +625,7 @@ Partial Class EmployeeManagement_frm
         Label17.AutoSize = True
         Label17.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label17.ForeColor = Color.Black
-        Label17.Location = New Point(167, 76)
+        Label17.Location = New Point(192, 76)
         Label17.Name = "Label17"
         Label17.Size = New Size(105, 27)
         Label17.TabIndex = 18
@@ -636,7 +636,7 @@ Partial Class EmployeeManagement_frm
         Label18.AutoSize = True
         Label18.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label18.ForeColor = Color.Black
-        Label18.Location = New Point(133, 117)
+        Label18.Location = New Point(156, 117)
         Label18.Name = "Label18"
         Label18.Size = New Size(140, 27)
         Label18.TabIndex = 17
@@ -647,7 +647,7 @@ Partial Class EmployeeManagement_frm
         Label19.AutoSize = True
         Label19.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label19.ForeColor = Color.Black
-        Label19.Location = New Point(160, 31)
+        Label19.Location = New Point(184, 31)
         Label19.Name = "Label19"
         Label19.Size = New Size(112, 27)
         Label19.TabIndex = 16
