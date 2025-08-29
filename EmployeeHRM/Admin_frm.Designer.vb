@@ -22,9 +22,15 @@ Partial Class Admin_frm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
-        Me.Text = "Admin_frm"
+        SuspendLayout()
+        ' 
+        ' Admin_frm
+        ' 
+        AutoScaleDimensions = New SizeF(8F, 20F)
+        AutoScaleMode = AutoScaleMode.Font
+        ClientSize = New Size(1902, 1033)
+        Name = "Admin_frm"
+        Text = "Admin_frm"
+        ResumeLayout(False)
     End Sub
 End Class
