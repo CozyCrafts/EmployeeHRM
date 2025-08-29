@@ -11,4 +11,8 @@ Public Class Profile_frm
         End If
 
     End Sub
+
+    Private Sub Profile_frm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.FormBorderStyle = FormBorderStyle.None
+    End Sub
 End Class

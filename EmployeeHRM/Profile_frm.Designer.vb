@@ -33,7 +33,7 @@ Partial Class Profile_frm
         LogOutbtn.FlatStyle = FlatStyle.Flat
         LogOutbtn.Font = New Font("Microsoft Sans Serif", 10.2F)
         LogOutbtn.ForeColor = Color.White
-        LogOutbtn.Location = New Point(13, 648)
+        LogOutbtn.Location = New Point(12, 984)
         LogOutbtn.Name = "LogOutbtn"
         LogOutbtn.Size = New Size(323, 37)
         LogOutbtn.TabIndex = 18
@@ -42,7 +42,7 @@ Partial Class Profile_frm
         ' 
         ' PictureBox1
         ' 
-        PictureBox1.BackColor = Color.DarkCyan
+        PictureBox1.BackColor = Color.SkyBlue
         PictureBox1.Location = New Point(-1, 0)
         PictureBox1.Name = "PictureBox1"
         PictureBox1.Size = New Size(346, 1045)
