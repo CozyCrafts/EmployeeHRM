@@ -61,7 +61,6 @@ Partial Class EmployeeManagement_frm
         Button2 = New Button()
         Button1 = New Button()
         PictureBox1 = New PictureBox()
-        Label13 = New Label()
         TextBox7 = New TextBox()
         Label14 = New Label()
         GroupBox2 = New GroupBox()
@@ -496,15 +495,6 @@ Partial Class EmployeeManagement_frm
         PictureBox1.TabIndex = 20
         PictureBox1.TabStop = False
         ' 
-        ' Label13
-        ' 
-        Label13.AutoSize = True
-        Label13.Location = New Point(0, 0)
-        Label13.Name = "Label13"
-        Label13.Size = New Size(61, 20)
-        Label13.TabIndex = 21
-        Label13.Text = "Label13"
-        ' 
         ' TextBox7
         ' 
         TextBox7.Location = New Point(601, 111)
@@ -671,7 +661,6 @@ Partial Class EmployeeManagement_frm
         Controls.Add(GroupBox2)
         Controls.Add(Label14)
         Controls.Add(TextBox7)
-        Controls.Add(Label13)
         Controls.Add(GroupBox1)
         Controls.Add(adminheader_pnl)
         Controls.Add(Panel1)
@@ -724,7 +713,6 @@ Partial Class EmployeeManagement_frm
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents EmployeeIDlbl As Label
-    Friend WithEvents Label13 As Label
     Friend WithEvents TextBox7 As TextBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents TextBox8 As TextBox
