@@ -27,8 +27,8 @@ Partial Class Admin_frm
         Panel1 = New Panel()
         Label8 = New Label()
         Label7 = New Label()
-        Label6 = New Label()
-        Label5 = New Label()
+        Payslipslbl = New Label()
+        SalaryProcessinglbl = New Label()
         Label4 = New Label()
         lblProfile = New Label()
         lblEmployees = New Label()
@@ -45,7 +45,7 @@ Partial Class Admin_frm
         ' 
         adminheader_pnl.BackColor = Color.White
         adminheader_pnl.Controls.Add(Label2)
-        adminheader_pnl.Location = New Point(338, -40)
+        adminheader_pnl.Location = New Point(338, -17)
         adminheader_pnl.Name = "adminheader_pnl"
         adminheader_pnl.Size = New Size(1608, 107)
         adminheader_pnl.TabIndex = 0
@@ -54,7 +54,7 @@ Partial Class Admin_frm
         ' 
         Label2.AutoSize = True
         Label2.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(76, 59)
+        Label2.Location = New Point(72, 49)
         Label2.Name = "Label2"
         Label2.Size = New Size(186, 34)
         Label2.TabIndex = 0
@@ -65,8 +65,8 @@ Partial Class Admin_frm
         Panel1.BackColor = Color.SteelBlue
         Panel1.Controls.Add(Label8)
         Panel1.Controls.Add(Label7)
-        Panel1.Controls.Add(Label6)
-        Panel1.Controls.Add(Label5)
+        Panel1.Controls.Add(Payslipslbl)
+        Panel1.Controls.Add(SalaryProcessinglbl)
         Panel1.Controls.Add(Label4)
         Panel1.Controls.Add(lblProfile)
         Panel1.Controls.Add(lblEmployees)
@@ -77,7 +77,7 @@ Partial Class Admin_frm
         Panel1.Controls.Add(lblMain)
         Panel1.Location = New Point(-6, -1)
         Panel1.Name = "Panel1"
-        Panel1.Size = New Size(371, 1045)
+        Panel1.Size = New Size(371, 1201)
         Panel1.TabIndex = 1
         ' 
         ' Label8
@@ -85,7 +85,7 @@ Partial Class Admin_frm
         Label8.AutoSize = True
         Label8.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label8.ForeColor = Color.White
-        Label8.Location = New Point(41, 20)
+        Label8.Location = New Point(35, 33)
         Label8.Name = "Label8"
         Label8.Size = New Size(197, 34)
         Label8.TabIndex = 12
@@ -96,40 +96,40 @@ Partial Class Admin_frm
         Label7.AutoSize = True
         Label7.Font = New Font("Century Gothic", 13.8F, FontStyle.Underline, GraphicsUnit.Point, CByte(0))
         Label7.ForeColor = Color.White
-        Label7.Location = New Point(36, 41)
+        Label7.Location = New Point(30, 67)
         Label7.Name = "Label7"
         Label7.Size = New Size(312, 27)
         Label7.TabIndex = 11
         Label7.Text = "                                                  "
         ' 
-        ' Label6
+        ' Payslipslbl
         ' 
-        Label6.AutoSize = True
-        Label6.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label6.ForeColor = Color.White
-        Label6.Location = New Point(64, 538)
-        Label6.Name = "Label6"
-        Label6.Size = New Size(101, 27)
-        Label6.TabIndex = 10
-        Label6.Text = "Payslips"
+        Payslipslbl.AutoSize = True
+        Payslipslbl.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Payslipslbl.ForeColor = Color.White
+        Payslipslbl.Location = New Point(58, 564)
+        Payslipslbl.Name = "Payslipslbl"
+        Payslipslbl.Size = New Size(101, 27)
+        Payslipslbl.TabIndex = 10
+        Payslipslbl.Text = "Payslips"
         ' 
-        ' Label5
+        ' SalaryProcessinglbl
         ' 
-        Label5.AutoSize = True
-        Label5.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label5.ForeColor = Color.White
-        Label5.Location = New Point(64, 496)
-        Label5.Name = "Label5"
-        Label5.Size = New Size(206, 27)
-        Label5.TabIndex = 9
-        Label5.Text = "Salary Processing"
+        SalaryProcessinglbl.AutoSize = True
+        SalaryProcessinglbl.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        SalaryProcessinglbl.ForeColor = Color.White
+        SalaryProcessinglbl.Location = New Point(58, 522)
+        SalaryProcessinglbl.Name = "SalaryProcessinglbl"
+        SalaryProcessinglbl.Size = New Size(206, 27)
+        SalaryProcessinglbl.TabIndex = 9
+        SalaryProcessinglbl.Text = "Salary Processing"
         ' 
         ' Label4
         ' 
         Label4.AutoSize = True
         Label4.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label4.ForeColor = Color.White
-        Label4.Location = New Point(41, 457)
+        Label4.Location = New Point(35, 483)
         Label4.Name = "Label4"
         Label4.Size = New Size(90, 22)
         Label4.TabIndex = 8
@@ -140,7 +140,7 @@ Partial Class Admin_frm
         lblProfile.AutoSize = True
         lblProfile.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblProfile.ForeColor = Color.White
-        lblProfile.Location = New Point(64, 302)
+        lblProfile.Location = New Point(58, 328)
         lblProfile.Name = "lblProfile"
         lblProfile.Size = New Size(211, 27)
         lblProfile.TabIndex = 7
@@ -151,7 +151,7 @@ Partial Class Admin_frm
         lblEmployees.AutoSize = True
         lblEmployees.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblEmployees.ForeColor = Color.White
-        lblEmployees.Location = New Point(64, 347)
+        lblEmployees.Location = New Point(58, 373)
         lblEmployees.Name = "lblEmployees"
         lblEmployees.Size = New Size(279, 27)
         lblEmployees.TabIndex = 6
@@ -162,7 +162,7 @@ Partial Class Admin_frm
         lblLeaveManagement.AutoSize = True
         lblLeaveManagement.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblLeaveManagement.ForeColor = Color.White
-        lblLeaveManagement.Location = New Point(64, 390)
+        lblLeaveManagement.Location = New Point(58, 416)
         lblLeaveManagement.Name = "lblLeaveManagement"
         lblLeaveManagement.Size = New Size(248, 27)
         lblLeaveManagement.TabIndex = 5
@@ -173,7 +173,7 @@ Partial Class Admin_frm
         lblManageEmployees.AutoSize = True
         lblManageEmployees.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblManageEmployees.ForeColor = Color.White
-        lblManageEmployees.Location = New Point(64, 255)
+        lblManageEmployees.Location = New Point(58, 281)
         lblManageEmployees.Name = "lblManageEmployees"
         lblManageEmployees.Size = New Size(240, 27)
         lblManageEmployees.TabIndex = 4
@@ -184,7 +184,7 @@ Partial Class Admin_frm
         Label3.AutoSize = True
         Label3.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label3.ForeColor = Color.White
-        Label3.Location = New Point(41, 218)
+        Label3.Location = New Point(35, 244)
         Label3.Name = "Label3"
         Label3.Size = New Size(106, 22)
         Label3.TabIndex = 3
@@ -195,7 +195,7 @@ Partial Class Admin_frm
         lblDashboard.AutoSize = True
         lblDashboard.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblDashboard.ForeColor = Color.White
-        lblDashboard.Location = New Point(64, 145)
+        lblDashboard.Location = New Point(58, 171)
         lblDashboard.Name = "lblDashboard"
         lblDashboard.Size = New Size(138, 27)
         lblDashboard.TabIndex = 2
@@ -206,7 +206,7 @@ Partial Class Admin_frm
         lblMain.AutoSize = True
         lblMain.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblMain.ForeColor = Color.White
-        lblMain.Location = New Point(41, 101)
+        lblMain.Location = New Point(35, 127)
         lblMain.Name = "lblMain"
         lblMain.Size = New Size(57, 22)
         lblMain.TabIndex = 1
@@ -217,12 +217,13 @@ Partial Class Admin_frm
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = SystemColors.InactiveBorder
-        ClientSize = New Size(1902, 1033)
+        ClientSize = New Size(1781, 1033)
         Controls.Add(Panel1)
         Controls.Add(adminheader_pnl)
         Name = "Admin_frm"
         StartPosition = FormStartPosition.CenterScreen
         Text = "Admin_frm"
+        WindowState = FormWindowState.Maximized
         adminheader_pnl.ResumeLayout(False)
         adminheader_pnl.PerformLayout()
         Panel1.ResumeLayout(False)
@@ -240,8 +241,8 @@ Partial Class Admin_frm
     Friend WithEvents lblManageEmployees As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents lblMain As Label
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Label5 As Label
+    Friend WithEvents Payslipslbl As Label
+    Friend WithEvents SalaryProcessinglbl As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents lblDashboard As Label
     Friend WithEvents Label8 As Label

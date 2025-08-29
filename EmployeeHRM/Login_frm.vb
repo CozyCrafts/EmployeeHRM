@@ -7,9 +7,11 @@
         If cmbRole.Text = "Admin" Then
             Admin_frm.Show()
             Me.Hide()
-        Else
+        ElseIf cmbRole.Text = "Employee" Then
             Employee_Dashboard.Show()
             Me.Hide()
+        Else
+            MessageBox.Show("Select a valid role", "Invalid Role", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
     End Sub
 End Class
