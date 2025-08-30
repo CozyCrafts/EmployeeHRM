@@ -25,8 +25,8 @@ Partial Class LeaveManagement_frm
         Panel1 = New Panel()
         Label8 = New Label()
         Label7 = New Label()
-        Label6 = New Label()
-        Label5 = New Label()
+        lblPayslips = New Label()
+        lblSalary = New Label()
         Label4 = New Label()
         lblProfile = New Label()
         lblEmployees = New Label()
@@ -43,8 +43,8 @@ Partial Class LeaveManagement_frm
         Panel1.BackColor = Color.SteelBlue
         Panel1.Controls.Add(Label8)
         Panel1.Controls.Add(Label7)
-        Panel1.Controls.Add(Label6)
-        Panel1.Controls.Add(Label5)
+        Panel1.Controls.Add(lblPayslips)
+        Panel1.Controls.Add(lblSalary)
         Panel1.Controls.Add(Label4)
         Panel1.Controls.Add(lblProfile)
         Panel1.Controls.Add(lblEmployees)
@@ -80,27 +80,27 @@ Partial Class LeaveManagement_frm
         Label7.TabIndex = 11
         Label7.Text = "                                                  "
         ' 
-        ' Label6
+        ' lblPayslips
         ' 
-        Label6.AutoSize = True
-        Label6.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label6.ForeColor = Color.White
-        Label6.Location = New Point(64, 538)
-        Label6.Name = "Label6"
-        Label6.Size = New Size(101, 27)
-        Label6.TabIndex = 10
-        Label6.Text = "Payslips"
+        lblPayslips.AutoSize = True
+        lblPayslips.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblPayslips.ForeColor = Color.White
+        lblPayslips.Location = New Point(64, 538)
+        lblPayslips.Name = "lblPayslips"
+        lblPayslips.Size = New Size(101, 27)
+        lblPayslips.TabIndex = 10
+        lblPayslips.Text = "Payslips"
         ' 
-        ' Label5
+        ' lblSalary
         ' 
-        Label5.AutoSize = True
-        Label5.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label5.ForeColor = Color.White
-        Label5.Location = New Point(64, 496)
-        Label5.Name = "Label5"
-        Label5.Size = New Size(206, 27)
-        Label5.TabIndex = 9
-        Label5.Text = "Salary Processing"
+        lblSalary.AutoSize = True
+        lblSalary.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblSalary.ForeColor = Color.White
+        lblSalary.Location = New Point(64, 496)
+        lblSalary.Name = "lblSalary"
+        lblSalary.Size = New Size(206, 27)
+        lblSalary.TabIndex = 9
+        lblSalary.Text = "Salary Processing"
         ' 
         ' Label4
         ' 
@@ -194,7 +194,7 @@ Partial Class LeaveManagement_frm
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1902, 1033)
+        ClientSize = New Size(1781, 1033)
         Controls.Add(Panel1)
         Name = "LeaveManagement_frm"
         Text = "LeaveManagement_frm"
@@ -206,8 +206,8 @@ Partial Class LeaveManagement_frm
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Label8 As Label
     Friend WithEvents Label7 As Label
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Label5 As Label
+    Friend WithEvents lblPayslips As Label
+    Friend WithEvents lblSalary As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents lblProfile As Label
     Friend WithEvents lblEmployees As Label

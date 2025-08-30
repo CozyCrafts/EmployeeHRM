@@ -1,5 +1,9 @@
 ﻿Public Class EmployeeManagement_frm
     Private Sub EmployeeManagement_frm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        OpenCon()
+        MsgBox("Database Connected")
+        dbCon.Close()
+
         Me.FormBorderStyle = FormBorderStyle.None
     End Sub
 
@@ -32,7 +36,7 @@
         Me.Hide()
     End Sub
 
-    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
     End Sub
 End Class

@@ -58,9 +58,9 @@ Partial Class EmployeeManagement_frm
         TextBox2 = New TextBox()
         TextBox1 = New TextBox()
         EmployeeIDlbl = New Label()
-        Button2 = New Button()
-        Button1 = New Button()
-        PictureBox1 = New PictureBox()
+        btnAddPic = New Button()
+        btnUpdatePic = New Button()
+        pbEmployee = New PictureBox()
         TextBox7 = New TextBox()
         Label14 = New Label()
         GroupBox2 = New GroupBox()
@@ -77,10 +77,13 @@ Partial Class EmployeeManagement_frm
         Label18 = New Label()
         Label19 = New Label()
         DataGridView1 = New DataGridView()
+        btnUpdate = New Button()
+        btnSave = New Button()
+        btnDelete = New Button()
         Panel1.SuspendLayout()
         adminheader_pnl.SuspendLayout()
         GroupBox1.SuspendLayout()
-        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
+        CType(pbEmployee, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox2.SuspendLayout()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
@@ -468,32 +471,32 @@ Partial Class EmployeeManagement_frm
         EmployeeIDlbl.Size = New Size(344, 32)
         EmployeeIDlbl.TabIndex = 23
         ' 
-        ' Button2
+        ' btnAddPic
         ' 
-        Button2.Location = New Point(1591, 369)
-        Button2.Name = "Button2"
-        Button2.Size = New Size(79, 31)
-        Button2.TabIndex = 22
-        Button2.Text = "Button2"
-        Button2.UseVisualStyleBackColor = True
+        btnAddPic.Location = New Point(1591, 381)
+        btnAddPic.Name = "btnAddPic"
+        btnAddPic.Size = New Size(79, 31)
+        btnAddPic.TabIndex = 22
+        btnAddPic.Text = "Save"
+        btnAddPic.UseVisualStyleBackColor = True
         ' 
-        ' Button1
+        ' btnUpdatePic
         ' 
-        Button1.Location = New Point(1676, 369)
-        Button1.Name = "Button1"
-        Button1.Size = New Size(79, 31)
-        Button1.TabIndex = 21
-        Button1.Text = "Button1"
-        Button1.UseVisualStyleBackColor = True
+        btnUpdatePic.Location = New Point(1676, 381)
+        btnUpdatePic.Name = "btnUpdatePic"
+        btnUpdatePic.Size = New Size(79, 31)
+        btnUpdatePic.TabIndex = 21
+        btnUpdatePic.Text = "Update"
+        btnUpdatePic.UseVisualStyleBackColor = True
         ' 
-        ' PictureBox1
+        ' pbEmployee
         ' 
-        PictureBox1.BorderStyle = BorderStyle.FixedSingle
-        PictureBox1.Location = New Point(1550, 182)
-        PictureBox1.Name = "PictureBox1"
-        PictureBox1.Size = New Size(205, 181)
-        PictureBox1.TabIndex = 20
-        PictureBox1.TabStop = False
+        pbEmployee.BorderStyle = BorderStyle.FixedSingle
+        pbEmployee.Location = New Point(1550, 183)
+        pbEmployee.Name = "pbEmployee"
+        pbEmployee.Size = New Size(205, 192)
+        pbEmployee.TabIndex = 20
+        pbEmployee.TabStop = False
         ' 
         ' TextBox7
         ' 
@@ -652,11 +655,53 @@ Partial Class EmployeeManagement_frm
         DataGridView1.Size = New Size(1299, 365)
         DataGridView1.TabIndex = 32
         ' 
+        ' btnUpdate
+        ' 
+        btnUpdate.BackColor = SystemColors.InactiveCaption
+        btnUpdate.BackgroundImageLayout = ImageLayout.None
+        btnUpdate.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnUpdate.ForeColor = Color.Black
+        btnUpdate.Location = New Point(1469, 99)
+        btnUpdate.Name = "btnUpdate"
+        btnUpdate.Size = New Size(140, 46)
+        btnUpdate.TabIndex = 33
+        btnUpdate.Text = "Update"
+        btnUpdate.UseVisualStyleBackColor = False
+        ' 
+        ' btnSave
+        ' 
+        btnSave.BackColor = SystemColors.InactiveCaption
+        btnSave.BackgroundImageLayout = ImageLayout.None
+        btnSave.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnSave.ForeColor = Color.Black
+        btnSave.Location = New Point(1323, 99)
+        btnSave.Name = "btnSave"
+        btnSave.Size = New Size(140, 46)
+        btnSave.TabIndex = 34
+        btnSave.Text = "Save"
+        btnSave.UseVisualStyleBackColor = False
+        ' 
+        ' btnDelete
+        ' 
+        btnDelete.BackColor = SystemColors.InactiveCaption
+        btnDelete.BackgroundImageLayout = ImageLayout.None
+        btnDelete.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnDelete.ForeColor = Color.Black
+        btnDelete.Location = New Point(1615, 99)
+        btnDelete.Name = "btnDelete"
+        btnDelete.Size = New Size(140, 46)
+        btnDelete.TabIndex = 35
+        btnDelete.Text = "Delete"
+        btnDelete.UseVisualStyleBackColor = False
+        ' 
         ' EmployeeManagement_frm
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1781, 1033)
+        Controls.Add(btnDelete)
+        Controls.Add(btnSave)
+        Controls.Add(btnUpdate)
         Controls.Add(DataGridView1)
         Controls.Add(GroupBox2)
         Controls.Add(Label14)
@@ -664,9 +709,9 @@ Partial Class EmployeeManagement_frm
         Controls.Add(GroupBox1)
         Controls.Add(adminheader_pnl)
         Controls.Add(Panel1)
-        Controls.Add(PictureBox1)
-        Controls.Add(Button1)
-        Controls.Add(Button2)
+        Controls.Add(pbEmployee)
+        Controls.Add(btnUpdatePic)
+        Controls.Add(btnAddPic)
         Name = "EmployeeManagement_frm"
         StartPosition = FormStartPosition.CenterScreen
         Text = "EmployeeManagement"
@@ -677,7 +722,7 @@ Partial Class EmployeeManagement_frm
         adminheader_pnl.PerformLayout()
         GroupBox1.ResumeLayout(False)
         GroupBox1.PerformLayout()
-        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
+        CType(pbEmployee, ComponentModel.ISupportInitialize).EndInit()
         GroupBox2.ResumeLayout(False)
         GroupBox2.PerformLayout()
         CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
@@ -705,9 +750,9 @@ Partial Class EmployeeManagement_frm
     Friend WithEvents Label6 As Label
     Friend WithEvents Label12 As Label
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents pbEmployee As PictureBox
+    Friend WithEvents btnAddPic As Button
+    Friend WithEvents btnUpdatePic As Button
     Friend WithEvents Label14 As Label
     Friend WithEvents TextBox3 As TextBox
     Friend WithEvents TextBox2 As TextBox
@@ -740,4 +785,7 @@ Partial Class EmployeeManagement_frm
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents TextBox16 As TextBox
     Friend WithEvents Label23 As Label
+    Friend WithEvents btnUpdate As Button
+    Friend WithEvents btnSave As Button
+    Friend WithEvents btnDelete As Button
 End Class

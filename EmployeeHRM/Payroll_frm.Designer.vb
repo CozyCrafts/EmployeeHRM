@@ -208,7 +208,7 @@ Partial Class Payroll_frm
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1902, 1033)
+        ClientSize = New Size(1781, 1033)
         Controls.Add(Panel1)
         Controls.Add(LogOutbtn)
         Name = "Payroll_frm"
