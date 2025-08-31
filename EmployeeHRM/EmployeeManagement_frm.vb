@@ -1,10 +1,29 @@
-﻿Public Class EmployeeManagement_frm
+﻿Imports MySql.Data.MySqlClient
+Public Class EmployeeManagement_frm
     Private Sub EmployeeManagement_frm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        OpenCon()
-        MsgBox("Database Connected")
-        dbCon.Close()
+
+        Dim connection As MySqlConnection
+        Dim command As New MySqlCommand
+        Dim dbadapter As MySqlDataAdapter
+        Dim table As DataTable
 
         Me.FormBorderStyle = FormBorderStyle.None
+
+        Try
+            connection = New MySqlConnection("server=localhost;username=root;password=admin;database=db_hrm;")
+            OpenCon()
+            command.Connection = connection
+            dbadapter = New MySqlDataAdapter("SELECT * FROM tbltesting", connection)
+            table = New DataTable
+            dbadapter.Fill(table)
+
+            DataGridView1.DataSource = table
+
+            connection.Close()
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
@@ -39,4 +58,6 @@
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
     End Sub
+
+
 End Class

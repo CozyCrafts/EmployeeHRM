@@ -1,9 +1,10 @@
 ﻿Imports MySql.Data.MySqlClient
 Module HRMModule
-    Public dbCon As MySqlConnection
+    Dim connection As MySqlConnection
+    Dim command As MySqlCommand
 
     Sub OpenCon()
-        dbCon.ConnectionString = "server=localhost;username=root;password=;database=db_hrm"
-        dbCon.Open()
+        connection = New MySqlConnection
+        connection.ConnectionString = "server=localhost;userid=root;password=admin;database=db_hrm"
     End Sub
 End Module
