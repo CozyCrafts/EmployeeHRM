@@ -2,24 +2,26 @@
 Public Class EmployeeManagement_frm
     Private Sub EmployeeManagement_frm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Dim connection As MySqlConnection
-        Dim command As New MySqlCommand
+        Dim dbcon As MySqlConnection
+        Dim dbcmd As New MySqlCommand
         Dim dbadapter As MySqlDataAdapter
-        Dim table As DataTable
+        Dim dbtable As DataTable
+
+        'hi
 
         Me.FormBorderStyle = FormBorderStyle.None
 
         Try
-            connection = New MySqlConnection("server=localhost;username=root;password=admin;database=db_hrm;")
-            OpenCon()
-            command.Connection = connection
-            dbadapter = New MySqlDataAdapter("SELECT * FROM tbltesting", connection)
-            table = New DataTable
-            dbadapter.Fill(table)
+            dbcon = New MySqlConnection("server=localhost;username=root;password=admin;database=db_hrm;")
+            Call OpenCon()
+            dbcmd.Connection = dbcon
+            dbadapter = New MySqlDataAdapter("SELECT * FROM tbltesting", dbcon)
+            dbtable = New DataTable
+            dbadapter.Fill(dbtable)
 
-            DataGridView1.DataSource = table
+            DataGridView1.DataSource = dbtable
 
-            connection.Close()
+            dbcon.Close()
 
         Catch ex As Exception
             MsgBox(ex.Message)
