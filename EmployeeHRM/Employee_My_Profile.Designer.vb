@@ -86,24 +86,12 @@ Partial Class Employee_My_Profile
         Label11 = New Label()
         Label25 = New Label()
         GroupBox6 = New GroupBox()
-        TextBox29 = New TextBox()
-        TextBox33 = New TextBox()
-        TextBox34 = New TextBox()
-        TextBox26 = New TextBox()
-        TextBox27 = New TextBox()
-        TextBox28 = New TextBox()
-        TextBox23 = New TextBox()
-        TextBox24 = New TextBox()
-        TextBox25 = New TextBox()
         Label34 = New Label()
         Label38 = New Label()
         Label39 = New Label()
         Label29 = New Label()
         Label30 = New Label()
         Label31 = New Label()
-        Label26 = New Label()
-        Label27 = New Label()
-        Label28 = New Label()
         TextBox30 = New TextBox()
         TextBox31 = New TextBox()
         TextBox32 = New TextBox()
@@ -136,6 +124,12 @@ Partial Class Employee_My_Profile
         Label43 = New Label()
         Label45 = New Label()
         DataGridView1 = New DataGridView()
+        TextBox23 = New TextBox()
+        TextBox24 = New TextBox()
+        TextBox25 = New TextBox()
+        TextBox26 = New TextBox()
+        TextBox27 = New TextBox()
+        TextBox28 = New TextBox()
         Panel1.SuspendLayout()
         adminheader_pnl.SuspendLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
@@ -800,9 +794,6 @@ Partial Class Employee_My_Profile
         ' 
         ' GroupBox6
         ' 
-        GroupBox6.Controls.Add(TextBox29)
-        GroupBox6.Controls.Add(TextBox33)
-        GroupBox6.Controls.Add(TextBox34)
         GroupBox6.Controls.Add(TextBox26)
         GroupBox6.Controls.Add(TextBox27)
         GroupBox6.Controls.Add(TextBox28)
@@ -815,9 +806,6 @@ Partial Class Employee_My_Profile
         GroupBox6.Controls.Add(Label29)
         GroupBox6.Controls.Add(Label30)
         GroupBox6.Controls.Add(Label31)
-        GroupBox6.Controls.Add(Label26)
-        GroupBox6.Controls.Add(Label27)
-        GroupBox6.Controls.Add(Label28)
         GroupBox6.Controls.Add(TextBox30)
         GroupBox6.Controls.Add(TextBox31)
         GroupBox6.Controls.Add(TextBox32)
@@ -832,83 +820,11 @@ Partial Class Employee_My_Profile
         GroupBox6.TabStop = False
         GroupBox6.Text = "Company-Provided Benefits"
         ' 
-        ' TextBox29
-        ' 
-        TextBox29.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox29.Location = New Point(856, 106)
-        TextBox29.Name = "TextBox29"
-        TextBox29.Size = New Size(95, 30)
-        TextBox29.TabIndex = 39
-        ' 
-        ' TextBox33
-        ' 
-        TextBox33.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox33.Location = New Point(856, 70)
-        TextBox33.Name = "TextBox33"
-        TextBox33.Size = New Size(95, 30)
-        TextBox33.TabIndex = 38
-        ' 
-        ' TextBox34
-        ' 
-        TextBox34.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox34.Location = New Point(856, 34)
-        TextBox34.Name = "TextBox34"
-        TextBox34.Size = New Size(95, 30)
-        TextBox34.TabIndex = 37
-        ' 
-        ' TextBox26
-        ' 
-        TextBox26.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox26.Location = New Point(619, 106)
-        TextBox26.Name = "TextBox26"
-        TextBox26.Size = New Size(95, 30)
-        TextBox26.TabIndex = 36
-        ' 
-        ' TextBox27
-        ' 
-        TextBox27.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox27.Location = New Point(619, 70)
-        TextBox27.Name = "TextBox27"
-        TextBox27.Size = New Size(95, 30)
-        TextBox27.TabIndex = 35
-        ' 
-        ' TextBox28
-        ' 
-        TextBox28.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox28.Location = New Point(619, 34)
-        TextBox28.Name = "TextBox28"
-        TextBox28.Size = New Size(95, 30)
-        TextBox28.TabIndex = 34
-        ' 
-        ' TextBox23
-        ' 
-        TextBox23.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox23.Location = New Point(382, 106)
-        TextBox23.Name = "TextBox23"
-        TextBox23.Size = New Size(95, 30)
-        TextBox23.TabIndex = 33
-        ' 
-        ' TextBox24
-        ' 
-        TextBox24.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox24.Location = New Point(382, 70)
-        TextBox24.Name = "TextBox24"
-        TextBox24.Size = New Size(95, 30)
-        TextBox24.TabIndex = 32
-        ' 
-        ' TextBox25
-        ' 
-        TextBox25.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox25.Location = New Point(382, 34)
-        TextBox25.Name = "TextBox25"
-        TextBox25.Size = New Size(95, 30)
-        TextBox25.TabIndex = 31
-        ' 
         ' Label34
         ' 
         Label34.AutoSize = True
         Label34.Font = New Font("Century Gothic", 9F)
-        Label34.Location = New Point(725, 116)
+        Label34.Location = New Point(651, 110)
         Label34.Name = "Label34"
         Label34.Size = New Size(125, 20)
         Label34.TabIndex = 27
@@ -918,7 +834,7 @@ Partial Class Employee_My_Profile
         ' 
         Label38.AutoSize = True
         Label38.Font = New Font("Century Gothic", 9F)
-        Label38.Location = New Point(720, 80)
+        Label38.Location = New Point(646, 74)
         Label38.Name = "Label38"
         Label38.Size = New Size(130, 20)
         Label38.TabIndex = 26
@@ -928,7 +844,7 @@ Partial Class Employee_My_Profile
         ' 
         Label39.AutoSize = True
         Label39.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label39.Location = New Point(735, 43)
+        Label39.Location = New Point(661, 37)
         Label39.Name = "Label39"
         Label39.Size = New Size(115, 21)
         Label39.TabIndex = 25
@@ -938,7 +854,7 @@ Partial Class Employee_My_Profile
         ' 
         Label29.AutoSize = True
         Label29.Font = New Font("Century Gothic", 9F)
-        Label29.Location = New Point(488, 116)
+        Label29.Location = New Point(342, 110)
         Label29.Name = "Label29"
         Label29.Size = New Size(125, 20)
         Label29.TabIndex = 21
@@ -948,7 +864,7 @@ Partial Class Employee_My_Profile
         ' 
         Label30.AutoSize = True
         Label30.Font = New Font("Century Gothic", 9F)
-        Label30.Location = New Point(483, 80)
+        Label30.Location = New Point(337, 74)
         Label30.Name = "Label30"
         Label30.Size = New Size(130, 20)
         Label30.TabIndex = 20
@@ -958,71 +874,41 @@ Partial Class Employee_My_Profile
         ' 
         Label31.AutoSize = True
         Label31.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label31.Location = New Point(490, 43)
+        Label31.Location = New Point(344, 37)
         Label31.Name = "Label31"
         Label31.Size = New Size(123, 21)
         Label31.TabIndex = 19
         Label31.Text = "PhilHealth ID:"
         ' 
-        ' Label26
-        ' 
-        Label26.AutoSize = True
-        Label26.Font = New Font("Century Gothic", 9F)
-        Label26.Location = New Point(251, 116)
-        Label26.Name = "Label26"
-        Label26.Size = New Size(125, 20)
-        Label26.TabIndex = 15
-        Label26.Text = "Employer Share:"
-        ' 
-        ' Label27
-        ' 
-        Label27.AutoSize = True
-        Label27.Font = New Font("Century Gothic", 9F)
-        Label27.Location = New Point(246, 80)
-        Label27.Name = "Label27"
-        Label27.Size = New Size(130, 20)
-        Label27.TabIndex = 14
-        Label27.Text = "Employee Share:"
-        ' 
-        ' Label28
-        ' 
-        Label28.AutoSize = True
-        Label28.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label28.Location = New Point(266, 43)
-        Label28.Name = "Label28"
-        Label28.Size = New Size(110, 21)
-        Label28.TabIndex = 13
-        Label28.Text = "BIR (Tax) ID:"
-        ' 
         ' TextBox30
         ' 
         TextBox30.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox30.Location = New Point(142, 106)
+        TextBox30.Location = New Point(152, 106)
         TextBox30.Name = "TextBox30"
-        TextBox30.Size = New Size(95, 30)
+        TextBox30.Size = New Size(160, 30)
         TextBox30.TabIndex = 12
         ' 
         ' TextBox31
         ' 
         TextBox31.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox31.Location = New Point(142, 70)
+        TextBox31.Location = New Point(152, 70)
         TextBox31.Name = "TextBox31"
-        TextBox31.Size = New Size(95, 30)
+        TextBox31.Size = New Size(160, 30)
         TextBox31.TabIndex = 11
         ' 
         ' TextBox32
         ' 
         TextBox32.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox32.Location = New Point(142, 34)
+        TextBox32.Location = New Point(152, 34)
         TextBox32.Name = "TextBox32"
-        TextBox32.Size = New Size(95, 30)
+        TextBox32.Size = New Size(160, 30)
         TextBox32.TabIndex = 10
         ' 
         ' Label32
         ' 
         Label32.AutoSize = True
         Label32.Font = New Font("Century Gothic", 9F)
-        Label32.Location = New Point(11, 110)
+        Label32.Location = New Point(21, 110)
         Label32.Name = "Label32"
         Label32.Size = New Size(125, 20)
         Label32.TabIndex = 3
@@ -1032,7 +918,7 @@ Partial Class Employee_My_Profile
         ' 
         Label33.AutoSize = True
         Label33.Font = New Font("Century Gothic", 9F)
-        Label33.Location = New Point(6, 74)
+        Label33.Location = New Point(16, 74)
         Label33.Name = "Label33"
         Label33.Size = New Size(130, 20)
         Label33.TabIndex = 2
@@ -1042,7 +928,7 @@ Partial Class Employee_My_Profile
         ' 
         Label35.AutoSize = True
         Label35.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label35.Location = New Point(71, 37)
+        Label35.Location = New Point(81, 37)
         Label35.Name = "Label35"
         Label35.Size = New Size(65, 21)
         Label35.TabIndex = 0
@@ -1147,7 +1033,7 @@ Partial Class Employee_My_Profile
         TextBox43.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         TextBox43.Location = New Point(483, 142)
         TextBox43.Name = "TextBox43"
-        TextBox43.Size = New Size(181, 30)
+        TextBox43.Size = New Size(201, 30)
         TextBox43.TabIndex = 26
         ' 
         ' TextBox44
@@ -1155,7 +1041,7 @@ Partial Class Employee_My_Profile
         TextBox44.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         TextBox44.Location = New Point(483, 106)
         TextBox44.Name = "TextBox44"
-        TextBox44.Size = New Size(181, 30)
+        TextBox44.Size = New Size(201, 30)
         TextBox44.TabIndex = 25
         ' 
         ' TextBox45
@@ -1163,7 +1049,7 @@ Partial Class Employee_My_Profile
         TextBox45.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         TextBox45.Location = New Point(483, 70)
         TextBox45.Name = "TextBox45"
-        TextBox45.Size = New Size(181, 30)
+        TextBox45.Size = New Size(201, 30)
         TextBox45.TabIndex = 24
         ' 
         ' TextBox46
@@ -1171,7 +1057,7 @@ Partial Class Employee_My_Profile
         TextBox46.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         TextBox46.Location = New Point(483, 31)
         TextBox46.Name = "TextBox46"
-        TextBox46.Size = New Size(181, 30)
+        TextBox46.Size = New Size(201, 30)
         TextBox46.TabIndex = 23
         ' 
         ' TextBox35
@@ -1307,6 +1193,54 @@ Partial Class Employee_My_Profile
         DataGridView1.Size = New Size(1389, 263)
         DataGridView1.TabIndex = 67
         ' 
+        ' TextBox23
+        ' 
+        TextBox23.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox23.Location = New Point(782, 100)
+        TextBox23.Name = "TextBox23"
+        TextBox23.Size = New Size(160, 30)
+        TextBox23.TabIndex = 30
+        ' 
+        ' TextBox24
+        ' 
+        TextBox24.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox24.Location = New Point(782, 64)
+        TextBox24.Name = "TextBox24"
+        TextBox24.Size = New Size(160, 30)
+        TextBox24.TabIndex = 29
+        ' 
+        ' TextBox25
+        ' 
+        TextBox25.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox25.Location = New Point(782, 28)
+        TextBox25.Name = "TextBox25"
+        TextBox25.Size = New Size(160, 30)
+        TextBox25.TabIndex = 28
+        ' 
+        ' TextBox26
+        ' 
+        TextBox26.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox26.Location = New Point(473, 106)
+        TextBox26.Name = "TextBox26"
+        TextBox26.Size = New Size(160, 30)
+        TextBox26.TabIndex = 33
+        ' 
+        ' TextBox27
+        ' 
+        TextBox27.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox27.Location = New Point(473, 70)
+        TextBox27.Name = "TextBox27"
+        TextBox27.Size = New Size(160, 30)
+        TextBox27.TabIndex = 32
+        ' 
+        ' TextBox28
+        ' 
+        TextBox28.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox28.Location = New Point(473, 34)
+        TextBox28.Name = "TextBox28"
+        TextBox28.Size = New Size(160, 30)
+        TextBox28.TabIndex = 31
+        ' 
         ' Employee_My_Profile
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
@@ -1437,18 +1371,6 @@ Partial Class Employee_My_Profile
     Friend WithEvents Label29 As Label
     Friend WithEvents Label30 As Label
     Friend WithEvents Label31 As Label
-    Friend WithEvents Label26 As Label
-    Friend WithEvents Label27 As Label
-    Friend WithEvents Label28 As Label
-    Friend WithEvents TextBox23 As TextBox
-    Friend WithEvents TextBox24 As TextBox
-    Friend WithEvents TextBox25 As TextBox
-    Friend WithEvents TextBox29 As TextBox
-    Friend WithEvents TextBox33 As TextBox
-    Friend WithEvents TextBox34 As TextBox
-    Friend WithEvents TextBox26 As TextBox
-    Friend WithEvents TextBox27 As TextBox
-    Friend WithEvents TextBox28 As TextBox
     Friend WithEvents Label48 As Label
     Friend WithEvents Label47 As Label
     Friend WithEvents Label46 As Label
@@ -1466,4 +1388,10 @@ Partial Class Employee_My_Profile
     Friend WithEvents Label40 As Label
     Friend WithEvents Label49 As Label
     Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents TextBox26 As TextBox
+    Friend WithEvents TextBox27 As TextBox
+    Friend WithEvents TextBox28 As TextBox
+    Friend WithEvents TextBox23 As TextBox
+    Friend WithEvents TextBox24 As TextBox
+    Friend WithEvents TextBox25 As TextBox
 End Class

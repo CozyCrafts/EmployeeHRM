@@ -27,5 +27,17 @@
         Employee_My_Profile.Show()
         Me.Hide()
     End Sub
+    Private Sub btnCIO_Click(sender As Object, e As EventArgs) Handles btnCIO.Click
+        Employee_Time_and_Attendancevb.Show()
+        Me.Hide()
+    End Sub
+    Private Sub btnPerfRev_Click(sender As Object, e As EventArgs) Handles btnPerfRev.Click
+        Employee_Goals_and_Growth.Show()
+        Me.Hide()
+    End Sub
+    Private Sub btnViewPayslips_Click(sender As Object, e As EventArgs) Handles btnViewPayslips.Click
+        Employee_Payroll.Show()
+        Me.Hide()
+    End Sub
 
 End Class
