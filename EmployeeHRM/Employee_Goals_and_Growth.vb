@@ -2,7 +2,7 @@
 
 Public Class Employee_Goals_and_Growth
     Private Sub lblEmpDashboard_Click(sender As Object, e As EventArgs) Handles lblEmpDashboard.Click
-        Emp_Dashboard.Show()
+        Employee_Dashboard.Show()
         Me.Hide()
     End Sub
 
@@ -24,4 +24,6 @@ Public Class Employee_Goals_and_Growth
     Private Sub lblEmpGG_Click(sender As Object, e As EventArgs) Handles lblEmpGG.Click
         lblEmpGG.Enabled = False
     End Sub
+
+
 End Class

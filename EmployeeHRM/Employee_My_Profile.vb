@@ -1,6 +1,6 @@
 ﻿Public Class Employee_My_Profile
     Private Sub lblEmpDashboard_Click(sender As Object, e As EventArgs) Handles lblEmpDashboard.Click
-        Emp_Dashboard.ShowDialog()
+        Employee_Dashboard.Show()
         Me.Hide()
     End Sub
 

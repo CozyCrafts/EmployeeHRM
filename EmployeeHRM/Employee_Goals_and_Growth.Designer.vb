@@ -33,8 +33,20 @@ Partial Class Employee_Goals_and_Growth
         lblMain = New Label()
         adminheader_pnl = New Panel()
         Label2 = New Label()
+        GroupBox4 = New GroupBox()
+        DataGridView1 = New DataGridView()
+        GroupBox1 = New GroupBox()
+        DataGridView2 = New DataGridView()
+        GroupBox2 = New GroupBox()
+        DataGridView3 = New DataGridView()
         Panel1.SuspendLayout()
         adminheader_pnl.SuspendLayout()
+        GroupBox4.SuspendLayout()
+        CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
+        GroupBox1.SuspendLayout()
+        CType(DataGridView2, ComponentModel.ISupportInitialize).BeginInit()
+        GroupBox2.SuspendLayout()
+        CType(DataGridView3, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' Panel1
@@ -50,7 +62,7 @@ Partial Class Employee_Goals_and_Growth
         Panel1.Controls.Add(lblMain)
         Panel1.Location = New Point(-7, -4)
         Panel1.Name = "Panel1"
-        Panel1.Size = New Size(371, 1045)
+        Panel1.Size = New Size(350, 1357)
         Panel1.TabIndex = 22
         ' 
         ' lblEmpGG
@@ -145,7 +157,7 @@ Partial Class Employee_Goals_and_Growth
         ' 
         adminheader_pnl.BackColor = Color.White
         adminheader_pnl.Controls.Add(Label2)
-        adminheader_pnl.Location = New Point(346, -27)
+        adminheader_pnl.Location = New Point(342, -27)
         adminheader_pnl.Name = "adminheader_pnl"
         adminheader_pnl.Size = New Size(1608, 107)
         adminheader_pnl.TabIndex = 23
@@ -160,19 +172,94 @@ Partial Class Employee_Goals_and_Growth
         Label2.TabIndex = 0
         Label2.Text = "Goals and Growth"
         ' 
+        ' GroupBox4
+        ' 
+        GroupBox4.Controls.Add(DataGridView1)
+        GroupBox4.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
+        GroupBox4.Location = New Point(395, 97)
+        GroupBox4.Name = "GroupBox4"
+        GroupBox4.Size = New Size(662, 519)
+        GroupBox4.TabIndex = 65
+        GroupBox4.TabStop = False
+        GroupBox4.Text = "Goals"
+        ' 
+        ' DataGridView1
+        ' 
+        DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridView1.Location = New Point(26, 44)
+        DataGridView1.Name = "DataGridView1"
+        DataGridView1.RowHeadersWidth = 51
+        DataGridView1.Size = New Size(612, 450)
+        DataGridView1.TabIndex = 0
+        ' 
+        ' GroupBox1
+        ' 
+        GroupBox1.Controls.Add(DataGridView2)
+        GroupBox1.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
+        GroupBox1.Location = New Point(385, 634)
+        GroupBox1.Name = "GroupBox1"
+        GroupBox1.Size = New Size(1367, 378)
+        GroupBox1.TabIndex = 66
+        GroupBox1.TabStop = False
+        GroupBox1.Text = "Appraisal History"
+        ' 
+        ' DataGridView2
+        ' 
+        DataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridView2.Location = New Point(20, 53)
+        DataGridView2.Name = "DataGridView2"
+        DataGridView2.RowHeadersWidth = 51
+        DataGridView2.Size = New Size(1320, 301)
+        DataGridView2.TabIndex = 0
+        ' 
+        ' GroupBox2
+        ' 
+        GroupBox2.Controls.Add(DataGridView3)
+        GroupBox2.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
+        GroupBox2.Location = New Point(1081, 109)
+        GroupBox2.Name = "GroupBox2"
+        GroupBox2.Size = New Size(671, 507)
+        GroupBox2.TabIndex = 67
+        GroupBox2.TabStop = False
+        GroupBox2.Text = "Assigned Training"
+        ' 
+        ' DataGridView3
+        ' 
+        DataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridView3.Location = New Point(26, 35)
+        DataGridView3.Name = "DataGridView3"
+        DataGridView3.RowHeadersWidth = 51
+        DataGridView3.Size = New Size(572, 447)
+        DataGridView3.TabIndex = 0
+        ' 
         ' Employee_Goals_and_Growth
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1781, 1033)
+        ControlBox = False
+        Controls.Add(GroupBox2)
+        Controls.Add(GroupBox1)
+        Controls.Add(GroupBox4)
         Controls.Add(Panel1)
         Controls.Add(adminheader_pnl)
+        FormBorderStyle = FormBorderStyle.None
+        MaximizeBox = False
+        MinimizeBox = False
         Name = "Employee_Goals_and_Growth"
+        StartPosition = FormStartPosition.CenterScreen
         Text = "Employee_Goals_and_Growth"
+        WindowState = FormWindowState.Maximized
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
         adminheader_pnl.ResumeLayout(False)
         adminheader_pnl.PerformLayout()
+        GroupBox4.ResumeLayout(False)
+        CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
+        GroupBox1.ResumeLayout(False)
+        CType(DataGridView2, ComponentModel.ISupportInitialize).EndInit()
+        GroupBox2.ResumeLayout(False)
+        CType(DataGridView3, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
 
@@ -187,4 +274,10 @@ Partial Class Employee_Goals_and_Growth
     Friend WithEvents lblMain As Label
     Friend WithEvents adminheader_pnl As Panel
     Friend WithEvents Label2 As Label
+    Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents DataGridView2 As DataGridView
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents DataGridView3 As DataGridView
 End Class

@@ -1,6 +1,6 @@
 ﻿Public Class Employee_Time_and_Attendancevb
     Private Sub lblEmpDashboard_Click(sender As Object, e As EventArgs) Handles lblEmpDashboard.Click
-        Emp_Dashboard.ShowDialog()
+        Employee_Dashboard.ShowDialog()
         Me.Hide()
     End Sub
 
@@ -22,4 +22,6 @@
         Employee_Goals_and_Growth.Show()
         Me.Hide()
     End Sub
+
+
 End Class
