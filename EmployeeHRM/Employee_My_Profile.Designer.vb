@@ -274,7 +274,7 @@ Partial Class Employee_My_Profile
         ' 
         ' PictureBox1
         ' 
-        PictureBox1.Location = New Point(392, 106)
+        PictureBox1.Location = New Point(393, 112)
         PictureBox1.Name = "PictureBox1"
         PictureBox1.Size = New Size(210, 179)
         PictureBox1.TabIndex = 22
@@ -286,7 +286,7 @@ Partial Class Employee_My_Profile
         btnSave.BackgroundImageLayout = ImageLayout.None
         btnSave.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
         btnSave.ForeColor = Color.Black
-        btnSave.Location = New Point(450, 288)
+        btnSave.Location = New Point(451, 304)
         btnSave.Name = "btnSave"
         btnSave.Size = New Size(103, 29)
         btnSave.TabIndex = 37
@@ -299,7 +299,7 @@ Partial Class Employee_My_Profile
         btnUpdate.BackgroundImageLayout = ImageLayout.None
         btnUpdate.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
         btnUpdate.ForeColor = Color.Black
-        btnUpdate.Location = New Point(431, 326)
+        btnUpdate.Location = New Point(433, 339)
         btnUpdate.Name = "btnUpdate"
         btnUpdate.Size = New Size(143, 29)
         btnUpdate.TabIndex = 36

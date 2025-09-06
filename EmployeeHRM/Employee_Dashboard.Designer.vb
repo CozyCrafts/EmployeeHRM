@@ -34,12 +34,17 @@ Partial Class Employee_Dashboard
         adminheader_pnl = New Panel()
         Label2 = New Label()
         GroupBox1 = New GroupBox()
-        Button1 = New Button()
-        Button3 = New Button()
+        btnHoliday = New Button()
+        btnForms = New Button()
+        btnPolicies = New Button()
+        btnHandbook = New Button()
         GroupBox2 = New GroupBox()
-        btnSave = New Button()
-        btnUpdate = New Button()
+        btnPerfRev = New Button()
+        btnCIO = New Button()
+        btnViewPayslips = New Button()
         GroupBox3 = New GroupBox()
+        btnEditProf = New Button()
+        txtProfPic = New PictureBox()
         TextBox9 = New TextBox()
         TextBox8 = New TextBox()
         TextBox7 = New TextBox()
@@ -48,29 +53,24 @@ Partial Class Employee_Dashboard
         Label9 = New Label()
         Label4 = New Label()
         Label3 = New Label()
-        Button5 = New Button()
-        PictureBox1 = New PictureBox()
         GroupBox4 = New GroupBox()
-        Button6 = New Button()
-        Button2 = New Button()
-        Button4 = New Button()
+        dgAnnounce = New DataGridView()
         GroupBox5 = New GroupBox()
+        dgUpEvents = New DataGridView()
         GroupBox6 = New GroupBox()
         DateTimePicker3 = New DateTimePicker()
-        Label1 = New Label()
-        DataGridView1 = New DataGridView()
-        DataGridView2 = New DataGridView()
+        lblCurrentStatus = New Label()
         Panel1.SuspendLayout()
         adminheader_pnl.SuspendLayout()
         GroupBox1.SuspendLayout()
         GroupBox2.SuspendLayout()
         GroupBox3.SuspendLayout()
-        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
+        CType(txtProfPic, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox4.SuspendLayout()
+        CType(dgAnnounce, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox5.SuspendLayout()
+        CType(dgUpEvents, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox6.SuspendLayout()
-        CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
-        CType(DataGridView2, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' Panel1
@@ -198,10 +198,10 @@ Partial Class Employee_Dashboard
         ' 
         ' GroupBox1
         ' 
-        GroupBox1.Controls.Add(Button3)
-        GroupBox1.Controls.Add(Button4)
-        GroupBox1.Controls.Add(Button2)
-        GroupBox1.Controls.Add(Button1)
+        GroupBox1.Controls.Add(btnHoliday)
+        GroupBox1.Controls.Add(btnForms)
+        GroupBox1.Controls.Add(btnPolicies)
+        GroupBox1.Controls.Add(btnHandbook)
         GroupBox1.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
         GroupBox1.Location = New Point(1025, 399)
         GroupBox1.Name = "GroupBox1"
@@ -210,31 +210,51 @@ Partial Class Employee_Dashboard
         GroupBox1.TabStop = False
         GroupBox1.Text = "Quick Access"
         ' 
-        ' Button1
+        ' btnHoliday
         ' 
-        Button1.Font = New Font("Century Gothic", 11F, FontStyle.Bold)
-        Button1.Location = New Point(22, 52)
-        Button1.Name = "Button1"
-        Button1.Size = New Size(168, 60)
-        Button1.TabIndex = 0
-        Button1.Text = "Employee Handook"
-        Button1.UseVisualStyleBackColor = True
+        btnHoliday.Font = New Font("Century Gothic", 11F, FontStyle.Bold)
+        btnHoliday.Location = New Point(548, 52)
+        btnHoliday.Name = "btnHoliday"
+        btnHoliday.Size = New Size(168, 60)
+        btnHoliday.TabIndex = 3
+        btnHoliday.Text = "Holiday Calendar"
+        btnHoliday.UseVisualStyleBackColor = True
         ' 
-        ' Button3
+        ' btnForms
         ' 
-        Button3.Font = New Font("Century Gothic", 11F, FontStyle.Bold)
-        Button3.Location = New Point(548, 52)
-        Button3.Name = "Button3"
-        Button3.Size = New Size(168, 60)
-        Button3.TabIndex = 3
-        Button3.Text = "Holiday Calendar"
-        Button3.UseVisualStyleBackColor = True
+        btnForms.Font = New Font("Century Gothic", 11F, FontStyle.Bold)
+        btnForms.Location = New Point(196, 52)
+        btnForms.Name = "btnForms"
+        btnForms.Size = New Size(168, 60)
+        btnForms.TabIndex = 2
+        btnForms.Text = "Forms"
+        btnForms.UseVisualStyleBackColor = True
+        ' 
+        ' btnPolicies
+        ' 
+        btnPolicies.Font = New Font("Century Gothic", 11F, FontStyle.Bold)
+        btnPolicies.Location = New Point(374, 52)
+        btnPolicies.Name = "btnPolicies"
+        btnPolicies.Size = New Size(168, 60)
+        btnPolicies.TabIndex = 1
+        btnPolicies.Text = "Policies"
+        btnPolicies.UseVisualStyleBackColor = True
+        ' 
+        ' btnHandbook
+        ' 
+        btnHandbook.Font = New Font("Century Gothic", 11F, FontStyle.Bold)
+        btnHandbook.Location = New Point(22, 52)
+        btnHandbook.Name = "btnHandbook"
+        btnHandbook.Size = New Size(168, 60)
+        btnHandbook.TabIndex = 0
+        btnHandbook.Text = "Employee Handook"
+        btnHandbook.UseVisualStyleBackColor = True
         ' 
         ' GroupBox2
         ' 
-        GroupBox2.Controls.Add(Button6)
-        GroupBox2.Controls.Add(btnSave)
-        GroupBox2.Controls.Add(btnUpdate)
+        GroupBox2.Controls.Add(btnPerfRev)
+        GroupBox2.Controls.Add(btnCIO)
+        GroupBox2.Controls.Add(btnViewPayslips)
         GroupBox2.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
         GroupBox2.Location = New Point(1379, 127)
         GroupBox2.Name = "GroupBox2"
@@ -243,36 +263,49 @@ Partial Class Employee_Dashboard
         GroupBox2.TabStop = False
         GroupBox2.Text = "Shortcuts"
         ' 
-        ' btnSave
+        ' btnPerfRev
         ' 
-        btnSave.BackColor = SystemColors.InactiveCaption
-        btnSave.BackgroundImageLayout = ImageLayout.None
-        btnSave.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnSave.ForeColor = Color.Black
-        btnSave.Location = New Point(35, 44)
-        btnSave.Name = "btnSave"
-        btnSave.Size = New Size(320, 46)
-        btnSave.TabIndex = 36
-        btnSave.Text = "Check In / Out"
-        btnSave.UseVisualStyleBackColor = False
+        btnPerfRev.BackColor = SystemColors.InactiveCaption
+        btnPerfRev.BackgroundImageLayout = ImageLayout.None
+        btnPerfRev.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnPerfRev.ForeColor = Color.Black
+        btnPerfRev.Location = New Point(35, 164)
+        btnPerfRev.Name = "btnPerfRev"
+        btnPerfRev.Size = New Size(320, 46)
+        btnPerfRev.TabIndex = 37
+        btnPerfRev.Text = "Performance Review"
+        btnPerfRev.UseVisualStyleBackColor = False
         ' 
-        ' btnUpdate
+        ' btnCIO
         ' 
-        btnUpdate.BackColor = SystemColors.InactiveCaption
-        btnUpdate.BackgroundImageLayout = ImageLayout.None
-        btnUpdate.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnUpdate.ForeColor = Color.Black
-        btnUpdate.Location = New Point(35, 102)
-        btnUpdate.Name = "btnUpdate"
-        btnUpdate.Size = New Size(320, 46)
-        btnUpdate.TabIndex = 35
-        btnUpdate.Text = "View Payslips"
-        btnUpdate.UseVisualStyleBackColor = False
+        btnCIO.BackColor = SystemColors.InactiveCaption
+        btnCIO.BackgroundImageLayout = ImageLayout.None
+        btnCIO.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnCIO.ForeColor = Color.Black
+        btnCIO.Location = New Point(35, 44)
+        btnCIO.Name = "btnCIO"
+        btnCIO.Size = New Size(320, 46)
+        btnCIO.TabIndex = 36
+        btnCIO.Text = "Check In / Out"
+        btnCIO.UseVisualStyleBackColor = False
+        ' 
+        ' btnViewPayslips
+        ' 
+        btnViewPayslips.BackColor = SystemColors.InactiveCaption
+        btnViewPayslips.BackgroundImageLayout = ImageLayout.None
+        btnViewPayslips.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnViewPayslips.ForeColor = Color.Black
+        btnViewPayslips.Location = New Point(35, 102)
+        btnViewPayslips.Name = "btnViewPayslips"
+        btnViewPayslips.Size = New Size(320, 46)
+        btnViewPayslips.TabIndex = 35
+        btnViewPayslips.Text = "View Payslips"
+        btnViewPayslips.UseVisualStyleBackColor = False
         ' 
         ' GroupBox3
         ' 
-        GroupBox3.Controls.Add(Button5)
-        GroupBox3.Controls.Add(PictureBox1)
+        GroupBox3.Controls.Add(btnEditProf)
+        GroupBox3.Controls.Add(txtProfPic)
         GroupBox3.Controls.Add(TextBox9)
         GroupBox3.Controls.Add(TextBox8)
         GroupBox3.Controls.Add(TextBox7)
@@ -288,6 +321,27 @@ Partial Class Employee_Dashboard
         GroupBox3.TabIndex = 63
         GroupBox3.TabStop = False
         GroupBox3.Text = "Profile"
+        ' 
+        ' btnEditProf
+        ' 
+        btnEditProf.BackColor = SystemColors.InactiveCaption
+        btnEditProf.BackgroundImageLayout = ImageLayout.None
+        btnEditProf.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnEditProf.ForeColor = Color.Black
+        btnEditProf.Location = New Point(475, 198)
+        btnEditProf.Name = "btnEditProf"
+        btnEditProf.Size = New Size(126, 44)
+        btnEditProf.TabIndex = 39
+        btnEditProf.Text = "Edit Profile"
+        btnEditProf.UseVisualStyleBackColor = False
+        ' 
+        ' txtProfPic
+        ' 
+        txtProfPic.Location = New Point(29, 46)
+        txtProfPic.Name = "txtProfPic"
+        txtProfPic.Size = New Size(215, 196)
+        txtProfPic.TabIndex = 38
+        txtProfPic.TabStop = False
         ' 
         ' TextBox9
         ' 
@@ -361,30 +415,9 @@ Partial Class Employee_Dashboard
         Label3.TabIndex = 0
         Label3.Text = "Employee ID:"
         ' 
-        ' Button5
-        ' 
-        Button5.BackColor = SystemColors.InactiveCaption
-        Button5.BackgroundImageLayout = ImageLayout.None
-        Button5.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        Button5.ForeColor = Color.Black
-        Button5.Location = New Point(475, 198)
-        Button5.Name = "Button5"
-        Button5.Size = New Size(126, 44)
-        Button5.TabIndex = 39
-        Button5.Text = "Edit Profile"
-        Button5.UseVisualStyleBackColor = False
-        ' 
-        ' PictureBox1
-        ' 
-        PictureBox1.Location = New Point(29, 46)
-        PictureBox1.Name = "PictureBox1"
-        PictureBox1.Size = New Size(215, 196)
-        PictureBox1.TabIndex = 38
-        PictureBox1.TabStop = False
-        ' 
         ' GroupBox4
         ' 
-        GroupBox4.Controls.Add(DataGridView1)
+        GroupBox4.Controls.Add(dgAnnounce)
         GroupBox4.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
         GroupBox4.Location = New Point(381, 399)
         GroupBox4.Name = "GroupBox4"
@@ -393,42 +426,18 @@ Partial Class Employee_Dashboard
         GroupBox4.TabStop = False
         GroupBox4.Text = "Announcements"
         ' 
-        ' Button6
+        ' dgAnnounce
         ' 
-        Button6.BackColor = SystemColors.InactiveCaption
-        Button6.BackgroundImageLayout = ImageLayout.None
-        Button6.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        Button6.ForeColor = Color.Black
-        Button6.Location = New Point(35, 164)
-        Button6.Name = "Button6"
-        Button6.Size = New Size(320, 46)
-        Button6.TabIndex = 37
-        Button6.Text = "Performance Review"
-        Button6.UseVisualStyleBackColor = False
-        ' 
-        ' Button2
-        ' 
-        Button2.Font = New Font("Century Gothic", 11F, FontStyle.Bold)
-        Button2.Location = New Point(374, 52)
-        Button2.Name = "Button2"
-        Button2.Size = New Size(168, 60)
-        Button2.TabIndex = 1
-        Button2.Text = "Policies"
-        Button2.UseVisualStyleBackColor = True
-        ' 
-        ' Button4
-        ' 
-        Button4.Font = New Font("Century Gothic", 11F, FontStyle.Bold)
-        Button4.Location = New Point(196, 52)
-        Button4.Name = "Button4"
-        Button4.Size = New Size(168, 60)
-        Button4.TabIndex = 2
-        Button4.Text = "Forms"
-        Button4.UseVisualStyleBackColor = True
+        dgAnnounce.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        dgAnnounce.Location = New Point(29, 48)
+        dgAnnounce.Name = "dgAnnounce"
+        dgAnnounce.RowHeadersWidth = 51
+        dgAnnounce.Size = New Size(572, 535)
+        dgAnnounce.TabIndex = 0
         ' 
         ' GroupBox5
         ' 
-        GroupBox5.Controls.Add(DataGridView2)
+        GroupBox5.Controls.Add(dgUpEvents)
         GroupBox5.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
         GroupBox5.Location = New Point(1025, 567)
         GroupBox5.Name = "GroupBox5"
@@ -437,10 +446,19 @@ Partial Class Employee_Dashboard
         GroupBox5.TabStop = False
         GroupBox5.Text = "Upcoming Events"
         ' 
+        ' dgUpEvents
+        ' 
+        dgUpEvents.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        dgUpEvents.Location = New Point(22, 46)
+        dgUpEvents.Name = "dgUpEvents"
+        dgUpEvents.RowHeadersWidth = 51
+        dgUpEvents.Size = New Size(694, 369)
+        dgUpEvents.TabIndex = 0
+        ' 
         ' GroupBox6
         ' 
         GroupBox6.Controls.Add(DateTimePicker3)
-        GroupBox6.Controls.Add(Label1)
+        GroupBox6.Controls.Add(lblCurrentStatus)
         GroupBox6.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
         GroupBox6.Location = New Point(1031, 127)
         GroupBox6.Name = "GroupBox6"
@@ -457,31 +475,13 @@ Partial Class Employee_Dashboard
         DateTimePicker3.Size = New Size(288, 26)
         DateTimePicker3.TabIndex = 38
         ' 
-        ' Label1
+        ' lblCurrentStatus
         ' 
-        Label1.BorderStyle = BorderStyle.FixedSingle
-        Label1.Location = New Point(26, 74)
-        Label1.Name = "Label1"
-        Label1.Size = New Size(288, 144)
-        Label1.TabIndex = 37
-        ' 
-        ' DataGridView1
-        ' 
-        DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView1.Location = New Point(29, 48)
-        DataGridView1.Name = "DataGridView1"
-        DataGridView1.RowHeadersWidth = 51
-        DataGridView1.Size = New Size(572, 535)
-        DataGridView1.TabIndex = 0
-        ' 
-        ' DataGridView2
-        ' 
-        DataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView2.Location = New Point(22, 46)
-        DataGridView2.Name = "DataGridView2"
-        DataGridView2.RowHeadersWidth = 51
-        DataGridView2.Size = New Size(694, 369)
-        DataGridView2.TabIndex = 0
+        lblCurrentStatus.BorderStyle = BorderStyle.FixedSingle
+        lblCurrentStatus.Location = New Point(26, 74)
+        lblCurrentStatus.Name = "lblCurrentStatus"
+        lblCurrentStatus.Size = New Size(288, 144)
+        lblCurrentStatus.TabIndex = 37
         ' 
         ' Employee_Dashboard
         ' 
@@ -510,12 +510,12 @@ Partial Class Employee_Dashboard
         GroupBox2.ResumeLayout(False)
         GroupBox3.ResumeLayout(False)
         GroupBox3.PerformLayout()
-        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
+        CType(txtProfPic, ComponentModel.ISupportInitialize).EndInit()
         GroupBox4.ResumeLayout(False)
+        CType(dgAnnounce, ComponentModel.ISupportInitialize).EndInit()
         GroupBox5.ResumeLayout(False)
+        CType(dgUpEvents, ComponentModel.ISupportInitialize).EndInit()
         GroupBox6.ResumeLayout(False)
-        CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
-        CType(DataGridView2, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
 
@@ -531,11 +531,11 @@ Partial Class Employee_Dashboard
     Friend WithEvents adminheader_pnl As Panel
     Friend WithEvents Label2 As Label
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Button3 As Button
+    Friend WithEvents btnHandbook As Button
+    Friend WithEvents btnHoliday As Button
     Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents btnSave As Button
-    Friend WithEvents btnUpdate As Button
+    Friend WithEvents btnCIO As Button
+    Friend WithEvents btnViewPayslips As Button
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents TextBox9 As TextBox
     Friend WithEvents TextBox8 As TextBox
@@ -545,16 +545,16 @@ Partial Class Employee_Dashboard
     Friend WithEvents Label9 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
-    Friend WithEvents Button5 As Button
-    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents btnEditProf As Button
+    Friend WithEvents txtProfPic As PictureBox
     Friend WithEvents GroupBox4 As GroupBox
-    Friend WithEvents Button6 As Button
-    Friend WithEvents Button4 As Button
-    Friend WithEvents Button2 As Button
+    Friend WithEvents btnPerfRev As Button
+    Friend WithEvents btnForms As Button
+    Friend WithEvents btnPolicies As Button
     Friend WithEvents GroupBox5 As GroupBox
     Friend WithEvents GroupBox6 As GroupBox
     Friend WithEvents DateTimePicker3 As DateTimePicker
-    Friend WithEvents Label1 As Label
-    Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents DataGridView2 As DataGridView
+    Friend WithEvents lblCurrentStatus As Label
+    Friend WithEvents dgAnnounce As DataGridView
+    Friend WithEvents dgUpEvents As DataGridView
 End Class

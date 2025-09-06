@@ -23,5 +23,9 @@
         Me.Hide()
     End Sub
 
+    Private Sub btnEditProf_Click(sender As Object, e As EventArgs) Handles btnEditProf.Click
+        Employee_My_Profile.Show()
+        Me.Hide()
+    End Sub
 
 End Class
