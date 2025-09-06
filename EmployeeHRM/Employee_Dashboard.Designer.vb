@@ -337,6 +337,7 @@ Partial Class Employee_Dashboard
         ' 
         ' txtProfPic
         ' 
+        txtProfPic.BorderStyle = BorderStyle.Fixed3D
         txtProfPic.Location = New Point(29, 46)
         txtProfPic.Name = "txtProfPic"
         txtProfPic.Size = New Size(215, 196)
