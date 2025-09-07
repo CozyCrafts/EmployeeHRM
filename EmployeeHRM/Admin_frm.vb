@@ -4,17 +4,17 @@
     End Sub
 
     Private Sub lblManageEmployees_Click(sender As Object, e As EventArgs) Handles lblManageEmployees.Click
-        EmployeeManagement_frm.Show()
+        Employee_Management.Show()
         Me.Hide()
     End Sub
 
     Private Sub lblProfile_Click(sender As Object, e As EventArgs) Handles lblProfile.Click
-        Profile_frm.Show()
+        Employee_My_Profile.Show()
         Me.Hide()
     End Sub
 
     Private Sub lblEmployees_Click(sender As Object, e As EventArgs) Handles lblEmployees.Click
-        EmployeeAttendance_frm.Show()
+        Employee_Time_and_Attendancevb.Show()
         Me.Hide()
     End Sub
 
@@ -29,7 +29,7 @@
     End Sub
 
     Private Sub Payslipslbl_Click(sender As Object, e As EventArgs) Handles Payslipslbl.Click
-        Payroll_frm.Show()
+        Employee_Payroll.Show()
         Me.Hide()
     End Sub
 End Class
