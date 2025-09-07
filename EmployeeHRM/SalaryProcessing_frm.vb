@@ -13,12 +13,12 @@
     End Sub
 
     Private Sub lblProfile_Click(sender As Object, e As EventArgs) Handles lblProfile.Click
-        Profile_frm.Show()
+        Employee_My_Profile.Show()
         Me.Hide()
     End Sub
 
     Private Sub lblEmployees_Click(sender As Object, e As EventArgs) Handles lblEmployees.Click
-        EmployeeManagement_frm.Show()
+        Employee_Time_and_Attendancevb.Show()
         Me.Hide()
     End Sub
 
