@@ -22,6 +22,7 @@ Partial Class Employee_Management
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        components = New ComponentModel.Container()
         Panel1 = New Panel()
         Label8 = New Label()
         Label7 = New Label()
@@ -80,12 +81,15 @@ Partial Class Employee_Management
         pbEmployee = New PictureBox()
         btnUpdatePic = New Button()
         btnAddPic = New Button()
+        MySqlCommand1 = New MySql.Data.MySqlClient.MySqlCommand()
+        BindingSource1 = New BindingSource(components)
         Panel1.SuspendLayout()
         adminheader_pnl.SuspendLayout()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox2.SuspendLayout()
         GroupBox1.SuspendLayout()
         CType(pbEmployee, ComponentModel.ISupportInitialize).BeginInit()
+        CType(BindingSource1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' Panel1
@@ -288,10 +292,10 @@ Partial Class Employee_Management
         ' DataGridView1
         ' 
         DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView1.Location = New Point(398, 620)
+        DataGridView1.Location = New Point(398, 735)
         DataGridView1.Name = "DataGridView1"
         DataGridView1.RowHeadersWidth = 51
-        DataGridView1.Size = New Size(1299, 365)
+        DataGridView1.Size = New Size(1349, 250)
         DataGridView1.TabIndex = 39
         ' 
         ' GroupBox2
@@ -309,9 +313,9 @@ Partial Class Employee_Management
         GroupBox2.Controls.Add(Label18)
         GroupBox2.Controls.Add(Label19)
         GroupBox2.Font = New Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        GroupBox2.Location = New Point(360, 415)
+        GroupBox2.Location = New Point(360, 540)
         GroupBox2.Name = "GroupBox2"
-        GroupBox2.Size = New Size(1176, 163)
+        GroupBox2.Size = New Size(1089, 163)
         GroupBox2.TabIndex = 38
         GroupBox2.TabStop = False
         GroupBox2.Text = "Work Information"
@@ -694,6 +698,16 @@ Partial Class Employee_Management
         btnAddPic.Text = "Save"
         btnAddPic.UseVisualStyleBackColor = True
         ' 
+        ' MySqlCommand1
+        ' 
+        MySqlCommand1.CacheAge = 0
+        MySqlCommand1.Connection = Nothing
+        MySqlCommand1.EnableCaching = False
+        MySqlCommand1.Transaction = Nothing
+        ' 
+        ' BindingSource1
+        ' 
+        ' 
         ' Employee_Management
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
@@ -724,6 +738,7 @@ Partial Class Employee_Management
         GroupBox1.ResumeLayout(False)
         GroupBox1.PerformLayout()
         CType(pbEmployee, ComponentModel.ISupportInitialize).EndInit()
+        CType(BindingSource1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -786,4 +801,6 @@ Partial Class Employee_Management
     Friend WithEvents pbEmployee As PictureBox
     Friend WithEvents btnUpdatePic As Button
     Friend WithEvents btnAddPic As Button
+    Friend WithEvents MySqlCommand1 As MySql.Data.MySqlClient.MySqlCommand
+    Friend WithEvents BindingSource1 As BindingSource
 End Class

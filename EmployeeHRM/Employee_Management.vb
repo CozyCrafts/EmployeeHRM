@@ -2,13 +2,6 @@
 Public Class Employee_Management
     Private Sub Employee_Management_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Dim dbcon As MySqlConnection
-        Dim dbcmd As New MySqlCommand
-        Dim dbadapter As MySqlDataAdapter
-        Dim dbtable As DataTable
-
-        'hi
-
         Me.FormBorderStyle = FormBorderStyle.None
 
         Try
@@ -64,4 +57,5 @@ Public Class Employee_Management
     Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
 
     End Sub
+
 End Class

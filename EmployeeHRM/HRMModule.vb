@@ -1,9 +1,9 @@
 ﻿Imports MySql.Data.MySqlClient
 Module HRMModule
-    Dim dbcon As MySqlConnection
-    Dim dbcmd As New MySqlCommand
-    Dim dbadapter As MySqlDataAdapter
-    Dim dbtable As DataTable
+    Public dbcon As MySqlConnection
+    Public dbcmd As New MySqlCommand
+    Public dbadapter As MySqlDataAdapter
+    Public dbtable As DataTable
 
     Sub OpenCon()
         dbcon = New MySqlConnection
