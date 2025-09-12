@@ -4,10 +4,10 @@
     End Sub
 
     Private Sub btnlogin_Click(sender As Object, e As EventArgs) Handles btnlogin.Click
-        If cmbRole.Text = "Admin" Then
+        If cmbRole.Text = "Manager" Then
             Admin_frm.Show()
             Me.Hide()
-        ElseIf cmbRole.Text = "Employee" Then
+        ElseIf cmbRole.Text = "Staff" Then
             Employee_Dashboard.Show()
             Me.Hide()
         Else

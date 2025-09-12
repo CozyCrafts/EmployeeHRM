@@ -110,7 +110,7 @@ Partial Class Login_frm
         cmbRole.DropDownStyle = ComboBoxStyle.DropDownList
         cmbRole.Font = New Font("Palatino Linotype", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         cmbRole.FormattingEnabled = True
-        cmbRole.Items.AddRange(New Object() {"Admin", "Employee"})
+        cmbRole.Items.AddRange(New Object() {"Manager", "Staff"})
         cmbRole.Location = New Point(76, 303)
         cmbRole.Name = "cmbRole"
         cmbRole.Size = New Size(245, 32)
