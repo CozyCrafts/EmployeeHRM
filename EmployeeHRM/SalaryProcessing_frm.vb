@@ -8,7 +8,7 @@
     End Sub
 
     Private Sub lblManageEmployees_Click(sender As Object, e As EventArgs) Handles lblManageEmployees.Click
-        EmployeeManagement_frm.Show()
+        Employee_Management.Show()
         Me.Hide()
     End Sub
 
