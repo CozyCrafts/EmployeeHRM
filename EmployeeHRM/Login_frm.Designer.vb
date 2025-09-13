@@ -28,8 +28,8 @@ Partial Class Login_frm
         Label2 = New Label()
         Label3 = New Label()
         Label1 = New Label()
-        TextBox1 = New TextBox()
-        TextBox2 = New TextBox()
+        txtUname = New TextBox()
+        txtPass = New TextBox()
         cmbRole = New ComboBox()
         btnlogin = New Button()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
@@ -89,21 +89,21 @@ Partial Class Login_frm
         Label1.TabIndex = 4
         Label1.Text = "Role:"
         ' 
-        ' TextBox1
+        ' txtUname
         ' 
-        TextBox1.Font = New Font("Palatino Linotype", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox1.Location = New Point(76, 367)
-        TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(244, 34)
-        TextBox1.TabIndex = 5
+        txtUname.Font = New Font("Palatino Linotype", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtUname.Location = New Point(76, 367)
+        txtUname.Name = "txtUname"
+        txtUname.Size = New Size(244, 34)
+        txtUname.TabIndex = 5
         ' 
-        ' TextBox2
+        ' txtPass
         ' 
-        TextBox2.Font = New Font("Palatino Linotype", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox2.Location = New Point(76, 433)
-        TextBox2.Name = "TextBox2"
-        TextBox2.Size = New Size(244, 34)
-        TextBox2.TabIndex = 6
+        txtPass.Font = New Font("Palatino Linotype", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtPass.Location = New Point(76, 433)
+        txtPass.Name = "txtPass"
+        txtPass.Size = New Size(244, 34)
+        txtPass.TabIndex = 6
         ' 
         ' cmbRole
         ' 
@@ -136,8 +136,8 @@ Partial Class Login_frm
         ClientSize = New Size(394, 612)
         Controls.Add(btnlogin)
         Controls.Add(cmbRole)
-        Controls.Add(TextBox2)
-        Controls.Add(TextBox1)
+        Controls.Add(txtPass)
+        Controls.Add(txtUname)
         Controls.Add(Label1)
         Controls.Add(Label3)
         Controls.Add(Label2)
@@ -156,8 +156,8 @@ Partial Class Login_frm
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents txtUname As TextBox
+    Friend WithEvents txtPass As TextBox
     Friend WithEvents cmbRole As ComboBox
     Friend WithEvents btnlogin As Button
 End Class

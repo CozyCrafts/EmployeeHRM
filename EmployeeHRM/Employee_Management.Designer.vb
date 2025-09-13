@@ -113,6 +113,7 @@ Partial Class Employee_Management
         Label31 = New Label()
         btnAddEmployee = New FontAwesome.Sharp.IconButton()
         btnEditEmployee = New FontAwesome.Sharp.IconButton()
+        btnUpdate = New Button()
         Panel1.SuspendLayout()
         adminheader_pnl.SuspendLayout()
         CType(dgvAccount, ComponentModel.ISupportInitialize).BeginInit()
@@ -643,7 +644,7 @@ Partial Class Employee_Management
         btnDelete.BackgroundImageLayout = ImageLayout.None
         btnDelete.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
         btnDelete.ForeColor = Color.Black
-        btnDelete.Location = New Point(1522, 88)
+        btnDelete.Location = New Point(1523, 90)
         btnDelete.Name = "btnDelete"
         btnDelete.Size = New Size(115, 45)
         btnDelete.TabIndex = 74
@@ -656,7 +657,7 @@ Partial Class Employee_Management
         btnSave.BackgroundImageLayout = ImageLayout.None
         btnSave.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
         btnSave.ForeColor = Color.Black
-        btnSave.Location = New Point(1412, 88)
+        btnSave.Location = New Point(1534, 89)
         btnSave.Name = "btnSave"
         btnSave.Size = New Size(104, 46)
         btnSave.TabIndex = 73
@@ -1062,7 +1063,7 @@ Partial Class Employee_Management
         btnAddEmployee.IconColor = Color.Black
         btnAddEmployee.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnAddEmployee.IconSize = 38
-        btnAddEmployee.Location = New Point(980, 79)
+        btnAddEmployee.Location = New Point(1407, 76)
         btnAddEmployee.Name = "btnAddEmployee"
         btnAddEmployee.Size = New Size(170, 70)
         btnAddEmployee.TabIndex = 78
@@ -1078,7 +1079,7 @@ Partial Class Employee_Management
         btnEditEmployee.IconChar = FontAwesome.Sharp.IconChar.UserPen
         btnEditEmployee.IconColor = Color.Black
         btnEditEmployee.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnEditEmployee.Location = New Point(1168, 80)
+        btnEditEmployee.Location = New Point(1583, 76)
         btnEditEmployee.Name = "btnEditEmployee"
         btnEditEmployee.Size = New Size(176, 70)
         btnEditEmployee.TabIndex = 79
@@ -1087,18 +1088,32 @@ Partial Class Employee_Management
         btnEditEmployee.TextImageRelation = TextImageRelation.ImageBeforeText
         btnEditEmployee.UseVisualStyleBackColor = False
         ' 
+        ' btnUpdate
+        ' 
+        btnUpdate.BackColor = SystemColors.InactiveCaption
+        btnUpdate.BackgroundImageLayout = ImageLayout.None
+        btnUpdate.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnUpdate.ForeColor = Color.Black
+        btnUpdate.Location = New Point(1413, 91)
+        btnUpdate.Name = "btnUpdate"
+        btnUpdate.Size = New Size(104, 46)
+        btnUpdate.TabIndex = 80
+        btnUpdate.Text = "Update"
+        btnUpdate.UseVisualStyleBackColor = False
+        ' 
         ' Employee_Management
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1781, 1033)
+        Controls.Add(btnUpdate)
         Controls.Add(btnEditEmployee)
         Controls.Add(btnAddEmployee)
         Controls.Add(GroupBox5)
         Controls.Add(GroupBox7)
         Controls.Add(GroupBox3)
-        Controls.Add(btnCancel)
         Controls.Add(btnDelete)
+        Controls.Add(btnCancel)
         Controls.Add(btnSave)
         Controls.Add(GroupBox4)
         Controls.Add(GroupBox1)
@@ -1225,4 +1240,5 @@ Partial Class Employee_Management
     Friend WithEvents Label45 As Label
     Friend WithEvents btnAddEmployee As FontAwesome.Sharp.IconButton
     Friend WithEvents btnEditEmployee As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnUpdate As Button
 End Class

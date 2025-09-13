@@ -21,7 +21,9 @@ Public Class Employee_Management
         End Try
 
         Call DisableFields()
-        LoadUsers()
+        LoadEmployee()
+
+        txtPass.UseSystemPasswordChar = True
     End Sub
 
     Private Sub lblProfile_Click(sender As Object, e As EventArgs) Handles lblProfile.Click
@@ -49,10 +51,10 @@ Public Class Employee_Management
         Me.Hide()
     End Sub
 
-    Private Sub SaveUser()
+    Private Sub SaveEmployee()
         Dim dbcon As MySqlConnection = HRMModule.GetConnection()
-        Dim query As String = "INSERT INTO tblaccount (Fname, Mname, Lname, Suffix, Age, Sex, CivilStatus, BirthDate, Username, Password) 
-                           VALUES (@Fname, @Mname, @Lname, @Suffix, @Age, @Sex, @CivilStatus, @BirthDate, @Username, @Password);"
+        Dim query As String = "INSERT INTO tblaccount (Fname, Mname, Lname, Suffix, Age, Sex, CivilStatus, BirthDate, UserType, Username, Password) 
+                           VALUES (@Fname, @Mname, @Lname, @Suffix, @Age, @Sex, @CivilStatus, @BirthDate, @UserType, @Username, @Password);"
         Try
             dbcon.Open()
 
@@ -71,15 +73,16 @@ Public Class Employee_Management
                 cmd.Parameters.AddWithValue("@Sex", cmbSex.Text)
                 cmd.Parameters.AddWithValue("@CivilStatus", cmbCivilStatus.Text)
                 cmd.Parameters.AddWithValue("@BirthDate", dtpBirthdate.Value)
+                cmd.Parameters.AddWithValue("@UserType", cmbUser.Text)
                 cmd.Parameters.AddWithValue("@Username", txtUname.Text)
-                cmd.Parameters.AddWithValue("@Password", txtPass.Text)
+                cmd.Parameters.AddWithValue("@Password", HashPassword(txtPass.Text))
 
                 cmd.ExecuteNonQuery()
 
                 cmd.CommandText = "SELECT LAST_INSERT_ID()"
                 Dim newEmployeeID As Integer = Convert.ToInt32(cmd.ExecuteScalar())
 
-                LoadUsers()
+                LoadEmployee()
 
                 For Each row As DataGridViewRow In dgvAccount.Rows
                     If row.Cells("Suffix").Value Is DBNull.Value Then
@@ -97,7 +100,78 @@ Public Class Employee_Management
         End Try
     End Sub
 
-    Private Sub LoadUsers()
+    Private Sub UpdateEmployee()
+        If dgvAccount.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a user to update.")
+            Return
+        End If
+
+        Dim selectedRow As DataGridViewRow = dgvAccount.SelectedRows(0)
+        Dim employeeID As Integer = Convert.ToInt32(selectedRow.Cells("EmployeeID").Value)
+
+        Dim dbcon As MySqlConnection = HRMModule.GetConnection()
+        Dim query As String = "UPDATE tblaccount 
+                           SET Fname = @Fname, 
+                               Mname = @Mname, 
+                               Lname = @Lname, 
+                               Suffix = @Suffix, 
+                               Age = @Age, 
+                               Sex = @Sex, 
+                               CivilStatus = @CivilStatus, 
+                               BirthDate = @BirthDate, 
+                               UserType = @UserType,
+                               Username = @Username, 
+                               Password = @Password
+                           WHERE EmployeeID = @EmployeeID;"
+
+        Try
+            dbcon.Open()
+
+            Using cmd As New MySqlCommand(query, dbcon)
+                cmd.Parameters.AddWithValue("@Fname", txtFname.Text)
+                cmd.Parameters.AddWithValue("@Mname", txtMname.Text)
+                cmd.Parameters.AddWithValue("@Lname", txtLname.Text)
+
+                If String.IsNullOrWhiteSpace(txtSuffix.Text) Then
+                    cmd.Parameters.AddWithValue("@Suffix", DBNull.Value)
+                Else
+                    cmd.Parameters.AddWithValue("@Suffix", txtSuffix.Text)
+                End If
+
+                cmd.Parameters.AddWithValue("@Age", txtage.Text)
+                cmd.Parameters.AddWithValue("@Sex", cmbSex.Text)
+                cmd.Parameters.AddWithValue("@CivilStatus", cmbCivilStatus.Text)
+                cmd.Parameters.AddWithValue("@BirthDate", dtpBirthdate.Value)
+                cmd.Parameters.AddWithValue("@UserType", cmbUser.Text)
+                cmd.Parameters.AddWithValue("@Username", txtUname.Text)
+                cmd.Parameters.AddWithValue("@Password", HashPassword(txtPass.Text))
+                cmd.Parameters.AddWithValue("@EmployeeID", employeeID)
+
+                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+
+                If rowsAffected > 0 Then
+                    LoadEmployee()
+                    For Each row As DataGridViewRow In dgvAccount.Rows
+                        If row.Cells("Suffix").Value Is DBNull.Value Then
+                            row.Cells("Suffix").Value = " "
+                        End If
+                    Next
+                    MessageBox.Show("User updated successfully.")
+                    DisableFields()
+                Else
+                    MessageBox.Show("No record updated. Please check EmployeeID.")
+                End If
+            End Using
+
+        Catch ex As MySqlException
+            MessageBox.Show("Error: " & ex.Message)
+        Finally
+            dbcon.Close()
+        End Try
+    End Sub
+
+
+    Private Sub LoadEmployee()
         Try
             OpenCon()
             dbcon.Open()
@@ -161,46 +235,97 @@ Public Class Employee_Management
         btnSave.Visible = False
         btnCancel.Visible = False
         btnDelete.Visible = False
+        btnUpdate.Visible = False
         btnAddEmployee.Visible = True
         btnEditEmployee.Visible = True
     End Sub
 
     Sub Clear()
+        lblID.Text = ""
         txtFname.Clear()
         txtMname.Clear()
         txtLname.Clear()
         txtSuffix.Clear()
         txtage.Clear()
+        cmbCivilStatus.SelectedIndex = -1
+        cmbSex.SelectedIndex = -1
+        cmbUser.SelectedIndex = -1
         txtUname.Clear()
         txtPass.Clear()
         dtpBirthdate.Value = Date.Today
     End Sub
 
-
     Private Sub btnAddEmployee_Click(sender As Object, e As EventArgs) Handles btnAddEmployee.Click
-        Call EnableFields()
-        Call Clear()
+        EnableFields()
+        Clear()
+        btnSave.Visible = True
+        btnUpdate.Visible = False
+        btnDelete.Visible = False
+        btnCancel.Visible = True
+        btnAddEmployee.Visible = False
+        btnEditEmployee.Visible = False
     End Sub
 
     Private Sub btnEditEmployee_Click(sender As Object, e As EventArgs) Handles btnEditEmployee.Click
-        DisableFields()
+        EnableFields()
         Clear()
+        btnSave.Visible = False
+        btnUpdate.Visible = True
+        btnDelete.Visible = True
+        btnCancel.Visible = True
+        btnAddEmployee.Visible = False
+        btnEditEmployee.Visible = False
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Clear()
-        LoadUsers()
+        LoadEmployee()
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        SaveUser()
+        SaveEmployee()
         Clear()
-        LoadUsers()
+        LoadEmployee()
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Call DisableFields()
-        Call Clear()
+        DisableFields()
+        Clear()
+    End Sub
+
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+        UpdateEmployee()
+        Clear()
+        LoadEmployee()
+    End Sub
+
+    Private Sub dgvAccount_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvAccount.CellClick
+        If e.RowIndex < 0 Then Return
+
+        Dim row As DataGridViewRow = dgvAccount.Rows(e.RowIndex)
+
+        lblID.Text = row.Cells("EmployeeID").Value.ToString()
+        txtFname.Text = row.Cells("Fname").Value.ToString()
+        txtMname.Text = row.Cells("Mname").Value.ToString()
+        txtLname.Text = row.Cells("Lname").Value.ToString()
+
+        If IsDBNull(row.Cells("Suffix").Value) Then
+            txtSuffix.Clear()
+        Else
+            txtSuffix.Text = row.Cells("Suffix").Value.ToString()
+        End If
+
+        txtage.Text = row.Cells("Age").Value.ToString()
+        cmbSex.Text = row.Cells("Sex").Value.ToString()
+        cmbCivilStatus.Text = row.Cells("CivilStatus").Value.ToString()
+
+        If Not IsDBNull(row.Cells("BirthDate").Value) Then
+            dtpBirthdate.Value = Convert.ToDateTime(row.Cells("BirthDate").Value)
+        End If
+
+        cmbUser.Text = row.Cells("UserType").Value.ToString()
+        txtUname.Text = row.Cells("Username").Value.ToString()
+        txtPass.Text = row.Cells("Password").Value.ToString()
     End Sub
 
 End Class
