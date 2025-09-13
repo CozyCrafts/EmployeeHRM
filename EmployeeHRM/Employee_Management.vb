@@ -24,6 +24,9 @@ Public Class Employee_Management
         LoadEmployee()
 
         txtPass.UseSystemPasswordChar = True
+        lblID.Text = GenerateEmployeeID()
+        dtpBirthdate.Format = DateTimePickerFormat.Custom
+        dtpBirthdate.CustomFormat = "MMMM/dd/yyyy"
     End Sub
 
     Private Sub lblProfile_Click(sender As Object, e As EventArgs) Handles lblProfile.Click
@@ -50,55 +53,89 @@ Public Class Employee_Management
         Employee_Payroll.Show()
         Me.Hide()
     End Sub
-
     Private Sub SaveEmployee()
         Dim dbcon As MySqlConnection = HRMModule.GetConnection()
-        Dim query As String = "INSERT INTO tblaccount (Fname, Mname, Lname, Suffix, Age, Sex, CivilStatus, BirthDate, UserType, Username, Password) 
-                           VALUES (@Fname, @Mname, @Lname, @Suffix, @Age, @Sex, @CivilStatus, @BirthDate, @UserType, @Username, @Password);"
+        Dim newEmployeeID As String = GenerateEmployeeID()
+
+        Dim query As String = "INSERT INTO tblaccount (EmployeeID, Fname, Mname, Lname, Suffix, Age, Sex, CivilStatus, BirthDate, UserType, Username, Password) 
+                           VALUES (@EmployeeID, @Fname, @Mname, @Lname, @Suffix, @Age, @Sex, @CivilStatus, @BirthDate, @UserType, @Username, @Password);"
+
         Try
             dbcon.Open()
 
-            Using cmd As New MySqlCommand(query, dbcon)
-                cmd.Parameters.AddWithValue("@Fname", txtFname.Text)
-                cmd.Parameters.AddWithValue("@Mname", txtMname.Text)
-                cmd.Parameters.AddWithValue("@Lname", txtLname.Text)
+            Using dbcmd As New MySqlCommand(query, dbcon)
+                dbcmd.Parameters.AddWithValue("@EmployeeID", newEmployeeID)
+
+                dbcmd.Parameters.AddWithValue("@Fname", txtFname.Text)
+                dbcmd.Parameters.AddWithValue("@Mname", txtMname.Text)
+                dbcmd.Parameters.AddWithValue("@Lname", txtLname.Text)
 
                 If String.IsNullOrWhiteSpace(txtSuffix.Text) Then
-                    cmd.Parameters.AddWithValue("@Suffix", DBNull.Value)
+                    dbcmd.Parameters.AddWithValue("@Suffix", DBNull.Value)
                 Else
-                    cmd.Parameters.AddWithValue("@Suffix", txtSuffix.Text)
+                    dbcmd.Parameters.AddWithValue("@Suffix", txtSuffix.Text)
                 End If
 
-                cmd.Parameters.AddWithValue("@Age", txtage.Text)
-                cmd.Parameters.AddWithValue("@Sex", cmbSex.Text)
-                cmd.Parameters.AddWithValue("@CivilStatus", cmbCivilStatus.Text)
-                cmd.Parameters.AddWithValue("@BirthDate", dtpBirthdate.Value)
-                cmd.Parameters.AddWithValue("@UserType", cmbUser.Text)
-                cmd.Parameters.AddWithValue("@Username", txtUname.Text)
-                cmd.Parameters.AddWithValue("@Password", HashPassword(txtPass.Text))
+                dbcmd.Parameters.AddWithValue("@Age", txtage.Text)
+                dbcmd.Parameters.AddWithValue("@Sex", cmbSex.Text)
+                dbcmd.Parameters.AddWithValue("@CivilStatus", cmbCivilStatus.Text)
+                dbcmd.Parameters.AddWithValue("@BirthDate", dtpBirthdate.Value.ToString("yyyy-MMMM-dd"))
+                dbcmd.Parameters.AddWithValue("@UserType", cmbUser.Text)
+                dbcmd.Parameters.AddWithValue("@Username", txtUname.Text)
+                dbcmd.Parameters.AddWithValue("@Password", HashPassword(txtPass.Text))
 
-                cmd.ExecuteNonQuery()
-
-                cmd.CommandText = "SELECT LAST_INSERT_ID()"
-                Dim newEmployeeID As Integer = Convert.ToInt32(cmd.ExecuteScalar())
-
-                LoadEmployee()
-
-                For Each row As DataGridViewRow In dgvAccount.Rows
-                    If row.Cells("Suffix").Value Is DBNull.Value Then
-                        row.Cells("Suffix").Value = " "
-                    End If
-                Next
-
-                MessageBox.Show("User added successfully. New EmployeeID: " & newEmployeeID)
-                DisableFields()
+                dbcmd.ExecuteNonQuery()
             End Using
+
+            LoadEmployee()
+
+            For Each row As DataGridViewRow In dgvAccount.Rows
+                If row.Cells("Suffix").Value Is DBNull.Value Then
+                    row.Cells("Suffix").Value = " "
+                End If
+            Next
+
+            MessageBox.Show("User added successfully. New EmployeeID: " & newEmployeeID)
+            DisableFields()
+
         Catch ex As MySqlException
             MessageBox.Show("Error: " & ex.Message)
         Finally
             dbcon.Close()
         End Try
     End Sub
+
+    Private Function GenerateEmployeeID() As String
+        Dim prefix As String = "20250"
+
+        Dim newID As String = prefix & "1"
+
+        Try
+            OpenCon()
+            dbcon.Open()
+
+            Dim query As String = "SELECT MAX(EmployeeID) FROM tblaccount WHERE EmployeeID LIKE @prefix"
+            Using cmd As New MySqlCommand(query, dbcon)
+                cmd.Parameters.AddWithValue("@prefix", prefix & "%")
+
+                Dim result As Object = cmd.ExecuteScalar()
+
+                If result IsNot DBNull.Value AndAlso result IsNot Nothing Then
+                    Dim lastID As String = result.ToString()
+                    Dim lastNumber As Integer = Convert.ToInt32(lastID)
+                    newID = (lastNumber + 1).ToString()
+                End If
+            End Using
+
+        Catch ex As MySqlException
+            MessageBox.Show("Error generating EmployeeID: " & ex.Message)
+        Finally
+            dbcon.Close()
+        End Try
+
+        Return newID
+    End Function
+
 
     Private Sub UpdateEmployee()
         If dgvAccount.SelectedRows.Count = 0 Then
@@ -141,7 +178,7 @@ Public Class Employee_Management
                 cmd.Parameters.AddWithValue("@Age", txtage.Text)
                 cmd.Parameters.AddWithValue("@Sex", cmbSex.Text)
                 cmd.Parameters.AddWithValue("@CivilStatus", cmbCivilStatus.Text)
-                cmd.Parameters.AddWithValue("@BirthDate", dtpBirthdate.Value)
+                dbcmd.Parameters.AddWithValue("@BirthDate", dtpBirthdate.Value.ToString("yyyy-MMMM-dd"))
                 cmd.Parameters.AddWithValue("@UserType", cmbUser.Text)
                 cmd.Parameters.AddWithValue("@Username", txtUname.Text)
                 cmd.Parameters.AddWithValue("@Password", HashPassword(txtPass.Text))
@@ -170,6 +207,51 @@ Public Class Employee_Management
         End Try
     End Sub
 
+    Private Sub DeleteEmployee()
+        If dgvAccount.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a user to delete.", "No Selection",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Dim selectedCell As DataGridViewCell = dgvAccount.SelectedCells(0)
+        Dim selectedRow As DataGridViewRow = dgvAccount.Rows(selectedCell.RowIndex)
+
+        Dim employeeID As Integer = Convert.ToInt32(selectedRow.Cells("EmployeeID").Value)
+        Dim employeeName As String = selectedRow.Cells("Fname").Value.ToString() & " " & selectedRow.Cells("Lname").Value.ToString()
+
+        Dim result As DialogResult = MessageBox.Show($"Are you sure you want to delete employee {employeeName}?",
+                                                 "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+        If result = DialogResult.No Then
+            Return
+        End If
+
+        Try
+            OpenCon()
+            dbcon.Open()
+
+            Dim query As String = "DELETE FROM tblaccount WHERE EmployeeID = @EmployeeID"
+            Using cmd As New MySqlCommand(query, dbcon)
+                cmd.Parameters.AddWithValue("@EmployeeID", employeeID)
+
+                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+
+                If rowsAffected > 0 Then
+                    LoadEmployee()
+                    MessageBox.Show("Employee deleted successfully.", "Deleted",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Else
+                    MessageBox.Show("No record was deleted. Please check EmployeeID.", "Error",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            End Using
+        Catch ex As MySqlException
+            MessageBox.Show("Error deleting employee: " & ex.Message)
+        Finally
+            dbcon.Close()
+        End Try
+    End Sub
 
     Private Sub LoadEmployee()
         Try
@@ -278,11 +360,34 @@ Public Class Employee_Management
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        DeleteEmployee()
         Clear()
         LoadEmployee()
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        If String.IsNullOrWhiteSpace(txtFname.Text) OrElse
+       String.IsNullOrWhiteSpace(txtLname.Text) OrElse
+       String.IsNullOrWhiteSpace(txtage.Text) OrElse
+       String.IsNullOrWhiteSpace(cmbSex.Text) OrElse
+       String.IsNullOrWhiteSpace(cmbCivilStatus.Text) OrElse
+       String.IsNullOrWhiteSpace(cmbUser.Text) OrElse
+       String.IsNullOrWhiteSpace(txtUname.Text) OrElse
+       String.IsNullOrWhiteSpace(txtPass.Text) Then
+
+            MessageBox.Show("Please fill in all required fields.", "Validation Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
+
+        Dim age As Integer
+        If Not Integer.TryParse(txtage.Text, age) OrElse age < 1 OrElse age > 100 Then
+            MessageBox.Show("Please enter a valid age (1-100).", "Invalid Age",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
         SaveEmployee()
         Clear()
         LoadEmployee()
@@ -294,6 +399,31 @@ Public Class Employee_Management
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+        If dgvAccount.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a user to update.")
+            Return
+        End If
+
+        If String.IsNullOrWhiteSpace(txtFname.Text) OrElse
+       String.IsNullOrWhiteSpace(txtLname.Text) OrElse
+       String.IsNullOrWhiteSpace(txtage.Text) OrElse
+       String.IsNullOrWhiteSpace(cmbSex.Text) OrElse
+       String.IsNullOrWhiteSpace(cmbCivilStatus.Text) OrElse
+       String.IsNullOrWhiteSpace(cmbUser.Text) OrElse
+       String.IsNullOrWhiteSpace(txtUname.Text) Then
+
+            MessageBox.Show("Please fill in all required fields before updating.", "Validation Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
+        Dim age As Integer
+        If Not Integer.TryParse(txtage.Text, age) OrElse age < 1 OrElse age > 100 Then
+            MessageBox.Show("Please enter a valid age (1-100).", "Invalid Age",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
         UpdateEmployee()
         Clear()
         LoadEmployee()

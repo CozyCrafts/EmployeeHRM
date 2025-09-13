@@ -393,7 +393,8 @@ Partial Class Employee_Management
         ' 
         ' dtpBirthdate
         ' 
-        dtpBirthdate.Location = New Point(583, 112)
+        dtpBirthdate.CustomFormat = "mm/dd/yyyy"
+        dtpBirthdate.Location = New Point(583, 109)
         dtpBirthdate.Name = "dtpBirthdate"
         dtpBirthdate.Size = New Size(207, 26)
         dtpBirthdate.TabIndex = 48
@@ -404,7 +405,7 @@ Partial Class Employee_Management
         cmbSex.DropDownStyle = ComboBoxStyle.DropDownList
         cmbSex.FormattingEnabled = True
         cmbSex.Items.AddRange(New Object() {"Female", "Male"})
-        cmbSex.Location = New Point(583, 146)
+        cmbSex.Location = New Point(583, 143)
         cmbSex.Name = "cmbSex"
         cmbSex.Size = New Size(207, 26)
         cmbSex.TabIndex = 47
@@ -476,7 +477,7 @@ Partial Class Employee_Management
         ' 
         ' txtage
         ' 
-        txtage.Location = New Point(585, 76)
+        txtage.Location = New Point(585, 72)
         txtage.Name = "txtage"
         txtage.Size = New Size(205, 26)
         txtage.TabIndex = 32
