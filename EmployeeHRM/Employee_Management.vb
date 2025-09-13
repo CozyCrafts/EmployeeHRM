@@ -51,33 +51,52 @@ Public Class Employee_Management
 
     Private Sub SaveUser()
         Dim dbcon As MySqlConnection = HRMModule.GetConnection()
-        Dim query As String = "INSERT INTO tblAccounts (Fname, Mname, Lname, Suffix, Age, Sex, CivilStatus, BirthDate, Username, Pass) 
+        Dim query As String = "INSERT INTO tblaccount (Fname, Mname, Lname, Suffix, Age, Sex, CivilStatus, BirthDate, Username, Password) 
                            VALUES (@Fname, @Mname, @Lname, @Suffix, @Age, @Sex, @CivilStatus, @BirthDate, @Username, @Password);"
-
-        Dim dbcmd As New MySqlCommand(query, dbcon)
-
         Try
             dbcon.Open()
-            dbcmd.Parameters.AddWithValue("@Fname", txtFname.Text)
-            dbcmd.Parameters.AddWithValue("@Mname", txtMname.Text)
-            dbcmd.Parameters.AddWithValue("@Lname", txtLname.Text)
-            dbcmd.Parameters.AddWithValue("@Suffix", txtSuffix.Text)
-            dbcmd.Parameters.AddWithValue("@Age", Convert.ToInt32(txtage.Text))
-            dbcmd.Parameters.AddWithValue("@Sex", cmbSex.Text)
-            dbcmd.Parameters.AddWithValue("@CivilStatus", cmbCivilStatus.Text)
-            dbcmd.Parameters.AddWithValue("@BirthDate", Convert.ToDateTime(dtpBirthdate.Value))
-            dbcmd.Parameters.AddWithValue("@Username", txtUname.Text)
-            dbcmd.Parameters.AddWithValue("@Pass", HashPassword(txtPass.Text))
 
-            dbcmd.ExecuteNonQuery()
-            MessageBox.Show("User added successfully.")
-            DisableFields()
+            Using cmd As New MySqlCommand(query, dbcon)
+                cmd.Parameters.AddWithValue("@Fname", txtFname.Text)
+                cmd.Parameters.AddWithValue("@Mname", txtMname.Text)
+                cmd.Parameters.AddWithValue("@Lname", txtLname.Text)
+
+                If String.IsNullOrWhiteSpace(txtSuffix.Text) Then
+                    cmd.Parameters.AddWithValue("@Suffix", DBNull.Value)
+                Else
+                    cmd.Parameters.AddWithValue("@Suffix", txtSuffix.Text)
+                End If
+
+                cmd.Parameters.AddWithValue("@Age", txtage.Text)
+                cmd.Parameters.AddWithValue("@Sex", cmbSex.Text)
+                cmd.Parameters.AddWithValue("@CivilStatus", cmbCivilStatus.Text)
+                cmd.Parameters.AddWithValue("@BirthDate", dtpBirthdate.Value)
+                cmd.Parameters.AddWithValue("@Username", txtUname.Text)
+                cmd.Parameters.AddWithValue("@Password", txtPass.Text)
+
+                cmd.ExecuteNonQuery()
+
+                cmd.CommandText = "SELECT LAST_INSERT_ID()"
+                Dim newEmployeeID As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+
+                LoadUsers()
+
+                For Each row As DataGridViewRow In dgvAccount.Rows
+                    If row.Cells("Suffix").Value Is DBNull.Value Then
+                        row.Cells("Suffix").Value = " "
+                    End If
+                Next
+
+                MessageBox.Show("User added successfully. New EmployeeID: " & newEmployeeID)
+                DisableFields()
+            End Using
         Catch ex As MySqlException
             MessageBox.Show("Error: " & ex.Message)
         Finally
             dbcon.Close()
         End Try
     End Sub
+
     Private Sub LoadUsers()
         Try
             OpenCon()
@@ -164,12 +183,13 @@ Public Class Employee_Management
     End Sub
 
     Private Sub btnEditEmployee_Click(sender As Object, e As EventArgs) Handles btnEditEmployee.Click
-        Call DisableFields()
-        Call Clear()
+        DisableFields()
+        Clear()
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-
+        Clear()
+        LoadUsers()
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -182,4 +202,5 @@ Public Class Employee_Management
         Call DisableFields()
         Call Clear()
     End Sub
+
 End Class
