@@ -234,7 +234,9 @@ Partial Class LeaveManagement_frm
         Controls.Add(adminheader_pnl)
         Controls.Add(Panel1)
         Name = "LeaveManagement_frm"
+        StartPosition = FormStartPosition.CenterScreen
         Text = "LeaveManagement_frm"
+        WindowState = FormWindowState.Maximized
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
         adminheader_pnl.ResumeLayout(False)
