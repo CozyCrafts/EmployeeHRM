@@ -22,7 +22,9 @@ Partial Class Admin_frm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Admin_frm))
         adminheader_pnl = New Panel()
+        pcbTerminate = New PictureBox()
         Label2 = New Label()
         Panel1 = New Panel()
         Label8 = New Label()
@@ -37,20 +39,30 @@ Partial Class Admin_frm
         Label3 = New Label()
         lblDashboard = New Label()
         lblMain = New Label()
-        btnTerminate = New FontAwesome.Sharp.IconButton()
         adminheader_pnl.SuspendLayout()
+        CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
         Panel1.SuspendLayout()
         SuspendLayout()
         ' 
         ' adminheader_pnl
         ' 
         adminheader_pnl.BackColor = Color.White
-        adminheader_pnl.Controls.Add(btnTerminate)
+        adminheader_pnl.Controls.Add(pcbTerminate)
         adminheader_pnl.Controls.Add(Label2)
         adminheader_pnl.Location = New Point(338, -17)
         adminheader_pnl.Name = "adminheader_pnl"
         adminheader_pnl.Size = New Size(1608, 107)
         adminheader_pnl.TabIndex = 0
+        ' 
+        ' pcbTerminate
+        ' 
+        pcbTerminate.Image = CType(resources.GetObject("pcbTerminate.Image"), Image)
+        pcbTerminate.Location = New Point(1348, 29)
+        pcbTerminate.Name = "pcbTerminate"
+        pcbTerminate.Size = New Size(55, 54)
+        pcbTerminate.SizeMode = PictureBoxSizeMode.StretchImage
+        pcbTerminate.TabIndex = 1
+        pcbTerminate.TabStop = False
         ' 
         ' Label2
         ' 
@@ -214,20 +226,6 @@ Partial Class Admin_frm
         lblMain.TabIndex = 1
         lblMain.Text = "MAIN"
         ' 
-        ' btnTerminate
-        ' 
-        btnTerminate.BackColor = Color.Transparent
-        btnTerminate.BackgroundImageLayout = ImageLayout.None
-        btnTerminate.IconChar = FontAwesome.Sharp.IconChar.Close
-        btnTerminate.IconColor = Color.Black
-        btnTerminate.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnTerminate.IconSize = 50
-        btnTerminate.Location = New Point(1332, 29)
-        btnTerminate.Name = "btnTerminate"
-        btnTerminate.Size = New Size(76, 54)
-        btnTerminate.TabIndex = 1
-        btnTerminate.UseVisualStyleBackColor = False
-        ' 
         ' Admin_frm
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
@@ -242,6 +240,7 @@ Partial Class Admin_frm
         WindowState = FormWindowState.Maximized
         adminheader_pnl.ResumeLayout(False)
         adminheader_pnl.PerformLayout()
+        CType(pcbTerminate, ComponentModel.ISupportInitialize).EndInit()
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
         ResumeLayout(False)
@@ -262,5 +261,5 @@ Partial Class Admin_frm
     Friend WithEvents Label7 As Label
     Friend WithEvents lblDashboard As Label
     Friend WithEvents Label8 As Label
-    Friend WithEvents btnTerminate As FontAwesome.Sharp.IconButton
+    Friend WithEvents pcbTerminate As PictureBox
 End Class
