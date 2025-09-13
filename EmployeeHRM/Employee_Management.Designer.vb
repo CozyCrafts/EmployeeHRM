@@ -22,6 +22,7 @@ Partial Class Employee_Management
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Employee_Management))
         Panel1 = New Panel()
         Label8 = New Label()
         Label7 = New Label()
@@ -114,6 +115,7 @@ Partial Class Employee_Management
         btnAddEmployee = New FontAwesome.Sharp.IconButton()
         btnEditEmployee = New FontAwesome.Sharp.IconButton()
         btnUpdate = New Button()
+        pcbTerminate = New PictureBox()
         Panel1.SuspendLayout()
         adminheader_pnl.SuspendLayout()
         CType(dgvAccount, ComponentModel.ISupportInitialize).BeginInit()
@@ -123,6 +125,7 @@ Partial Class Employee_Management
         GroupBox3.SuspendLayout()
         GroupBox7.SuspendLayout()
         GroupBox5.SuspendLayout()
+        CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' Panel1
@@ -205,7 +208,7 @@ Partial Class Employee_Management
         lblProfile.AutoSize = True
         lblProfile.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblProfile.ForeColor = Color.White
-        lblProfile.Location = New Point(61, 319)
+        lblProfile.Location = New Point(56, 277)
         lblProfile.Name = "lblProfile"
         lblProfile.Size = New Size(211, 27)
         lblProfile.TabIndex = 7
@@ -216,7 +219,7 @@ Partial Class Employee_Management
         lblEmployees.AutoSize = True
         lblEmployees.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblEmployees.ForeColor = Color.White
-        lblEmployees.Location = New Point(61, 364)
+        lblEmployees.Location = New Point(56, 322)
         lblEmployees.Name = "lblEmployees"
         lblEmployees.Size = New Size(279, 27)
         lblEmployees.TabIndex = 6
@@ -227,7 +230,7 @@ Partial Class Employee_Management
         lblLeaveManagement.AutoSize = True
         lblLeaveManagement.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblLeaveManagement.ForeColor = Color.White
-        lblLeaveManagement.Location = New Point(61, 407)
+        lblLeaveManagement.Location = New Point(56, 365)
         lblLeaveManagement.Name = "lblLeaveManagement"
         lblLeaveManagement.Size = New Size(248, 27)
         lblLeaveManagement.TabIndex = 5
@@ -238,7 +241,7 @@ Partial Class Employee_Management
         lblManageEmployees.AutoSize = True
         lblManageEmployees.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblManageEmployees.ForeColor = Color.White
-        lblManageEmployees.Location = New Point(61, 272)
+        lblManageEmployees.Location = New Point(56, 402)
         lblManageEmployees.Name = "lblManageEmployees"
         lblManageEmployees.Size = New Size(240, 27)
         lblManageEmployees.TabIndex = 4
@@ -280,6 +283,7 @@ Partial Class Employee_Management
         ' adminheader_pnl
         ' 
         adminheader_pnl.BackColor = Color.White
+        adminheader_pnl.Controls.Add(pcbTerminate)
         adminheader_pnl.Controls.Add(Label2)
         adminheader_pnl.Location = New Point(343, -36)
         adminheader_pnl.Name = "adminheader_pnl"
@@ -1102,6 +1106,16 @@ Partial Class Employee_Management
         btnUpdate.Text = "Update"
         btnUpdate.UseVisualStyleBackColor = False
         ' 
+        ' pcbTerminate
+        ' 
+        pcbTerminate.Image = CType(resources.GetObject("pcbTerminate.Image"), Image)
+        pcbTerminate.Location = New Point(1352, 45)
+        pcbTerminate.Name = "pcbTerminate"
+        pcbTerminate.Size = New Size(55, 54)
+        pcbTerminate.SizeMode = PictureBoxSizeMode.StretchImage
+        pcbTerminate.TabIndex = 81
+        pcbTerminate.TabStop = False
+        ' 
         ' Employee_Management
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
@@ -1146,6 +1160,7 @@ Partial Class Employee_Management
         GroupBox7.PerformLayout()
         GroupBox5.ResumeLayout(False)
         GroupBox5.PerformLayout()
+        CType(pcbTerminate, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -1242,4 +1257,5 @@ Partial Class Employee_Management
     Friend WithEvents btnAddEmployee As FontAwesome.Sharp.IconButton
     Friend WithEvents btnEditEmployee As FontAwesome.Sharp.IconButton
     Friend WithEvents btnUpdate As Button
+    Friend WithEvents pcbTerminate As PictureBox
 End Class

@@ -79,7 +79,7 @@ Public Class Employee_Management
                 dbcmd.Parameters.AddWithValue("@Age", txtage.Text)
                 dbcmd.Parameters.AddWithValue("@Sex", cmbSex.Text)
                 dbcmd.Parameters.AddWithValue("@CivilStatus", cmbCivilStatus.Text)
-                dbcmd.Parameters.AddWithValue("@BirthDate", dtpBirthdate.Value.ToString("yyyy-MMMM-dd"))
+                dbcmd.Parameters.AddWithValue("@BirthDate", dtpBirthdate.Value.ToString("yyyy-MM-dd"))
                 dbcmd.Parameters.AddWithValue("@UserType", cmbUser.Text)
                 dbcmd.Parameters.AddWithValue("@Username", txtUname.Text)
                 dbcmd.Parameters.AddWithValue("@Password", HashPassword(txtPass.Text))
@@ -178,7 +178,7 @@ Public Class Employee_Management
                 cmd.Parameters.AddWithValue("@Age", txtage.Text)
                 cmd.Parameters.AddWithValue("@Sex", cmbSex.Text)
                 cmd.Parameters.AddWithValue("@CivilStatus", cmbCivilStatus.Text)
-                dbcmd.Parameters.AddWithValue("@BirthDate", dtpBirthdate.Value.ToString("yyyy-MMMM-dd"))
+                dbcmd.Parameters.AddWithValue("@BirthDate", dtpBirthdate.Value.ToString("yyyy-MM-dd"))
                 cmd.Parameters.AddWithValue("@UserType", cmbUser.Text)
                 cmd.Parameters.AddWithValue("@Username", txtUname.Text)
                 cmd.Parameters.AddWithValue("@Password", HashPassword(txtPass.Text))
@@ -458,4 +458,14 @@ Public Class Employee_Management
         txtPass.Text = row.Cells("Password").Value.ToString()
     End Sub
 
+    Private Sub pcbTerminate_Click(sender As Object, e As EventArgs) Handles pcbTerminate.Click
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to exit the system?",
+                                                "Confirm Exit",
+                                                MessageBoxButtons.YesNo,
+                                                MessageBoxIcon.Question)
+
+        If result = DialogResult.Yes Then
+            Application.Exit()
+        End If
+    End Sub
 End Class

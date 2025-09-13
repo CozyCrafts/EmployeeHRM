@@ -37,6 +37,7 @@ Partial Class Admin_frm
         Label3 = New Label()
         lblDashboard = New Label()
         lblMain = New Label()
+        btnTerminate = New FontAwesome.Sharp.IconButton()
         adminheader_pnl.SuspendLayout()
         Panel1.SuspendLayout()
         SuspendLayout()
@@ -44,6 +45,7 @@ Partial Class Admin_frm
         ' adminheader_pnl
         ' 
         adminheader_pnl.BackColor = Color.White
+        adminheader_pnl.Controls.Add(btnTerminate)
         adminheader_pnl.Controls.Add(Label2)
         adminheader_pnl.Location = New Point(338, -17)
         adminheader_pnl.Name = "adminheader_pnl"
@@ -140,7 +142,7 @@ Partial Class Admin_frm
         lblProfile.AutoSize = True
         lblProfile.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblProfile.ForeColor = Color.White
-        lblProfile.Location = New Point(58, 328)
+        lblProfile.Location = New Point(58, 282)
         lblProfile.Name = "lblProfile"
         lblProfile.Size = New Size(211, 27)
         lblProfile.TabIndex = 7
@@ -151,7 +153,7 @@ Partial Class Admin_frm
         lblEmployees.AutoSize = True
         lblEmployees.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblEmployees.ForeColor = Color.White
-        lblEmployees.Location = New Point(58, 373)
+        lblEmployees.Location = New Point(58, 327)
         lblEmployees.Name = "lblEmployees"
         lblEmployees.Size = New Size(279, 27)
         lblEmployees.TabIndex = 6
@@ -162,7 +164,7 @@ Partial Class Admin_frm
         lblLeaveManagement.AutoSize = True
         lblLeaveManagement.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblLeaveManagement.ForeColor = Color.White
-        lblLeaveManagement.Location = New Point(58, 416)
+        lblLeaveManagement.Location = New Point(58, 370)
         lblLeaveManagement.Name = "lblLeaveManagement"
         lblLeaveManagement.Size = New Size(248, 27)
         lblLeaveManagement.TabIndex = 5
@@ -173,7 +175,7 @@ Partial Class Admin_frm
         lblManageEmployees.AutoSize = True
         lblManageEmployees.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblManageEmployees.ForeColor = Color.White
-        lblManageEmployees.Location = New Point(58, 281)
+        lblManageEmployees.Location = New Point(58, 410)
         lblManageEmployees.Name = "lblManageEmployees"
         lblManageEmployees.Size = New Size(240, 27)
         lblManageEmployees.TabIndex = 4
@@ -212,6 +214,20 @@ Partial Class Admin_frm
         lblMain.TabIndex = 1
         lblMain.Text = "MAIN"
         ' 
+        ' btnTerminate
+        ' 
+        btnTerminate.BackColor = Color.Transparent
+        btnTerminate.BackgroundImageLayout = ImageLayout.None
+        btnTerminate.IconChar = FontAwesome.Sharp.IconChar.Close
+        btnTerminate.IconColor = Color.Black
+        btnTerminate.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnTerminate.IconSize = 50
+        btnTerminate.Location = New Point(1332, 29)
+        btnTerminate.Name = "btnTerminate"
+        btnTerminate.Size = New Size(76, 54)
+        btnTerminate.TabIndex = 1
+        btnTerminate.UseVisualStyleBackColor = False
+        ' 
         ' Admin_frm
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
@@ -246,4 +262,5 @@ Partial Class Admin_frm
     Friend WithEvents Label7 As Label
     Friend WithEvents lblDashboard As Label
     Friend WithEvents Label8 As Label
+    Friend WithEvents btnTerminate As FontAwesome.Sharp.IconButton
 End Class

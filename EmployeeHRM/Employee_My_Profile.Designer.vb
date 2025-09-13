@@ -22,15 +22,7 @@ Partial Class Employee_My_Profile
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Panel1 = New Panel()
-        lblEmpGG = New Label()
-        lblEmpPayroll = New Label()
-        lblEmpTA = New Label()
-        lblMyProf = New Label()
-        lblEmpDashboard = New Label()
-        Label8 = New Label()
-        Label7 = New Label()
-        lblMain = New Label()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Employee_My_Profile))
         adminheader_pnl = New Panel()
         Label2 = New Label()
         PictureBox1 = New PictureBox()
@@ -130,7 +122,20 @@ Partial Class Employee_My_Profile
         Label43 = New Label()
         Label45 = New Label()
         DataGridView1 = New DataGridView()
-        Panel1.SuspendLayout()
+        Panel2 = New Panel()
+        lblManageEmployees = New Label()
+        Label26 = New Label()
+        Label27 = New Label()
+        Payslipslbl = New Label()
+        SalaryProcessinglbl = New Label()
+        Label28 = New Label()
+        lblProfile = New Label()
+        lblEmployees = New Label()
+        lblLeaveManagement = New Label()
+        Label50 = New Label()
+        lblDashboard = New Label()
+        Label51 = New Label()
+        pcbTerminate = New PictureBox()
         adminheader_pnl.SuspendLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox1.SuspendLayout()
@@ -141,115 +146,14 @@ Partial Class Employee_My_Profile
         GroupBox6.SuspendLayout()
         GroupBox7.SuspendLayout()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
+        Panel2.SuspendLayout()
+        CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
-        ' 
-        ' Panel1
-        ' 
-        Panel1.BackColor = Color.SteelBlue
-        Panel1.Controls.Add(lblEmpGG)
-        Panel1.Controls.Add(lblEmpPayroll)
-        Panel1.Controls.Add(lblEmpTA)
-        Panel1.Controls.Add(lblMyProf)
-        Panel1.Controls.Add(lblEmpDashboard)
-        Panel1.Controls.Add(Label8)
-        Panel1.Controls.Add(Label7)
-        Panel1.Controls.Add(lblMain)
-        Panel1.Location = New Point(-7, -4)
-        Panel1.Name = "Panel1"
-        Panel1.Size = New Size(350, 1357)
-        Panel1.TabIndex = 20
-        ' 
-        ' lblEmpGG
-        ' 
-        lblEmpGG.AutoSize = True
-        lblEmpGG.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblEmpGG.ForeColor = Color.White
-        lblEmpGG.Location = New Point(64, 390)
-        lblEmpGG.Name = "lblEmpGG"
-        lblEmpGG.Size = New Size(220, 27)
-        lblEmpGG.TabIndex = 25
-        lblEmpGG.Text = "Goals and Growth"
-        ' 
-        ' lblEmpPayroll
-        ' 
-        lblEmpPayroll.AutoSize = True
-        lblEmpPayroll.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblEmpPayroll.ForeColor = Color.White
-        lblEmpPayroll.Location = New Point(64, 327)
-        lblEmpPayroll.Name = "lblEmpPayroll"
-        lblEmpPayroll.Size = New Size(89, 27)
-        lblEmpPayroll.TabIndex = 24
-        lblEmpPayroll.Text = "Payroll"
-        ' 
-        ' lblEmpTA
-        ' 
-        lblEmpTA.AutoSize = True
-        lblEmpTA.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblEmpTA.ForeColor = Color.White
-        lblEmpTA.Location = New Point(64, 266)
-        lblEmpTA.Name = "lblEmpTA"
-        lblEmpTA.Size = New Size(262, 27)
-        lblEmpTA.TabIndex = 23
-        lblEmpTA.Text = "Time and Attendance"
-        ' 
-        ' lblMyProf
-        ' 
-        lblMyProf.AutoSize = True
-        lblMyProf.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblMyProf.ForeColor = Color.White
-        lblMyProf.Location = New Point(64, 205)
-        lblMyProf.Name = "lblMyProf"
-        lblMyProf.Size = New Size(124, 27)
-        lblMyProf.TabIndex = 22
-        lblMyProf.Text = "My Profile"
-        ' 
-        ' lblEmpDashboard
-        ' 
-        lblEmpDashboard.AutoSize = True
-        lblEmpDashboard.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblEmpDashboard.ForeColor = Color.White
-        lblEmpDashboard.Location = New Point(64, 145)
-        lblEmpDashboard.Name = "lblEmpDashboard"
-        lblEmpDashboard.Size = New Size(138, 27)
-        lblEmpDashboard.TabIndex = 21
-        lblEmpDashboard.Text = "Dashboard"
-        ' 
-        ' Label8
-        ' 
-        Label8.AutoSize = True
-        Label8.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label8.ForeColor = Color.White
-        Label8.Location = New Point(41, 20)
-        Label8.Name = "Label8"
-        Label8.Size = New Size(197, 34)
-        Label8.TabIndex = 12
-        Label8.Text = " HR System"
-        ' 
-        ' Label7
-        ' 
-        Label7.AutoSize = True
-        Label7.Font = New Font("Century Gothic", 13.8F, FontStyle.Underline, GraphicsUnit.Point, CByte(0))
-        Label7.ForeColor = Color.White
-        Label7.Location = New Point(36, 41)
-        Label7.Name = "Label7"
-        Label7.Size = New Size(312, 27)
-        Label7.TabIndex = 11
-        Label7.Text = "                                                  "
-        ' 
-        ' lblMain
-        ' 
-        lblMain.AutoSize = True
-        lblMain.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblMain.ForeColor = Color.White
-        lblMain.Location = New Point(41, 101)
-        lblMain.Name = "lblMain"
-        lblMain.Size = New Size(57, 22)
-        lblMain.TabIndex = 1
-        lblMain.Text = "MAIN"
         ' 
         ' adminheader_pnl
         ' 
         adminheader_pnl.BackColor = Color.White
+        adminheader_pnl.Controls.Add(pcbTerminate)
         adminheader_pnl.Controls.Add(Label2)
         adminheader_pnl.Location = New Point(343, -27)
         adminheader_pnl.Name = "adminheader_pnl"
@@ -1242,11 +1146,174 @@ Partial Class Employee_My_Profile
         DataGridView1.Size = New Size(1389, 263)
         DataGridView1.TabIndex = 67
         ' 
+        ' Panel2
+        ' 
+        Panel2.BackColor = Color.SteelBlue
+        Panel2.Controls.Add(lblManageEmployees)
+        Panel2.Controls.Add(Label26)
+        Panel2.Controls.Add(Label27)
+        Panel2.Controls.Add(Payslipslbl)
+        Panel2.Controls.Add(SalaryProcessinglbl)
+        Panel2.Controls.Add(Label28)
+        Panel2.Controls.Add(lblProfile)
+        Panel2.Controls.Add(lblEmployees)
+        Panel2.Controls.Add(lblLeaveManagement)
+        Panel2.Controls.Add(Label50)
+        Panel2.Controls.Add(lblDashboard)
+        Panel2.Controls.Add(Label51)
+        Panel2.Location = New Point(-6, -6)
+        Panel2.Name = "Panel2"
+        Panel2.Size = New Size(350, 1357)
+        Panel2.TabIndex = 28
+        ' 
+        ' lblManageEmployees
+        ' 
+        lblManageEmployees.AutoSize = True
+        lblManageEmployees.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblManageEmployees.ForeColor = Color.White
+        lblManageEmployees.Location = New Point(56, 408)
+        lblManageEmployees.Name = "lblManageEmployees"
+        lblManageEmployees.Size = New Size(240, 27)
+        lblManageEmployees.TabIndex = 68
+        lblManageEmployees.Text = "Manage Employees"
+        ' 
+        ' Label26
+        ' 
+        Label26.AutoSize = True
+        Label26.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label26.ForeColor = Color.White
+        Label26.Location = New Point(38, 37)
+        Label26.Name = "Label26"
+        Label26.Size = New Size(197, 34)
+        Label26.TabIndex = 12
+        Label26.Text = " HR System"
+        ' 
+        ' Label27
+        ' 
+        Label27.AutoSize = True
+        Label27.Font = New Font("Century Gothic", 13.8F, FontStyle.Underline, GraphicsUnit.Point, CByte(0))
+        Label27.ForeColor = Color.White
+        Label27.Location = New Point(33, 58)
+        Label27.Name = "Label27"
+        Label27.Size = New Size(312, 27)
+        Label27.TabIndex = 11
+        Label27.Text = "                                                  "
+        ' 
+        ' Payslipslbl
+        ' 
+        Payslipslbl.AutoSize = True
+        Payslipslbl.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Payslipslbl.ForeColor = Color.White
+        Payslipslbl.Location = New Point(61, 555)
+        Payslipslbl.Name = "Payslipslbl"
+        Payslipslbl.Size = New Size(101, 27)
+        Payslipslbl.TabIndex = 10
+        Payslipslbl.Text = "Payslips"
+        ' 
+        ' SalaryProcessinglbl
+        ' 
+        SalaryProcessinglbl.AutoSize = True
+        SalaryProcessinglbl.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        SalaryProcessinglbl.ForeColor = Color.White
+        SalaryProcessinglbl.Location = New Point(61, 513)
+        SalaryProcessinglbl.Name = "SalaryProcessinglbl"
+        SalaryProcessinglbl.Size = New Size(206, 27)
+        SalaryProcessinglbl.TabIndex = 9
+        SalaryProcessinglbl.Text = "Salary Processing"
+        ' 
+        ' Label28
+        ' 
+        Label28.AutoSize = True
+        Label28.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label28.ForeColor = Color.White
+        Label28.Location = New Point(38, 474)
+        Label28.Name = "Label28"
+        Label28.Size = New Size(90, 22)
+        Label28.TabIndex = 8
+        Label28.Text = " PAYROLL"
+        ' 
+        ' lblProfile
+        ' 
+        lblProfile.AutoSize = True
+        lblProfile.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblProfile.ForeColor = Color.White
+        lblProfile.Location = New Point(56, 278)
+        lblProfile.Name = "lblProfile"
+        lblProfile.Size = New Size(211, 27)
+        lblProfile.TabIndex = 7
+        lblProfile.Text = "Employees Profile"
+        ' 
+        ' lblEmployees
+        ' 
+        lblEmployees.AutoSize = True
+        lblEmployees.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblEmployees.ForeColor = Color.White
+        lblEmployees.Location = New Point(56, 323)
+        lblEmployees.Name = "lblEmployees"
+        lblEmployees.Size = New Size(279, 27)
+        lblEmployees.TabIndex = 6
+        lblEmployees.Text = "Employees Attendance"
+        ' 
+        ' lblLeaveManagement
+        ' 
+        lblLeaveManagement.AutoSize = True
+        lblLeaveManagement.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblLeaveManagement.ForeColor = Color.White
+        lblLeaveManagement.Location = New Point(56, 366)
+        lblLeaveManagement.Name = "lblLeaveManagement"
+        lblLeaveManagement.Size = New Size(248, 27)
+        lblLeaveManagement.TabIndex = 5
+        lblLeaveManagement.Text = "Leave Management"
+        ' 
+        ' Label50
+        ' 
+        Label50.AutoSize = True
+        Label50.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label50.ForeColor = Color.White
+        Label50.Location = New Point(38, 235)
+        Label50.Name = "Label50"
+        Label50.Size = New Size(106, 22)
+        Label50.TabIndex = 3
+        Label50.Text = "EMPLOYEES"
+        ' 
+        ' lblDashboard
+        ' 
+        lblDashboard.AutoSize = True
+        lblDashboard.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblDashboard.ForeColor = Color.White
+        lblDashboard.Location = New Point(61, 162)
+        lblDashboard.Name = "lblDashboard"
+        lblDashboard.Size = New Size(138, 27)
+        lblDashboard.TabIndex = 2
+        lblDashboard.Text = "Dashboard"
+        ' 
+        ' Label51
+        ' 
+        Label51.AutoSize = True
+        Label51.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label51.ForeColor = Color.White
+        Label51.Location = New Point(38, 118)
+        Label51.Name = "Label51"
+        Label51.Size = New Size(57, 22)
+        Label51.TabIndex = 1
+        Label51.Text = "MAIN"
+        ' 
+        ' pcbTerminate
+        ' 
+        pcbTerminate.Image = CType(resources.GetObject("pcbTerminate.Image"), Image)
+        pcbTerminate.Location = New Point(1371, 38)
+        pcbTerminate.Name = "pcbTerminate"
+        pcbTerminate.Size = New Size(55, 54)
+        pcbTerminate.SizeMode = PictureBoxSizeMode.StretchImage
+        pcbTerminate.TabIndex = 2
+        pcbTerminate.TabStop = False
+        ' 
         ' Employee_My_Profile
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1781, 1033)
+        Controls.Add(Panel2)
         Controls.Add(DataGridView1)
         Controls.Add(GroupBox7)
         Controls.Add(GroupBox6)
@@ -1256,7 +1323,6 @@ Partial Class Employee_My_Profile
         Controls.Add(btnSave)
         Controls.Add(btnUpdate)
         Controls.Add(PictureBox1)
-        Controls.Add(Panel1)
         Controls.Add(adminheader_pnl)
         FormBorderStyle = FormBorderStyle.FixedSingle
         MaximizeBox = False
@@ -1265,8 +1331,6 @@ Partial Class Employee_My_Profile
         StartPosition = FormStartPosition.CenterScreen
         Text = "Emp_My_Profile"
         WindowState = FormWindowState.Maximized
-        Panel1.ResumeLayout(False)
-        Panel1.PerformLayout()
         adminheader_pnl.ResumeLayout(False)
         adminheader_pnl.PerformLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
@@ -1284,18 +1348,11 @@ Partial Class Employee_My_Profile
         GroupBox7.ResumeLayout(False)
         GroupBox7.PerformLayout()
         CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
+        Panel2.ResumeLayout(False)
+        Panel2.PerformLayout()
+        CType(pcbTerminate, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
-
-    Friend WithEvents Panel1 As Panel
-    Friend WithEvents Label8 As Label
-    Friend WithEvents Label7 As Label
-    Friend WithEvents lblMain As Label
-    Friend WithEvents lblEmpDashboard As Label
-    Friend WithEvents lblEmpGG As Label
-    Friend WithEvents lblEmpPayroll As Label
-    Friend WithEvents lblEmpTA As Label
-    Friend WithEvents lblMyProf As Label
     Friend WithEvents adminheader_pnl As Panel
     Friend WithEvents Label2 As Label
     Friend WithEvents PictureBox1 As PictureBox
@@ -1395,4 +1452,18 @@ Partial Class Employee_My_Profile
     Friend WithEvents TextBox23 As TextBox
     Friend WithEvents TextBox24 As TextBox
     Friend WithEvents TextBox25 As TextBox
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents Label26 As Label
+    Friend WithEvents Label27 As Label
+    Friend WithEvents Payslipslbl As Label
+    Friend WithEvents SalaryProcessinglbl As Label
+    Friend WithEvents Label28 As Label
+    Friend WithEvents lblProfile As Label
+    Friend WithEvents lblEmployees As Label
+    Friend WithEvents lblLeaveManagement As Label
+    Friend WithEvents Label50 As Label
+    Friend WithEvents lblDashboard As Label
+    Friend WithEvents Label51 As Label
+    Friend WithEvents lblManageEmployees As Label
+    Friend WithEvents pcbTerminate As PictureBox
 End Class

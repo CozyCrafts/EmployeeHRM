@@ -1,26 +1,23 @@
 ﻿Public Class Employee_Dashboard
-    Private Sub lblEmpDashboard_Click(sender As Object, e As EventArgs) Handles lblEmpDashboard.Click
-        lblEmpDashboard.Enabled = False
-    End Sub
 
-    Private Sub lblMyProf_Click(sender As Object, e As EventArgs) Handles lblMyProf.Click
+    Private Sub lblMyProf_Click(sender As Object, e As EventArgs)
         Employee_My_Profile.Show()
-        Me.Hide()
+        Hide()
     End Sub
 
-    Private Sub lblEmpTA_Click(sender As Object, e As EventArgs) Handles lblEmpTA.Click
+    Private Sub lblEmpTA_Click(sender As Object, e As EventArgs)
         Employee_Time_and_Attendancevb.Show()
-        Me.Hide()
+        Hide()
     End Sub
 
-    Private Sub lblEmpPayroll_Click(sender As Object, e As EventArgs) Handles lblEmpPayroll.Click
+    Private Sub lblEmpPayroll_Click(sender As Object, e As EventArgs)
         Employee_Payroll.Show()
-        Me.Hide()
+        Hide()
     End Sub
 
-    Private Sub lblEmpGG_Click(sender As Object, e As EventArgs) Handles lblEmpGG.Click
+    Private Sub lblEmpGG_Click(sender As Object, e As EventArgs)
         Employee_Goals_and_Growth.Show()
-        Me.Hide()
+        Hide()
     End Sub
 
     Private Sub btnEditProf_Click(sender As Object, e As EventArgs) Handles btnEditProf.Click
@@ -376,5 +373,41 @@
 
     Private Sub Employee_Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
+
+    Private Sub lblProfile_Click(sender As Object, e As EventArgs) Handles lblProfile.Click
+        Employee_My_Profile.Show()
+        Me.Hide()
+    End Sub
+
+    Private Sub lblEmployees_Click(sender As Object, e As EventArgs) Handles lblEmployees.Click
+        Employee_Time_and_Attendancevb.Show()
+        Me.Hide()
+    End Sub
+
+    Private Sub lblLeaveManagement_Click(sender As Object, e As EventArgs) Handles lblLeaveManagement.Click
+        LeaveManagement_frm.Show()
+        Me.Hide()
+    End Sub
+
+    Private Sub SalaryProcessinglbl_Click(sender As Object, e As EventArgs) Handles SalaryProcessinglbl.Click
+        SalaryProcessing_frm.Show()
+        Me.Hide()
+    End Sub
+
+    Private Sub Payslipslbl_Click(sender As Object, e As EventArgs) Handles Payslipslbl.Click
+        Employee_Payroll.Show()
+        Me.Hide()
+    End Sub
+
+    Private Sub pcbTerminate_Click(sender As Object, e As EventArgs) Handles pcbTerminate.Click
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to exit the system?",
+                                                "Confirm Exit",
+                                                MessageBoxButtons.YesNo,
+                                                MessageBoxIcon.Question)
+
+        If result = DialogResult.Yes Then
+            Application.Exit()
+        End If
     End Sub
 End Class

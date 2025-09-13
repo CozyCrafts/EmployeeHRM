@@ -1,10 +1,22 @@
 ﻿Public Class SalaryProcessing_frm
+    Public Property UserRole As String
     Private Sub SalaryProcessing_frm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.FormBorderStyle = FormBorderStyle.None
+
+
+        If UserRole = "Staff" Then
+            lblManageEmployees.Visible = False
+        ElseIf UserRole = "Manager" Then
+            lblManageEmployees.Visible = True
+        End If
     End Sub
 
     Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
-
+        If UserRole = "Staff" Then
+            Employee_Dashboard.Show()
+        ElseIf UserRole = "Manager" Then
+            Admin_frm.Show()
+        End If
     End Sub
 
     Private Sub lblManageEmployees_Click(sender As Object, e As EventArgs) Handles lblManageEmployees.Click
@@ -27,5 +39,14 @@
         Me.Hide()
     End Sub
 
+    Private Sub pcbTerminate_Click(sender As Object, e As EventArgs) Handles pcbTerminate.Click
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to exit the system?",
+                                                "Confirm Exit",
+                                                MessageBoxButtons.YesNo,
+                                                MessageBoxIcon.Question)
 
+        If result = DialogResult.Yes Then
+            Application.Exit()
+        End If
+    End Sub
 End Class

@@ -32,7 +32,9 @@ Partial Class Login_frm
         txtPass = New TextBox()
         cmbRole = New ComboBox()
         btnlogin = New Button()
+        pcbTerminate = New PictureBox()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
+        CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' PictureBox1
@@ -128,12 +130,23 @@ Partial Class Login_frm
         btnlogin.Text = "Login"
         btnlogin.UseVisualStyleBackColor = False
         ' 
+        ' pcbTerminate
+        ' 
+        pcbTerminate.Image = CType(resources.GetObject("pcbTerminate.Image"), Image)
+        pcbTerminate.Location = New Point(355, 1)
+        pcbTerminate.Name = "pcbTerminate"
+        pcbTerminate.Size = New Size(36, 36)
+        pcbTerminate.SizeMode = PictureBoxSizeMode.StretchImage
+        pcbTerminate.TabIndex = 9
+        pcbTerminate.TabStop = False
+        ' 
         ' Login_frm
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.White
         ClientSize = New Size(394, 612)
+        Controls.Add(pcbTerminate)
         Controls.Add(btnlogin)
         Controls.Add(cmbRole)
         Controls.Add(txtPass)
@@ -147,6 +160,7 @@ Partial Class Login_frm
         StartPosition = FormStartPosition.CenterScreen
         Text = "Login_frm"
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
+        CType(pcbTerminate, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -160,4 +174,5 @@ Partial Class Login_frm
     Friend WithEvents txtPass As TextBox
     Friend WithEvents cmbRole As ComboBox
     Friend WithEvents btnlogin As Button
+    Friend WithEvents pcbTerminate As PictureBox
 End Class
