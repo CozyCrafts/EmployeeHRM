@@ -37,6 +37,7 @@ Partial Class Employee_Management
         lblDashboard = New Label()
         lblMain = New Label()
         adminheader_pnl = New Panel()
+        pcbTerminate = New PictureBox()
         Label2 = New Label()
         dgvAccount = New DataGridView()
         Label14 = New Label()
@@ -80,23 +81,25 @@ Partial Class Employee_Management
         Label29 = New Label()
         Label30 = New Label()
         Label32 = New Label()
-        GroupBox7 = New GroupBox()
-        Label49 = New Label()
-        Label48 = New Label()
+        btnAddEmployee = New FontAwesome.Sharp.IconButton()
+        btnEditEmployee = New FontAwesome.Sharp.IconButton()
+        btnUpdate = New Button()
+        GroupBox11 = New GroupBox()
+        DateTimePicker1 = New DateTimePicker()
         Label47 = New Label()
+        RadioButton2 = New RadioButton()
+        RadioButton1 = New RadioButton()
         Label46 = New Label()
-        Label44 = New Label()
-        Label42 = New Label()
-        TextBox43 = New TextBox()
-        TextBox44 = New TextBox()
-        TextBox45 = New TextBox()
-        TextBox46 = New TextBox()
-        TextBox35 = New TextBox()
-        TextBox38 = New TextBox()
-        TextBox39 = New TextBox()
-        TextBox40 = New TextBox()
-        Label41 = New Label()
+        GroupBox10 = New GroupBox()
+        TextBox8 = New TextBox()
+        TextBox9 = New TextBox()
+        TextBox10 = New TextBox()
+        TextBox15 = New TextBox()
         Label40 = New Label()
+        Label41 = New Label()
+        Label42 = New Label()
+        Label44 = New Label()
+        GroupBox7 = New GroupBox()
         TextBox36 = New TextBox()
         TextBox37 = New TextBox()
         TextBox41 = New TextBox()
@@ -105,27 +108,73 @@ Partial Class Employee_Management
         Label37 = New Label()
         Label43 = New Label()
         Label45 = New Label()
-        GroupBox5 = New GroupBox()
-        TextBox20 = New TextBox()
-        TextBox23 = New TextBox()
+        GroupBox6 = New GroupBox()
+        TextBox26 = New TextBox()
         TextBox27 = New TextBox()
+        TextBox28 = New TextBox()
+        TextBox23 = New TextBox()
+        TextBox24 = New TextBox()
+        TextBox25 = New TextBox()
+        Label34 = New Label()
+        Label38 = New Label()
+        Label39 = New Label()
+        Label9 = New Label()
+        Label11 = New Label()
+        Label31 = New Label()
+        TextBox30 = New TextBox()
+        TextBox31 = New TextBox()
+        TextBox32 = New TextBox()
+        Label12 = New Label()
+        Label33 = New Label()
+        Label35 = New Label()
+        GroupBox2 = New GroupBox()
+        TextBox1 = New TextBox()
+        Label17 = New Label()
+        TextBox11 = New TextBox()
+        TextBox12 = New TextBox()
+        TextBox13 = New TextBox()
+        TextBox14 = New TextBox()
+        TextBox20 = New TextBox()
+        Label18 = New Label()
+        Label19 = New Label()
+        Label22 = New Label()
+        Label23 = New Label()
+        Label25 = New Label()
+        GroupBox5 = New GroupBox()
+        GroupBox8 = New GroupBox()
+        TextBox4 = New TextBox()
+        Label53 = New Label()
+        TextBox6 = New TextBox()
+        TextBox21 = New TextBox()
+        TextBox22 = New TextBox()
+        Label26 = New Label()
         Label27 = New Label()
         Label28 = New Label()
-        Label31 = New Label()
-        btnAddEmployee = New FontAwesome.Sharp.IconButton()
-        btnEditEmployee = New FontAwesome.Sharp.IconButton()
-        btnUpdate = New Button()
-        pcbTerminate = New PictureBox()
+        GroupBox9 = New GroupBox()
+        TextBox2 = New TextBox()
+        Label54 = New Label()
+        TextBox3 = New TextBox()
+        TextBox5 = New TextBox()
+        TextBox16 = New TextBox()
+        Label48 = New Label()
+        Label49 = New Label()
+        Label50 = New Label()
         Panel1.SuspendLayout()
         adminheader_pnl.SuspendLayout()
+        CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
         CType(dgvAccount, ComponentModel.ISupportInitialize).BeginInit()
         CType(pbEmployee, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox1.SuspendLayout()
         GroupBox4.SuspendLayout()
         GroupBox3.SuspendLayout()
+        GroupBox11.SuspendLayout()
+        GroupBox10.SuspendLayout()
         GroupBox7.SuspendLayout()
+        GroupBox6.SuspendLayout()
+        GroupBox2.SuspendLayout()
         GroupBox5.SuspendLayout()
-        CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
+        GroupBox8.SuspendLayout()
+        GroupBox9.SuspendLayout()
         SuspendLayout()
         ' 
         ' Panel1
@@ -290,6 +339,16 @@ Partial Class Employee_Management
         adminheader_pnl.Size = New Size(1608, 107)
         adminheader_pnl.TabIndex = 4
         ' 
+        ' pcbTerminate
+        ' 
+        pcbTerminate.Image = CType(resources.GetObject("pcbTerminate.Image"), Image)
+        pcbTerminate.Location = New Point(1352, 45)
+        pcbTerminate.Name = "pcbTerminate"
+        pcbTerminate.Size = New Size(55, 54)
+        pcbTerminate.SizeMode = PictureBoxSizeMode.StretchImage
+        pcbTerminate.TabIndex = 81
+        pcbTerminate.TabStop = False
+        ' 
         ' Label2
         ' 
         Label2.AutoSize = True
@@ -306,10 +365,10 @@ Partial Class Employee_Management
         dgvAccount.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
         dgvAccount.ColumnHeadersHeight = 29
         dgvAccount.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        dgvAccount.Location = New Point(398, 735)
+        dgvAccount.Location = New Point(367, 993)
         dgvAccount.Name = "dgvAccount"
         dgvAccount.RowHeadersWidth = 51
-        dgvAccount.Size = New Size(1349, 250)
+        dgvAccount.Size = New Size(1349, 45)
         dgvAccount.TabIndex = 39
         ' 
         ' Label14
@@ -333,7 +392,7 @@ Partial Class Employee_Management
         ' pbEmployee
         ' 
         pbEmployee.BorderStyle = BorderStyle.FixedSingle
-        pbEmployee.Location = New Point(360, 155)
+        pbEmployee.Location = New Point(360, 128)
         pbEmployee.Name = "pbEmployee"
         pbEmployee.Size = New Size(205, 192)
         pbEmployee.TabIndex = 43
@@ -341,7 +400,7 @@ Partial Class Employee_Management
         ' 
         ' btnUpdatePic
         ' 
-        btnUpdatePic.Location = New Point(445, 351)
+        btnUpdatePic.Location = New Point(490, 322)
         btnUpdatePic.Name = "btnUpdatePic"
         btnUpdatePic.Size = New Size(79, 31)
         btnUpdatePic.TabIndex = 44
@@ -350,7 +409,7 @@ Partial Class Employee_Management
         ' 
         ' btnAddPic
         ' 
-        btnAddPic.Location = New Point(360, 351)
+        btnAddPic.Location = New Point(405, 322)
         btnAddPic.Name = "btnAddPic"
         btnAddPic.Size = New Size(79, 31)
         btnAddPic.TabIndex = 45
@@ -378,7 +437,7 @@ Partial Class Employee_Management
         GroupBox1.Controls.Add(lblfname)
         GroupBox1.Controls.Add(Label1)
         GroupBox1.Font = New Font("Century Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        GroupBox1.Location = New Point(583, 155)
+        GroupBox1.Location = New Point(573, 128)
         GroupBox1.Name = "GroupBox1"
         GroupBox1.Size = New Size(796, 221)
         GroupBox1.TabIndex = 46
@@ -566,9 +625,9 @@ Partial Class Employee_Management
         GroupBox4.Controls.Add(Label13)
         GroupBox4.Controls.Add(Label5)
         GroupBox4.Font = New Font("Century Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        GroupBox4.Location = New Point(1385, 155)
+        GroupBox4.Location = New Point(1378, 132)
         GroupBox4.Name = "GroupBox4"
-        GroupBox4.Size = New Size(374, 221)
+        GroupBox4.Size = New Size(361, 221)
         GroupBox4.TabIndex = 47
         GroupBox4.TabStop = False
         GroupBox4.Text = "User Information"
@@ -580,21 +639,21 @@ Partial Class Employee_Management
         cmbUser.Items.AddRange(New Object() {"Manager", "Staff"})
         cmbUser.Location = New Point(27, 57)
         cmbUser.Name = "cmbUser"
-        cmbUser.Size = New Size(323, 26)
+        cmbUser.Size = New Size(311, 26)
         cmbUser.TabIndex = 46
         ' 
         ' txtPass
         ' 
         txtPass.Location = New Point(27, 182)
         txtPass.Name = "txtPass"
-        txtPass.Size = New Size(326, 26)
+        txtPass.Size = New Size(314, 26)
         txtPass.TabIndex = 45
         ' 
         ' txtUname
         ' 
         txtUname.Location = New Point(27, 122)
         txtUname.Name = "txtUname"
-        txtUname.Size = New Size(326, 26)
+        txtUname.Size = New Size(314, 26)
         txtUname.TabIndex = 44
         ' 
         ' Label24
@@ -636,7 +695,7 @@ Partial Class Employee_Management
         btnCancel.BackgroundImageLayout = ImageLayout.None
         btnCancel.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
         btnCancel.ForeColor = Color.Black
-        btnCancel.Location = New Point(1644, 88)
+        btnCancel.Location = New Point(1623, 82)
         btnCancel.Name = "btnCancel"
         btnCancel.Size = New Size(115, 45)
         btnCancel.TabIndex = 75
@@ -649,7 +708,7 @@ Partial Class Employee_Management
         btnDelete.BackgroundImageLayout = ImageLayout.None
         btnDelete.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
         btnDelete.ForeColor = Color.Black
-        btnDelete.Location = New Point(1523, 90)
+        btnDelete.Location = New Point(1502, 84)
         btnDelete.Name = "btnDelete"
         btnDelete.Size = New Size(115, 45)
         btnDelete.TabIndex = 74
@@ -662,7 +721,7 @@ Partial Class Employee_Management
         btnSave.BackgroundImageLayout = ImageLayout.None
         btnSave.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
         btnSave.ForeColor = Color.Black
-        btnSave.Location = New Point(1534, 89)
+        btnSave.Location = New Point(1513, 83)
         btnSave.Name = "btnSave"
         btnSave.Size = New Size(104, 46)
         btnSave.TabIndex = 73
@@ -678,9 +737,9 @@ Partial Class Employee_Management
         GroupBox3.Controls.Add(Label30)
         GroupBox3.Controls.Add(Label32)
         GroupBox3.Font = New Font("Century Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        GroupBox3.Location = New Point(366, 395)
+        GroupBox3.Location = New Point(358, 358)
         GroupBox3.Name = "GroupBox3"
-        GroupBox3.Size = New Size(1381, 86)
+        GroupBox3.Size = New Size(1374, 86)
         GroupBox3.TabIndex = 76
         GroupBox3.TabStop = False
         GroupBox3.Text = "Added Information"
@@ -690,7 +749,7 @@ Partial Class Employee_Management
         txtAddress.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         txtAddress.Location = New Point(831, 40)
         txtAddress.Name = "txtAddress"
-        txtAddress.Size = New Size(532, 30)
+        txtAddress.Size = New Size(499, 30)
         txtAddress.TabIndex = 14
         ' 
         ' txtEmail
@@ -739,326 +798,6 @@ Partial Class Employee_Management
         Label32.TabIndex = 1
         Label32.Text = "Email Address:"
         ' 
-        ' GroupBox7
-        ' 
-        GroupBox7.Controls.Add(Label49)
-        GroupBox7.Controls.Add(Label48)
-        GroupBox7.Controls.Add(Label47)
-        GroupBox7.Controls.Add(Label46)
-        GroupBox7.Controls.Add(Label44)
-        GroupBox7.Controls.Add(Label42)
-        GroupBox7.Controls.Add(TextBox43)
-        GroupBox7.Controls.Add(TextBox44)
-        GroupBox7.Controls.Add(TextBox45)
-        GroupBox7.Controls.Add(TextBox46)
-        GroupBox7.Controls.Add(TextBox35)
-        GroupBox7.Controls.Add(TextBox38)
-        GroupBox7.Controls.Add(TextBox39)
-        GroupBox7.Controls.Add(TextBox40)
-        GroupBox7.Controls.Add(Label41)
-        GroupBox7.Controls.Add(Label40)
-        GroupBox7.Controls.Add(TextBox36)
-        GroupBox7.Controls.Add(TextBox37)
-        GroupBox7.Controls.Add(TextBox41)
-        GroupBox7.Controls.Add(TextBox42)
-        GroupBox7.Controls.Add(Label36)
-        GroupBox7.Controls.Add(Label37)
-        GroupBox7.Controls.Add(Label43)
-        GroupBox7.Controls.Add(Label45)
-        GroupBox7.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        GroupBox7.Location = New Point(366, 487)
-        GroupBox7.Name = "GroupBox7"
-        GroupBox7.Size = New Size(962, 205)
-        GroupBox7.TabIndex = 77
-        GroupBox7.TabStop = False
-        GroupBox7.Text = "Government-Mandated Benefits"
-        ' 
-        ' Label49
-        ' 
-        Label49.AutoSize = True
-        Label49.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label49.Location = New Point(699, 148)
-        Label49.Name = "Label49"
-        Label49.Size = New Size(65, 21)
-        Label49.TabIndex = 32
-        Label49.Text = "Expiry:"
-        ' 
-        ' Label48
-        ' 
-        Label48.AutoSize = True
-        Label48.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label48.Location = New Point(699, 112)
-        Label48.Name = "Label48"
-        Label48.Size = New Size(65, 21)
-        Label48.TabIndex = 31
-        Label48.Text = "Expiry:"
-        ' 
-        ' Label47
-        ' 
-        Label47.AutoSize = True
-        Label47.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label47.Location = New Point(699, 76)
-        Label47.Name = "Label47"
-        Label47.Size = New Size(65, 21)
-        Label47.TabIndex = 30
-        Label47.Text = "Expiry:"
-        ' 
-        ' Label46
-        ' 
-        Label46.AutoSize = True
-        Label46.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label46.Location = New Point(405, 151)
-        Label46.Name = "Label46"
-        Label46.Size = New Size(72, 21)
-        Label46.TabIndex = 29
-        Label46.Text = "Details:"
-        ' 
-        ' Label44
-        ' 
-        Label44.AutoSize = True
-        Label44.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label44.Location = New Point(405, 115)
-        Label44.Name = "Label44"
-        Label44.Size = New Size(72, 21)
-        Label44.TabIndex = 28
-        Label44.Text = "Details:"
-        ' 
-        ' Label42
-        ' 
-        Label42.AutoSize = True
-        Label42.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label42.Location = New Point(405, 79)
-        Label42.Name = "Label42"
-        Label42.Size = New Size(72, 21)
-        Label42.TabIndex = 27
-        Label42.Text = "Details:"
-        ' 
-        ' TextBox43
-        ' 
-        TextBox43.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox43.Location = New Point(483, 142)
-        TextBox43.Name = "TextBox43"
-        TextBox43.Size = New Size(201, 30)
-        TextBox43.TabIndex = 26
-        ' 
-        ' TextBox44
-        ' 
-        TextBox44.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox44.Location = New Point(483, 106)
-        TextBox44.Name = "TextBox44"
-        TextBox44.Size = New Size(201, 30)
-        TextBox44.TabIndex = 25
-        ' 
-        ' TextBox45
-        ' 
-        TextBox45.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox45.Location = New Point(483, 70)
-        TextBox45.Name = "TextBox45"
-        TextBox45.Size = New Size(201, 30)
-        TextBox45.TabIndex = 24
-        ' 
-        ' TextBox46
-        ' 
-        TextBox46.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox46.Location = New Point(483, 31)
-        TextBox46.Name = "TextBox46"
-        TextBox46.Size = New Size(201, 30)
-        TextBox46.TabIndex = 23
-        ' 
-        ' TextBox35
-        ' 
-        TextBox35.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox35.Location = New Point(770, 139)
-        TextBox35.Name = "TextBox35"
-        TextBox35.Size = New Size(181, 30)
-        TextBox35.TabIndex = 22
-        ' 
-        ' TextBox38
-        ' 
-        TextBox38.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox38.Location = New Point(770, 103)
-        TextBox38.Name = "TextBox38"
-        TextBox38.Size = New Size(181, 30)
-        TextBox38.TabIndex = 21
-        ' 
-        ' TextBox39
-        ' 
-        TextBox39.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox39.Location = New Point(770, 67)
-        TextBox39.Name = "TextBox39"
-        TextBox39.Size = New Size(181, 30)
-        TextBox39.TabIndex = 20
-        ' 
-        ' TextBox40
-        ' 
-        TextBox40.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox40.Location = New Point(770, 31)
-        TextBox40.Name = "TextBox40"
-        TextBox40.Size = New Size(181, 30)
-        TextBox40.TabIndex = 19
-        ' 
-        ' Label41
-        ' 
-        Label41.AutoSize = True
-        Label41.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label41.Location = New Point(699, 37)
-        Label41.Name = "Label41"
-        Label41.Size = New Size(65, 21)
-        Label41.TabIndex = 18
-        Label41.Text = "Expiry:"
-        ' 
-        ' Label40
-        ' 
-        Label40.AutoSize = True
-        Label40.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label40.Location = New Point(405, 40)
-        Label40.Name = "Label40"
-        Label40.Size = New Size(72, 21)
-        Label40.TabIndex = 17
-        Label40.Text = "Details:"
-        ' 
-        ' TextBox36
-        ' 
-        TextBox36.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox36.Location = New Point(175, 142)
-        TextBox36.Name = "TextBox36"
-        TextBox36.Size = New Size(213, 30)
-        TextBox36.TabIndex = 16
-        ' 
-        ' TextBox37
-        ' 
-        TextBox37.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox37.Location = New Point(175, 106)
-        TextBox37.Name = "TextBox37"
-        TextBox37.Size = New Size(213, 30)
-        TextBox37.TabIndex = 15
-        ' 
-        ' TextBox41
-        ' 
-        TextBox41.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox41.Location = New Point(175, 70)
-        TextBox41.Name = "TextBox41"
-        TextBox41.Size = New Size(213, 30)
-        TextBox41.TabIndex = 11
-        ' 
-        ' TextBox42
-        ' 
-        TextBox42.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox42.Location = New Point(175, 34)
-        TextBox42.Name = "TextBox42"
-        TextBox42.Size = New Size(213, 30)
-        TextBox42.TabIndex = 10
-        ' 
-        ' Label36
-        ' 
-        Label36.AutoSize = True
-        Label36.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label36.Location = New Point(84, 150)
-        Label36.Name = "Label36"
-        Label36.Size = New Size(85, 21)
-        Label36.TabIndex = 9
-        Label36.Text = "Bonuses:"
-        ' 
-        ' Label37
-        ' 
-        Label37.AutoSize = True
-        Label37.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label37.Location = New Point(53, 114)
-        Label37.Name = "Label37"
-        Label37.Size = New Size(116, 21)
-        Label37.TabIndex = 8
-        Label37.Text = "Allowances:"
-        ' 
-        ' Label43
-        ' 
-        Label43.AutoSize = True
-        Label43.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label43.Location = New Point(34, 79)
-        Label43.Name = "Label43"
-        Label43.Size = New Size(135, 21)
-        Label43.TabIndex = 2
-        Label43.Text = "Life Insurance:"
-        ' 
-        ' Label45
-        ' 
-        Label45.AutoSize = True
-        Label45.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label45.Location = New Point(6, 43)
-        Label45.Name = "Label45"
-        Label45.Size = New Size(163, 21)
-        Label45.TabIndex = 0
-        Label45.Text = "Health Insurance:"
-        ' 
-        ' GroupBox5
-        ' 
-        GroupBox5.Controls.Add(TextBox20)
-        GroupBox5.Controls.Add(TextBox23)
-        GroupBox5.Controls.Add(TextBox27)
-        GroupBox5.Controls.Add(Label27)
-        GroupBox5.Controls.Add(Label28)
-        GroupBox5.Controls.Add(Label31)
-        GroupBox5.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        GroupBox5.Location = New Point(1334, 487)
-        GroupBox5.Name = "GroupBox5"
-        GroupBox5.Size = New Size(409, 203)
-        GroupBox5.TabIndex = 69
-        GroupBox5.TabStop = False
-        GroupBox5.Text = "Emergency Contact"
-        ' 
-        ' TextBox20
-        ' 
-        TextBox20.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox20.Location = New Point(186, 122)
-        TextBox20.Name = "TextBox20"
-        TextBox20.Size = New Size(189, 30)
-        TextBox20.TabIndex = 18
-        ' 
-        ' TextBox23
-        ' 
-        TextBox23.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox23.Location = New Point(186, 86)
-        TextBox23.Name = "TextBox23"
-        TextBox23.Size = New Size(189, 30)
-        TextBox23.TabIndex = 17
-        ' 
-        ' TextBox27
-        ' 
-        TextBox27.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox27.Location = New Point(186, 50)
-        TextBox27.Name = "TextBox27"
-        TextBox27.Size = New Size(189, 30)
-        TextBox27.TabIndex = 16
-        ' 
-        ' Label27
-        ' 
-        Label27.AutoSize = True
-        Label27.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label27.Location = New Point(33, 131)
-        Label27.Name = "Label27"
-        Label27.Size = New Size(147, 21)
-        Label27.TabIndex = 15
-        Label27.Text = "Phone Number:"
-        ' 
-        ' Label28
-        ' 
-        Label28.AutoSize = True
-        Label28.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label28.Location = New Point(61, 95)
-        Label28.Name = "Label28"
-        Label28.Size = New Size(119, 21)
-        Label28.TabIndex = 14
-        Label28.Text = "Relationship:"
-        ' 
-        ' Label31
-        ' 
-        Label31.AutoSize = True
-        Label31.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label31.Location = New Point(111, 59)
-        Label31.Name = "Label31"
-        Label31.Size = New Size(69, 21)
-        Label31.TabIndex = 13
-        Label31.Text = "Name:"
-        ' 
         ' btnAddEmployee
         ' 
         btnAddEmployee.BackColor = SystemColors.InactiveCaption
@@ -1068,9 +807,9 @@ Partial Class Employee_Management
         btnAddEmployee.IconColor = Color.Black
         btnAddEmployee.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnAddEmployee.IconSize = 38
-        btnAddEmployee.Location = New Point(1407, 76)
+        btnAddEmployee.Location = New Point(1384, 76)
         btnAddEmployee.Name = "btnAddEmployee"
-        btnAddEmployee.Size = New Size(170, 70)
+        btnAddEmployee.Size = New Size(170, 49)
         btnAddEmployee.TabIndex = 78
         btnAddEmployee.Text = "Add Employee"
         btnAddEmployee.TextAlign = ContentAlignment.MiddleLeft
@@ -1084,9 +823,9 @@ Partial Class Employee_Management
         btnEditEmployee.IconChar = FontAwesome.Sharp.IconChar.UserPen
         btnEditEmployee.IconColor = Color.Black
         btnEditEmployee.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnEditEmployee.Location = New Point(1583, 76)
+        btnEditEmployee.Location = New Point(1560, 76)
         btnEditEmployee.Name = "btnEditEmployee"
-        btnEditEmployee.Size = New Size(176, 70)
+        btnEditEmployee.Size = New Size(176, 49)
         btnEditEmployee.TabIndex = 79
         btnEditEmployee.Text = "Edit Employee"
         btnEditEmployee.TextAlign = ContentAlignment.MiddleLeft
@@ -1099,33 +838,785 @@ Partial Class Employee_Management
         btnUpdate.BackgroundImageLayout = ImageLayout.None
         btnUpdate.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
         btnUpdate.ForeColor = Color.Black
-        btnUpdate.Location = New Point(1413, 91)
+        btnUpdate.Location = New Point(1392, 82)
         btnUpdate.Name = "btnUpdate"
         btnUpdate.Size = New Size(104, 46)
         btnUpdate.TabIndex = 80
         btnUpdate.Text = "Update"
         btnUpdate.UseVisualStyleBackColor = False
         ' 
-        ' pcbTerminate
+        ' GroupBox11
         ' 
-        pcbTerminate.Image = CType(resources.GetObject("pcbTerminate.Image"), Image)
-        pcbTerminate.Location = New Point(1352, 45)
-        pcbTerminate.Name = "pcbTerminate"
-        pcbTerminate.Size = New Size(55, 54)
-        pcbTerminate.SizeMode = PictureBoxSizeMode.StretchImage
-        pcbTerminate.TabIndex = 81
-        pcbTerminate.TabStop = False
+        GroupBox11.Controls.Add(DateTimePicker1)
+        GroupBox11.Controls.Add(Label47)
+        GroupBox11.Controls.Add(RadioButton2)
+        GroupBox11.Controls.Add(RadioButton1)
+        GroupBox11.Controls.Add(Label46)
+        GroupBox11.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
+        GroupBox11.Location = New Point(359, 915)
+        GroupBox11.Name = "GroupBox11"
+        GroupBox11.Size = New Size(956, 66)
+        GroupBox11.TabIndex = 84
+        GroupBox11.TabStop = False
+        GroupBox11.Text = "Payroll"
+        ' 
+        ' DateTimePicker1
+        ' 
+        DateTimePicker1.CustomFormat = "mm/dd/yyyy"
+        DateTimePicker1.Location = New Point(608, 25)
+        DateTimePicker1.Name = "DateTimePicker1"
+        DateTimePicker1.Size = New Size(342, 32)
+        DateTimePicker1.TabIndex = 50
+        DateTimePicker1.Value = New Date(2025, 9, 13, 1, 11, 7, 0)
+        ' 
+        ' Label47
+        ' 
+        Label47.AutoSize = True
+        Label47.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label47.Location = New Point(454, 32)
+        Label47.Name = "Label47"
+        Label47.Size = New Size(149, 21)
+        Label47.TabIndex = 20
+        Label47.Text = "Date Received:"
+        ' 
+        ' RadioButton2
+        ' 
+        RadioButton2.AutoSize = True
+        RadioButton2.Location = New Point(311, 30)
+        RadioButton2.Name = "RadioButton2"
+        RadioButton2.Size = New Size(110, 27)
+        RadioButton2.TabIndex = 19
+        RadioButton2.TabStop = True
+        RadioButton2.Text = "Pending"
+        RadioButton2.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton1
+        ' 
+        RadioButton1.AutoSize = True
+        RadioButton1.Location = New Point(174, 31)
+        RadioButton1.Name = "RadioButton1"
+        RadioButton1.Size = New Size(124, 27)
+        RadioButton1.TabIndex = 18
+        RadioButton1.TabStop = True
+        RadioButton1.Text = "Received"
+        RadioButton1.UseVisualStyleBackColor = True
+        ' 
+        ' Label46
+        ' 
+        Label46.AutoSize = True
+        Label46.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label46.Location = New Point(81, 34)
+        Label46.Name = "Label46"
+        Label46.Size = New Size(68, 21)
+        Label46.TabIndex = 17
+        Label46.Text = "Status:"
+        ' 
+        ' GroupBox10
+        ' 
+        GroupBox10.Controls.Add(TextBox8)
+        GroupBox10.Controls.Add(TextBox9)
+        GroupBox10.Controls.Add(TextBox10)
+        GroupBox10.Controls.Add(TextBox15)
+        GroupBox10.Controls.Add(Label40)
+        GroupBox10.Controls.Add(Label41)
+        GroupBox10.Controls.Add(Label42)
+        GroupBox10.Controls.Add(Label44)
+        GroupBox10.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        GroupBox10.Location = New Point(836, 710)
+        GroupBox10.Name = "GroupBox10"
+        GroupBox10.Size = New Size(467, 205)
+        GroupBox10.TabIndex = 83
+        GroupBox10.TabStop = False
+        GroupBox10.Text = "Deduction"
+        ' 
+        ' TextBox8
+        ' 
+        TextBox8.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox8.Location = New Point(191, 142)
+        TextBox8.Name = "TextBox8"
+        TextBox8.Size = New Size(259, 30)
+        TextBox8.TabIndex = 16
+        ' 
+        ' TextBox9
+        ' 
+        TextBox9.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox9.Location = New Point(191, 106)
+        TextBox9.Name = "TextBox9"
+        TextBox9.Size = New Size(259, 30)
+        TextBox9.TabIndex = 15
+        ' 
+        ' TextBox10
+        ' 
+        TextBox10.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox10.Location = New Point(191, 70)
+        TextBox10.Name = "TextBox10"
+        TextBox10.Size = New Size(259, 30)
+        TextBox10.TabIndex = 11
+        ' 
+        ' TextBox15
+        ' 
+        TextBox15.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox15.Location = New Point(191, 34)
+        TextBox15.Name = "TextBox15"
+        TextBox15.Size = New Size(259, 30)
+        TextBox15.TabIndex = 10
+        ' 
+        ' Label40
+        ' 
+        Label40.AutoSize = True
+        Label40.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label40.Location = New Point(44, 148)
+        Label40.Name = "Label40"
+        Label40.Size = New Size(133, 21)
+        Label40.TabIndex = 9
+        Label40.Text = "Date Applied:"
+        ' 
+        ' Label41
+        ' 
+        Label41.AutoSize = True
+        Label41.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label41.Location = New Point(40, 115)
+        Label41.Name = "Label41"
+        Label41.Size = New Size(137, 21)
+        Label41.TabIndex = 8
+        Label41.Text = "Unpaid Leave:"
+        ' 
+        ' Label42
+        ' 
+        Label42.AutoSize = True
+        Label42.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label42.Location = New Point(126, 79)
+        Label42.Name = "Label42"
+        Label42.Size = New Size(54, 21)
+        Label42.TabIndex = 2
+        Label42.Text = "Late:"
+        ' 
+        ' Label44
+        ' 
+        Label44.AutoSize = True
+        Label44.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label44.Location = New Point(6, 43)
+        Label44.Name = "Label44"
+        Label44.Size = New Size(174, 21)
+        Label44.TabIndex = 0
+        Label44.Text = "Days of Absences:"
+        ' 
+        ' GroupBox7
+        ' 
+        GroupBox7.Controls.Add(TextBox36)
+        GroupBox7.Controls.Add(TextBox37)
+        GroupBox7.Controls.Add(TextBox41)
+        GroupBox7.Controls.Add(TextBox42)
+        GroupBox7.Controls.Add(Label36)
+        GroupBox7.Controls.Add(Label37)
+        GroupBox7.Controls.Add(Label43)
+        GroupBox7.Controls.Add(Label45)
+        GroupBox7.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        GroupBox7.Location = New Point(356, 707)
+        GroupBox7.Name = "GroupBox7"
+        GroupBox7.Size = New Size(467, 205)
+        GroupBox7.TabIndex = 82
+        GroupBox7.TabStop = False
+        GroupBox7.Text = "Salary"
+        ' 
+        ' TextBox36
+        ' 
+        TextBox36.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox36.Location = New Point(175, 142)
+        TextBox36.Name = "TextBox36"
+        TextBox36.Size = New Size(259, 30)
+        TextBox36.TabIndex = 16
+        ' 
+        ' TextBox37
+        ' 
+        TextBox37.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox37.Location = New Point(175, 106)
+        TextBox37.Name = "TextBox37"
+        TextBox37.Size = New Size(259, 30)
+        TextBox37.TabIndex = 15
+        ' 
+        ' TextBox41
+        ' 
+        TextBox41.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox41.Location = New Point(175, 70)
+        TextBox41.Name = "TextBox41"
+        TextBox41.Size = New Size(259, 30)
+        TextBox41.TabIndex = 11
+        ' 
+        ' TextBox42
+        ' 
+        TextBox42.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox42.Location = New Point(175, 34)
+        TextBox42.Name = "TextBox42"
+        TextBox42.Size = New Size(259, 30)
+        TextBox42.TabIndex = 10
+        ' 
+        ' Label36
+        ' 
+        Label36.AutoSize = True
+        Label36.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label36.Location = New Point(21, 147)
+        Label36.Name = "Label36"
+        Label36.Size = New Size(143, 21)
+        Label36.TabIndex = 9
+        Label36.Text = "Effective Date:"
+        ' 
+        ' Label37
+        ' 
+        Label37.AutoSize = True
+        Label37.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label37.Location = New Point(18, 115)
+        Label37.Name = "Label37"
+        Label37.Size = New Size(145, 21)
+        Label37.TabIndex = 8
+        Label37.Text = "Overtime Rate:"
+        ' 
+        ' Label43
+        ' 
+        Label43.AutoSize = True
+        Label43.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label43.Location = New Point(53, 79)
+        Label43.Name = "Label43"
+        Label43.Size = New Size(109, 21)
+        Label43.TabIndex = 2
+        Label43.Text = "Allowance:"
+        ' 
+        ' Label45
+        ' 
+        Label45.AutoSize = True
+        Label45.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label45.Location = New Point(47, 40)
+        Label45.Name = "Label45"
+        Label45.Size = New Size(113, 21)
+        Label45.TabIndex = 0
+        Label45.Text = "Base Salary:"
+        ' 
+        ' GroupBox6
+        ' 
+        GroupBox6.Controls.Add(TextBox26)
+        GroupBox6.Controls.Add(TextBox27)
+        GroupBox6.Controls.Add(TextBox28)
+        GroupBox6.Controls.Add(TextBox23)
+        GroupBox6.Controls.Add(TextBox24)
+        GroupBox6.Controls.Add(TextBox25)
+        GroupBox6.Controls.Add(Label34)
+        GroupBox6.Controls.Add(Label38)
+        GroupBox6.Controls.Add(Label39)
+        GroupBox6.Controls.Add(Label9)
+        GroupBox6.Controls.Add(Label11)
+        GroupBox6.Controls.Add(Label31)
+        GroupBox6.Controls.Add(TextBox30)
+        GroupBox6.Controls.Add(TextBox31)
+        GroupBox6.Controls.Add(TextBox32)
+        GroupBox6.Controls.Add(Label12)
+        GroupBox6.Controls.Add(Label33)
+        GroupBox6.Controls.Add(Label35)
+        GroupBox6.Font = New Font("Century Gothic", 10F, FontStyle.Bold)
+        GroupBox6.Location = New Point(357, 557)
+        GroupBox6.Name = "GroupBox6"
+        GroupBox6.Size = New Size(952, 151)
+        GroupBox6.TabIndex = 81
+        GroupBox6.TabStop = False
+        GroupBox6.Text = "Company-Provided Benefits"
+        ' 
+        ' TextBox26
+        ' 
+        TextBox26.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox26.Location = New Point(467, 106)
+        TextBox26.Name = "TextBox26"
+        TextBox26.Size = New Size(160, 30)
+        TextBox26.TabIndex = 33
+        ' 
+        ' TextBox27
+        ' 
+        TextBox27.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox27.Location = New Point(467, 70)
+        TextBox27.Name = "TextBox27"
+        TextBox27.Size = New Size(160, 30)
+        TextBox27.TabIndex = 32
+        ' 
+        ' TextBox28
+        ' 
+        TextBox28.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox28.Location = New Point(467, 34)
+        TextBox28.Name = "TextBox28"
+        TextBox28.Size = New Size(160, 30)
+        TextBox28.TabIndex = 31
+        ' 
+        ' TextBox23
+        ' 
+        TextBox23.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox23.Location = New Point(776, 100)
+        TextBox23.Name = "TextBox23"
+        TextBox23.Size = New Size(160, 30)
+        TextBox23.TabIndex = 30
+        ' 
+        ' TextBox24
+        ' 
+        TextBox24.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox24.Location = New Point(776, 64)
+        TextBox24.Name = "TextBox24"
+        TextBox24.Size = New Size(160, 30)
+        TextBox24.TabIndex = 29
+        ' 
+        ' TextBox25
+        ' 
+        TextBox25.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox25.Location = New Point(776, 28)
+        TextBox25.Name = "TextBox25"
+        TextBox25.Size = New Size(160, 30)
+        TextBox25.TabIndex = 28
+        ' 
+        ' Label34
+        ' 
+        Label34.AutoSize = True
+        Label34.Font = New Font("Century Gothic", 9F)
+        Label34.Location = New Point(645, 110)
+        Label34.Name = "Label34"
+        Label34.Size = New Size(125, 20)
+        Label34.TabIndex = 27
+        Label34.Text = "Employer Share:"
+        ' 
+        ' Label38
+        ' 
+        Label38.AutoSize = True
+        Label38.Font = New Font("Century Gothic", 9F)
+        Label38.Location = New Point(640, 74)
+        Label38.Name = "Label38"
+        Label38.Size = New Size(130, 20)
+        Label38.TabIndex = 26
+        Label38.Text = "Employee Share:"
+        ' 
+        ' Label39
+        ' 
+        Label39.AutoSize = True
+        Label39.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label39.Location = New Point(655, 37)
+        Label39.Name = "Label39"
+        Label39.Size = New Size(115, 21)
+        Label39.TabIndex = 25
+        Label39.Text = "Pag-IBIG ID:"
+        ' 
+        ' Label9
+        ' 
+        Label9.AutoSize = True
+        Label9.Font = New Font("Century Gothic", 9F)
+        Label9.Location = New Point(336, 110)
+        Label9.Name = "Label9"
+        Label9.Size = New Size(125, 20)
+        Label9.TabIndex = 21
+        Label9.Text = "Employer Share:"
+        ' 
+        ' Label11
+        ' 
+        Label11.AutoSize = True
+        Label11.Font = New Font("Century Gothic", 9F)
+        Label11.Location = New Point(331, 74)
+        Label11.Name = "Label11"
+        Label11.Size = New Size(130, 20)
+        Label11.TabIndex = 20
+        Label11.Text = "Employee Share:"
+        ' 
+        ' Label31
+        ' 
+        Label31.AutoSize = True
+        Label31.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label31.Location = New Point(338, 37)
+        Label31.Name = "Label31"
+        Label31.Size = New Size(123, 21)
+        Label31.TabIndex = 19
+        Label31.Text = "PhilHealth ID:"
+        ' 
+        ' TextBox30
+        ' 
+        TextBox30.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox30.Location = New Point(146, 106)
+        TextBox30.Name = "TextBox30"
+        TextBox30.Size = New Size(160, 30)
+        TextBox30.TabIndex = 12
+        ' 
+        ' TextBox31
+        ' 
+        TextBox31.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox31.Location = New Point(146, 70)
+        TextBox31.Name = "TextBox31"
+        TextBox31.Size = New Size(160, 30)
+        TextBox31.TabIndex = 11
+        ' 
+        ' TextBox32
+        ' 
+        TextBox32.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox32.Location = New Point(146, 34)
+        TextBox32.Name = "TextBox32"
+        TextBox32.Size = New Size(160, 30)
+        TextBox32.TabIndex = 10
+        ' 
+        ' Label12
+        ' 
+        Label12.AutoSize = True
+        Label12.Font = New Font("Century Gothic", 9F)
+        Label12.Location = New Point(15, 110)
+        Label12.Name = "Label12"
+        Label12.Size = New Size(125, 20)
+        Label12.TabIndex = 3
+        Label12.Text = "Employer Share:"
+        ' 
+        ' Label33
+        ' 
+        Label33.AutoSize = True
+        Label33.Font = New Font("Century Gothic", 9F)
+        Label33.Location = New Point(10, 74)
+        Label33.Name = "Label33"
+        Label33.Size = New Size(130, 20)
+        Label33.TabIndex = 2
+        Label33.Text = "Employee Share:"
+        ' 
+        ' Label35
+        ' 
+        Label35.AutoSize = True
+        Label35.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label35.Location = New Point(75, 37)
+        Label35.Name = "Label35"
+        Label35.Size = New Size(65, 21)
+        Label35.TabIndex = 0
+        Label35.Text = "SSS ID:"
+        ' 
+        ' GroupBox2
+        ' 
+        GroupBox2.Controls.Add(TextBox1)
+        GroupBox2.Controls.Add(Label17)
+        GroupBox2.Controls.Add(TextBox11)
+        GroupBox2.Controls.Add(TextBox12)
+        GroupBox2.Controls.Add(TextBox13)
+        GroupBox2.Controls.Add(TextBox14)
+        GroupBox2.Controls.Add(TextBox20)
+        GroupBox2.Controls.Add(Label18)
+        GroupBox2.Controls.Add(Label19)
+        GroupBox2.Controls.Add(Label22)
+        GroupBox2.Controls.Add(Label23)
+        GroupBox2.Controls.Add(Label25)
+        GroupBox2.Font = New Font("Century Gothic", 10F, FontStyle.Bold)
+        GroupBox2.Location = New Point(358, 450)
+        GroupBox2.Name = "GroupBox2"
+        GroupBox2.Size = New Size(1374, 106)
+        GroupBox2.TabIndex = 85
+        GroupBox2.TabStop = False
+        GroupBox2.Text = "Work Information"
+        ' 
+        ' TextBox1
+        ' 
+        TextBox1.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox1.Location = New Point(1012, 59)
+        TextBox1.Name = "TextBox1"
+        TextBox1.Size = New Size(206, 30)
+        TextBox1.TabIndex = 16
+        ' 
+        ' Label17
+        ' 
+        Label17.AutoSize = True
+        Label17.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label17.Location = New Point(853, 68)
+        Label17.Name = "Label17"
+        Label17.Size = New Size(154, 21)
+        Label17.TabIndex = 15
+        Label17.Text = "Years of Service:"
+        ' 
+        ' TextBox11
+        ' 
+        TextBox11.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox11.Location = New Point(1012, 23)
+        TextBox11.Name = "TextBox11"
+        TextBox11.Size = New Size(206, 30)
+        TextBox11.TabIndex = 14
+        ' 
+        ' TextBox12
+        ' 
+        TextBox12.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox12.Location = New Point(570, 59)
+        TextBox12.Name = "TextBox12"
+        TextBox12.Size = New Size(255, 30)
+        TextBox12.TabIndex = 13
+        ' 
+        ' TextBox13
+        ' 
+        TextBox13.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox13.Location = New Point(570, 23)
+        TextBox13.Name = "TextBox13"
+        TextBox13.Size = New Size(255, 30)
+        TextBox13.TabIndex = 12
+        ' 
+        ' TextBox14
+        ' 
+        TextBox14.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox14.Location = New Point(157, 65)
+        TextBox14.Name = "TextBox14"
+        TextBox14.Size = New Size(220, 30)
+        TextBox14.TabIndex = 11
+        ' 
+        ' TextBox20
+        ' 
+        TextBox20.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox20.Location = New Point(157, 29)
+        TextBox20.Name = "TextBox20"
+        TextBox20.Size = New Size(220, 30)
+        TextBox20.TabIndex = 10
+        ' 
+        ' Label18
+        ' 
+        Label18.AutoSize = True
+        Label18.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label18.Location = New Point(862, 32)
+        Label18.Name = "Label18"
+        Label18.Size = New Size(144, 21)
+        Label18.TabIndex = 4
+        Label18.Text = "Contract Type:"
+        ' 
+        ' Label19
+        ' 
+        Label19.AutoSize = True
+        Label19.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label19.Location = New Point(384, 32)
+        Label19.Name = "Label19"
+        Label19.Size = New Size(185, 21)
+        Label19.TabIndex = 3
+        Label19.Text = "Employment Status:"
+        ' 
+        ' Label22
+        ' 
+        Label22.AutoSize = True
+        Label22.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label22.Location = New Point(70, 74)
+        Label22.Name = "Label22"
+        Label22.Size = New Size(81, 21)
+        Label22.TabIndex = 2
+        Label22.Text = "Position:"
+        ' 
+        ' Label23
+        ' 
+        Label23.AutoSize = True
+        Label23.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label23.Location = New Point(460, 68)
+        Label23.Name = "Label23"
+        Label23.Size = New Size(108, 21)
+        Label23.TabIndex = 1
+        Label23.Text = "Date Hired:"
+        ' 
+        ' Label25
+        ' 
+        Label25.AutoSize = True
+        Label25.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label25.Location = New Point(65, 38)
+        Label25.Name = "Label25"
+        Label25.Size = New Size(86, 21)
+        Label25.TabIndex = 0
+        Label25.Text = "Job Title:"
+        ' 
+        ' GroupBox5
+        ' 
+        GroupBox5.Controls.Add(GroupBox8)
+        GroupBox5.Controls.Add(GroupBox9)
+        GroupBox5.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        GroupBox5.Location = New Point(1323, 559)
+        GroupBox5.Name = "GroupBox5"
+        GroupBox5.Size = New Size(409, 411)
+        GroupBox5.TabIndex = 86
+        GroupBox5.TabStop = False
+        GroupBox5.Text = "Emergency Contact"
+        ' 
+        ' GroupBox8
+        ' 
+        GroupBox8.Controls.Add(TextBox4)
+        GroupBox8.Controls.Add(Label53)
+        GroupBox8.Controls.Add(TextBox6)
+        GroupBox8.Controls.Add(TextBox21)
+        GroupBox8.Controls.Add(TextBox22)
+        GroupBox8.Controls.Add(Label26)
+        GroupBox8.Controls.Add(Label27)
+        GroupBox8.Controls.Add(Label28)
+        GroupBox8.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        GroupBox8.Location = New Point(17, 215)
+        GroupBox8.Name = "GroupBox8"
+        GroupBox8.Size = New Size(370, 185)
+        GroupBox8.TabIndex = 64
+        GroupBox8.TabStop = False
+        GroupBox8.Text = "Contact 2"
+        ' 
+        ' TextBox4
+        ' 
+        TextBox4.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox4.Location = New Point(159, 144)
+        TextBox4.Name = "TextBox4"
+        TextBox4.Size = New Size(189, 30)
+        TextBox4.TabIndex = 14
+        ' 
+        ' Label53
+        ' 
+        Label53.AutoSize = True
+        Label53.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label53.Location = New Point(68, 147)
+        Label53.Name = "Label53"
+        Label53.Size = New Size(85, 21)
+        Label53.TabIndex = 13
+        Label53.Text = "Address:"
+        ' 
+        ' TextBox6
+        ' 
+        TextBox6.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox6.Location = New Point(159, 104)
+        TextBox6.Name = "TextBox6"
+        TextBox6.Size = New Size(189, 30)
+        TextBox6.TabIndex = 12
+        ' 
+        ' TextBox21
+        ' 
+        TextBox21.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox21.Location = New Point(159, 68)
+        TextBox21.Name = "TextBox21"
+        TextBox21.Size = New Size(189, 30)
+        TextBox21.TabIndex = 11
+        ' 
+        ' TextBox22
+        ' 
+        TextBox22.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox22.Location = New Point(159, 32)
+        TextBox22.Name = "TextBox22"
+        TextBox22.Size = New Size(189, 30)
+        TextBox22.TabIndex = 10
+        ' 
+        ' Label26
+        ' 
+        Label26.AutoSize = True
+        Label26.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label26.Location = New Point(6, 113)
+        Label26.Name = "Label26"
+        Label26.Size = New Size(147, 21)
+        Label26.TabIndex = 3
+        Label26.Text = "Phone Number:"
+        ' 
+        ' Label27
+        ' 
+        Label27.AutoSize = True
+        Label27.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label27.Location = New Point(34, 77)
+        Label27.Name = "Label27"
+        Label27.Size = New Size(119, 21)
+        Label27.TabIndex = 2
+        Label27.Text = "Relationship:"
+        ' 
+        ' Label28
+        ' 
+        Label28.AutoSize = True
+        Label28.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label28.Location = New Point(84, 41)
+        Label28.Name = "Label28"
+        Label28.Size = New Size(69, 21)
+        Label28.TabIndex = 0
+        Label28.Text = "Name:"
+        ' 
+        ' GroupBox9
+        ' 
+        GroupBox9.Controls.Add(TextBox2)
+        GroupBox9.Controls.Add(Label54)
+        GroupBox9.Controls.Add(TextBox3)
+        GroupBox9.Controls.Add(TextBox5)
+        GroupBox9.Controls.Add(TextBox16)
+        GroupBox9.Controls.Add(Label48)
+        GroupBox9.Controls.Add(Label49)
+        GroupBox9.Controls.Add(Label50)
+        GroupBox9.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        GroupBox9.Location = New Point(17, 33)
+        GroupBox9.Name = "GroupBox9"
+        GroupBox9.Size = New Size(370, 172)
+        GroupBox9.TabIndex = 63
+        GroupBox9.TabStop = False
+        GroupBox9.Text = "Contact 1"
+        ' 
+        ' TextBox2
+        ' 
+        TextBox2.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox2.Location = New Point(159, 132)
+        TextBox2.Name = "TextBox2"
+        TextBox2.Size = New Size(189, 30)
+        TextBox2.TabIndex = 14
+        ' 
+        ' Label54
+        ' 
+        Label54.AutoSize = True
+        Label54.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label54.Location = New Point(68, 141)
+        Label54.Name = "Label54"
+        Label54.Size = New Size(85, 21)
+        Label54.TabIndex = 13
+        Label54.Text = "Address:"
+        ' 
+        ' TextBox3
+        ' 
+        TextBox3.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox3.Location = New Point(159, 97)
+        TextBox3.Name = "TextBox3"
+        TextBox3.Size = New Size(189, 30)
+        TextBox3.TabIndex = 12
+        ' 
+        ' TextBox5
+        ' 
+        TextBox5.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox5.Location = New Point(159, 61)
+        TextBox5.Name = "TextBox5"
+        TextBox5.Size = New Size(189, 30)
+        TextBox5.TabIndex = 11
+        ' 
+        ' TextBox16
+        ' 
+        TextBox16.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox16.Location = New Point(159, 25)
+        TextBox16.Name = "TextBox16"
+        TextBox16.Size = New Size(189, 30)
+        TextBox16.TabIndex = 10
+        ' 
+        ' Label48
+        ' 
+        Label48.AutoSize = True
+        Label48.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label48.Location = New Point(6, 106)
+        Label48.Name = "Label48"
+        Label48.Size = New Size(147, 21)
+        Label48.TabIndex = 3
+        Label48.Text = "Phone Number:"
+        ' 
+        ' Label49
+        ' 
+        Label49.AutoSize = True
+        Label49.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label49.Location = New Point(34, 70)
+        Label49.Name = "Label49"
+        Label49.Size = New Size(119, 21)
+        Label49.TabIndex = 2
+        Label49.Text = "Relationship:"
+        ' 
+        ' Label50
+        ' 
+        Label50.AutoSize = True
+        Label50.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label50.Location = New Point(84, 34)
+        Label50.Name = "Label50"
+        Label50.Size = New Size(69, 21)
+        Label50.TabIndex = 0
+        Label50.Text = "Name:"
         ' 
         ' Employee_Management
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1781, 1033)
+        ClientSize = New Size(1761, 1033)
+        Controls.Add(GroupBox5)
+        Controls.Add(GroupBox2)
+        Controls.Add(GroupBox11)
+        Controls.Add(GroupBox10)
+        Controls.Add(GroupBox7)
+        Controls.Add(GroupBox6)
         Controls.Add(btnUpdate)
         Controls.Add(btnEditEmployee)
         Controls.Add(btnAddEmployee)
-        Controls.Add(GroupBox5)
-        Controls.Add(GroupBox7)
         Controls.Add(GroupBox3)
         Controls.Add(btnDelete)
         Controls.Add(btnCancel)
@@ -1143,11 +1634,11 @@ Partial Class Employee_Management
         Name = "Employee_Management"
         StartPosition = FormStartPosition.CenterScreen
         Text = "Employee_Management"
-        WindowState = FormWindowState.Maximized
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
         adminheader_pnl.ResumeLayout(False)
         adminheader_pnl.PerformLayout()
+        CType(pcbTerminate, ComponentModel.ISupportInitialize).EndInit()
         CType(dgvAccount, ComponentModel.ISupportInitialize).EndInit()
         CType(pbEmployee, ComponentModel.ISupportInitialize).EndInit()
         GroupBox1.ResumeLayout(False)
@@ -1156,11 +1647,21 @@ Partial Class Employee_Management
         GroupBox4.PerformLayout()
         GroupBox3.ResumeLayout(False)
         GroupBox3.PerformLayout()
+        GroupBox11.ResumeLayout(False)
+        GroupBox11.PerformLayout()
+        GroupBox10.ResumeLayout(False)
+        GroupBox10.PerformLayout()
         GroupBox7.ResumeLayout(False)
         GroupBox7.PerformLayout()
+        GroupBox6.ResumeLayout(False)
+        GroupBox6.PerformLayout()
+        GroupBox2.ResumeLayout(False)
+        GroupBox2.PerformLayout()
         GroupBox5.ResumeLayout(False)
-        GroupBox5.PerformLayout()
-        CType(pcbTerminate, ComponentModel.ISupportInitialize).EndInit()
+        GroupBox8.ResumeLayout(False)
+        GroupBox8.PerformLayout()
+        GroupBox9.ResumeLayout(False)
+        GroupBox9.PerformLayout()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -1222,30 +1723,26 @@ Partial Class Employee_Management
     Friend WithEvents Label29 As Label
     Friend WithEvents Label30 As Label
     Friend WithEvents Label32 As Label
-    Friend WithEvents GroupBox7 As GroupBox
-    Friend WithEvents GroupBox5 As GroupBox
-    Friend WithEvents TextBox20 As TextBox
-    Friend WithEvents TextBox23 As TextBox
-    Friend WithEvents TextBox27 As TextBox
-    Friend WithEvents Label27 As Label
-    Friend WithEvents Label28 As Label
-    Friend WithEvents Label31 As Label
-    Friend WithEvents Label49 As Label
-    Friend WithEvents Label48 As Label
+    Friend WithEvents btnAddEmployee As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnEditEmployee As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnUpdate As Button
+    Friend WithEvents pcbTerminate As PictureBox
+    Friend WithEvents GroupBox11 As GroupBox
+    Friend WithEvents DateTimePicker1 As DateTimePicker
     Friend WithEvents Label47 As Label
+    Friend WithEvents RadioButton2 As RadioButton
+    Friend WithEvents RadioButton1 As RadioButton
     Friend WithEvents Label46 As Label
-    Friend WithEvents Label44 As Label
-    Friend WithEvents Label42 As Label
-    Friend WithEvents TextBox43 As TextBox
-    Friend WithEvents TextBox44 As TextBox
-    Friend WithEvents TextBox45 As TextBox
-    Friend WithEvents TextBox46 As TextBox
-    Friend WithEvents TextBox35 As TextBox
-    Friend WithEvents TextBox38 As TextBox
-    Friend WithEvents TextBox39 As TextBox
-    Friend WithEvents TextBox40 As TextBox
-    Friend WithEvents Label41 As Label
+    Friend WithEvents GroupBox10 As GroupBox
+    Friend WithEvents TextBox8 As TextBox
+    Friend WithEvents TextBox9 As TextBox
+    Friend WithEvents TextBox10 As TextBox
+    Friend WithEvents TextBox15 As TextBox
     Friend WithEvents Label40 As Label
+    Friend WithEvents Label41 As Label
+    Friend WithEvents Label42 As Label
+    Friend WithEvents Label44 As Label
+    Friend WithEvents GroupBox7 As GroupBox
     Friend WithEvents TextBox36 As TextBox
     Friend WithEvents TextBox37 As TextBox
     Friend WithEvents TextBox41 As TextBox
@@ -1254,8 +1751,55 @@ Partial Class Employee_Management
     Friend WithEvents Label37 As Label
     Friend WithEvents Label43 As Label
     Friend WithEvents Label45 As Label
-    Friend WithEvents btnAddEmployee As FontAwesome.Sharp.IconButton
-    Friend WithEvents btnEditEmployee As FontAwesome.Sharp.IconButton
-    Friend WithEvents btnUpdate As Button
-    Friend WithEvents pcbTerminate As PictureBox
+    Friend WithEvents GroupBox6 As GroupBox
+    Friend WithEvents TextBox26 As TextBox
+    Friend WithEvents TextBox27 As TextBox
+    Friend WithEvents TextBox28 As TextBox
+    Friend WithEvents TextBox23 As TextBox
+    Friend WithEvents TextBox24 As TextBox
+    Friend WithEvents TextBox25 As TextBox
+    Friend WithEvents Label34 As Label
+    Friend WithEvents Label38 As Label
+    Friend WithEvents Label39 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Label11 As Label
+    Friend WithEvents Label31 As Label
+    Friend WithEvents TextBox30 As TextBox
+    Friend WithEvents TextBox31 As TextBox
+    Friend WithEvents TextBox32 As TextBox
+    Friend WithEvents Label12 As Label
+    Friend WithEvents Label33 As Label
+    Friend WithEvents Label35 As Label
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Label17 As Label
+    Friend WithEvents TextBox11 As TextBox
+    Friend WithEvents TextBox12 As TextBox
+    Friend WithEvents TextBox13 As TextBox
+    Friend WithEvents TextBox14 As TextBox
+    Friend WithEvents TextBox20 As TextBox
+    Friend WithEvents Label18 As Label
+    Friend WithEvents Label19 As Label
+    Friend WithEvents Label22 As Label
+    Friend WithEvents Label23 As Label
+    Friend WithEvents Label25 As Label
+    Friend WithEvents GroupBox5 As GroupBox
+    Friend WithEvents GroupBox8 As GroupBox
+    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents Label53 As Label
+    Friend WithEvents TextBox6 As TextBox
+    Friend WithEvents TextBox21 As TextBox
+    Friend WithEvents TextBox22 As TextBox
+    Friend WithEvents Label26 As Label
+    Friend WithEvents Label27 As Label
+    Friend WithEvents Label28 As Label
+    Friend WithEvents GroupBox9 As GroupBox
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents Label54 As Label
+    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents TextBox16 As TextBox
+    Friend WithEvents Label48 As Label
+    Friend WithEvents Label49 As Label
+    Friend WithEvents Label50 As Label
 End Class
