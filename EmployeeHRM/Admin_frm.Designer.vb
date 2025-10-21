@@ -22,7 +22,9 @@ Partial Class Admin_frm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Admin_frm))
         adminheader_pnl = New Panel()
+        pcbTerminate = New PictureBox()
         Label2 = New Label()
         Panel1 = New Panel()
         Label8 = New Label()
@@ -38,17 +40,29 @@ Partial Class Admin_frm
         lblDashboard = New Label()
         lblMain = New Label()
         adminheader_pnl.SuspendLayout()
+        CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
         Panel1.SuspendLayout()
         SuspendLayout()
         ' 
         ' adminheader_pnl
         ' 
         adminheader_pnl.BackColor = Color.White
+        adminheader_pnl.Controls.Add(pcbTerminate)
         adminheader_pnl.Controls.Add(Label2)
         adminheader_pnl.Location = New Point(338, -17)
         adminheader_pnl.Name = "adminheader_pnl"
         adminheader_pnl.Size = New Size(1608, 107)
         adminheader_pnl.TabIndex = 0
+        ' 
+        ' pcbTerminate
+        ' 
+        pcbTerminate.Image = CType(resources.GetObject("pcbTerminate.Image"), Image)
+        pcbTerminate.Location = New Point(1348, 29)
+        pcbTerminate.Name = "pcbTerminate"
+        pcbTerminate.Size = New Size(55, 54)
+        pcbTerminate.SizeMode = PictureBoxSizeMode.StretchImage
+        pcbTerminate.TabIndex = 1
+        pcbTerminate.TabStop = False
         ' 
         ' Label2
         ' 
@@ -140,7 +154,7 @@ Partial Class Admin_frm
         lblProfile.AutoSize = True
         lblProfile.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblProfile.ForeColor = Color.White
-        lblProfile.Location = New Point(58, 328)
+        lblProfile.Location = New Point(58, 282)
         lblProfile.Name = "lblProfile"
         lblProfile.Size = New Size(211, 27)
         lblProfile.TabIndex = 7
@@ -151,7 +165,7 @@ Partial Class Admin_frm
         lblEmployees.AutoSize = True
         lblEmployees.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblEmployees.ForeColor = Color.White
-        lblEmployees.Location = New Point(58, 373)
+        lblEmployees.Location = New Point(58, 327)
         lblEmployees.Name = "lblEmployees"
         lblEmployees.Size = New Size(279, 27)
         lblEmployees.TabIndex = 6
@@ -162,7 +176,7 @@ Partial Class Admin_frm
         lblLeaveManagement.AutoSize = True
         lblLeaveManagement.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblLeaveManagement.ForeColor = Color.White
-        lblLeaveManagement.Location = New Point(58, 416)
+        lblLeaveManagement.Location = New Point(58, 370)
         lblLeaveManagement.Name = "lblLeaveManagement"
         lblLeaveManagement.Size = New Size(248, 27)
         lblLeaveManagement.TabIndex = 5
@@ -173,7 +187,7 @@ Partial Class Admin_frm
         lblManageEmployees.AutoSize = True
         lblManageEmployees.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblManageEmployees.ForeColor = Color.White
-        lblManageEmployees.Location = New Point(58, 281)
+        lblManageEmployees.Location = New Point(58, 410)
         lblManageEmployees.Name = "lblManageEmployees"
         lblManageEmployees.Size = New Size(240, 27)
         lblManageEmployees.TabIndex = 4
@@ -226,6 +240,7 @@ Partial Class Admin_frm
         WindowState = FormWindowState.Maximized
         adminheader_pnl.ResumeLayout(False)
         adminheader_pnl.PerformLayout()
+        CType(pcbTerminate, ComponentModel.ISupportInitialize).EndInit()
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
         ResumeLayout(False)
@@ -246,4 +261,5 @@ Partial Class Admin_frm
     Friend WithEvents Label7 As Label
     Friend WithEvents lblDashboard As Label
     Friend WithEvents Label8 As Label
+    Friend WithEvents pcbTerminate As PictureBox
 End Class

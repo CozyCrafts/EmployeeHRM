@@ -32,4 +32,15 @@
         Employee_Payroll.Show()
         Me.Hide()
     End Sub
+
+    Private Sub pcbTerminate_Click(sender As Object, e As EventArgs) Handles pcbTerminate.Click
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to exit the system?",
+                                                "Confirm Exit",
+                                                MessageBoxButtons.YesNo,
+                                                MessageBoxIcon.Question)
+
+        If result = DialogResult.Yes Then
+            Application.Exit()
+        End If
+    End Sub
 End Class

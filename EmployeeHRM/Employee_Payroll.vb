@@ -1,25 +1,31 @@
 ﻿Public Class Employee_Payroll
-    Private Sub lblEmpDashboard_Click(sender As Object, e As EventArgs) Handles lblEmpDashboard.Click
-        Employee_Dashboard.ShowDialog()
-        Me.Hide()
+    Public Property UserRole As String
+    Private Sub Employee_Payroll_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.FormBorderStyle = FormBorderStyle.None
+
+        If UserRole = "Staff" Then
+            lblManageEmployees.Visible = False
+        ElseIf UserRole = "Manager" Then
+            lblManageEmployees.Visible = True
+        End If
     End Sub
 
-    Private Sub lblMyProf_Click(sender As Object, e As EventArgs) Handles lblMyProf.Click
-        Employee_My_Profile.Show()
-        Me.Hide()
+    Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
+        If UserRole = "Staff" Then
+            Employee_Dashboard.Show()
+        ElseIf UserRole = "Manager" Then
+            Admin_frm.Show()
+        End If
     End Sub
 
-    Private Sub lblEmpTA_Click(sender As Object, e As EventArgs) Handles lblEmpTA.Click
-        Employee_Time_and_Attendancevb.Show()
-        Me.Hide()
-    End Sub
+    Private Sub pcbTerminate_Click(sender As Object, e As EventArgs) Handles pcbTerminate.Click
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to exit the system?",
+                                                "Confirm Exit",
+                                                MessageBoxButtons.YesNo,
+                                                MessageBoxIcon.Question)
 
-    Private Sub lblEmpPayroll_Click(sender As Object, e As EventArgs) Handles lblEmpPayroll.Click
-        lblEmpPayroll.Enabled = False
-    End Sub
-
-    Private Sub lblEmpGG_Click(sender As Object, e As EventArgs) Handles lblEmpGG.Click
-        Employee_Goals_and_Growth.Show()
-        Me.Hide()
+        If result = DialogResult.Yes Then
+            Application.Exit()
+        End If
     End Sub
 End Class

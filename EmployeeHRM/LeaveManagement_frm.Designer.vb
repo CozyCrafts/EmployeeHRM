@@ -22,6 +22,7 @@ Partial Class LeaveManagement_frm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(LeaveManagement_frm))
         Panel1 = New Panel()
         Label8 = New Label()
         Label7 = New Label()
@@ -35,7 +36,12 @@ Partial Class LeaveManagement_frm
         Label3 = New Label()
         lblDashboard = New Label()
         lblMain = New Label()
+        adminheader_pnl = New Panel()
+        pcbTerminate = New PictureBox()
+        Label2 = New Label()
         Panel1.SuspendLayout()
+        adminheader_pnl.SuspendLayout()
+        CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' Panel1
@@ -118,7 +124,7 @@ Partial Class LeaveManagement_frm
         lblProfile.AutoSize = True
         lblProfile.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblProfile.ForeColor = Color.White
-        lblProfile.Location = New Point(64, 302)
+        lblProfile.Location = New Point(64, 259)
         lblProfile.Name = "lblProfile"
         lblProfile.Size = New Size(211, 27)
         lblProfile.TabIndex = 7
@@ -129,7 +135,7 @@ Partial Class LeaveManagement_frm
         lblEmployees.AutoSize = True
         lblEmployees.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblEmployees.ForeColor = Color.White
-        lblEmployees.Location = New Point(64, 347)
+        lblEmployees.Location = New Point(64, 304)
         lblEmployees.Name = "lblEmployees"
         lblEmployees.Size = New Size(279, 27)
         lblEmployees.TabIndex = 6
@@ -140,7 +146,7 @@ Partial Class LeaveManagement_frm
         lblLeaveManagement.AutoSize = True
         lblLeaveManagement.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblLeaveManagement.ForeColor = Color.White
-        lblLeaveManagement.Location = New Point(64, 390)
+        lblLeaveManagement.Location = New Point(64, 347)
         lblLeaveManagement.Name = "lblLeaveManagement"
         lblLeaveManagement.Size = New Size(248, 27)
         lblLeaveManagement.TabIndex = 5
@@ -151,7 +157,7 @@ Partial Class LeaveManagement_frm
         lblManageEmployees.AutoSize = True
         lblManageEmployees.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblManageEmployees.ForeColor = Color.White
-        lblManageEmployees.Location = New Point(64, 255)
+        lblManageEmployees.Location = New Point(64, 388)
         lblManageEmployees.Name = "lblManageEmployees"
         lblManageEmployees.Size = New Size(240, 27)
         lblManageEmployees.TabIndex = 4
@@ -190,16 +196,52 @@ Partial Class LeaveManagement_frm
         lblMain.TabIndex = 1
         lblMain.Text = "MAIN"
         ' 
+        ' adminheader_pnl
+        ' 
+        adminheader_pnl.BackColor = Color.White
+        adminheader_pnl.Controls.Add(pcbTerminate)
+        adminheader_pnl.Controls.Add(Label2)
+        adminheader_pnl.Location = New Point(365, -35)
+        adminheader_pnl.Name = "adminheader_pnl"
+        adminheader_pnl.Size = New Size(1608, 107)
+        adminheader_pnl.TabIndex = 3
+        ' 
+        ' pcbTerminate
+        ' 
+        pcbTerminate.Image = CType(resources.GetObject("pcbTerminate.Image"), Image)
+        pcbTerminate.Location = New Point(1338, 45)
+        pcbTerminate.Name = "pcbTerminate"
+        pcbTerminate.Size = New Size(55, 54)
+        pcbTerminate.SizeMode = PictureBoxSizeMode.StretchImage
+        pcbTerminate.TabIndex = 1
+        pcbTerminate.TabStop = False
+        ' 
+        ' Label2
+        ' 
+        Label2.AutoSize = True
+        Label2.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label2.Location = New Point(72, 49)
+        Label2.Name = "Label2"
+        Label2.Size = New Size(324, 34)
+        Label2.TabIndex = 0
+        Label2.Text = "Leave Management"
+        ' 
         ' LeaveManagement_frm
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1781, 1033)
+        Controls.Add(adminheader_pnl)
         Controls.Add(Panel1)
         Name = "LeaveManagement_frm"
+        StartPosition = FormStartPosition.CenterScreen
         Text = "LeaveManagement_frm"
+        WindowState = FormWindowState.Maximized
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
+        adminheader_pnl.ResumeLayout(False)
+        adminheader_pnl.PerformLayout()
+        CType(pcbTerminate, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
 
@@ -212,8 +254,11 @@ Partial Class LeaveManagement_frm
     Friend WithEvents lblProfile As Label
     Friend WithEvents lblEmployees As Label
     Friend WithEvents lblLeaveManagement As Label
-    Friend WithEvents lblManageEmployees As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents lblDashboard As Label
     Friend WithEvents lblMain As Label
+    Friend WithEvents lblManageEmployees As Label
+    Friend WithEvents adminheader_pnl As Panel
+    Friend WithEvents pcbTerminate As PictureBox
+    Friend WithEvents Label2 As Label
 End Class
