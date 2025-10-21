@@ -9,7 +9,7 @@ Module HRMModule
 
     Sub OpenCon()
         dbcon = New MySqlConnection
-        dbcon.ConnectionString = "server=localhost;userid=root;password=admin;database=db_hrm"
+        dbcon.ConnectionString = "server=localhost;userid=root;password=091951;database=db_hrm"
     End Sub
 
 
