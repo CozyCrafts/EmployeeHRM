@@ -27,7 +27,7 @@ Public Class Login_frm
                 Dim userType As String = reader("UserType").ToString()
 
                 If userType = "Manager" Then
-                    Admin_frm.Show()
+                    Manager_Dashboard.Show()
                     Me.Hide()
                 ElseIf userType = "Staff" Then
                     Employee_Dashboard.Show()

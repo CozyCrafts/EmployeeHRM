@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Employee_Time_and_Attendancevb
+Partial Class Attendance
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,11 +22,10 @@ Partial Class Employee_Time_and_Attendancevb
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Employee_Time_and_Attendancevb))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Attendance))
         adminheader_pnl = New Panel()
+        pcbTerminate = New PictureBox()
         Label2 = New Label()
-        GroupBox2 = New GroupBox()
-        DataGridView1 = New DataGridView()
         GroupBox3 = New GroupBox()
         Button3 = New Button()
         ComboBox1 = New ComboBox()
@@ -46,28 +45,31 @@ Partial Class Employee_Time_and_Attendancevb
         DataGridView2 = New DataGridView()
         GroupBox1 = New GroupBox()
         Panel2 = New Panel()
-        lblManageEmployees = New Label()
+        lblAmenities = New Label()
+        lblGoalsAndGrowth = New Label()
+        lblLeaveApproval = New Label()
+        lblPerformanceReview = New Label()
+        lblPayrollSummary = New Label()
+        lblDepartment = New Label()
+        lblAttendanceTracker = New Label()
+        lblTeamOverview = New Label()
         Label5 = New Label()
-        Label6 = New Label()
-        Payslipslbl = New Label()
-        SalaryProcessinglbl = New Label()
-        Label10 = New Label()
-        lblProfile = New Label()
-        lblEmployees = New Label()
+        lblMyProfile = New Label()
+        lblAttendance = New Label()
         lblLeaveManagement = New Label()
-        Label11 = New Label()
+        lblSalary = New Label()
+        Label6 = New Label()
+        Label26 = New Label()
+        Label27 = New Label()
         lblDashboard = New Label()
-        Label12 = New Label()
-        pcbTerminate = New PictureBox()
+        Label51 = New Label()
         adminheader_pnl.SuspendLayout()
-        GroupBox2.SuspendLayout()
-        CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
+        CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox3.SuspendLayout()
         GroupBox4.SuspendLayout()
         CType(DataGridView2, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox1.SuspendLayout()
         Panel2.SuspendLayout()
-        CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' adminheader_pnl
@@ -75,10 +77,20 @@ Partial Class Employee_Time_and_Attendancevb
         adminheader_pnl.BackColor = Color.White
         adminheader_pnl.Controls.Add(pcbTerminate)
         adminheader_pnl.Controls.Add(Label2)
-        adminheader_pnl.Location = New Point(343, -27)
+        adminheader_pnl.Location = New Point(338, -17)
         adminheader_pnl.Name = "adminheader_pnl"
         adminheader_pnl.Size = New Size(1608, 107)
         adminheader_pnl.TabIndex = 23
+        ' 
+        ' pcbTerminate
+        ' 
+        pcbTerminate.Image = CType(resources.GetObject("pcbTerminate.Image"), Image)
+        pcbTerminate.Location = New Point(1352, 45)
+        pcbTerminate.Name = "pcbTerminate"
+        pcbTerminate.Size = New Size(55, 54)
+        pcbTerminate.SizeMode = PictureBoxSizeMode.StretchImage
+        pcbTerminate.TabIndex = 65
+        pcbTerminate.TabStop = False
         ' 
         ' Label2
         ' 
@@ -86,29 +98,9 @@ Partial Class Employee_Time_and_Attendancevb
         Label2.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label2.Location = New Point(53, 58)
         Label2.Name = "Label2"
-        Label2.Size = New Size(353, 34)
+        Label2.Size = New Size(206, 34)
         Label2.TabIndex = 0
-        Label2.Text = "Time and Attendance"
-        ' 
-        ' GroupBox2
-        ' 
-        GroupBox2.Controls.Add(DataGridView1)
-        GroupBox2.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        GroupBox2.Location = New Point(370, 740)
-        GroupBox2.Name = "GroupBox2"
-        GroupBox2.Size = New Size(1399, 262)
-        GroupBox2.TabIndex = 62
-        GroupBox2.TabStop = False
-        GroupBox2.Text = "Leave Requests"
-        ' 
-        ' DataGridView1
-        ' 
-        DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView1.Location = New Point(25, 31)
-        DataGridView1.Name = "DataGridView1"
-        DataGridView1.RowHeadersWidth = 51
-        DataGridView1.Size = New Size(1351, 214)
-        DataGridView1.TabIndex = 35
+        Label2.Text = " Attendance"
         ' 
         ' GroupBox3
         ' 
@@ -310,186 +302,246 @@ Partial Class Employee_Time_and_Attendancevb
         ' Panel2
         ' 
         Panel2.BackColor = Color.SteelBlue
-        Panel2.Controls.Add(lblManageEmployees)
+        Panel2.Controls.Add(lblAmenities)
+        Panel2.Controls.Add(lblGoalsAndGrowth)
+        Panel2.Controls.Add(lblLeaveApproval)
+        Panel2.Controls.Add(lblPerformanceReview)
+        Panel2.Controls.Add(lblPayrollSummary)
+        Panel2.Controls.Add(lblDepartment)
+        Panel2.Controls.Add(lblAttendanceTracker)
+        Panel2.Controls.Add(lblTeamOverview)
         Panel2.Controls.Add(Label5)
-        Panel2.Controls.Add(Label6)
-        Panel2.Controls.Add(Payslipslbl)
-        Panel2.Controls.Add(SalaryProcessinglbl)
-        Panel2.Controls.Add(Label10)
-        Panel2.Controls.Add(lblProfile)
-        Panel2.Controls.Add(lblEmployees)
+        Panel2.Controls.Add(lblMyProfile)
+        Panel2.Controls.Add(lblAttendance)
         Panel2.Controls.Add(lblLeaveManagement)
-        Panel2.Controls.Add(Label11)
+        Panel2.Controls.Add(lblSalary)
+        Panel2.Controls.Add(Label6)
+        Panel2.Controls.Add(Label26)
+        Panel2.Controls.Add(Label27)
         Panel2.Controls.Add(lblDashboard)
-        Panel2.Controls.Add(Label12)
-        Panel2.Location = New Point(-1, -6)
+        Panel2.Controls.Add(Label51)
+        Panel2.Location = New Point(-6, -6)
         Panel2.Name = "Panel2"
         Panel2.Size = New Size(350, 1357)
         Panel2.TabIndex = 28
         ' 
-        ' lblManageEmployees
+        ' lblAmenities
         ' 
-        lblManageEmployees.AutoSize = True
-        lblManageEmployees.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblManageEmployees.ForeColor = Color.White
-        lblManageEmployees.Location = New Point(58, 405)
-        lblManageEmployees.Name = "lblManageEmployees"
-        lblManageEmployees.Size = New Size(240, 27)
-        lblManageEmployees.TabIndex = 13
-        lblManageEmployees.Text = "Manage Employees"
+        lblAmenities.AutoSize = True
+        lblAmenities.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblAmenities.ForeColor = Color.White
+        lblAmenities.Location = New Point(53, 780)
+        lblAmenities.Name = "lblAmenities"
+        lblAmenities.Size = New Size(118, 27)
+        lblAmenities.TabIndex = 111
+        lblAmenities.Text = "Amenties"
+        ' 
+        ' lblGoalsAndGrowth
+        ' 
+        lblGoalsAndGrowth.AutoSize = True
+        lblGoalsAndGrowth.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblGoalsAndGrowth.ForeColor = Color.White
+        lblGoalsAndGrowth.Location = New Point(53, 430)
+        lblGoalsAndGrowth.Name = "lblGoalsAndGrowth"
+        lblGoalsAndGrowth.Size = New Size(220, 27)
+        lblGoalsAndGrowth.TabIndex = 110
+        lblGoalsAndGrowth.Text = "Goals and Growth"
+        ' 
+        ' lblLeaveApproval
+        ' 
+        lblLeaveApproval.AutoSize = True
+        lblLeaveApproval.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblLeaveApproval.ForeColor = Color.White
+        lblLeaveApproval.Location = New Point(53, 620)
+        lblLeaveApproval.Name = "lblLeaveApproval"
+        lblLeaveApproval.Size = New Size(198, 27)
+        lblLeaveApproval.TabIndex = 109
+        lblLeaveApproval.Text = "Leave Approval"
+        ' 
+        ' lblPerformanceReview
+        ' 
+        lblPerformanceReview.AutoSize = True
+        lblPerformanceReview.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblPerformanceReview.ForeColor = Color.White
+        lblPerformanceReview.Location = New Point(53, 700)
+        lblPerformanceReview.Name = "lblPerformanceReview"
+        lblPerformanceReview.Size = New Size(250, 27)
+        lblPerformanceReview.TabIndex = 108
+        lblPerformanceReview.Text = "Performance Review"
+        ' 
+        ' lblPayrollSummary
+        ' 
+        lblPayrollSummary.AutoSize = True
+        lblPayrollSummary.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblPayrollSummary.ForeColor = Color.White
+        lblPayrollSummary.Location = New Point(53, 660)
+        lblPayrollSummary.Name = "lblPayrollSummary"
+        lblPayrollSummary.Size = New Size(200, 27)
+        lblPayrollSummary.TabIndex = 107
+        lblPayrollSummary.Text = "Payroll Summary"
+        ' 
+        ' lblDepartment
+        ' 
+        lblDepartment.AutoSize = True
+        lblDepartment.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblDepartment.ForeColor = Color.White
+        lblDepartment.Location = New Point(53, 740)
+        lblDepartment.Name = "lblDepartment"
+        lblDepartment.Size = New Size(150, 27)
+        lblDepartment.TabIndex = 106
+        lblDepartment.Text = "Department"
+        ' 
+        ' lblAttendanceTracker
+        ' 
+        lblAttendanceTracker.AutoSize = True
+        lblAttendanceTracker.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblAttendanceTracker.ForeColor = Color.White
+        lblAttendanceTracker.Location = New Point(53, 580)
+        lblAttendanceTracker.Name = "lblAttendanceTracker"
+        lblAttendanceTracker.Size = New Size(239, 27)
+        lblAttendanceTracker.TabIndex = 105
+        lblAttendanceTracker.Text = "Attendance Tracker"
+        ' 
+        ' lblTeamOverview
+        ' 
+        lblTeamOverview.AutoSize = True
+        lblTeamOverview.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblTeamOverview.ForeColor = Color.White
+        lblTeamOverview.Location = New Point(53, 540)
+        lblTeamOverview.Name = "lblTeamOverview"
+        lblTeamOverview.Size = New Size(195, 27)
+        lblTeamOverview.TabIndex = 104
+        lblTeamOverview.Text = "Team Overview"
         ' 
         ' Label5
         ' 
         Label5.AutoSize = True
-        Label5.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label5.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label5.ForeColor = Color.White
-        Label5.Location = New Point(38, 37)
+        Label5.Location = New Point(30, 500)
         Label5.Name = "Label5"
-        Label5.Size = New Size(197, 34)
-        Label5.TabIndex = 12
-        Label5.Text = " HR System"
+        Label5.Size = New Size(135, 22)
+        Label5.TabIndex = 103
+        Label5.Text = "MANAGEMENT"
         ' 
-        ' Label6
+        ' lblMyProfile
         ' 
-        Label6.AutoSize = True
-        Label6.Font = New Font("Century Gothic", 13.8F, FontStyle.Underline, GraphicsUnit.Point, CByte(0))
-        Label6.ForeColor = Color.White
-        Label6.Location = New Point(33, 58)
-        Label6.Name = "Label6"
-        Label6.Size = New Size(312, 27)
-        Label6.TabIndex = 11
-        Label6.Text = "                                                  "
+        lblMyProfile.AutoSize = True
+        lblMyProfile.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblMyProfile.ForeColor = Color.White
+        lblMyProfile.Location = New Point(53, 270)
+        lblMyProfile.Name = "lblMyProfile"
+        lblMyProfile.Size = New Size(124, 27)
+        lblMyProfile.TabIndex = 102
+        lblMyProfile.Text = "My Profile"
         ' 
-        ' Payslipslbl
+        ' lblAttendance
         ' 
-        Payslipslbl.AutoSize = True
-        Payslipslbl.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Payslipslbl.ForeColor = Color.White
-        Payslipslbl.Location = New Point(61, 555)
-        Payslipslbl.Name = "Payslipslbl"
-        Payslipslbl.Size = New Size(101, 27)
-        Payslipslbl.TabIndex = 10
-        Payslipslbl.Text = "Payslips"
-        ' 
-        ' SalaryProcessinglbl
-        ' 
-        SalaryProcessinglbl.AutoSize = True
-        SalaryProcessinglbl.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        SalaryProcessinglbl.ForeColor = Color.White
-        SalaryProcessinglbl.Location = New Point(61, 513)
-        SalaryProcessinglbl.Name = "SalaryProcessinglbl"
-        SalaryProcessinglbl.Size = New Size(206, 27)
-        SalaryProcessinglbl.TabIndex = 9
-        SalaryProcessinglbl.Text = "Salary Processing"
-        ' 
-        ' Label10
-        ' 
-        Label10.AutoSize = True
-        Label10.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label10.ForeColor = Color.White
-        Label10.Location = New Point(38, 474)
-        Label10.Name = "Label10"
-        Label10.Size = New Size(90, 22)
-        Label10.TabIndex = 8
-        Label10.Text = " PAYROLL"
-        ' 
-        ' lblProfile
-        ' 
-        lblProfile.AutoSize = True
-        lblProfile.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblProfile.ForeColor = Color.White
-        lblProfile.Location = New Point(56, 278)
-        lblProfile.Name = "lblProfile"
-        lblProfile.Size = New Size(211, 27)
-        lblProfile.TabIndex = 7
-        lblProfile.Text = "Employees Profile"
-        ' 
-        ' lblEmployees
-        ' 
-        lblEmployees.AutoSize = True
-        lblEmployees.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblEmployees.ForeColor = Color.White
-        lblEmployees.Location = New Point(56, 323)
-        lblEmployees.Name = "lblEmployees"
-        lblEmployees.Size = New Size(279, 27)
-        lblEmployees.TabIndex = 6
-        lblEmployees.Text = "Employees Attendance"
+        lblAttendance.AutoSize = True
+        lblAttendance.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblAttendance.ForeColor = Color.White
+        lblAttendance.Location = New Point(53, 310)
+        lblAttendance.Name = "lblAttendance"
+        lblAttendance.Size = New Size(150, 27)
+        lblAttendance.TabIndex = 101
+        lblAttendance.Text = "Attendance"
         ' 
         ' lblLeaveManagement
         ' 
         lblLeaveManagement.AutoSize = True
         lblLeaveManagement.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblLeaveManagement.ForeColor = Color.White
-        lblLeaveManagement.Location = New Point(56, 366)
+        lblLeaveManagement.Location = New Point(53, 350)
         lblLeaveManagement.Name = "lblLeaveManagement"
         lblLeaveManagement.Size = New Size(248, 27)
-        lblLeaveManagement.TabIndex = 5
+        lblLeaveManagement.TabIndex = 100
         lblLeaveManagement.Text = "Leave Management"
         ' 
-        ' Label11
+        ' lblSalary
         ' 
-        Label11.AutoSize = True
-        Label11.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label11.ForeColor = Color.White
-        Label11.Location = New Point(38, 235)
-        Label11.Name = "Label11"
-        Label11.Size = New Size(106, 22)
-        Label11.TabIndex = 3
-        Label11.Text = "EMPLOYEES"
+        lblSalary.AutoSize = True
+        lblSalary.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblSalary.ForeColor = Color.White
+        lblSalary.Location = New Point(53, 390)
+        lblSalary.Name = "lblSalary"
+        lblSalary.Size = New Size(81, 27)
+        lblSalary.TabIndex = 99
+        lblSalary.Text = "Salary"
+        ' 
+        ' Label6
+        ' 
+        Label6.AutoSize = True
+        Label6.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label6.ForeColor = Color.White
+        Label6.Location = New Point(30, 230)
+        Label6.Name = "Label6"
+        Label6.Size = New Size(98, 22)
+        Label6.TabIndex = 98
+        Label6.Text = "OVERVIEW"
+        ' 
+        ' Label26
+        ' 
+        Label26.AutoSize = True
+        Label26.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label26.ForeColor = Color.White
+        Label26.Location = New Point(85, 35)
+        Label26.Name = "Label26"
+        Label26.Size = New Size(197, 34)
+        Label26.TabIndex = 97
+        Label26.Text = " HR System"
+        ' 
+        ' Label27
+        ' 
+        Label27.AutoSize = True
+        Label27.Font = New Font("Century Gothic", 13.8F, FontStyle.Underline, GraphicsUnit.Point, CByte(0))
+        Label27.ForeColor = Color.White
+        Label27.Location = New Point(15, 60)
+        Label27.Name = "Label27"
+        Label27.Size = New Size(312, 27)
+        Label27.TabIndex = 96
+        Label27.Text = "                                                  "
         ' 
         ' lblDashboard
         ' 
         lblDashboard.AutoSize = True
         lblDashboard.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblDashboard.ForeColor = Color.White
-        lblDashboard.Location = New Point(61, 162)
+        lblDashboard.Location = New Point(53, 160)
         lblDashboard.Name = "lblDashboard"
         lblDashboard.Size = New Size(138, 27)
-        lblDashboard.TabIndex = 2
+        lblDashboard.TabIndex = 91
         lblDashboard.Text = "Dashboard"
         ' 
-        ' Label12
+        ' Label51
         ' 
-        Label12.AutoSize = True
-        Label12.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label12.ForeColor = Color.White
-        Label12.Location = New Point(38, 118)
-        Label12.Name = "Label12"
-        Label12.Size = New Size(57, 22)
-        Label12.TabIndex = 1
-        Label12.Text = "MAIN"
+        Label51.AutoSize = True
+        Label51.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label51.ForeColor = Color.White
+        Label51.Location = New Point(30, 120)
+        Label51.Name = "Label51"
+        Label51.Size = New Size(57, 22)
+        Label51.TabIndex = 90
+        Label51.Text = "MAIN"
         ' 
-        ' pcbTerminate
-        ' 
-        pcbTerminate.Image = CType(resources.GetObject("pcbTerminate.Image"), Image)
-        pcbTerminate.Location = New Point(1371, 39)
-        pcbTerminate.Name = "pcbTerminate"
-        pcbTerminate.Size = New Size(55, 54)
-        pcbTerminate.SizeMode = PictureBoxSizeMode.StretchImage
-        pcbTerminate.TabIndex = 65
-        pcbTerminate.TabStop = False
-        ' 
-        ' Employee_Time_and_Attendancevb
+        ' Attendance
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1781, 1033)
+        ClientSize = New Size(1779, 1080)
         ControlBox = False
         Controls.Add(Panel2)
         Controls.Add(GroupBox4)
         Controls.Add(GroupBox3)
-        Controls.Add(GroupBox2)
         Controls.Add(GroupBox1)
         Controls.Add(adminheader_pnl)
         FormBorderStyle = FormBorderStyle.None
-        Name = "Employee_Time_and_Attendancevb"
+        Name = "Attendance"
         StartPosition = FormStartPosition.CenterScreen
         Text = "Employee_Time_and_Attendancevb"
         WindowState = FormWindowState.Maximized
         adminheader_pnl.ResumeLayout(False)
         adminheader_pnl.PerformLayout()
-        GroupBox2.ResumeLayout(False)
-        CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
+        CType(pcbTerminate, ComponentModel.ISupportInitialize).EndInit()
         GroupBox3.ResumeLayout(False)
         GroupBox3.PerformLayout()
         GroupBox4.ResumeLayout(False)
@@ -497,13 +549,10 @@ Partial Class Employee_Time_and_Attendancevb
         GroupBox1.ResumeLayout(False)
         Panel2.ResumeLayout(False)
         Panel2.PerformLayout()
-        CType(pcbTerminate, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
     Friend WithEvents adminheader_pnl As Panel
     Friend WithEvents Label2 As Label
-    Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents btnSave As Button
     Friend WithEvents DateTimePicker2 As DateTimePicker
@@ -523,17 +572,23 @@ Partial Class Employee_Time_and_Attendancevb
     Friend WithEvents DataGridView2 As DataGridView
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents Label5 As Label
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Payslipslbl As Label
-    Friend WithEvents SalaryProcessinglbl As Label
-    Friend WithEvents Label10 As Label
-    Friend WithEvents lblProfile As Label
-    Friend WithEvents lblEmployees As Label
-    Friend WithEvents lblLeaveManagement As Label
-    Friend WithEvents Label11 As Label
-    Friend WithEvents lblDashboard As Label
-    Friend WithEvents Label12 As Label
-    Friend WithEvents lblManageEmployees As Label
     Friend WithEvents pcbTerminate As PictureBox
+    Friend WithEvents Label26 As Label
+    Friend WithEvents Label27 As Label
+    Friend WithEvents lblAmenities As Label
+    Friend WithEvents lblGoalsAndGrowth As Label
+    Friend WithEvents lblLeaveApproval As Label
+    Friend WithEvents lblPerformanceReview As Label
+    Friend WithEvents lblPayrollSummary As Label
+    Friend WithEvents lblDepartment As Label
+    Friend WithEvents lblAttendanceTracker As Label
+    Friend WithEvents lblTeamOverview As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents lblMyProfile As Label
+    Friend WithEvents lblAttendance As Label
+    Friend WithEvents lblLeaveManagement As Label
+    Friend WithEvents lblSalary As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents lblDashboard As Label
+    Friend WithEvents Label51 As Label
 End Class

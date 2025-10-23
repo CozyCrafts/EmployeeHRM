@@ -1,8 +1,8 @@
 ﻿Imports System.Text
 Imports MySql.Data.MySqlClient
 Imports System.Security.Cryptography
-Public Class Employee_Management
-    Private Sub Employee_Management_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+Public Class Team_Overview
+    Private Sub Team_Overview_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Me.FormBorderStyle = FormBorderStyle.None
         Try
@@ -29,30 +29,65 @@ Public Class Employee_Management
         dtpBirthdate.CustomFormat = "MMMM/dd/yyyy"
     End Sub
 
-    Private Sub lblProfile_Click(sender As Object, e As EventArgs) Handles lblProfile.Click
-        Employee_My_Profile.Show()
+    Private Sub lblMyProfile_Click(sender As Object, e As EventArgs)
+        MyProfile.Show()
+        Hide()
+    End Sub
+
+    Private Sub lblAttendance_Click(sender As Object, e As EventArgs)
+        Attendance.Show()
+        Hide()
+    End Sub
+
+    Private Sub lblLeaveManagement_Click(sender As Object, e As EventArgs)
+        Leave_Management.Show()
+        Hide()
+    End Sub
+
+    Private Sub lblSalary_Click(sender As Object, e As EventArgs) Handles lblSalary.Click
+        Salary.Show()
         Me.Hide()
     End Sub
 
-    Private Sub lblEmployees_Click(sender As Object, e As EventArgs) Handles lblEmployees.Click
-        Employee_Time_and_Attendancevb.Show()
+    Private Sub lblGoalsAndGrowth_Click(sender As Object, e As EventArgs) Handles lblGoalsAndGrowth.Click
+        Goals_and_Growth.Show()
         Me.Hide()
     End Sub
 
-    Private Sub lblLeaveManagement_Click(sender As Object, e As EventArgs) Handles lblLeaveManagement.Click
-        LeaveManagement_frm.Show()
+    Private Sub lblTeamOverview_Click(sender As Object, e As EventArgs) Handles lblTeamOverview.Click
+        lblTeamOverview.Enabled = False
+    End Sub
+
+    Private Sub lblAttandance_Tracker_Click(sender As Object, e As EventArgs) Handles lblAttandanceTracker.Click
+        Attendance_Tracker.Show()
         Me.Hide()
     End Sub
 
-    Private Sub SalaryProcessinglbl_Click(sender As Object, e As EventArgs) Handles SalaryProcessinglbl.Click
-        SalaryProcessing_frm.Show()
+    Private Sub lblLeaveApproval_Click(sender As Object, e As EventArgs) Handles lblLeaveApproval.Click
+        Leave_Approval.Show()
         Me.Hide()
     End Sub
 
-    Private Sub Payslipslbl_Click(sender As Object, e As EventArgs) Handles Payslipslbl.Click
-        Employee_Payroll.Show()
+    Private Sub lblPayrollSummary_Click(sender As Object, e As EventArgs) Handles lblPayrollSummary.Click
+        Payroll_Summary.Show()
         Me.Hide()
     End Sub
+
+    Private Sub lblPerformanceReview_Click(sender As Object, e As EventArgs) Handles lblPerformanceReview.Click
+        Performance_Review.Show()
+        Me.Hide()
+    End Sub
+
+    Private Sub lblDepartment_Click(sender As Object, e As EventArgs) Handles lblDepartment.Click
+        Department.Show()
+        Me.Hide()
+    End Sub
+
+    Private Sub lblAmenities_Click(sender As Object, e As EventArgs) Handles lblAmenities.Click
+        Amenities.Show()
+        Me.Hide()
+    End Sub
+
     Private Sub SaveEmployee()
         Dim dbcon As MySqlConnection = HRMModule.GetConnection()
         Dim newEmployeeID As String = GenerateEmployeeID()
@@ -468,4 +503,6 @@ Public Class Employee_Management
             Application.Exit()
         End If
     End Sub
+
+
 End Class
