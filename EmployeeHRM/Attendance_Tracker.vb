@@ -25,34 +25,30 @@
 
     End Sub
 
-    Private Sub lblDashboard_Click(sender As Object, e As EventArgs)
-        If UserRole = "Staff" Then
-            Employee_Dashboard.Show()
-        ElseIf UserRole = "Manager" Then
-            Manager_Dashboard.Show()
-        End If
+    Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
+        Manager_Dashboard.Show()
         Me.Hide()
     End Sub
     Private Sub lblMyProfile_Click(sender As Object, e As EventArgs) Handles lblMyProfile.Click
         MyProfile.Show()
         Me.Hide()
     End Sub
-    Private Sub lblAttendance_Click(sender As Object, e As EventArgs)
-            Attendance.Show()
-            Hide()
-        End Sub
+    Private Sub lblAttendance_Click(sender As Object, e As EventArgs) Handles lblAttendance.Click
+        Attendance.Show()
+        Hide()
+    End Sub
 
-    Private Sub lblLeaveManagement_Click(sender As Object, e As EventArgs)
+    Private Sub lblLeaveManagement_Click(sender As Object, e As EventArgs) Handles lblLeaveManagement.Click
         Leave_Management.Show()
         Hide()
     End Sub
 
-    Private Sub lblSalary_Click(sender As Object, e As EventArgs)
-            Salary.Show()
-            Hide()
-        End Sub
+    Private Sub lblSalary_Click(sender As Object, e As EventArgs) Handles lblSalary.Click
+        Salary.Show()
+        Hide()
+    End Sub
 
-    Private Sub lblGoalsAndGrowth_Click(sender As Object, e As EventArgs)
+    Private Sub lblGoalsAndGrowth_Click(sender As Object, e As EventArgs) Handles lblGoalsAndGrowth.Click
         Goals_and_Growth.Show()
         Hide()
     End Sub

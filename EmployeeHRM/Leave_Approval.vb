@@ -26,11 +26,7 @@
 
 
     Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
-        If UserRole = "Staff" Then
-            Employee_Dashboard.Show()
-        ElseIf UserRole = "Manager" Then
-            Manager_Dashboard.Show()
-        End If
+        Manager_Dashboard.Show()
         Me.Hide()
     End Sub
 

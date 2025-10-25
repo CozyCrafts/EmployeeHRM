@@ -29,17 +29,21 @@ Public Class Team_Overview
         dtpBirthdate.CustomFormat = "MMMM/dd/yyyy"
     End Sub
 
-    Private Sub lblMyProfile_Click(sender As Object, e As EventArgs)
+    Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
+        Manager_Dashboard.Show()
+        Me.Hide()
+    End Sub
+    Private Sub lblMyProfile_Click(sender As Object, e As EventArgs) Handles lblMyProfile.Click
         MyProfile.Show()
         Hide()
     End Sub
 
-    Private Sub lblAttendance_Click(sender As Object, e As EventArgs)
+    Private Sub lblAttendance_Click(sender As Object, e As EventArgs) Handles lblAttendance.Click
         Attendance.Show()
         Hide()
     End Sub
 
-    Private Sub lblLeaveManagement_Click(sender As Object, e As EventArgs)
+    Private Sub lblLeaveManagement_Click(sender As Object, e As EventArgs) Handles lblLeaveManagement.Click
         Leave_Management.Show()
         Hide()
     End Sub
