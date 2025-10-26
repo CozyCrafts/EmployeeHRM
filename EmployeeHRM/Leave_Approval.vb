@@ -1,30 +1,4 @@
 ﻿Public Class Leave_Approval
-
-    Public Property UserRole As String
-
-    Private Sub Leave_Approval_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.FormBorderStyle = FormBorderStyle.None
-
-
-        If UserRole = "Staff" Then
-            lblTeamOverview.Visible = False
-            lblAttendanceTracker.Visible = False
-            lblLeaveApproval.Visible = False
-            lblPayrollSummary.Visible = False
-            lblPerformanceReview.Visible = False
-            lblDepartment.Visible = False
-        ElseIf UserRole = "Manager" Then
-            lblTeamOverview.Visible = True
-            lblAttendanceTracker.Visible = True
-            lblLeaveApproval.Visible = True
-            lblPayrollSummary.Visible = True
-            lblPerformanceReview.Visible = True
-            lblDepartment.Visible = True
-        End If
-    End Sub
-
-
-
     Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
         Manager_Dashboard.Show()
         Me.Hide()

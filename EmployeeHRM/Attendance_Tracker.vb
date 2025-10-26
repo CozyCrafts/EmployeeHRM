@@ -1,30 +1,4 @@
 ﻿Public Class Attendance_Tracker
-
-    Public Property UserRole As String
-    Private Sub Attendance_Tracker_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.FormBorderStyle = FormBorderStyle.None
-
-        If UserRole = "Staff" Then
-
-            lblTeamOverview.Visible = False
-            lblAttendanceTracker.Visible = False
-            lblLeaveApproval.Visible = False
-            lblPayrollSummary.Visible = False
-            lblPerformanceReview.Visible = False
-            lblDepartment.Visible = False
-
-        ElseIf UserRole = "Manager" Then
-
-            lblTeamOverview.Visible = True
-            lblAttendanceTracker.Visible = True
-            lblLeaveApproval.Visible = True
-            lblPayrollSummary.Visible = True
-            lblPerformanceReview.Visible = True
-            lblDepartment.Visible = True
-        End If
-
-    End Sub
-
     Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
         Manager_Dashboard.Show()
         Me.Hide()
@@ -55,15 +29,15 @@
 
 
     Private Sub pcbTerminate_Click(sender As Object, e As EventArgs) Handles pcbTerminate.Click
-            Dim result As DialogResult = MessageBox.Show("Are you sure you want to exit the system?",
-                                                "Confirm Exit",
-                                                MessageBoxButtons.YesNo,
-                                                MessageBoxIcon.Question)
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to exit the system?",
+                                            "Confirm Exit",
+                                            MessageBoxButtons.YesNo,
+                                            MessageBoxIcon.Question)
 
-            If result = DialogResult.Yes Then
-                Application.Exit()
-            End If
-        End Sub
+        If result = DialogResult.Yes Then
+            Application.Exit()
+        End If
+    End Sub
 
     Private Sub lblTeamOverview_Click(sender As Object, e As EventArgs) Handles lblTeamOverview.Click
         Team_Overview.Show()
@@ -92,12 +66,12 @@
     End Sub
 
     Private Sub lblDepartment_Click(sender As Object, e As EventArgs) Handles lblDepartment.Click
-            Department.Show()
-            Me.Hide()
-        End Sub
+        Department.Show()
+        Me.Hide()
+    End Sub
 
-        Private Sub lblAmenities_Click(sender As Object, e As EventArgs) Handles lblAmenities.Click
-            Amenities.Show()
-            Me.Hide()
-        End Sub
-    End Class
+    Private Sub lblAmenities_Click(sender As Object, e As EventArgs) Handles lblAmenities.Click
+        Amenities.Show()
+        Me.Hide()
+    End Sub
+End Class

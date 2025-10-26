@@ -446,7 +446,7 @@ Partial Class Team_Overview
         dgvAccount.Location = New Point(367, 993)
         dgvAccount.Name = "dgvAccount"
         dgvAccount.RowHeadersWidth = 51
-        dgvAccount.Size = New Size(1349, 45)
+        dgvAccount.Size = New Size(1349, 81)
         dgvAccount.TabIndex = 39
         ' 
         ' Label14

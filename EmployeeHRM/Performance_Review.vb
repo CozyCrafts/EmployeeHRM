@@ -1,34 +1,8 @@
 ﻿Public Class Performance_Review
 
-    Public Property UserRole As String
-    Private Sub Performance_Review_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.FormBorderStyle = FormBorderStyle.None
-
-        If UserRole = "Staff" Then
-
-            lblTeamOverview.Visible = False
-            lblAttendanceTracker.Visible = False
-            lblLeaveApproval.Visible = False
-            lblPayrollSummary.Visible = False
-            lblPerformanceReview.Visible = False
-            lblDepartment.Visible = False
-
-        ElseIf UserRole = "Manager" Then
-
-            lblTeamOverview.Visible = True
-            lblAttendanceTracker.Visible = True
-            lblLeaveApproval.Visible = True
-            lblPayrollSummary.Visible = True
-            lblPerformanceReview.Visible = True
-            lblDepartment.Visible = True
-        End If
-
-    End Sub
-
     Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
         Manager_Dashboard.Show()
         Me.Hide()
-
     End Sub
     Private Sub lblMyProfile_Click(sender As Object, e As EventArgs) Handles lblMyProfile.Click
         MyProfile.Show()
@@ -37,7 +11,6 @@
     Private Sub lblAttendance_Click(sender As Object, e As EventArgs) Handles lblAttendance.Click
         Attendance.Show()
         Me.Hide()
-
     End Sub
 
     Private Sub lblLeaveManagement_Click(sender As Object, e As EventArgs) Handles lblLeaveManagement.Click
@@ -95,12 +68,12 @@
     End Sub
 
     Private Sub lblDepartment_Click(sender As Object, e As EventArgs) Handles lblDepartment.Click
-            Department.Show()
-            Me.Hide()
+        Department.Show()
+        Me.Hide()
         End Sub
 
-        Private Sub lblAmenities_Click(sender As Object, e As EventArgs) Handles lblAmenities.Click
-            Amenities.Show()
-            Me.Hide()
-        End Sub
-    End Class
+    Private Sub lblAmenities_Click(sender As Object, e As EventArgs) Handles lblAmenities.Click
+        Amenities.Show()
+        Me.Hide()
+    End Sub
+End Class
