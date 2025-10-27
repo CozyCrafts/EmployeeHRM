@@ -443,10 +443,10 @@ Partial Class Team_Overview
         dgvAccount.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
         dgvAccount.ColumnHeadersHeight = 29
         dgvAccount.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        dgvAccount.Location = New Point(367, 993)
+        dgvAccount.Location = New Point(360, 987)
         dgvAccount.Name = "dgvAccount"
         dgvAccount.RowHeadersWidth = 51
-        dgvAccount.Size = New Size(1349, 81)
+        dgvAccount.Size = New Size(1349, 98)
         dgvAccount.TabIndex = 39
         ' 
         ' Label14

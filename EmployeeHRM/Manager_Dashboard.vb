@@ -85,4 +85,11 @@
         End If
     End Sub
 
+    Private Sub btnHandbook_Click(sender As Object, e As EventArgs) Handles btnHandbook.Click
+
+    End Sub
+
+    Private Sub GroupBox3_Enter(sender As Object, e As EventArgs) Handles GroupBox3.Enter
+
+    End Sub
 End Class

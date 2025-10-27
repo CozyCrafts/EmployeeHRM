@@ -33,6 +33,8 @@ Partial Class Login_frm
         cmbRole = New ComboBox()
         btnlogin = New Button()
         pcbTerminate = New PictureBox()
+        btnEmployee = New Button()
+        btnManager = New Button()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
@@ -140,12 +142,38 @@ Partial Class Login_frm
         pcbTerminate.TabIndex = 9
         pcbTerminate.TabStop = False
         ' 
+        ' btnEmployee
+        ' 
+        btnEmployee.BackColor = Color.White
+        btnEmployee.Font = New Font("Perpetua", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnEmployee.ForeColor = SystemColors.MenuHighlight
+        btnEmployee.Location = New Point(73, 542)
+        btnEmployee.Name = "btnEmployee"
+        btnEmployee.Size = New Size(121, 47)
+        btnEmployee.TabIndex = 10
+        btnEmployee.Text = "Employee"
+        btnEmployee.UseVisualStyleBackColor = False
+        ' 
+        ' btnManager
+        ' 
+        btnManager.BackColor = Color.White
+        btnManager.Font = New Font("Perpetua", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnManager.ForeColor = SystemColors.MenuHighlight
+        btnManager.Location = New Point(200, 542)
+        btnManager.Name = "btnManager"
+        btnManager.Size = New Size(121, 47)
+        btnManager.TabIndex = 11
+        btnManager.Text = "Manager"
+        btnManager.UseVisualStyleBackColor = False
+        ' 
         ' Login_frm
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.White
         ClientSize = New Size(394, 612)
+        Controls.Add(btnManager)
+        Controls.Add(btnEmployee)
         Controls.Add(pcbTerminate)
         Controls.Add(btnlogin)
         Controls.Add(cmbRole)
@@ -175,4 +203,6 @@ Partial Class Login_frm
     Friend WithEvents cmbRole As ComboBox
     Friend WithEvents btnlogin As Button
     Friend WithEvents pcbTerminate As PictureBox
+    Friend WithEvents btnEmployee As Button
+    Friend WithEvents btnManager As Button
 End Class

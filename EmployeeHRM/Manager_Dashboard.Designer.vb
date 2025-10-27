@@ -54,7 +54,7 @@ Partial Class Manager_Dashboard
         dgAnnounce = New DataGridView()
         GroupBox3 = New GroupBox()
         Label1 = New Label()
-        TextBox1 = New TextBox()
+        txtDepartment = New TextBox()
         btnEditProf = New Button()
         txtProfPic = New PictureBox()
         TextBox9 = New TextBox()
@@ -413,7 +413,7 @@ Partial Class Manager_Dashboard
         ' GroupBox3
         ' 
         GroupBox3.Controls.Add(Label1)
-        GroupBox3.Controls.Add(TextBox1)
+        GroupBox3.Controls.Add(txtDepartment)
         GroupBox3.Controls.Add(btnEditProf)
         GroupBox3.Controls.Add(txtProfPic)
         GroupBox3.Controls.Add(TextBox9)
@@ -442,13 +442,13 @@ Partial Class Manager_Dashboard
         Label1.TabIndex = 41
         Label1.Text = "Department:"
         ' 
-        ' TextBox1
+        ' txtDepartment
         ' 
-        TextBox1.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox1.Location = New Point(383, 184)
-        TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(218, 30)
-        TextBox1.TabIndex = 40
+        txtDepartment.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtDepartment.Location = New Point(383, 184)
+        txtDepartment.Name = "txtDepartment"
+        txtDepartment.Size = New Size(218, 30)
+        txtDepartment.TabIndex = 40
         ' 
         ' btnEditProf
         ' 
@@ -718,7 +718,7 @@ Partial Class Manager_Dashboard
     Friend WithEvents dgAnnounce As DataGridView
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents Label1 As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtDepartment As TextBox
     Friend WithEvents btnEditProf As Button
     Friend WithEvents txtProfPic As PictureBox
     Friend WithEvents TextBox9 As TextBox

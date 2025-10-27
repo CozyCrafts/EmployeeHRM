@@ -45,9 +45,11 @@ Partial Class Department
         adminheader_pnl = New Panel()
         pcbTerminate = New PictureBox()
         Label2 = New Label()
+        DataGridView1 = New DataGridView()
         Panel1.SuspendLayout()
         adminheader_pnl.SuspendLayout()
         CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
+        CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' Panel1
@@ -304,12 +306,22 @@ Partial Class Department
         Label2.TabIndex = 0
         Label2.Text = "Department"
         ' 
+        ' DataGridView1
+        ' 
+        DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridView1.Location = New Point(410, 414)
+        DataGridView1.Name = "DataGridView1"
+        DataGridView1.RowHeadersWidth = 51
+        DataGridView1.Size = New Size(1335, 590)
+        DataGridView1.TabIndex = 4
+        ' 
         ' Department
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1781, 1033)
         ControlBox = False
+        Controls.Add(DataGridView1)
         Controls.Add(Panel1)
         Controls.Add(adminheader_pnl)
         Name = "Department"
@@ -321,6 +333,7 @@ Partial Class Department
         adminheader_pnl.ResumeLayout(False)
         adminheader_pnl.PerformLayout()
         CType(pcbTerminate, ComponentModel.ISupportInitialize).EndInit()
+        CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
 
@@ -346,4 +359,5 @@ Partial Class Department
     Friend WithEvents adminheader_pnl As Panel
     Friend WithEvents pcbTerminate As PictureBox
     Friend WithEvents Label2 As Label
+    Friend WithEvents DataGridView1 As DataGridView
 End Class
