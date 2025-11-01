@@ -246,7 +246,7 @@ Partial Class Leave_Management
         Label27.AutoSize = True
         Label27.Font = New Font("Century Gothic", 13.8F, FontStyle.Underline, GraphicsUnit.Point, CByte(0))
         Label27.ForeColor = Color.White
-        Label27.Location = New Point(15, 60)
+        Label27.Location = New Point(30, 65)
         Label27.Name = "Label27"
         Label27.Size = New Size(312, 27)
         Label27.TabIndex = 96

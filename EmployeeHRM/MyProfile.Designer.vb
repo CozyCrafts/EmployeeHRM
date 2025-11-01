@@ -571,7 +571,7 @@ Partial Class MyProfile
         Panel2.Controls.Add(Label27)
         Panel2.Location = New Point(-6, -6)
         Panel2.Name = "Panel2"
-        Panel2.Size = New Size(329, 1357)
+        Panel2.Size = New Size(350, 1357)
         Panel2.TabIndex = 28
         ' 
         ' lblAmenities
@@ -733,7 +733,7 @@ Partial Class MyProfile
         lblDashboard.AutoSize = True
         lblDashboard.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblDashboard.ForeColor = Color.White
-        lblDashboard.Location = New Point(53, 167)
+        lblDashboard.Location = New Point(53, 160)
         lblDashboard.Name = "lblDashboard"
         lblDashboard.Size = New Size(138, 27)
         lblDashboard.TabIndex = 20
@@ -755,7 +755,7 @@ Partial Class MyProfile
         Label26.AutoSize = True
         Label26.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label26.ForeColor = Color.White
-        Label26.Location = New Point(58, 35)
+        Label26.Location = New Point(85, 35)
         Label26.Name = "Label26"
         Label26.Size = New Size(197, 34)
         Label26.TabIndex = 12
@@ -766,7 +766,7 @@ Partial Class MyProfile
         Label27.AutoSize = True
         Label27.Font = New Font("Century Gothic", 13.8F, FontStyle.Underline, GraphicsUnit.Point, CByte(0))
         Label27.ForeColor = Color.White
-        Label27.Location = New Point(15, 60)
+        Label27.Location = New Point(30, 65)
         Label27.Name = "Label27"
         Label27.Size = New Size(312, 27)
         Label27.TabIndex = 11

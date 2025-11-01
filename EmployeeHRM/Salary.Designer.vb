@@ -122,7 +122,7 @@ Partial Class Salary
         lblAmenities.AutoSize = True
         lblAmenities.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblAmenities.ForeColor = Color.White
-        lblAmenities.Location = New Point(57, 780)
+        lblAmenities.Location = New Point(53, 780)
         lblAmenities.Name = "lblAmenities"
         lblAmenities.Size = New Size(118, 27)
         lblAmenities.TabIndex = 91
@@ -133,7 +133,7 @@ Partial Class Salary
         lblTrainings.AutoSize = True
         lblTrainings.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblTrainings.ForeColor = Color.White
-        lblTrainings.Location = New Point(57, 430)
+        lblTrainings.Location = New Point(53, 430)
         lblTrainings.Name = "lblTrainings"
         lblTrainings.Size = New Size(110, 27)
         lblTrainings.TabIndex = 90
@@ -144,7 +144,7 @@ Partial Class Salary
         lblLeaveApproval.AutoSize = True
         lblLeaveApproval.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblLeaveApproval.ForeColor = Color.White
-        lblLeaveApproval.Location = New Point(57, 620)
+        lblLeaveApproval.Location = New Point(53, 620)
         lblLeaveApproval.Name = "lblLeaveApproval"
         lblLeaveApproval.Size = New Size(198, 27)
         lblLeaveApproval.TabIndex = 89
@@ -155,7 +155,7 @@ Partial Class Salary
         lblEmployeeTrainings.AutoSize = True
         lblEmployeeTrainings.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblEmployeeTrainings.ForeColor = Color.White
-        lblEmployeeTrainings.Location = New Point(57, 700)
+        lblEmployeeTrainings.Location = New Point(53, 700)
         lblEmployeeTrainings.Name = "lblEmployeeTrainings"
         lblEmployeeTrainings.Size = New Size(230, 27)
         lblEmployeeTrainings.TabIndex = 88
@@ -166,7 +166,7 @@ Partial Class Salary
         lblPayrollSummary.AutoSize = True
         lblPayrollSummary.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblPayrollSummary.ForeColor = Color.White
-        lblPayrollSummary.Location = New Point(57, 660)
+        lblPayrollSummary.Location = New Point(53, 660)
         lblPayrollSummary.Name = "lblPayrollSummary"
         lblPayrollSummary.Size = New Size(200, 27)
         lblPayrollSummary.TabIndex = 87
@@ -177,7 +177,7 @@ Partial Class Salary
         lblDepartment.AutoSize = True
         lblDepartment.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblDepartment.ForeColor = Color.White
-        lblDepartment.Location = New Point(57, 740)
+        lblDepartment.Location = New Point(53, 740)
         lblDepartment.Name = "lblDepartment"
         lblDepartment.Size = New Size(150, 27)
         lblDepartment.TabIndex = 86
@@ -188,7 +188,7 @@ Partial Class Salary
         lblAttendanceTracker.AutoSize = True
         lblAttendanceTracker.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblAttendanceTracker.ForeColor = Color.White
-        lblAttendanceTracker.Location = New Point(57, 580)
+        lblAttendanceTracker.Location = New Point(53, 580)
         lblAttendanceTracker.Name = "lblAttendanceTracker"
         lblAttendanceTracker.Size = New Size(239, 27)
         lblAttendanceTracker.TabIndex = 85
@@ -199,7 +199,7 @@ Partial Class Salary
         lblTeamOverview.AutoSize = True
         lblTeamOverview.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblTeamOverview.ForeColor = Color.White
-        lblTeamOverview.Location = New Point(57, 540)
+        lblTeamOverview.Location = New Point(53, 540)
         lblTeamOverview.Name = "lblTeamOverview"
         lblTeamOverview.Size = New Size(195, 27)
         lblTeamOverview.TabIndex = 84
@@ -210,7 +210,7 @@ Partial Class Salary
         Label28.AutoSize = True
         Label28.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label28.ForeColor = Color.White
-        Label28.Location = New Point(34, 500)
+        Label28.Location = New Point(30, 500)
         Label28.Name = "Label28"
         Label28.Size = New Size(135, 22)
         Label28.TabIndex = 83
@@ -221,7 +221,7 @@ Partial Class Salary
         lblMyProfile.AutoSize = True
         lblMyProfile.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblMyProfile.ForeColor = Color.White
-        lblMyProfile.Location = New Point(57, 270)
+        lblMyProfile.Location = New Point(53, 270)
         lblMyProfile.Name = "lblMyProfile"
         lblMyProfile.Size = New Size(124, 27)
         lblMyProfile.TabIndex = 82
@@ -232,7 +232,7 @@ Partial Class Salary
         lblAttendance.AutoSize = True
         lblAttendance.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblAttendance.ForeColor = Color.White
-        lblAttendance.Location = New Point(57, 310)
+        lblAttendance.Location = New Point(53, 310)
         lblAttendance.Name = "lblAttendance"
         lblAttendance.Size = New Size(150, 27)
         lblAttendance.TabIndex = 81
@@ -243,7 +243,7 @@ Partial Class Salary
         lblLeaveManagement.AutoSize = True
         lblLeaveManagement.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblLeaveManagement.ForeColor = Color.White
-        lblLeaveManagement.Location = New Point(57, 350)
+        lblLeaveManagement.Location = New Point(53, 350)
         lblLeaveManagement.Name = "lblLeaveManagement"
         lblLeaveManagement.Size = New Size(248, 27)
         lblLeaveManagement.TabIndex = 80
@@ -254,7 +254,7 @@ Partial Class Salary
         lblSalary.AutoSize = True
         lblSalary.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblSalary.ForeColor = Color.White
-        lblSalary.Location = New Point(57, 390)
+        lblSalary.Location = New Point(53, 390)
         lblSalary.Name = "lblSalary"
         lblSalary.Size = New Size(81, 27)
         lblSalary.TabIndex = 79
@@ -265,7 +265,7 @@ Partial Class Salary
         Label49.AutoSize = True
         Label49.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label49.ForeColor = Color.White
-        Label49.Location = New Point(34, 230)
+        Label49.Location = New Point(30, 230)
         Label49.Name = "Label49"
         Label49.Size = New Size(98, 22)
         Label49.TabIndex = 78
@@ -287,7 +287,7 @@ Partial Class Salary
         Label27.AutoSize = True
         Label27.Font = New Font("Century Gothic", 13.8F, FontStyle.Underline, GraphicsUnit.Point, CByte(0))
         Label27.ForeColor = Color.White
-        Label27.Location = New Point(19, 62)
+        Label27.Location = New Point(30, 65)
         Label27.Name = "Label27"
         Label27.Size = New Size(312, 27)
         Label27.TabIndex = 76
@@ -298,7 +298,7 @@ Partial Class Salary
         lblDashboard.AutoSize = True
         lblDashboard.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblDashboard.ForeColor = Color.White
-        lblDashboard.Location = New Point(57, 162)
+        lblDashboard.Location = New Point(53, 160)
         lblDashboard.Name = "lblDashboard"
         lblDashboard.Size = New Size(138, 27)
         lblDashboard.TabIndex = 71
@@ -309,7 +309,7 @@ Partial Class Salary
         Label51.AutoSize = True
         Label51.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label51.ForeColor = Color.White
-        Label51.Location = New Point(34, 122)
+        Label51.Location = New Point(30, 120)
         Label51.Name = "Label51"
         Label51.Size = New Size(57, 22)
         Label51.TabIndex = 70

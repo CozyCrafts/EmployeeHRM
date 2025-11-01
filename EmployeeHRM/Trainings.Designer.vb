@@ -180,7 +180,7 @@ Partial Class Trainings
         lblAmenities.AutoSize = True
         lblAmenities.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblAmenities.ForeColor = Color.White
-        lblAmenities.Location = New Point(80, 897)
+        lblAmenities.Location = New Point(53, 780)
         lblAmenities.Margin = New Padding(4, 0, 4, 0)
         lblAmenities.Name = "lblAmenities"
         lblAmenities.Size = New Size(118, 27)
@@ -192,7 +192,7 @@ Partial Class Trainings
         lblTrainings.AutoSize = True
         lblTrainings.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblTrainings.ForeColor = Color.White
-        lblTrainings.Location = New Point(82, 492)
+        lblTrainings.Location = New Point(53, 430)
         lblTrainings.Margin = New Padding(4, 0, 4, 0)
         lblTrainings.Name = "lblTrainings"
         lblTrainings.Size = New Size(110, 27)
@@ -204,7 +204,7 @@ Partial Class Trainings
         lblLeaveApproval.AutoSize = True
         lblLeaveApproval.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblLeaveApproval.ForeColor = Color.White
-        lblLeaveApproval.Location = New Point(82, 713)
+        lblLeaveApproval.Location = New Point(53, 620)
         lblLeaveApproval.Margin = New Padding(4, 0, 4, 0)
         lblLeaveApproval.Name = "lblLeaveApproval"
         lblLeaveApproval.Size = New Size(198, 27)
@@ -216,7 +216,7 @@ Partial Class Trainings
         lblEmployeeTrainings.AutoSize = True
         lblEmployeeTrainings.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblEmployeeTrainings.ForeColor = Color.White
-        lblEmployeeTrainings.Location = New Point(82, 805)
+        lblEmployeeTrainings.Location = New Point(53, 700)
         lblEmployeeTrainings.Margin = New Padding(4, 0, 4, 0)
         lblEmployeeTrainings.Name = "lblEmployeeTrainings"
         lblEmployeeTrainings.Size = New Size(230, 27)
@@ -228,7 +228,7 @@ Partial Class Trainings
         lblPayrollSummary.AutoSize = True
         lblPayrollSummary.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblPayrollSummary.ForeColor = Color.White
-        lblPayrollSummary.Location = New Point(82, 759)
+        lblPayrollSummary.Location = New Point(53, 660)
         lblPayrollSummary.Margin = New Padding(4, 0, 4, 0)
         lblPayrollSummary.Name = "lblPayrollSummary"
         lblPayrollSummary.Size = New Size(200, 27)
@@ -240,7 +240,7 @@ Partial Class Trainings
         lblDepartment.AutoSize = True
         lblDepartment.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblDepartment.ForeColor = Color.White
-        lblDepartment.Location = New Point(80, 851)
+        lblDepartment.Location = New Point(53, 740)
         lblDepartment.Margin = New Padding(4, 0, 4, 0)
         lblDepartment.Name = "lblDepartment"
         lblDepartment.Size = New Size(150, 27)
@@ -252,7 +252,7 @@ Partial Class Trainings
         lblAttendanceTracker.AutoSize = True
         lblAttendanceTracker.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblAttendanceTracker.ForeColor = Color.White
-        lblAttendanceTracker.Location = New Point(82, 667)
+        lblAttendanceTracker.Location = New Point(53, 580)
         lblAttendanceTracker.Margin = New Padding(4, 0, 4, 0)
         lblAttendanceTracker.Name = "lblAttendanceTracker"
         lblAttendanceTracker.Size = New Size(239, 27)
@@ -264,7 +264,7 @@ Partial Class Trainings
         lblTeamOverview.AutoSize = True
         lblTeamOverview.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblTeamOverview.ForeColor = Color.White
-        lblTeamOverview.Location = New Point(82, 621)
+        lblTeamOverview.Location = New Point(53, 540)
         lblTeamOverview.Margin = New Padding(4, 0, 4, 0)
         lblTeamOverview.Name = "lblTeamOverview"
         lblTeamOverview.Size = New Size(195, 27)
@@ -276,7 +276,7 @@ Partial Class Trainings
         Label28.AutoSize = True
         Label28.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label28.ForeColor = Color.White
-        Label28.Location = New Point(45, 575)
+        Label28.Location = New Point(30, 500)
         Label28.Margin = New Padding(4, 0, 4, 0)
         Label28.Name = "Label28"
         Label28.Size = New Size(135, 22)
@@ -288,7 +288,7 @@ Partial Class Trainings
         lblMyProfile.AutoSize = True
         lblMyProfile.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblMyProfile.ForeColor = Color.White
-        lblMyProfile.Location = New Point(80, 310)
+        lblMyProfile.Location = New Point(53, 270)
         lblMyProfile.Margin = New Padding(4, 0, 4, 0)
         lblMyProfile.Name = "lblMyProfile"
         lblMyProfile.Size = New Size(124, 27)
@@ -300,7 +300,7 @@ Partial Class Trainings
         lblAttendance.AutoSize = True
         lblAttendance.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblAttendance.ForeColor = Color.White
-        lblAttendance.Location = New Point(80, 356)
+        lblAttendance.Location = New Point(53, 310)
         lblAttendance.Margin = New Padding(4, 0, 4, 0)
         lblAttendance.Name = "lblAttendance"
         lblAttendance.Size = New Size(150, 27)
@@ -312,7 +312,7 @@ Partial Class Trainings
         lblLeaveManagement.AutoSize = True
         lblLeaveManagement.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblLeaveManagement.ForeColor = Color.White
-        lblLeaveManagement.Location = New Point(80, 401)
+        lblLeaveManagement.Location = New Point(53, 350)
         lblLeaveManagement.Margin = New Padding(4, 0, 4, 0)
         lblLeaveManagement.Name = "lblLeaveManagement"
         lblLeaveManagement.Size = New Size(248, 27)
@@ -324,7 +324,7 @@ Partial Class Trainings
         lblSalary.AutoSize = True
         lblSalary.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblSalary.ForeColor = Color.White
-        lblSalary.Location = New Point(82, 446)
+        lblSalary.Location = New Point(53, 390)
         lblSalary.Margin = New Padding(4, 0, 4, 0)
         lblSalary.Name = "lblSalary"
         lblSalary.Size = New Size(81, 27)
@@ -336,7 +336,7 @@ Partial Class Trainings
         Label49.AutoSize = True
         Label49.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label49.ForeColor = Color.White
-        Label49.Location = New Point(45, 264)
+        Label49.Location = New Point(30, 230)
         Label49.Margin = New Padding(4, 0, 4, 0)
         Label49.Name = "Label49"
         Label49.Size = New Size(98, 22)
@@ -348,7 +348,7 @@ Partial Class Trainings
         Label26.AutoSize = True
         Label26.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label26.ForeColor = Color.White
-        Label26.Location = New Point(128, 40)
+        Label26.Location = New Point(85, 35)
         Label26.Margin = New Padding(4, 0, 4, 0)
         Label26.Name = "Label26"
         Label26.Size = New Size(197, 34)
@@ -360,7 +360,7 @@ Partial Class Trainings
         Label27.AutoSize = True
         Label27.Font = New Font("Century Gothic", 13.8F, FontStyle.Underline, GraphicsUnit.Point, CByte(0))
         Label27.ForeColor = Color.White
-        Label27.Location = New Point(22, 69)
+        Label27.Location = New Point(30, 65)
         Label27.Margin = New Padding(4, 0, 4, 0)
         Label27.Name = "Label27"
         Label27.Size = New Size(312, 27)
@@ -372,7 +372,7 @@ Partial Class Trainings
         lblDashboard.AutoSize = True
         lblDashboard.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblDashboard.ForeColor = Color.White
-        lblDashboard.Location = New Point(80, 184)
+        lblDashboard.Location = New Point(53, 160)
         lblDashboard.Margin = New Padding(4, 0, 4, 0)
         lblDashboard.Name = "lblDashboard"
         lblDashboard.Size = New Size(138, 27)
@@ -384,7 +384,7 @@ Partial Class Trainings
         Label51.AutoSize = True
         Label51.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label51.ForeColor = Color.White
-        Label51.Location = New Point(45, 138)
+        Label51.Location = New Point(30, 120)
         Label51.Margin = New Padding(4, 0, 4, 0)
         Label51.Name = "Label51"
         Label51.Size = New Size(57, 22)

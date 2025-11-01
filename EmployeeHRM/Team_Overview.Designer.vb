@@ -335,7 +335,7 @@ Partial Class Team_Overview
         lblMyProfile.AutoSize = True
         lblMyProfile.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblMyProfile.ForeColor = Color.White
-        lblMyProfile.Location = New Point(47, 270)
+        lblMyProfile.Location = New Point(53, 270)
         lblMyProfile.Name = "lblMyProfile"
         lblMyProfile.Size = New Size(124, 27)
         lblMyProfile.TabIndex = 25

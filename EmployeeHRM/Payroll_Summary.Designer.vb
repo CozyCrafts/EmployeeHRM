@@ -108,7 +108,7 @@ Partial Class Payroll_Summary
         Panel1.Controls.Add(lblMain)
         Panel1.Location = New Point(-6, -6)
         Panel1.Name = "Panel1"
-        Panel1.Size = New Size(371, 1201)
+        Panel1.Size = New Size(350, 1357)
         Panel1.TabIndex = 5
         ' 
         ' lblAmenities
