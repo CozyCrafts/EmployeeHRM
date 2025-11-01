@@ -9,14 +9,14 @@
             lblAttendanceTracker.Visible = False
             lblLeaveApproval.Visible = False
             lblPayrollSummary.Visible = False
-            lblPerformanceReview.Visible = False
+            lblEmployeeTrainings.Visible = False
             lblDepartment.Visible = False
         ElseIf UserRole = "Manager" Then
             lblTeamOverview.Visible = True
             lblAttendanceTracker.Visible = True
             lblLeaveApproval.Visible = True
             lblPayrollSummary.Visible = True
-            lblPerformanceReview.Visible = True
+            lblEmployeeTrainings.Visible = True
             lblDepartment.Visible = True
         End If
 
@@ -38,13 +38,12 @@
         MyProfile.Show()
         Me.Hide()
     End Sub
+
     Private Sub lblAttendance_Click(sender As Object, e As EventArgs) Handles lblAttendance.Click
         lblAttendance.Enabled = False
     End Sub
 
-
     Private Sub lblLeaveManagement_Click(sender As Object, e As EventArgs) Handles lblLeaveManagement.Click
-
         Leave_Management.Show()
         Me.Hide()
     End Sub
@@ -57,9 +56,8 @@
     End Sub
 
 
-    Private Sub lblGoalsAndGrowth_Click(sender As Object, e As EventArgs) Handles lblGoalsAndGrowth.Click
-
-        Goals_and_Growth.Show()
+    Private Sub lblTrainings_Click(sender As Object, e As EventArgs) Handles lblTrainings.Click
+        Trainings.Show()
         Me.Hide()
     End Sub
 
@@ -84,8 +82,8 @@
         Me.Hide()
     End Sub
 
-    Private Sub lblPerformanceReview_Click(sender As Object, e As EventArgs) Handles lblPerformanceReview.Click
-        Performance_Review.Show()
+    Private Sub lblEmployeeTrainings_Click(sender As Object, e As EventArgs) Handles lblEmployeeTrainings.Click
+        Employee_Trainings.Show
         Me.Hide()
     End Sub
 

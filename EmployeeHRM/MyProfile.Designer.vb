@@ -63,40 +63,12 @@ Partial Class MyProfile
         Label10 = New Label()
         Label11 = New Label()
         Label25 = New Label()
-        GroupBox6 = New GroupBox()
-        Label34 = New Label()
-        Label38 = New Label()
-        Label29 = New Label()
-        Label30 = New Label()
-        txtPhilHealthAnnual = New TextBox()
-        txtPhilHealthMonthly = New TextBox()
-        txtPhilHealthID = New TextBox()
-        txtPAGIBIGAnnual = New TextBox()
-        txtPAGIBIGMonthly = New TextBox()
-        txtPAGIBIGID = New TextBox()
-        Label39 = New Label()
-        Label31 = New Label()
-        txtSSSAnnual = New TextBox()
-        txtSSSMonthly = New TextBox()
-        txtSSSID = New TextBox()
-        Label32 = New Label()
-        Label33 = New Label()
-        Label35 = New Label()
-        GroupBox7 = New GroupBox()
-        txtEffectiveDate = New TextBox()
-        txtOvertimeRate = New TextBox()
-        txtAllowance = New TextBox()
-        txtBaseSalary = New TextBox()
-        Label36 = New Label()
-        Label37 = New Label()
-        Label43 = New Label()
-        Label45 = New Label()
         DataGridView1 = New DataGridView()
         Panel2 = New Panel()
         lblAmenities = New Label()
-        lblGoalsAndGrowth = New Label()
+        lblTrainings = New Label()
         lblLeaveApproval = New Label()
-        lblPerformanceReview = New Label()
+        lblEmployeeTrainings = New Label()
         lblPayrollSummary = New Label()
         lblDepartment = New Label()
         lblAttendanceTracker = New Label()
@@ -119,6 +91,9 @@ Partial Class MyProfile
         Label8 = New Label()
         Label52 = New Label()
         GroupBox1 = New GroupBox()
+        TextBox2 = New TextBox()
+        TextBox1 = New TextBox()
+        Label29 = New Label()
         cmbCivilStatus = New ComboBox()
         dtpBirthdate = New DateTimePicker()
         cmbSex = New ComboBox()
@@ -134,7 +109,6 @@ Partial Class MyProfile
         lblage = New Label()
         Label17 = New Label()
         txtFname = New TextBox()
-        lblID = New Label()
         lblfname = New Label()
         Label18 = New Label()
         GroupBox9 = New GroupBox()
@@ -144,21 +118,6 @@ Partial Class MyProfile
         Label19 = New Label()
         Label22 = New Label()
         Label23 = New Label()
-        GroupBox10 = New GroupBox()
-        txtDateApplied = New TextBox()
-        TextBox9 = New TextBox()
-        txtLate = New TextBox()
-        txtDaysOfAbscences = New TextBox()
-        Label40 = New Label()
-        Label41 = New Label()
-        Label42 = New Label()
-        Label44 = New Label()
-        GroupBox11 = New GroupBox()
-        dtpDataReceived = New DateTimePicker()
-        Label47 = New Label()
-        rbPending = New RadioButton()
-        rbReceived = New RadioButton()
-        Label46 = New Label()
         adminheader_pnl.SuspendLayout()
         CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
         CType(pbProfilePicture, ComponentModel.ISupportInitialize).BeginInit()
@@ -166,15 +125,11 @@ Partial Class MyProfile
         GroupBox4.SuspendLayout()
         GroupBox5.SuspendLayout()
         GroupBox3.SuspendLayout()
-        GroupBox6.SuspendLayout()
-        GroupBox7.SuspendLayout()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         Panel2.SuspendLayout()
         GroupBox8.SuspendLayout()
         GroupBox1.SuspendLayout()
         GroupBox9.SuspendLayout()
-        GroupBox10.SuspendLayout()
-        GroupBox11.SuspendLayout()
         SuspendLayout()
         ' 
         ' adminheader_pnl
@@ -584,302 +539,22 @@ Partial Class MyProfile
         Label25.TabIndex = 0
         Label25.Text = "Name:"
         ' 
-        ' GroupBox6
-        ' 
-        GroupBox6.Controls.Add(Label34)
-        GroupBox6.Controls.Add(Label38)
-        GroupBox6.Controls.Add(Label29)
-        GroupBox6.Controls.Add(Label30)
-        GroupBox6.Controls.Add(txtPhilHealthAnnual)
-        GroupBox6.Controls.Add(txtPhilHealthMonthly)
-        GroupBox6.Controls.Add(txtPhilHealthID)
-        GroupBox6.Controls.Add(txtPAGIBIGAnnual)
-        GroupBox6.Controls.Add(txtPAGIBIGMonthly)
-        GroupBox6.Controls.Add(txtPAGIBIGID)
-        GroupBox6.Controls.Add(Label39)
-        GroupBox6.Controls.Add(Label31)
-        GroupBox6.Controls.Add(txtSSSAnnual)
-        GroupBox6.Controls.Add(txtSSSMonthly)
-        GroupBox6.Controls.Add(txtSSSID)
-        GroupBox6.Controls.Add(Label32)
-        GroupBox6.Controls.Add(Label33)
-        GroupBox6.Controls.Add(Label35)
-        GroupBox6.Font = New Font("Century Gothic", 10F, FontStyle.Bold)
-        GroupBox6.Location = New Point(345, 531)
-        GroupBox6.Name = "GroupBox6"
-        GroupBox6.Size = New Size(951, 146)
-        GroupBox6.TabIndex = 65
-        GroupBox6.TabStop = False
-        GroupBox6.Text = "Benefits"
-        ' 
-        ' Label34
-        ' 
-        Label34.AutoSize = True
-        Label34.Font = New Font("Century Gothic", 8F)
-        Label34.Location = New Point(639, 106)
-        Label34.Name = "Label34"
-        Label34.Size = New Size(139, 19)
-        Label34.TabIndex = 37
-        Label34.Text = "Annual Deduction:"
-        ' 
-        ' Label38
-        ' 
-        Label38.AutoSize = True
-        Label38.Font = New Font("Century Gothic", 8F)
-        Label38.Location = New Point(631, 72)
-        Label38.Name = "Label38"
-        Label38.Size = New Size(146, 19)
-        Label38.TabIndex = 36
-        Label38.Text = "Monthly Deduction:"
-        ' 
-        ' Label29
-        ' 
-        Label29.AutoSize = True
-        Label29.Font = New Font("Century Gothic", 8F)
-        Label29.Location = New Point(324, 106)
-        Label29.Name = "Label29"
-        Label29.Size = New Size(139, 19)
-        Label29.TabIndex = 35
-        Label29.Text = "Annual Deduction:"
-        ' 
-        ' Label30
-        ' 
-        Label30.AutoSize = True
-        Label30.Font = New Font("Century Gothic", 8F)
-        Label30.Location = New Point(317, 72)
-        Label30.Name = "Label30"
-        Label30.Size = New Size(146, 19)
-        Label30.TabIndex = 34
-        Label30.Text = "Monthly Deduction:"
-        ' 
-        ' txtPhilHealthAnnual
-        ' 
-        txtPhilHealthAnnual.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtPhilHealthAnnual.Location = New Point(469, 97)
-        txtPhilHealthAnnual.Name = "txtPhilHealthAnnual"
-        txtPhilHealthAnnual.Size = New Size(160, 30)
-        txtPhilHealthAnnual.TabIndex = 33
-        ' 
-        ' txtPhilHealthMonthly
-        ' 
-        txtPhilHealthMonthly.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtPhilHealthMonthly.Location = New Point(469, 61)
-        txtPhilHealthMonthly.Name = "txtPhilHealthMonthly"
-        txtPhilHealthMonthly.Size = New Size(160, 30)
-        txtPhilHealthMonthly.TabIndex = 32
-        ' 
-        ' txtPhilHealthID
-        ' 
-        txtPhilHealthID.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtPhilHealthID.Location = New Point(469, 25)
-        txtPhilHealthID.Name = "txtPhilHealthID"
-        txtPhilHealthID.Size = New Size(160, 30)
-        txtPhilHealthID.TabIndex = 31
-        ' 
-        ' txtPAGIBIGAnnual
-        ' 
-        txtPAGIBIGAnnual.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtPAGIBIGAnnual.Location = New Point(783, 99)
-        txtPAGIBIGAnnual.Name = "txtPAGIBIGAnnual"
-        txtPAGIBIGAnnual.Size = New Size(160, 30)
-        txtPAGIBIGAnnual.TabIndex = 30
-        ' 
-        ' txtPAGIBIGMonthly
-        ' 
-        txtPAGIBIGMonthly.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtPAGIBIGMonthly.Location = New Point(783, 63)
-        txtPAGIBIGMonthly.Name = "txtPAGIBIGMonthly"
-        txtPAGIBIGMonthly.Size = New Size(160, 30)
-        txtPAGIBIGMonthly.TabIndex = 29
-        ' 
-        ' txtPAGIBIGID
-        ' 
-        txtPAGIBIGID.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtPAGIBIGID.Location = New Point(783, 27)
-        txtPAGIBIGID.Name = "txtPAGIBIGID"
-        txtPAGIBIGID.Size = New Size(160, 30)
-        txtPAGIBIGID.TabIndex = 28
-        ' 
-        ' Label39
-        ' 
-        Label39.AutoSize = True
-        Label39.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label39.Location = New Point(662, 36)
-        Label39.Name = "Label39"
-        Label39.Size = New Size(115, 21)
-        Label39.TabIndex = 25
-        Label39.Text = "Pag-IBIG ID:"
-        ' 
-        ' Label31
-        ' 
-        Label31.AutoSize = True
-        Label31.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label31.Location = New Point(340, 30)
-        Label31.Name = "Label31"
-        Label31.Size = New Size(123, 21)
-        Label31.TabIndex = 19
-        Label31.Text = "PhilHealth ID:"
-        ' 
-        ' txtSSSAnnual
-        ' 
-        txtSSSAnnual.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtSSSAnnual.Location = New Point(152, 97)
-        txtSSSAnnual.Name = "txtSSSAnnual"
-        txtSSSAnnual.Size = New Size(160, 30)
-        txtSSSAnnual.TabIndex = 12
-        ' 
-        ' txtSSSMonthly
-        ' 
-        txtSSSMonthly.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtSSSMonthly.Location = New Point(152, 61)
-        txtSSSMonthly.Name = "txtSSSMonthly"
-        txtSSSMonthly.Size = New Size(160, 30)
-        txtSSSMonthly.TabIndex = 11
-        ' 
-        ' txtSSSID
-        ' 
-        txtSSSID.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtSSSID.Location = New Point(152, 25)
-        txtSSSID.Name = "txtSSSID"
-        txtSSSID.Size = New Size(160, 30)
-        txtSSSID.TabIndex = 10
-        ' 
-        ' Label32
-        ' 
-        Label32.AutoSize = True
-        Label32.Font = New Font("Century Gothic", 8F)
-        Label32.Location = New Point(7, 101)
-        Label32.Name = "Label32"
-        Label32.Size = New Size(139, 19)
-        Label32.TabIndex = 3
-        Label32.Text = "Annual Deduction:"
-        ' 
-        ' Label33
-        ' 
-        Label33.AutoSize = True
-        Label33.Font = New Font("Century Gothic", 8F)
-        Label33.Location = New Point(0, 68)
-        Label33.Name = "Label33"
-        Label33.Size = New Size(146, 19)
-        Label33.TabIndex = 2
-        Label33.Text = "Monthly Deduction:"
-        ' 
-        ' Label35
-        ' 
-        Label35.AutoSize = True
-        Label35.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label35.Location = New Point(81, 30)
-        Label35.Name = "Label35"
-        Label35.Size = New Size(65, 21)
-        Label35.TabIndex = 0
-        Label35.Text = "SSS ID:"
-        ' 
-        ' GroupBox7
-        ' 
-        GroupBox7.Controls.Add(txtEffectiveDate)
-        GroupBox7.Controls.Add(txtOvertimeRate)
-        GroupBox7.Controls.Add(txtAllowance)
-        GroupBox7.Controls.Add(txtBaseSalary)
-        GroupBox7.Controls.Add(Label36)
-        GroupBox7.Controls.Add(Label37)
-        GroupBox7.Controls.Add(Label43)
-        GroupBox7.Controls.Add(Label45)
-        GroupBox7.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        GroupBox7.Location = New Point(346, 680)
-        GroupBox7.Name = "GroupBox7"
-        GroupBox7.Size = New Size(467, 195)
-        GroupBox7.TabIndex = 66
-        GroupBox7.TabStop = False
-        GroupBox7.Text = "Salary"
-        ' 
-        ' txtEffectiveDate
-        ' 
-        txtEffectiveDate.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtEffectiveDate.Location = New Point(175, 142)
-        txtEffectiveDate.Name = "txtEffectiveDate"
-        txtEffectiveDate.Size = New Size(259, 30)
-        txtEffectiveDate.TabIndex = 16
-        ' 
-        ' txtOvertimeRate
-        ' 
-        txtOvertimeRate.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtOvertimeRate.Location = New Point(175, 106)
-        txtOvertimeRate.Name = "txtOvertimeRate"
-        txtOvertimeRate.Size = New Size(259, 30)
-        txtOvertimeRate.TabIndex = 15
-        ' 
-        ' txtAllowance
-        ' 
-        txtAllowance.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtAllowance.Location = New Point(175, 70)
-        txtAllowance.Name = "txtAllowance"
-        txtAllowance.Size = New Size(259, 30)
-        txtAllowance.TabIndex = 11
-        ' 
-        ' txtBaseSalary
-        ' 
-        txtBaseSalary.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtBaseSalary.Location = New Point(175, 34)
-        txtBaseSalary.Name = "txtBaseSalary"
-        txtBaseSalary.Size = New Size(259, 30)
-        txtBaseSalary.TabIndex = 10
-        ' 
-        ' Label36
-        ' 
-        Label36.AutoSize = True
-        Label36.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label36.Location = New Point(21, 147)
-        Label36.Name = "Label36"
-        Label36.Size = New Size(143, 21)
-        Label36.TabIndex = 9
-        Label36.Text = "Effective Date:"
-        ' 
-        ' Label37
-        ' 
-        Label37.AutoSize = True
-        Label37.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label37.Location = New Point(18, 115)
-        Label37.Name = "Label37"
-        Label37.Size = New Size(145, 21)
-        Label37.TabIndex = 8
-        Label37.Text = "Overtime Rate:"
-        ' 
-        ' Label43
-        ' 
-        Label43.AutoSize = True
-        Label43.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label43.Location = New Point(53, 79)
-        Label43.Name = "Label43"
-        Label43.Size = New Size(109, 21)
-        Label43.TabIndex = 2
-        Label43.Text = "Allowance:"
-        ' 
-        ' Label45
-        ' 
-        Label45.AutoSize = True
-        Label45.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label45.Location = New Point(47, 40)
-        Label45.Name = "Label45"
-        Label45.Size = New Size(113, 21)
-        Label45.TabIndex = 0
-        Label45.Text = "Base Salary:"
-        ' 
         ' DataGridView1
         ' 
         DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView1.Location = New Point(367, 993)
+        DataGridView1.Location = New Point(349, 559)
         DataGridView1.Name = "DataGridView1"
         DataGridView1.RowHeadersWidth = 51
-        DataGridView1.Size = New Size(1348, 78)
+        DataGridView1.Size = New Size(954, 78)
         DataGridView1.TabIndex = 67
         ' 
         ' Panel2
         ' 
         Panel2.BackColor = Color.SteelBlue
         Panel2.Controls.Add(lblAmenities)
-        Panel2.Controls.Add(lblGoalsAndGrowth)
+        Panel2.Controls.Add(lblTrainings)
         Panel2.Controls.Add(lblLeaveApproval)
-        Panel2.Controls.Add(lblPerformanceReview)
+        Panel2.Controls.Add(lblEmployeeTrainings)
         Panel2.Controls.Add(lblPayrollSummary)
         Panel2.Controls.Add(lblDepartment)
         Panel2.Controls.Add(lblAttendanceTracker)
@@ -910,16 +585,16 @@ Partial Class MyProfile
         lblAmenities.TabIndex = 34
         lblAmenities.Text = "Amenties"
         ' 
-        ' lblGoalsAndGrowth
+        ' lblTrainings
         ' 
-        lblGoalsAndGrowth.AutoSize = True
-        lblGoalsAndGrowth.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblGoalsAndGrowth.ForeColor = Color.White
-        lblGoalsAndGrowth.Location = New Point(53, 430)
-        lblGoalsAndGrowth.Name = "lblGoalsAndGrowth"
-        lblGoalsAndGrowth.Size = New Size(220, 27)
-        lblGoalsAndGrowth.TabIndex = 33
-        lblGoalsAndGrowth.Text = "Goals and Growth"
+        lblTrainings.AutoSize = True
+        lblTrainings.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblTrainings.ForeColor = Color.White
+        lblTrainings.Location = New Point(53, 430)
+        lblTrainings.Name = "lblTrainings"
+        lblTrainings.Size = New Size(110, 27)
+        lblTrainings.TabIndex = 33
+        lblTrainings.Text = "Trainings"
         ' 
         ' lblLeaveApproval
         ' 
@@ -932,16 +607,16 @@ Partial Class MyProfile
         lblLeaveApproval.TabIndex = 32
         lblLeaveApproval.Text = "Leave Approval"
         ' 
-        ' lblPerformanceReview
+        ' lblEmployeeTrainings
         ' 
-        lblPerformanceReview.AutoSize = True
-        lblPerformanceReview.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblPerformanceReview.ForeColor = Color.White
-        lblPerformanceReview.Location = New Point(53, 700)
-        lblPerformanceReview.Name = "lblPerformanceReview"
-        lblPerformanceReview.Size = New Size(250, 27)
-        lblPerformanceReview.TabIndex = 31
-        lblPerformanceReview.Text = "Performance Review"
+        lblEmployeeTrainings.AutoSize = True
+        lblEmployeeTrainings.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblEmployeeTrainings.ForeColor = Color.White
+        lblEmployeeTrainings.Location = New Point(53, 700)
+        lblEmployeeTrainings.Name = "lblEmployeeTrainings"
+        lblEmployeeTrainings.Size = New Size(230, 27)
+        lblEmployeeTrainings.TabIndex = 31
+        lblEmployeeTrainings.Text = "Employee Trainings"
         ' 
         ' lblPayrollSummary
         ' 
@@ -1172,6 +847,9 @@ Partial Class MyProfile
         ' 
         ' GroupBox1
         ' 
+        GroupBox1.Controls.Add(TextBox2)
+        GroupBox1.Controls.Add(TextBox1)
+        GroupBox1.Controls.Add(Label29)
         GroupBox1.Controls.Add(cmbCivilStatus)
         GroupBox1.Controls.Add(dtpBirthdate)
         GroupBox1.Controls.Add(cmbSex)
@@ -1187,7 +865,6 @@ Partial Class MyProfile
         GroupBox1.Controls.Add(lblage)
         GroupBox1.Controls.Add(Label17)
         GroupBox1.Controls.Add(txtFname)
-        GroupBox1.Controls.Add(lblID)
         GroupBox1.Controls.Add(lblfname)
         GroupBox1.Controls.Add(Label18)
         GroupBox1.Font = New Font("Century Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
@@ -1197,6 +874,31 @@ Partial Class MyProfile
         GroupBox1.TabIndex = 47
         GroupBox1.TabStop = False
         GroupBox1.Text = "Personal Information"
+        ' 
+        ' TextBox2
+        ' 
+        TextBox2.Location = New Point(566, 40)
+        TextBox2.Name = "TextBox2"
+        TextBox2.Size = New Size(205, 26)
+        TextBox2.TabIndex = 52
+        ' 
+        ' TextBox1
+        ' 
+        TextBox1.Location = New Point(177, 41)
+        TextBox1.Name = "TextBox1"
+        TextBox1.Size = New Size(257, 26)
+        TextBox1.TabIndex = 51
+        ' 
+        ' Label29
+        ' 
+        Label29.AutoSize = True
+        Label29.Font = New Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label29.ForeColor = Color.Black
+        Label29.Location = New Point(450, 44)
+        Label29.Name = "Label29"
+        Label29.Size = New Size(108, 23)
+        Label29.TabIndex = 50
+        Label29.Text = "Password:"
         ' 
         ' cmbCivilStatus
         ' 
@@ -1334,19 +1036,10 @@ Partial Class MyProfile
         ' 
         ' txtFname
         ' 
-        txtFname.Location = New Point(177, 76)
+        txtFname.Location = New Point(177, 79)
         txtFname.Name = "txtFname"
         txtFname.Size = New Size(257, 26)
         txtFname.TabIndex = 24
-        ' 
-        ' lblID
-        ' 
-        lblID.BackColor = SystemColors.ButtonHighlight
-        lblID.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblID.Location = New Point(177, 34)
-        lblID.Name = "lblID"
-        lblID.Size = New Size(257, 32)
-        lblID.TabIndex = 23
         ' 
         ' lblfname
         ' 
@@ -1364,7 +1057,7 @@ Partial Class MyProfile
         Label18.AutoSize = True
         Label18.Font = New Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label18.ForeColor = Color.Black
-        Label18.Location = New Point(19, 39)
+        Label18.Location = New Point(19, 49)
         Label18.Name = "Label18"
         Label18.Size = New Size(140, 23)
         Label18.TabIndex = 13
@@ -1440,184 +1133,24 @@ Partial Class MyProfile
         Label23.TabIndex = 1
         Label23.Text = "Email Address:"
         ' 
-        ' GroupBox10
-        ' 
-        GroupBox10.Controls.Add(txtDateApplied)
-        GroupBox10.Controls.Add(TextBox9)
-        GroupBox10.Controls.Add(txtLate)
-        GroupBox10.Controls.Add(txtDaysOfAbscences)
-        GroupBox10.Controls.Add(Label40)
-        GroupBox10.Controls.Add(Label41)
-        GroupBox10.Controls.Add(Label42)
-        GroupBox10.Controls.Add(Label44)
-        GroupBox10.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        GroupBox10.Location = New Point(829, 680)
-        GroupBox10.Name = "GroupBox10"
-        GroupBox10.Size = New Size(467, 195)
-        GroupBox10.TabIndex = 67
-        GroupBox10.TabStop = False
-        GroupBox10.Text = "Deduction"
-        ' 
-        ' txtDateApplied
-        ' 
-        txtDateApplied.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtDateApplied.Location = New Point(191, 142)
-        txtDateApplied.Name = "txtDateApplied"
-        txtDateApplied.Size = New Size(259, 30)
-        txtDateApplied.TabIndex = 16
-        ' 
-        ' TextBox9
-        ' 
-        TextBox9.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox9.Location = New Point(191, 106)
-        TextBox9.Name = "TextBox9"
-        TextBox9.Size = New Size(259, 30)
-        TextBox9.TabIndex = 15
-        ' 
-        ' txtLate
-        ' 
-        txtLate.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtLate.Location = New Point(191, 70)
-        txtLate.Name = "txtLate"
-        txtLate.Size = New Size(259, 30)
-        txtLate.TabIndex = 11
-        ' 
-        ' txtDaysOfAbscences
-        ' 
-        txtDaysOfAbscences.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtDaysOfAbscences.Location = New Point(191, 34)
-        txtDaysOfAbscences.Name = "txtDaysOfAbscences"
-        txtDaysOfAbscences.Size = New Size(259, 30)
-        txtDaysOfAbscences.TabIndex = 10
-        ' 
-        ' Label40
-        ' 
-        Label40.AutoSize = True
-        Label40.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label40.Location = New Point(44, 148)
-        Label40.Name = "Label40"
-        Label40.Size = New Size(133, 21)
-        Label40.TabIndex = 9
-        Label40.Text = "Date Applied:"
-        ' 
-        ' Label41
-        ' 
-        Label41.AutoSize = True
-        Label41.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label41.Location = New Point(40, 115)
-        Label41.Name = "Label41"
-        Label41.Size = New Size(137, 21)
-        Label41.TabIndex = 8
-        Label41.Text = "Unpaid Leave:"
-        ' 
-        ' Label42
-        ' 
-        Label42.AutoSize = True
-        Label42.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label42.Location = New Point(126, 79)
-        Label42.Name = "Label42"
-        Label42.Size = New Size(54, 21)
-        Label42.TabIndex = 2
-        Label42.Text = "Late:"
-        ' 
-        ' Label44
-        ' 
-        Label44.AutoSize = True
-        Label44.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label44.Location = New Point(6, 43)
-        Label44.Name = "Label44"
-        Label44.Size = New Size(174, 21)
-        Label44.TabIndex = 0
-        Label44.Text = "Days of Absences:"
-        ' 
-        ' GroupBox11
-        ' 
-        GroupBox11.Controls.Add(dtpDataReceived)
-        GroupBox11.Controls.Add(Label47)
-        GroupBox11.Controls.Add(rbPending)
-        GroupBox11.Controls.Add(rbReceived)
-        GroupBox11.Controls.Add(Label46)
-        GroupBox11.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        GroupBox11.Location = New Point(359, 915)
-        GroupBox11.Name = "GroupBox11"
-        GroupBox11.Size = New Size(947, 66)
-        GroupBox11.TabIndex = 78
-        GroupBox11.TabStop = False
-        GroupBox11.Text = "Payroll"
-        ' 
-        ' dtpDataReceived
-        ' 
-        dtpDataReceived.CustomFormat = "mm/dd/yyyy"
-        dtpDataReceived.Location = New Point(593, 25)
-        dtpDataReceived.Name = "dtpDataReceived"
-        dtpDataReceived.Size = New Size(342, 32)
-        dtpDataReceived.TabIndex = 50
-        dtpDataReceived.Value = New Date(2025, 9, 13, 1, 11, 7, 0)
-        ' 
-        ' Label47
-        ' 
-        Label47.AutoSize = True
-        Label47.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label47.Location = New Point(439, 32)
-        Label47.Name = "Label47"
-        Label47.Size = New Size(149, 21)
-        Label47.TabIndex = 20
-        Label47.Text = "Date Received:"
-        ' 
-        ' rbPending
-        ' 
-        rbPending.AutoSize = True
-        rbPending.Location = New Point(296, 30)
-        rbPending.Name = "rbPending"
-        rbPending.Size = New Size(110, 27)
-        rbPending.TabIndex = 19
-        rbPending.TabStop = True
-        rbPending.Text = "Pending"
-        rbPending.UseVisualStyleBackColor = True
-        ' 
-        ' rbReceived
-        ' 
-        rbReceived.AutoSize = True
-        rbReceived.Location = New Point(159, 31)
-        rbReceived.Name = "rbReceived"
-        rbReceived.Size = New Size(124, 27)
-        rbReceived.TabIndex = 18
-        rbReceived.TabStop = True
-        rbReceived.Text = "Received"
-        rbReceived.UseVisualStyleBackColor = True
-        ' 
-        ' Label46
-        ' 
-        Label46.AutoSize = True
-        Label46.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label46.Location = New Point(66, 34)
-        Label46.Name = "Label46"
-        Label46.Size = New Size(68, 21)
-        Label46.TabIndex = 17
-        Label46.Text = "Status:"
-        ' 
         ' MyProfile
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1761, 1033)
         ControlBox = False
-        Controls.Add(GroupBox11)
-        Controls.Add(GroupBox10)
         Controls.Add(GroupBox9)
         Controls.Add(GroupBox1)
         Controls.Add(GroupBox8)
         Controls.Add(Panel2)
         Controls.Add(DataGridView1)
-        Controls.Add(GroupBox7)
-        Controls.Add(GroupBox6)
         Controls.Add(GroupBox5)
         Controls.Add(GroupBox2)
         Controls.Add(btnEdit)
         Controls.Add(btnSave)
         Controls.Add(pbProfilePicture)
         Controls.Add(adminheader_pnl)
-        FormBorderStyle = FormBorderStyle.FixedSingle
+        FormBorderStyle = FormBorderStyle.None
         MaximizeBox = False
         MinimizeBox = False
         Name = "MyProfile"
@@ -1635,10 +1168,6 @@ Partial Class MyProfile
         GroupBox5.ResumeLayout(False)
         GroupBox3.ResumeLayout(False)
         GroupBox3.PerformLayout()
-        GroupBox6.ResumeLayout(False)
-        GroupBox6.PerformLayout()
-        GroupBox7.ResumeLayout(False)
-        GroupBox7.PerformLayout()
         CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
         Panel2.ResumeLayout(False)
         Panel2.PerformLayout()
@@ -1648,10 +1177,6 @@ Partial Class MyProfile
         GroupBox1.PerformLayout()
         GroupBox9.ResumeLayout(False)
         GroupBox9.PerformLayout()
-        GroupBox10.ResumeLayout(False)
-        GroupBox10.PerformLayout()
-        GroupBox11.ResumeLayout(False)
-        GroupBox11.PerformLayout()
         ResumeLayout(False)
     End Sub
     Friend WithEvents adminheader_pnl As Panel
@@ -1687,31 +1212,7 @@ Partial Class MyProfile
     Friend WithEvents Label10 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents Label25 As Label
-    Friend WithEvents GroupBox6 As GroupBox
-    Friend WithEvents txtSSSAnnual As TextBox
-    Friend WithEvents txtSSSMonthly As TextBox
-    Friend WithEvents txtSSSID As TextBox
-    Friend WithEvents Label32 As Label
-    Friend WithEvents Label33 As Label
-    Friend WithEvents Label35 As Label
-    Friend WithEvents GroupBox7 As GroupBox
-    Friend WithEvents txtEffectiveDate As TextBox
-    Friend WithEvents txtOvertimeRate As TextBox
-    Friend WithEvents txtAllowance As TextBox
-    Friend WithEvents txtBaseSalary As TextBox
-    Friend WithEvents Label36 As Label
-    Friend WithEvents Label37 As Label
-    Friend WithEvents Label43 As Label
-    Friend WithEvents Label45 As Label
-    Friend WithEvents Label39 As Label
-    Friend WithEvents Label31 As Label
     Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents txtPhilHealthAnnual As TextBox
-    Friend WithEvents txtPhilHealthMonthly As TextBox
-    Friend WithEvents txtPhilHealthID As TextBox
-    Friend WithEvents txtPAGIBIGAnnual As TextBox
-    Friend WithEvents txtPAGIBIGMonthly As TextBox
-    Friend WithEvents txtPAGIBIGID As TextBox
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Label26 As Label
     Friend WithEvents Label27 As Label
@@ -1739,7 +1240,6 @@ Partial Class MyProfile
     Friend WithEvents lblage As Label
     Friend WithEvents Label17 As Label
     Friend WithEvents txtFname As TextBox
-    Friend WithEvents lblID As Label
     Friend WithEvents lblfname As Label
     Friend WithEvents Label18 As Label
     Friend WithEvents GroupBox9 As GroupBox
@@ -1753,31 +1253,12 @@ Partial Class MyProfile
     Friend WithEvents Label53 As Label
     Friend WithEvents txtC1Address As TextBox
     Friend WithEvents Label54 As Label
-    Friend WithEvents GroupBox10 As GroupBox
-    Friend WithEvents txtDateApplied As TextBox
-    Friend WithEvents TextBox9 As TextBox
-    Friend WithEvents txtLate As TextBox
-    Friend WithEvents txtDaysOfAbscences As TextBox
-    Friend WithEvents Label40 As Label
-    Friend WithEvents Label41 As Label
-    Friend WithEvents Label42 As Label
-    Friend WithEvents Label44 As Label
-    Friend WithEvents GroupBox11 As GroupBox
-    Friend WithEvents rbPending As RadioButton
-    Friend WithEvents rbReceived As RadioButton
-    Friend WithEvents Label46 As Label
-    Friend WithEvents dtpDataReceived As DateTimePicker
-    Friend WithEvents Label47 As Label
     Friend WithEvents txtDepartment As TextBox
     Friend WithEvents Label48 As Label
-    Friend WithEvents Label34 As Label
-    Friend WithEvents Label38 As Label
-    Friend WithEvents Label29 As Label
-    Friend WithEvents Label30 As Label
     Friend WithEvents lblAmenities As Label
-    Friend WithEvents lblGoalsAndGrowth As Label
+    Friend WithEvents lblTrainings As Label
     Friend WithEvents lblLeaveApproval As Label
-    Friend WithEvents lblPerformanceReview As Label
+    Friend WithEvents lblEmployeeTrainings As Label
     Friend WithEvents lblPayrollSummary As Label
     Friend WithEvents lblDepartment As Label
     Friend WithEvents lblAttendanceTracker As Label
@@ -1790,4 +1271,7 @@ Partial Class MyProfile
     Friend WithEvents Label49 As Label
     Friend WithEvents lblDashboard As Label
     Friend WithEvents lblMain As Label
+    Friend WithEvents Label29 As Label
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents TextBox1 As TextBox
 End Class

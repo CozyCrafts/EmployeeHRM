@@ -1,4 +1,6 @@
-﻿Public Class Goals_and_Growth
+﻿Imports MySql.Data.MySqlClient
+
+Public Class Trainings
     Public Property UserRole As String
 
     Private Sub Goals_and_Growth_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -10,14 +12,14 @@
             lblAttendanceTracker.Visible = False
             lblLeaveApproval.Visible = False
             lblPayrollSummary.Visible = False
-            lblPerformanceReview.Visible = False
+            lblEmployeeTrainings.Visible = False
             lblDepartment.Visible = False
         ElseIf UserRole = "Manager" Then
             lblTeamOverview.Visible = True
             lblAttendanceTracker.Visible = True
             lblLeaveApproval.Visible = True
             lblPayrollSummary.Visible = True
-            lblPerformanceReview.Visible = True
+            lblEmployeeTrainings.Visible = True
             lblDepartment.Visible = True
         End If
     End Sub
@@ -27,7 +29,7 @@
         If UserRole = "Staff" Then
             Employee_Dashboard.Show()
         ElseIf UserRole = "Manager" Then
-        Manager_Dashboard.Show()
+            Manager_Dashboard.Show()
         End If
         Me.Hide()
     End Sub
@@ -54,8 +56,8 @@
     End Sub
 
 
-    Private Sub lblGoalsAndGrowth_Click(sender As Object, e As EventArgs) Handles lblGoalsAndGrowth.Click
-        lblGoalsAndGrowth.Enabled = False
+    Private Sub lblGoalsAndGrowth_Click(sender As Object, e As EventArgs) Handles lblTrainings.Click
+        lblTrainings.Enabled = False
     End Sub
 
 
@@ -79,8 +81,8 @@
         Me.Hide()
     End Sub
 
-    Private Sub lblPerformanceReview_Click(sender As Object, e As EventArgs) Handles lblPerformanceReview.Click
-        Performance_Review.Show()
+    Private Sub lblEmployeeTrainings_Click(sender As Object, e As EventArgs) Handles lblEmployeeTrainings.Click
+        Employee_Trainings.Show()
         Me.Hide()
     End Sub
 
@@ -96,7 +98,7 @@
 
 
     Private Sub pcbTerminate_Click(sender As Object, e As EventArgs) Handles pcbTerminate.Click
-        Dim result As DialogResult = MessageBox.Show("Are you sure you want to exit the system?",
+        Dim result = MessageBox.Show("Are you sure you want to exit the system?",
                                                 "Confirm Exit",
                                                 MessageBoxButtons.YesNo,
                                                 MessageBoxIcon.Question)
@@ -104,4 +106,7 @@
             Application.Exit()
         End If
     End Sub
+
+
+
 End Class

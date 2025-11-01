@@ -26,18 +26,8 @@ Partial Class Attendance
         adminheader_pnl = New Panel()
         pcbTerminate = New PictureBox()
         Label2 = New Label()
-        GroupBox3 = New GroupBox()
-        Button3 = New Button()
-        ComboBox1 = New ComboBox()
-        DateTimePicker2 = New DateTimePicker()
-        DateTimePicker1 = New DateTimePicker()
-        Label1 = New Label()
-        TextBox8 = New TextBox()
-        Label13 = New Label()
-        Label9 = New Label()
-        Label3 = New Label()
-        btnSave = New Button()
         GroupBox4 = New GroupBox()
+        ComboBox1 = New ComboBox()
         DateTimePicker3 = New DateTimePicker()
         Label4 = New Label()
         Button2 = New Button()
@@ -46,9 +36,9 @@ Partial Class Attendance
         GroupBox1 = New GroupBox()
         Panel2 = New Panel()
         lblAmenities = New Label()
-        lblGoalsAndGrowth = New Label()
+        lblTrainings = New Label()
         lblLeaveApproval = New Label()
-        lblPerformanceReview = New Label()
+        lblEmployeeTrainings = New Label()
         lblPayrollSummary = New Label()
         lblDepartment = New Label()
         lblAttendanceTracker = New Label()
@@ -63,9 +53,10 @@ Partial Class Attendance
         Label27 = New Label()
         lblDashboard = New Label()
         Label51 = New Label()
+        Label8 = New Label()
+        Label10 = New Label()
         adminheader_pnl.SuspendLayout()
         CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
-        GroupBox3.SuspendLayout()
         GroupBox4.SuspendLayout()
         CType(DataGridView2, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox1.SuspendLayout()
@@ -102,155 +93,40 @@ Partial Class Attendance
         Label2.TabIndex = 0
         Label2.Text = " Attendance"
         ' 
-        ' GroupBox3
-        ' 
-        GroupBox3.Controls.Add(Button3)
-        GroupBox3.Controls.Add(ComboBox1)
-        GroupBox3.Controls.Add(DateTimePicker2)
-        GroupBox3.Controls.Add(DateTimePicker1)
-        GroupBox3.Controls.Add(Label1)
-        GroupBox3.Controls.Add(TextBox8)
-        GroupBox3.Controls.Add(Label13)
-        GroupBox3.Controls.Add(Label9)
-        GroupBox3.Controls.Add(Label3)
-        GroupBox3.Controls.Add(btnSave)
-        GroupBox3.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        GroupBox3.Location = New Point(1218, 116)
-        GroupBox3.Name = "GroupBox3"
-        GroupBox3.Size = New Size(514, 350)
-        GroupBox3.TabIndex = 63
-        GroupBox3.TabStop = False
-        GroupBox3.Text = "Application for Leave"
-        ' 
-        ' Button3
-        ' 
-        Button3.BackColor = SystemColors.InactiveCaption
-        Button3.BackgroundImageLayout = ImageLayout.None
-        Button3.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        Button3.ForeColor = Color.Black
-        Button3.Location = New Point(170, 294)
-        Button3.Name = "Button3"
-        Button3.Size = New Size(140, 46)
-        Button3.TabIndex = 46
-        Button3.Text = "Clear"
-        Button3.UseVisualStyleBackColor = False
-        ' 
-        ' ComboBox1
-        ' 
-        ComboBox1.Font = New Font("Century Gothic", 11.2F)
-        ComboBox1.FormattingEnabled = True
-        ComboBox1.Items.AddRange(New Object() {"Service Incentive Leave", "Maternity Leave", "Paternity Leave", "Parental Leave for Solo Parents", "Special Leave for Women", "Leave for Victims of Violence Against Women and their Children "})
-        ComboBox1.Location = New Point(170, 45)
-        ComboBox1.Name = "ComboBox1"
-        ComboBox1.Size = New Size(338, 30)
-        ComboBox1.TabIndex = 45
-        ' 
-        ' DateTimePicker2
-        ' 
-        DateTimePicker2.Font = New Font("Century Gothic", 11.2F)
-        DateTimePicker2.Location = New Point(170, 146)
-        DateTimePicker2.Name = "DateTimePicker2"
-        DateTimePicker2.Size = New Size(338, 30)
-        DateTimePicker2.TabIndex = 44
-        ' 
-        ' DateTimePicker1
-        ' 
-        DateTimePicker1.Font = New Font("Century Gothic", 11.2F)
-        DateTimePicker1.Location = New Point(170, 98)
-        DateTimePicker1.Name = "DateTimePicker1"
-        DateTimePicker1.Size = New Size(338, 30)
-        DateTimePicker1.TabIndex = 43
-        ' 
-        ' Label1
-        ' 
-        Label1.AutoSize = True
-        Label1.Font = New Font("Century Gothic", 11.2F)
-        Label1.Location = New Point(78, 152)
-        Label1.Name = "Label1"
-        Label1.Size = New Size(86, 22)
-        Label1.TabIndex = 42
-        Label1.Text = "To Date:"
-        ' 
-        ' TextBox8
-        ' 
-        TextBox8.Font = New Font("Century Gothic", 11.2F)
-        TextBox8.Location = New Point(170, 202)
-        TextBox8.Multiline = True
-        TextBox8.Name = "TextBox8"
-        TextBox8.Size = New Size(338, 86)
-        TextBox8.TabIndex = 41
-        ' 
-        ' Label13
-        ' 
-        Label13.AutoSize = True
-        Label13.Font = New Font("Century Gothic", 11.2F)
-        Label13.Location = New Point(81, 205)
-        Label13.Name = "Label13"
-        Label13.Size = New Size(83, 22)
-        Label13.TabIndex = 38
-        Label13.Text = "Reason:"
-        ' 
-        ' Label9
-        ' 
-        Label9.AutoSize = True
-        Label9.Font = New Font("Century Gothic", 11.2F)
-        Label9.Location = New Point(54, 106)
-        Label9.Name = "Label9"
-        Label9.Size = New Size(110, 22)
-        Label9.TabIndex = 37
-        Label9.Text = "From Date:"
-        ' 
-        ' Label3
-        ' 
-        Label3.AutoSize = True
-        Label3.Font = New Font("Century Gothic", 11.2F)
-        Label3.Location = New Point(18, 53)
-        Label3.Name = "Label3"
-        Label3.Size = New Size(146, 22)
-        Label3.TabIndex = 36
-        Label3.Text = "Type of Leave:"
-        ' 
-        ' btnSave
-        ' 
-        btnSave.BackColor = SystemColors.InactiveCaption
-        btnSave.BackgroundImageLayout = ImageLayout.None
-        btnSave.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnSave.ForeColor = Color.Black
-        btnSave.Location = New Point(316, 294)
-        btnSave.Name = "btnSave"
-        btnSave.Size = New Size(192, 46)
-        btnSave.TabIndex = 35
-        btnSave.Text = "Sumbit Application"
-        btnSave.UseVisualStyleBackColor = False
-        ' 
         ' GroupBox4
         ' 
-        GroupBox4.Controls.Add(DateTimePicker3)
-        GroupBox4.Controls.Add(Label4)
-        GroupBox4.Controls.Add(Button2)
-        GroupBox4.Controls.Add(Button1)
+        GroupBox4.Controls.Add(ComboBox1)
         GroupBox4.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        GroupBox4.Location = New Point(370, 107)
+        GroupBox4.Location = New Point(370, 214)
         GroupBox4.Name = "GroupBox4"
-        GroupBox4.Size = New Size(299, 332)
+        GroupBox4.Size = New Size(705, 235)
         GroupBox4.TabIndex = 64
         GroupBox4.TabStop = False
         GroupBox4.Text = "Current Status"
         ' 
+        ' ComboBox1
+        ' 
+        ComboBox1.FormattingEnabled = True
+        ComboBox1.Location = New Point(128, 54)
+        ComboBox1.Name = "ComboBox1"
+        ComboBox1.Size = New Size(151, 31)
+        ComboBox1.TabIndex = 0
+        ' 
         ' DateTimePicker3
         ' 
         DateTimePicker3.Font = New Font("Century Gothic", 8F, FontStyle.Bold)
-        DateTimePicker3.Location = New Point(26, 38)
+        DateTimePicker3.Location = New Point(1081, 222)
         DateTimePicker3.Name = "DateTimePicker3"
         DateTimePicker3.Size = New Size(254, 24)
         DateTimePicker3.TabIndex = 38
         ' 
         ' Label4
         ' 
+        Label4.BackColor = Color.White
         Label4.BorderStyle = BorderStyle.FixedSingle
-        Label4.Location = New Point(26, 66)
+        Label4.Location = New Point(1081, 260)
         Label4.Name = "Label4"
-        Label4.Size = New Size(254, 120)
+        Label4.Size = New Size(254, 47)
         Label4.TabIndex = 37
         ' 
         ' Button2
@@ -259,9 +135,9 @@ Partial Class Attendance
         Button2.BackgroundImageLayout = ImageLayout.None
         Button2.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
         Button2.ForeColor = Color.Black
-        Button2.Location = New Point(37, 206)
+        Button2.Location = New Point(1097, 321)
         Button2.Name = "Button2"
-        Button2.Size = New Size(224, 46)
+        Button2.Size = New Size(224, 37)
         Button2.TabIndex = 36
         Button2.Text = "Check In"
         Button2.UseVisualStyleBackColor = False
@@ -272,9 +148,9 @@ Partial Class Attendance
         Button1.BackgroundImageLayout = ImageLayout.None
         Button1.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
         Button1.ForeColor = Color.Black
-        Button1.Location = New Point(37, 264)
+        Button1.Location = New Point(1097, 364)
         Button1.Name = "Button1"
-        Button1.Size = New Size(224, 46)
+        Button1.Size = New Size(224, 37)
         Button1.TabIndex = 35
         Button1.Text = "Check Out"
         Button1.UseVisualStyleBackColor = False
@@ -303,9 +179,9 @@ Partial Class Attendance
         ' 
         Panel2.BackColor = Color.SteelBlue
         Panel2.Controls.Add(lblAmenities)
-        Panel2.Controls.Add(lblGoalsAndGrowth)
+        Panel2.Controls.Add(lblTrainings)
         Panel2.Controls.Add(lblLeaveApproval)
-        Panel2.Controls.Add(lblPerformanceReview)
+        Panel2.Controls.Add(lblEmployeeTrainings)
         Panel2.Controls.Add(lblPayrollSummary)
         Panel2.Controls.Add(lblDepartment)
         Panel2.Controls.Add(lblAttendanceTracker)
@@ -336,16 +212,16 @@ Partial Class Attendance
         lblAmenities.TabIndex = 111
         lblAmenities.Text = "Amenties"
         ' 
-        ' lblGoalsAndGrowth
+        ' lblTrainings
         ' 
-        lblGoalsAndGrowth.AutoSize = True
-        lblGoalsAndGrowth.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblGoalsAndGrowth.ForeColor = Color.White
-        lblGoalsAndGrowth.Location = New Point(53, 430)
-        lblGoalsAndGrowth.Name = "lblGoalsAndGrowth"
-        lblGoalsAndGrowth.Size = New Size(220, 27)
-        lblGoalsAndGrowth.TabIndex = 110
-        lblGoalsAndGrowth.Text = "Goals and Growth"
+        lblTrainings.AutoSize = True
+        lblTrainings.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblTrainings.ForeColor = Color.White
+        lblTrainings.Location = New Point(53, 430)
+        lblTrainings.Name = "lblTrainings"
+        lblTrainings.Size = New Size(110, 27)
+        lblTrainings.TabIndex = 110
+        lblTrainings.Text = "Trainings"
         ' 
         ' lblLeaveApproval
         ' 
@@ -358,16 +234,16 @@ Partial Class Attendance
         lblLeaveApproval.TabIndex = 109
         lblLeaveApproval.Text = "Leave Approval"
         ' 
-        ' lblPerformanceReview
+        ' lblEmployeeTrainings
         ' 
-        lblPerformanceReview.AutoSize = True
-        lblPerformanceReview.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblPerformanceReview.ForeColor = Color.White
-        lblPerformanceReview.Location = New Point(53, 700)
-        lblPerformanceReview.Name = "lblPerformanceReview"
-        lblPerformanceReview.Size = New Size(250, 27)
-        lblPerformanceReview.TabIndex = 108
-        lblPerformanceReview.Text = "Performance Review"
+        lblEmployeeTrainings.AutoSize = True
+        lblEmployeeTrainings.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblEmployeeTrainings.ForeColor = Color.White
+        lblEmployeeTrainings.Location = New Point(53, 700)
+        lblEmployeeTrainings.Name = "lblEmployeeTrainings"
+        lblEmployeeTrainings.Size = New Size(230, 27)
+        lblEmployeeTrainings.TabIndex = 108
+        lblEmployeeTrainings.Text = "Employee Trainings"
         ' 
         ' lblPayrollSummary
         ' 
@@ -523,15 +399,40 @@ Partial Class Attendance
         Label51.TabIndex = 90
         Label51.Text = "MAIN"
         ' 
+        ' Label8
+        ' 
+        Label8.BackColor = SystemColors.ButtonHighlight
+        Label8.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label8.Location = New Point(537, 159)
+        Label8.Name = "Label8"
+        Label8.Size = New Size(269, 32)
+        Label8.TabIndex = 68
+        ' 
+        ' Label10
+        ' 
+        Label10.AutoSize = True
+        Label10.Font = New Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label10.ForeColor = Color.Black
+        Label10.Location = New Point(370, 158)
+        Label10.Name = "Label10"
+        Label10.Size = New Size(161, 23)
+        Label10.TabIndex = 67
+        Label10.Text = "Attendance ID:"
+        ' 
         ' Attendance
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1779, 1080)
+        ClientSize = New Size(1761, 1033)
         ControlBox = False
+        Controls.Add(DateTimePicker3)
+        Controls.Add(Label4)
+        Controls.Add(Label8)
+        Controls.Add(Button2)
+        Controls.Add(Label10)
+        Controls.Add(Button1)
         Controls.Add(Panel2)
         Controls.Add(GroupBox4)
-        Controls.Add(GroupBox3)
         Controls.Add(GroupBox1)
         Controls.Add(adminheader_pnl)
         FormBorderStyle = FormBorderStyle.None
@@ -542,32 +443,20 @@ Partial Class Attendance
         adminheader_pnl.ResumeLayout(False)
         adminheader_pnl.PerformLayout()
         CType(pcbTerminate, ComponentModel.ISupportInitialize).EndInit()
-        GroupBox3.ResumeLayout(False)
-        GroupBox3.PerformLayout()
         GroupBox4.ResumeLayout(False)
         CType(DataGridView2, ComponentModel.ISupportInitialize).EndInit()
         GroupBox1.ResumeLayout(False)
         Panel2.ResumeLayout(False)
         Panel2.PerformLayout()
         ResumeLayout(False)
+        PerformLayout()
     End Sub
     Friend WithEvents adminheader_pnl As Panel
     Friend WithEvents Label2 As Label
-    Friend WithEvents GroupBox3 As GroupBox
-    Friend WithEvents btnSave As Button
-    Friend WithEvents DateTimePicker2 As DateTimePicker
-    Friend WithEvents DateTimePicker1 As DateTimePicker
-    Friend WithEvents Label1 As Label
-    Friend WithEvents TextBox8 As TextBox
-    Friend WithEvents Label13 As Label
-    Friend WithEvents Label9 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents GroupBox4 As GroupBox
     Friend WithEvents Button2 As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents Label4 As Label
-    Friend WithEvents Button3 As Button
     Friend WithEvents DateTimePicker3 As DateTimePicker
     Friend WithEvents DataGridView2 As DataGridView
     Friend WithEvents GroupBox1 As GroupBox
@@ -576,9 +465,9 @@ Partial Class Attendance
     Friend WithEvents Label26 As Label
     Friend WithEvents Label27 As Label
     Friend WithEvents lblAmenities As Label
-    Friend WithEvents lblGoalsAndGrowth As Label
+    Friend WithEvents lblTrainings As Label
     Friend WithEvents lblLeaveApproval As Label
-    Friend WithEvents lblPerformanceReview As Label
+    Friend WithEvents lblEmployeeTrainings As Label
     Friend WithEvents lblPayrollSummary As Label
     Friend WithEvents lblDepartment As Label
     Friend WithEvents lblAttendanceTracker As Label
@@ -591,4 +480,7 @@ Partial Class Attendance
     Friend WithEvents Label6 As Label
     Friend WithEvents lblDashboard As Label
     Friend WithEvents Label51 As Label
+    Friend WithEvents Label8 As Label
+    Friend WithEvents Label10 As Label
+    Friend WithEvents ComboBox1 As ComboBox
 End Class

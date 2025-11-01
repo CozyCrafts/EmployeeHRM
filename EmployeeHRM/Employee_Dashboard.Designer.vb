@@ -56,7 +56,7 @@ Partial Class Employee_Dashboard
         pcbTerminate = New PictureBox()
         Label2 = New Label()
         Panel2 = New Panel()
-        lblGoalsAndGrowth = New Label()
+        lblTrainings = New Label()
         lblSalary = New Label()
         Label26 = New Label()
         Label27 = New Label()
@@ -436,7 +436,7 @@ Partial Class Employee_Dashboard
         ' Panel2
         ' 
         Panel2.BackColor = Color.SteelBlue
-        Panel2.Controls.Add(lblGoalsAndGrowth)
+        Panel2.Controls.Add(lblTrainings)
         Panel2.Controls.Add(lblSalary)
         Panel2.Controls.Add(Label26)
         Panel2.Controls.Add(Label27)
@@ -448,26 +448,26 @@ Partial Class Employee_Dashboard
         Panel2.Controls.Add(Label51)
         Panel2.Location = New Point(-6, -6)
         Panel2.Name = "Panel2"
-        Panel2.Size = New Size(371, 1201)
+        Panel2.Size = New Size(350, 1357)
         Panel2.TabIndex = 80
         ' 
-        ' lblGoalsAndGrowth
+        ' lblTrainings
         ' 
-        lblGoalsAndGrowth.AutoSize = True
-        lblGoalsAndGrowth.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblGoalsAndGrowth.ForeColor = Color.White
-        lblGoalsAndGrowth.Location = New Point(53, 500)
-        lblGoalsAndGrowth.Name = "lblGoalsAndGrowth"
-        lblGoalsAndGrowth.Size = New Size(220, 27)
-        lblGoalsAndGrowth.TabIndex = 69
-        lblGoalsAndGrowth.Text = "Goals and Growth"
+        lblTrainings.AutoSize = True
+        lblTrainings.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblTrainings.ForeColor = Color.White
+        lblTrainings.Location = New Point(53, 430)
+        lblTrainings.Name = "lblTrainings"
+        lblTrainings.Size = New Size(110, 27)
+        lblTrainings.TabIndex = 69
+        lblTrainings.Text = "Trainings"
         ' 
         ' lblSalary
         ' 
         lblSalary.AutoSize = True
         lblSalary.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblSalary.ForeColor = Color.White
-        lblSalary.Location = New Point(53, 450)
+        lblSalary.Location = New Point(53, 390)
         lblSalary.Name = "lblSalary"
         lblSalary.Size = New Size(81, 27)
         lblSalary.TabIndex = 68
@@ -478,7 +478,7 @@ Partial Class Employee_Dashboard
         Label26.AutoSize = True
         Label26.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label26.ForeColor = Color.White
-        Label26.Location = New Point(58, 35)
+        Label26.Location = New Point(85, 35)
         Label26.Name = "Label26"
         Label26.Size = New Size(197, 34)
         Label26.TabIndex = 12
@@ -489,7 +489,7 @@ Partial Class Employee_Dashboard
         Label27.AutoSize = True
         Label27.Font = New Font("Century Gothic", 13.8F, FontStyle.Underline, GraphicsUnit.Point, CByte(0))
         Label27.ForeColor = Color.White
-        Label27.Location = New Point(15, 60)
+        Label27.Location = New Point(30, 65)
         Label27.Name = "Label27"
         Label27.Size = New Size(312, 27)
         Label27.TabIndex = 11
@@ -500,7 +500,7 @@ Partial Class Employee_Dashboard
         lblMyProfile.AutoSize = True
         lblMyProfile.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblMyProfile.ForeColor = Color.White
-        lblMyProfile.Location = New Point(53, 300)
+        lblMyProfile.Location = New Point(53, 270)
         lblMyProfile.Name = "lblMyProfile"
         lblMyProfile.Size = New Size(124, 27)
         lblMyProfile.TabIndex = 7
@@ -511,7 +511,7 @@ Partial Class Employee_Dashboard
         lblAttendance.AutoSize = True
         lblAttendance.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblAttendance.ForeColor = Color.White
-        lblAttendance.Location = New Point(53, 350)
+        lblAttendance.Location = New Point(53, 310)
         lblAttendance.Name = "lblAttendance"
         lblAttendance.Size = New Size(150, 27)
         lblAttendance.TabIndex = 6
@@ -522,7 +522,7 @@ Partial Class Employee_Dashboard
         lblLeaveManagement.AutoSize = True
         lblLeaveManagement.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         lblLeaveManagement.ForeColor = Color.White
-        lblLeaveManagement.Location = New Point(53, 400)
+        lblLeaveManagement.Location = New Point(53, 350)
         lblLeaveManagement.Name = "lblLeaveManagement"
         lblLeaveManagement.Size = New Size(248, 27)
         lblLeaveManagement.TabIndex = 5
@@ -533,7 +533,7 @@ Partial Class Employee_Dashboard
         Label50.AutoSize = True
         Label50.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label50.ForeColor = Color.White
-        Label50.Location = New Point(30, 250)
+        Label50.Location = New Point(30, 230)
         Label50.Name = "Label50"
         Label50.Size = New Size(98, 22)
         Label50.TabIndex = 3
@@ -710,6 +710,7 @@ Partial Class Employee_Dashboard
         Controls.Add(GroupBox4)
         Controls.Add(GroupBox3)
         Controls.Add(GroupBox1)
+        FormBorderStyle = FormBorderStyle.None
         Name = "Employee_Dashboard"
         StartPosition = FormStartPosition.CenterScreen
         Text = "Dashboard"
@@ -768,7 +769,7 @@ Partial Class Employee_Dashboard
     Friend WithEvents pcbTerminate As PictureBox
     Friend WithEvents Label2 As Label
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents lblGoalsAndGrowth As Label
+    Friend WithEvents lblTrainings As Label
     Friend WithEvents lblSalary As Label
     Friend WithEvents Label26 As Label
     Friend WithEvents Label27 As Label

@@ -26,20 +26,11 @@ Partial Class Salary
         adminheader_pnl = New Panel()
         pcbTerminate = New PictureBox()
         Label2 = New Label()
-        GroupBox1 = New GroupBox()
-        DataGridView2 = New DataGridView()
-        GroupBox2 = New GroupBox()
-        GroupBox5 = New GroupBox()
-        DataGridView4 = New DataGridView()
-        GroupBox4 = New GroupBox()
-        DataGridView1 = New DataGridView()
-        GroupBox3 = New GroupBox()
-        DataGridView3 = New DataGridView()
         Panel2 = New Panel()
         lblAmenities = New Label()
-        lblGoalsAndGrowth = New Label()
+        lblTrainings = New Label()
         lblLeaveApproval = New Label()
-        lblPerformanceReview = New Label()
+        lblEmployeeTrainings = New Label()
         lblPayrollSummary = New Label()
         lblDepartment = New Label()
         lblAttendanceTracker = New Label()
@@ -54,18 +45,20 @@ Partial Class Salary
         Label27 = New Label()
         lblDashboard = New Label()
         Label51 = New Label()
+        GroupBox11 = New GroupBox()
+        DateTimePicker1 = New DateTimePicker()
+        Label47 = New Label()
+        RadioButton2 = New RadioButton()
+        RadioButton1 = New RadioButton()
+        Label46 = New Label()
+        Label5 = New Label()
+        Label6 = New Label()
+        lblID = New Label()
+        Label1 = New Label()
         adminheader_pnl.SuspendLayout()
         CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
-        GroupBox1.SuspendLayout()
-        CType(DataGridView2, ComponentModel.ISupportInitialize).BeginInit()
-        GroupBox2.SuspendLayout()
-        GroupBox5.SuspendLayout()
-        CType(DataGridView4, ComponentModel.ISupportInitialize).BeginInit()
-        GroupBox4.SuspendLayout()
-        CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
-        GroupBox3.SuspendLayout()
-        CType(DataGridView3, ComponentModel.ISupportInitialize).BeginInit()
         Panel2.SuspendLayout()
+        GroupBox11.SuspendLayout()
         SuspendLayout()
         ' 
         ' adminheader_pnl
@@ -98,106 +91,13 @@ Partial Class Salary
         Label2.TabIndex = 0
         Label2.Text = "Salary"
         ' 
-        ' GroupBox1
-        ' 
-        GroupBox1.Controls.Add(DataGridView2)
-        GroupBox1.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        GroupBox1.Location = New Point(375, 97)
-        GroupBox1.Name = "GroupBox1"
-        GroupBox1.Size = New Size(1779, 1080)
-        GroupBox1.TabIndex = 62
-        GroupBox1.TabStop = False
-        GroupBox1.Text = "Payslips"
-        ' 
-        ' DataGridView2
-        ' 
-        DataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView2.Location = New Point(36, 44)
-        DataGridView2.Name = "DataGridView2"
-        DataGridView2.RowHeadersWidth = 51
-        DataGridView2.Size = New Size(1316, 201)
-        DataGridView2.TabIndex = 34
-        ' 
-        ' GroupBox2
-        ' 
-        GroupBox2.Controls.Add(GroupBox5)
-        GroupBox2.Controls.Add(GroupBox4)
-        GroupBox2.Controls.Add(GroupBox3)
-        GroupBox2.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        GroupBox2.Location = New Point(375, 386)
-        GroupBox2.Name = "GroupBox2"
-        GroupBox2.Size = New Size(1373, 610)
-        GroupBox2.TabIndex = 63
-        GroupBox2.TabStop = False
-        GroupBox2.Text = "Salary Breakdown"
-        ' 
-        ' GroupBox5
-        ' 
-        GroupBox5.Controls.Add(DataGridView4)
-        GroupBox5.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        GroupBox5.Location = New Point(36, 360)
-        GroupBox5.Name = "GroupBox5"
-        GroupBox5.Size = New Size(618, 228)
-        GroupBox5.TabIndex = 66
-        GroupBox5.TabStop = False
-        GroupBox5.Text = "Gross Income"
-        ' 
-        ' DataGridView4
-        ' 
-        DataGridView4.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView4.Location = New Point(19, 31)
-        DataGridView4.Name = "DataGridView4"
-        DataGridView4.RowHeadersWidth = 51
-        DataGridView4.Size = New Size(578, 174)
-        DataGridView4.TabIndex = 35
-        ' 
-        ' GroupBox4
-        ' 
-        GroupBox4.Controls.Add(DataGridView1)
-        GroupBox4.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        GroupBox4.Location = New Point(687, 42)
-        GroupBox4.Name = "GroupBox4"
-        GroupBox4.Size = New Size(665, 546)
-        GroupBox4.TabIndex = 65
-        GroupBox4.TabStop = False
-        GroupBox4.Text = "Deductions"
-        ' 
-        ' DataGridView1
-        ' 
-        DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView1.Location = New Point(28, 31)
-        DataGridView1.Name = "DataGridView1"
-        DataGridView1.RowHeadersWidth = 51
-        DataGridView1.Size = New Size(617, 492)
-        DataGridView1.TabIndex = 35
-        ' 
-        ' GroupBox3
-        ' 
-        GroupBox3.Controls.Add(DataGridView3)
-        GroupBox3.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        GroupBox3.Location = New Point(36, 42)
-        GroupBox3.Name = "GroupBox3"
-        GroupBox3.Size = New Size(618, 312)
-        GroupBox3.TabIndex = 64
-        GroupBox3.TabStop = False
-        GroupBox3.Text = "Earnings"
-        ' 
-        ' DataGridView3
-        ' 
-        DataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView3.Location = New Point(19, 31)
-        DataGridView3.Name = "DataGridView3"
-        DataGridView3.RowHeadersWidth = 51
-        DataGridView3.Size = New Size(578, 248)
-        DataGridView3.TabIndex = 35
-        ' 
         ' Panel2
         ' 
         Panel2.BackColor = Color.SteelBlue
         Panel2.Controls.Add(lblAmenities)
-        Panel2.Controls.Add(lblGoalsAndGrowth)
+        Panel2.Controls.Add(lblTrainings)
         Panel2.Controls.Add(lblLeaveApproval)
-        Panel2.Controls.Add(lblPerformanceReview)
+        Panel2.Controls.Add(lblEmployeeTrainings)
         Panel2.Controls.Add(lblPayrollSummary)
         Panel2.Controls.Add(lblDepartment)
         Panel2.Controls.Add(lblAttendanceTracker)
@@ -228,16 +128,16 @@ Partial Class Salary
         lblAmenities.TabIndex = 91
         lblAmenities.Text = "Amenties"
         ' 
-        ' lblGoalsAndGrowth
+        ' lblTrainings
         ' 
-        lblGoalsAndGrowth.AutoSize = True
-        lblGoalsAndGrowth.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblGoalsAndGrowth.ForeColor = Color.White
-        lblGoalsAndGrowth.Location = New Point(57, 430)
-        lblGoalsAndGrowth.Name = "lblGoalsAndGrowth"
-        lblGoalsAndGrowth.Size = New Size(220, 27)
-        lblGoalsAndGrowth.TabIndex = 90
-        lblGoalsAndGrowth.Text = "Goals and Growth"
+        lblTrainings.AutoSize = True
+        lblTrainings.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblTrainings.ForeColor = Color.White
+        lblTrainings.Location = New Point(57, 430)
+        lblTrainings.Name = "lblTrainings"
+        lblTrainings.Size = New Size(110, 27)
+        lblTrainings.TabIndex = 90
+        lblTrainings.Text = "Trainings"
         ' 
         ' lblLeaveApproval
         ' 
@@ -250,16 +150,16 @@ Partial Class Salary
         lblLeaveApproval.TabIndex = 89
         lblLeaveApproval.Text = "Leave Approval"
         ' 
-        ' lblPerformanceReview
+        ' lblEmployeeTrainings
         ' 
-        lblPerformanceReview.AutoSize = True
-        lblPerformanceReview.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblPerformanceReview.ForeColor = Color.White
-        lblPerformanceReview.Location = New Point(57, 700)
-        lblPerformanceReview.Name = "lblPerformanceReview"
-        lblPerformanceReview.Size = New Size(250, 27)
-        lblPerformanceReview.TabIndex = 88
-        lblPerformanceReview.Text = "Performance Review"
+        lblEmployeeTrainings.AutoSize = True
+        lblEmployeeTrainings.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblEmployeeTrainings.ForeColor = Color.White
+        lblEmployeeTrainings.Location = New Point(57, 700)
+        lblEmployeeTrainings.Name = "lblEmployeeTrainings"
+        lblEmployeeTrainings.Size = New Size(230, 27)
+        lblEmployeeTrainings.TabIndex = 88
+        lblEmployeeTrainings.Text = "Employee Trainings"
         ' 
         ' lblPayrollSummary
         ' 
@@ -415,15 +315,123 @@ Partial Class Salary
         Label51.TabIndex = 70
         Label51.Text = "MAIN"
         ' 
+        ' GroupBox11
+        ' 
+        GroupBox11.Controls.Add(DateTimePicker1)
+        GroupBox11.Controls.Add(Label47)
+        GroupBox11.Controls.Add(RadioButton2)
+        GroupBox11.Controls.Add(RadioButton1)
+        GroupBox11.Controls.Add(Label46)
+        GroupBox11.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
+        GroupBox11.Location = New Point(412, 483)
+        GroupBox11.Name = "GroupBox11"
+        GroupBox11.Size = New Size(841, 66)
+        GroupBox11.TabIndex = 86
+        GroupBox11.TabStop = False
+        GroupBox11.Text = "Status"
+        ' 
+        ' DateTimePicker1
+        ' 
+        DateTimePicker1.CustomFormat = "mm/dd/yyyy"
+        DateTimePicker1.Location = New Point(490, 23)
+        DateTimePicker1.Name = "DateTimePicker1"
+        DateTimePicker1.Size = New Size(342, 32)
+        DateTimePicker1.TabIndex = 50
+        DateTimePicker1.Value = New Date(2025, 9, 13, 1, 11, 7, 0)
+        ' 
+        ' Label47
+        ' 
+        Label47.AutoSize = True
+        Label47.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label47.Location = New Point(335, 32)
+        Label47.Name = "Label47"
+        Label47.Size = New Size(149, 21)
+        Label47.TabIndex = 20
+        Label47.Text = "Date Received:"
+        ' 
+        ' RadioButton2
+        ' 
+        RadioButton2.AutoSize = True
+        RadioButton2.Location = New Point(220, 27)
+        RadioButton2.Name = "RadioButton2"
+        RadioButton2.Size = New Size(110, 27)
+        RadioButton2.TabIndex = 19
+        RadioButton2.TabStop = True
+        RadioButton2.Text = "Pending"
+        RadioButton2.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton1
+        ' 
+        RadioButton1.AutoSize = True
+        RadioButton1.Location = New Point(81, 25)
+        RadioButton1.Name = "RadioButton1"
+        RadioButton1.Size = New Size(124, 27)
+        RadioButton1.TabIndex = 18
+        RadioButton1.TabStop = True
+        RadioButton1.Text = "Received"
+        RadioButton1.UseVisualStyleBackColor = True
+        ' 
+        ' Label46
+        ' 
+        Label46.AutoSize = True
+        Label46.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label46.Location = New Point(81, 34)
+        Label46.Name = "Label46"
+        Label46.Size = New Size(0, 21)
+        Label46.TabIndex = 17
+        ' 
+        ' Label5
+        ' 
+        Label5.BackColor = SystemColors.ButtonHighlight
+        Label5.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label5.Location = New Point(549, 155)
+        Label5.Name = "Label5"
+        Label5.Size = New Size(269, 32)
+        Label5.TabIndex = 93
+        ' 
+        ' Label6
+        ' 
+        Label6.AutoSize = True
+        Label6.Font = New Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label6.ForeColor = Color.Black
+        Label6.Location = New Point(391, 160)
+        Label6.Name = "Label6"
+        Label6.Size = New Size(101, 23)
+        Label6.TabIndex = 92
+        Label6.Text = "Salary ID:"
+        ' 
+        ' lblID
+        ' 
+        lblID.BackColor = SystemColors.ButtonHighlight
+        lblID.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblID.Location = New Point(549, 111)
+        lblID.Name = "lblID"
+        lblID.Size = New Size(269, 32)
+        lblID.TabIndex = 91
+        ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Font = New Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label1.ForeColor = Color.Black
+        Label1.Location = New Point(391, 116)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(140, 23)
+        Label1.TabIndex = 90
+        Label1.Text = "Employee ID:"
+        ' 
         ' Salary
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1781, 1033)
+        ClientSize = New Size(1761, 1033)
         ControlBox = False
+        Controls.Add(Label5)
+        Controls.Add(Label6)
+        Controls.Add(lblID)
+        Controls.Add(Label1)
+        Controls.Add(GroupBox11)
         Controls.Add(Panel2)
-        Controls.Add(GroupBox2)
-        Controls.Add(GroupBox1)
         Controls.Add(adminheader_pnl)
         FormBorderStyle = FormBorderStyle.None
         Name = "Salary"
@@ -433,30 +441,15 @@ Partial Class Salary
         adminheader_pnl.ResumeLayout(False)
         adminheader_pnl.PerformLayout()
         CType(pcbTerminate, ComponentModel.ISupportInitialize).EndInit()
-        GroupBox1.ResumeLayout(False)
-        CType(DataGridView2, ComponentModel.ISupportInitialize).EndInit()
-        GroupBox2.ResumeLayout(False)
-        GroupBox5.ResumeLayout(False)
-        CType(DataGridView4, ComponentModel.ISupportInitialize).EndInit()
-        GroupBox4.ResumeLayout(False)
-        CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
-        GroupBox3.ResumeLayout(False)
-        CType(DataGridView3, ComponentModel.ISupportInitialize).EndInit()
         Panel2.ResumeLayout(False)
         Panel2.PerformLayout()
+        GroupBox11.ResumeLayout(False)
+        GroupBox11.PerformLayout()
         ResumeLayout(False)
+        PerformLayout()
     End Sub
     Friend WithEvents adminheader_pnl As Panel
     Friend WithEvents Label2 As Label
-    Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents DataGridView2 As DataGridView
-    Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents GroupBox4 As GroupBox
-    Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents GroupBox3 As GroupBox
-    Friend WithEvents DataGridView3 As DataGridView
-    Friend WithEvents GroupBox5 As GroupBox
-    Friend WithEvents DataGridView4 As DataGridView
     Friend WithEvents Panel2 As Panel
     Friend WithEvents pcbTerminate As PictureBox
     Friend WithEvents Label26 As Label
@@ -464,9 +457,9 @@ Partial Class Salary
     Friend WithEvents lblDashboard As Label
     Friend WithEvents Label51 As Label
     Friend WithEvents lblAmenities As Label
-    Friend WithEvents lblGoalsAndGrowth As Label
+    Friend WithEvents lblTrainings As Label
     Friend WithEvents lblLeaveApproval As Label
-    Friend WithEvents lblPerformanceReview As Label
+    Friend WithEvents lblEmployeeTrainings As Label
     Friend WithEvents lblPayrollSummary As Label
     Friend WithEvents lblDepartment As Label
     Friend WithEvents lblAttendanceTracker As Label
@@ -477,4 +470,14 @@ Partial Class Salary
     Friend WithEvents lblLeaveManagement As Label
     Friend WithEvents lblSalary As Label
     Friend WithEvents Label49 As Label
+    Friend WithEvents GroupBox11 As GroupBox
+    Friend WithEvents DateTimePicker1 As DateTimePicker
+    Friend WithEvents Label47 As Label
+    Friend WithEvents RadioButton2 As RadioButton
+    Friend WithEvents RadioButton1 As RadioButton
+    Friend WithEvents Label46 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents lblID As Label
+    Friend WithEvents Label1 As Label
 End Class

@@ -25,9 +25,9 @@ Partial Class Department
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Department))
         Panel1 = New Panel()
         lblAmenities = New Label()
-        lblGoalsAndGrowth = New Label()
+        lblTrainings = New Label()
         lblLeaveApproval = New Label()
-        lblPerformanceReview = New Label()
+        lblEmployeeTrainings = New Label()
         lblPayrollSummary = New Label()
         lblDepartment = New Label()
         Label8 = New Label()
@@ -45,20 +45,25 @@ Partial Class Department
         adminheader_pnl = New Panel()
         pcbTerminate = New PictureBox()
         Label2 = New Label()
-        DataGridView1 = New DataGridView()
+        dgvDepartment = New DataGridView()
+        btnUpdate = New Button()
+        TextBox6 = New TextBox()
+        TextBox10 = New TextBox()
+        Label1 = New Label()
+        Label10 = New Label()
         Panel1.SuspendLayout()
         adminheader_pnl.SuspendLayout()
         CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
-        CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
+        CType(dgvDepartment, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' Panel1
         ' 
         Panel1.BackColor = Color.SteelBlue
         Panel1.Controls.Add(lblAmenities)
-        Panel1.Controls.Add(lblGoalsAndGrowth)
+        Panel1.Controls.Add(lblTrainings)
         Panel1.Controls.Add(lblLeaveApproval)
-        Panel1.Controls.Add(lblPerformanceReview)
+        Panel1.Controls.Add(lblEmployeeTrainings)
         Panel1.Controls.Add(lblPayrollSummary)
         Panel1.Controls.Add(lblDepartment)
         Panel1.Controls.Add(Label8)
@@ -89,16 +94,16 @@ Partial Class Department
         lblAmenities.TabIndex = 18
         lblAmenities.Text = "Amenties"
         ' 
-        ' lblGoalsAndGrowth
+        ' lblTrainings
         ' 
-        lblGoalsAndGrowth.AutoSize = True
-        lblGoalsAndGrowth.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblGoalsAndGrowth.ForeColor = Color.White
-        lblGoalsAndGrowth.Location = New Point(53, 430)
-        lblGoalsAndGrowth.Name = "lblGoalsAndGrowth"
-        lblGoalsAndGrowth.Size = New Size(220, 27)
-        lblGoalsAndGrowth.TabIndex = 17
-        lblGoalsAndGrowth.Text = "Goals and Growth"
+        lblTrainings.AutoSize = True
+        lblTrainings.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblTrainings.ForeColor = Color.White
+        lblTrainings.Location = New Point(53, 430)
+        lblTrainings.Name = "lblTrainings"
+        lblTrainings.Size = New Size(110, 27)
+        lblTrainings.TabIndex = 17
+        lblTrainings.Text = "Trainings"
         ' 
         ' lblLeaveApproval
         ' 
@@ -111,16 +116,16 @@ Partial Class Department
         lblLeaveApproval.TabIndex = 16
         lblLeaveApproval.Text = "Leave Approval"
         ' 
-        ' lblPerformanceReview
+        ' lblEmployeeTrainings
         ' 
-        lblPerformanceReview.AutoSize = True
-        lblPerformanceReview.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblPerformanceReview.ForeColor = Color.White
-        lblPerformanceReview.Location = New Point(53, 700)
-        lblPerformanceReview.Name = "lblPerformanceReview"
-        lblPerformanceReview.Size = New Size(250, 27)
-        lblPerformanceReview.TabIndex = 15
-        lblPerformanceReview.Text = "Performance Review"
+        lblEmployeeTrainings.AutoSize = True
+        lblEmployeeTrainings.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblEmployeeTrainings.ForeColor = Color.White
+        lblEmployeeTrainings.Location = New Point(53, 700)
+        lblEmployeeTrainings.Name = "lblEmployeeTrainings"
+        lblEmployeeTrainings.Size = New Size(230, 27)
+        lblEmployeeTrainings.TabIndex = 15
+        lblEmployeeTrainings.Text = "Employee Trainings"
         ' 
         ' lblPayrollSummary
         ' 
@@ -306,24 +311,79 @@ Partial Class Department
         Label2.TabIndex = 0
         Label2.Text = "Department"
         ' 
-        ' DataGridView1
+        ' dgvDepartment
         ' 
-        DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView1.Location = New Point(410, 414)
-        DataGridView1.Name = "DataGridView1"
-        DataGridView1.RowHeadersWidth = 51
-        DataGridView1.Size = New Size(1335, 590)
-        DataGridView1.TabIndex = 4
+        dgvDepartment.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        dgvDepartment.Location = New Point(410, 414)
+        dgvDepartment.Name = "dgvDepartment"
+        dgvDepartment.RowHeadersWidth = 51
+        dgvDepartment.Size = New Size(1335, 590)
+        dgvDepartment.TabIndex = 4
+        ' 
+        ' btnUpdate
+        ' 
+        btnUpdate.BackColor = SystemColors.InactiveCaption
+        btnUpdate.BackgroundImageLayout = ImageLayout.None
+        btnUpdate.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnUpdate.ForeColor = Color.Black
+        btnUpdate.Location = New Point(1021, 102)
+        btnUpdate.Name = "btnUpdate"
+        btnUpdate.Size = New Size(104, 46)
+        btnUpdate.TabIndex = 81
+        btnUpdate.Text = "Update"
+        btnUpdate.UseVisualStyleBackColor = False
+        ' 
+        ' TextBox6
+        ' 
+        TextBox6.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox6.Location = New Point(564, 151)
+        TextBox6.Name = "TextBox6"
+        TextBox6.Size = New Size(218, 30)
+        TextBox6.TabIndex = 85
+        ' 
+        ' TextBox10
+        ' 
+        TextBox10.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox10.Location = New Point(564, 116)
+        TextBox10.Name = "TextBox10"
+        TextBox10.Size = New Size(218, 30)
+        TextBox10.TabIndex = 84
+        ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label1.Location = New Point(412, 161)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(146, 21)
+        Label1.TabIndex = 83
+        Label1.Text = "Department ID:"
+        ' 
+        ' Label10
+        ' 
+        Label10.AutoSize = True
+        Label10.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label10.Location = New Point(431, 125)
+        Label10.Name = "Label10"
+        Label10.Size = New Size(127, 21)
+        Label10.TabIndex = 82
+        Label10.Text = "Employee ID:"
         ' 
         ' Department
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1781, 1033)
+        ClientSize = New Size(1761, 1033)
         ControlBox = False
-        Controls.Add(DataGridView1)
+        Controls.Add(TextBox6)
+        Controls.Add(TextBox10)
+        Controls.Add(Label1)
+        Controls.Add(Label10)
+        Controls.Add(btnUpdate)
+        Controls.Add(dgvDepartment)
         Controls.Add(Panel1)
         Controls.Add(adminheader_pnl)
+        FormBorderStyle = FormBorderStyle.None
         Name = "Department"
         StartPosition = FormStartPosition.CenterScreen
         Text = "Department"
@@ -333,15 +393,16 @@ Partial Class Department
         adminheader_pnl.ResumeLayout(False)
         adminheader_pnl.PerformLayout()
         CType(pcbTerminate, ComponentModel.ISupportInitialize).EndInit()
-        CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
+        CType(dgvDepartment, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
+        PerformLayout()
     End Sub
 
     Friend WithEvents Panel1 As Panel
     Friend WithEvents lblAmenities As Label
-    Friend WithEvents lblGoalsAndGrowth As Label
+    Friend WithEvents lblTrainings As Label
     Friend WithEvents lblLeaveApproval As Label
-    Friend WithEvents lblPerformanceReview As Label
+    Friend WithEvents lblEmployeeTrainings As Label
     Friend WithEvents lblPayrollSummary As Label
     Friend WithEvents lblDepartment As Label
     Friend WithEvents Label8 As Label
@@ -359,5 +420,10 @@ Partial Class Department
     Friend WithEvents adminheader_pnl As Panel
     Friend WithEvents pcbTerminate As PictureBox
     Friend WithEvents Label2 As Label
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents dgvDepartment As DataGridView
+    Friend WithEvents btnUpdate As Button
+    Friend WithEvents TextBox6 As TextBox
+    Friend WithEvents TextBox10 As TextBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label10 As Label
 End Class

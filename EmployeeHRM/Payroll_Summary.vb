@@ -26,8 +26,8 @@ Public Class Payroll_Summary
         Me.Hide()
     End Sub
 
-    Private Sub lblGoalsAndGrowth_Click(sender As Object, e As EventArgs) Handles lblGoalsAndGrowth.Click
-        Goals_and_Growth.Show()
+    Private Sub lblTrainings_Click(sender As Object, e As EventArgs) Handles lblTrainings.Click
+        Trainings.Show()
         Me.Hide()
     End Sub
 
@@ -63,8 +63,8 @@ Public Class Payroll_Summary
         lblPayrollSummary.Enabled = False
     End Sub
 
-    Private Sub lblPerformanceReview_Click(sender As Object, e As EventArgs) Handles lblPerformanceReview.Click
-        Performance_Review.Show()
+    Private Sub lblEmployeeTrainings_Click(sender As Object, e As EventArgs) Handles lblEmployeeTrainings.Click
+        Employee_Trainings.Show()
         Me.Hide()
     End Sub
 

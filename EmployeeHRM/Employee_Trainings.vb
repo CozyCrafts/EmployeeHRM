@@ -1,4 +1,4 @@
-﻿Public Class Performance_Review
+﻿Public Class Employee_Trainings
 
     Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
         Manager_Dashboard.Show()
@@ -25,8 +25,8 @@
 
     End Sub
 
-    Private Sub lblGoalsAndGrowth_Click(sender As Object, e As EventArgs) Handles lblGoalsAndGrowth.Click
-        Goals_and_Growth.Show()
+    Private Sub lblTrainings_Click(sender As Object, e As EventArgs) Handles lblTrainings.Click
+        Trainings.Show()
         Me.Hide()
     End Sub
 
@@ -63,8 +63,8 @@
         Me.Hide()
     End Sub
 
-    Private Sub lblPerformanceReview_Click(sender As Object, e As EventArgs) Handles lblPerformanceReview.Click
-        lblPerformanceReview.Enabled = False
+    Private Sub lblEmployeeTrainings_Click(sender As Object, e As EventArgs) Handles lblEmployeeTrainings.Click
+        lblEmployeeTrainings.Enabled = False
     End Sub
 
     Private Sub lblDepartment_Click(sender As Object, e As EventArgs) Handles lblDepartment.Click

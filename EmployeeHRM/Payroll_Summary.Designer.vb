@@ -28,9 +28,9 @@ Partial Class Payroll_Summary
         Label2 = New Label()
         Panel1 = New Panel()
         lblAmenities = New Label()
-        lblGoalsAndGrowth = New Label()
+        lblTrainings = New Label()
         lblLeaveApproval = New Label()
-        lblPerformanceReview = New Label()
+        lblEmployeeTrainings = New Label()
         lblPayrollSummary = New Label()
         lblDepartment = New Label()
         Label8 = New Label()
@@ -45,6 +45,11 @@ Partial Class Payroll_Summary
         Label3 = New Label()
         lblDashboard = New Label()
         lblMain = New Label()
+        lblID = New Label()
+        Label1 = New Label()
+        Label5 = New Label()
+        Label6 = New Label()
+        ComboBox1 = New ComboBox()
         adminheader_pnl.SuspendLayout()
         CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
         Panel1.SuspendLayout()
@@ -84,9 +89,9 @@ Partial Class Payroll_Summary
         ' 
         Panel1.BackColor = Color.SteelBlue
         Panel1.Controls.Add(lblAmenities)
-        Panel1.Controls.Add(lblGoalsAndGrowth)
+        Panel1.Controls.Add(lblTrainings)
         Panel1.Controls.Add(lblLeaveApproval)
-        Panel1.Controls.Add(lblPerformanceReview)
+        Panel1.Controls.Add(lblEmployeeTrainings)
         Panel1.Controls.Add(lblPayrollSummary)
         Panel1.Controls.Add(lblDepartment)
         Panel1.Controls.Add(Label8)
@@ -117,16 +122,16 @@ Partial Class Payroll_Summary
         lblAmenities.TabIndex = 18
         lblAmenities.Text = "Amenties"
         ' 
-        ' lblGoalsAndGrowth
+        ' lblTrainings
         ' 
-        lblGoalsAndGrowth.AutoSize = True
-        lblGoalsAndGrowth.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblGoalsAndGrowth.ForeColor = Color.White
-        lblGoalsAndGrowth.Location = New Point(53, 430)
-        lblGoalsAndGrowth.Name = "lblGoalsAndGrowth"
-        lblGoalsAndGrowth.Size = New Size(220, 27)
-        lblGoalsAndGrowth.TabIndex = 17
-        lblGoalsAndGrowth.Text = "Goals and Growth"
+        lblTrainings.AutoSize = True
+        lblTrainings.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblTrainings.ForeColor = Color.White
+        lblTrainings.Location = New Point(53, 430)
+        lblTrainings.Name = "lblTrainings"
+        lblTrainings.Size = New Size(110, 27)
+        lblTrainings.TabIndex = 17
+        lblTrainings.Text = "Trainings"
         ' 
         ' lblLeaveApproval
         ' 
@@ -139,16 +144,16 @@ Partial Class Payroll_Summary
         lblLeaveApproval.TabIndex = 16
         lblLeaveApproval.Text = "Leave Approval"
         ' 
-        ' lblPerformanceReview
+        ' lblEmployeeTrainings
         ' 
-        lblPerformanceReview.AutoSize = True
-        lblPerformanceReview.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblPerformanceReview.ForeColor = Color.White
-        lblPerformanceReview.Location = New Point(53, 700)
-        lblPerformanceReview.Name = "lblPerformanceReview"
-        lblPerformanceReview.Size = New Size(250, 27)
-        lblPerformanceReview.TabIndex = 15
-        lblPerformanceReview.Text = "Performance Review"
+        lblEmployeeTrainings.AutoSize = True
+        lblEmployeeTrainings.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblEmployeeTrainings.ForeColor = Color.White
+        lblEmployeeTrainings.Location = New Point(53, 700)
+        lblEmployeeTrainings.Name = "lblEmployeeTrainings"
+        lblEmployeeTrainings.Size = New Size(230, 27)
+        lblEmployeeTrainings.TabIndex = 15
+        lblEmployeeTrainings.Text = "Employee Trainings"
         ' 
         ' lblPayrollSummary
         ' 
@@ -304,14 +309,68 @@ Partial Class Payroll_Summary
         lblMain.TabIndex = 1
         lblMain.Text = "MAIN"
         ' 
+        ' lblID
+        ' 
+        lblID.BackColor = SystemColors.ButtonHighlight
+        lblID.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblID.Location = New Point(568, 123)
+        lblID.Name = "lblID"
+        lblID.Size = New Size(269, 32)
+        lblID.TabIndex = 87
+        ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Font = New Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label1.ForeColor = Color.Black
+        Label1.Location = New Point(410, 128)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(140, 23)
+        Label1.TabIndex = 86
+        Label1.Text = "Employee ID:"
+        ' 
+        ' Label5
+        ' 
+        Label5.BackColor = SystemColors.ButtonHighlight
+        Label5.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label5.Location = New Point(568, 167)
+        Label5.Name = "Label5"
+        Label5.Size = New Size(269, 32)
+        Label5.TabIndex = 89
+        ' 
+        ' Label6
+        ' 
+        Label6.AutoSize = True
+        Label6.Font = New Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label6.ForeColor = Color.Black
+        Label6.Location = New Point(410, 172)
+        Label6.Name = "Label6"
+        Label6.Size = New Size(107, 23)
+        Label6.TabIndex = 88
+        Label6.Text = "Payroll ID:"
+        ' 
+        ' ComboBox1
+        ' 
+        ComboBox1.FormattingEnabled = True
+        ComboBox1.Location = New Point(568, 224)
+        ComboBox1.Name = "ComboBox1"
+        ComboBox1.Size = New Size(151, 28)
+        ComboBox1.TabIndex = 90
+        ' 
         ' Payroll_Summary
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1781, 1033)
+        ClientSize = New Size(1761, 1033)
         ControlBox = False
+        Controls.Add(ComboBox1)
+        Controls.Add(Label5)
+        Controls.Add(Label6)
+        Controls.Add(lblID)
+        Controls.Add(Label1)
         Controls.Add(Panel1)
         Controls.Add(adminheader_pnl)
+        FormBorderStyle = FormBorderStyle.None
         Name = "Payroll_Summary"
         StartPosition = FormStartPosition.CenterScreen
         Text = "Payroll_Summary"
@@ -322,6 +381,7 @@ Partial Class Payroll_Summary
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
         ResumeLayout(False)
+        PerformLayout()
     End Sub
 
     Friend WithEvents adminheader_pnl As Panel
@@ -329,9 +389,9 @@ Partial Class Payroll_Summary
     Friend WithEvents Label2 As Label
     Friend WithEvents Panel1 As Panel
     Friend WithEvents lblAmenities As Label
-    Friend WithEvents lblGoalsAndGrowth As Label
+    Friend WithEvents lblTrainings As Label
     Friend WithEvents lblLeaveApproval As Label
-    Friend WithEvents lblPerformanceReview As Label
+    Friend WithEvents lblEmployeeTrainings As Label
     Friend WithEvents lblPayrollSummary As Label
     Friend WithEvents lblDepartment As Label
     Friend WithEvents Label8 As Label
@@ -346,4 +406,9 @@ Partial Class Payroll_Summary
     Friend WithEvents Label3 As Label
     Friend WithEvents lblDashboard As Label
     Friend WithEvents lblMain As Label
+    Friend WithEvents lblID As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents ComboBox1 As ComboBox
 End Class
