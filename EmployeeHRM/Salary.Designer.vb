@@ -55,10 +55,14 @@ Partial Class Salary
         Label6 = New Label()
         lblID = New Label()
         Label1 = New Label()
+        GroupBox1 = New GroupBox()
+        dgvTrainingHistory = New DataGridView()
         adminheader_pnl.SuspendLayout()
         CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
         Panel2.SuspendLayout()
         GroupBox11.SuspendLayout()
+        GroupBox1.SuspendLayout()
+        CType(dgvTrainingHistory, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' adminheader_pnl
@@ -420,12 +424,36 @@ Partial Class Salary
         Label1.TabIndex = 90
         Label1.Text = "Employee ID:"
         ' 
+        ' GroupBox1
+        ' 
+        GroupBox1.Controls.Add(dgvTrainingHistory)
+        GroupBox1.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
+        GroupBox1.Location = New Point(412, 574)
+        GroupBox1.Margin = New Padding(4, 3, 4, 3)
+        GroupBox1.Name = "GroupBox1"
+        GroupBox1.Padding = New Padding(4, 3, 4, 3)
+        GroupBox1.Size = New Size(1342, 314)
+        GroupBox1.TabIndex = 94
+        GroupBox1.TabStop = False
+        GroupBox1.Text = "Salary History"
+        ' 
+        ' dgvTrainingHistory
+        ' 
+        dgvTrainingHistory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        dgvTrainingHistory.Location = New Point(25, 46)
+        dgvTrainingHistory.Margin = New Padding(4, 3, 4, 3)
+        dgvTrainingHistory.Name = "dgvTrainingHistory"
+        dgvTrainingHistory.RowHeadersWidth = 51
+        dgvTrainingHistory.Size = New Size(1292, 248)
+        dgvTrainingHistory.TabIndex = 0
+        ' 
         ' Salary
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1761, 1033)
         ControlBox = False
+        Controls.Add(GroupBox1)
         Controls.Add(Label5)
         Controls.Add(Label6)
         Controls.Add(lblID)
@@ -445,6 +473,8 @@ Partial Class Salary
         Panel2.PerformLayout()
         GroupBox11.ResumeLayout(False)
         GroupBox11.PerformLayout()
+        GroupBox1.ResumeLayout(False)
+        CType(dgvTrainingHistory, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -480,4 +510,6 @@ Partial Class Salary
     Friend WithEvents Label6 As Label
     Friend WithEvents lblID As Label
     Friend WithEvents Label1 As Label
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents dgvTrainingHistory As DataGridView
 End Class

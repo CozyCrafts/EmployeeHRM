@@ -45,42 +45,47 @@ Partial Class Employee_Trainings
         adminheader_pnl = New Panel()
         pcbTerminate = New PictureBox()
         Label2 = New Label()
-        GroupBox1 = New GroupBox()
+        gbEmployeeTrainingHistory = New GroupBox()
         dgvEmployeeTrainingHistory = New DataGridView()
-        GroupBox4 = New GroupBox()
-        btnAddTraining = New Button()
-        btnUpdateTraining = New Button()
-        Label11 = New Label()
-        btnDeleteTraining = New Button()
-        TextBox1 = New TextBox()
-        txtTrainingTitle = New TextBox()
-        txtTrainingType = New TextBox()
-        txtTrainingID = New TextBox()
-        Label6 = New Label()
-        Label21 = New Label()
-        Label1 = New Label()
-        txtTrainingDescription = New TextBox()
-        Label5 = New Label()
-        btnCancelTraining = New Button()
-        btnSaveTraining = New Button()
-        GroupBox3 = New GroupBox()
+        gbSchedule = New GroupBox()
         Label9 = New Label()
         Label10 = New Label()
-        dtpStarted = New DateTimePicker()
-        dtpCompleted = New DateTimePicker()
-        GroupBox2 = New GroupBox()
+        dtpTrainingStarted = New DateTimePicker()
+        dtpTrainingCompleted = New DateTimePicker()
+        gbStatus = New GroupBox()
         rbPostponed = New RadioButton()
         rbCompleted = New RadioButton()
         rbPlanned = New RadioButton()
         rbInProgress = New RadioButton()
+        btnSaveTraining = New Button()
+        btnCancelTraining = New Button()
+        Label5 = New Label()
+        txtTrainingDescription = New TextBox()
+        Label1 = New Label()
+        Label21 = New Label()
+        Label6 = New Label()
+        txtTrainingID = New TextBox()
+        txtTrainingType = New TextBox()
+        txtTrainingTitle = New TextBox()
+        TextBox1 = New TextBox()
+        btnDeleteTraining = New Button()
+        Label11 = New Label()
+        btnUpdateTraining = New Button()
+        btnAddTraining = New Button()
+        gbEmplyeeTrainingsDetails = New GroupBox()
+        Label12 = New Label()
+        TextBox2 = New TextBox()
+        btnRefreshTrainings = New Button()
+        txtSearchTrainings = New TextBox()
+        btnSearchTrainings = New Button()
         Panel1.SuspendLayout()
         adminheader_pnl.SuspendLayout()
         CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
-        GroupBox1.SuspendLayout()
+        gbEmployeeTrainingHistory.SuspendLayout()
         CType(dgvEmployeeTrainingHistory, ComponentModel.ISupportInitialize).BeginInit()
-        GroupBox4.SuspendLayout()
-        GroupBox3.SuspendLayout()
-        GroupBox2.SuspendLayout()
+        gbSchedule.SuspendLayout()
+        gbStatus.SuspendLayout()
+        gbEmplyeeTrainingsDetails.SuspendLayout()
         SuspendLayout()
         ' 
         ' Panel1
@@ -337,237 +342,47 @@ Partial Class Employee_Trainings
         Label2.TabIndex = 0
         Label2.Text = "Employee Trainings"
         ' 
-        ' GroupBox1
+        ' gbEmployeeTrainingHistory
         ' 
-        GroupBox1.Controls.Add(dgvEmployeeTrainingHistory)
-        GroupBox1.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        GroupBox1.Location = New Point(416, 694)
-        GroupBox1.Margin = New Padding(4, 3, 4, 3)
-        GroupBox1.Name = "GroupBox1"
-        GroupBox1.Padding = New Padding(4, 3, 4, 3)
-        GroupBox1.Size = New Size(1361, 314)
-        GroupBox1.TabIndex = 67
-        GroupBox1.TabStop = False
-        GroupBox1.Text = "Employee Training History"
+        gbEmployeeTrainingHistory.Controls.Add(btnRefreshTrainings)
+        gbEmployeeTrainingHistory.Controls.Add(txtSearchTrainings)
+        gbEmployeeTrainingHistory.Controls.Add(btnSearchTrainings)
+        gbEmployeeTrainingHistory.Controls.Add(dgvEmployeeTrainingHistory)
+        gbEmployeeTrainingHistory.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
+        gbEmployeeTrainingHistory.Location = New Point(383, 614)
+        gbEmployeeTrainingHistory.Margin = New Padding(4, 3, 4, 3)
+        gbEmployeeTrainingHistory.Name = "gbEmployeeTrainingHistory"
+        gbEmployeeTrainingHistory.Padding = New Padding(4, 3, 4, 3)
+        gbEmployeeTrainingHistory.Size = New Size(1362, 394)
+        gbEmployeeTrainingHistory.TabIndex = 67
+        gbEmployeeTrainingHistory.TabStop = False
+        gbEmployeeTrainingHistory.Text = "Employee Training History"
         ' 
         ' dgvEmployeeTrainingHistory
         ' 
         dgvEmployeeTrainingHistory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        dgvEmployeeTrainingHistory.Location = New Point(25, 46)
+        dgvEmployeeTrainingHistory.Location = New Point(27, 92)
         dgvEmployeeTrainingHistory.Margin = New Padding(4, 3, 4, 3)
         dgvEmployeeTrainingHistory.Name = "dgvEmployeeTrainingHistory"
         dgvEmployeeTrainingHistory.RowHeadersWidth = 51
-        dgvEmployeeTrainingHistory.Size = New Size(1308, 248)
+        dgvEmployeeTrainingHistory.Size = New Size(1277, 276)
         dgvEmployeeTrainingHistory.TabIndex = 0
         ' 
-        ' GroupBox4
+        ' gbSchedule
         ' 
-        GroupBox4.Controls.Add(btnAddTraining)
-        GroupBox4.Controls.Add(btnUpdateTraining)
-        GroupBox4.Controls.Add(Label11)
-        GroupBox4.Controls.Add(btnDeleteTraining)
-        GroupBox4.Controls.Add(TextBox1)
-        GroupBox4.Controls.Add(txtTrainingTitle)
-        GroupBox4.Controls.Add(txtTrainingType)
-        GroupBox4.Controls.Add(txtTrainingID)
-        GroupBox4.Controls.Add(Label6)
-        GroupBox4.Controls.Add(Label21)
-        GroupBox4.Controls.Add(Label1)
-        GroupBox4.Controls.Add(txtTrainingDescription)
-        GroupBox4.Controls.Add(Label5)
-        GroupBox4.Controls.Add(btnCancelTraining)
-        GroupBox4.Controls.Add(btnSaveTraining)
-        GroupBox4.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        GroupBox4.Location = New Point(416, 167)
-        GroupBox4.Margin = New Padding(4, 3, 4, 3)
-        GroupBox4.Name = "GroupBox4"
-        GroupBox4.Padding = New Padding(4, 3, 4, 3)
-        GroupBox4.Size = New Size(1269, 308)
-        GroupBox4.TabIndex = 84
-        GroupBox4.TabStop = False
-        GroupBox4.Text = "Details"
-        ' 
-        ' btnAddTraining
-        ' 
-        btnAddTraining.BackColor = SystemColors.InactiveCaption
-        btnAddTraining.BackgroundImageLayout = ImageLayout.None
-        btnAddTraining.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnAddTraining.ForeColor = Color.Black
-        btnAddTraining.Location = New Point(888, 71)
-        btnAddTraining.Name = "btnAddTraining"
-        btnAddTraining.Size = New Size(340, 46)
-        btnAddTraining.TabIndex = 82
-        btnAddTraining.Text = "Add Training"
-        btnAddTraining.UseVisualStyleBackColor = False
-        ' 
-        ' btnUpdateTraining
-        ' 
-        btnUpdateTraining.BackColor = SystemColors.InactiveCaption
-        btnUpdateTraining.BackgroundImageLayout = ImageLayout.None
-        btnUpdateTraining.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnUpdateTraining.ForeColor = Color.Black
-        btnUpdateTraining.Location = New Point(888, 138)
-        btnUpdateTraining.Name = "btnUpdateTraining"
-        btnUpdateTraining.Size = New Size(340, 46)
-        btnUpdateTraining.TabIndex = 87
-        btnUpdateTraining.Text = "Update "
-        btnUpdateTraining.UseVisualStyleBackColor = False
-        ' 
-        ' Label11
-        ' 
-        Label11.AutoSize = True
-        Label11.Font = New Font("Century Gothic", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label11.ForeColor = Color.Black
-        Label11.Location = New Point(73, 49)
-        Label11.Margin = New Padding(4, 0, 4, 0)
-        Label11.Name = "Label11"
-        Label11.Size = New Size(161, 27)
-        Label11.TabIndex = 86
-        Label11.Text = "Employee ID:"
-        ' 
-        ' btnDeleteTraining
-        ' 
-        btnDeleteTraining.BackColor = SystemColors.InactiveCaption
-        btnDeleteTraining.BackgroundImageLayout = ImageLayout.None
-        btnDeleteTraining.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnDeleteTraining.ForeColor = Color.Black
-        btnDeleteTraining.Location = New Point(888, 201)
-        btnDeleteTraining.Name = "btnDeleteTraining"
-        btnDeleteTraining.Size = New Size(340, 46)
-        btnDeleteTraining.TabIndex = 88
-        btnDeleteTraining.Text = "Delete"
-        btnDeleteTraining.UseVisualStyleBackColor = False
-        ' 
-        ' TextBox1
-        ' 
-        TextBox1.Location = New Point(242, 88)
-        TextBox1.Margin = New Padding(4, 3, 4, 3)
-        TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(349, 36)
-        TextBox1.TabIndex = 85
-        ' 
-        ' txtTrainingTitle
-        ' 
-        txtTrainingTitle.Location = New Point(242, 130)
-        txtTrainingTitle.Margin = New Padding(4, 3, 4, 3)
-        txtTrainingTitle.Name = "txtTrainingTitle"
-        txtTrainingTitle.Size = New Size(619, 36)
-        txtTrainingTitle.TabIndex = 72
-        ' 
-        ' txtTrainingType
-        ' 
-        txtTrainingType.Location = New Point(243, 172)
-        txtTrainingType.Margin = New Padding(4, 3, 4, 3)
-        txtTrainingType.Name = "txtTrainingType"
-        txtTrainingType.Size = New Size(619, 36)
-        txtTrainingType.TabIndex = 80
-        ' 
-        ' txtTrainingID
-        ' 
-        txtTrainingID.Location = New Point(242, 46)
-        txtTrainingID.Margin = New Padding(4, 3, 4, 3)
-        txtTrainingID.Name = "txtTrainingID"
-        txtTrainingID.Size = New Size(349, 36)
-        txtTrainingID.TabIndex = 23
-        ' 
-        ' Label6
-        ' 
-        Label6.AutoSize = True
-        Label6.Font = New Font("Century Gothic", 13F)
-        Label6.ForeColor = Color.Black
-        Label6.Location = New Point(76, 172)
-        Label6.Margin = New Padding(4, 0, 4, 0)
-        Label6.Name = "Label6"
-        Label6.Size = New Size(159, 25)
-        Label6.TabIndex = 79
-        Label6.Text = "Training Type:"
-        ' 
-        ' Label21
-        ' 
-        Label21.AutoSize = True
-        Label21.Font = New Font("Century Gothic", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label21.ForeColor = Color.Black
-        Label21.Location = New Point(98, 87)
-        Label21.Margin = New Padding(4, 0, 4, 0)
-        Label21.Name = "Label21"
-        Label21.Size = New Size(136, 27)
-        Label21.TabIndex = 70
-        Label21.Text = "Training ID:"
-        ' 
-        ' Label1
-        ' 
-        Label1.AutoSize = True
-        Label1.Font = New Font("Century Gothic", 13F)
-        Label1.ForeColor = Color.Black
-        Label1.Location = New Point(85, 130)
-        Label1.Margin = New Padding(4, 0, 4, 0)
-        Label1.Name = "Label1"
-        Label1.Size = New Size(149, 25)
-        Label1.TabIndex = 71
-        Label1.Text = "Training Title:"
-        ' 
-        ' txtTrainingDescription
-        ' 
-        txtTrainingDescription.Location = New Point(242, 214)
-        txtTrainingDescription.Margin = New Padding(4, 3, 4, 3)
-        txtTrainingDescription.Multiline = True
-        txtTrainingDescription.Name = "txtTrainingDescription"
-        txtTrainingDescription.Size = New Size(619, 60)
-        txtTrainingDescription.TabIndex = 73
-        ' 
-        ' Label5
-        ' 
-        Label5.AutoSize = True
-        Label5.Font = New Font("Century Gothic", 13F)
-        Label5.ForeColor = Color.Black
-        Label5.Location = New Point(98, 214)
-        Label5.Margin = New Padding(4, 0, 4, 0)
-        Label5.Name = "Label5"
-        Label5.Size = New Size(136, 25)
-        Label5.TabIndex = 74
-        Label5.Text = "Description:"
-        ' 
-        ' btnCancelTraining
-        ' 
-        btnCancelTraining.BackColor = SystemColors.InactiveCaption
-        btnCancelTraining.BackgroundImageLayout = ImageLayout.None
-        btnCancelTraining.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnCancelTraining.ForeColor = Color.Black
-        btnCancelTraining.Location = New Point(1061, 138)
-        btnCancelTraining.Name = "btnCancelTraining"
-        btnCancelTraining.Size = New Size(167, 46)
-        btnCancelTraining.TabIndex = 84
-        btnCancelTraining.Text = "Cancel"
-        btnCancelTraining.UseVisualStyleBackColor = False
-        ' 
-        ' btnSaveTraining
-        ' 
-        btnSaveTraining.BackColor = SystemColors.InactiveCaption
-        btnSaveTraining.BackgroundImageLayout = ImageLayout.None
-        btnSaveTraining.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnSaveTraining.ForeColor = Color.Black
-        btnSaveTraining.Location = New Point(888, 138)
-        btnSaveTraining.Name = "btnSaveTraining"
-        btnSaveTraining.Size = New Size(167, 46)
-        btnSaveTraining.TabIndex = 83
-        btnSaveTraining.Text = "Save"
-        btnSaveTraining.UseVisualStyleBackColor = False
-        ' 
-        ' GroupBox3
-        ' 
-        GroupBox3.Controls.Add(Label9)
-        GroupBox3.Controls.Add(Label10)
-        GroupBox3.Controls.Add(dtpStarted)
-        GroupBox3.Controls.Add(dtpCompleted)
-        GroupBox3.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        GroupBox3.Location = New Point(410, 514)
-        GroupBox3.Margin = New Padding(4, 3, 4, 3)
-        GroupBox3.Name = "GroupBox3"
-        GroupBox3.Padding = New Padding(4, 3, 4, 3)
-        GroupBox3.Size = New Size(624, 127)
-        GroupBox3.TabIndex = 83
-        GroupBox3.TabStop = False
-        GroupBox3.Text = "Schedule "
+        gbSchedule.Controls.Add(Label9)
+        gbSchedule.Controls.Add(Label10)
+        gbSchedule.Controls.Add(dtpTrainingStarted)
+        gbSchedule.Controls.Add(dtpTrainingCompleted)
+        gbSchedule.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
+        gbSchedule.Location = New Point(383, 474)
+        gbSchedule.Margin = New Padding(4, 3, 4, 3)
+        gbSchedule.Name = "gbSchedule"
+        gbSchedule.Padding = New Padding(4, 3, 4, 3)
+        gbSchedule.Size = New Size(655, 127)
+        gbSchedule.TabIndex = 83
+        gbSchedule.TabStop = False
+        gbSchedule.Text = "Schedule "
         ' 
         ' Label9
         ' 
@@ -593,47 +408,47 @@ Partial Class Employee_Trainings
         Label10.TabIndex = 78
         Label10.Text = "Date Started:"
         ' 
-        ' dtpStarted
+        ' dtpTrainingStarted
         ' 
-        dtpStarted.CalendarFont = New Font("Century Gothic", 10.2F)
-        dtpStarted.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        dtpStarted.Location = New Point(235, 34)
-        dtpStarted.Margin = New Padding(4, 3, 4, 3)
-        dtpStarted.Name = "dtpStarted"
-        dtpStarted.Size = New Size(373, 32)
-        dtpStarted.TabIndex = 76
+        dtpTrainingStarted.CalendarFont = New Font("Century Gothic", 10.2F)
+        dtpTrainingStarted.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
+        dtpTrainingStarted.Location = New Point(235, 34)
+        dtpTrainingStarted.Margin = New Padding(4, 3, 4, 3)
+        dtpTrainingStarted.Name = "dtpTrainingStarted"
+        dtpTrainingStarted.Size = New Size(396, 32)
+        dtpTrainingStarted.TabIndex = 76
         ' 
-        ' dtpCompleted
+        ' dtpTrainingCompleted
         ' 
-        dtpCompleted.CalendarFont = New Font("Century Gothic", 10.2F)
-        dtpCompleted.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        dtpCompleted.Location = New Point(235, 77)
-        dtpCompleted.Margin = New Padding(4, 3, 4, 3)
-        dtpCompleted.Name = "dtpCompleted"
-        dtpCompleted.Size = New Size(373, 32)
-        dtpCompleted.TabIndex = 77
+        dtpTrainingCompleted.CalendarFont = New Font("Century Gothic", 10.2F)
+        dtpTrainingCompleted.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
+        dtpTrainingCompleted.Location = New Point(235, 77)
+        dtpTrainingCompleted.Margin = New Padding(4, 3, 4, 3)
+        dtpTrainingCompleted.Name = "dtpTrainingCompleted"
+        dtpTrainingCompleted.Size = New Size(396, 32)
+        dtpTrainingCompleted.TabIndex = 77
         ' 
-        ' GroupBox2
+        ' gbStatus
         ' 
-        GroupBox2.Controls.Add(rbPostponed)
-        GroupBox2.Controls.Add(rbCompleted)
-        GroupBox2.Controls.Add(rbPlanned)
-        GroupBox2.Controls.Add(rbInProgress)
-        GroupBox2.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        GroupBox2.Location = New Point(1070, 523)
-        GroupBox2.Margin = New Padding(4, 3, 4, 3)
-        GroupBox2.Name = "GroupBox2"
-        GroupBox2.Padding = New Padding(4, 3, 4, 3)
-        GroupBox2.Size = New Size(633, 118)
-        GroupBox2.TabIndex = 82
-        GroupBox2.TabStop = False
-        GroupBox2.Text = "Status"
+        gbStatus.Controls.Add(rbPostponed)
+        gbStatus.Controls.Add(rbCompleted)
+        gbStatus.Controls.Add(rbPlanned)
+        gbStatus.Controls.Add(rbInProgress)
+        gbStatus.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
+        gbStatus.Location = New Point(1058, 483)
+        gbStatus.Margin = New Padding(4, 3, 4, 3)
+        gbStatus.Name = "gbStatus"
+        gbStatus.Padding = New Padding(4, 3, 4, 3)
+        gbStatus.Size = New Size(687, 118)
+        gbStatus.TabIndex = 82
+        gbStatus.TabStop = False
+        gbStatus.Text = "Status"
         ' 
         ' rbPostponed
         ' 
         rbPostponed.AutoSize = True
         rbPostponed.Font = New Font("Century Gothic", 13F)
-        rbPostponed.Location = New Point(480, 55)
+        rbPostponed.Location = New Point(512, 55)
         rbPostponed.Margin = New Padding(4, 3, 4, 3)
         rbPostponed.Name = "rbPostponed"
         rbPostponed.Size = New Size(148, 29)
@@ -646,7 +461,7 @@ Partial Class Employee_Trainings
         ' 
         rbCompleted.AutoSize = True
         rbCompleted.Font = New Font("Century Gothic", 13F)
-        rbCompleted.Location = New Point(313, 55)
+        rbCompleted.Location = New Point(329, 55)
         rbCompleted.Margin = New Padding(4, 3, 4, 3)
         rbCompleted.Name = "rbCompleted"
         rbCompleted.Size = New Size(159, 29)
@@ -672,7 +487,7 @@ Partial Class Employee_Trainings
         ' 
         rbInProgress.AutoSize = True
         rbInProgress.Font = New Font("Century Gothic", 13F)
-        rbInProgress.Location = New Point(163, 55)
+        rbInProgress.Location = New Point(164, 55)
         rbInProgress.Margin = New Padding(4, 3, 4, 3)
         rbInProgress.Name = "rbInProgress"
         rbInProgress.Size = New Size(146, 29)
@@ -681,16 +496,266 @@ Partial Class Employee_Trainings
         rbInProgress.Text = "In Progress"
         rbInProgress.UseVisualStyleBackColor = True
         ' 
+        ' btnSaveTraining
+        ' 
+        btnSaveTraining.BackColor = SystemColors.InactiveCaption
+        btnSaveTraining.BackgroundImageLayout = ImageLayout.None
+        btnSaveTraining.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnSaveTraining.ForeColor = Color.Black
+        btnSaveTraining.Location = New Point(957, 135)
+        btnSaveTraining.Name = "btnSaveTraining"
+        btnSaveTraining.Size = New Size(167, 46)
+        btnSaveTraining.TabIndex = 83
+        btnSaveTraining.Text = "Save"
+        btnSaveTraining.UseVisualStyleBackColor = False
+        ' 
+        ' btnCancelTraining
+        ' 
+        btnCancelTraining.BackColor = SystemColors.InactiveCaption
+        btnCancelTraining.BackgroundImageLayout = ImageLayout.None
+        btnCancelTraining.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnCancelTraining.ForeColor = Color.Black
+        btnCancelTraining.Location = New Point(1130, 135)
+        btnCancelTraining.Name = "btnCancelTraining"
+        btnCancelTraining.Size = New Size(167, 46)
+        btnCancelTraining.TabIndex = 84
+        btnCancelTraining.Text = "Cancel"
+        btnCancelTraining.UseVisualStyleBackColor = False
+        ' 
+        ' Label5
+        ' 
+        Label5.AutoSize = True
+        Label5.Font = New Font("Century Gothic", 13F)
+        Label5.ForeColor = Color.Black
+        Label5.Location = New Point(151, 262)
+        Label5.Margin = New Padding(4, 0, 4, 0)
+        Label5.Name = "Label5"
+        Label5.Size = New Size(136, 25)
+        Label5.TabIndex = 74
+        Label5.Text = "Description:"
+        ' 
+        ' txtTrainingDescription
+        ' 
+        txtTrainingDescription.Location = New Point(295, 258)
+        txtTrainingDescription.Margin = New Padding(4, 3, 4, 3)
+        txtTrainingDescription.Multiline = True
+        txtTrainingDescription.Name = "txtTrainingDescription"
+        txtTrainingDescription.Size = New Size(619, 60)
+        txtTrainingDescription.TabIndex = 73
+        ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Font = New Font("Century Gothic", 13F)
+        Label1.ForeColor = Color.Black
+        Label1.Location = New Point(138, 185)
+        Label1.Margin = New Padding(4, 0, 4, 0)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(149, 25)
+        Label1.TabIndex = 71
+        Label1.Text = "Training Title:"
+        ' 
+        ' Label21
+        ' 
+        Label21.AutoSize = True
+        Label21.Font = New Font("Century Gothic", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label21.ForeColor = Color.Black
+        Label21.Location = New Point(151, 141)
+        Label21.Margin = New Padding(4, 0, 4, 0)
+        Label21.Name = "Label21"
+        Label21.Size = New Size(136, 27)
+        Label21.TabIndex = 70
+        Label21.Text = "Training ID:"
+        ' 
+        ' Label6
+        ' 
+        Label6.AutoSize = True
+        Label6.Font = New Font("Century Gothic", 13F)
+        Label6.ForeColor = Color.Black
+        Label6.Location = New Point(128, 227)
+        Label6.Margin = New Padding(4, 0, 4, 0)
+        Label6.Name = "Label6"
+        Label6.Size = New Size(159, 25)
+        Label6.TabIndex = 79
+        Label6.Text = "Training Type:"
+        ' 
+        ' txtTrainingID
+        ' 
+        txtTrainingID.Location = New Point(295, 48)
+        txtTrainingID.Margin = New Padding(4, 3, 4, 3)
+        txtTrainingID.Name = "txtTrainingID"
+        txtTrainingID.Size = New Size(349, 36)
+        txtTrainingID.TabIndex = 23
+        ' 
+        ' txtTrainingType
+        ' 
+        txtTrainingType.Location = New Point(295, 216)
+        txtTrainingType.Margin = New Padding(4, 3, 4, 3)
+        txtTrainingType.Name = "txtTrainingType"
+        txtTrainingType.Size = New Size(619, 36)
+        txtTrainingType.TabIndex = 80
+        ' 
+        ' txtTrainingTitle
+        ' 
+        txtTrainingTitle.Location = New Point(295, 174)
+        txtTrainingTitle.Margin = New Padding(4, 3, 4, 3)
+        txtTrainingTitle.Name = "txtTrainingTitle"
+        txtTrainingTitle.Size = New Size(619, 36)
+        txtTrainingTitle.TabIndex = 72
+        ' 
+        ' TextBox1
+        ' 
+        TextBox1.Location = New Point(295, 132)
+        TextBox1.Margin = New Padding(4, 3, 4, 3)
+        TextBox1.Name = "TextBox1"
+        TextBox1.Size = New Size(349, 36)
+        TextBox1.TabIndex = 85
+        ' 
+        ' btnDeleteTraining
+        ' 
+        btnDeleteTraining.BackColor = SystemColors.InactiveCaption
+        btnDeleteTraining.BackgroundImageLayout = ImageLayout.None
+        btnDeleteTraining.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnDeleteTraining.ForeColor = Color.Black
+        btnDeleteTraining.Location = New Point(957, 198)
+        btnDeleteTraining.Name = "btnDeleteTraining"
+        btnDeleteTraining.Size = New Size(340, 46)
+        btnDeleteTraining.TabIndex = 88
+        btnDeleteTraining.Text = "Delete"
+        btnDeleteTraining.UseVisualStyleBackColor = False
+        ' 
+        ' Label11
+        ' 
+        Label11.AutoSize = True
+        Label11.Font = New Font("Century Gothic", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label11.ForeColor = Color.Black
+        Label11.Location = New Point(126, 57)
+        Label11.Margin = New Padding(4, 0, 4, 0)
+        Label11.Name = "Label11"
+        Label11.Size = New Size(161, 27)
+        Label11.TabIndex = 86
+        Label11.Text = "Employee ID:"
+        ' 
+        ' btnUpdateTraining
+        ' 
+        btnUpdateTraining.BackColor = SystemColors.InactiveCaption
+        btnUpdateTraining.BackgroundImageLayout = ImageLayout.None
+        btnUpdateTraining.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnUpdateTraining.ForeColor = Color.Black
+        btnUpdateTraining.Location = New Point(957, 135)
+        btnUpdateTraining.Name = "btnUpdateTraining"
+        btnUpdateTraining.Size = New Size(340, 46)
+        btnUpdateTraining.TabIndex = 87
+        btnUpdateTraining.Text = "Update "
+        btnUpdateTraining.UseVisualStyleBackColor = False
+        ' 
+        ' btnAddTraining
+        ' 
+        btnAddTraining.BackColor = SystemColors.InactiveCaption
+        btnAddTraining.BackgroundImageLayout = ImageLayout.None
+        btnAddTraining.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnAddTraining.ForeColor = Color.Black
+        btnAddTraining.Location = New Point(957, 66)
+        btnAddTraining.Name = "btnAddTraining"
+        btnAddTraining.Size = New Size(340, 46)
+        btnAddTraining.TabIndex = 82
+        btnAddTraining.Text = "Add Training"
+        btnAddTraining.UseVisualStyleBackColor = False
+        ' 
+        ' gbEmplyeeTrainingsDetails
+        ' 
+        gbEmplyeeTrainingsDetails.Controls.Add(Label12)
+        gbEmplyeeTrainingsDetails.Controls.Add(TextBox2)
+        gbEmplyeeTrainingsDetails.Controls.Add(btnAddTraining)
+        gbEmplyeeTrainingsDetails.Controls.Add(btnUpdateTraining)
+        gbEmplyeeTrainingsDetails.Controls.Add(Label11)
+        gbEmplyeeTrainingsDetails.Controls.Add(btnDeleteTraining)
+        gbEmplyeeTrainingsDetails.Controls.Add(TextBox1)
+        gbEmplyeeTrainingsDetails.Controls.Add(txtTrainingTitle)
+        gbEmplyeeTrainingsDetails.Controls.Add(txtTrainingType)
+        gbEmplyeeTrainingsDetails.Controls.Add(txtTrainingID)
+        gbEmplyeeTrainingsDetails.Controls.Add(Label6)
+        gbEmplyeeTrainingsDetails.Controls.Add(Label21)
+        gbEmplyeeTrainingsDetails.Controls.Add(Label1)
+        gbEmplyeeTrainingsDetails.Controls.Add(txtTrainingDescription)
+        gbEmplyeeTrainingsDetails.Controls.Add(Label5)
+        gbEmplyeeTrainingsDetails.Controls.Add(btnCancelTraining)
+        gbEmplyeeTrainingsDetails.Controls.Add(btnSaveTraining)
+        gbEmplyeeTrainingsDetails.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
+        gbEmplyeeTrainingsDetails.Location = New Point(380, 110)
+        gbEmplyeeTrainingsDetails.Margin = New Padding(4, 3, 4, 3)
+        gbEmplyeeTrainingsDetails.Name = "gbEmplyeeTrainingsDetails"
+        gbEmplyeeTrainingsDetails.Padding = New Padding(4, 3, 4, 3)
+        gbEmplyeeTrainingsDetails.Size = New Size(1365, 350)
+        gbEmplyeeTrainingsDetails.TabIndex = 84
+        gbEmplyeeTrainingsDetails.TabStop = False
+        gbEmplyeeTrainingsDetails.Text = "Details"
+        ' 
+        ' Label12
+        ' 
+        Label12.AutoSize = True
+        Label12.Font = New Font("Century Gothic", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label12.ForeColor = Color.Black
+        Label12.Location = New Point(79, 99)
+        Label12.Margin = New Padding(4, 0, 4, 0)
+        Label12.Name = "Label12"
+        Label12.Size = New Size(208, 27)
+        Label12.TabIndex = 90
+        Label12.Text = "Employee Name:"
+        ' 
+        ' TextBox2
+        ' 
+        TextBox2.Location = New Point(295, 90)
+        TextBox2.Margin = New Padding(4, 3, 4, 3)
+        TextBox2.Name = "TextBox2"
+        TextBox2.Size = New Size(349, 36)
+        TextBox2.TabIndex = 89
+        ' 
+        ' btnRefreshTrainings
+        ' 
+        btnRefreshTrainings.BackColor = SystemColors.InactiveCaption
+        btnRefreshTrainings.BackgroundImageLayout = ImageLayout.None
+        btnRefreshTrainings.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnRefreshTrainings.ForeColor = Color.Black
+        btnRefreshTrainings.Location = New Point(464, 40)
+        btnRefreshTrainings.Name = "btnRefreshTrainings"
+        btnRefreshTrainings.Size = New Size(167, 46)
+        btnRefreshTrainings.TabIndex = 94
+        btnRefreshTrainings.Text = "Refresh Data"
+        btnRefreshTrainings.UseVisualStyleBackColor = False
+        ' 
+        ' txtSearchTrainings
+        ' 
+        txtSearchTrainings.Font = New Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtSearchTrainings.Location = New Point(201, 48)
+        txtSearchTrainings.Margin = New Padding(4, 3, 4, 3)
+        txtSearchTrainings.Name = "txtSearchTrainings"
+        txtSearchTrainings.Size = New Size(256, 32)
+        txtSearchTrainings.TabIndex = 93
+        ' 
+        ' btnSearchTrainings
+        ' 
+        btnSearchTrainings.BackColor = SystemColors.InactiveCaption
+        btnSearchTrainings.BackgroundImageLayout = ImageLayout.None
+        btnSearchTrainings.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnSearchTrainings.ForeColor = Color.Black
+        btnSearchTrainings.Location = New Point(27, 40)
+        btnSearchTrainings.Name = "btnSearchTrainings"
+        btnSearchTrainings.Size = New Size(167, 46)
+        btnSearchTrainings.TabIndex = 92
+        btnSearchTrainings.Text = "Search"
+        btnSearchTrainings.UseVisualStyleBackColor = False
+        ' 
         ' Employee_Trainings
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1761, 1033)
         ControlBox = False
-        Controls.Add(GroupBox4)
-        Controls.Add(GroupBox3)
-        Controls.Add(GroupBox2)
-        Controls.Add(GroupBox1)
+        Controls.Add(gbEmplyeeTrainingsDetails)
+        Controls.Add(gbSchedule)
+        Controls.Add(gbStatus)
+        Controls.Add(gbEmployeeTrainingHistory)
         Controls.Add(Panel1)
         Controls.Add(adminheader_pnl)
         FormBorderStyle = FormBorderStyle.None
@@ -702,14 +767,15 @@ Partial Class Employee_Trainings
         adminheader_pnl.ResumeLayout(False)
         adminheader_pnl.PerformLayout()
         CType(pcbTerminate, ComponentModel.ISupportInitialize).EndInit()
-        GroupBox1.ResumeLayout(False)
+        gbEmployeeTrainingHistory.ResumeLayout(False)
+        gbEmployeeTrainingHistory.PerformLayout()
         CType(dgvEmployeeTrainingHistory, ComponentModel.ISupportInitialize).EndInit()
-        GroupBox4.ResumeLayout(False)
-        GroupBox4.PerformLayout()
-        GroupBox3.ResumeLayout(False)
-        GroupBox3.PerformLayout()
-        GroupBox2.ResumeLayout(False)
-        GroupBox2.PerformLayout()
+        gbSchedule.ResumeLayout(False)
+        gbSchedule.PerformLayout()
+        gbStatus.ResumeLayout(False)
+        gbStatus.PerformLayout()
+        gbEmplyeeTrainingsDetails.ResumeLayout(False)
+        gbEmplyeeTrainingsDetails.PerformLayout()
         ResumeLayout(False)
     End Sub
 
@@ -735,32 +801,37 @@ Partial Class Employee_Trainings
     Friend WithEvents adminheader_pnl As Panel
     Friend WithEvents pcbTerminate As PictureBox
     Friend WithEvents Label2 As Label
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents gbEmployeeTrainingHistory As GroupBox
     Friend WithEvents dgvEmployeeTrainingHistory As DataGridView
-    Friend WithEvents GroupBox4 As GroupBox
-    Friend WithEvents txtTrainingTitle As TextBox
-    Friend WithEvents txtTrainingType As TextBox
-    Friend WithEvents txtTrainingID As TextBox
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Label21 As Label
-    Friend WithEvents Label1 As Label
-    Friend WithEvents txtTrainingDescription As TextBox
-    Friend WithEvents Label5 As Label
-    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents gbSchedule As GroupBox
     Friend WithEvents Label9 As Label
     Friend WithEvents Label10 As Label
-    Friend WithEvents dtpStarted As DateTimePicker
-    Friend WithEvents dtpCompleted As DateTimePicker
-    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents dtpTrainingStarted As DateTimePicker
+    Friend WithEvents dtpTrainingCompleted As DateTimePicker
+    Friend WithEvents gbStatus As GroupBox
     Friend WithEvents rbPostponed As RadioButton
     Friend WithEvents rbCompleted As RadioButton
     Friend WithEvents rbPlanned As RadioButton
     Friend WithEvents rbInProgress As RadioButton
-    Friend WithEvents btnAddTraining As Button
-    Friend WithEvents btnCancelTraining As Button
     Friend WithEvents btnSaveTraining As Button
-    Friend WithEvents Label11 As Label
+    Friend WithEvents btnCancelTraining As Button
+    Friend WithEvents Label5 As Label
+    Friend WithEvents txtTrainingDescription As TextBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label21 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents txtTrainingID As TextBox
+    Friend WithEvents txtTrainingType As TextBox
+    Friend WithEvents txtTrainingTitle As TextBox
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents btnDeleteTraining As Button
+    Friend WithEvents Label11 As Label
     Friend WithEvents btnUpdateTraining As Button
+    Friend WithEvents btnAddTraining As Button
+    Friend WithEvents gbEmplyeeTrainingsDetails As GroupBox
+    Friend WithEvents Label12 As Label
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents btnRefreshTrainings As Button
+    Friend WithEvents txtSearchTrainings As TextBox
+    Friend WithEvents btnSearchTrainings As Button
 End Class

@@ -133,7 +133,7 @@ Partial Class Trainings
         GroupBox1.Margin = New Padding(4, 3, 4, 3)
         GroupBox1.Name = "GroupBox1"
         GroupBox1.Padding = New Padding(4, 3, 4, 3)
-        GroupBox1.Size = New Size(1361, 314)
+        GroupBox1.Size = New Size(1342, 314)
         GroupBox1.TabIndex = 66
         GroupBox1.TabStop = False
         GroupBox1.Text = "Training History"
@@ -145,7 +145,7 @@ Partial Class Trainings
         dgvTrainingHistory.Margin = New Padding(4, 3, 4, 3)
         dgvTrainingHistory.Name = "dgvTrainingHistory"
         dgvTrainingHistory.RowHeadersWidth = 51
-        dgvTrainingHistory.Size = New Size(1308, 248)
+        dgvTrainingHistory.Size = New Size(1292, 248)
         dgvTrainingHistory.TabIndex = 0
         ' 
         ' Panel2

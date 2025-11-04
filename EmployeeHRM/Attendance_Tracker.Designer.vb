@@ -45,9 +45,53 @@ Partial Class Attendance_Tracker
         Label3 = New Label()
         lblDashboard = New Label()
         lblMain = New Label()
+        gbAttendanceList = New GroupBox()
+        btnRefreshAttendance = New Button()
+        txtSearchAttendance = New TextBox()
+        dgcAttendanceList = New DataGridView()
+        btnSearchAttendance = New Button()
+        gbAttendanceDetails = New GroupBox()
+        gbDailyTimeRecord = New GroupBox()
+        dtpCheckOutPM = New DateTimePicker()
+        dtpCheckInPM = New DateTimePicker()
+        dtpCheckOutAM = New DateTimePicker()
+        dtpCheckInAM = New DateTimePicker()
+        dtpDateAttendance = New DateTimePicker()
+        Label19 = New Label()
+        Label18 = New Label()
+        Label17 = New Label()
+        Label16 = New Label()
+        Label14 = New Label()
+        btnEditAttendance = New Button()
+        txtJobTitle = New TextBox()
+        Label9 = New Label()
+        txtAttendanceID = New TextBox()
+        Label6 = New Label()
+        txtAbscences = New TextBox()
+        Label15 = New Label()
+        txtDaysAttended = New TextBox()
+        Label13 = New Label()
+        txtExtendedHours = New TextBox()
+        Label12 = New Label()
+        txtEmployeeName = New TextBox()
+        Label11 = New Label()
+        Label10 = New Label()
+        cbAttendanceStatus = New ComboBox()
+        txtTotalHours = New TextBox()
+        txtDepartmentID = New TextBox()
+        txtEmployeeID = New TextBox()
+        Label21 = New Label()
+        Label1 = New Label()
+        Label5 = New Label()
+        btnSaveAttendance = New Button()
+        btnCancelAttendance = New Button()
         adminheader_pnl.SuspendLayout()
         CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
         Panel1.SuspendLayout()
+        gbAttendanceList.SuspendLayout()
+        CType(dgcAttendanceList, ComponentModel.ISupportInitialize).BeginInit()
+        gbAttendanceDetails.SuspendLayout()
+        gbDailyTimeRecord.SuspendLayout()
         SuspendLayout()
         ' 
         ' adminheader_pnl
@@ -304,12 +348,480 @@ Partial Class Attendance_Tracker
         lblMain.TabIndex = 1
         lblMain.Text = "MAIN"
         ' 
+        ' gbAttendanceList
+        ' 
+        gbAttendanceList.Controls.Add(btnRefreshAttendance)
+        gbAttendanceList.Controls.Add(txtSearchAttendance)
+        gbAttendanceList.Controls.Add(dgcAttendanceList)
+        gbAttendanceList.Controls.Add(btnSearchAttendance)
+        gbAttendanceList.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
+        gbAttendanceList.Location = New Point(373, 574)
+        gbAttendanceList.Margin = New Padding(4, 3, 4, 3)
+        gbAttendanceList.Name = "gbAttendanceList"
+        gbAttendanceList.Padding = New Padding(4, 3, 4, 3)
+        gbAttendanceList.Size = New Size(1359, 434)
+        gbAttendanceList.TabIndex = 68
+        gbAttendanceList.TabStop = False
+        gbAttendanceList.Text = "Attendance List"
+        ' 
+        ' btnRefreshAttendance
+        ' 
+        btnRefreshAttendance.BackColor = SystemColors.InactiveCaption
+        btnRefreshAttendance.BackgroundImageLayout = ImageLayout.None
+        btnRefreshAttendance.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnRefreshAttendance.ForeColor = Color.Black
+        btnRefreshAttendance.Location = New Point(467, 61)
+        btnRefreshAttendance.Name = "btnRefreshAttendance"
+        btnRefreshAttendance.Size = New Size(167, 46)
+        btnRefreshAttendance.TabIndex = 91
+        btnRefreshAttendance.Text = "Refresh Data"
+        btnRefreshAttendance.UseVisualStyleBackColor = False
+        ' 
+        ' txtSearchAttendance
+        ' 
+        txtSearchAttendance.Font = New Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtSearchAttendance.Location = New Point(204, 69)
+        txtSearchAttendance.Margin = New Padding(4, 3, 4, 3)
+        txtSearchAttendance.Name = "txtSearchAttendance"
+        txtSearchAttendance.Size = New Size(256, 32)
+        txtSearchAttendance.TabIndex = 90
+        ' 
+        ' dgcAttendanceList
+        ' 
+        dgcAttendanceList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        dgcAttendanceList.Location = New Point(30, 120)
+        dgcAttendanceList.Margin = New Padding(4, 3, 4, 3)
+        dgcAttendanceList.Name = "dgcAttendanceList"
+        dgcAttendanceList.RowHeadersWidth = 51
+        dgcAttendanceList.Size = New Size(1303, 285)
+        dgcAttendanceList.TabIndex = 0
+        ' 
+        ' btnSearchAttendance
+        ' 
+        btnSearchAttendance.BackColor = SystemColors.InactiveCaption
+        btnSearchAttendance.BackgroundImageLayout = ImageLayout.None
+        btnSearchAttendance.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnSearchAttendance.ForeColor = Color.Black
+        btnSearchAttendance.Location = New Point(30, 61)
+        btnSearchAttendance.Name = "btnSearchAttendance"
+        btnSearchAttendance.Size = New Size(167, 46)
+        btnSearchAttendance.TabIndex = 89
+        btnSearchAttendance.Text = "Search"
+        btnSearchAttendance.UseVisualStyleBackColor = False
+        ' 
+        ' gbAttendanceDetails
+        ' 
+        gbAttendanceDetails.Controls.Add(gbDailyTimeRecord)
+        gbAttendanceDetails.Controls.Add(btnEditAttendance)
+        gbAttendanceDetails.Controls.Add(txtJobTitle)
+        gbAttendanceDetails.Controls.Add(Label9)
+        gbAttendanceDetails.Controls.Add(txtAttendanceID)
+        gbAttendanceDetails.Controls.Add(Label6)
+        gbAttendanceDetails.Controls.Add(txtAbscences)
+        gbAttendanceDetails.Controls.Add(Label15)
+        gbAttendanceDetails.Controls.Add(txtDaysAttended)
+        gbAttendanceDetails.Controls.Add(Label13)
+        gbAttendanceDetails.Controls.Add(txtExtendedHours)
+        gbAttendanceDetails.Controls.Add(Label12)
+        gbAttendanceDetails.Controls.Add(txtEmployeeName)
+        gbAttendanceDetails.Controls.Add(Label11)
+        gbAttendanceDetails.Controls.Add(Label10)
+        gbAttendanceDetails.Controls.Add(cbAttendanceStatus)
+        gbAttendanceDetails.Controls.Add(txtTotalHours)
+        gbAttendanceDetails.Controls.Add(txtDepartmentID)
+        gbAttendanceDetails.Controls.Add(txtEmployeeID)
+        gbAttendanceDetails.Controls.Add(Label21)
+        gbAttendanceDetails.Controls.Add(Label1)
+        gbAttendanceDetails.Controls.Add(Label5)
+        gbAttendanceDetails.Controls.Add(btnSaveAttendance)
+        gbAttendanceDetails.Controls.Add(btnCancelAttendance)
+        gbAttendanceDetails.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
+        gbAttendanceDetails.Location = New Point(380, 150)
+        gbAttendanceDetails.Margin = New Padding(4, 3, 4, 3)
+        gbAttendanceDetails.Name = "gbAttendanceDetails"
+        gbAttendanceDetails.Padding = New Padding(4, 3, 4, 3)
+        gbAttendanceDetails.Size = New Size(1354, 398)
+        gbAttendanceDetails.TabIndex = 83
+        gbAttendanceDetails.TabStop = False
+        gbAttendanceDetails.Text = "Details"
+        ' 
+        ' gbDailyTimeRecord
+        ' 
+        gbDailyTimeRecord.Controls.Add(dtpCheckOutPM)
+        gbDailyTimeRecord.Controls.Add(dtpCheckInPM)
+        gbDailyTimeRecord.Controls.Add(dtpCheckOutAM)
+        gbDailyTimeRecord.Controls.Add(dtpCheckInAM)
+        gbDailyTimeRecord.Controls.Add(dtpDateAttendance)
+        gbDailyTimeRecord.Controls.Add(Label19)
+        gbDailyTimeRecord.Controls.Add(Label18)
+        gbDailyTimeRecord.Controls.Add(Label17)
+        gbDailyTimeRecord.Controls.Add(Label16)
+        gbDailyTimeRecord.Controls.Add(Label14)
+        gbDailyTimeRecord.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
+        gbDailyTimeRecord.Location = New Point(899, 44)
+        gbDailyTimeRecord.Margin = New Padding(4, 3, 4, 3)
+        gbDailyTimeRecord.Name = "gbDailyTimeRecord"
+        gbDailyTimeRecord.Padding = New Padding(4, 3, 4, 3)
+        gbDailyTimeRecord.Size = New Size(433, 322)
+        gbDailyTimeRecord.TabIndex = 120
+        gbDailyTimeRecord.TabStop = False
+        gbDailyTimeRecord.Text = "Daily Time Record"
+        ' 
+        ' dtpCheckOutPM
+        ' 
+        dtpCheckOutPM.CustomFormat = "hh:mm tt"
+        dtpCheckOutPM.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
+        dtpCheckOutPM.Format = DateTimePickerFormat.Custom
+        dtpCheckOutPM.Location = New Point(235, 247)
+        dtpCheckOutPM.Name = "dtpCheckOutPM"
+        dtpCheckOutPM.Size = New Size(138, 32)
+        dtpCheckOutPM.TabIndex = 126
+        ' 
+        ' dtpCheckInPM
+        ' 
+        dtpCheckInPM.CustomFormat = "hh:mm tt"
+        dtpCheckInPM.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
+        dtpCheckInPM.Format = DateTimePickerFormat.Custom
+        dtpCheckInPM.Location = New Point(235, 197)
+        dtpCheckInPM.Name = "dtpCheckInPM"
+        dtpCheckInPM.Size = New Size(138, 32)
+        dtpCheckInPM.TabIndex = 125
+        ' 
+        ' dtpCheckOutAM
+        ' 
+        dtpCheckOutAM.CustomFormat = "hh:mm tt"
+        dtpCheckOutAM.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
+        dtpCheckOutAM.Format = DateTimePickerFormat.Custom
+        dtpCheckOutAM.Location = New Point(235, 147)
+        dtpCheckOutAM.Name = "dtpCheckOutAM"
+        dtpCheckOutAM.Size = New Size(138, 32)
+        dtpCheckOutAM.TabIndex = 124
+        ' 
+        ' dtpCheckInAM
+        ' 
+        dtpCheckInAM.CustomFormat = "hh:mm tt"
+        dtpCheckInAM.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
+        dtpCheckInAM.Format = DateTimePickerFormat.Custom
+        dtpCheckInAM.Location = New Point(235, 97)
+        dtpCheckInAM.Name = "dtpCheckInAM"
+        dtpCheckInAM.Size = New Size(138, 32)
+        dtpCheckInAM.TabIndex = 123
+        ' 
+        ' dtpDateAttendance
+        ' 
+        dtpDateAttendance.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
+        dtpDateAttendance.Location = New Point(88, 42)
+        dtpDateAttendance.Name = "dtpDateAttendance"
+        dtpDateAttendance.Size = New Size(335, 32)
+        dtpDateAttendance.TabIndex = 122
+        ' 
+        ' Label19
+        ' 
+        Label19.AutoSize = True
+        Label19.Font = New Font("Century Gothic", 13F)
+        Label19.ForeColor = Color.Black
+        Label19.Location = New Point(71, 252)
+        Label19.Margin = New Padding(4, 0, 4, 0)
+        Label19.Name = "Label19"
+        Label19.Size = New Size(157, 25)
+        Label19.TabIndex = 121
+        Label19.Text = "Time Out PM:"
+        ' 
+        ' Label18
+        ' 
+        Label18.AutoSize = True
+        Label18.Font = New Font("Century Gothic", 13F)
+        Label18.ForeColor = Color.Black
+        Label18.Location = New Point(67, 154)
+        Label18.Margin = New Padding(4, 0, 4, 0)
+        Label18.Name = "Label18"
+        Label18.Size = New Size(161, 25)
+        Label18.TabIndex = 120
+        Label18.Text = "Time Out AM:"
+        ' 
+        ' Label17
+        ' 
+        Label17.AutoSize = True
+        Label17.Font = New Font("Century Gothic", 13F)
+        Label17.ForeColor = Color.Black
+        Label17.Location = New Point(92, 204)
+        Label17.Margin = New Padding(4, 0, 4, 0)
+        Label17.Name = "Label17"
+        Label17.Size = New Size(136, 25)
+        Label17.TabIndex = 119
+        Label17.Text = "Time In PM:"
+        ' 
+        ' Label16
+        ' 
+        Label16.AutoSize = True
+        Label16.Font = New Font("Century Gothic", 13F)
+        Label16.ForeColor = Color.Black
+        Label16.Location = New Point(88, 104)
+        Label16.Margin = New Padding(4, 0, 4, 0)
+        Label16.Name = "Label16"
+        Label16.Size = New Size(140, 25)
+        Label16.TabIndex = 118
+        Label16.Text = "Time In AM:"
+        ' 
+        ' Label14
+        ' 
+        Label14.AutoSize = True
+        Label14.Font = New Font("Century Gothic", 13F)
+        Label14.ForeColor = Color.Black
+        Label14.Location = New Point(10, 49)
+        Label14.Margin = New Padding(4, 0, 4, 0)
+        Label14.Name = "Label14"
+        Label14.Size = New Size(71, 25)
+        Label14.TabIndex = 117
+        Label14.Text = "Date:"
+        ' 
+        ' btnEditAttendance
+        ' 
+        btnEditAttendance.BackColor = SystemColors.InactiveCaption
+        btnEditAttendance.BackgroundImageLayout = ImageLayout.None
+        btnEditAttendance.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnEditAttendance.ForeColor = Color.Black
+        btnEditAttendance.Location = New Point(349, 287)
+        btnEditAttendance.Name = "btnEditAttendance"
+        btnEditAttendance.Size = New Size(333, 46)
+        btnEditAttendance.TabIndex = 117
+        btnEditAttendance.Text = "Edit Attendance"
+        btnEditAttendance.UseVisualStyleBackColor = False
+        ' 
+        ' txtJobTitle
+        ' 
+        txtJobTitle.Location = New Point(231, 179)
+        txtJobTitle.Margin = New Padding(4, 3, 4, 3)
+        txtJobTitle.Name = "txtJobTitle"
+        txtJobTitle.Size = New Size(256, 36)
+        txtJobTitle.TabIndex = 106
+        ' 
+        ' Label9
+        ' 
+        Label9.AutoSize = True
+        Label9.Font = New Font("Century Gothic", 13F)
+        Label9.ForeColor = Color.Black
+        Label9.Location = New Point(116, 192)
+        Label9.Margin = New Padding(4, 0, 4, 0)
+        Label9.Name = "Label9"
+        Label9.Size = New Size(107, 25)
+        Label9.TabIndex = 105
+        Label9.Text = "Job Title:"
+        ' 
+        ' txtAttendanceID
+        ' 
+        txtAttendanceID.Location = New Point(706, 56)
+        txtAttendanceID.Margin = New Padding(4, 3, 4, 3)
+        txtAttendanceID.Name = "txtAttendanceID"
+        txtAttendanceID.Size = New Size(174, 36)
+        txtAttendanceID.TabIndex = 80
+        ' 
+        ' Label6
+        ' 
+        Label6.AutoSize = True
+        Label6.Font = New Font("Century Gothic", 13F)
+        Label6.ForeColor = Color.Black
+        Label6.Location = New Point(521, 66)
+        Label6.Margin = New Padding(4, 0, 4, 0)
+        Label6.Name = "Label6"
+        Label6.Size = New Size(177, 25)
+        Label6.TabIndex = 79
+        Label6.Text = "Attendance ID:"
+        ' 
+        ' txtAbscences
+        ' 
+        txtAbscences.Location = New Point(706, 181)
+        txtAbscences.Margin = New Padding(4, 3, 4, 3)
+        txtAbscences.Name = "txtAbscences"
+        txtAbscences.Size = New Size(174, 36)
+        txtAbscences.TabIndex = 95
+        ' 
+        ' Label15
+        ' 
+        Label15.AutoSize = True
+        Label15.Font = New Font("Century Gothic", 13F)
+        Label15.ForeColor = Color.Black
+        Label15.Location = New Point(561, 192)
+        Label15.Margin = New Padding(4, 0, 4, 0)
+        Label15.Name = "Label15"
+        Label15.Size = New Size(137, 25)
+        Label15.TabIndex = 94
+        Label15.Text = "Abscences:"
+        ' 
+        ' txtDaysAttended
+        ' 
+        txtDaysAttended.Location = New Point(706, 223)
+        txtDaysAttended.Margin = New Padding(4, 3, 4, 3)
+        txtDaysAttended.Name = "txtDaysAttended"
+        txtDaysAttended.Size = New Size(174, 36)
+        txtDaysAttended.TabIndex = 91
+        ' 
+        ' Label13
+        ' 
+        Label13.AutoSize = True
+        Label13.Font = New Font("Century Gothic", 13F)
+        Label13.ForeColor = Color.Black
+        Label13.Location = New Point(517, 234)
+        Label13.Margin = New Padding(4, 0, 4, 0)
+        Label13.Name = "Label13"
+        Label13.Size = New Size(181, 25)
+        Label13.TabIndex = 90
+        Label13.Text = "Days Attended:"
+        ' 
+        ' txtExtendedHours
+        ' 
+        txtExtendedHours.Location = New Point(706, 139)
+        txtExtendedHours.Margin = New Padding(4, 3, 4, 3)
+        txtExtendedHours.Name = "txtExtendedHours"
+        txtExtendedHours.Size = New Size(174, 36)
+        txtExtendedHours.TabIndex = 89
+        ' 
+        ' Label12
+        ' 
+        Label12.AutoSize = True
+        Label12.Font = New Font("Century Gothic", 13F)
+        Label12.ForeColor = Color.Black
+        Label12.Location = New Point(514, 150)
+        Label12.Margin = New Padding(4, 0, 4, 0)
+        Label12.Name = "Label12"
+        Label12.Size = New Size(184, 25)
+        Label12.TabIndex = 88
+        Label12.Text = "Extended Hours:"
+        ' 
+        ' txtEmployeeName
+        ' 
+        txtEmployeeName.Location = New Point(231, 95)
+        txtEmployeeName.Margin = New Padding(4, 3, 4, 3)
+        txtEmployeeName.Name = "txtEmployeeName"
+        txtEmployeeName.Size = New Size(256, 36)
+        txtEmployeeName.TabIndex = 86
+        ' 
+        ' Label11
+        ' 
+        Label11.AutoSize = True
+        Label11.Font = New Font("Century Gothic", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label11.ForeColor = Color.Black
+        Label11.Location = New Point(15, 104)
+        Label11.Margin = New Padding(4, 0, 4, 0)
+        Label11.Name = "Label11"
+        Label11.Size = New Size(208, 27)
+        Label11.TabIndex = 87
+        Label11.Text = "Employee Name:"
+        ' 
+        ' Label10
+        ' 
+        Label10.AutoSize = True
+        Label10.Font = New Font("Century Gothic", 13F)
+        Label10.ForeColor = Color.Black
+        Label10.Location = New Point(141, 231)
+        Label10.Margin = New Padding(4, 0, 4, 0)
+        Label10.Name = "Label10"
+        Label10.Size = New Size(82, 25)
+        Label10.TabIndex = 85
+        Label10.Text = "Status:"
+        ' 
+        ' cbAttendanceStatus
+        ' 
+        cbAttendanceStatus.FormattingEnabled = True
+        cbAttendanceStatus.Location = New Point(231, 221)
+        cbAttendanceStatus.Name = "cbAttendanceStatus"
+        cbAttendanceStatus.Size = New Size(256, 35)
+        cbAttendanceStatus.TabIndex = 84
+        ' 
+        ' txtTotalHours
+        ' 
+        txtTotalHours.Location = New Point(706, 98)
+        txtTotalHours.Margin = New Padding(4, 3, 4, 3)
+        txtTotalHours.Name = "txtTotalHours"
+        txtTotalHours.Size = New Size(174, 36)
+        txtTotalHours.TabIndex = 82
+        ' 
+        ' txtDepartmentID
+        ' 
+        txtDepartmentID.Location = New Point(231, 137)
+        txtDepartmentID.Margin = New Padding(4, 3, 4, 3)
+        txtDepartmentID.Name = "txtDepartmentID"
+        txtDepartmentID.Size = New Size(256, 36)
+        txtDepartmentID.TabIndex = 72
+        ' 
+        ' txtEmployeeID
+        ' 
+        txtEmployeeID.Location = New Point(231, 53)
+        txtEmployeeID.Margin = New Padding(4, 3, 4, 3)
+        txtEmployeeID.Name = "txtEmployeeID"
+        txtEmployeeID.Size = New Size(256, 36)
+        txtEmployeeID.TabIndex = 23
+        ' 
+        ' Label21
+        ' 
+        Label21.AutoSize = True
+        Label21.Font = New Font("Century Gothic", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label21.ForeColor = Color.Black
+        Label21.Location = New Point(62, 62)
+        Label21.Margin = New Padding(4, 0, 4, 0)
+        Label21.Name = "Label21"
+        Label21.Size = New Size(161, 27)
+        Label21.TabIndex = 70
+        Label21.Text = "Employee ID:"
+        ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Font = New Font("Century Gothic", 13F)
+        Label1.ForeColor = Color.Black
+        Label1.Location = New Point(45, 150)
+        Label1.Margin = New Padding(4, 0, 4, 0)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(178, 25)
+        Label1.TabIndex = 71
+        Label1.Text = "Department ID:"
+        ' 
+        ' Label5
+        ' 
+        Label5.AutoSize = True
+        Label5.Font = New Font("Century Gothic", 13F)
+        Label5.ForeColor = Color.Black
+        Label5.Location = New Point(568, 109)
+        Label5.Margin = New Padding(4, 0, 4, 0)
+        Label5.Name = "Label5"
+        Label5.Size = New Size(136, 25)
+        Label5.TabIndex = 74
+        Label5.Text = "Total Hours:"
+        ' 
+        ' btnSaveAttendance
+        ' 
+        btnSaveAttendance.BackColor = SystemColors.InactiveCaption
+        btnSaveAttendance.BackgroundImageLayout = ImageLayout.None
+        btnSaveAttendance.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnSaveAttendance.ForeColor = Color.Black
+        btnSaveAttendance.Location = New Point(349, 287)
+        btnSaveAttendance.Name = "btnSaveAttendance"
+        btnSaveAttendance.Size = New Size(167, 46)
+        btnSaveAttendance.TabIndex = 118
+        btnSaveAttendance.Text = "Save "
+        btnSaveAttendance.UseVisualStyleBackColor = False
+        ' 
+        ' btnCancelAttendance
+        ' 
+        btnCancelAttendance.BackColor = SystemColors.InactiveCaption
+        btnCancelAttendance.BackgroundImageLayout = ImageLayout.None
+        btnCancelAttendance.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnCancelAttendance.ForeColor = Color.Black
+        btnCancelAttendance.Location = New Point(515, 287)
+        btnCancelAttendance.Name = "btnCancelAttendance"
+        btnCancelAttendance.Size = New Size(167, 46)
+        btnCancelAttendance.TabIndex = 119
+        btnCancelAttendance.Text = "Cancel"
+        btnCancelAttendance.UseVisualStyleBackColor = False
+        ' 
         ' Attendance_Tracker
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1781, 1033)
         ControlBox = False
+        Controls.Add(gbAttendanceDetails)
+        Controls.Add(gbAttendanceList)
         Controls.Add(Panel1)
         Controls.Add(adminheader_pnl)
         FormBorderStyle = FormBorderStyle.None
@@ -322,6 +834,13 @@ Partial Class Attendance_Tracker
         CType(pcbTerminate, ComponentModel.ISupportInitialize).EndInit()
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
+        gbAttendanceList.ResumeLayout(False)
+        gbAttendanceList.PerformLayout()
+        CType(dgcAttendanceList, ComponentModel.ISupportInitialize).EndInit()
+        gbAttendanceDetails.ResumeLayout(False)
+        gbAttendanceDetails.PerformLayout()
+        gbDailyTimeRecord.ResumeLayout(False)
+        gbDailyTimeRecord.PerformLayout()
         ResumeLayout(False)
     End Sub
 
@@ -347,4 +866,44 @@ Partial Class Attendance_Tracker
     Friend WithEvents Label3 As Label
     Friend WithEvents lblDashboard As Label
     Friend WithEvents lblMain As Label
+    Friend WithEvents gbAttendanceList As GroupBox
+    Friend WithEvents txtSearchAttendance As TextBox
+    Friend WithEvents dgcAttendanceList As DataGridView
+    Friend WithEvents btnSearchAttendance As Button
+    Friend WithEvents gbAttendanceDetails As GroupBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents cbAttendanceStatus As ComboBox
+    Friend WithEvents txtDepartmentID As TextBox
+    Friend WithEvents txtAttendanceID As TextBox
+    Friend WithEvents txtEmployeeID As TextBox
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label21 As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents txtTotalHours As TextBox
+    Friend WithEvents Label5 As Label
+    Friend WithEvents btnRefreshAttendance As Button
+    Friend WithEvents txtEmployeeName As TextBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents txtAbscences As TextBox
+    Friend WithEvents Label15 As Label
+    Friend WithEvents txtDaysAttended As TextBox
+    Friend WithEvents Label13 As Label
+    Friend WithEvents txtExtendedHours As TextBox
+    Friend WithEvents Label12 As Label
+    Friend WithEvents txtJobTitle As TextBox
+    Friend WithEvents Label9 As Label
+    Friend WithEvents btnEditAttendance As Button
+    Friend WithEvents btnSaveAttendance As Button
+    Friend WithEvents btnCancelAttendance As Button
+    Friend WithEvents gbDailyTimeRecord As GroupBox
+    Friend WithEvents dtpCheckOutPM As DateTimePicker
+    Friend WithEvents dtpCheckInPM As DateTimePicker
+    Friend WithEvents dtpCheckOutAM As DateTimePicker
+    Friend WithEvents dtpCheckInAM As DateTimePicker
+    Friend WithEvents dtpDateAttendance As DateTimePicker
+    Friend WithEvents Label19 As Label
+    Friend WithEvents Label18 As Label
+    Friend WithEvents Label17 As Label
+    Friend WithEvents Label16 As Label
+    Friend WithEvents Label14 As Label
 End Class

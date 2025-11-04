@@ -45,22 +45,22 @@ Partial Class Amenities
         adminheader_pnl = New Panel()
         pcbTerminate = New PictureBox()
         Label2 = New Label()
-        GroupBox1 = New GroupBox()
-        TextBox3 = New TextBox()
-        dgvTrainingHistory = New DataGridView()
-        Button1 = New Button()
-        GroupBox4 = New GroupBox()
+        gbAmenitiesList = New GroupBox()
+        txtSearchAmenities = New TextBox()
+        dgvAmenities = New DataGridView()
+        btnSearchAmenities = New Button()
+        gbDetailsAmenities = New GroupBox()
         btnDeleteAmenity = New Button()
         btnAddAmenity = New Button()
         btnUpdateAmenity = New Button()
         Label10 = New Label()
-        ComboBox1 = New ComboBox()
-        TextBox2 = New TextBox()
-        TextBox1 = New TextBox()
+        cbConditionAmenities = New ComboBox()
+        txtLocationAmenities = New TextBox()
+        txtNameAmenities = New TextBox()
         Label9 = New Label()
-        txtTrainingTitle = New TextBox()
-        txtTrainingType = New TextBox()
-        txtTrainingID = New TextBox()
+        txtDepartmentID = New TextBox()
+        txtAmenitiesID = New TextBox()
+        txtEmployeeID = New TextBox()
         Label6 = New Label()
         Label21 = New Label()
         Label1 = New Label()
@@ -70,9 +70,9 @@ Partial Class Amenities
         Panel1.SuspendLayout()
         adminheader_pnl.SuspendLayout()
         CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
-        GroupBox1.SuspendLayout()
-        CType(dgvTrainingHistory, ComponentModel.ISupportInitialize).BeginInit()
-        GroupBox4.SuspendLayout()
+        gbAmenitiesList.SuspendLayout()
+        CType(dgvAmenities, ComponentModel.ISupportInitialize).BeginInit()
+        gbDetailsAmenities.SuspendLayout()
         SuspendLayout()
         ' 
         ' Panel1
@@ -330,81 +330,81 @@ Partial Class Amenities
         Label2.TabIndex = 0
         Label2.Text = "Amenities"
         ' 
-        ' GroupBox1
+        ' gbAmenitiesList
         ' 
-        GroupBox1.Controls.Add(TextBox3)
-        GroupBox1.Controls.Add(dgvTrainingHistory)
-        GroupBox1.Controls.Add(Button1)
-        GroupBox1.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        GroupBox1.Location = New Point(410, 534)
-        GroupBox1.Margin = New Padding(4, 3, 4, 3)
-        GroupBox1.Name = "GroupBox1"
-        GroupBox1.Padding = New Padding(4, 3, 4, 3)
-        GroupBox1.Size = New Size(1361, 434)
-        GroupBox1.TabIndex = 67
-        GroupBox1.TabStop = False
-        GroupBox1.Text = "Amenities List"
+        gbAmenitiesList.Controls.Add(txtSearchAmenities)
+        gbAmenitiesList.Controls.Add(dgvAmenities)
+        gbAmenitiesList.Controls.Add(btnSearchAmenities)
+        gbAmenitiesList.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
+        gbAmenitiesList.Location = New Point(374, 446)
+        gbAmenitiesList.Margin = New Padding(4, 3, 4, 3)
+        gbAmenitiesList.Name = "gbAmenitiesList"
+        gbAmenitiesList.Padding = New Padding(4, 3, 4, 3)
+        gbAmenitiesList.Size = New Size(1358, 563)
+        gbAmenitiesList.TabIndex = 67
+        gbAmenitiesList.TabStop = False
+        gbAmenitiesList.Text = "Amenities List"
         ' 
-        ' TextBox3
+        ' txtSearchAmenities
         ' 
-        TextBox3.Font = New Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox3.Location = New Point(208, 59)
-        TextBox3.Margin = New Padding(4, 3, 4, 3)
-        TextBox3.Name = "TextBox3"
-        TextBox3.Size = New Size(256, 32)
-        TextBox3.TabIndex = 90
+        txtSearchAmenities.Font = New Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtSearchAmenities.Location = New Point(208, 59)
+        txtSearchAmenities.Margin = New Padding(4, 3, 4, 3)
+        txtSearchAmenities.Name = "txtSearchAmenities"
+        txtSearchAmenities.Size = New Size(256, 32)
+        txtSearchAmenities.TabIndex = 90
         ' 
-        ' dgvTrainingHistory
+        ' dgvAmenities
         ' 
-        dgvTrainingHistory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        dgvTrainingHistory.Location = New Point(34, 120)
-        dgvTrainingHistory.Margin = New Padding(4, 3, 4, 3)
-        dgvTrainingHistory.Name = "dgvTrainingHistory"
-        dgvTrainingHistory.RowHeadersWidth = 51
-        dgvTrainingHistory.Size = New Size(1308, 285)
-        dgvTrainingHistory.TabIndex = 0
+        dgvAmenities.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        dgvAmenities.Location = New Point(34, 120)
+        dgvAmenities.Margin = New Padding(4, 3, 4, 3)
+        dgvAmenities.Name = "dgvAmenities"
+        dgvAmenities.RowHeadersWidth = 51
+        dgvAmenities.Size = New Size(1298, 404)
+        dgvAmenities.TabIndex = 0
         ' 
-        ' Button1
+        ' btnSearchAmenities
         ' 
-        Button1.BackColor = SystemColors.InactiveCaption
-        Button1.BackgroundImageLayout = ImageLayout.None
-        Button1.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        Button1.ForeColor = Color.Black
-        Button1.Location = New Point(34, 51)
-        Button1.Name = "Button1"
-        Button1.Size = New Size(167, 46)
-        Button1.TabIndex = 89
-        Button1.Text = "Search"
-        Button1.UseVisualStyleBackColor = False
+        btnSearchAmenities.BackColor = SystemColors.InactiveCaption
+        btnSearchAmenities.BackgroundImageLayout = ImageLayout.None
+        btnSearchAmenities.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnSearchAmenities.ForeColor = Color.Black
+        btnSearchAmenities.Location = New Point(34, 51)
+        btnSearchAmenities.Name = "btnSearchAmenities"
+        btnSearchAmenities.Size = New Size(167, 46)
+        btnSearchAmenities.TabIndex = 89
+        btnSearchAmenities.Text = "Search"
+        btnSearchAmenities.UseVisualStyleBackColor = False
         ' 
-        ' GroupBox4
+        ' gbDetailsAmenities
         ' 
-        GroupBox4.Controls.Add(btnDeleteAmenity)
-        GroupBox4.Controls.Add(btnAddAmenity)
-        GroupBox4.Controls.Add(btnUpdateAmenity)
-        GroupBox4.Controls.Add(Label10)
-        GroupBox4.Controls.Add(ComboBox1)
-        GroupBox4.Controls.Add(TextBox2)
-        GroupBox4.Controls.Add(TextBox1)
-        GroupBox4.Controls.Add(Label9)
-        GroupBox4.Controls.Add(txtTrainingTitle)
-        GroupBox4.Controls.Add(txtTrainingType)
-        GroupBox4.Controls.Add(txtTrainingID)
-        GroupBox4.Controls.Add(Label6)
-        GroupBox4.Controls.Add(Label21)
-        GroupBox4.Controls.Add(Label1)
-        GroupBox4.Controls.Add(Label5)
-        GroupBox4.Controls.Add(btnCancelAmenity)
-        GroupBox4.Controls.Add(btnSaveAmenity)
-        GroupBox4.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        GroupBox4.Location = New Point(407, 208)
-        GroupBox4.Margin = New Padding(4, 3, 4, 3)
-        GroupBox4.Name = "GroupBox4"
-        GroupBox4.Padding = New Padding(4, 3, 4, 3)
-        GroupBox4.Size = New Size(1361, 297)
-        GroupBox4.TabIndex = 82
-        GroupBox4.TabStop = False
-        GroupBox4.Text = "Details"
+        gbDetailsAmenities.Controls.Add(btnDeleteAmenity)
+        gbDetailsAmenities.Controls.Add(btnAddAmenity)
+        gbDetailsAmenities.Controls.Add(btnUpdateAmenity)
+        gbDetailsAmenities.Controls.Add(Label10)
+        gbDetailsAmenities.Controls.Add(cbConditionAmenities)
+        gbDetailsAmenities.Controls.Add(txtLocationAmenities)
+        gbDetailsAmenities.Controls.Add(txtNameAmenities)
+        gbDetailsAmenities.Controls.Add(Label9)
+        gbDetailsAmenities.Controls.Add(txtDepartmentID)
+        gbDetailsAmenities.Controls.Add(txtAmenitiesID)
+        gbDetailsAmenities.Controls.Add(txtEmployeeID)
+        gbDetailsAmenities.Controls.Add(Label6)
+        gbDetailsAmenities.Controls.Add(Label21)
+        gbDetailsAmenities.Controls.Add(Label1)
+        gbDetailsAmenities.Controls.Add(Label5)
+        gbDetailsAmenities.Controls.Add(btnCancelAmenity)
+        gbDetailsAmenities.Controls.Add(btnSaveAmenity)
+        gbDetailsAmenities.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
+        gbDetailsAmenities.Location = New Point(374, 114)
+        gbDetailsAmenities.Margin = New Padding(4, 3, 4, 3)
+        gbDetailsAmenities.Name = "gbDetailsAmenities"
+        gbDetailsAmenities.Padding = New Padding(4, 3, 4, 3)
+        gbDetailsAmenities.Size = New Size(1358, 297)
+        gbDetailsAmenities.TabIndex = 82
+        gbDetailsAmenities.TabStop = False
+        gbDetailsAmenities.Text = "Details"
         ' 
         ' btnDeleteAmenity
         ' 
@@ -412,7 +412,7 @@ Partial Class Amenities
         btnDeleteAmenity.BackgroundImageLayout = ImageLayout.None
         btnDeleteAmenity.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
         btnDeleteAmenity.ForeColor = Color.Black
-        btnDeleteAmenity.Location = New Point(996, 200)
+        btnDeleteAmenity.Location = New Point(992, 200)
         btnDeleteAmenity.Name = "btnDeleteAmenity"
         btnDeleteAmenity.Size = New Size(340, 46)
         btnDeleteAmenity.TabIndex = 89
@@ -425,7 +425,7 @@ Partial Class Amenities
         btnAddAmenity.BackgroundImageLayout = ImageLayout.None
         btnAddAmenity.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
         btnAddAmenity.ForeColor = Color.Black
-        btnAddAmenity.Location = New Point(996, 63)
+        btnAddAmenity.Location = New Point(992, 54)
         btnAddAmenity.Name = "btnAddAmenity"
         btnAddAmenity.Size = New Size(340, 46)
         btnAddAmenity.TabIndex = 87
@@ -438,7 +438,7 @@ Partial Class Amenities
         btnUpdateAmenity.BackgroundImageLayout = ImageLayout.None
         btnUpdateAmenity.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
         btnUpdateAmenity.ForeColor = Color.Black
-        btnUpdateAmenity.Location = New Point(996, 129)
+        btnUpdateAmenity.Location = New Point(992, 121)
         btnUpdateAmenity.Name = "btnUpdateAmenity"
         btnUpdateAmenity.Size = New Size(340, 46)
         btnUpdateAmenity.TabIndex = 86
@@ -450,79 +450,79 @@ Partial Class Amenities
         Label10.AutoSize = True
         Label10.Font = New Font("Century Gothic", 13F)
         Label10.ForeColor = Color.Black
-        Label10.Location = New Point(568, 115)
+        Label10.Location = New Point(577, 115)
         Label10.Margin = New Padding(4, 0, 4, 0)
         Label10.Name = "Label10"
         Label10.Size = New Size(121, 25)
         Label10.TabIndex = 85
         Label10.Text = "Condition:"
         ' 
-        ' ComboBox1
+        ' cbConditionAmenities
         ' 
-        ComboBox1.FormattingEnabled = True
-        ComboBox1.Location = New Point(696, 105)
-        ComboBox1.Name = "ComboBox1"
-        ComboBox1.Size = New Size(256, 35)
-        ComboBox1.TabIndex = 84
+        cbConditionAmenities.FormattingEnabled = True
+        cbConditionAmenities.Location = New Point(705, 105)
+        cbConditionAmenities.Name = "cbConditionAmenities"
+        cbConditionAmenities.Size = New Size(256, 35)
+        cbConditionAmenities.TabIndex = 84
         ' 
-        ' TextBox2
+        ' txtLocationAmenities
         ' 
-        TextBox2.Location = New Point(196, 212)
-        TextBox2.Margin = New Padding(4, 3, 4, 3)
-        TextBox2.Name = "TextBox2"
-        TextBox2.Size = New Size(757, 36)
-        TextBox2.TabIndex = 83
+        txtLocationAmenities.Location = New Point(205, 212)
+        txtLocationAmenities.Margin = New Padding(4, 3, 4, 3)
+        txtLocationAmenities.Name = "txtLocationAmenities"
+        txtLocationAmenities.Size = New Size(757, 36)
+        txtLocationAmenities.TabIndex = 83
         ' 
-        ' TextBox1
+        ' txtNameAmenities
         ' 
-        TextBox1.Location = New Point(196, 157)
-        TextBox1.Margin = New Padding(4, 3, 4, 3)
-        TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(757, 36)
-        TextBox1.TabIndex = 82
+        txtNameAmenities.Location = New Point(205, 157)
+        txtNameAmenities.Margin = New Padding(4, 3, 4, 3)
+        txtNameAmenities.Name = "txtNameAmenities"
+        txtNameAmenities.Size = New Size(757, 36)
+        txtNameAmenities.TabIndex = 82
         ' 
         ' Label9
         ' 
         Label9.AutoSize = True
         Label9.Font = New Font("Century Gothic", 13F)
         Label9.ForeColor = Color.Black
-        Label9.Location = New Point(78, 221)
+        Label9.Location = New Point(87, 221)
         Label9.Margin = New Padding(4, 0, 4, 0)
         Label9.Name = "Label9"
         Label9.Size = New Size(110, 25)
         Label9.TabIndex = 81
         Label9.Text = "Location:"
         ' 
-        ' txtTrainingTitle
+        ' txtDepartmentID
         ' 
-        txtTrainingTitle.Location = New Point(697, 54)
-        txtTrainingTitle.Margin = New Padding(4, 3, 4, 3)
-        txtTrainingTitle.Name = "txtTrainingTitle"
-        txtTrainingTitle.Size = New Size(256, 36)
-        txtTrainingTitle.TabIndex = 72
+        txtDepartmentID.Location = New Point(706, 54)
+        txtDepartmentID.Margin = New Padding(4, 3, 4, 3)
+        txtDepartmentID.Name = "txtDepartmentID"
+        txtDepartmentID.Size = New Size(256, 36)
+        txtDepartmentID.TabIndex = 72
         ' 
-        ' txtTrainingType
+        ' txtAmenitiesID
         ' 
-        txtTrainingType.Location = New Point(196, 104)
-        txtTrainingType.Margin = New Padding(4, 3, 4, 3)
-        txtTrainingType.Name = "txtTrainingType"
-        txtTrainingType.Size = New Size(256, 36)
-        txtTrainingType.TabIndex = 80
+        txtAmenitiesID.Location = New Point(205, 104)
+        txtAmenitiesID.Margin = New Padding(4, 3, 4, 3)
+        txtAmenitiesID.Name = "txtAmenitiesID"
+        txtAmenitiesID.Size = New Size(256, 36)
+        txtAmenitiesID.TabIndex = 80
         ' 
-        ' txtTrainingID
+        ' txtEmployeeID
         ' 
-        txtTrainingID.Location = New Point(196, 54)
-        txtTrainingID.Margin = New Padding(4, 3, 4, 3)
-        txtTrainingID.Name = "txtTrainingID"
-        txtTrainingID.Size = New Size(256, 36)
-        txtTrainingID.TabIndex = 23
+        txtEmployeeID.Location = New Point(205, 54)
+        txtEmployeeID.Margin = New Padding(4, 3, 4, 3)
+        txtEmployeeID.Name = "txtEmployeeID"
+        txtEmployeeID.Size = New Size(256, 36)
+        txtEmployeeID.TabIndex = 23
         ' 
         ' Label6
         ' 
         Label6.AutoSize = True
         Label6.Font = New Font("Century Gothic", 13F)
         Label6.ForeColor = Color.Black
-        Label6.Location = New Point(37, 115)
+        Label6.Location = New Point(46, 115)
         Label6.Margin = New Padding(4, 0, 4, 0)
         Label6.Name = "Label6"
         Label6.Size = New Size(151, 25)
@@ -534,7 +534,7 @@ Partial Class Amenities
         Label21.AutoSize = True
         Label21.Font = New Font("Century Gothic", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label21.ForeColor = Color.Black
-        Label21.Location = New Point(27, 63)
+        Label21.Location = New Point(36, 63)
         Label21.Margin = New Padding(4, 0, 4, 0)
         Label21.Name = "Label21"
         Label21.Size = New Size(161, 27)
@@ -546,7 +546,7 @@ Partial Class Amenities
         Label1.AutoSize = True
         Label1.Font = New Font("Century Gothic", 13F)
         Label1.ForeColor = Color.Black
-        Label1.Location = New Point(511, 58)
+        Label1.Location = New Point(520, 58)
         Label1.Margin = New Padding(4, 0, 4, 0)
         Label1.Name = "Label1"
         Label1.Size = New Size(178, 25)
@@ -558,7 +558,7 @@ Partial Class Amenities
         Label5.AutoSize = True
         Label5.Font = New Font("Century Gothic", 13F)
         Label5.ForeColor = Color.Black
-        Label5.Location = New Point(103, 168)
+        Label5.Location = New Point(112, 168)
         Label5.Margin = New Padding(4, 0, 4, 0)
         Label5.Name = "Label5"
         Label5.Size = New Size(85, 25)
@@ -571,7 +571,7 @@ Partial Class Amenities
         btnCancelAmenity.BackgroundImageLayout = ImageLayout.None
         btnCancelAmenity.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
         btnCancelAmenity.ForeColor = Color.Black
-        btnCancelAmenity.Location = New Point(1169, 130)
+        btnCancelAmenity.Location = New Point(1165, 121)
         btnCancelAmenity.Name = "btnCancelAmenity"
         btnCancelAmenity.Size = New Size(167, 46)
         btnCancelAmenity.TabIndex = 88
@@ -584,7 +584,7 @@ Partial Class Amenities
         btnSaveAmenity.BackgroundImageLayout = ImageLayout.None
         btnSaveAmenity.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
         btnSaveAmenity.ForeColor = Color.Black
-        btnSaveAmenity.Location = New Point(996, 131)
+        btnSaveAmenity.Location = New Point(992, 121)
         btnSaveAmenity.Name = "btnSaveAmenity"
         btnSaveAmenity.Size = New Size(167, 46)
         btnSaveAmenity.TabIndex = 90
@@ -597,8 +597,8 @@ Partial Class Amenities
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1761, 1033)
         ControlBox = False
-        Controls.Add(GroupBox4)
-        Controls.Add(GroupBox1)
+        Controls.Add(gbDetailsAmenities)
+        Controls.Add(gbAmenitiesList)
         Controls.Add(Panel1)
         Controls.Add(adminheader_pnl)
         FormBorderStyle = FormBorderStyle.None
@@ -611,11 +611,11 @@ Partial Class Amenities
         adminheader_pnl.ResumeLayout(False)
         adminheader_pnl.PerformLayout()
         CType(pcbTerminate, ComponentModel.ISupportInitialize).EndInit()
-        GroupBox1.ResumeLayout(False)
-        GroupBox1.PerformLayout()
-        CType(dgvTrainingHistory, ComponentModel.ISupportInitialize).EndInit()
-        GroupBox4.ResumeLayout(False)
-        GroupBox4.PerformLayout()
+        gbAmenitiesList.ResumeLayout(False)
+        gbAmenitiesList.PerformLayout()
+        CType(dgvAmenities, ComponentModel.ISupportInitialize).EndInit()
+        gbDetailsAmenities.ResumeLayout(False)
+        gbDetailsAmenities.PerformLayout()
         ResumeLayout(False)
     End Sub
 
@@ -641,25 +641,25 @@ Partial Class Amenities
     Friend WithEvents adminheader_pnl As Panel
     Friend WithEvents pcbTerminate As PictureBox
     Friend WithEvents Label2 As Label
-    Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents dgvTrainingHistory As DataGridView
-    Friend WithEvents GroupBox4 As GroupBox
-    Friend WithEvents txtTrainingTitle As TextBox
-    Friend WithEvents txtTrainingType As TextBox
-    Friend WithEvents txtTrainingID As TextBox
+    Friend WithEvents gbAmenitiesList As GroupBox
+    Friend WithEvents dgvAmenities As DataGridView
+    Friend WithEvents gbDetailsAmenities As GroupBox
+    Friend WithEvents txtDepartmentID As TextBox
+    Friend WithEvents txtAmenitiesID As TextBox
+    Friend WithEvents txtEmployeeID As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents Label21 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtLocationAmenities As TextBox
+    Friend WithEvents txtNameAmenities As TextBox
     Friend WithEvents Label9 As Label
     Friend WithEvents Label10 As Label
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cbConditionAmenities As ComboBox
     Friend WithEvents btnUpdateAmenity As Button
     Friend WithEvents btnAddAmenity As Button
-    Friend WithEvents Button1 As Button
-    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents btnSearchAmenities As Button
+    Friend WithEvents txtSearchAmenities As TextBox
     Friend WithEvents btnSaveAmenity As Button
     Friend WithEvents btnDeleteAmenity As Button
     Friend WithEvents btnCancelAmenity As Button

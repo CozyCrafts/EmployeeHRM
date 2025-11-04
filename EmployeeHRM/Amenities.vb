@@ -87,5 +87,7 @@
         End If
     End Sub
 
+    Private Sub btnCancelAmenity_Click(sender As Object, e As EventArgs) Handles btnCancelAmenity.Click
 
+    End Sub
 End Class
