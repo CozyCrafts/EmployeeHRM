@@ -2,19 +2,21 @@
 
 Module HRMModule
     Public dbcon As MySqlConnection
-    Public dbcmd As New MySqlCommand
+    Public dbcmd As MySqlCommand
     Public dbadapter As MySqlDataAdapter
     Public dbtable As DataTable
 
-
     Sub OpenCon()
-        dbcon = New MySqlConnection
-        dbcon.ConnectionString = "server=localhost;userid=root;password=091951;database=db_hrm"
+        If dbcon Is Nothing Then
+            dbcon = New MySqlConnection("server=localhost;userid=root;password=091951;database=db_hrm")
+        End If
+
+        If dbcon.State = ConnectionState.Closed Then
+            dbcon.Open()
+        End If
     End Sub
 
-
     Public Function GetConnection() As MySqlConnection
-        Return New MySqlConnection("server=localhost;userid=root;password=admin;database=db_hrm")
+        Return New MySqlConnection("server=localhost;userid=root;password=091951;database=db_hrm")
     End Function
-
 End Module
