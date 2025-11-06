@@ -2,31 +2,16 @@
 Imports MySql.Data.MySqlClient
 Imports System.Security.Cryptography
 Imports System.Globalization
+Imports System.Windows.Controls
 
 Public Class Team_Overview
 
     Private Sub Team_Overview_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LoadEmployeeData()
         LoadOtherEmployeeInfo()
         DisableAllTextboxes()
     End Sub
 
-    Private Sub LoadEmployeeData()
-        Try
-            Dim connectionString As String = "server=localhost;userid=root;password=091951;database=db_hrm"
-            Using dbcon As New MySqlConnection(connectionString)
-                dbcon.Open()
-                Dim query As String = "SELECT * FROM tblemployee"
-                Dim adapter As New MySqlDataAdapter(query, dbcon)
-                Dim table As New DataTable()
-                adapter.Fill(table)
-                dgvAccount.DataSource = table
-            End Using
-        Catch ex As Exception
-            MessageBox.Show("Error loading data: " & ex.Message)
-        End Try
-    End Sub
-
+    ' Load all employee info into dgvOtherInfo
     Private Sub LoadOtherEmployeeInfo()
         Try
             Dim connectionString As String = "server=localhost;userid=root;password=091951;database=db_hrm"
@@ -34,38 +19,38 @@ Public Class Team_Overview
                 dbcon.Open()
 
                 Dim query As String = "
-                    SELECT 
-                        e.`EmployeeID`,
-                        e.`First Name` AS FirstName,
-                        e.`MiddleName`,
-                        e.`LastName`,
-                        e.`BirthDate`,
-                        e.`Age`,
-                        e.`Sex`,
-                        e.`Civil Status` AS CivilStatus,
-                        e.`Contact Number` AS ContactNumber,
-                        e.`Email Address` AS EmailAddress,
-                        e.`Address`,
-                        ec.`EmergencyContactID` AS ContactID,
-                        ec.`Name` AS EmergencyName,
-                        ec.`Relationship`,
-                        ec.`PhoneNumber` AS EmergencyPhone,
-                        ec.`Address` AS EmergencyAddress,
-                        a.`UserID`,
-                        a.`UserType`,
-                        d.`DepartmentID`,
-                        d.`Name` AS DepartmentName,
-                        j.`JobID`,
-                        j.`EmploymentStatus`,
-                        j.`DateHired`,
-                        j.`ContractType`,
-                        j.`JobTitle`,
-                        j.`YearsOfService`
-                    FROM `tblemployee` e
-                    LEFT JOIN `tblemergencycontact` ec ON e.`EmployeeID` = ec.`EmployeeID`
-                    LEFT JOIN `tblaccount` a ON e.`EmployeeID` = a.`EmployeeID`
-                    LEFT JOIN `tbljobdetails` j ON e.`EmployeeID` = j.`EmployeeID`
-                    LEFT JOIN `tbldepartment` d ON j.`DepartmentID` = d.`DepartmentID`;
+                SELECT
+                    e.EmployeeID,
+                    e.`First Name` AS FirstName,
+                    e.MiddleName,
+                    e.LastName,
+                    e.BirthDate,
+                    e.Age,
+                    e.Sex,
+                    e.`Civil Status` AS CivilStatus,
+                    e.`Contact Number` AS ContactNumber,
+                    e.`Email Address` AS EmailAddress,
+                    e.Address,
+                    ec.EmergencyContactID,
+                    ec.Name AS EmergencyName,
+                    ec.Relationship,
+                    ec.PhoneNumber AS EmergencyPhone,
+                    ec.Address AS EmergencyAddress,
+                    a.UserID,
+                    a.UserType,
+                    j.JobID,
+                    j.EmploymentStatus,
+                    j.DateHired,
+                    j.ContractType,
+                    j.JobTitle,
+                    j.YearsOfService,
+                    d.DepartmentID,
+                    d.Name AS DepartmentName
+                FROM tblemployee e
+                LEFT JOIN tblemergencycontact ec ON e.EmployeeID = ec.EmployeeID
+                LEFT JOIN tblaccount a ON e.EmployeeID = a.EmployeeID
+                LEFT JOIN tbljobdetails j ON e.EmployeeID = j.EmployeeID
+                LEFT JOIN tbldepartment d ON j.DepartmentID = d.DepartmentID;
                 "
 
                 Dim adapter As New MySqlDataAdapter(query, dbcon)
@@ -74,16 +59,16 @@ Public Class Team_Overview
                 dgvOtherInfo.DataSource = table
             End Using
 
+            dgvOtherInfo.ScrollBars = ScrollBars.Both
+            dgvOtherInfo.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells
+            dgvOtherInfo.DefaultCellStyle.WrapMode = DataGridViewTriState.False
+            dgvOtherInfo.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None
+            dgvOtherInfo.DefaultCellStyle.Font = New Font("Century Gothic", 9, FontStyle.Regular)
+            dgvOtherInfo.ColumnHeadersDefaultCellStyle.Font = New Font("Century Gothic", 10, FontStyle.Bold)
+
         Catch ex As Exception
             MessageBox.Show("Error loading other info: " & ex.Message)
         End Try
-
-        dgvOtherInfo.ScrollBars = ScrollBars.Both
-        dgvOtherInfo.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells
-        dgvOtherInfo.DefaultCellStyle.WrapMode = DataGridViewTriState.False
-        dgvOtherInfo.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None
-        dgvOtherInfo.DefaultCellStyle.Font = New Font("Century Gothic", 9, FontStyle.Regular)
-        dgvOtherInfo.ColumnHeadersDefaultCellStyle.Font = New Font("Century Gothic", 10, FontStyle.Bold)
     End Sub
 
     Private Sub DisableAllTextboxes()
@@ -114,53 +99,155 @@ Public Class Team_Overview
         txtJobTitle.Enabled = False
         txtYearsOfSevice.Enabled = False
     End Sub
-    Private Sub dgvOtherInfo_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvOtherInfo.CellClick
-        If e.RowIndex < 0 Then Return
 
-        Dim row As DataGridViewRow = dgvOtherInfo.Rows(e.RowIndex)
+    Private Sub EnableAllTextboxes()
+        txtEmployeeID.Enabled = True
+        txtFirstName.Enabled = True
+        txtMiddleName.Enabled = True
+        txtLastName.Enabled = True
+        dtpBirthDate.Enabled = True
+        txtAge.Enabled = True
+        txtSex.Enabled = True
+        txtCivilStatus.Enabled = True
+        txtPhone.Enabled = True
+        txtEmail.Enabled = True
+        txtAddress.Enabled = True
+        txtECContactID.Enabled = True
+        txtECName.Enabled = True
+        txtECRelationship.Enabled = True
+        txtECPhone.Enabled = True
+        txtECAddress.Enabled = True
+        txtUserID.Enabled = True
+        txtUserType.Enabled = True
+        txtDepartmentID.Enabled = True
+        txtDepartment.Enabled = True
+        txtJobID.Enabled = True
+        txtEmployeeStatus.Enabled = True
+        dtpDateHired.Enabled = True
+        txtContractType.Enabled = True
+        txtJobTitle.Enabled = True
+        txtYearsOfSevice.Enabled = True
+    End Sub
 
-        txtEmployeeID.Text = row.Cells("EmployeeID").Value.ToString()
-        txtFirstName.Text = row.Cells("FirstName").Value.ToString()
-        txtMiddleName.Text = row.Cells("MiddleName").Value.ToString()
-        txtLastName.Text = row.Cells("LastName").Value.ToString()
-        Dim birthDateStr As String = If(row.Cells("BirthDate").Value, "").ToString()
+    ' Populate textboxes from selected row
+    Private Sub PopulateTextboxes(row As DataGridViewRow)
+        If row Is Nothing Then Return
+
+        Dim GetCellValue As Func(Of String, String) = Function(colName As String)
+                                                          If row.DataGridView.Columns.Contains(colName) Then
+                                                              Return If(row.Cells(colName)?.Value, "").ToString()
+                                                          Else
+                                                              Return ""
+                                                          End If
+                                                      End Function
+
+        ' --- Employee Info ---
+        txtEmployeeID.Text = GetCellValue("EmployeeID")
+        txtFirstName.Text = GetCellValue("FirstName")
+        txtMiddleName.Text = GetCellValue("MiddleName")
+        txtLastName.Text = GetCellValue("LastName")
+
         Dim birthDate As DateTime
-        If DateTime.TryParseExact(birthDateStr, "M/d/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, birthDate) Then
+        If DateTime.TryParse(GetCellValue("BirthDate"), birthDate) Then
             dtpBirthDate.Value = birthDate
         Else
             dtpBirthDate.Value = DateTime.Now
         End If
-        txtAge.Text = row.Cells("Age").Value.ToString()
-        txtSex.Text = row.Cells("Sex").Value.ToString()
-        txtCivilStatus.Text = row.Cells("CivilStatus").Value.ToString()
-        txtPhone.Text = row.Cells("ContactNumber").Value.ToString()
-        txtEmail.Text = row.Cells("EmailAddress").Value.ToString()
-        txtAddress.Text = row.Cells("Address").Value.ToString()
-        txtECContactID.Text = row.Cells("ContactID").Value.ToString()
-        txtECName.Text = row.Cells("EmergencyName").Value.ToString()
-        txtECRelationship.Text = row.Cells("Relationship").Value.ToString()
-        txtECPhone.Text = row.Cells("EmergencyPhone").Value.ToString()
-        txtECAddress.Text = row.Cells("EmergencyAddress").Value.ToString()
-        txtUserID.Text = row.Cells("UserID").Value.ToString()
-        txtUserType.Text = row.Cells("UserType").Value.ToString()
-        txtDepartmentID.Text = row.Cells("DepartmentID").Value.ToString()
-        txtDepartment.Text = row.Cells("DepartmentName").Value.ToString()
-        txtJobID.Text = row.Cells("JobID").Value.ToString()
-        txtEmployeeStatus.Text = row.Cells("EmploymentStatus").Value.ToString()
-        Dim dateHiredStr As String = If(row.Cells("DateHired").Value, "").ToString()
+
+        txtAge.Text = GetCellValue("Age")
+        txtSex.Text = GetCellValue("Sex")
+        txtCivilStatus.Text = GetCellValue("CivilStatus")
+        txtPhone.Text = GetCellValue("ContactNumber")
+        txtEmail.Text = GetCellValue("EmailAddress")
+        txtAddress.Text = GetCellValue("Address")
+
+        ' --- Emergency Contact ---
+        txtECContactID.Text = GetCellValue("EmergencyContactID")
+        txtECName.Text = GetCellValue("EmergencyName")
+        txtECRelationship.Text = GetCellValue("Relationship")
+        txtECPhone.Text = GetCellValue("EmergencyPhone")
+        txtECAddress.Text = GetCellValue("EmergencyAddress")
+
+        ' --- Account Info ---
+        txtUserID.Text = GetCellValue("UserID")
+        txtUserType.Text = GetCellValue("UserType")
+
+        ' --- Job / Department Info ---
+        txtDepartmentID.Text = GetCellValue("DepartmentID")
+        txtDepartment.Text = GetCellValue("DepartmentName")
+        txtJobID.Text = GetCellValue("JobID")
+        txtEmployeeStatus.Text = GetCellValue("EmploymentStatus")
+
         Dim dateHired As DateTime
-        If DateTime.TryParseExact(dateHiredStr, "M/d/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, dateHired) Then
+        If DateTime.TryParse(GetCellValue("DateHired"), dateHired) Then
             dtpDateHired.Value = dateHired
         Else
             dtpDateHired.Value = DateTime.Now
         End If
 
-        txtContractType.Text = row.Cells("ContractType").Value.ToString()
-        txtJobTitle.Text = row.Cells("JobTitle").Value.ToString()
-        txtYearsOfSevice.Text = row.Cells("YearsOfService").Value.ToString()
+        txtContractType.Text = GetCellValue("ContractType")
+        txtJobTitle.Text = GetCellValue("JobTitle")
+        txtYearsOfSevice.Text = GetCellValue("YearsOfService")
     End Sub
 
+    ' dgvOtherInfo click
+    Private Sub dgvOtherInfo_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvOtherInfo.CellClick
+        If e.RowIndex < 0 Then Return
+        PopulateTextboxes(dgvOtherInfo.Rows(e.RowIndex))
+    End Sub
 
+    ' --- Live search on text change ---
+    Private Sub txtSearchEmployee_TextChanged(sender As Object, e As EventArgs) Handles txtSearchEmployee.TextChanged
+        Dim searchValue As String = txtSearchEmployee.Text.Trim()
+
+        ' Clear previous selection
+        dgvOtherInfo.ClearSelection()
+
+        If String.IsNullOrEmpty(searchValue) Then
+            ' Reload all data if search box is empty
+            LoadOtherEmployeeInfo()
+            Return
+        End If
+
+        Dim found As Boolean = False
+        Dim searchParts() As String = searchValue.Split(" "c, StringSplitOptions.RemoveEmptyEntries)
+
+        For Each row As DataGridViewRow In dgvOtherInfo.Rows
+            If Not row.IsNewRow Then
+                Dim employeeID As String = row.Cells("EmployeeID").Value.ToString()
+                Dim firstName As String = row.Cells("FirstName").Value.ToString()
+                Dim lastName As String = row.Cells("LastName").Value.ToString()
+                Dim fullName As String = $"{firstName} {lastName}"
+
+                ' Check EmployeeID
+                If employeeID.IndexOf(searchValue, StringComparison.OrdinalIgnoreCase) >= 0 Then
+                    row.Selected = True
+                    found = True
+                    Continue For
+                End If
+
+                ' Check full name or individual parts
+                Dim nameMatch As Boolean = False
+                If fullName.IndexOf(searchValue, StringComparison.OrdinalIgnoreCase) >= 0 Then
+                    nameMatch = True
+                Else
+                    For Each part In searchParts
+                        If firstName.IndexOf(part, StringComparison.OrdinalIgnoreCase) >= 0 OrElse
+                           lastName.IndexOf(part, StringComparison.OrdinalIgnoreCase) >= 0 Then
+                            nameMatch = True
+                        End If
+                    Next
+                End If
+
+                If nameMatch Then
+                    row.Selected = True
+                    found = True
+                End If
+            End If
+        Next
+    End Sub
+
+    ' --- Navigation and exit code remains unchanged ---
     Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
         Manager_Dashboard.Show()
         Me.Hide()
@@ -225,15 +312,13 @@ Public Class Team_Overview
         Me.Hide()
     End Sub
 
+    ' Exit
     Private Sub pcbTerminate_Click(sender As Object, e As EventArgs) Handles pcbTerminate.Click
         Dim result As DialogResult = MessageBox.Show("Are you sure you want to exit the system?",
-                                                "Confirm Exit",
-                                                MessageBoxButtons.YesNo,
-                                                MessageBoxIcon.Question)
-
-        If result = DialogResult.Yes Then
-            Application.Exit()
-        End If
+                                                    "Confirm Exit",
+                                                    MessageBoxButtons.YesNo,
+                                                    MessageBoxIcon.Question)
+        If result = DialogResult.Yes Then Application.Exit()
     End Sub
 
 End Class
