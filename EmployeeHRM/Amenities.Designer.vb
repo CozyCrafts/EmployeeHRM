@@ -23,6 +23,7 @@ Partial Class Amenities
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Amenities))
+        Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Panel1 = New Panel()
         lblAmenities = New Label()
         lblTrainings = New Label()
@@ -43,16 +44,16 @@ Partial Class Amenities
         lblDashboard = New Label()
         lblMain = New Label()
         adminheader_pnl = New Panel()
-        pcbTerminate = New PictureBox()
+        btnSignOut = New FontAwesome.Sharp.IconButton()
         Label2 = New Label()
         gbAmenitiesList = New GroupBox()
         txtSearchAmenities = New TextBox()
+        PictureBox1 = New PictureBox()
         dgvAmenities = New DataGridView()
-        btnSearchAmenities = New Button()
         gbDetailsAmenities = New GroupBox()
-        btnDeleteAmenity = New Button()
-        btnAddAmenity = New Button()
-        btnUpdateAmenity = New Button()
+        btnEditAmenity = New FontAwesome.Sharp.IconButton()
+        btnDeleteAmenity = New FontAwesome.Sharp.IconButton()
+        btnAddAmenity = New FontAwesome.Sharp.IconButton()
         Label10 = New Label()
         cbConditionAmenities = New ComboBox()
         txtLocationAmenities = New TextBox()
@@ -65,12 +66,12 @@ Partial Class Amenities
         Label21 = New Label()
         Label1 = New Label()
         Label5 = New Label()
-        btnCancelAmenity = New Button()
-        btnSaveAmenity = New Button()
+        btnSaveAmenity = New FontAwesome.Sharp.IconButton()
+        btnCancelAmenity = New FontAwesome.Sharp.IconButton()
         Panel1.SuspendLayout()
         adminheader_pnl.SuspendLayout()
-        CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
         gbAmenitiesList.SuspendLayout()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         CType(dgvAmenities, ComponentModel.ISupportInitialize).BeginInit()
         gbDetailsAmenities.SuspendLayout()
         SuspendLayout()
@@ -303,22 +304,28 @@ Partial Class Amenities
         ' adminheader_pnl
         ' 
         adminheader_pnl.BackColor = Color.White
-        adminheader_pnl.Controls.Add(pcbTerminate)
+        adminheader_pnl.Controls.Add(btnSignOut)
         adminheader_pnl.Controls.Add(Label2)
         adminheader_pnl.Location = New Point(338, -17)
         adminheader_pnl.Name = "adminheader_pnl"
         adminheader_pnl.Size = New Size(1608, 107)
         adminheader_pnl.TabIndex = 3
         ' 
-        ' pcbTerminate
+        ' btnSignOut
         ' 
-        pcbTerminate.Image = CType(resources.GetObject("pcbTerminate.Image"), Image)
-        pcbTerminate.Location = New Point(1352, 45)
-        pcbTerminate.Name = "pcbTerminate"
-        pcbTerminate.Size = New Size(55, 54)
-        pcbTerminate.SizeMode = PictureBoxSizeMode.StretchImage
-        pcbTerminate.TabIndex = 1
-        pcbTerminate.TabStop = False
+        btnSignOut.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnSignOut.IconChar = FontAwesome.Sharp.IconChar.SignOut
+        btnSignOut.IconColor = Color.Black
+        btnSignOut.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSignOut.IconSize = 38
+        btnSignOut.ImageAlign = ContentAlignment.MiddleLeft
+        btnSignOut.Location = New Point(1252, 46)
+        btnSignOut.Name = "btnSignOut"
+        btnSignOut.Size = New Size(142, 54)
+        btnSignOut.TabIndex = 38
+        btnSignOut.Text = "Sign Out"
+        btnSignOut.TextAlign = ContentAlignment.MiddleRight
+        btnSignOut.UseVisualStyleBackColor = True
         ' 
         ' Label2
         ' 
@@ -333,14 +340,14 @@ Partial Class Amenities
         ' gbAmenitiesList
         ' 
         gbAmenitiesList.Controls.Add(txtSearchAmenities)
+        gbAmenitiesList.Controls.Add(PictureBox1)
         gbAmenitiesList.Controls.Add(dgvAmenities)
-        gbAmenitiesList.Controls.Add(btnSearchAmenities)
         gbAmenitiesList.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        gbAmenitiesList.Location = New Point(374, 446)
+        gbAmenitiesList.Location = New Point(374, 424)
         gbAmenitiesList.Margin = New Padding(4, 3, 4, 3)
         gbAmenitiesList.Name = "gbAmenitiesList"
         gbAmenitiesList.Padding = New Padding(4, 3, 4, 3)
-        gbAmenitiesList.Size = New Size(1358, 563)
+        gbAmenitiesList.Size = New Size(1358, 660)
         gbAmenitiesList.TabIndex = 67
         gbAmenitiesList.TabStop = False
         gbAmenitiesList.Text = "Amenities List"
@@ -348,40 +355,48 @@ Partial Class Amenities
         ' txtSearchAmenities
         ' 
         txtSearchAmenities.Font = New Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtSearchAmenities.Location = New Point(208, 59)
+        txtSearchAmenities.Location = New Point(85, 57)
         txtSearchAmenities.Margin = New Padding(4, 3, 4, 3)
         txtSearchAmenities.Name = "txtSearchAmenities"
         txtSearchAmenities.Size = New Size(256, 32)
         txtSearchAmenities.TabIndex = 90
         ' 
+        ' PictureBox1
+        ' 
+        PictureBox1.BackgroundImage = CType(resources.GetObject("PictureBox1.BackgroundImage"), Image)
+        PictureBox1.BackgroundImageLayout = ImageLayout.Zoom
+        PictureBox1.Location = New Point(18, 41)
+        PictureBox1.Name = "PictureBox1"
+        PictureBox1.Size = New Size(77, 48)
+        PictureBox1.TabIndex = 103
+        PictureBox1.TabStop = False
+        ' 
         ' dgvAmenities
         ' 
+        dgvAmenities.AllowUserToResizeColumns = False
+        dgvAmenities.AllowUserToResizeRows = False
+        dgvAmenities.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         dgvAmenities.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        dgvAmenities.Location = New Point(34, 120)
+        DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = SystemColors.Window
+        DataGridViewCellStyle1.Font = New Font("Century Gothic", 11F, FontStyle.Bold)
+        DataGridViewCellStyle1.ForeColor = SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = DataGridViewTriState.False
+        dgvAmenities.DefaultCellStyle = DataGridViewCellStyle1
+        dgvAmenities.Location = New Point(34, 110)
         dgvAmenities.Margin = New Padding(4, 3, 4, 3)
         dgvAmenities.Name = "dgvAmenities"
         dgvAmenities.RowHeadersWidth = 51
-        dgvAmenities.Size = New Size(1298, 404)
+        dgvAmenities.Size = New Size(1298, 525)
         dgvAmenities.TabIndex = 0
-        ' 
-        ' btnSearchAmenities
-        ' 
-        btnSearchAmenities.BackColor = SystemColors.InactiveCaption
-        btnSearchAmenities.BackgroundImageLayout = ImageLayout.None
-        btnSearchAmenities.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnSearchAmenities.ForeColor = Color.Black
-        btnSearchAmenities.Location = New Point(34, 51)
-        btnSearchAmenities.Name = "btnSearchAmenities"
-        btnSearchAmenities.Size = New Size(167, 46)
-        btnSearchAmenities.TabIndex = 89
-        btnSearchAmenities.Text = "Search"
-        btnSearchAmenities.UseVisualStyleBackColor = False
         ' 
         ' gbDetailsAmenities
         ' 
+        gbDetailsAmenities.Controls.Add(btnEditAmenity)
         gbDetailsAmenities.Controls.Add(btnDeleteAmenity)
         gbDetailsAmenities.Controls.Add(btnAddAmenity)
-        gbDetailsAmenities.Controls.Add(btnUpdateAmenity)
         gbDetailsAmenities.Controls.Add(Label10)
         gbDetailsAmenities.Controls.Add(cbConditionAmenities)
         gbDetailsAmenities.Controls.Add(txtLocationAmenities)
@@ -394,8 +409,8 @@ Partial Class Amenities
         gbDetailsAmenities.Controls.Add(Label21)
         gbDetailsAmenities.Controls.Add(Label1)
         gbDetailsAmenities.Controls.Add(Label5)
-        gbDetailsAmenities.Controls.Add(btnCancelAmenity)
         gbDetailsAmenities.Controls.Add(btnSaveAmenity)
+        gbDetailsAmenities.Controls.Add(btnCancelAmenity)
         gbDetailsAmenities.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
         gbDetailsAmenities.Location = New Point(374, 114)
         gbDetailsAmenities.Margin = New Padding(4, 3, 4, 3)
@@ -406,44 +421,56 @@ Partial Class Amenities
         gbDetailsAmenities.TabStop = False
         gbDetailsAmenities.Text = "Details"
         ' 
+        ' btnEditAmenity
+        ' 
+        btnEditAmenity.BackColor = SystemColors.InactiveCaption
+        btnEditAmenity.Font = New Font("Century Gothic", 13F, FontStyle.Bold)
+        btnEditAmenity.IconChar = FontAwesome.Sharp.IconChar.Edit
+        btnEditAmenity.IconColor = Color.Black
+        btnEditAmenity.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnEditAmenity.IconSize = 40
+        btnEditAmenity.ImageAlign = ContentAlignment.MiddleLeft
+        btnEditAmenity.Location = New Point(1024, 118)
+        btnEditAmenity.Name = "btnEditAmenity"
+        btnEditAmenity.Size = New Size(250, 57)
+        btnEditAmenity.TabIndex = 91
+        btnEditAmenity.Text = "Edit Amenity"
+        btnEditAmenity.TextAlign = ContentAlignment.MiddleRight
+        btnEditAmenity.UseVisualStyleBackColor = False
+        ' 
         ' btnDeleteAmenity
         ' 
         btnDeleteAmenity.BackColor = SystemColors.InactiveCaption
-        btnDeleteAmenity.BackgroundImageLayout = ImageLayout.None
-        btnDeleteAmenity.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnDeleteAmenity.ForeColor = Color.Black
-        btnDeleteAmenity.Location = New Point(992, 200)
+        btnDeleteAmenity.Font = New Font("Century Gothic", 13F, FontStyle.Bold)
+        btnDeleteAmenity.IconChar = FontAwesome.Sharp.IconChar.Trash
+        btnDeleteAmenity.IconColor = Color.Black
+        btnDeleteAmenity.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnDeleteAmenity.IconSize = 35
+        btnDeleteAmenity.ImageAlign = ContentAlignment.MiddleLeft
+        btnDeleteAmenity.Location = New Point(1024, 191)
         btnDeleteAmenity.Name = "btnDeleteAmenity"
-        btnDeleteAmenity.Size = New Size(340, 46)
-        btnDeleteAmenity.TabIndex = 89
-        btnDeleteAmenity.Text = "Delete"
+        btnDeleteAmenity.Size = New Size(250, 57)
+        btnDeleteAmenity.TabIndex = 106
+        btnDeleteAmenity.Text = "Delete Amenity"
+        btnDeleteAmenity.TextAlign = ContentAlignment.MiddleRight
         btnDeleteAmenity.UseVisualStyleBackColor = False
         ' 
         ' btnAddAmenity
         ' 
         btnAddAmenity.BackColor = SystemColors.InactiveCaption
-        btnAddAmenity.BackgroundImageLayout = ImageLayout.None
-        btnAddAmenity.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnAddAmenity.ForeColor = Color.Black
-        btnAddAmenity.Location = New Point(992, 54)
+        btnAddAmenity.Font = New Font("Century Gothic", 13F, FontStyle.Bold)
+        btnAddAmenity.IconChar = FontAwesome.Sharp.IconChar.PlusSquare
+        btnAddAmenity.IconColor = Color.Black
+        btnAddAmenity.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnAddAmenity.IconSize = 35
+        btnAddAmenity.ImageAlign = ContentAlignment.MiddleLeft
+        btnAddAmenity.Location = New Point(1024, 54)
         btnAddAmenity.Name = "btnAddAmenity"
-        btnAddAmenity.Size = New Size(340, 46)
-        btnAddAmenity.TabIndex = 87
-        btnAddAmenity.Text = "Add Amenity "
+        btnAddAmenity.Size = New Size(250, 58)
+        btnAddAmenity.TabIndex = 88
+        btnAddAmenity.Text = "Add Amenity"
+        btnAddAmenity.TextAlign = ContentAlignment.MiddleRight
         btnAddAmenity.UseVisualStyleBackColor = False
-        ' 
-        ' btnUpdateAmenity
-        ' 
-        btnUpdateAmenity.BackColor = SystemColors.InactiveCaption
-        btnUpdateAmenity.BackgroundImageLayout = ImageLayout.None
-        btnUpdateAmenity.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnUpdateAmenity.ForeColor = Color.Black
-        btnUpdateAmenity.Location = New Point(992, 121)
-        btnUpdateAmenity.Name = "btnUpdateAmenity"
-        btnUpdateAmenity.Size = New Size(340, 46)
-        btnUpdateAmenity.TabIndex = 86
-        btnUpdateAmenity.Text = "Update"
-        btnUpdateAmenity.UseVisualStyleBackColor = False
         ' 
         ' Label10
         ' 
@@ -565,31 +592,39 @@ Partial Class Amenities
         Label5.TabIndex = 74
         Label5.Text = "Name:"
         ' 
-        ' btnCancelAmenity
-        ' 
-        btnCancelAmenity.BackColor = SystemColors.InactiveCaption
-        btnCancelAmenity.BackgroundImageLayout = ImageLayout.None
-        btnCancelAmenity.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnCancelAmenity.ForeColor = Color.Black
-        btnCancelAmenity.Location = New Point(1165, 121)
-        btnCancelAmenity.Name = "btnCancelAmenity"
-        btnCancelAmenity.Size = New Size(167, 46)
-        btnCancelAmenity.TabIndex = 88
-        btnCancelAmenity.Text = "Cancel"
-        btnCancelAmenity.UseVisualStyleBackColor = False
-        ' 
         ' btnSaveAmenity
         ' 
         btnSaveAmenity.BackColor = SystemColors.InactiveCaption
-        btnSaveAmenity.BackgroundImageLayout = ImageLayout.None
-        btnSaveAmenity.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnSaveAmenity.ForeColor = Color.Black
-        btnSaveAmenity.Location = New Point(992, 121)
+        btnSaveAmenity.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
+        btnSaveAmenity.IconChar = FontAwesome.Sharp.IconChar.Save
+        btnSaveAmenity.IconColor = Color.Black
+        btnSaveAmenity.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSaveAmenity.IconSize = 35
+        btnSaveAmenity.ImageAlign = ContentAlignment.MiddleLeft
+        btnSaveAmenity.Location = New Point(1024, 87)
         btnSaveAmenity.Name = "btnSaveAmenity"
-        btnSaveAmenity.Size = New Size(167, 46)
-        btnSaveAmenity.TabIndex = 90
+        btnSaveAmenity.Size = New Size(250, 57)
+        btnSaveAmenity.TabIndex = 104
         btnSaveAmenity.Text = "Save"
+        btnSaveAmenity.TextAlign = ContentAlignment.MiddleRight
         btnSaveAmenity.UseVisualStyleBackColor = False
+        ' 
+        ' btnCancelAmenity
+        ' 
+        btnCancelAmenity.BackColor = SystemColors.InactiveCaption
+        btnCancelAmenity.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
+        btnCancelAmenity.IconChar = FontAwesome.Sharp.IconChar.Cancel
+        btnCancelAmenity.IconColor = Color.Black
+        btnCancelAmenity.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnCancelAmenity.IconSize = 35
+        btnCancelAmenity.ImageAlign = ContentAlignment.MiddleLeft
+        btnCancelAmenity.Location = New Point(1024, 150)
+        btnCancelAmenity.Name = "btnCancelAmenity"
+        btnCancelAmenity.Size = New Size(250, 57)
+        btnCancelAmenity.TabIndex = 105
+        btnCancelAmenity.Text = "Cancel"
+        btnCancelAmenity.TextAlign = ContentAlignment.MiddleRight
+        btnCancelAmenity.UseVisualStyleBackColor = False
         ' 
         ' Amenities
         ' 
@@ -610,9 +645,9 @@ Partial Class Amenities
         Panel1.PerformLayout()
         adminheader_pnl.ResumeLayout(False)
         adminheader_pnl.PerformLayout()
-        CType(pcbTerminate, ComponentModel.ISupportInitialize).EndInit()
         gbAmenitiesList.ResumeLayout(False)
         gbAmenitiesList.PerformLayout()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         CType(dgvAmenities, ComponentModel.ISupportInitialize).EndInit()
         gbDetailsAmenities.ResumeLayout(False)
         gbDetailsAmenities.PerformLayout()
@@ -639,7 +674,6 @@ Partial Class Amenities
     Friend WithEvents lblDashboard As Label
     Friend WithEvents lblMain As Label
     Friend WithEvents adminheader_pnl As Panel
-    Friend WithEvents pcbTerminate As PictureBox
     Friend WithEvents Label2 As Label
     Friend WithEvents gbAmenitiesList As GroupBox
     Friend WithEvents dgvAmenities As DataGridView
@@ -656,11 +690,14 @@ Partial Class Amenities
     Friend WithEvents Label9 As Label
     Friend WithEvents Label10 As Label
     Friend WithEvents cbConditionAmenities As ComboBox
-    Friend WithEvents btnUpdateAmenity As Button
-    Friend WithEvents btnAddAmenity As Button
-    Friend WithEvents btnSearchAmenities As Button
     Friend WithEvents txtSearchAmenities As TextBox
-    Friend WithEvents btnSaveAmenity As Button
-    Friend WithEvents btnDeleteAmenity As Button
-    Friend WithEvents btnCancelAmenity As Button
+
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents btnSignOut As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnAddAmenity As FontAwesome.Sharp.IconButton
+
+    Friend WithEvents btnEditAmenity As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnCancelAmenity As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnSaveAmenity As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnDeleteAmenity As FontAwesome.Sharp.IconButton
 End Class

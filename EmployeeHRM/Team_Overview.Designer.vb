@@ -43,22 +43,32 @@ Partial Class Team_Overview
         lblDashboard = New Label()
         lblMain = New Label()
         adminheader_pnl = New Panel()
+        btnSignOut = New FontAwesome.Sharp.IconButton()
         pcbTerminate = New PictureBox()
         Label2 = New Label()
-        btnCancel = New Button()
-        btnDelete = New Button()
-        btnSave = New Button()
+        btnCancelEmployee = New Button()
+        btnSaveEmployee = New Button()
         btnAddEmployee = New FontAwesome.Sharp.IconButton()
         btnEditEmployee = New FontAwesome.Sharp.IconButton()
-        txtUserID = New TextBox()
-        Label10 = New Label()
-        Label52 = New Label()
         GroupBox4 = New GroupBox()
+        GroupBox1 = New GroupBox()
+        Label1 = New Label()
+        cbUserType = New ComboBox()
+        txtUsername = New TextBox()
+        Label29 = New Label()
+        txtPassword = New TextBox()
+        txtUserID = New TextBox()
+        Label52 = New Label()
+        Label10 = New Label()
+        cbCivilStatus = New ComboBox()
+        cbSex = New ComboBox()
+        IconButton1 = New FontAwesome.Sharp.IconButton()
         txtSearchEmployee = New TextBox()
         PictureBox1 = New PictureBox()
         dgvOtherInfo = New DataGridView()
         GroupBox3 = New GroupBox()
-        txtUserType = New TextBox()
+        cbContractType = New ComboBox()
+        cbEmployeeStatus = New ComboBox()
         dtpDateHired = New DateTimePicker()
         txtDepartment = New TextBox()
         Label11 = New Label()
@@ -72,11 +82,7 @@ Partial Class Team_Overview
         Label48 = New Label()
         txtJobTitle = New TextBox()
         Label16 = New Label()
-        txtEmployeeStatus = New TextBox()
-        txtContractType = New TextBox()
         txtYearsOfSevice = New TextBox()
-        txtCivilStatus = New TextBox()
-        txtSex = New TextBox()
         GroupBox5 = New GroupBox()
         txtECAddress = New TextBox()
         Label24 = New Label()
@@ -108,11 +114,12 @@ Partial Class Team_Overview
         txtMiddleName = New TextBox()
         Label14 = New Label()
         Label13 = New Label()
-        IconButton1 = New FontAwesome.Sharp.IconButton()
+        btnDeleteEmployee = New FontAwesome.Sharp.IconButton()
         Panel1.SuspendLayout()
         adminheader_pnl.SuspendLayout()
         CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox4.SuspendLayout()
+        GroupBox1.SuspendLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         CType(dgvOtherInfo, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox3.SuspendLayout()
@@ -346,12 +353,29 @@ Partial Class Team_Overview
         ' adminheader_pnl
         ' 
         adminheader_pnl.BackColor = Color.White
+        adminheader_pnl.Controls.Add(btnSignOut)
         adminheader_pnl.Controls.Add(pcbTerminate)
         adminheader_pnl.Controls.Add(Label2)
         adminheader_pnl.Location = New Point(338, -17)
         adminheader_pnl.Name = "adminheader_pnl"
         adminheader_pnl.Size = New Size(1608, 107)
         adminheader_pnl.TabIndex = 4
+        ' 
+        ' btnSignOut
+        ' 
+        btnSignOut.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnSignOut.IconChar = FontAwesome.Sharp.IconChar.SignOut
+        btnSignOut.IconColor = Color.Black
+        btnSignOut.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSignOut.IconSize = 38
+        btnSignOut.ImageAlign = ContentAlignment.MiddleLeft
+        btnSignOut.Location = New Point(1204, 45)
+        btnSignOut.Name = "btnSignOut"
+        btnSignOut.Size = New Size(142, 54)
+        btnSignOut.TabIndex = 37
+        btnSignOut.Text = "Sign Out"
+        btnSignOut.TextAlign = ContentAlignment.MiddleRight
+        btnSignOut.UseVisualStyleBackColor = True
         ' 
         ' pcbTerminate
         ' 
@@ -373,44 +397,31 @@ Partial Class Team_Overview
         Label2.TabIndex = 0
         Label2.Text = "Team Overview"
         ' 
-        ' btnCancel
+        ' btnCancelEmployee
         ' 
-        btnCancel.BackColor = SystemColors.InactiveCaption
-        btnCancel.BackgroundImageLayout = ImageLayout.None
-        btnCancel.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnCancel.ForeColor = Color.Black
-        btnCancel.Location = New Point(1240, 31)
-        btnCancel.Name = "btnCancel"
-        btnCancel.Size = New Size(89, 45)
-        btnCancel.TabIndex = 75
-        btnCancel.Text = "Cancel"
-        btnCancel.UseVisualStyleBackColor = False
+        btnCancelEmployee.BackColor = SystemColors.InactiveCaption
+        btnCancelEmployee.BackgroundImageLayout = ImageLayout.None
+        btnCancelEmployee.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnCancelEmployee.ForeColor = Color.Black
+        btnCancelEmployee.Location = New Point(1240, 35)
+        btnCancelEmployee.Name = "btnCancelEmployee"
+        btnCancelEmployee.Size = New Size(89, 45)
+        btnCancelEmployee.TabIndex = 75
+        btnCancelEmployee.Text = "Cancel"
+        btnCancelEmployee.UseVisualStyleBackColor = False
         ' 
-        ' btnDelete
+        ' btnSaveEmployee
         ' 
-        btnDelete.BackColor = SystemColors.InactiveCaption
-        btnDelete.BackgroundImageLayout = ImageLayout.None
-        btnDelete.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnDelete.ForeColor = Color.Black
-        btnDelete.Location = New Point(967, 33)
-        btnDelete.Name = "btnDelete"
-        btnDelete.Size = New Size(178, 44)
-        btnDelete.TabIndex = 74
-        btnDelete.Text = "Delete Record"
-        btnDelete.UseVisualStyleBackColor = False
-        ' 
-        ' btnSave
-        ' 
-        btnSave.BackColor = SystemColors.InactiveCaption
-        btnSave.BackgroundImageLayout = ImageLayout.None
-        btnSave.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnSave.ForeColor = Color.Black
-        btnSave.Location = New Point(1151, 31)
-        btnSave.Name = "btnSave"
-        btnSave.Size = New Size(90, 45)
-        btnSave.TabIndex = 73
-        btnSave.Text = "Save"
-        btnSave.UseVisualStyleBackColor = False
+        btnSaveEmployee.BackColor = SystemColors.InactiveCaption
+        btnSaveEmployee.BackgroundImageLayout = ImageLayout.None
+        btnSaveEmployee.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnSaveEmployee.ForeColor = Color.Black
+        btnSaveEmployee.Location = New Point(1151, 35)
+        btnSaveEmployee.Name = "btnSaveEmployee"
+        btnSaveEmployee.Size = New Size(90, 45)
+        btnSaveEmployee.TabIndex = 73
+        btnSaveEmployee.Text = "Save"
+        btnSaveEmployee.UseVisualStyleBackColor = False
         ' 
         ' btnAddEmployee
         ' 
@@ -421,7 +432,7 @@ Partial Class Team_Overview
         btnAddEmployee.IconColor = Color.Black
         btnAddEmployee.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnAddEmployee.IconSize = 38
-        btnAddEmployee.Location = New Point(967, 32)
+        btnAddEmployee.Location = New Point(1151, 36)
         btnAddEmployee.Name = "btnAddEmployee"
         btnAddEmployee.Size = New Size(178, 44)
         btnAddEmployee.TabIndex = 78
@@ -438,7 +449,7 @@ Partial Class Team_Overview
         btnEditEmployee.IconColor = Color.Black
         btnEditEmployee.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnEditEmployee.IconSize = 38
-        btnEditEmployee.Location = New Point(1151, 31)
+        btnEditEmployee.Location = New Point(967, 34)
         btnEditEmployee.Name = "btnEditEmployee"
         btnEditEmployee.Size = New Size(178, 46)
         btnEditEmployee.TabIndex = 79
@@ -446,48 +457,18 @@ Partial Class Team_Overview
         btnEditEmployee.TextImageRelation = TextImageRelation.ImageBeforeText
         btnEditEmployee.UseVisualStyleBackColor = False
         ' 
-        ' txtUserID
-        ' 
-        txtUserID.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold)
-        txtUserID.Location = New Point(96, 31)
-        txtUserID.Name = "txtUserID"
-        txtUserID.Size = New Size(97, 30)
-        txtUserID.TabIndex = 48
-        ' 
-        ' Label10
-        ' 
-        Label10.AutoSize = True
-        Label10.Font = New Font("Century Gothic", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label10.ForeColor = Color.Black
-        Label10.Location = New Point(17, 40)
-        Label10.Name = "Label10"
-        Label10.Size = New Size(73, 21)
-        Label10.TabIndex = 47
-        Label10.Text = "User ID:"
-        ' 
-        ' Label52
-        ' 
-        Label52.AutoSize = True
-        Label52.Font = New Font("Century Gothic", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label52.ForeColor = Color.Black
-        Label52.Location = New Point(196, 40)
-        Label52.Name = "Label52"
-        Label52.Size = New Size(94, 21)
-        Label52.TabIndex = 30
-        Label52.Text = "User Type:"
-        ' 
         ' GroupBox4
         ' 
         GroupBox4.BackgroundImageLayout = ImageLayout.Zoom
+        GroupBox4.Controls.Add(GroupBox1)
+        GroupBox4.Controls.Add(cbCivilStatus)
+        GroupBox4.Controls.Add(cbSex)
         GroupBox4.Controls.Add(IconButton1)
         GroupBox4.Controls.Add(txtSearchEmployee)
         GroupBox4.Controls.Add(PictureBox1)
         GroupBox4.Controls.Add(dgvOtherInfo)
         GroupBox4.Controls.Add(GroupBox3)
-        GroupBox4.Controls.Add(txtCivilStatus)
-        GroupBox4.Controls.Add(txtSex)
         GroupBox4.Controls.Add(btnAddEmployee)
-        GroupBox4.Controls.Add(btnDelete)
         GroupBox4.Controls.Add(btnEditEmployee)
         GroupBox4.Controls.Add(GroupBox5)
         GroupBox4.Controls.Add(txtAddress)
@@ -510,8 +491,9 @@ Partial Class Team_Overview
         GroupBox4.Controls.Add(txtMiddleName)
         GroupBox4.Controls.Add(Label14)
         GroupBox4.Controls.Add(Label13)
-        GroupBox4.Controls.Add(btnCancel)
-        GroupBox4.Controls.Add(btnSave)
+        GroupBox4.Controls.Add(btnCancelEmployee)
+        GroupBox4.Controls.Add(btnSaveEmployee)
+        GroupBox4.Controls.Add(btnDeleteEmployee)
         GroupBox4.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
         GroupBox4.Location = New Point(391, 114)
         GroupBox4.Name = "GroupBox4"
@@ -519,6 +501,127 @@ Partial Class Team_Overview
         GroupBox4.TabIndex = 89
         GroupBox4.TabStop = False
         GroupBox4.Text = "Employee Information"
+        ' 
+        ' GroupBox1
+        ' 
+        GroupBox1.Controls.Add(Label1)
+        GroupBox1.Controls.Add(cbUserType)
+        GroupBox1.Controls.Add(txtUsername)
+        GroupBox1.Controls.Add(Label29)
+        GroupBox1.Controls.Add(txtPassword)
+        GroupBox1.Controls.Add(txtUserID)
+        GroupBox1.Controls.Add(Label52)
+        GroupBox1.Controls.Add(Label10)
+        GroupBox1.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        GroupBox1.Location = New Point(910, 835)
+        GroupBox1.Name = "GroupBox1"
+        GroupBox1.Size = New Size(420, 161)
+        GroupBox1.TabIndex = 108
+        GroupBox1.TabStop = False
+        GroupBox1.Text = "Account "
+        ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label1.Location = New Point(24, 83)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(103, 21)
+        Label1.TabIndex = 75
+        Label1.Text = "Username:"
+        ' 
+        ' cbUserType
+        ' 
+        cbUserType.FormattingEnabled = True
+        cbUserType.Location = New Point(281, 37)
+        cbUserType.Name = "cbUserType"
+        cbUserType.Size = New Size(123, 31)
+        cbUserType.TabIndex = 107
+        ' 
+        ' txtUsername
+        ' 
+        txtUsername.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtUsername.Location = New Point(133, 74)
+        txtUsername.Name = "txtUsername"
+        txtUsername.Size = New Size(271, 30)
+        txtUsername.TabIndex = 76
+        ' 
+        ' Label29
+        ' 
+        Label29.AutoSize = True
+        Label29.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label29.Location = New Point(32, 119)
+        Label29.Name = "Label29"
+        Label29.Size = New Size(95, 21)
+        Label29.TabIndex = 68
+        Label29.Text = "Password:"
+        ' 
+        ' txtPassword
+        ' 
+        txtPassword.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtPassword.Location = New Point(133, 110)
+        txtPassword.Name = "txtPassword"
+        txtPassword.Size = New Size(271, 30)
+        txtPassword.TabIndex = 71
+        ' 
+        ' txtUserID
+        ' 
+        txtUserID.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold)
+        txtUserID.Location = New Point(90, 38)
+        txtUserID.Name = "txtUserID"
+        txtUserID.Size = New Size(85, 30)
+        txtUserID.TabIndex = 48
+        ' 
+        ' Label52
+        ' 
+        Label52.AutoSize = True
+        Label52.Font = New Font("Century Gothic", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label52.ForeColor = Color.Black
+        Label52.Location = New Point(181, 47)
+        Label52.Name = "Label52"
+        Label52.Size = New Size(94, 21)
+        Label52.TabIndex = 30
+        Label52.Text = "User Type:"
+        ' 
+        ' Label10
+        ' 
+        Label10.AutoSize = True
+        Label10.Font = New Font("Century Gothic", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label10.ForeColor = Color.Black
+        Label10.Location = New Point(11, 47)
+        Label10.Name = "Label10"
+        Label10.Size = New Size(73, 21)
+        Label10.TabIndex = 47
+        Label10.Text = "User ID:"
+        ' 
+        ' cbCivilStatus
+        ' 
+        cbCivilStatus.FormattingEnabled = True
+        cbCivilStatus.Location = New Point(155, 786)
+        cbCivilStatus.Name = "cbCivilStatus"
+        cbCivilStatus.Size = New Size(291, 31)
+        cbCivilStatus.TabIndex = 106
+        ' 
+        ' cbSex
+        ' 
+        cbSex.FormattingEnabled = True
+        cbSex.Location = New Point(155, 749)
+        cbSex.Name = "cbSex"
+        cbSex.Size = New Size(291, 31)
+        cbSex.TabIndex = 105
+        ' 
+        ' IconButton1
+        ' 
+        IconButton1.BackColor = SystemColors.Control
+        IconButton1.IconChar = FontAwesome.Sharp.IconChar.Refresh
+        IconButton1.IconColor = Color.Black
+        IconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto
+        IconButton1.IconSize = 38
+        IconButton1.Location = New Point(328, 39)
+        IconButton1.Name = "IconButton1"
+        IconButton1.Size = New Size(79, 40)
+        IconButton1.TabIndex = 103
+        IconButton1.UseVisualStyleBackColor = False
         ' 
         ' txtSearchEmployee
         ' 
@@ -546,24 +649,22 @@ Partial Class Team_Overview
         dgvOtherInfo.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
         dgvOtherInfo.ColumnHeadersHeight = 29
         dgvOtherInfo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        dgvOtherInfo.Location = New Point(15, 85)
+        dgvOtherInfo.Location = New Point(15, 86)
         dgvOtherInfo.Name = "dgvOtherInfo"
         dgvOtherInfo.RowHeadersWidth = 51
-        dgvOtherInfo.Size = New Size(1314, 442)
+        dgvOtherInfo.Size = New Size(1314, 445)
         dgvOtherInfo.TabIndex = 90
         ' 
         ' GroupBox3
         ' 
-        GroupBox3.Controls.Add(txtUserType)
+        GroupBox3.Controls.Add(cbContractType)
+        GroupBox3.Controls.Add(cbEmployeeStatus)
         GroupBox3.Controls.Add(dtpDateHired)
-        GroupBox3.Controls.Add(txtUserID)
         GroupBox3.Controls.Add(txtDepartment)
         GroupBox3.Controls.Add(Label11)
-        GroupBox3.Controls.Add(Label10)
         GroupBox3.Controls.Add(Label25)
         GroupBox3.Controls.Add(Label21)
         GroupBox3.Controls.Add(txtJobID)
-        GroupBox3.Controls.Add(Label52)
         GroupBox3.Controls.Add(Label20)
         GroupBox3.Controls.Add(Label15)
         GroupBox3.Controls.Add(txtDepartmentID)
@@ -571,30 +672,36 @@ Partial Class Team_Overview
         GroupBox3.Controls.Add(Label48)
         GroupBox3.Controls.Add(txtJobTitle)
         GroupBox3.Controls.Add(Label16)
-        GroupBox3.Controls.Add(txtEmployeeStatus)
-        GroupBox3.Controls.Add(txtContractType)
         GroupBox3.Controls.Add(txtYearsOfSevice)
         GroupBox3.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        GroupBox3.Location = New Point(21, 840)
+        GroupBox3.Location = New Point(21, 835)
         GroupBox3.Name = "GroupBox3"
-        GroupBox3.Size = New Size(1308, 153)
+        GroupBox3.Size = New Size(883, 184)
         GroupBox3.TabIndex = 88
         GroupBox3.TabStop = False
         GroupBox3.Text = "Job Details"
         ' 
-        ' txtUserType
+        ' cbContractType
         ' 
-        txtUserType.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold)
-        txtUserType.Location = New Point(296, 32)
-        txtUserType.Name = "txtUserType"
-        txtUserType.Size = New Size(125, 30)
-        txtUserType.TabIndex = 50
+        cbContractType.FormattingEnabled = True
+        cbContractType.Location = New Point(602, 67)
+        cbContractType.Name = "cbContractType"
+        cbContractType.Size = New Size(264, 31)
+        cbContractType.TabIndex = 107
+        ' 
+        ' cbEmployeeStatus
+        ' 
+        cbEmployeeStatus.FormattingEnabled = True
+        cbEmployeeStatus.Location = New Point(602, 30)
+        cbEmployeeStatus.Name = "cbEmployeeStatus"
+        cbEmployeeStatus.Size = New Size(264, 31)
+        cbEmployeeStatus.TabIndex = 106
         ' 
         ' dtpDateHired
         ' 
         dtpDateHired.CustomFormat = "mm/dd/yyyy"
         dtpDateHired.Font = New Font("Century Gothic", 9F, FontStyle.Bold)
-        dtpDateHired.Location = New Point(1028, 37)
+        dtpDateHired.Location = New Point(602, 104)
         dtpDateHired.Name = "dtpDateHired"
         dtpDateHired.Size = New Size(264, 26)
         dtpDateHired.TabIndex = 49
@@ -603,16 +710,16 @@ Partial Class Team_Overview
         ' txtDepartment
         ' 
         txtDepartment.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtDepartment.Location = New Point(171, 104)
+        txtDepartment.Location = New Point(170, 139)
         txtDepartment.Name = "txtDepartment"
-        txtDepartment.Size = New Size(250, 30)
+        txtDepartment.Size = New Size(235, 30)
         txtDepartment.TabIndex = 20
         ' 
         ' Label11
         ' 
         Label11.AutoSize = True
         Label11.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label11.Location = New Point(17, 77)
+        Label11.Location = New Point(18, 112)
         Label11.Name = "Label11"
         Label11.Size = New Size(146, 21)
         Label11.TabIndex = 17
@@ -622,7 +729,7 @@ Partial Class Team_Overview
         ' 
         Label25.AutoSize = True
         Label25.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label25.Location = New Point(541, 41)
+        Label25.Location = New Point(93, 40)
         Label25.Name = "Label25"
         Label25.Size = New Size(71, 21)
         Label25.TabIndex = 19
@@ -632,7 +739,7 @@ Partial Class Team_Overview
         ' 
         Label21.AutoSize = True
         Label21.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label21.Location = New Point(526, 77)
+        Label21.Location = New Point(78, 76)
         Label21.Name = "Label21"
         Label21.Size = New Size(86, 21)
         Label21.TabIndex = 0
@@ -641,7 +748,7 @@ Partial Class Team_Overview
         ' txtJobID
         ' 
         txtJobID.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtJobID.Location = New Point(620, 32)
+        txtJobID.Location = New Point(170, 31)
         txtJobID.Name = "txtJobID"
         txtJobID.Size = New Size(235, 30)
         txtJobID.TabIndex = 18
@@ -650,7 +757,7 @@ Partial Class Team_Overview
         ' 
         Label20.AutoSize = True
         Label20.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label20.Location = New Point(914, 42)
+        Label20.Location = New Point(488, 109)
         Label20.Name = "Label20"
         Label20.Size = New Size(108, 21)
         Label20.TabIndex = 1
@@ -660,7 +767,7 @@ Partial Class Team_Overview
         ' 
         Label15.AutoSize = True
         Label15.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label15.Location = New Point(427, 113)
+        Label15.Location = New Point(411, 40)
         Label15.Name = "Label15"
         Label15.Size = New Size(185, 21)
         Label15.TabIndex = 3
@@ -669,16 +776,16 @@ Partial Class Team_Overview
         ' txtDepartmentID
         ' 
         txtDepartmentID.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtDepartmentID.Location = New Point(171, 68)
+        txtDepartmentID.Location = New Point(170, 103)
         txtDepartmentID.Name = "txtDepartmentID"
-        txtDepartmentID.Size = New Size(250, 30)
+        txtDepartmentID.Size = New Size(235, 30)
         txtDepartmentID.TabIndex = 16
         ' 
         ' Label12
         ' 
         Label12.AutoSize = True
         Label12.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label12.Location = New Point(878, 78)
+        Label12.Location = New Point(452, 77)
         Label12.Name = "Label12"
         Label12.Size = New Size(144, 21)
         Label12.TabIndex = 4
@@ -688,7 +795,7 @@ Partial Class Team_Overview
         ' 
         Label48.AutoSize = True
         Label48.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label48.Location = New Point(40, 113)
+        Label48.Location = New Point(41, 148)
         Label48.Name = "Label48"
         Label48.Size = New Size(123, 21)
         Label48.TabIndex = 15
@@ -697,7 +804,7 @@ Partial Class Team_Overview
         ' txtJobTitle
         ' 
         txtJobTitle.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtJobTitle.Location = New Point(620, 68)
+        txtJobTitle.Location = New Point(170, 67)
         txtJobTitle.Name = "txtJobTitle"
         txtJobTitle.Size = New Size(235, 30)
         txtJobTitle.TabIndex = 10
@@ -706,51 +813,19 @@ Partial Class Team_Overview
         ' 
         Label16.AutoSize = True
         Label16.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label16.Location = New Point(868, 114)
+        Label16.Location = New Point(442, 144)
         Label16.Name = "Label16"
         Label16.Size = New Size(154, 21)
         Label16.TabIndex = 15
         Label16.Text = "Years of Service:"
         ' 
-        ' txtEmployeeStatus
-        ' 
-        txtEmployeeStatus.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtEmployeeStatus.Location = New Point(618, 104)
-        txtEmployeeStatus.Name = "txtEmployeeStatus"
-        txtEmployeeStatus.Size = New Size(237, 30)
-        txtEmployeeStatus.TabIndex = 12
-        ' 
-        ' txtContractType
-        ' 
-        txtContractType.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtContractType.Location = New Point(1028, 69)
-        txtContractType.Name = "txtContractType"
-        txtContractType.Size = New Size(264, 30)
-        txtContractType.TabIndex = 14
-        ' 
         ' txtYearsOfSevice
         ' 
         txtYearsOfSevice.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtYearsOfSevice.Location = New Point(1028, 105)
+        txtYearsOfSevice.Location = New Point(602, 135)
         txtYearsOfSevice.Name = "txtYearsOfSevice"
         txtYearsOfSevice.Size = New Size(264, 30)
         txtYearsOfSevice.TabIndex = 13
-        ' 
-        ' txtCivilStatus
-        ' 
-        txtCivilStatus.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold)
-        txtCivilStatus.Location = New Point(154, 785)
-        txtCivilStatus.Name = "txtCivilStatus"
-        txtCivilStatus.Size = New Size(291, 30)
-        txtCivilStatus.TabIndex = 101
-        ' 
-        ' txtSex
-        ' 
-        txtSex.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold)
-        txtSex.Location = New Point(154, 749)
-        txtSex.Name = "txtSex"
-        txtSex.Size = New Size(291, 30)
-        txtSex.TabIndex = 100
         ' 
         ' GroupBox5
         ' 
@@ -765,7 +840,7 @@ Partial Class Team_Overview
         GroupBox5.Controls.Add(Label28)
         GroupBox5.Controls.Add(txtECName)
         GroupBox5.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        GroupBox5.Location = New Point(818, 533)
+        GroupBox5.Location = New Point(818, 547)
         GroupBox5.Name = "GroupBox5"
         GroupBox5.Size = New Size(511, 282)
         GroupBox5.TabIndex = 87
@@ -1057,18 +1132,23 @@ Partial Class Team_Overview
         Label13.TabIndex = 34
         Label13.Text = "Civil Status:"
         ' 
-        ' IconButton1
+        ' btnDeleteEmployee
         ' 
-        IconButton1.BackColor = SystemColors.Control
-        IconButton1.IconChar = FontAwesome.Sharp.IconChar.Refresh
-        IconButton1.IconColor = Color.Black
-        IconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto
-        IconButton1.IconSize = 38
-        IconButton1.Location = New Point(328, 39)
-        IconButton1.Name = "IconButton1"
-        IconButton1.Size = New Size(79, 40)
-        IconButton1.TabIndex = 103
-        IconButton1.UseVisualStyleBackColor = False
+        btnDeleteEmployee.BackColor = SystemColors.InactiveCaption
+        btnDeleteEmployee.Font = New Font("Century Gothic", 8.2F, FontStyle.Bold)
+        btnDeleteEmployee.ForeColor = SystemColors.ControlText
+        btnDeleteEmployee.IconChar = FontAwesome.Sharp.IconChar.UserMinus
+        btnDeleteEmployee.IconColor = Color.Black
+        btnDeleteEmployee.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnDeleteEmployee.IconSize = 38
+        btnDeleteEmployee.ImageAlign = ContentAlignment.MiddleLeft
+        btnDeleteEmployee.Location = New Point(783, 35)
+        btnDeleteEmployee.Name = "btnDeleteEmployee"
+        btnDeleteEmployee.Size = New Size(178, 44)
+        btnDeleteEmployee.TabIndex = 104
+        btnDeleteEmployee.Text = "Delete Employee"
+        btnDeleteEmployee.TextImageRelation = TextImageRelation.ImageBeforeText
+        btnDeleteEmployee.UseVisualStyleBackColor = False
         ' 
         ' Team_Overview
         ' 
@@ -1091,6 +1171,8 @@ Partial Class Team_Overview
         CType(pcbTerminate, ComponentModel.ISupportInitialize).EndInit()
         GroupBox4.ResumeLayout(False)
         GroupBox4.PerformLayout()
+        GroupBox1.ResumeLayout(False)
+        GroupBox1.PerformLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         CType(dgvOtherInfo, ComponentModel.ISupportInitialize).EndInit()
         GroupBox3.ResumeLayout(False)
@@ -1103,9 +1185,8 @@ Partial Class Team_Overview
     Friend WithEvents Panel1 As Panel
     Friend WithEvents adminheader_pnl As Panel
     Friend WithEvents Label2 As Label
-    Friend WithEvents btnCancel As Button
-    Friend WithEvents btnDelete As Button
-    Friend WithEvents btnSave As Button
+    Friend WithEvents btnCancelEmployee As Button
+    Friend WithEvents btnSaveEmployee As Button
     Friend WithEvents btnAddEmployee As FontAwesome.Sharp.IconButton
     Friend WithEvents btnEditEmployee As FontAwesome.Sharp.IconButton
     Friend WithEvents pcbTerminate As PictureBox
@@ -1127,9 +1208,6 @@ Partial Class Team_Overview
     Friend WithEvents Label3 As Label
     Friend WithEvents lblDashboard As Label
     Friend WithEvents lblMain As Label
-    Friend WithEvents txtUserID As TextBox
-    Friend WithEvents Label10 As Label
-    Friend WithEvents Label52 As Label
     Friend WithEvents GroupBox4 As GroupBox
     Friend WithEvents txtAddress As TextBox
     Friend WithEvents txtEmployeeID As TextBox
@@ -1151,22 +1229,6 @@ Partial Class Team_Overview
     Friend WithEvents txtMiddleName As TextBox
     Friend WithEvents Label14 As Label
     Friend WithEvents Label13 As Label
-    Friend WithEvents GroupBox3 As GroupBox
-    Friend WithEvents dtpDateHired As DateTimePicker
-    Friend WithEvents txtDepartment As TextBox
-    Friend WithEvents Label11 As Label
-    Friend WithEvents Label25 As Label
-    Friend WithEvents Label21 As Label
-    Friend WithEvents txtJobID As TextBox
-    Friend WithEvents Label20 As Label
-    Friend WithEvents Label15 As Label
-    Friend WithEvents txtDepartmentID As TextBox
-    Friend WithEvents Label12 As Label
-    Friend WithEvents Label48 As Label
-    Friend WithEvents txtJobTitle As TextBox
-    Friend WithEvents Label16 As Label
-    Friend WithEvents txtContractType As TextBox
-    Friend WithEvents txtYearsOfSevice As TextBox
     Friend WithEvents GroupBox5 As GroupBox
     Friend WithEvents txtECAddress As TextBox
     Friend WithEvents Label24 As Label
@@ -1179,11 +1241,40 @@ Partial Class Team_Overview
     Friend WithEvents Label28 As Label
     Friend WithEvents txtECName As TextBox
     Friend WithEvents txtSearchEmployee As TextBox
-    Friend WithEvents dgvOtherInfo As DataGridView
-    Friend WithEvents txtEmployeeStatus As TextBox
-    Friend WithEvents txtCivilStatus As TextBox
-    Friend WithEvents txtSex As TextBox
-    Friend WithEvents txtUserType As TextBox
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents IconButton1 As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnDeleteEmployee As FontAwesome.Sharp.IconButton
+    Friend WithEvents dgvOtherInfo As DataGridView
+    Friend WithEvents btnSignOut As FontAwesome.Sharp.IconButton
+    Friend WithEvents cbCivilStatus As ComboBox
+    Friend WithEvents cbSex As ComboBox
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents cbContractType As ComboBox
+    Friend WithEvents cbEmployeeStatus As ComboBox
+    Friend WithEvents dtpDateHired As DateTimePicker
+    Friend WithEvents txtUserID As TextBox
+    Friend WithEvents txtDepartment As TextBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents Label10 As Label
+    Friend WithEvents Label25 As Label
+    Friend WithEvents Label21 As Label
+    Friend WithEvents txtJobID As TextBox
+    Friend WithEvents Label52 As Label
+    Friend WithEvents Label20 As Label
+    Friend WithEvents Label15 As Label
+    Friend WithEvents txtDepartmentID As TextBox
+    Friend WithEvents Label12 As Label
+    Friend WithEvents Label48 As Label
+    Friend WithEvents txtJobTitle As TextBox
+    Friend WithEvents Label16 As Label
+    Friend WithEvents txtYearsOfSevice As TextBox
+    Friend WithEvents cbUserType As ComboBox
+    Friend WithEvents cbEmploymentStatus As ComboBox
+    Friend WithEvents cbJobID As ComboBox
+    Friend WithEvents cbJobTitle As ComboBox
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents txtUsername As TextBox
+    Friend WithEvents Label29 As Label
+    Friend WithEvents txtPassword As TextBox
 End Class

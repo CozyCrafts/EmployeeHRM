@@ -129,11 +129,11 @@ Partial Class Trainings
         ' 
         GroupBox1.Controls.Add(dgvTrainingHistory)
         GroupBox1.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        GroupBox1.Location = New Point(403, 580)
+        GroupBox1.Location = New Point(418, 477)
         GroupBox1.Margin = New Padding(4, 3, 4, 3)
         GroupBox1.Name = "GroupBox1"
         GroupBox1.Padding = New Padding(4, 3, 4, 3)
-        GroupBox1.Size = New Size(1342, 314)
+        GroupBox1.Size = New Size(1330, 574)
         GroupBox1.TabIndex = 66
         GroupBox1.TabStop = False
         GroupBox1.Text = "Training History"
@@ -145,7 +145,7 @@ Partial Class Trainings
         dgvTrainingHistory.Margin = New Padding(4, 3, 4, 3)
         dgvTrainingHistory.Name = "dgvTrainingHistory"
         dgvTrainingHistory.RowHeadersWidth = 51
-        dgvTrainingHistory.Size = New Size(1292, 248)
+        dgvTrainingHistory.Size = New Size(1291, 491)
         dgvTrainingHistory.TabIndex = 0
         ' 
         ' Panel2
@@ -551,11 +551,11 @@ Partial Class Trainings
         GroupBox3.Controls.Add(dtpCompleted)
         GroupBox3.Controls.Add(btnTrainingCancel)
         GroupBox3.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        GroupBox3.Location = New Point(1112, 255)
+        GroupBox3.Location = New Point(1118, 154)
         GroupBox3.Margin = New Padding(4, 3, 4, 3)
         GroupBox3.Name = "GroupBox3"
         GroupBox3.Padding = New Padding(4, 3, 4, 3)
-        GroupBox3.Size = New Size(624, 308)
+        GroupBox3.Size = New Size(624, 317)
         GroupBox3.TabIndex = 78
         GroupBox3.TabStop = False
         GroupBox3.Text = " Duration"
@@ -654,7 +654,7 @@ Partial Class Trainings
         GroupBox4.Controls.Add(txtTrainingDescription)
         GroupBox4.Controls.Add(Label1)
         GroupBox4.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        GroupBox4.Location = New Point(403, 246)
+        GroupBox4.Location = New Point(418, 154)
         GroupBox4.Margin = New Padding(4, 3, 4, 3)
         GroupBox4.Name = "GroupBox4"
         GroupBox4.Padding = New Padding(4, 3, 4, 3)
