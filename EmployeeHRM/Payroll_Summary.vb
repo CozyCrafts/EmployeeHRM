@@ -5,6 +5,9 @@ Public Class Payroll_Summary
     Private Sub Payroll_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadPayrollSummary()
         LockControls()
+        SetPayrollDefaultState()
+        SetDeductionDefaultState()
+        SetSalaryDefaultState()
     End Sub
 
     Private Sub UnlockControls()
@@ -120,6 +123,88 @@ Public Class Payroll_Summary
     End Sub
 
     Private payrollTable As DataTable = Nothing
+    ' === PAYROLL BUTTON VISIBILITY ===
+    Private Sub SetPayrollDefaultState()
+        btnAddPayroll.Visible = True
+        btnEditPayroll.Visible = False
+        btnDeletePayroll.Visible = False
+        btnSavePayroll.Visible = False
+        btnCancelPayroll.Visible = False
+        btnComputePayroll.Visible = False
+    End Sub
+
+    Private Sub SetPayrollRecordSelectedState()
+        btnAddPayroll.Visible = True
+        btnEditPayroll.Visible = True
+        btnDeletePayroll.Visible = True
+        btnSavePayroll.Visible = False
+        btnCancelPayroll.Visible = False
+        btnComputePayroll.Visible = False
+    End Sub
+
+    Private Sub SetPayrollEditAddState()
+        btnAddPayroll.Visible = False
+        btnEditPayroll.Visible = False
+        btnDeletePayroll.Visible = False
+        btnSavePayroll.Visible = True
+        btnCancelPayroll.Visible = True
+        btnComputePayroll.Visible = True
+    End Sub
+
+
+    ' === DEDUCTION BUTTON VISIBILITY ===
+    Private Sub SetDeductionDefaultState()
+        btnAddDeduction.Visible = True
+        btnEditDeduction.Visible = False
+        btnDeleteDeduction.Visible = False
+        btnSaveDeduction.Visible = False
+        btnCancelDeduction.Visible = False
+        btnComputeDeduction.Visible = False
+    End Sub
+
+    Private Sub SetDeductionRecordSelectedState()
+        btnAddDeduction.Visible = True
+        btnEditDeduction.Visible = True
+        btnDeleteDeduction.Visible = True
+        btnSaveDeduction.Visible = False
+        btnCancelDeduction.Visible = False
+        btnComputeDeduction.Visible = False
+    End Sub
+
+    Private Sub SetDeductionEditAddState()
+        btnAddDeduction.Visible = False
+        btnEditDeduction.Visible = False
+        btnDeleteDeduction.Visible = False
+        btnSaveDeduction.Visible = True
+        btnCancelDeduction.Visible = True
+        btnComputeDeduction.Visible = True
+    End Sub
+
+
+    ' === SALARY BUTTON VISIBILITY ===
+    Private Sub SetSalaryDefaultState()
+        btnAddSalary.Visible = True
+        btnEditSalary.Visible = False
+        btnDeleteSalary.Visible = False
+        btnSaveSalary.Visible = False
+        btnCancelSalary.Visible = False
+    End Sub
+
+    Private Sub SetSalaryRecordSelectedState()
+        btnAddSalary.Visible = True
+        btnEditSalary.Visible = True
+        btnDeleteSalary.Visible = True
+        btnSaveSalary.Visible = False
+        btnCancelSalary.Visible = False
+    End Sub
+
+    Private Sub SetSalaryEditAddState()
+        btnAddSalary.Visible = False
+        btnEditSalary.Visible = False
+        btnDeleteSalary.Visible = False
+        btnSaveSalary.Visible = True
+        btnCancelSalary.Visible = True
+    End Sub
 
     Private Sub CalculateTotalDeduction()
         Dim sss As Decimal = Val(txtSSS.Text)
@@ -171,6 +256,10 @@ Public Class Payroll_Summary
             ' Attendance
             txtAttendanceID.Text = If(row.Cells("AttendanceID").Value IsNot DBNull.Value, row.Cells("AttendanceID").Value.ToString(), "")
             txtAbscences.Text = If(row.Cells("Absences").Value IsNot DBNull.Value, row.Cells("Absences").Value.ToString(), "")
+            ' Once a record is selected:
+            SetPayrollRecordSelectedState()
+            SetDeductionRecordSelectedState()
+            SetSalaryRecordSelectedState()
         End If
     End Sub
     Private Function EscapeForRowFilter(value As String) As String
@@ -179,16 +268,17 @@ Public Class Payroll_Summary
         Dim v As String = value.Replace("'", "''")
         v = v.Replace("[", "[[]").Replace("]", "[]]")
         Return v
+
     End Function
+
     Private Sub txtSearchPayroll_TextChanged(sender As Object, e As EventArgs) Handles txtSearchPayroll.TextChanged
         Dim searchText As String = txtSearchPayroll.Text.Trim().ToLower()
 
-        ' Reset all rows when search box is empty
+        ' If search is empty, reset all highlights
         If searchText = "" Then
             For Each row As DataGridViewRow In dgvPayrollSummary.Rows
                 row.DefaultCellStyle.BackColor = Color.White
                 row.DefaultCellStyle.SelectionBackColor = Color.LightBlue
-                row.DefaultCellStyle.ForeColor = Color.Black
             Next
             Exit Sub
         End If
@@ -198,19 +288,19 @@ Public Class Payroll_Summary
 
             Dim match As Boolean = False
 
-            ' Match EmployeeID
+            ' Check EmployeeID
             If row.Cells("EmployeeID").Value IsNot DBNull.Value AndAlso
            row.Cells("EmployeeID").Value.ToString().ToLower().Contains(searchText) Then
                 match = True
             End If
 
-            ' Match EmployeeName
+            ' Check EmployeeName
             If row.Cells("EmployeeName").Value IsNot DBNull.Value AndAlso
            row.Cells("EmployeeName").Value.ToString().ToLower().Contains(searchText) Then
                 match = True
             End If
 
-            ' Match JobTitle
+            ' Check JobTitle
             If row.Cells("JobTitle").Value IsNot DBNull.Value AndAlso
            row.Cells("JobTitle").Value.ToString().ToLower().Contains(searchText) Then
                 match = True
@@ -218,8 +308,8 @@ Public Class Payroll_Summary
 
             ' Highlight entire row if matched
             If match Then
-                row.DefaultCellStyle.BackColor = Color.LightSkyBlue
-                row.DefaultCellStyle.SelectionBackColor = Color.DeepSkyBlue
+                row.DefaultCellStyle.BackColor = Color.Gold
+                row.DefaultCellStyle.SelectionBackColor = Color.Goldenrod
                 row.DefaultCellStyle.ForeColor = Color.Black
             Else
                 row.DefaultCellStyle.BackColor = Color.White
@@ -229,6 +319,28 @@ Public Class Payroll_Summary
         Next
     End Sub
 
+    Private Sub btnAddPayroll_Click(sender As Object, e As EventArgs) Handles btnAddPayroll.Click
+        UnlockControls()
+        SetPayrollEditAddState()
+    End Sub
+    Private Sub btnEditPayroll_Click(sender As Object, e As EventArgs) Handles btnEditPayroll.Click
+        UnlockControls()
+        SetPayrollEditAddState()
+    End Sub
+    Private Sub btnSavePayroll_Click(sender As Object, e As EventArgs) Handles btnSavePayroll.Click
+        ' ... your save logic ...
+        LockControls()
+        SetPayrollDefaultState()
+        LoadPayrollSummary()
+    End Sub
+    Private Sub btnCancelPayroll_Click(sender As Object, e As EventArgs) Handles btnCancelPayroll.Click
+        LockControls()
+        SetPayrollDefaultState()
+    End Sub
+    Private Sub btnDeletePayroll_Click(sender As Object, e As EventArgs) Handles btnDeletePayroll.Click
+        ' ... delete logic ...
+        SetPayrollDefaultState()
+    End Sub
 
     Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
         Manager_Dashboard.Show()
