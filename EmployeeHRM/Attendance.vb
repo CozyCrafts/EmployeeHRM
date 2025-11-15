@@ -1,37 +1,32 @@
-﻿Public Class Attendance
+﻿Imports MySql.Data.MySqlClient
+
+Public Class Attendance
     Public Property UserRole As String
 
     Private Sub Attendance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.FormBorderStyle = FormBorderStyle.None
+        ' Load attendance records for the logged-in employee
+        Try
+            OpenCon() ' Ensure database connection is open
 
-        If UserRole = "Staff" Then
-            lblTeamOverview.Visible = False
-            lblAttendanceTracker.Visible = False
-            lblLeaveApproval.Visible = False
-            lblPayrollSummary.Visible = False
-            lblEmployeeTrainings.Visible = False
-            lblDepartment.Visible = False
-        ElseIf UserRole = "Manager" Then
-            lblTeamOverview.Visible = True
-            lblAttendanceTracker.Visible = True
-            lblLeaveApproval.Visible = True
-            lblPayrollSummary.Visible = True
-            lblEmployeeTrainings.Visible = True
-            lblDepartment.Visible = True
-        End If
+            Dim query As String = "SELECT date, time_in, time_out, status FROM attendance WHERE employee_id = @empID ORDER BY date DESC"
+            dbcmd = New MySqlCommand(query, dbcon)
+            dbcmd.Parameters.AddWithValue("@empID", LoggedInEmployeeID)
 
+            dbadapter = New MySqlDataAdapter(dbcmd)
+            dbtable = New DataTable()
+            dbadapter.Fill(dbtable)
 
+            ' Assuming you have a DataGridView named DataGridView1
+            dgvAttendanceHistory.DataSource = dbtable
+
+        Catch ex As Exception
+            MessageBox.Show("Error loading attendance: " & ex.Message)
+        End Try
     End Sub
 
-
+    ' --- Navigation buttons ---
     Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
-        If UserRole = "Staff" Then
-            Employee_Dashboard.Show()
-        ElseIf UserRole = "Manager" Then
-            Manager_Dashboard.Show()
-        End If
-        Me.Hide()
-
+        lblDashboard.Enabled = False
     End Sub
 
     Private Sub lblMyProfile_Click(sender As Object, e As EventArgs) Handles lblMyProfile.Click
@@ -48,19 +43,15 @@
         Me.Hide()
     End Sub
 
-
     Private Sub lblSalary_Click(sender As Object, e As EventArgs) Handles lblSalary.Click
-
         Salary.Show()
         Me.Hide()
     End Sub
-
 
     Private Sub lblTrainings_Click(sender As Object, e As EventArgs) Handles lblTrainings.Click
         Trainings.Show()
         Me.Hide()
     End Sub
-
 
     Private Sub lblTeamOverview_Click(sender As Object, e As EventArgs) Handles lblTeamOverview.Click
         Team_Overview.Show()
@@ -83,7 +74,7 @@
     End Sub
 
     Private Sub lblEmployeeTrainings_Click(sender As Object, e As EventArgs) Handles lblEmployeeTrainings.Click
-        Employee_Trainings.Show
+        Employee_Trainings.Show()
         Me.Hide()
     End Sub
 
@@ -97,7 +88,6 @@
         Me.Hide()
     End Sub
 
-
     Private Sub pcbTerminate_Click(sender As Object, e As EventArgs) Handles pcbTerminate.Click
         Dim result As DialogResult = MessageBox.Show("Are you sure you want to exit the system?",
                                                 "Confirm Exit",
@@ -107,4 +97,5 @@
             Application.Exit()
         End If
     End Sub
+
 End Class

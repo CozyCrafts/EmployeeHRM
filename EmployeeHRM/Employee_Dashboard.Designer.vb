@@ -22,16 +22,27 @@ Partial Class Employee_Dashboard
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Employee_Dashboard))
         GroupBox2 = New GroupBox()
+        btnTrainings = New Button()
         btnApplyForLeave = New Button()
         btnAttendance = New Button()
         btnViewSalary = New Button()
         GroupBox1 = New GroupBox()
+        btnHolidayCalendar = New Button()
+        btnPolicies = New Button()
+        btnForms = New Button()
+        btmEmployeeHandbook = New Button()
         adminheader_pnl = New Panel()
-        pcbTerminate = New PictureBox()
         Label2 = New Label()
         Panel2 = New Panel()
+        lblAmenities = New Label()
+        lblLeaveApproval = New Label()
+        lblEmployeeTrainings = New Label()
+        lblPayrollSummary = New Label()
+        lblDepartment = New Label()
+        lblAttendanceTracker = New Label()
+        lblTeamOverview = New Label()
+        Label1 = New Label()
         lblTrainings = New Label()
         lblSalary = New Label()
         Label26 = New Label()
@@ -43,6 +54,9 @@ Partial Class Employee_Dashboard
         lblEmpDashboard = New Label()
         Label51 = New Label()
         GroupBox7 = New GroupBox()
+        Label9 = New Label()
+        lblWelcome = New Label()
+        Label5 = New Label()
         Label3 = New Label()
         txtDepartment = New TextBox()
         btnEditProfile = New Button()
@@ -54,15 +68,10 @@ Partial Class Employee_Dashboard
         Label7 = New Label()
         Label8 = New Label()
         Label10 = New Label()
-        btmEmployeeHandbook = New Button()
-        btnForms = New Button()
-        btnPolicies = New Button()
-        btnHolidayCalendar = New Button()
-        btnTrainings = New Button()
+        btnSignOut = New FontAwesome.Sharp.IconButton()
         GroupBox2.SuspendLayout()
         GroupBox1.SuspendLayout()
         adminheader_pnl.SuspendLayout()
-        CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
         Panel2.SuspendLayout()
         GroupBox7.SuspendLayout()
         SuspendLayout()
@@ -74,12 +83,25 @@ Partial Class Employee_Dashboard
         GroupBox2.Controls.Add(btnAttendance)
         GroupBox2.Controls.Add(btnViewSalary)
         GroupBox2.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        GroupBox2.Location = New Point(1269, 110)
+        GroupBox2.Location = New Point(1262, 188)
         GroupBox2.Name = "GroupBox2"
         GroupBox2.Size = New Size(476, 316)
         GroupBox2.TabIndex = 78
         GroupBox2.TabStop = False
         GroupBox2.Text = "Shortcuts"
+        ' 
+        ' btnTrainings
+        ' 
+        btnTrainings.BackColor = SystemColors.InactiveCaption
+        btnTrainings.BackgroundImageLayout = ImageLayout.None
+        btnTrainings.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnTrainings.ForeColor = Color.Black
+        btnTrainings.Location = New Point(35, 243)
+        btnTrainings.Name = "btnTrainings"
+        btnTrainings.Size = New Size(420, 46)
+        btnTrainings.TabIndex = 38
+        btnTrainings.Text = "Trainings"
+        btnTrainings.UseVisualStyleBackColor = False
         ' 
         ' btnApplyForLeave
         ' 
@@ -127,32 +149,74 @@ Partial Class Employee_Dashboard
         GroupBox1.Controls.Add(btnForms)
         GroupBox1.Controls.Add(btmEmployeeHandbook)
         GroupBox1.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        GroupBox1.Location = New Point(380, 304)
+        GroupBox1.Location = New Point(373, 382)
         GroupBox1.Name = "GroupBox1"
         GroupBox1.Size = New Size(869, 122)
         GroupBox1.TabIndex = 73
         GroupBox1.TabStop = False
         GroupBox1.Text = "Quick Access"
         ' 
+        ' btnHolidayCalendar
+        ' 
+        btnHolidayCalendar.BackColor = SystemColors.InactiveCaption
+        btnHolidayCalendar.BackgroundImageLayout = ImageLayout.None
+        btnHolidayCalendar.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnHolidayCalendar.ForeColor = Color.Black
+        btnHolidayCalendar.Location = New Point(636, 53)
+        btnHolidayCalendar.Name = "btnHolidayCalendar"
+        btnHolidayCalendar.Size = New Size(196, 46)
+        btnHolidayCalendar.TabIndex = 40
+        btnHolidayCalendar.Text = "Holiday Calendar"
+        btnHolidayCalendar.UseVisualStyleBackColor = False
+        ' 
+        ' btnPolicies
+        ' 
+        btnPolicies.BackColor = SystemColors.InactiveCaption
+        btnPolicies.BackgroundImageLayout = ImageLayout.None
+        btnPolicies.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnPolicies.ForeColor = Color.Black
+        btnPolicies.Location = New Point(423, 53)
+        btnPolicies.Name = "btnPolicies"
+        btnPolicies.Size = New Size(196, 46)
+        btnPolicies.TabIndex = 39
+        btnPolicies.Text = "Policies"
+        btnPolicies.UseVisualStyleBackColor = False
+        ' 
+        ' btnForms
+        ' 
+        btnForms.BackColor = SystemColors.InactiveCaption
+        btnForms.BackgroundImageLayout = ImageLayout.None
+        btnForms.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btnForms.ForeColor = Color.Black
+        btnForms.Location = New Point(221, 53)
+        btnForms.Name = "btnForms"
+        btnForms.Size = New Size(196, 46)
+        btnForms.TabIndex = 38
+        btnForms.Text = "Forms"
+        btnForms.UseVisualStyleBackColor = False
+        ' 
+        ' btmEmployeeHandbook
+        ' 
+        btmEmployeeHandbook.BackColor = SystemColors.InactiveCaption
+        btmEmployeeHandbook.BackgroundImageLayout = ImageLayout.None
+        btmEmployeeHandbook.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
+        btmEmployeeHandbook.ForeColor = Color.Black
+        btmEmployeeHandbook.Location = New Point(19, 53)
+        btmEmployeeHandbook.Name = "btmEmployeeHandbook"
+        btmEmployeeHandbook.Size = New Size(196, 46)
+        btmEmployeeHandbook.TabIndex = 37
+        btmEmployeeHandbook.Text = "Employee Handbook"
+        btmEmployeeHandbook.UseVisualStyleBackColor = False
+        ' 
         ' adminheader_pnl
         ' 
         adminheader_pnl.BackColor = Color.White
-        adminheader_pnl.Controls.Add(pcbTerminate)
+        adminheader_pnl.Controls.Add(btnSignOut)
         adminheader_pnl.Controls.Add(Label2)
         adminheader_pnl.Location = New Point(338, -17)
         adminheader_pnl.Name = "adminheader_pnl"
         adminheader_pnl.Size = New Size(1608, 107)
         adminheader_pnl.TabIndex = 79
-        ' 
-        ' pcbTerminate
-        ' 
-        pcbTerminate.Image = CType(resources.GetObject("pcbTerminate.Image"), Image)
-        pcbTerminate.Location = New Point(1352, 45)
-        pcbTerminate.Name = "pcbTerminate"
-        pcbTerminate.Size = New Size(55, 54)
-        pcbTerminate.SizeMode = PictureBoxSizeMode.StretchImage
-        pcbTerminate.TabIndex = 1
-        pcbTerminate.TabStop = False
         ' 
         ' Label2
         ' 
@@ -167,6 +231,14 @@ Partial Class Employee_Dashboard
         ' Panel2
         ' 
         Panel2.BackColor = Color.SteelBlue
+        Panel2.Controls.Add(lblAmenities)
+        Panel2.Controls.Add(lblLeaveApproval)
+        Panel2.Controls.Add(lblEmployeeTrainings)
+        Panel2.Controls.Add(lblPayrollSummary)
+        Panel2.Controls.Add(lblDepartment)
+        Panel2.Controls.Add(lblAttendanceTracker)
+        Panel2.Controls.Add(lblTeamOverview)
+        Panel2.Controls.Add(Label1)
         Panel2.Controls.Add(lblTrainings)
         Panel2.Controls.Add(lblSalary)
         Panel2.Controls.Add(Label26)
@@ -181,6 +253,94 @@ Partial Class Employee_Dashboard
         Panel2.Name = "Panel2"
         Panel2.Size = New Size(350, 1357)
         Panel2.TabIndex = 80
+        ' 
+        ' lblAmenities
+        ' 
+        lblAmenities.AutoSize = True
+        lblAmenities.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblAmenities.ForeColor = Color.White
+        lblAmenities.Location = New Point(53, 780)
+        lblAmenities.Name = "lblAmenities"
+        lblAmenities.Size = New Size(118, 27)
+        lblAmenities.TabIndex = 77
+        lblAmenities.Text = "Amenties"
+        ' 
+        ' lblLeaveApproval
+        ' 
+        lblLeaveApproval.AutoSize = True
+        lblLeaveApproval.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblLeaveApproval.ForeColor = Color.White
+        lblLeaveApproval.Location = New Point(53, 620)
+        lblLeaveApproval.Name = "lblLeaveApproval"
+        lblLeaveApproval.Size = New Size(198, 27)
+        lblLeaveApproval.TabIndex = 76
+        lblLeaveApproval.Text = "Leave Approval"
+        ' 
+        ' lblEmployeeTrainings
+        ' 
+        lblEmployeeTrainings.AutoSize = True
+        lblEmployeeTrainings.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblEmployeeTrainings.ForeColor = Color.White
+        lblEmployeeTrainings.Location = New Point(53, 700)
+        lblEmployeeTrainings.Name = "lblEmployeeTrainings"
+        lblEmployeeTrainings.Size = New Size(230, 27)
+        lblEmployeeTrainings.TabIndex = 75
+        lblEmployeeTrainings.Text = "Employee Trainings"
+        ' 
+        ' lblPayrollSummary
+        ' 
+        lblPayrollSummary.AutoSize = True
+        lblPayrollSummary.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblPayrollSummary.ForeColor = Color.White
+        lblPayrollSummary.Location = New Point(53, 660)
+        lblPayrollSummary.Name = "lblPayrollSummary"
+        lblPayrollSummary.Size = New Size(200, 27)
+        lblPayrollSummary.TabIndex = 74
+        lblPayrollSummary.Text = "Payroll Summary"
+        ' 
+        ' lblDepartment
+        ' 
+        lblDepartment.AutoSize = True
+        lblDepartment.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblDepartment.ForeColor = Color.White
+        lblDepartment.Location = New Point(53, 740)
+        lblDepartment.Name = "lblDepartment"
+        lblDepartment.Size = New Size(150, 27)
+        lblDepartment.TabIndex = 73
+        lblDepartment.Text = "Department"
+        ' 
+        ' lblAttendanceTracker
+        ' 
+        lblAttendanceTracker.AutoSize = True
+        lblAttendanceTracker.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblAttendanceTracker.ForeColor = Color.White
+        lblAttendanceTracker.Location = New Point(53, 580)
+        lblAttendanceTracker.Name = "lblAttendanceTracker"
+        lblAttendanceTracker.Size = New Size(239, 27)
+        lblAttendanceTracker.TabIndex = 72
+        lblAttendanceTracker.Text = "Attendance Tracker"
+        ' 
+        ' lblTeamOverview
+        ' 
+        lblTeamOverview.AutoSize = True
+        lblTeamOverview.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblTeamOverview.ForeColor = Color.White
+        lblTeamOverview.Location = New Point(53, 540)
+        lblTeamOverview.Name = "lblTeamOverview"
+        lblTeamOverview.Size = New Size(195, 27)
+        lblTeamOverview.TabIndex = 71
+        lblTeamOverview.Text = "Team Overview"
+        ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.ForeColor = Color.White
+        Label1.Location = New Point(30, 500)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(135, 22)
+        Label1.TabIndex = 70
+        Label1.Text = "MANAGEMENT"
         ' 
         ' lblTrainings
         ' 
@@ -294,6 +454,9 @@ Partial Class Employee_Dashboard
         ' 
         ' GroupBox7
         ' 
+        GroupBox7.Controls.Add(Label9)
+        GroupBox7.Controls.Add(lblWelcome)
+        GroupBox7.Controls.Add(Label5)
         GroupBox7.Controls.Add(Label3)
         GroupBox7.Controls.Add(txtDepartment)
         GroupBox7.Controls.Add(btnEditProfile)
@@ -306,18 +469,47 @@ Partial Class Employee_Dashboard
         GroupBox7.Controls.Add(Label8)
         GroupBox7.Controls.Add(Label10)
         GroupBox7.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        GroupBox7.Location = New Point(380, 110)
+        GroupBox7.Location = New Point(373, 139)
         GroupBox7.Name = "GroupBox7"
-        GroupBox7.Size = New Size(869, 183)
+        GroupBox7.Size = New Size(869, 232)
         GroupBox7.TabIndex = 81
         GroupBox7.TabStop = False
         GroupBox7.Text = "Profile"
+        ' 
+        ' Label9
+        ' 
+        Label9.AutoSize = True
+        Label9.Font = New Font("Century Gothic", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label9.Location = New Point(333, 49)
+        Label9.Name = "Label9"
+        Label9.Size = New Size(25, 37)
+        Label9.TabIndex = 44
+        Label9.Text = "!"
+        ' 
+        ' lblWelcome
+        ' 
+        lblWelcome.AutoSize = True
+        lblWelcome.Font = New Font("Century Gothic", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblWelcome.Location = New Point(187, 49)
+        lblWelcome.Name = "lblWelcome"
+        lblWelcome.Size = New Size(0, 37)
+        lblWelcome.TabIndex = 43
+        ' 
+        ' Label5
+        ' 
+        Label5.AutoSize = True
+        Label5.Font = New Font("Century Gothic", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label5.Location = New Point(37, 49)
+        Label5.Name = "Label5"
+        Label5.Size = New Size(155, 37)
+        Label5.TabIndex = 42
+        Label5.Text = "Welcome"
         ' 
         ' Label3
         ' 
         Label3.AutoSize = True
         Label3.Font = New Font("Century Gothic", 12F)
-        Label3.Location = New Point(461, 88)
+        Label3.Location = New Point(454, 148)
         Label3.Name = "Label3"
         Label3.Size = New Size(135, 23)
         Label3.TabIndex = 41
@@ -326,7 +518,7 @@ Partial Class Employee_Dashboard
         ' txtDepartment
         ' 
         txtDepartment.Font = New Font("Century Gothic", 12F)
-        txtDepartment.Location = New Point(602, 79)
+        txtDepartment.Location = New Point(595, 139)
         txtDepartment.Name = "txtDepartment"
         txtDepartment.Size = New Size(243, 32)
         txtDepartment.TabIndex = 40
@@ -337,7 +529,7 @@ Partial Class Employee_Dashboard
         btnEditProfile.BackgroundImageLayout = ImageLayout.None
         btnEditProfile.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
         btnEditProfile.ForeColor = Color.Black
-        btnEditProfile.Location = New Point(615, 116)
+        btnEditProfile.Location = New Point(608, 176)
         btnEditProfile.Name = "btnEditProfile"
         btnEditProfile.Size = New Size(218, 33)
         btnEditProfile.TabIndex = 39
@@ -347,7 +539,7 @@ Partial Class Employee_Dashboard
         ' txtPosition
         ' 
         txtPosition.Font = New Font("Century Gothic", 12F)
-        txtPosition.Location = New Point(602, 41)
+        txtPosition.Location = New Point(595, 101)
         txtPosition.Name = "txtPosition"
         txtPosition.Size = New Size(243, 32)
         txtPosition.TabIndex = 13
@@ -355,7 +547,7 @@ Partial Class Employee_Dashboard
         ' txtJobTitle
         ' 
         txtJobTitle.Font = New Font("Century Gothic", 12F)
-        txtJobTitle.Location = New Point(194, 117)
+        txtJobTitle.Location = New Point(187, 177)
         txtJobTitle.Name = "txtJobTitle"
         txtJobTitle.Size = New Size(243, 32)
         txtJobTitle.TabIndex = 12
@@ -363,7 +555,7 @@ Partial Class Employee_Dashboard
         ' txtName
         ' 
         txtName.Font = New Font("Century Gothic", 12F)
-        txtName.Location = New Point(194, 79)
+        txtName.Location = New Point(187, 139)
         txtName.Name = "txtName"
         txtName.Size = New Size(243, 32)
         txtName.TabIndex = 11
@@ -371,7 +563,7 @@ Partial Class Employee_Dashboard
         ' txtEmployeeID
         ' 
         txtEmployeeID.Font = New Font("Century Gothic", 12F)
-        txtEmployeeID.Location = New Point(194, 41)
+        txtEmployeeID.Location = New Point(187, 101)
         txtEmployeeID.Name = "txtEmployeeID"
         txtEmployeeID.Size = New Size(243, 32)
         txtEmployeeID.TabIndex = 10
@@ -380,7 +572,7 @@ Partial Class Employee_Dashboard
         ' 
         Label4.AutoSize = True
         Label4.Font = New Font("Century Gothic", 12F)
-        Label4.Location = New Point(94, 126)
+        Label4.Location = New Point(87, 186)
         Label4.Name = "Label4"
         Label4.Size = New Size(94, 23)
         Label4.TabIndex = 3
@@ -390,7 +582,7 @@ Partial Class Employee_Dashboard
         ' 
         Label7.AutoSize = True
         Label7.Font = New Font("Century Gothic", 12F)
-        Label7.Location = New Point(112, 90)
+        Label7.Location = New Point(105, 150)
         Label7.Name = "Label7"
         Label7.Size = New Size(76, 23)
         Label7.TabIndex = 2
@@ -400,7 +592,7 @@ Partial Class Employee_Dashboard
         ' 
         Label8.AutoSize = True
         Label8.Font = New Font("Century Gothic", 12F)
-        Label8.Location = New Point(510, 50)
+        Label8.Location = New Point(503, 110)
         Label8.Name = "Label8"
         Label8.Size = New Size(86, 23)
         Label8.TabIndex = 1
@@ -410,76 +602,27 @@ Partial Class Employee_Dashboard
         ' 
         Label10.AutoSize = True
         Label10.Font = New Font("Century Gothic", 12F)
-        Label10.Location = New Point(48, 50)
+        Label10.Location = New Point(41, 110)
         Label10.Name = "Label10"
         Label10.Size = New Size(140, 23)
         Label10.TabIndex = 0
         Label10.Text = "Employee ID:"
         ' 
-        ' btmEmployeeHandbook
+        ' btnSignOut
         ' 
-        btmEmployeeHandbook.BackColor = SystemColors.InactiveCaption
-        btmEmployeeHandbook.BackgroundImageLayout = ImageLayout.None
-        btmEmployeeHandbook.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btmEmployeeHandbook.ForeColor = Color.Black
-        btmEmployeeHandbook.Location = New Point(19, 53)
-        btmEmployeeHandbook.Name = "btmEmployeeHandbook"
-        btmEmployeeHandbook.Size = New Size(196, 46)
-        btmEmployeeHandbook.TabIndex = 37
-        btmEmployeeHandbook.Text = "Employee Handbook"
-        btmEmployeeHandbook.UseVisualStyleBackColor = False
-        ' 
-        ' btnForms
-        ' 
-        btnForms.BackColor = SystemColors.InactiveCaption
-        btnForms.BackgroundImageLayout = ImageLayout.None
-        btnForms.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnForms.ForeColor = Color.Black
-        btnForms.Location = New Point(221, 53)
-        btnForms.Name = "btnForms"
-        btnForms.Size = New Size(196, 46)
-        btnForms.TabIndex = 38
-        btnForms.Text = "Forms"
-        btnForms.UseVisualStyleBackColor = False
-        ' 
-        ' btnPolicies
-        ' 
-        btnPolicies.BackColor = SystemColors.InactiveCaption
-        btnPolicies.BackgroundImageLayout = ImageLayout.None
-        btnPolicies.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnPolicies.ForeColor = Color.Black
-        btnPolicies.Location = New Point(423, 53)
-        btnPolicies.Name = "btnPolicies"
-        btnPolicies.Size = New Size(196, 46)
-        btnPolicies.TabIndex = 39
-        btnPolicies.Text = "Policies"
-        btnPolicies.UseVisualStyleBackColor = False
-        ' 
-        ' btnHolidayCalendar
-        ' 
-        btnHolidayCalendar.BackColor = SystemColors.InactiveCaption
-        btnHolidayCalendar.BackgroundImageLayout = ImageLayout.None
-        btnHolidayCalendar.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnHolidayCalendar.ForeColor = Color.Black
-        btnHolidayCalendar.Location = New Point(636, 53)
-        btnHolidayCalendar.Name = "btnHolidayCalendar"
-        btnHolidayCalendar.Size = New Size(196, 46)
-        btnHolidayCalendar.TabIndex = 40
-        btnHolidayCalendar.Text = "Holiday Calendar"
-        btnHolidayCalendar.UseVisualStyleBackColor = False
-        ' 
-        ' btnTrainings
-        ' 
-        btnTrainings.BackColor = SystemColors.InactiveCaption
-        btnTrainings.BackgroundImageLayout = ImageLayout.None
-        btnTrainings.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnTrainings.ForeColor = Color.Black
-        btnTrainings.Location = New Point(35, 243)
-        btnTrainings.Name = "btnTrainings"
-        btnTrainings.Size = New Size(420, 46)
-        btnTrainings.TabIndex = 38
-        btnTrainings.Text = "Trainings"
-        btnTrainings.UseVisualStyleBackColor = False
+        btnSignOut.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnSignOut.IconChar = FontAwesome.Sharp.IconChar.SignOut
+        btnSignOut.IconColor = Color.Black
+        btnSignOut.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSignOut.IconSize = 38
+        btnSignOut.ImageAlign = ContentAlignment.MiddleLeft
+        btnSignOut.Location = New Point(1258, 46)
+        btnSignOut.Name = "btnSignOut"
+        btnSignOut.Size = New Size(142, 54)
+        btnSignOut.TabIndex = 39
+        btnSignOut.Text = "Sign Out"
+        btnSignOut.TextAlign = ContentAlignment.MiddleRight
+        btnSignOut.UseVisualStyleBackColor = True
         ' 
         ' Employee_Dashboard
         ' 
@@ -501,7 +644,6 @@ Partial Class Employee_Dashboard
         GroupBox1.ResumeLayout(False)
         adminheader_pnl.ResumeLayout(False)
         adminheader_pnl.PerformLayout()
-        CType(pcbTerminate, ComponentModel.ISupportInitialize).EndInit()
         Panel2.ResumeLayout(False)
         Panel2.PerformLayout()
         GroupBox7.ResumeLayout(False)
@@ -515,7 +657,6 @@ Partial Class Employee_Dashboard
     Friend WithEvents btnViewSalary As Button
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents adminheader_pnl As Panel
-    Friend WithEvents pcbTerminate As PictureBox
     Friend WithEvents Label2 As Label
     Friend WithEvents Panel2 As Panel
     Friend WithEvents lblTrainings As Label
@@ -545,4 +686,16 @@ Partial Class Employee_Dashboard
     Friend WithEvents btnForms As Button
     Friend WithEvents btmEmployeeHandbook As Button
     Friend WithEvents btnTrainings As Button
+    Friend WithEvents lblAmenities As Label
+    Friend WithEvents lblLeaveApproval As Label
+    Friend WithEvents lblEmployeeTrainings As Label
+    Friend WithEvents lblPayrollSummary As Label
+    Friend WithEvents lblDepartment As Label
+    Friend WithEvents lblAttendanceTracker As Label
+    Friend WithEvents lblTeamOverview As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents lblWelcome As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents btnSignOut As FontAwesome.Sharp.IconButton
 End Class

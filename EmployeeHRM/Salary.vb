@@ -1,40 +1,39 @@
-﻿Public Class Salary
+﻿Imports MySql.Data.MySqlClient
+
+Public Class Salary
     Public Property UserRole As String
 
     Private Sub Salary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.FormBorderStyle = FormBorderStyle.None
+        ' Load salary records for the logged-in employee
+        Try
+            OpenCon() ' Ensure database connection is open
 
+            Dim query As String = "SELECT salary_month, basic_pay, allowances, deductions, net_salary FROM salary WHERE employee_id = @empID ORDER BY salary_month DESC"
+            dbcmd = New MySqlCommand(query, dbcon)
+            dbcmd.Parameters.AddWithValue("@empID", LoggedInEmployeeID)
 
-        If UserRole = "Staff" Then
-            lblTeamOverview.Visible = False
-            lblAttendanceTracker.Visible = False
-            lblLeaveApproval.Visible = False
-            lblPayrollSummary.Visible = False
-            lblEmployeeTrainings.Visible = False
-            lblDepartment.Visible = False
-        ElseIf UserRole = "Manager" Then
-            lblTeamOverview.Visible = True
-            lblAttendanceTracker.Visible = True
-            lblLeaveApproval.Visible = True
-            lblPayrollSummary.Visible = True
-            lblEmployeeTrainings.Visible = True
-            lblDepartment.Visible = True
-        End If
+            dbadapter = New MySqlDataAdapter(dbcmd)
+            dbtable = New DataTable()
+            dbadapter.Fill(dbtable)
+
+            ' Assuming you have a DataGridView named DataGridView1
+            dgvSalaryHistory.DataSource = dbtable
+
+        Catch ex As Exception
+            MessageBox.Show("Error loading salary records: " & ex.Message)
+        End Try
     End Sub
 
-
+    ' --- Navigation buttons ---
     Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
-        If UserRole = "Staff" Then
-            Employee_Dashboard.Show()
-        ElseIf UserRole = "Manager" Then
-            Manager_Dashboard.Show()
-        End If
-        Me.Hide()
+        lblDashboard.Enabled = False
     End Sub
+
     Private Sub lblMyProfile_Click(sender As Object, e As EventArgs) Handles lblMyProfile.Click
         MyProfile.Show()
         Me.Hide()
     End Sub
+
     Private Sub lblAttendance_Click(sender As Object, e As EventArgs) Handles lblAttendance.Click
         Attendance.Show()
         Me.Hide()
@@ -98,6 +97,5 @@
             Application.Exit()
         End If
     End Sub
-
 
 End Class

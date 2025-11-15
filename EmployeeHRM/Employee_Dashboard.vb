@@ -1,4 +1,30 @@
-﻿Public Class Employee_Dashboard
+﻿Imports MySql.Data.MySqlClient
+
+Public Class Employee_Dashboard
+    Public UserRole As String
+    Private Sub Employee_Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Display a welcome message using the logged-in username from HRMModule
+        lblWelcome.Text = "Welcome, " & LoggedInUsername
+
+        ' Example: you can also load summary info like total attendance, pending leaves, etc.
+        ' For now, just showing a welcome message
+        If UserRole = "Staff" Then
+            lblTeamOverview.Visible = False
+            lblAttendanceTracker.Visible = False
+            lblLeaveApproval.Visible = False
+            lblPayrollSummary.Visible = False
+            lblEmployeeTrainings.Visible = False
+            lblDepartment.Visible = False
+        ElseIf UserRole = "Manager" Then
+            lblTeamOverview.Visible = True
+            lblAttendanceTracker.Visible = True
+            lblLeaveApproval.Visible = True
+            lblPayrollSummary.Visible = True
+            lblEmployeeTrainings.Visible = True
+            lblDepartment.Visible = True
+        End If
+    End Sub
+
     Private Sub lblEmpDashboard_Click(sender As Object, e As EventArgs) Handles lblEmpDashboard.Click
         lblEmpDashboard.Enabled = False
     End Sub
@@ -27,15 +53,41 @@
         Trainings.Show()
         Me.Hide()
     End Sub
-
-    Private Sub pcbTerminate_Click(sender As Object, e As EventArgs) Handles pcbTerminate.Click
-        Dim result As DialogResult = MessageBox.Show("Are you sure you want to exit the system?",
-                                               "Confirm Exit",
-                                               MessageBoxButtons.YesNo,
-                                               MessageBoxIcon.Question)
-
+    Private Sub lblTeamOverview_Click(sender As Object, e As EventArgs) Handles lblTeamOverview.Click
+        Team_Overview.Show()
+        Me.Hide()
+    End Sub
+    Private Sub lblAttendanceTracker_Click(sender As Object, e As EventArgs) Handles lblAttendanceTracker.Click
+        Attendance_Tracker.Show()
+        Me.Hide()
+    End Sub
+    Private Sub lblLeaveApproval_Click(sender As Object, e As EventArgs) Handles lblLeaveApproval.Click
+        Leave_Approval.Show()
+        Me.Hide()
+    End Sub
+    Private Sub lblEmployeeTrainings_Click(sender As Object, e As EventArgs) Handles lblEmployeeTrainings.Click
+        Employee_Trainings.Show()
+        Me.Hide()
+    End Sub
+    Private Sub lblDepartment_Click(sender As Object, e As EventArgs) Handles lblDepartment.Click
+        Department.Show()
+        Me.Hide()
+    End Sub
+    Private Sub lblAmenities_Click(sender As Object, e As EventArgs) Handles lblAmenities.Click
+        Amenities.Show()
+        Me.Hide()
+    End Sub
+    Private Sub btnSignOut_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
+        Dim result As DialogResult = MessageBox.Show(
+            "Are you sure you want to sign out?",
+            "Confirm Sign Out",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question
+        )
         If result = DialogResult.Yes Then
-            Application.Exit()
+            Login_frm.Show()
+            Me.Hide()
         End If
     End Sub
+
 End Class

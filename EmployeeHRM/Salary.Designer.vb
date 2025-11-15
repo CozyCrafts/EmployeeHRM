@@ -48,6 +48,8 @@ Partial Class Salary
         GroupBox4 = New GroupBox()
         dgvSalaryHistory = New DataGridView()
         GroupBox3 = New GroupBox()
+        txtJobTitle = New TextBox()
+        Label6 = New Label()
         txtNetPay = New TextBox()
         GroupBox2 = New GroupBox()
         Label24 = New Label()
@@ -384,6 +386,8 @@ Partial Class Salary
         ' 
         ' GroupBox3
         ' 
+        GroupBox3.Controls.Add(txtJobTitle)
+        GroupBox3.Controls.Add(Label6)
         GroupBox3.Controls.Add(txtNetPay)
         GroupBox3.Controls.Add(GroupBox2)
         GroupBox3.Controls.Add(txtPayrollID)
@@ -409,6 +413,24 @@ Partial Class Salary
         GroupBox3.TabIndex = 95
         GroupBox3.TabStop = False
         GroupBox3.Text = "Payroll Computation"
+        ' 
+        ' txtJobTitle
+        ' 
+        txtJobTitle.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtJobTitle.Location = New Point(188, 145)
+        txtJobTitle.Name = "txtJobTitle"
+        txtJobTitle.Size = New Size(335, 30)
+        txtJobTitle.TabIndex = 114
+        ' 
+        ' Label6
+        ' 
+        Label6.AutoSize = True
+        Label6.Font = New Font("Century Gothic", 11F)
+        Label6.Location = New Point(15, 153)
+        Label6.Name = "Label6"
+        Label6.Size = New Size(87, 22)
+        Label6.TabIndex = 113
+        Label6.Text = "Job Title:"
         ' 
         ' txtNetPay
         ' 
@@ -790,7 +812,7 @@ Partial Class Salary
         ' txtEmployeeID
         ' 
         txtEmployeeID.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtEmployeeID.Location = New Point(188, 98)
+        txtEmployeeID.Location = New Point(188, 49)
         txtEmployeeID.Name = "txtEmployeeID"
         txtEmployeeID.Size = New Size(335, 30)
         txtEmployeeID.TabIndex = 99
@@ -799,7 +821,7 @@ Partial Class Salary
         ' 
         Label4.AutoSize = True
         Label4.Font = New Font("Century Gothic", 11F)
-        Label4.Location = New Point(53, 106)
+        Label4.Location = New Point(53, 57)
         Label4.Name = "Label4"
         Label4.Size = New Size(129, 22)
         Label4.TabIndex = 98
@@ -808,7 +830,7 @@ Partial Class Salary
         ' txtEmployeeName
         ' 
         txtEmployeeName.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtEmployeeName.Location = New Point(188, 143)
+        txtEmployeeName.Location = New Point(188, 101)
         txtEmployeeName.Name = "txtEmployeeName"
         txtEmployeeName.Size = New Size(335, 30)
         txtEmployeeName.TabIndex = 97
@@ -817,7 +839,7 @@ Partial Class Salary
         ' 
         Label5.AutoSize = True
         Label5.Font = New Font("Century Gothic", 11F)
-        Label5.Location = New Point(16, 146)
+        Label5.Location = New Point(16, 97)
         Label5.Name = "Label5"
         Label5.Size = New Size(166, 22)
         Label5.TabIndex = 96
@@ -994,4 +1016,6 @@ Partial Class Salary
     Friend WithEvents txtGrossSalary As TextBox
     Friend WithEvents dtpPaymentDate As DateTimePicker
     Friend WithEvents Label23 As Label
+    Friend WithEvents txtJobTitle As TextBox
+    Friend WithEvents Label6 As Label
 End Class

@@ -59,12 +59,8 @@ Partial Class Amenities
         txtLocationAmenities = New TextBox()
         txtNameAmenities = New TextBox()
         Label9 = New Label()
-        txtDepartmentID = New TextBox()
         txtAmenitiesID = New TextBox()
-        txtEmployeeID = New TextBox()
         Label6 = New Label()
-        Label21 = New Label()
-        Label1 = New Label()
         Label5 = New Label()
         btnSaveAmenity = New FontAwesome.Sharp.IconButton()
         btnCancelAmenity = New FontAwesome.Sharp.IconButton()
@@ -402,12 +398,8 @@ Partial Class Amenities
         gbDetailsAmenities.Controls.Add(txtLocationAmenities)
         gbDetailsAmenities.Controls.Add(txtNameAmenities)
         gbDetailsAmenities.Controls.Add(Label9)
-        gbDetailsAmenities.Controls.Add(txtDepartmentID)
         gbDetailsAmenities.Controls.Add(txtAmenitiesID)
-        gbDetailsAmenities.Controls.Add(txtEmployeeID)
         gbDetailsAmenities.Controls.Add(Label6)
-        gbDetailsAmenities.Controls.Add(Label21)
-        gbDetailsAmenities.Controls.Add(Label1)
         gbDetailsAmenities.Controls.Add(Label5)
         gbDetailsAmenities.Controls.Add(btnSaveAmenity)
         gbDetailsAmenities.Controls.Add(btnCancelAmenity)
@@ -520,14 +512,6 @@ Partial Class Amenities
         Label9.TabIndex = 81
         Label9.Text = "Location:"
         ' 
-        ' txtDepartmentID
-        ' 
-        txtDepartmentID.Location = New Point(706, 54)
-        txtDepartmentID.Margin = New Padding(4, 3, 4, 3)
-        txtDepartmentID.Name = "txtDepartmentID"
-        txtDepartmentID.Size = New Size(256, 36)
-        txtDepartmentID.TabIndex = 72
-        ' 
         ' txtAmenitiesID
         ' 
         txtAmenitiesID.Location = New Point(205, 104)
@@ -535,14 +519,6 @@ Partial Class Amenities
         txtAmenitiesID.Name = "txtAmenitiesID"
         txtAmenitiesID.Size = New Size(256, 36)
         txtAmenitiesID.TabIndex = 80
-        ' 
-        ' txtEmployeeID
-        ' 
-        txtEmployeeID.Location = New Point(205, 54)
-        txtEmployeeID.Margin = New Padding(4, 3, 4, 3)
-        txtEmployeeID.Name = "txtEmployeeID"
-        txtEmployeeID.Size = New Size(256, 36)
-        txtEmployeeID.TabIndex = 23
         ' 
         ' Label6
         ' 
@@ -555,30 +531,6 @@ Partial Class Amenities
         Label6.Size = New Size(151, 25)
         Label6.TabIndex = 79
         Label6.Text = "Amenities ID:"
-        ' 
-        ' Label21
-        ' 
-        Label21.AutoSize = True
-        Label21.Font = New Font("Century Gothic", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label21.ForeColor = Color.Black
-        Label21.Location = New Point(36, 63)
-        Label21.Margin = New Padding(4, 0, 4, 0)
-        Label21.Name = "Label21"
-        Label21.Size = New Size(161, 27)
-        Label21.TabIndex = 70
-        Label21.Text = "Employee ID:"
-        ' 
-        ' Label1
-        ' 
-        Label1.AutoSize = True
-        Label1.Font = New Font("Century Gothic", 13F)
-        Label1.ForeColor = Color.Black
-        Label1.Location = New Point(520, 58)
-        Label1.Margin = New Padding(4, 0, 4, 0)
-        Label1.Name = "Label1"
-        Label1.Size = New Size(178, 25)
-        Label1.TabIndex = 71
-        Label1.Text = "Department ID:"
         ' 
         ' Label5
         ' 
@@ -678,12 +630,8 @@ Partial Class Amenities
     Friend WithEvents gbAmenitiesList As GroupBox
     Friend WithEvents dgvAmenities As DataGridView
     Friend WithEvents gbDetailsAmenities As GroupBox
-    Friend WithEvents txtDepartmentID As TextBox
     Friend WithEvents txtAmenitiesID As TextBox
-    Friend WithEvents txtEmployeeID As TextBox
     Friend WithEvents Label6 As Label
-    Friend WithEvents Label21 As Label
-    Friend WithEvents Label1 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents txtLocationAmenities As TextBox
     Friend WithEvents txtNameAmenities As TextBox

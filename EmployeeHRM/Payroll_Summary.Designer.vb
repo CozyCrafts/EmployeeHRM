@@ -53,24 +53,18 @@ Partial Class Payroll_Summary
         txtSSS = New TextBox()
         Label35 = New Label()
         GroupBox1 = New GroupBox()
-        btnDeleteDeduction = New FontAwesome.Sharp.IconButton()
-        btnEditDeduction = New FontAwesome.Sharp.IconButton()
-        btnComputeDeduction = New FontAwesome.Sharp.IconButton()
-        Label1 = New Label()
-        txtTotalDeduction = New TextBox()
+        Label18 = New Label()
+        txtDaysAttended = New TextBox()
         Label10 = New Label()
-        txtAbscences = New TextBox()
-        btnAddDeduction = New FontAwesome.Sharp.IconButton()
+        txtAbsences = New TextBox()
         Label9 = New Label()
+        Label1 = New Label()
         txtDeductionID = New TextBox()
-        dtpDateApplied = New DateTimePicker()
+        txtTotalDeduction = New TextBox()
         Label14 = New Label()
         txtUnpaidLeave = New TextBox()
         Label17 = New Label()
         txtAttendanceID = New TextBox()
-        Label20 = New Label()
-        btnSaveDeduction = New FontAwesome.Sharp.IconButton()
-        btnCancelDeduction = New FontAwesome.Sharp.IconButton()
         Label23 = New Label()
         txtBaseSalary = New TextBox()
         Label22 = New Label()
@@ -81,25 +75,20 @@ Partial Class Payroll_Summary
         GroupBox3 = New GroupBox()
         btnAddPayroll = New FontAwesome.Sharp.IconButton()
         btnComputePayroll = New FontAwesome.Sharp.IconButton()
+        Label5 = New Label()
         btnDeletePayroll = New FontAwesome.Sharp.IconButton()
         btnCancelPayroll = New FontAwesome.Sharp.IconButton()
+        txtJobTitle = New TextBox()
         btnSavePayroll = New FontAwesome.Sharp.IconButton()
         cbEmployeeID = New ComboBox()
         txtNetPay = New TextBox()
         GroupBox2 = New GroupBox()
-        Label5 = New Label()
-        btnDeleteSalary = New FontAwesome.Sharp.IconButton()
-        txtJobTitle = New TextBox()
-        btnEditSalary = New FontAwesome.Sharp.IconButton()
-        txtJobID = New TextBox()
-        Label24 = New Label()
-        btnAddSalary = New FontAwesome.Sharp.IconButton()
+        Label13 = New Label()
+        txtTotalHours = New TextBox()
+        Label12 = New Label()
+        txtExceededHours = New TextBox()
         Label11 = New Label()
         txtAllowance = New TextBox()
-        Label12 = New Label()
-        txtSalaryID = New TextBox()
-        btnCancelSalary = New FontAwesome.Sharp.IconButton()
-        btnSaveSalary = New FontAwesome.Sharp.IconButton()
         txtPayrollID = New TextBox()
         btnEditPayroll = New FontAwesome.Sharp.IconButton()
         Label28 = New Label()
@@ -118,6 +107,7 @@ Partial Class Payroll_Summary
         txtSearchPayroll = New TextBox()
         PictureBox1 = New PictureBox()
         dgvPayrollSummary = New DataGridView()
+        btnSendToATM = New FontAwesome.Sharp.IconButton()
         adminheader_pnl.SuspendLayout()
         Panel1.SuspendLayout()
         GroupBox6.SuspendLayout()
@@ -398,9 +388,9 @@ Partial Class Payroll_Summary
         GroupBox6.Controls.Add(txtSSS)
         GroupBox6.Controls.Add(Label35)
         GroupBox6.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        GroupBox6.Location = New Point(366, 18)
+        GroupBox6.Location = New Point(356, 37)
         GroupBox6.Name = "GroupBox6"
-        GroupBox6.Size = New Size(392, 132)
+        GroupBox6.Size = New Size(392, 141)
         GroupBox6.TabIndex = 91
         GroupBox6.TabStop = False
         GroupBox6.Text = "Benefits"
@@ -408,7 +398,7 @@ Partial Class Payroll_Summary
         ' txtPhilHealth
         ' 
         txtPhilHealth.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtPhilHealth.Location = New Point(157, 58)
+        txtPhilHealth.Location = New Point(173, 58)
         txtPhilHealth.Name = "txtPhilHealth"
         txtPhilHealth.Size = New Size(169, 30)
         txtPhilHealth.TabIndex = 31
@@ -416,7 +406,7 @@ Partial Class Payroll_Summary
         ' txtPagIBIG
         ' 
         txtPagIBIG.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtPagIBIG.Location = New Point(157, 94)
+        txtPagIBIG.Location = New Point(173, 94)
         txtPagIBIG.Name = "txtPagIBIG"
         txtPagIBIG.Size = New Size(169, 30)
         txtPagIBIG.TabIndex = 28
@@ -425,7 +415,7 @@ Partial Class Payroll_Summary
         ' 
         Label39.AutoSize = True
         Label39.Font = New Font("Century Gothic", 11F)
-        Label39.Location = New Point(55, 101)
+        Label39.Location = New Point(71, 101)
         Label39.Name = "Label39"
         Label39.Size = New Size(96, 22)
         Label39.TabIndex = 25
@@ -435,7 +425,7 @@ Partial Class Payroll_Summary
         ' 
         Label31.AutoSize = True
         Label31.Font = New Font("Century Gothic", 11F)
-        Label31.Location = New Point(47, 66)
+        Label31.Location = New Point(63, 66)
         Label31.Name = "Label31"
         Label31.Size = New Size(104, 22)
         Label31.TabIndex = 19
@@ -444,7 +434,7 @@ Partial Class Payroll_Summary
         ' txtSSS
         ' 
         txtSSS.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtSSS.Location = New Point(157, 22)
+        txtSSS.Location = New Point(173, 22)
         txtSSS.Name = "txtSSS"
         txtSSS.Size = New Size(169, 30)
         txtSSS.TabIndex = 10
@@ -453,7 +443,7 @@ Partial Class Payroll_Summary
         ' 
         Label35.AutoSize = True
         Label35.Font = New Font("Century Gothic", 11F)
-        Label35.Location = New Point(109, 30)
+        Label35.Location = New Point(125, 30)
         Label35.Name = "Label35"
         Label35.Size = New Size(42, 22)
         Label35.TabIndex = 0
@@ -461,170 +451,104 @@ Partial Class Payroll_Summary
         ' 
         ' GroupBox1
         ' 
-        GroupBox1.Controls.Add(btnDeleteDeduction)
-        GroupBox1.Controls.Add(btnEditDeduction)
-        GroupBox1.Controls.Add(btnComputeDeduction)
-        GroupBox1.Controls.Add(Label1)
-        GroupBox1.Controls.Add(txtTotalDeduction)
+        GroupBox1.Controls.Add(Label18)
+        GroupBox1.Controls.Add(txtDaysAttended)
         GroupBox1.Controls.Add(Label10)
-        GroupBox1.Controls.Add(txtAbscences)
-        GroupBox1.Controls.Add(btnAddDeduction)
+        GroupBox1.Controls.Add(txtAbsences)
         GroupBox1.Controls.Add(Label9)
+        GroupBox1.Controls.Add(Label1)
         GroupBox1.Controls.Add(txtDeductionID)
-        GroupBox1.Controls.Add(dtpDateApplied)
+        GroupBox1.Controls.Add(txtTotalDeduction)
         GroupBox1.Controls.Add(GroupBox6)
         GroupBox1.Controls.Add(Label14)
         GroupBox1.Controls.Add(txtUnpaidLeave)
         GroupBox1.Controls.Add(Label17)
         GroupBox1.Controls.Add(txtAttendanceID)
-        GroupBox1.Controls.Add(Label20)
-        GroupBox1.Controls.Add(btnSaveDeduction)
-        GroupBox1.Controls.Add(btnCancelDeduction)
         GroupBox1.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        GroupBox1.Location = New Point(545, 225)
+        GroupBox1.Location = New Point(542, 193)
         GroupBox1.Name = "GroupBox1"
-        GroupBox1.Size = New Size(768, 298)
+        GroupBox1.Size = New Size(771, 235)
         GroupBox1.TabIndex = 92
         GroupBox1.TabStop = False
         GroupBox1.Text = "Deduction"
         ' 
-        ' btnDeleteDeduction
+        ' Label18
         ' 
-        btnDeleteDeduction.BackColor = SystemColors.InactiveCaption
-        btnDeleteDeduction.Font = New Font("Century Gothic", 9F, FontStyle.Bold)
-        btnDeleteDeduction.IconChar = FontAwesome.Sharp.IconChar.Trash
-        btnDeleteDeduction.IconColor = Color.Black
-        btnDeleteDeduction.IconFont = FontAwesome.Sharp.IconFont.Solid
-        btnDeleteDeduction.IconSize = 25
-        btnDeleteDeduction.ImageAlign = ContentAlignment.MiddleLeft
-        btnDeleteDeduction.Location = New Point(565, 216)
-        btnDeleteDeduction.Name = "btnDeleteDeduction"
-        btnDeleteDeduction.Size = New Size(193, 40)
-        btnDeleteDeduction.TabIndex = 121
-        btnDeleteDeduction.Text = "Delete Deduction"
-        btnDeleteDeduction.TextAlign = ContentAlignment.MiddleRight
-        btnDeleteDeduction.UseVisualStyleBackColor = False
+        Label18.AutoSize = True
+        Label18.Font = New Font("Century Gothic", 11F)
+        Label18.Location = New Point(15, 120)
+        Label18.Name = "Label18"
+        Label18.Size = New Size(156, 22)
+        Label18.TabIndex = 127
+        Label18.Text = "Days Attended:"
         ' 
-        ' btnEditDeduction
+        ' txtDaysAttended
         ' 
-        btnEditDeduction.BackColor = SystemColors.InactiveCaption
-        btnEditDeduction.Font = New Font("Century Gothic", 9F, FontStyle.Bold)
-        btnEditDeduction.IconChar = FontAwesome.Sharp.IconChar.Edit
-        btnEditDeduction.IconColor = Color.Black
-        btnEditDeduction.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnEditDeduction.IconSize = 25
-        btnEditDeduction.ImageAlign = ContentAlignment.MiddleLeft
-        btnEditDeduction.Location = New Point(565, 170)
-        btnEditDeduction.Name = "btnEditDeduction"
-        btnEditDeduction.Size = New Size(193, 40)
-        btnEditDeduction.TabIndex = 120
-        btnEditDeduction.Text = "Edit Deduction"
-        btnEditDeduction.TextAlign = ContentAlignment.MiddleRight
-        btnEditDeduction.UseVisualStyleBackColor = False
-        ' 
-        ' btnComputeDeduction
-        ' 
-        btnComputeDeduction.BackColor = SystemColors.InactiveCaption
-        btnComputeDeduction.Font = New Font("Century Gothic", 9F, FontStyle.Bold)
-        btnComputeDeduction.IconChar = FontAwesome.Sharp.IconChar.Calculator
-        btnComputeDeduction.IconColor = Color.Black
-        btnComputeDeduction.IconFont = FontAwesome.Sharp.IconFont.Solid
-        btnComputeDeduction.IconSize = 25
-        btnComputeDeduction.ImageAlign = ContentAlignment.MiddleLeft
-        btnComputeDeduction.Location = New Point(366, 218)
-        btnComputeDeduction.Name = "btnComputeDeduction"
-        btnComputeDeduction.Size = New Size(193, 37)
-        btnComputeDeduction.TabIndex = 119
-        btnComputeDeduction.Text = "Compute Deduction"
-        btnComputeDeduction.TextAlign = ContentAlignment.MiddleRight
-        btnComputeDeduction.UseVisualStyleBackColor = False
-        ' 
-        ' Label1
-        ' 
-        Label1.AutoSize = True
-        Label1.Font = New Font("Century Gothic", 11F)
-        Label1.Location = New Point(13, 208)
-        Label1.Name = "Label1"
-        Label1.Size = New Size(160, 22)
-        Label1.TabIndex = 113
-        Label1.Text = "Total Deduction:"
-        ' 
-        ' txtTotalDeduction
-        ' 
-        txtTotalDeduction.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtTotalDeduction.Location = New Point(179, 200)
-        txtTotalDeduction.Name = "txtTotalDeduction"
-        txtTotalDeduction.Size = New Size(160, 30)
-        txtTotalDeduction.TabIndex = 112
+        txtDaysAttended.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtDaysAttended.Location = New Point(177, 112)
+        txtDaysAttended.Name = "txtDaysAttended"
+        txtDaysAttended.Size = New Size(160, 30)
+        txtDaysAttended.TabIndex = 126
         ' 
         ' Label10
         ' 
         Label10.AutoSize = True
         Label10.Font = New Font("Century Gothic", 11F)
-        Label10.Location = New Point(56, 128)
+        Label10.Location = New Point(66, 156)
         Label10.Name = "Label10"
-        Label10.Size = New Size(117, 22)
+        Label10.Size = New Size(105, 22)
         Label10.TabIndex = 97
-        Label10.Text = "Abscences:"
+        Label10.Text = "Absences:"
         ' 
-        ' txtAbscences
+        ' txtAbsences
         ' 
-        txtAbscences.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtAbscences.Location = New Point(179, 120)
-        txtAbscences.Name = "txtAbscences"
-        txtAbscences.Size = New Size(160, 30)
-        txtAbscences.TabIndex = 96
-        ' 
-        ' btnAddDeduction
-        ' 
-        btnAddDeduction.BackColor = SystemColors.InactiveCaption
-        btnAddDeduction.Font = New Font("Century Gothic", 9F, FontStyle.Bold)
-        btnAddDeduction.IconChar = FontAwesome.Sharp.IconChar.MinusCircle
-        btnAddDeduction.IconColor = Color.Black
-        btnAddDeduction.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnAddDeduction.IconSize = 25
-        btnAddDeduction.ImageAlign = ContentAlignment.MiddleLeft
-        btnAddDeduction.Location = New Point(366, 171)
-        btnAddDeduction.Name = "btnAddDeduction"
-        btnAddDeduction.Size = New Size(193, 41)
-        btnAddDeduction.TabIndex = 118
-        btnAddDeduction.Text = "Add Deduction"
-        btnAddDeduction.TextAlign = ContentAlignment.MiddleRight
-        btnAddDeduction.UseVisualStyleBackColor = False
+        txtAbsences.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtAbsences.Location = New Point(177, 148)
+        txtAbsences.Name = "txtAbsences"
+        txtAbsences.Size = New Size(160, 30)
+        txtAbsences.TabIndex = 96
         ' 
         ' Label9
         ' 
         Label9.AutoSize = True
         Label9.Font = New Font("Century Gothic", 11F)
-        Label9.Location = New Point(37, 48)
+        Label9.Location = New Point(35, 49)
         Label9.Name = "Label9"
         Label9.Size = New Size(136, 22)
         Label9.TabIndex = 95
         Label9.Text = "Deduction ID:"
         ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Font = New Font("Century Gothic", 11F)
+        Label1.Location = New Point(363, 194)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(160, 22)
+        Label1.TabIndex = 113
+        Label1.Text = "Total Deduction:"
+        ' 
         ' txtDeductionID
         ' 
         txtDeductionID.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtDeductionID.Location = New Point(179, 40)
+        txtDeductionID.Location = New Point(177, 40)
         txtDeductionID.Name = "txtDeductionID"
         txtDeductionID.Size = New Size(160, 30)
         txtDeductionID.TabIndex = 94
         ' 
-        ' dtpDateApplied
+        ' txtTotalDeduction
         ' 
-        dtpDateApplied.CalendarFont = New Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        dtpDateApplied.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        dtpDateApplied.Format = DateTimePickerFormat.Short
-        dtpDateApplied.Location = New Point(179, 240)
-        dtpDateApplied.Name = "dtpDateApplied"
-        dtpDateApplied.Size = New Size(160, 30)
-        dtpDateApplied.TabIndex = 93
+        txtTotalDeduction.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtTotalDeduction.Location = New Point(529, 185)
+        txtTotalDeduction.Name = "txtTotalDeduction"
+        txtTotalDeduction.Size = New Size(169, 30)
+        txtTotalDeduction.TabIndex = 112
         ' 
         ' Label14
         ' 
         Label14.AutoSize = True
         Label14.Font = New Font("Century Gothic", 11F)
-        Label14.Location = New Point(28, 168)
+        Label14.Location = New Point(26, 192)
         Label14.Name = "Label14"
         Label14.Size = New Size(145, 22)
         Label14.TabIndex = 25
@@ -633,7 +557,7 @@ Partial Class Payroll_Summary
         ' txtUnpaidLeave
         ' 
         txtUnpaidLeave.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtUnpaidLeave.Location = New Point(179, 160)
+        txtUnpaidLeave.Location = New Point(177, 184)
         txtUnpaidLeave.Name = "txtUnpaidLeave"
         txtUnpaidLeave.Size = New Size(160, 30)
         txtUnpaidLeave.TabIndex = 11
@@ -642,7 +566,7 @@ Partial Class Payroll_Summary
         ' 
         Label17.AutoSize = True
         Label17.Font = New Font("Century Gothic", 11F)
-        Label17.Location = New Point(19, 88)
+        Label17.Location = New Point(17, 84)
         Label17.Name = "Label17"
         Label17.Size = New Size(154, 22)
         Label17.TabIndex = 19
@@ -651,60 +575,16 @@ Partial Class Payroll_Summary
         ' txtAttendanceID
         ' 
         txtAttendanceID.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtAttendanceID.Location = New Point(179, 80)
+        txtAttendanceID.Location = New Point(177, 76)
         txtAttendanceID.Name = "txtAttendanceID"
         txtAttendanceID.Size = New Size(160, 30)
         txtAttendanceID.TabIndex = 10
-        ' 
-        ' Label20
-        ' 
-        Label20.AutoSize = True
-        Label20.Font = New Font("Century Gothic", 11F)
-        Label20.Location = New Point(35, 247)
-        Label20.Name = "Label20"
-        Label20.Size = New Size(138, 22)
-        Label20.TabIndex = 0
-        Label20.Text = "Date Applied:"
-        ' 
-        ' btnSaveDeduction
-        ' 
-        btnSaveDeduction.BackColor = SystemColors.InactiveCaption
-        btnSaveDeduction.Font = New Font("Century Gothic", 10F, FontStyle.Bold)
-        btnSaveDeduction.IconChar = FontAwesome.Sharp.IconChar.Save
-        btnSaveDeduction.IconColor = Color.Black
-        btnSaveDeduction.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnSaveDeduction.IconSize = 25
-        btnSaveDeduction.ImageAlign = ContentAlignment.MiddleLeft
-        btnSaveDeduction.Location = New Point(366, 219)
-        btnSaveDeduction.Name = "btnSaveDeduction"
-        btnSaveDeduction.Size = New Size(99, 37)
-        btnSaveDeduction.TabIndex = 123
-        btnSaveDeduction.Text = "Save "
-        btnSaveDeduction.TextAlign = ContentAlignment.MiddleRight
-        btnSaveDeduction.UseVisualStyleBackColor = False
-        ' 
-        ' btnCancelDeduction
-        ' 
-        btnCancelDeduction.BackColor = SystemColors.InactiveCaption
-        btnCancelDeduction.Font = New Font("Century Gothic", 9F, FontStyle.Bold)
-        btnCancelDeduction.IconChar = FontAwesome.Sharp.IconChar.Cancel
-        btnCancelDeduction.IconColor = Color.Black
-        btnCancelDeduction.IconFont = FontAwesome.Sharp.IconFont.Solid
-        btnCancelDeduction.IconSize = 25
-        btnCancelDeduction.ImageAlign = ContentAlignment.MiddleLeft
-        btnCancelDeduction.Location = New Point(462, 218)
-        btnCancelDeduction.Name = "btnCancelDeduction"
-        btnCancelDeduction.Size = New Size(97, 37)
-        btnCancelDeduction.TabIndex = 122
-        btnCancelDeduction.Text = "Cancel"
-        btnCancelDeduction.TextAlign = ContentAlignment.MiddleRight
-        btnCancelDeduction.UseVisualStyleBackColor = False
         ' 
         ' Label23
         ' 
         Label23.AutoSize = True
         Label23.Font = New Font("Century Gothic", 11F)
-        Label23.Location = New Point(35, 371)
+        Label23.Location = New Point(38, 339)
         Label23.Name = "Label23"
         Label23.Size = New Size(149, 22)
         Label23.TabIndex = 0
@@ -713,16 +593,16 @@ Partial Class Payroll_Summary
         ' txtBaseSalary
         ' 
         txtBaseSalary.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtBaseSalary.Location = New Point(132, 98)
+        txtBaseSalary.Location = New Point(158, 31)
         txtBaseSalary.Name = "txtBaseSalary"
-        txtBaseSalary.Size = New Size(276, 30)
+        txtBaseSalary.Size = New Size(221, 30)
         txtBaseSalary.TabIndex = 10
         ' 
         ' Label22
         ' 
         Label22.AutoSize = True
         Label22.Font = New Font("Century Gothic", 11F)
-        Label22.Location = New Point(465, 34)
+        Label22.Location = New Point(39, 76)
         Label22.Name = "Label22"
         Label22.Size = New Size(113, 22)
         Label22.TabIndex = 19
@@ -731,24 +611,24 @@ Partial Class Payroll_Summary
         ' txtDailyRate
         ' 
         txtDailyRate.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtDailyRate.Location = New Point(584, 64)
+        txtDailyRate.Location = New Point(158, 104)
         txtDailyRate.Name = "txtDailyRate"
-        txtDailyRate.Size = New Size(160, 30)
+        txtDailyRate.Size = New Size(219, 30)
         txtDailyRate.TabIndex = 11
         ' 
         ' txtOvertimeRate
         ' 
         txtOvertimeRate.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtOvertimeRate.Location = New Point(584, 100)
+        txtOvertimeRate.Location = New Point(552, 67)
         txtOvertimeRate.Name = "txtOvertimeRate"
-        txtOvertimeRate.Size = New Size(160, 30)
+        txtOvertimeRate.Size = New Size(183, 30)
         txtOvertimeRate.TabIndex = 12
         ' 
         ' Label21
         ' 
         Label21.AutoSize = True
         Label21.Font = New Font("Century Gothic", 11F)
-        Label21.Location = New Point(427, 108)
+        Label21.Location = New Point(395, 75)
         Label21.Name = "Label21"
         Label21.Size = New Size(151, 22)
         Label21.TabIndex = 25
@@ -758,7 +638,7 @@ Partial Class Payroll_Summary
         ' 
         Label19.AutoSize = True
         Label19.Font = New Font("Century Gothic", 11F)
-        Label19.Location = New Point(8, 106)
+        Label19.Location = New Point(34, 39)
         Label19.Name = "Label19"
         Label19.Size = New Size(118, 22)
         Label19.TabIndex = 26
@@ -766,10 +646,13 @@ Partial Class Payroll_Summary
         ' 
         ' GroupBox3
         ' 
+        GroupBox3.Controls.Add(btnSendToATM)
         GroupBox3.Controls.Add(btnAddPayroll)
         GroupBox3.Controls.Add(btnComputePayroll)
+        GroupBox3.Controls.Add(Label5)
         GroupBox3.Controls.Add(btnDeletePayroll)
         GroupBox3.Controls.Add(btnCancelPayroll)
+        GroupBox3.Controls.Add(txtJobTitle)
         GroupBox3.Controls.Add(btnSavePayroll)
         GroupBox3.Controls.Add(cbEmployeeID)
         GroupBox3.Controls.Add(txtNetPay)
@@ -791,9 +674,9 @@ Partial Class Payroll_Summary
         GroupBox3.Controls.Add(dtpPaymentDate)
         GroupBox3.Controls.Add(Label23)
         GroupBox3.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        GroupBox3.Location = New Point(410, 138)
+        GroupBox3.Location = New Point(410, 114)
         GroupBox3.Name = "GroupBox3"
-        GroupBox3.Size = New Size(1335, 543)
+        GroupBox3.Size = New Size(1335, 495)
         GroupBox3.TabIndex = 91
         GroupBox3.TabStop = False
         GroupBox3.Text = "Payroll Computation"
@@ -807,9 +690,9 @@ Partial Class Payroll_Summary
         btnAddPayroll.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnAddPayroll.IconSize = 25
         btnAddPayroll.ImageAlign = ContentAlignment.MiddleLeft
-        btnAddPayroll.Location = New Point(170, 421)
+        btnAddPayroll.Location = New Point(175, 369)
         btnAddPayroll.Name = "btnAddPayroll"
-        btnAddPayroll.Size = New Size(175, 44)
+        btnAddPayroll.Size = New Size(171, 44)
         btnAddPayroll.TabIndex = 118
         btnAddPayroll.Text = "Add Payroll"
         btnAddPayroll.TextAlign = ContentAlignment.MiddleRight
@@ -824,13 +707,23 @@ Partial Class Payroll_Summary
         btnComputePayroll.IconFont = FontAwesome.Sharp.IconFont.Solid
         btnComputePayroll.IconSize = 25
         btnComputePayroll.ImageAlign = ContentAlignment.MiddleLeft
-        btnComputePayroll.Location = New Point(169, 472)
+        btnComputePayroll.Location = New Point(175, 369)
         btnComputePayroll.Name = "btnComputePayroll"
-        btnComputePayroll.Size = New Size(175, 44)
+        btnComputePayroll.Size = New Size(171, 44)
         btnComputePayroll.TabIndex = 115
         btnComputePayroll.Text = "Compute Payroll"
         btnComputePayroll.TextAlign = ContentAlignment.MiddleRight
         btnComputePayroll.UseVisualStyleBackColor = False
+        ' 
+        ' Label5
+        ' 
+        Label5.AutoSize = True
+        Label5.Font = New Font("Century Gothic", 11F)
+        Label5.Location = New Point(100, 123)
+        Label5.Name = "Label5"
+        Label5.Size = New Size(87, 22)
+        Label5.TabIndex = 105
+        Label5.Text = "Job Title:"
         ' 
         ' btnDeletePayroll
         ' 
@@ -841,9 +734,9 @@ Partial Class Payroll_Summary
         btnDeletePayroll.IconFont = FontAwesome.Sharp.IconFont.Solid
         btnDeletePayroll.IconSize = 25
         btnDeletePayroll.ImageAlign = ContentAlignment.MiddleLeft
-        btnDeletePayroll.Location = New Point(351, 472)
+        btnDeletePayroll.Location = New Point(362, 420)
         btnDeletePayroll.Name = "btnDeletePayroll"
-        btnDeletePayroll.Size = New Size(175, 44)
+        btnDeletePayroll.Size = New Size(171, 44)
         btnDeletePayroll.TabIndex = 116
         btnDeletePayroll.Text = "Delete Payroll"
         btnDeletePayroll.TextAlign = ContentAlignment.MiddleRight
@@ -858,13 +751,21 @@ Partial Class Payroll_Summary
         btnCancelPayroll.IconFont = FontAwesome.Sharp.IconFont.Solid
         btnCancelPayroll.IconSize = 25
         btnCancelPayroll.ImageAlign = ContentAlignment.MiddleLeft
-        btnCancelPayroll.Location = New Point(351, 471)
+        btnCancelPayroll.Location = New Point(362, 419)
         btnCancelPayroll.Name = "btnCancelPayroll"
         btnCancelPayroll.Size = New Size(105, 43)
         btnCancelPayroll.TabIndex = 116
         btnCancelPayroll.Text = "Cancel"
         btnCancelPayroll.TextAlign = ContentAlignment.MiddleRight
         btnCancelPayroll.UseVisualStyleBackColor = False
+        ' 
+        ' txtJobTitle
+        ' 
+        txtJobTitle.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtJobTitle.Location = New Point(193, 115)
+        txtJobTitle.Name = "txtJobTitle"
+        txtJobTitle.Size = New Size(335, 30)
+        txtJobTitle.TabIndex = 104
         ' 
         ' btnSavePayroll
         ' 
@@ -875,7 +776,7 @@ Partial Class Payroll_Summary
         btnSavePayroll.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnSavePayroll.IconSize = 25
         btnSavePayroll.ImageAlign = ContentAlignment.MiddleLeft
-        btnSavePayroll.Location = New Point(239, 471)
+        btnSavePayroll.Location = New Point(241, 419)
         btnSavePayroll.Name = "btnSavePayroll"
         btnSavePayroll.Size = New Size(105, 44)
         btnSavePayroll.TabIndex = 117
@@ -886,7 +787,7 @@ Partial Class Payroll_Summary
         ' cbEmployeeID
         ' 
         cbEmployeeID.FormattingEnabled = True
-        cbEmployeeID.Location = New Point(190, 43)
+        cbEmployeeID.Location = New Point(192, 38)
         cbEmployeeID.Name = "cbEmployeeID"
         cbEmployeeID.Size = New Size(335, 35)
         cbEmployeeID.TabIndex = 113
@@ -894,132 +795,74 @@ Partial Class Payroll_Summary
         ' txtNetPay
         ' 
         txtNetPay.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtNetPay.Location = New Point(190, 318)
+        txtNetPay.Location = New Point(193, 295)
         txtNetPay.Name = "txtNetPay"
         txtNetPay.Size = New Size(335, 30)
         txtNetPay.TabIndex = 112
         ' 
         ' GroupBox2
         ' 
-        GroupBox2.Controls.Add(Label5)
-        GroupBox2.Controls.Add(btnDeleteSalary)
-        GroupBox2.Controls.Add(txtJobTitle)
-        GroupBox2.Controls.Add(btnEditSalary)
-        GroupBox2.Controls.Add(txtJobID)
-        GroupBox2.Controls.Add(Label24)
-        GroupBox2.Controls.Add(btnAddSalary)
+        GroupBox2.Controls.Add(Label13)
+        GroupBox2.Controls.Add(txtTotalHours)
+        GroupBox2.Controls.Add(Label12)
+        GroupBox2.Controls.Add(txtExceededHours)
         GroupBox2.Controls.Add(Label11)
         GroupBox2.Controls.Add(txtAllowance)
-        GroupBox2.Controls.Add(Label12)
-        GroupBox2.Controls.Add(txtSalaryID)
         GroupBox2.Controls.Add(Label19)
         GroupBox2.Controls.Add(Label21)
         GroupBox2.Controls.Add(txtOvertimeRate)
         GroupBox2.Controls.Add(txtDailyRate)
         GroupBox2.Controls.Add(Label22)
         GroupBox2.Controls.Add(txtBaseSalary)
-        GroupBox2.Controls.Add(btnCancelSalary)
-        GroupBox2.Controls.Add(btnSaveSalary)
         GroupBox2.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
         GroupBox2.Location = New Point(545, 27)
         GroupBox2.Name = "GroupBox2"
-        GroupBox2.Size = New Size(768, 192)
+        GroupBox2.Size = New Size(768, 160)
         GroupBox2.TabIndex = 93
         GroupBox2.TabStop = False
         GroupBox2.Text = "Salary"
         ' 
-        ' Label5
+        ' Label13
         ' 
-        Label5.AutoSize = True
-        Label5.Font = New Font("Century Gothic", 11F)
-        Label5.Location = New Point(39, 67)
-        Label5.Name = "Label5"
-        Label5.Size = New Size(87, 22)
-        Label5.TabIndex = 105
-        Label5.Text = "Job Title:"
+        Label13.AutoSize = True
+        Label13.Font = New Font("Century Gothic", 11F)
+        Label13.Location = New Point(433, 39)
+        Label13.Name = "Label13"
+        Label13.Size = New Size(113, 22)
+        Label13.TabIndex = 132
+        Label13.Text = "Total Hours:"
         ' 
-        ' btnDeleteSalary
+        ' txtTotalHours
         ' 
-        btnDeleteSalary.BackColor = SystemColors.InactiveCaption
-        btnDeleteSalary.Font = New Font("Century Gothic", 9F, FontStyle.Bold)
-        btnDeleteSalary.IconChar = FontAwesome.Sharp.IconChar.Trash
-        btnDeleteSalary.IconColor = Color.Black
-        btnDeleteSalary.IconFont = FontAwesome.Sharp.IconFont.Solid
-        btnDeleteSalary.IconSize = 25
-        btnDeleteSalary.ImageAlign = ContentAlignment.MiddleLeft
-        btnDeleteSalary.Location = New Point(500, 145)
-        btnDeleteSalary.Name = "btnDeleteSalary"
-        btnDeleteSalary.Size = New Size(157, 40)
-        btnDeleteSalary.TabIndex = 126
-        btnDeleteSalary.Text = "Delete Salary"
-        btnDeleteSalary.TextAlign = ContentAlignment.MiddleRight
-        btnDeleteSalary.UseVisualStyleBackColor = False
+        txtTotalHours.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtTotalHours.Location = New Point(552, 31)
+        txtTotalHours.Name = "txtTotalHours"
+        txtTotalHours.Size = New Size(183, 30)
+        txtTotalHours.TabIndex = 131
         ' 
-        ' txtJobTitle
+        ' Label12
         ' 
-        txtJobTitle.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtJobTitle.Location = New Point(132, 62)
-        txtJobTitle.Name = "txtJobTitle"
-        txtJobTitle.Size = New Size(276, 30)
-        txtJobTitle.TabIndex = 104
+        Label12.AutoSize = True
+        Label12.Font = New Font("Century Gothic", 11F)
+        Label12.Location = New Point(383, 111)
+        Label12.Name = "Label12"
+        Label12.Size = New Size(163, 22)
+        Label12.TabIndex = 129
+        Label12.Text = "Exceeded Hours:"
         ' 
-        ' btnEditSalary
+        ' txtExceededHours
         ' 
-        btnEditSalary.BackColor = SystemColors.InactiveCaption
-        btnEditSalary.Font = New Font("Century Gothic", 9F, FontStyle.Bold)
-        btnEditSalary.IconChar = FontAwesome.Sharp.IconChar.Edit
-        btnEditSalary.IconColor = Color.Black
-        btnEditSalary.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnEditSalary.IconSize = 25
-        btnEditSalary.ImageAlign = ContentAlignment.MiddleLeft
-        btnEditSalary.Location = New Point(337, 145)
-        btnEditSalary.Name = "btnEditSalary"
-        btnEditSalary.Size = New Size(157, 40)
-        btnEditSalary.TabIndex = 125
-        btnEditSalary.Text = "Edit Salary"
-        btnEditSalary.TextAlign = ContentAlignment.MiddleRight
-        btnEditSalary.UseVisualStyleBackColor = False
-        ' 
-        ' txtJobID
-        ' 
-        txtJobID.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtJobID.Location = New Point(132, 26)
-        txtJobID.Name = "txtJobID"
-        txtJobID.Size = New Size(82, 30)
-        txtJobID.TabIndex = 98
-        ' 
-        ' Label24
-        ' 
-        Label24.AutoSize = True
-        Label24.Font = New Font("Century Gothic", 11F)
-        Label24.Location = New Point(53, 34)
-        Label24.Name = "Label24"
-        Label24.Size = New Size(73, 22)
-        Label24.TabIndex = 99
-        Label24.Text = "Job ID:"
-        ' 
-        ' btnAddSalary
-        ' 
-        btnAddSalary.BackColor = SystemColors.InactiveCaption
-        btnAddSalary.Font = New Font("Century Gothic", 9F, FontStyle.Bold)
-        btnAddSalary.IconChar = FontAwesome.Sharp.IconChar.MoneyBill1Wave
-        btnAddSalary.IconColor = Color.Black
-        btnAddSalary.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnAddSalary.IconSize = 25
-        btnAddSalary.ImageAlign = ContentAlignment.MiddleLeft
-        btnAddSalary.Location = New Point(174, 145)
-        btnAddSalary.Name = "btnAddSalary"
-        btnAddSalary.Size = New Size(157, 41)
-        btnAddSalary.TabIndex = 123
-        btnAddSalary.Text = "Add Salary"
-        btnAddSalary.TextAlign = ContentAlignment.MiddleRight
-        btnAddSalary.UseVisualStyleBackColor = False
+        txtExceededHours.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtExceededHours.Location = New Point(552, 103)
+        txtExceededHours.Name = "txtExceededHours"
+        txtExceededHours.Size = New Size(183, 30)
+        txtExceededHours.TabIndex = 130
         ' 
         ' Label11
         ' 
         Label11.AutoSize = True
         Label11.Font = New Font("Century Gothic", 11F)
-        Label11.Location = New Point(470, 71)
+        Label11.Location = New Point(44, 112)
         Label11.Name = "Label11"
         Label11.Size = New Size(108, 22)
         Label11.TabIndex = 97
@@ -1028,67 +871,15 @@ Partial Class Payroll_Summary
         ' txtAllowance
         ' 
         txtAllowance.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtAllowance.Location = New Point(584, 26)
+        txtAllowance.Location = New Point(158, 68)
         txtAllowance.Name = "txtAllowance"
-        txtAllowance.Size = New Size(160, 30)
+        txtAllowance.Size = New Size(219, 30)
         txtAllowance.TabIndex = 96
-        ' 
-        ' Label12
-        ' 
-        Label12.AutoSize = True
-        Label12.Font = New Font("Century Gothic", 11F)
-        Label12.Location = New Point(226, 34)
-        Label12.Name = "Label12"
-        Label12.Size = New Size(94, 22)
-        Label12.TabIndex = 95
-        Label12.Text = "Salary ID:"
-        ' 
-        ' txtSalaryID
-        ' 
-        txtSalaryID.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtSalaryID.Location = New Point(326, 26)
-        txtSalaryID.Name = "txtSalaryID"
-        txtSalaryID.Size = New Size(82, 30)
-        txtSalaryID.TabIndex = 94
-        ' 
-        ' btnCancelSalary
-        ' 
-        btnCancelSalary.BackColor = SystemColors.InactiveCaption
-        btnCancelSalary.Font = New Font("Century Gothic", 9F, FontStyle.Bold)
-        btnCancelSalary.IconChar = FontAwesome.Sharp.IconChar.Cancel
-        btnCancelSalary.IconColor = Color.Black
-        btnCancelSalary.IconFont = FontAwesome.Sharp.IconFont.Solid
-        btnCancelSalary.IconSize = 25
-        btnCancelSalary.ImageAlign = ContentAlignment.MiddleLeft
-        btnCancelSalary.Location = New Point(452, 147)
-        btnCancelSalary.Name = "btnCancelSalary"
-        btnCancelSalary.Size = New Size(91, 37)
-        btnCancelSalary.TabIndex = 127
-        btnCancelSalary.Text = "Cancel"
-        btnCancelSalary.TextAlign = ContentAlignment.MiddleRight
-        btnCancelSalary.UseVisualStyleBackColor = False
-        ' 
-        ' btnSaveSalary
-        ' 
-        btnSaveSalary.BackColor = SystemColors.InactiveCaption
-        btnSaveSalary.Font = New Font("Century Gothic", 10F, FontStyle.Bold)
-        btnSaveSalary.IconChar = FontAwesome.Sharp.IconChar.Save
-        btnSaveSalary.IconColor = Color.Black
-        btnSaveSalary.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnSaveSalary.IconSize = 25
-        btnSaveSalary.ImageAlign = ContentAlignment.MiddleLeft
-        btnSaveSalary.Location = New Point(288, 148)
-        btnSaveSalary.Name = "btnSaveSalary"
-        btnSaveSalary.Size = New Size(91, 37)
-        btnSaveSalary.TabIndex = 128
-        btnSaveSalary.Text = "Save "
-        btnSaveSalary.TextAlign = ContentAlignment.MiddleRight
-        btnSaveSalary.UseVisualStyleBackColor = False
         ' 
         ' txtPayrollID
         ' 
         txtPayrollID.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtPayrollID.Location = New Point(191, 138)
+        txtPayrollID.Location = New Point(193, 151)
         txtPayrollID.Name = "txtPayrollID"
         txtPayrollID.Size = New Size(335, 30)
         txtPayrollID.TabIndex = 103
@@ -1102,9 +893,9 @@ Partial Class Payroll_Summary
         btnEditPayroll.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnEditPayroll.IconSize = 25
         btnEditPayroll.ImageAlign = ContentAlignment.MiddleLeft
-        btnEditPayroll.Location = New Point(351, 421)
+        btnEditPayroll.Location = New Point(362, 369)
         btnEditPayroll.Name = "btnEditPayroll"
-        btnEditPayroll.Size = New Size(175, 44)
+        btnEditPayroll.Size = New Size(171, 44)
         btnEditPayroll.TabIndex = 115
         btnEditPayroll.Text = "Edit Payroll"
         btnEditPayroll.TextAlign = ContentAlignment.MiddleRight
@@ -1114,7 +905,7 @@ Partial Class Payroll_Summary
         ' 
         Label28.AutoSize = True
         Label28.Font = New Font("Century Gothic", 11F)
-        Label28.Location = New Point(87, 144)
+        Label28.Location = New Point(89, 159)
         Label28.Name = "Label28"
         Label28.Size = New Size(98, 22)
         Label28.TabIndex = 102
@@ -1123,7 +914,7 @@ Partial Class Payroll_Summary
         ' txtBasicSalary
         ' 
         txtBasicSalary.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtBasicSalary.Location = New Point(191, 183)
+        txtBasicSalary.Location = New Point(193, 187)
         txtBasicSalary.Name = "txtBasicSalary"
         txtBasicSalary.Size = New Size(335, 30)
         txtBasicSalary.TabIndex = 101
@@ -1132,7 +923,7 @@ Partial Class Payroll_Summary
         ' 
         Label29.AutoSize = True
         Label29.Font = New Font("Century Gothic", 11F)
-        Label29.Location = New Point(43, 236)
+        Label29.Location = New Point(45, 231)
         Label29.Name = "Label29"
         Label29.Size = New Size(142, 22)
         Label29.TabIndex = 100
@@ -1142,7 +933,7 @@ Partial Class Payroll_Summary
         ' 
         Label26.AutoSize = True
         Label26.Font = New Font("Century Gothic", 11F)
-        Label26.Location = New Point(56, 56)
+        Label26.Location = New Point(57, 51)
         Label26.Name = "Label26"
         Label26.Size = New Size(129, 22)
         Label26.TabIndex = 98
@@ -1151,7 +942,7 @@ Partial Class Payroll_Summary
         ' txtEmployeeName
         ' 
         txtEmployeeName.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtEmployeeName.Location = New Point(191, 93)
+        txtEmployeeName.Location = New Point(193, 79)
         txtEmployeeName.Name = "txtEmployeeName"
         txtEmployeeName.Size = New Size(335, 30)
         txtEmployeeName.TabIndex = 97
@@ -1160,7 +951,7 @@ Partial Class Payroll_Summary
         ' 
         Label27.AutoSize = True
         Label27.Font = New Font("Century Gothic", 11F)
-        Label27.Location = New Point(19, 96)
+        Label27.Location = New Point(21, 87)
         Label27.Name = "Label27"
         Label27.Size = New Size(166, 22)
         Label27.TabIndex = 96
@@ -1169,7 +960,7 @@ Partial Class Payroll_Summary
         ' txtOvertimePay
         ' 
         txtOvertimePay.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtOvertimePay.Location = New Point(191, 228)
+        txtOvertimePay.Location = New Point(193, 223)
         txtOvertimePay.Name = "txtOvertimePay"
         txtOvertimePay.Size = New Size(335, 30)
         txtOvertimePay.TabIndex = 95
@@ -1178,7 +969,7 @@ Partial Class Payroll_Summary
         ' 
         Label25.AutoSize = True
         Label25.Font = New Font("Century Gothic", 11F)
-        Label25.Location = New Point(64, 191)
+        Label25.Location = New Point(66, 195)
         Label25.Name = "Label25"
         Label25.Size = New Size(121, 22)
         Label25.TabIndex = 94
@@ -1188,7 +979,7 @@ Partial Class Payroll_Summary
         ' 
         Label15.AutoSize = True
         Label15.Font = New Font("Century Gothic", 11F)
-        Label15.Location = New Point(96, 325)
+        Label15.Location = New Point(99, 303)
         Label15.Name = "Label15"
         Label15.Size = New Size(88, 22)
         Label15.TabIndex = 25
@@ -1198,7 +989,7 @@ Partial Class Payroll_Summary
         ' 
         Label16.AutoSize = True
         Label16.Font = New Font("Century Gothic", 11F)
-        Label16.Location = New Point(61, 278)
+        Label16.Location = New Point(63, 267)
         Label16.Name = "Label16"
         Label16.Size = New Size(124, 22)
         Label16.TabIndex = 19
@@ -1207,7 +998,7 @@ Partial Class Payroll_Summary
         ' txtGrossSalary
         ' 
         txtGrossSalary.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtGrossSalary.Location = New Point(191, 273)
+        txtGrossSalary.Location = New Point(193, 259)
         txtGrossSalary.Name = "txtGrossSalary"
         txtGrossSalary.Size = New Size(335, 30)
         txtGrossSalary.TabIndex = 10
@@ -1216,7 +1007,7 @@ Partial Class Payroll_Summary
         ' 
         dtpPaymentDate.CalendarFont = New Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         dtpPaymentDate.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        dtpPaymentDate.Location = New Point(190, 363)
+        dtpPaymentDate.Location = New Point(193, 331)
         dtpPaymentDate.Name = "dtpPaymentDate"
         dtpPaymentDate.Size = New Size(335, 30)
         dtpPaymentDate.TabIndex = 93
@@ -1226,10 +1017,10 @@ Partial Class Payroll_Summary
         GroupBox4.Controls.Add(txtSearchPayroll)
         GroupBox4.Controls.Add(PictureBox1)
         GroupBox4.Controls.Add(dgvPayrollSummary)
-        GroupBox4.Font = New Font("Century Gothic", 13F, FontStyle.Bold)
-        GroupBox4.Location = New Point(410, 694)
+        GroupBox4.Font = New Font("Century Gothic", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        GroupBox4.Location = New Point(410, 615)
         GroupBox4.Name = "GroupBox4"
-        GroupBox4.Size = New Size(1335, 511)
+        GroupBox4.Size = New Size(1335, 510)
         GroupBox4.TabIndex = 94
         GroupBox4.TabStop = False
         GroupBox4.Text = "Salary"
@@ -1237,7 +1028,7 @@ Partial Class Payroll_Summary
         ' txtSearchPayroll
         ' 
         txtSearchPayroll.Font = New Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtSearchPayroll.Location = New Point(67, 57)
+        txtSearchPayroll.Location = New Point(67, 47)
         txtSearchPayroll.Margin = New Padding(4, 3, 4, 3)
         txtSearchPayroll.Name = "txtSearchPayroll"
         txtSearchPayroll.Size = New Size(256, 32)
@@ -1247,7 +1038,7 @@ Partial Class Payroll_Summary
         ' 
         PictureBox1.BackgroundImage = CType(resources.GetObject("PictureBox1.BackgroundImage"), Image)
         PictureBox1.BackgroundImageLayout = ImageLayout.Zoom
-        PictureBox1.Location = New Point(0, 41)
+        PictureBox1.Location = New Point(0, 31)
         PictureBox1.Name = "PictureBox1"
         PictureBox1.Size = New Size(77, 48)
         PictureBox1.TabIndex = 103
@@ -1255,12 +1046,32 @@ Partial Class Payroll_Summary
         ' 
         ' dgvPayrollSummary
         ' 
+        dgvPayrollSummary.AllowUserToResizeColumns = False
+        dgvPayrollSummary.AllowUserToResizeRows = False
+        dgvPayrollSummary.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         dgvPayrollSummary.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        dgvPayrollSummary.Location = New Point(19, 95)
+        dgvPayrollSummary.Location = New Point(19, 85)
         dgvPayrollSummary.Name = "dgvPayrollSummary"
         dgvPayrollSummary.RowHeadersWidth = 51
-        dgvPayrollSummary.Size = New Size(1294, 294)
+        dgvPayrollSummary.Size = New Size(1294, 382)
         dgvPayrollSummary.TabIndex = 0
+        ' 
+        ' btnSendToATM
+        ' 
+        btnSendToATM.BackColor = SystemColors.InactiveCaption
+        btnSendToATM.Font = New Font("Century Gothic", 11F, FontStyle.Bold)
+        btnSendToATM.IconChar = FontAwesome.Sharp.IconChar.CreditCard
+        btnSendToATM.IconColor = Color.Black
+        btnSendToATM.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSendToATM.IconSize = 30
+        btnSendToATM.ImageAlign = ContentAlignment.MiddleLeft
+        btnSendToATM.Location = New Point(1142, 443)
+        btnSendToATM.Name = "btnSendToATM"
+        btnSendToATM.Size = New Size(171, 44)
+        btnSendToATM.TabIndex = 119
+        btnSendToATM.Text = "Send To ATM"
+        btnSendToATM.TextAlign = ContentAlignment.MiddleRight
+        btnSendToATM.UseVisualStyleBackColor = False
         ' 
         ' Payroll_Summary
         ' 
@@ -1331,10 +1142,8 @@ Partial Class Payroll_Summary
     Friend WithEvents TextBox7 As TextBox
     Friend WithEvents txtUnpaidLeave As TextBox
     Friend WithEvents txtAttendanceID As TextBox
-    Friend WithEvents Label20 As Label
-    Friend WithEvents dtpDateApplied As DateTimePicker
     Friend WithEvents Label10 As Label
-    Friend WithEvents txtAbscences As TextBox
+    Friend WithEvents txtAbsences As TextBox
     Friend WithEvents Label9 As Label
     Friend WithEvents txtDeductionID As TextBox
     Friend WithEvents Label23 As Label
@@ -1350,15 +1159,11 @@ Partial Class Payroll_Summary
     Friend WithEvents Label16 As Label
     Friend WithEvents txtGrossSalary As TextBox
     Friend WithEvents dtpPaymentDate As DateTimePicker
-    Friend WithEvents txtSalaryID As TextBox
-    Friend WithEvents Label12 As Label
     Friend WithEvents txtAllowance As TextBox
     Friend WithEvents Label11 As Label
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents txtOvertimePay As TextBox
     Friend WithEvents Label25 As Label
-    Friend WithEvents Label24 As Label
-    Friend WithEvents txtJobID As TextBox
     Friend WithEvents txtPayrollID As TextBox
     Friend WithEvents Label28 As Label
     Friend WithEvents txtBasicSalary As TextBox
@@ -1382,18 +1187,13 @@ Partial Class Payroll_Summary
     Friend WithEvents btnSavePayroll As FontAwesome.Sharp.IconButton
     Friend WithEvents btnCancelPayroll As FontAwesome.Sharp.IconButton
     Friend WithEvents btnDeletePayroll As FontAwesome.Sharp.IconButton
-    Friend WithEvents btnComputeDeduction As FontAwesome.Sharp.IconButton
-    Friend WithEvents btnCancelDeduction As FontAwesome.Sharp.IconButton
-    Friend WithEvents btnSaveDeduction As FontAwesome.Sharp.IconButton
-    Friend WithEvents btnEditDeduction As FontAwesome.Sharp.IconButton
-    Friend WithEvents btnDeleteDeduction As FontAwesome.Sharp.IconButton
-    Friend WithEvents btnAddDeduction As FontAwesome.Sharp.IconButton
-    Friend WithEvents btnSaveSalary As FontAwesome.Sharp.IconButton
-    Friend WithEvents btnDeleteSalary As FontAwesome.Sharp.IconButton
-    Friend WithEvents btnEditSalary As FontAwesome.Sharp.IconButton
-    Friend WithEvents btnAddSalary As FontAwesome.Sharp.IconButton
-    Friend WithEvents btnCancelSalary As FontAwesome.Sharp.IconButton
     Friend WithEvents btnAddPayroll As FontAwesome.Sharp.IconButton
     Friend WithEvents btnSignOut As FontAwesome.Sharp.IconButton
+    Friend WithEvents Label18 As Label
+    Friend WithEvents txtDaysAttended As TextBox
+    Friend WithEvents Label12 As Label
+    Friend WithEvents txtExceededHours As TextBox
+    Friend WithEvents txtTotalHours As TextBox
+    Friend WithEvents btnSendToATM As FontAwesome.Sharp.IconButton
 
 End Class

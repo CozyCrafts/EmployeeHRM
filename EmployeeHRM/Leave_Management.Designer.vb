@@ -22,7 +22,6 @@ Partial Class Leave_Management
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Leave_Management))
         Panel1 = New Panel()
         lblAmenities = New Label()
         lblTrainings = New Label()
@@ -43,19 +42,19 @@ Partial Class Leave_Management
         lblDashboard = New Label()
         Label51 = New Label()
         adminheader_pnl = New Panel()
-        pcbTerminate = New PictureBox()
+        btnSignOut = New FontAwesome.Sharp.IconButton()
         Label2 = New Label()
         gbLeaveHistory = New GroupBox()
-        btnRefreshLeave = New Button()
-        txtSearchLeave = New TextBox()
-        btnSearchLeave = New Button()
         dgvLeaveHistory = New DataGridView()
+        btnApplyforLeave = New FontAwesome.Sharp.IconButton()
         gbLeaveDetails = New GroupBox()
+        btnSaveLeave = New FontAwesome.Sharp.IconButton()
+        btnCancelLeave = New FontAwesome.Sharp.IconButton()
         gbLeaveDuration = New GroupBox()
         Label13 = New Label()
-        DateTimePicker2 = New DateTimePicker()
+        dtpDurationDateTo = New DateTimePicker()
         Label14 = New Label()
-        DateTimePicker1 = New DateTimePicker()
+        dtpDurationDateFrom = New DateTimePicker()
         Label10 = New Label()
         txtStatusLeave = New TextBox()
         Label9 = New Label()
@@ -71,13 +70,8 @@ Partial Class Leave_Management
         Label21 = New Label()
         Label1 = New Label()
         Label5 = New Label()
-        btnApplyforLeave = New Button()
-        btnSubmitLeave = New Button()
-        btnResetLeave = New Button()
-        btnDeleteLeaveRequest = New Button()
         Panel1.SuspendLayout()
         adminheader_pnl.SuspendLayout()
-        CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
         gbLeaveHistory.SuspendLayout()
         CType(dgvLeaveHistory, ComponentModel.ISupportInitialize).BeginInit()
         gbLeaveDetails.SuspendLayout()
@@ -311,22 +305,28 @@ Partial Class Leave_Management
         ' adminheader_pnl
         ' 
         adminheader_pnl.BackColor = Color.White
-        adminheader_pnl.Controls.Add(pcbTerminate)
+        adminheader_pnl.Controls.Add(btnSignOut)
         adminheader_pnl.Controls.Add(Label2)
         adminheader_pnl.Location = New Point(338, -17)
         adminheader_pnl.Name = "adminheader_pnl"
         adminheader_pnl.Size = New Size(1608, 107)
         adminheader_pnl.TabIndex = 3
         ' 
-        ' pcbTerminate
+        ' btnSignOut
         ' 
-        pcbTerminate.Image = CType(resources.GetObject("pcbTerminate.Image"), Image)
-        pcbTerminate.Location = New Point(1352, 45)
-        pcbTerminate.Name = "pcbTerminate"
-        pcbTerminate.Size = New Size(55, 54)
-        pcbTerminate.SizeMode = PictureBoxSizeMode.StretchImage
-        pcbTerminate.TabIndex = 1
-        pcbTerminate.TabStop = False
+        btnSignOut.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnSignOut.IconChar = FontAwesome.Sharp.IconChar.SignOut
+        btnSignOut.IconColor = Color.Black
+        btnSignOut.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSignOut.IconSize = 38
+        btnSignOut.ImageAlign = ContentAlignment.MiddleLeft
+        btnSignOut.Location = New Point(1265, 40)
+        btnSignOut.Name = "btnSignOut"
+        btnSignOut.Size = New Size(142, 54)
+        btnSignOut.TabIndex = 38
+        btnSignOut.Text = "Sign Out"
+        btnSignOut.TextAlign = ContentAlignment.MiddleRight
+        btnSignOut.UseVisualStyleBackColor = True
         ' 
         ' Label2
         ' 
@@ -340,9 +340,6 @@ Partial Class Leave_Management
         ' 
         ' gbLeaveHistory
         ' 
-        gbLeaveHistory.Controls.Add(btnRefreshLeave)
-        gbLeaveHistory.Controls.Add(txtSearchLeave)
-        gbLeaveHistory.Controls.Add(btnSearchLeave)
         gbLeaveHistory.Controls.Add(dgvLeaveHistory)
         gbLeaveHistory.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
         gbLeaveHistory.Location = New Point(372, 549)
@@ -354,56 +351,41 @@ Partial Class Leave_Management
         gbLeaveHistory.TabStop = False
         gbLeaveHistory.Text = " Leave History"
         ' 
-        ' btnRefreshLeave
-        ' 
-        btnRefreshLeave.BackColor = SystemColors.InactiveCaption
-        btnRefreshLeave.BackgroundImageLayout = ImageLayout.None
-        btnRefreshLeave.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnRefreshLeave.ForeColor = Color.Black
-        btnRefreshLeave.Location = New Point(1187, 40)
-        btnRefreshLeave.Name = "btnRefreshLeave"
-        btnRefreshLeave.Size = New Size(167, 46)
-        btnRefreshLeave.TabIndex = 94
-        btnRefreshLeave.Text = "Refresh Data"
-        btnRefreshLeave.UseVisualStyleBackColor = False
-        ' 
-        ' txtSearchLeave
-        ' 
-        txtSearchLeave.Font = New Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtSearchLeave.Location = New Point(202, 61)
-        txtSearchLeave.Margin = New Padding(4, 3, 4, 3)
-        txtSearchLeave.Name = "txtSearchLeave"
-        txtSearchLeave.Size = New Size(256, 32)
-        txtSearchLeave.TabIndex = 93
-        ' 
-        ' btnSearchLeave
-        ' 
-        btnSearchLeave.BackColor = SystemColors.InactiveCaption
-        btnSearchLeave.BackgroundImageLayout = ImageLayout.None
-        btnSearchLeave.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnSearchLeave.ForeColor = Color.Black
-        btnSearchLeave.Location = New Point(28, 53)
-        btnSearchLeave.Name = "btnSearchLeave"
-        btnSearchLeave.Size = New Size(167, 46)
-        btnSearchLeave.TabIndex = 92
-        btnSearchLeave.Text = "Search"
-        btnSearchLeave.UseVisualStyleBackColor = False
-        ' 
         ' dgvLeaveHistory
         ' 
+        dgvLeaveHistory.AllowUserToResizeColumns = False
+        dgvLeaveHistory.AllowUserToResizeRows = False
+        dgvLeaveHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         dgvLeaveHistory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        dgvLeaveHistory.Location = New Point(28, 105)
+        dgvLeaveHistory.Location = New Point(28, 59)
         dgvLeaveHistory.Margin = New Padding(4, 3, 4, 3)
         dgvLeaveHistory.Name = "dgvLeaveHistory"
         dgvLeaveHistory.RowHeadersWidth = 51
-        dgvLeaveHistory.Size = New Size(1326, 320)
+        dgvLeaveHistory.Size = New Size(1326, 366)
         dgvLeaveHistory.TabIndex = 0
+        ' 
+        ' btnApplyforLeave
+        ' 
+        btnApplyforLeave.BackColor = SystemColors.InactiveCaption
+        btnApplyforLeave.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
+        btnApplyforLeave.IconChar = FontAwesome.Sharp.IconChar.CalendarDays
+        btnApplyforLeave.IconColor = Color.Black
+        btnApplyforLeave.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnApplyforLeave.IconSize = 30
+        btnApplyforLeave.ImageAlign = ContentAlignment.MiddleLeft
+        btnApplyforLeave.Location = New Point(937, 236)
+        btnApplyforLeave.Name = "btnApplyforLeave"
+        btnApplyforLeave.Size = New Size(323, 77)
+        btnApplyforLeave.TabIndex = 94
+        btnApplyforLeave.Text = "Apply for Leave"
+        btnApplyforLeave.TextAlign = ContentAlignment.MiddleRight
+        btnApplyforLeave.UseVisualStyleBackColor = False
         ' 
         ' gbLeaveDetails
         ' 
-        gbLeaveDetails.Controls.Add(btnDeleteLeaveRequest)
         gbLeaveDetails.Controls.Add(btnApplyforLeave)
-        gbLeaveDetails.Controls.Add(btnSubmitLeave)
+        gbLeaveDetails.Controls.Add(btnSaveLeave)
+        gbLeaveDetails.Controls.Add(btnCancelLeave)
         gbLeaveDetails.Controls.Add(gbLeaveDuration)
         gbLeaveDetails.Controls.Add(Label10)
         gbLeaveDetails.Controls.Add(txtStatusLeave)
@@ -420,7 +402,6 @@ Partial Class Leave_Management
         gbLeaveDetails.Controls.Add(Label21)
         gbLeaveDetails.Controls.Add(Label1)
         gbLeaveDetails.Controls.Add(Label5)
-        gbLeaveDetails.Controls.Add(btnResetLeave)
         gbLeaveDetails.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
         gbLeaveDetails.Location = New Point(375, 156)
         gbLeaveDetails.Margin = New Padding(4, 3, 4, 3)
@@ -431,12 +412,46 @@ Partial Class Leave_Management
         gbLeaveDetails.TabStop = False
         gbLeaveDetails.Text = "Details"
         ' 
+        ' btnSaveLeave
+        ' 
+        btnSaveLeave.BackColor = SystemColors.InactiveCaption
+        btnSaveLeave.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnSaveLeave.IconChar = FontAwesome.Sharp.IconChar.Save
+        btnSaveLeave.IconColor = Color.Black
+        btnSaveLeave.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSaveLeave.IconSize = 35
+        btnSaveLeave.ImageAlign = ContentAlignment.MiddleLeft
+        btnSaveLeave.Location = New Point(937, 237)
+        btnSaveLeave.Name = "btnSaveLeave"
+        btnSaveLeave.Size = New Size(153, 74)
+        btnSaveLeave.TabIndex = 112
+        btnSaveLeave.Text = "Save"
+        btnSaveLeave.TextAlign = ContentAlignment.MiddleRight
+        btnSaveLeave.UseVisualStyleBackColor = False
+        ' 
+        ' btnCancelLeave
+        ' 
+        btnCancelLeave.BackColor = SystemColors.InactiveCaption
+        btnCancelLeave.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnCancelLeave.IconChar = FontAwesome.Sharp.IconChar.Cancel
+        btnCancelLeave.IconColor = Color.Black
+        btnCancelLeave.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnCancelLeave.IconSize = 35
+        btnCancelLeave.ImageAlign = ContentAlignment.MiddleLeft
+        btnCancelLeave.Location = New Point(1096, 238)
+        btnCancelLeave.Name = "btnCancelLeave"
+        btnCancelLeave.Size = New Size(153, 72)
+        btnCancelLeave.TabIndex = 113
+        btnCancelLeave.Text = "Cancel"
+        btnCancelLeave.TextAlign = ContentAlignment.MiddleRight
+        btnCancelLeave.UseVisualStyleBackColor = False
+        ' 
         ' gbLeaveDuration
         ' 
         gbLeaveDuration.Controls.Add(Label13)
-        gbLeaveDuration.Controls.Add(DateTimePicker2)
+        gbLeaveDuration.Controls.Add(dtpDurationDateTo)
         gbLeaveDuration.Controls.Add(Label14)
-        gbLeaveDuration.Controls.Add(DateTimePicker1)
+        gbLeaveDuration.Controls.Add(dtpDurationDateFrom)
         gbLeaveDuration.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
         gbLeaveDuration.Location = New Point(729, 35)
         gbLeaveDuration.Margin = New Padding(4, 3, 4, 3)
@@ -459,13 +474,13 @@ Partial Class Leave_Management
         Label13.TabIndex = 95
         Label13.Text = "Date From:"
         ' 
-        ' DateTimePicker2
+        ' dtpDurationDateTo
         ' 
-        DateTimePicker2.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        DateTimePicker2.Location = New Point(176, 108)
-        DateTimePicker2.Name = "DateTimePicker2"
-        DateTimePicker2.Size = New Size(364, 32)
-        DateTimePicker2.TabIndex = 98
+        dtpDurationDateTo.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
+        dtpDurationDateTo.Location = New Point(176, 108)
+        dtpDurationDateTo.Name = "dtpDurationDateTo"
+        dtpDurationDateTo.Size = New Size(364, 32)
+        dtpDurationDateTo.TabIndex = 98
         ' 
         ' Label14
         ' 
@@ -479,13 +494,13 @@ Partial Class Leave_Management
         Label14.TabIndex = 96
         Label14.Text = "Date To:"
         ' 
-        ' DateTimePicker1
+        ' dtpDurationDateFrom
         ' 
-        DateTimePicker1.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        DateTimePicker1.Location = New Point(176, 57)
-        DateTimePicker1.Name = "DateTimePicker1"
-        DateTimePicker1.Size = New Size(364, 32)
-        DateTimePicker1.TabIndex = 97
+        dtpDurationDateFrom.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
+        dtpDurationDateFrom.Location = New Point(176, 57)
+        dtpDurationDateFrom.Name = "dtpDurationDateFrom"
+        dtpDurationDateFrom.Size = New Size(364, 32)
+        dtpDurationDateFrom.TabIndex = 97
         ' 
         ' Label10
         ' 
@@ -638,58 +653,6 @@ Partial Class Leave_Management
         Label5.TabIndex = 74
         Label5.Text = "Approved By:"
         ' 
-        ' btnApplyforLeave
-        ' 
-        btnApplyforLeave.BackColor = SystemColors.InactiveCaption
-        btnApplyforLeave.BackgroundImageLayout = ImageLayout.None
-        btnApplyforLeave.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnApplyforLeave.ForeColor = Color.Black
-        btnApplyforLeave.Location = New Point(869, 223)
-        btnApplyforLeave.Name = "btnApplyforLeave"
-        btnApplyforLeave.Size = New Size(342, 46)
-        btnApplyforLeave.TabIndex = 100
-        btnApplyforLeave.Text = "Apply for Leave"
-        btnApplyforLeave.UseVisualStyleBackColor = False
-        ' 
-        ' btnSubmitLeave
-        ' 
-        btnSubmitLeave.BackColor = SystemColors.InactiveCaption
-        btnSubmitLeave.BackgroundImageLayout = ImageLayout.None
-        btnSubmitLeave.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnSubmitLeave.ForeColor = Color.Black
-        btnSubmitLeave.Location = New Point(871, 223)
-        btnSubmitLeave.Name = "btnSubmitLeave"
-        btnSubmitLeave.Size = New Size(167, 46)
-        btnSubmitLeave.TabIndex = 101
-        btnSubmitLeave.Text = "Submit"
-        btnSubmitLeave.UseVisualStyleBackColor = False
-        ' 
-        ' btnResetLeave
-        ' 
-        btnResetLeave.BackColor = SystemColors.InactiveCaption
-        btnResetLeave.BackgroundImageLayout = ImageLayout.None
-        btnResetLeave.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnResetLeave.ForeColor = Color.Black
-        btnResetLeave.Location = New Point(1044, 223)
-        btnResetLeave.Name = "btnResetLeave"
-        btnResetLeave.Size = New Size(167, 46)
-        btnResetLeave.TabIndex = 102
-        btnResetLeave.Text = "Reset"
-        btnResetLeave.UseVisualStyleBackColor = False
-        ' 
-        ' btnDeleteLeaveRequest
-        ' 
-        btnDeleteLeaveRequest.BackColor = SystemColors.InactiveCaption
-        btnDeleteLeaveRequest.BackgroundImageLayout = ImageLayout.None
-        btnDeleteLeaveRequest.Font = New Font("Century Gothic", 10.2F, FontStyle.Bold)
-        btnDeleteLeaveRequest.ForeColor = Color.Black
-        btnDeleteLeaveRequest.Location = New Point(869, 275)
-        btnDeleteLeaveRequest.Name = "btnDeleteLeaveRequest"
-        btnDeleteLeaveRequest.Size = New Size(342, 46)
-        btnDeleteLeaveRequest.TabIndex = 103
-        btnDeleteLeaveRequest.Text = "Delete Request"
-        btnDeleteLeaveRequest.UseVisualStyleBackColor = False
-        ' 
         ' Leave_Management
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
@@ -709,9 +672,7 @@ Partial Class Leave_Management
         Panel1.PerformLayout()
         adminheader_pnl.ResumeLayout(False)
         adminheader_pnl.PerformLayout()
-        CType(pcbTerminate, ComponentModel.ISupportInitialize).EndInit()
         gbLeaveHistory.ResumeLayout(False)
-        gbLeaveHistory.PerformLayout()
         CType(dgvLeaveHistory, ComponentModel.ISupportInitialize).EndInit()
         gbLeaveDetails.ResumeLayout(False)
         gbLeaveDetails.PerformLayout()
@@ -722,7 +683,6 @@ Partial Class Leave_Management
 
     Friend WithEvents Panel1 As Panel
     Friend WithEvents adminheader_pnl As Panel
-    Friend WithEvents pcbTerminate As PictureBox
     Friend WithEvents Label2 As Label
     Friend WithEvents Label26 As Label
     Friend WithEvents Label27 As Label
@@ -743,16 +703,13 @@ Partial Class Leave_Management
     Friend WithEvents lblSalary As Label
     Friend WithEvents Label49 As Label
     Friend WithEvents gbLeaveHistory As GroupBox
-    Friend WithEvents btnRefreshLeave As Button
-    Friend WithEvents txtSearchLeave As TextBox
-    Friend WithEvents btnSearchLeave As Button
     Friend WithEvents dgvLeaveHistory As DataGridView
     Friend WithEvents gbLeaveDetails As GroupBox
     Friend WithEvents gbLeaveDuration As GroupBox
     Friend WithEvents Label13 As Label
-    Friend WithEvents DateTimePicker2 As DateTimePicker
+    Friend WithEvents dtpDurationDateTo As DateTimePicker
     Friend WithEvents Label14 As Label
-    Friend WithEvents DateTimePicker1 As DateTimePicker
+    Friend WithEvents dtpDurationDateFrom As DateTimePicker
     Friend WithEvents Label10 As Label
     Friend WithEvents txtStatusLeave As TextBox
     Friend WithEvents Label9 As Label
@@ -768,8 +725,8 @@ Partial Class Leave_Management
     Friend WithEvents Label21 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents btnApplyforLeave As Button
-    Friend WithEvents btnResetLeave As Button
-    Friend WithEvents btnSubmitLeave As Button
-    Friend WithEvents btnDeleteLeaveRequest As Button
+    Friend WithEvents btnApplyforLeave As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnSignOut As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnCancelLeave As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnSaveLeave As FontAwesome.Sharp.IconButton
 End Class

@@ -61,12 +61,8 @@ Partial Class Department
         txtDepartmentName = New TextBox()
         btnSaveDepartment = New FontAwesome.Sharp.IconButton()
         Label9 = New Label()
-        txtEmployeeName = New TextBox()
-        Label11 = New Label()
         Label10 = New Label()
         txtDepartmentID = New TextBox()
-        txtEmployeeID = New TextBox()
-        Label21 = New Label()
         Label1 = New Label()
         Panel1.SuspendLayout()
         adminheader_pnl.SuspendLayout()
@@ -417,12 +413,8 @@ Partial Class Department
         gbDepartmentDetails.Controls.Add(txtDepartmentName)
         gbDepartmentDetails.Controls.Add(btnSaveDepartment)
         gbDepartmentDetails.Controls.Add(Label9)
-        gbDepartmentDetails.Controls.Add(txtEmployeeName)
-        gbDepartmentDetails.Controls.Add(Label11)
         gbDepartmentDetails.Controls.Add(Label10)
         gbDepartmentDetails.Controls.Add(txtDepartmentID)
-        gbDepartmentDetails.Controls.Add(txtEmployeeID)
-        gbDepartmentDetails.Controls.Add(Label21)
         gbDepartmentDetails.Controls.Add(Label1)
         gbDepartmentDetails.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
         gbDepartmentDetails.Location = New Point(410, 146)
@@ -504,7 +496,7 @@ Partial Class Department
         ' 
         ' txtDepartmentDescription
         ' 
-        txtDepartmentDescription.Location = New Point(211, 185)
+        txtDepartmentDescription.Location = New Point(227, 158)
         txtDepartmentDescription.Margin = New Padding(4, 3, 4, 3)
         txtDepartmentDescription.Multiline = True
         txtDepartmentDescription.Name = "txtDepartmentDescription"
@@ -513,7 +505,7 @@ Partial Class Department
         ' 
         ' txtDepartmentName
         ' 
-        txtDepartmentName.Location = New Point(709, 127)
+        txtDepartmentName.Location = New Point(725, 100)
         txtDepartmentName.Margin = New Padding(4, 3, 4, 3)
         txtDepartmentName.Name = "txtDepartmentName"
         txtDepartmentName.Size = New Size(282, 36)
@@ -541,39 +533,19 @@ Partial Class Department
         Label9.AutoSize = True
         Label9.Font = New Font("Century Gothic", 13F)
         Label9.ForeColor = Color.Black
-        Label9.Location = New Point(478, 138)
+        Label9.Location = New Point(494, 111)
         Label9.Margin = New Padding(4, 0, 4, 0)
         Label9.Name = "Label9"
         Label9.Size = New Size(223, 25)
         Label9.TabIndex = 105
         Label9.Text = "Department Name:"
         ' 
-        ' txtEmployeeName
-        ' 
-        txtEmployeeName.Location = New Point(707, 76)
-        txtEmployeeName.Margin = New Padding(4, 3, 4, 3)
-        txtEmployeeName.Name = "txtEmployeeName"
-        txtEmployeeName.Size = New Size(282, 36)
-        txtEmployeeName.TabIndex = 86
-        ' 
-        ' Label11
-        ' 
-        Label11.AutoSize = True
-        Label11.Font = New Font("Century Gothic", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label11.ForeColor = Color.Black
-        Label11.Location = New Point(491, 85)
-        Label11.Margin = New Padding(4, 0, 4, 0)
-        Label11.Name = "Label11"
-        Label11.Size = New Size(208, 27)
-        Label11.TabIndex = 87
-        Label11.Text = "Employee Name:"
-        ' 
         ' Label10
         ' 
         Label10.AutoSize = True
         Label10.Font = New Font("Century Gothic", 13F)
         Label10.ForeColor = Color.Black
-        Label10.Location = New Point(70, 189)
+        Label10.Location = New Point(86, 162)
         Label10.Margin = New Padding(4, 0, 4, 0)
         Label10.Name = "Label10"
         Label10.Size = New Size(136, 25)
@@ -582,38 +554,18 @@ Partial Class Department
         ' 
         ' txtDepartmentID
         ' 
-        txtDepartmentID.Location = New Point(214, 127)
+        txtDepartmentID.Location = New Point(230, 100)
         txtDepartmentID.Margin = New Padding(4, 3, 4, 3)
         txtDepartmentID.Name = "txtDepartmentID"
         txtDepartmentID.Size = New Size(256, 36)
         txtDepartmentID.TabIndex = 72
-        ' 
-        ' txtEmployeeID
-        ' 
-        txtEmployeeID.Location = New Point(214, 76)
-        txtEmployeeID.Margin = New Padding(4, 3, 4, 3)
-        txtEmployeeID.Name = "txtEmployeeID"
-        txtEmployeeID.Size = New Size(256, 36)
-        txtEmployeeID.TabIndex = 23
-        ' 
-        ' Label21
-        ' 
-        Label21.AutoSize = True
-        Label21.Font = New Font("Century Gothic", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label21.ForeColor = Color.Black
-        Label21.Location = New Point(45, 85)
-        Label21.Margin = New Padding(4, 0, 4, 0)
-        Label21.Name = "Label21"
-        Label21.Size = New Size(161, 27)
-        Label21.TabIndex = 70
-        Label21.Text = "Employee ID:"
         ' 
         ' Label1
         ' 
         Label1.AutoSize = True
         Label1.Font = New Font("Century Gothic", 13F)
         Label1.ForeColor = Color.Black
-        Label1.Location = New Point(28, 138)
+        Label1.Location = New Point(44, 111)
         Label1.Margin = New Padding(4, 0, 4, 0)
         Label1.Name = "Label1"
         Label1.Size = New Size(178, 25)
@@ -675,12 +627,8 @@ Partial Class Department
     Friend WithEvents btnRefreshDepartment As Button
     Friend WithEvents txtDepartmentName As TextBox
     Friend WithEvents Label9 As Label
-    Friend WithEvents txtEmployeeName As TextBox
-    Friend WithEvents Label11 As Label
     Friend WithEvents Label10 As Label
     Friend WithEvents txtDepartmentID As TextBox
-    Friend WithEvents txtEmployeeID As TextBox
-    Friend WithEvents Label21 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents txtDepartmentDescription As TextBox
     Friend WithEvents txtSearchDepartment As TextBox

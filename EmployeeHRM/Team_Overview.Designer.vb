@@ -44,7 +44,6 @@ Partial Class Team_Overview
         lblMain = New Label()
         adminheader_pnl = New Panel()
         btnSignOut = New FontAwesome.Sharp.IconButton()
-        pcbTerminate = New PictureBox()
         Label2 = New Label()
         btnCancelEmployee = New Button()
         btnSaveEmployee = New Button()
@@ -62,7 +61,6 @@ Partial Class Team_Overview
         Label10 = New Label()
         cbCivilStatus = New ComboBox()
         cbSex = New ComboBox()
-        IconButton1 = New FontAwesome.Sharp.IconButton()
         txtSearchEmployee = New TextBox()
         PictureBox1 = New PictureBox()
         dgvOtherInfo = New DataGridView()
@@ -117,7 +115,6 @@ Partial Class Team_Overview
         btnDeleteEmployee = New FontAwesome.Sharp.IconButton()
         Panel1.SuspendLayout()
         adminheader_pnl.SuspendLayout()
-        CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox4.SuspendLayout()
         GroupBox1.SuspendLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
@@ -354,7 +351,6 @@ Partial Class Team_Overview
         ' 
         adminheader_pnl.BackColor = Color.White
         adminheader_pnl.Controls.Add(btnSignOut)
-        adminheader_pnl.Controls.Add(pcbTerminate)
         adminheader_pnl.Controls.Add(Label2)
         adminheader_pnl.Location = New Point(338, -17)
         adminheader_pnl.Name = "adminheader_pnl"
@@ -369,23 +365,13 @@ Partial Class Team_Overview
         btnSignOut.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnSignOut.IconSize = 38
         btnSignOut.ImageAlign = ContentAlignment.MiddleLeft
-        btnSignOut.Location = New Point(1204, 45)
+        btnSignOut.Location = New Point(1265, 46)
         btnSignOut.Name = "btnSignOut"
         btnSignOut.Size = New Size(142, 54)
         btnSignOut.TabIndex = 37
         btnSignOut.Text = "Sign Out"
         btnSignOut.TextAlign = ContentAlignment.MiddleRight
         btnSignOut.UseVisualStyleBackColor = True
-        ' 
-        ' pcbTerminate
-        ' 
-        pcbTerminate.Image = CType(resources.GetObject("pcbTerminate.Image"), Image)
-        pcbTerminate.Location = New Point(1352, 45)
-        pcbTerminate.Name = "pcbTerminate"
-        pcbTerminate.Size = New Size(55, 54)
-        pcbTerminate.SizeMode = PictureBoxSizeMode.StretchImage
-        pcbTerminate.TabIndex = 81
-        pcbTerminate.TabStop = False
         ' 
         ' Label2
         ' 
@@ -463,7 +449,6 @@ Partial Class Team_Overview
         GroupBox4.Controls.Add(GroupBox1)
         GroupBox4.Controls.Add(cbCivilStatus)
         GroupBox4.Controls.Add(cbSex)
-        GroupBox4.Controls.Add(IconButton1)
         GroupBox4.Controls.Add(txtSearchEmployee)
         GroupBox4.Controls.Add(PictureBox1)
         GroupBox4.Controls.Add(dgvOtherInfo)
@@ -610,19 +595,6 @@ Partial Class Team_Overview
         cbSex.Size = New Size(291, 31)
         cbSex.TabIndex = 105
         ' 
-        ' IconButton1
-        ' 
-        IconButton1.BackColor = SystemColors.Control
-        IconButton1.IconChar = FontAwesome.Sharp.IconChar.Refresh
-        IconButton1.IconColor = Color.Black
-        IconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto
-        IconButton1.IconSize = 38
-        IconButton1.Location = New Point(328, 39)
-        IconButton1.Name = "IconButton1"
-        IconButton1.Size = New Size(79, 40)
-        IconButton1.TabIndex = 103
-        IconButton1.UseVisualStyleBackColor = False
-        ' 
         ' txtSearchEmployee
         ' 
         txtSearchEmployee.Font = New Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
@@ -644,6 +616,8 @@ Partial Class Team_Overview
         ' 
         ' dgvOtherInfo
         ' 
+        dgvOtherInfo.AllowUserToResizeColumns = False
+        dgvOtherInfo.AllowUserToResizeRows = False
         dgvOtherInfo.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         dgvOtherInfo.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
         dgvOtherInfo.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
@@ -1168,7 +1142,6 @@ Partial Class Team_Overview
         Panel1.PerformLayout()
         adminheader_pnl.ResumeLayout(False)
         adminheader_pnl.PerformLayout()
-        CType(pcbTerminate, ComponentModel.ISupportInitialize).EndInit()
         GroupBox4.ResumeLayout(False)
         GroupBox4.PerformLayout()
         GroupBox1.ResumeLayout(False)
@@ -1189,7 +1162,6 @@ Partial Class Team_Overview
     Friend WithEvents btnSaveEmployee As Button
     Friend WithEvents btnAddEmployee As FontAwesome.Sharp.IconButton
     Friend WithEvents btnEditEmployee As FontAwesome.Sharp.IconButton
-    Friend WithEvents pcbTerminate As PictureBox
     Friend WithEvents lblAmenities As Label
     Friend WithEvents lblTrainings As Label
     Friend WithEvents lblLeaveApproval As Label
@@ -1242,7 +1214,6 @@ Partial Class Team_Overview
     Friend WithEvents txtECName As TextBox
     Friend WithEvents txtSearchEmployee As TextBox
     Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents IconButton1 As FontAwesome.Sharp.IconButton
     Friend WithEvents btnDeleteEmployee As FontAwesome.Sharp.IconButton
     Friend WithEvents dgvOtherInfo As DataGridView
     Friend WithEvents btnSignOut As FontAwesome.Sharp.IconButton

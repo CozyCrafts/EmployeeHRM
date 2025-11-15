@@ -3,6 +3,9 @@
 Public Class Department
     Private conn As MySqlConnection
     Private connectionString As String = "server=localhost;userid=root;password=091951;database=db_hrm"
+    Private isAdding As Boolean = False
+    Private originalValues As New Dictionary(Of String, String)
+
     Private Sub Department_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             conn = New MySqlConnection(connectionString)
@@ -65,61 +68,25 @@ Public Class Department
     Private Sub dgvDepartmentRecords_SelectionChanged(sender As Object, e As EventArgs) Handles dgvDepartmentRecords.SelectionChanged
         If dgvDepartmentRecords.CurrentRow IsNot Nothing Then
             Dim row As DataGridViewRow = dgvDepartmentRecords.CurrentRow
-            txtEmployeeID.Text = If(row.Cells("EmployeeID").Value IsNot DBNull.Value, row.Cells("EmployeeID").Value.ToString(), "")
-            txtEmployeeName.Text = If(row.Cells("FullName").Value IsNot DBNull.Value, row.Cells("FullName").Value.ToString(), "")
             txtDepartmentID.Text = If(row.Cells("DepartmentID").Value IsNot DBNull.Value, row.Cells("DepartmentID").Value.ToString(), "")
             txtDepartmentName.Text = If(row.Cells("DepartmentName").Value IsNot DBNull.Value, row.Cells("DepartmentName").Value.ToString(), "")
             txtDepartmentDescription.Text = If(row.Cells("Description").Value IsNot DBNull.Value, row.Cells("Description").Value.ToString(), "")
+            originalValues("DepartmentName") = txtDepartmentName.Text
+            originalValues("Description") = txtDepartmentDescription.Text
+
         End If
         LockTextBoxes()
         SetRecordSelectedButtonState()
     End Sub
     Private Sub LockTextBoxes()
-        txtEmployeeID.ReadOnly = True
-        txtEmployeeName.ReadOnly = True
         txtDepartmentID.ReadOnly = True
         txtDepartmentName.ReadOnly = True
         txtDepartmentDescription.ReadOnly = True
     End Sub
     Private Sub UnlockTextBoxes()
-        txtEmployeeID.ReadOnly = True
-        txtEmployeeName.ReadOnly = True
         txtDepartmentID.ReadOnly = True
         txtDepartmentName.ReadOnly = False
         txtDepartmentDescription.ReadOnly = False
-    End Sub
-    Private Sub txtSearchDepartment_TextChanged(sender As Object, e As EventArgs) Handles txtSearchDepartment.TextChanged
-        Dim searchValue As String = txtSearchDepartment.Text.Trim()
-        dgvDepartmentRecords.ClearSelection()
-        If String.IsNullOrEmpty(searchValue) Then
-            LoadDepartments()
-            Return
-        End If
-        Dim searchParts() As String = searchValue.Split(" "c, StringSplitOptions.RemoveEmptyEntries)
-        For Each row As DataGridViewRow In dgvDepartmentRecords.Rows
-            If Not row.IsNewRow Then
-                Dim employeeID As String = row.Cells("EmployeeID").Value.ToString()
-                Dim fullName As String = row.Cells("FullName").Value.ToString()
-                Dim departmentID As String = row.Cells("DepartmentID").Value.ToString()
-                Dim departmentName As String = row.Cells("DepartmentName").Value.ToString()
-                Dim matchFound As Boolean = False
-                If employeeID.IndexOf(searchValue, StringComparison.OrdinalIgnoreCase) >= 0 OrElse
-               fullName.IndexOf(searchValue, StringComparison.OrdinalIgnoreCase) >= 0 OrElse
-               departmentID.IndexOf(searchValue, StringComparison.OrdinalIgnoreCase) >= 0 OrElse
-               departmentName.IndexOf(searchValue, StringComparison.OrdinalIgnoreCase) >= 0 Then
-                    matchFound = True
-                Else
-                    For Each part In searchParts
-                        If fullName.IndexOf(part, StringComparison.OrdinalIgnoreCase) >= 0 OrElse
-                       departmentName.IndexOf(part, StringComparison.OrdinalIgnoreCase) >= 0 Then
-                            matchFound = True
-                            Exit For
-                        End If
-                    Next
-                End If
-                row.Selected = matchFound
-            End If
-        Next
     End Sub
     Private Sub SetDefaultButtonState()
         btnAddDepartment.Visible = True
@@ -142,8 +109,6 @@ Public Class Department
         btnSaveDepartment.Visible = False
         btnCancelDepartment.Visible = False
     End Sub
-
-    Private isAdding As Boolean = False
     Private Sub btnDeleteDepartment_Click(sender As Object, e As EventArgs) Handles btnDeleteDepartment.Click
         If String.IsNullOrEmpty(txtDepartmentID.Text) Then
             MessageBox.Show("Please select a department to delete.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -177,8 +142,7 @@ Public Class Department
         txtDepartmentID.Text = GetNextDepartmentID()
         txtDepartmentName.Clear()
         txtDepartmentDescription.Clear()
-        txtEmployeeID.Clear()
-        txtEmployeeName.Clear()
+        dgvDepartmentRecords.Enabled = False
         UnlockTextBoxes()
         SetEditAddButtonState()
     End Sub
@@ -188,6 +152,7 @@ Public Class Department
             Return
         End If
         isAdding = False
+
         UnlockTextBoxes()
         SetEditAddButtonState()
     End Sub
@@ -202,7 +167,12 @@ Public Class Department
             txtDepartmentDescription.Focus()
             Return
         End If
-
+        If Not isAdding Then
+            If txtDepartmentName.Text = originalValues("DepartmentName") AndAlso txtDepartmentDescription.Text = originalValues("Description") Then
+                MessageBox.Show("No changes were made. Nothing to save.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Return
+            End If
+        End If
         If isAdding Then
             SaveNewDepartment()
         Else
@@ -274,8 +244,37 @@ Public Class Department
         End Try
         Return newID
     End Function
+    Private Sub txtSearchDepartment_TextChanged(sender As Object, e As EventArgs) Handles txtSearchDepartment.TextChanged
+        Dim searchValue As String = txtSearchDepartment.Text.Trim()
+        If String.IsNullOrEmpty(searchValue) Then
+            LoadDepartments()
+            Return
+        End If
+        Dim searchParts() As String = searchValue.Split(" "c, StringSplitOptions.RemoveEmptyEntries)
+
+        For Each row As DataGridViewRow In dgvDepartmentRecords.Rows
+            If Not row.IsNewRow Then
+                Dim departmentID As String = row.Cells("DepartmentID").Value.ToString()
+                Dim departmentName As String = row.Cells("DepartmentName").Value.ToString()
+                Dim matchFound As Boolean = False
+                If departmentID.IndexOf(searchValue, StringComparison.OrdinalIgnoreCase) >= 0 OrElse
+               departmentName.IndexOf(searchValue, StringComparison.OrdinalIgnoreCase) >= 0 Then
+                    matchFound = True
+                Else
+                    For Each part In searchParts
+                        If departmentID.IndexOf(part, StringComparison.OrdinalIgnoreCase) >= 0 OrElse
+                       departmentName.IndexOf(part, StringComparison.OrdinalIgnoreCase) >= 0 Then
+                            matchFound = True
+                            Exit For
+                        End If
+                    Next
+                End If
+                row.Visible = matchFound
+            End If
+        Next
+    End Sub
     Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
-        Manager_Dashboard.Show()
+        Employee_Dashboard.Show()
         Me.Hide()
     End Sub
     Private Sub lblMyProfile_Click(sender As Object, e As EventArgs) Handles lblMyProfile.Click

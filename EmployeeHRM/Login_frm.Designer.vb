@@ -28,12 +28,11 @@ Partial Class Login_frm
         Label2 = New Label()
         Label3 = New Label()
         Label1 = New Label()
-        txtUname = New TextBox()
-        txtPass = New TextBox()
+        txtUsername = New TextBox()
+        txtPassword = New TextBox()
         cmbRole = New ComboBox()
-        btnlogin = New Button()
-        btnEmployee = New Button()
-        btnManager = New Button()
+        btnLogIn = New Button()
+        btne = New Button()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -91,21 +90,21 @@ Partial Class Login_frm
         Label1.TabIndex = 4
         Label1.Text = "Role:"
         ' 
-        ' txtUname
+        ' txtUsername
         ' 
-        txtUname.Font = New Font("Palatino Linotype", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtUname.Location = New Point(76, 367)
-        txtUname.Name = "txtUname"
-        txtUname.Size = New Size(244, 34)
-        txtUname.TabIndex = 5
+        txtUsername.Font = New Font("Palatino Linotype", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtUsername.Location = New Point(76, 367)
+        txtUsername.Name = "txtUsername"
+        txtUsername.Size = New Size(244, 34)
+        txtUsername.TabIndex = 5
         ' 
-        ' txtPass
+        ' txtPassword
         ' 
-        txtPass.Font = New Font("Palatino Linotype", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtPass.Location = New Point(76, 433)
-        txtPass.Name = "txtPass"
-        txtPass.Size = New Size(244, 34)
-        txtPass.TabIndex = 6
+        txtPassword.Font = New Font("Palatino Linotype", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtPassword.Location = New Point(76, 433)
+        txtPassword.Name = "txtPassword"
+        txtPassword.Size = New Size(244, 34)
+        txtPassword.TabIndex = 6
         ' 
         ' cmbRole
         ' 
@@ -118,54 +117,41 @@ Partial Class Login_frm
         cmbRole.Size = New Size(245, 32)
         cmbRole.TabIndex = 7
         ' 
-        ' btnlogin
+        ' btnLogIn
         ' 
-        btnlogin.BackColor = Color.White
-        btnlogin.Font = New Font("Perpetua", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnlogin.ForeColor = SystemColors.MenuHighlight
-        btnlogin.Location = New Point(145, 489)
-        btnlogin.Name = "btnlogin"
-        btnlogin.Size = New Size(101, 47)
-        btnlogin.TabIndex = 8
-        btnlogin.Text = "Login"
-        btnlogin.UseVisualStyleBackColor = False
+        btnLogIn.BackColor = Color.White
+        btnLogIn.Font = New Font("Perpetua", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnLogIn.ForeColor = SystemColors.MenuHighlight
+        btnLogIn.Location = New Point(31, 498)
+        btnLogIn.Name = "btnLogIn"
+        btnLogIn.Size = New Size(101, 47)
+        btnLogIn.TabIndex = 8
+        btnLogIn.Text = "Login"
+        btnLogIn.UseVisualStyleBackColor = False
         ' 
-        ' btnEmployee
+        ' btne
         ' 
-        btnEmployee.BackColor = Color.White
-        btnEmployee.Font = New Font("Perpetua", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnEmployee.ForeColor = SystemColors.MenuHighlight
-        btnEmployee.Location = New Point(73, 542)
-        btnEmployee.Name = "btnEmployee"
-        btnEmployee.Size = New Size(121, 47)
-        btnEmployee.TabIndex = 10
-        btnEmployee.Text = "Employee"
-        btnEmployee.UseVisualStyleBackColor = False
-        ' 
-        ' btnManager
-        ' 
-        btnManager.BackColor = Color.White
-        btnManager.Font = New Font("Perpetua", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnManager.ForeColor = SystemColors.MenuHighlight
-        btnManager.Location = New Point(200, 542)
-        btnManager.Name = "btnManager"
-        btnManager.Size = New Size(121, 47)
-        btnManager.TabIndex = 11
-        btnManager.Text = "Manager"
-        btnManager.UseVisualStyleBackColor = False
+        btne.BackColor = Color.White
+        btne.Font = New Font("Perpetua", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btne.ForeColor = SystemColors.MenuHighlight
+        btne.Location = New Point(193, 486)
+        btne.Name = "btne"
+        btne.Size = New Size(101, 47)
+        btne.TabIndex = 9
+        btne.Text = "eto muna"
+        btne.UseVisualStyleBackColor = False
         ' 
         ' Login_frm
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.White
-        ClientSize = New Size(394, 612)
-        Controls.Add(btnManager)
-        Controls.Add(btnEmployee)
-        Controls.Add(btnlogin)
+        ClientSize = New Size(394, 557)
+        Controls.Add(btne)
+        Controls.Add(btnLogIn)
         Controls.Add(cmbRole)
-        Controls.Add(txtPass)
-        Controls.Add(txtUname)
+        Controls.Add(txtPassword)
+        Controls.Add(txtUsername)
         Controls.Add(Label1)
         Controls.Add(Label3)
         Controls.Add(Label2)
@@ -184,10 +170,9 @@ Partial Class Login_frm
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents txtUname As TextBox
-    Friend WithEvents txtPass As TextBox
+    Friend WithEvents txtUsername As TextBox
+    Friend WithEvents txtPassword As TextBox
     Friend WithEvents cmbRole As ComboBox
-    Friend WithEvents btnlogin As Button
-    Friend WithEvents btnEmployee As Button
-    Friend WithEvents btnManager As Button
+    Friend WithEvents btnLogIn As Button
+    Friend WithEvents btne As Button
 End Class

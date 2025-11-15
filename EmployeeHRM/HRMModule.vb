@@ -1,6 +1,12 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Module HRMModule
+    ' 🌟 Add these lines at the top
+    Public LoggedInEmployeeID As String
+    Public LoggedInUsername As String
+    Public LoggedInRole As String
+
+    ' Existing database variables
     Public dbcon As MySqlConnection
     Public dbcmd As MySqlCommand
     Public dbadapter As MySqlDataAdapter
@@ -19,4 +25,5 @@ Module HRMModule
     Public Function GetConnection() As MySqlConnection
         Return New MySqlConnection("server=localhost;userid=root;password=091951;database=db_hrm")
     End Function
+
 End Module

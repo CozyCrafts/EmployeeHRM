@@ -1,8 +1,11 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class Amenities
+
     Private connectionString As String = "server=localhost;userid=root;password=091951;database=db_hrm"
     Private isAddingAmenity As Boolean = False
+    Private originalAmenityValues As New Dictionary(Of String, String)
+
     Private Sub Amenities_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadAmenities()
         cbConditionAmenities.Items.AddRange({"Good", "Needs Repair", "Excellent", "Fair"})
@@ -10,28 +13,15 @@ Public Class Amenities
         LockControls()
         SetDefaultAmenityButtons()
     End Sub
-    Private Function GetNullableInt(value As String) As Object
-        If String.IsNullOrWhiteSpace(value) Then Return DBNull.Value
-        Dim num As Integer
-        If Integer.TryParse(value, num) Then Return num Else Return DBNull.Value
-    End Function
     Private Sub LoadAmenities()
         Dim query As String = "
             SELECT 
-                a.AmenitiesID,
-                a.Name AS AmenityName,
-                a.Location,
-                a.Condition,
-                a.EmployeeID,
-                e.`First Name` AS FirstName,
-                e.MiddleName,
-                e.LastName,
-                a.DepartmentID,
-                d.Name AS DepartmentName
-            FROM tblamenities a
-            LEFT JOIN tblemployee e ON a.EmployeeID = e.EmployeeID
-            LEFT JOIN tbldepartment d ON a.DepartmentID = d.DepartmentID
-            ORDER BY a.AmenitiesID;
+                AmenitiesID,
+                Name AS AmenityName,
+                Location,
+                `Condition`
+            FROM tblamenities
+            ORDER BY AmenitiesID;
         "
         Try
             Using conn As New MySqlConnection(connectionString)
@@ -39,20 +29,7 @@ Public Class Amenities
                     Using adapter As New MySqlDataAdapter(cmd)
                         Dim table As New DataTable()
                         adapter.Fill(table)
-
-                        If Not table.Columns.Contains("EmployeeName") Then
-                            table.Columns.Add("EmployeeName", GetType(String))
-                        End If
-                        For Each row As DataRow In table.Rows
-                            Dim firstName As String = If(row("FirstName") IsNot DBNull.Value, row("FirstName").ToString(), "")
-                            Dim middleName As String = If(row("MiddleName") IsNot DBNull.Value, row("MiddleName").ToString(), "")
-                            Dim lastName As String = If(row("LastName") IsNot DBNull.Value, row("LastName").ToString(), "")
-                            row("EmployeeName") = (firstName & " " & middleName & " " & lastName).Trim()
-                        Next
                         dgvAmenities.DataSource = table
-                        For Each col As String In {"EmployeeID", "EmployeeName", "FirstName", "MiddleName", "LastName", "DepartmentID", "DepartmentName"}
-                            If table.Columns.Contains(col) Then dgvAmenities.Columns(col).Visible = False
-                        Next
                     End Using
                 End Using
             End Using
@@ -62,6 +39,7 @@ Public Class Amenities
     End Sub
     Private Function GetNextAmenityID() As String
         Dim newID As String = "AM1"
+
         Try
             Using conn As New MySqlConnection(connectionString)
                 conn.Open()
@@ -76,33 +54,58 @@ Public Class Amenities
                     End If
                 End Using
             End Using
+
         Catch ex As Exception
             MessageBox.Show("Error generating Amenity ID: " & ex.Message)
         End Try
+
         Return newID
+    End Function
+    Private Function ValidateAmenityFields() As Boolean
+        If String.IsNullOrWhiteSpace(txtNameAmenities.Text) Then
+            MessageBox.Show("Amenity Name is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtNameAmenities.Focus()
+            Return False
+        End If
+
+        If String.IsNullOrWhiteSpace(txtLocationAmenities.Text) Then
+            MessageBox.Show("Amenity Location is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtLocationAmenities.Focus()
+            Return False
+        End If
+
+        If cbConditionAmenities.SelectedIndex = -1 Then
+            MessageBox.Show("Please select a Condition.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            cbConditionAmenities.Focus()
+            Return False
+        End If
+
+        Return True
     End Function
     Private Sub SaveNewAmenity()
         Try
             Using conn As New MySqlConnection(connectionString)
                 conn.Open()
+
                 Dim query As String = "
                     INSERT INTO tblamenities 
-                        (AmenitiesID, Name, Location, `Condition`, EmployeeID, DepartmentID) 
+                        (AmenitiesID, Name, Location, `Condition`) 
                     VALUES 
-                        (@AmenitiesID, @Name, @Location, @Condition, @EmployeeID, @DepartmentID)
+                        (@AmenitiesID, @Name, @Location, @Condition)
                 "
+
                 Using cmd As New MySqlCommand(query, conn)
                     cmd.Parameters.AddWithValue("@AmenitiesID", txtAmenitiesID.Text.Trim())
                     cmd.Parameters.AddWithValue("@Name", txtNameAmenities.Text.Trim())
                     cmd.Parameters.AddWithValue("@Location", txtLocationAmenities.Text.Trim())
                     cmd.Parameters.AddWithValue("@Condition", cbConditionAmenities.SelectedItem.ToString())
-                    cmd.Parameters.AddWithValue("@EmployeeID", GetNullableInt(txtEmployeeID.Text.Trim()))
-                    cmd.Parameters.AddWithValue("@DepartmentID", GetNullableInt(txtDepartmentID.Text.Trim()))
                     cmd.ExecuteNonQuery()
                 End Using
             End Using
+
             MessageBox.Show("Amenity added successfully!")
             LoadAmenities()
+
         Catch ex As Exception
             MessageBox.Show("Error adding amenity: " & ex.Message)
         End Try
@@ -111,27 +114,28 @@ Public Class Amenities
         Try
             Using conn As New MySqlConnection(connectionString)
                 conn.Open()
+
                 Dim query As String = "
                     UPDATE tblamenities
-                    SET Name=@Name,
+                    SET 
+                        Name=@Name,
                         Location=@Location,
-                        `Condition`=@Condition,
-                        EmployeeID=@EmployeeID,
-                        DepartmentID=@DepartmentID
+                        `Condition`=@Condition
                     WHERE AmenitiesID=@AmenitiesID
                 "
+
                 Using cmd As New MySqlCommand(query, conn)
                     cmd.Parameters.AddWithValue("@AmenitiesID", txtAmenitiesID.Text.Trim())
                     cmd.Parameters.AddWithValue("@Name", txtNameAmenities.Text.Trim())
                     cmd.Parameters.AddWithValue("@Location", txtLocationAmenities.Text.Trim())
                     cmd.Parameters.AddWithValue("@Condition", cbConditionAmenities.SelectedItem.ToString())
-                    cmd.Parameters.AddWithValue("@EmployeeID", GetNullableInt(txtEmployeeID.Text.Trim()))
-                    cmd.Parameters.AddWithValue("@DepartmentID", GetNullableInt(txtDepartmentID.Text.Trim()))
                     cmd.ExecuteNonQuery()
                 End Using
             End Using
+
             MessageBox.Show("Amenity updated successfully!")
             LoadAmenities()
+
         Catch ex As Exception
             MessageBox.Show("Error updating amenity: " & ex.Message)
         End Try
@@ -142,19 +146,24 @@ Public Class Amenities
             Return
         End If
 
-        Dim result As DialogResult = MessageBox.Show("Are you sure you want to delete this amenity?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to delete this amenity?", "Confirm Delete", MessageBoxButtons.YesNo)
+
         If result = DialogResult.Yes Then
             Try
                 Using conn As New MySqlConnection(connectionString)
                     conn.Open()
+
                     Dim query As String = "DELETE FROM tblamenities WHERE AmenitiesID=@AmenitiesID"
+
                     Using cmd As New MySqlCommand(query, conn)
                         cmd.Parameters.AddWithValue("@AmenitiesID", txtAmenitiesID.Text.Trim())
                         cmd.ExecuteNonQuery()
                     End Using
                 End Using
-                MessageBox.Show("Amenity deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                MessageBox.Show("Amenity deleted successfully!")
                 LoadAmenities()
+
             Catch ex As Exception
                 MessageBox.Show("Error deleting amenity: " & ex.Message)
             End Try
@@ -164,16 +173,12 @@ Public Class Amenities
         txtAmenitiesID.ReadOnly = True
         txtNameAmenities.ReadOnly = True
         txtLocationAmenities.ReadOnly = True
-        txtEmployeeID.ReadOnly = True
-        txtDepartmentID.ReadOnly = True
         cbConditionAmenities.Enabled = False
     End Sub
     Private Sub UnlockControls()
         txtAmenitiesID.ReadOnly = True
         txtNameAmenities.ReadOnly = False
         txtLocationAmenities.ReadOnly = False
-        txtEmployeeID.ReadOnly = True
-        txtDepartmentID.ReadOnly = True
         cbConditionAmenities.Enabled = True
     End Sub
     Private Sub SetDefaultAmenityButtons()
@@ -199,56 +204,71 @@ Public Class Amenities
     End Sub
     Private Sub dgvAmenities_SelectionChanged(sender As Object, e As EventArgs) Handles dgvAmenities.SelectionChanged
         If isAddingAmenity Then Return
+        If dgvAmenities.CurrentRow Is Nothing Then Return
 
-        If dgvAmenities.CurrentRow IsNot Nothing Then
-            Dim row As DataGridViewRow = dgvAmenities.CurrentRow
-            txtAmenitiesID.Text = If(row.Cells("AmenitiesID").Value IsNot DBNull.Value, row.Cells("AmenitiesID").Value.ToString(), "")
-            txtNameAmenities.Text = If(row.Cells("AmenityName").Value IsNot DBNull.Value, row.Cells("AmenityName").Value.ToString(), "")
-            txtLocationAmenities.Text = If(row.Cells("Location").Value IsNot DBNull.Value, row.Cells("Location").Value.ToString(), "")
-            txtEmployeeID.Text = If(row.Cells("EmployeeID").Value IsNot DBNull.Value, row.Cells("EmployeeID").Value.ToString(), "")
-            txtDepartmentID.Text = If(row.Cells("DepartmentID").Value IsNot DBNull.Value, row.Cells("DepartmentID").Value.ToString(), "")
-            If row.Cells("Condition").Value IsNot DBNull.Value Then
-                cbConditionAmenities.SelectedItem = row.Cells("Condition").Value.ToString()
-            Else
-                cbConditionAmenities.SelectedIndex = -1
-            End If
+        Dim row As DataGridViewRow = dgvAmenities.CurrentRow
+        If row.Cells("AmenitiesID").Value IsNot Nothing Then txtAmenitiesID.Text = row.Cells("AmenitiesID").Value.ToString()
+        If row.Cells("AmenityName").Value IsNot Nothing Then txtNameAmenities.Text = row.Cells("AmenityName").Value.ToString()
+        If row.Cells("Location").Value IsNot Nothing Then txtLocationAmenities.Text = row.Cells("Location").Value.ToString()
+        If row.Cells("Condition").Value IsNot Nothing Then cbConditionAmenities.SelectedItem = row.Cells("Condition").Value.ToString()
 
-            LockControls()
-            SetRecordSelectedAmenityButtons()
-        Else
-            SetDefaultAmenityButtons()
-        End If
+        originalAmenityValues("AmenityName") = txtNameAmenities.Text
+        originalAmenityValues("Location") = txtLocationAmenities.Text
+        originalAmenityValues("Condition") = If(cbConditionAmenities.SelectedItem IsNot Nothing, cbConditionAmenities.SelectedItem.ToString(), "")
+
+        LockControls()
+        SetRecordSelectedAmenityButtons()
     End Sub
     Private Sub btnAddAmenity_Click(sender As Object, e As EventArgs) Handles btnAddAmenity.Click
         isAddingAmenity = True
         txtAmenitiesID.Text = GetNextAmenityID()
         txtNameAmenities.Clear()
         txtLocationAmenities.Clear()
-        txtEmployeeID.Clear()
-        txtDepartmentID.Clear()
         cbConditionAmenities.SelectedIndex = -1
+        dgvAmenities.Enabled = False
         UnlockControls()
         SetEditAddAmenityButtons()
     End Sub
     Private Sub btnEditAmenity_Click(sender As Object, e As EventArgs) Handles btnEditAmenity.Click
-        If String.IsNullOrEmpty(txtAmenitiesID.Text) Then
-            MessageBox.Show("Please select an amenity to edit.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        If txtAmenitiesID.Text = "" Then
+            MessageBox.Show("Select an amenity to edit.")
             Return
         End If
+
         isAddingAmenity = False
         UnlockControls()
         SetEditAddAmenityButtons()
     End Sub
-    Private Sub btnSaveAmenity_Click(sender As Object, e As EventArgs)
-        If String.IsNullOrWhiteSpace(txtNameAmenities.Text) Then
-            MessageBox.Show("Amenity Name is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
+    Private Sub btnSaveAmenity_Click(sender As Object, e As EventArgs) Handles btnSaveAmenity.Click
 
+        If Not ValidateAmenityFields() Then Exit Sub
+        If Not isAddingAmenity Then
+            Dim nameChanged As Boolean = Not originalAmenityValues.ContainsKey("AmenityName") OrElse txtNameAmenities.Text <> originalAmenityValues("AmenityName")
+            Dim locationChanged As Boolean = Not originalAmenityValues.ContainsKey("Location") OrElse txtLocationAmenities.Text <> originalAmenityValues("Location")
+            Dim conditionChanged As Boolean = Not originalAmenityValues.ContainsKey("Condition") OrElse cbConditionAmenities.SelectedItem.ToString() <> originalAmenityValues("Condition")
+
+            If Not (nameChanged Or locationChanged Or conditionChanged) Then
+                MessageBox.Show("No changes were made. Nothing to save.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Return
+            End If
+        End If
         If isAddingAmenity Then
             SaveNewAmenity()
         Else
             UpdateAmenity()
+        End If
+        If Not isAddingAmenity Then
+            Dim nameOriginal As String = If(originalAmenityValues.ContainsKey("AmenityName"), originalAmenityValues("AmenityName"), "")
+            Dim locationOriginal As String = If(originalAmenityValues.ContainsKey("Location"), originalAmenityValues("Location"), "")
+            Dim conditionOriginal As String = If(originalAmenityValues.ContainsKey("Condition"), originalAmenityValues("Condition"), "")
+
+            If txtNameAmenities.Text = nameOriginal AndAlso
+       txtLocationAmenities.Text = locationOriginal AndAlso
+       cbConditionAmenities.SelectedItem.ToString() = conditionOriginal Then
+
+                MessageBox.Show("No changes were made. Nothing to save.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Return
+            End If
         End If
 
         isAddingAmenity = False
@@ -266,8 +286,22 @@ Public Class Amenities
         LockControls()
         SetDefaultAmenityButtons()
     End Sub
+    Private Sub txtSearchAmenities_TextChanged(sender As Object, e As EventArgs) Handles txtSearchAmenities.TextChanged
+        Dim searchValue As String = txtSearchAmenities.Text.Trim()
+        Dim dt As DataTable = TryCast(dgvAmenities.DataSource, DataTable)
+        If dt Is Nothing Then Return
+        If String.IsNullOrEmpty(searchValue) Then
+            dt.DefaultView.RowFilter = ""
+            Return
+        End If
+        searchValue = searchValue.Replace("'", "''")
+        dt.DefaultView.RowFilter = String.Format(
+        "AmenitiesID LIKE '%{0}%' OR AmenityName LIKE '%{0}%'",
+        searchValue
+    )
+    End Sub
     Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
-        Manager_Dashboard.Show()
+        Employee_Dashboard.Show()
         Me.Hide()
     End Sub
     Private Sub lblMyProfile_Click(sender As Object, e As EventArgs) Handles lblMyProfile.Click
@@ -325,4 +359,5 @@ Public Class Amenities
             Me.Hide()
         End If
     End Sub
+
 End Class

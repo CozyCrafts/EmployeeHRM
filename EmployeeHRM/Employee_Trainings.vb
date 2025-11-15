@@ -81,6 +81,10 @@ Public Class Employee_Trainings
             MessageBox.Show("Error loading trainings: " & ex.Message)
         End Try
     End Sub
+    Private Sub MakeDateTimePickerReadOnly(dtp As DateTimePicker)
+        dtp.Enabled = False
+        dtp.ShowUpDown = False
+    End Sub
     Private Sub LockControls()
         cbEmployeeID.Enabled = False
         txtEmployeeName.ReadOnly = True
@@ -88,7 +92,7 @@ Public Class Employee_Trainings
         txtTrainingTitle.ReadOnly = True
         txtTrainingType.ReadOnly = True
         txtTrainingDescription.ReadOnly = True
-        dtpTrainingStarted.Enabled = False
+        MakeDateTimePickerReadOnly(dtpTrainingStarted)
         dtpTrainingCompleted.Enabled = False
         rbPlanned.Enabled = False
         rbInProgress.Enabled = False
@@ -103,12 +107,34 @@ Public Class Employee_Trainings
         cbEmployeeID.Enabled = False
         txtEmployeeName.ReadOnly = True
         txtTrainingID.ReadOnly = True
-        dtpTrainingStarted.Enabled = True
+        dtpTrainingStarted.Enabled = False
+        rbPlanned.Enabled = False
         dtpTrainingCompleted.Enabled = True
-        rbPlanned.Enabled = True
         rbInProgress.Enabled = True
         rbCompleted.Enabled = True
         rbPostponed.Enabled = True
+    End Sub
+    Private Sub UpdateTrainingDates()
+        If rbInProgress.Checked Then
+            If dtpTrainingStarted.Value = Date.MinValue Then
+                dtpTrainingStarted.Value = Date.Now
+                MakeDateTimePickerReadOnly(dtpTrainingStarted)
+            End If
+            dtpTrainingCompleted.Enabled = False
+        ElseIf rbCompleted.Checked Then
+            If dtpTrainingStarted.Value = Date.MinValue Then
+                dtpTrainingStarted.Value = Date.Now
+                MakeDateTimePickerReadOnly(dtpTrainingStarted)
+            End If
+            dtpTrainingCompleted.Value = Date.Now
+            dtpTrainingCompleted.Enabled = True
+        Else
+            dtpTrainingCompleted.Enabled = False
+        End If
+    End Sub
+    Private Sub StatusRadioButton_CheckedChanged(sender As Object, e As EventArgs) _
+Handles rbInProgress.CheckedChanged, rbCompleted.CheckedChanged, rbPostponed.CheckedChanged
+        UpdateTrainingDates()
     End Sub
     Private Sub ClearForm()
         cbEmployeeID.SelectedIndex = -1
@@ -151,7 +177,7 @@ Public Class Employee_Trainings
         txtTrainingTitle.ReadOnly = False
         txtTrainingType.ReadOnly = False
         txtTrainingDescription.ReadOnly = False
-        dtpTrainingStarted.Enabled = True
+        dtpTrainingStarted.Enabled = False
         dtpTrainingCompleted.Enabled = False
         rbPlanned.Checked = True
         rbPlanned.Enabled = True
@@ -194,19 +220,62 @@ Public Class Employee_Trainings
         UnlockControls()
         SetEditAddButtonState()
     End Sub
+    Private Function ValidateTrainingFields() As Boolean
+        If cbEmployeeID.SelectedIndex = -1 Then
+            MessageBox.Show("Please select an employee.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            cbEmployeeID.Focus()
+            Return False
+        End If
+        If String.IsNullOrWhiteSpace(txtTrainingTitle.Text) Then
+            MessageBox.Show("Training Title is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtTrainingTitle.Focus()
+            Return False
+        End If
+        If String.IsNullOrWhiteSpace(txtTrainingType.Text) Then
+            MessageBox.Show("Training Type is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtTrainingType.Focus()
+            Return False
+        End If
+        If String.IsNullOrWhiteSpace(txtTrainingDescription.Text) Then
+            MessageBox.Show("Training Description is required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtTrainingDescription.Focus()
+            Return False
+        End If
+        If rbInProgress.Checked AndAlso dtpTrainingStarted.Value = Date.MinValue Then
+            MessageBox.Show("Start Date must be set when training is In Progress.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+
+        If rbCompleted.Checked AndAlso dtpTrainingCompleted.Value = Date.MinValue Then
+            MessageBox.Show("Completion Date must be set when training is Completed.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+        If rbCompleted.Checked AndAlso dtpTrainingCompleted.Value < dtpTrainingStarted.Value Then
+            MessageBox.Show("Completion Date cannot be earlier than Start Date.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+
+        Return True
+    End Function
     Private Sub btnSaveTraining_Click(sender As Object, e As EventArgs) Handles btnSaveTraining.Click
+        If Not ValidateTrainingFields() Then
+            Exit Sub
+        End If
+
         Dim status As String = If(rbPlanned.Checked, "Planned", If(rbInProgress.Checked, "In Progress", If(rbCompleted.Checked, "Completed", "Postponed")))
+
         Try
             Using conn As New MySqlConnection(connectionString)
                 conn.Open()
                 Dim query As String
                 If isAdding Then
                     query = "INSERT INTO tbltrainingdevelopment (EmployeeID, TrainingID, TrainingTitle, TrainingType, Status, DateStarted, DateCompleted, Description) " &
-                            "VALUES (@EmployeeID, @TrainingID, @TrainingTitle, @TrainingType, @Status, @DateStarted, @DateCompleted, @Description)"
+                        "VALUES (@EmployeeID, @TrainingID, @TrainingTitle, @TrainingType, @Status, @DateStarted, @DateCompleted, @Description)"
                 Else
                     query = "UPDATE tbltrainingdevelopment SET TrainingTitle=@TrainingTitle, TrainingType=@TrainingType, Status=@Status, " &
-                            "DateStarted=@DateStarted, DateCompleted=@DateCompleted, Description=@Description WHERE TrainingID=@TrainingID"
+                        "DateStarted=@DateStarted, DateCompleted=@DateCompleted, Description=@Description WHERE TrainingID=@TrainingID"
                 End If
+
                 Using cmd As New MySqlCommand(query, conn)
                     cmd.Parameters.AddWithValue("@EmployeeID", cbEmployeeID.SelectedValue.ToString())
                     cmd.Parameters.AddWithValue("@TrainingID", txtTrainingID.Text.Trim())
@@ -219,11 +288,14 @@ Public Class Employee_Trainings
                     cmd.ExecuteNonQuery()
                 End Using
             End Using
+
             MessageBox.Show("Training saved successfully.")
             LoadTrainings()
+
         Catch ex As Exception
             MessageBox.Show("Error saving training: " & ex.Message)
         End Try
+
         isAdding = False
         LockControls()
         SetDefaultButtonState()
@@ -281,10 +353,31 @@ Public Class Employee_Trainings
         End Try
         Return newID
     End Function
+    Private Sub txtSearchTraining_TextChanged(sender As Object, e As EventArgs) Handles txtSearchTrainings.TextChanged
+        Dim searchValue As String = txtSearchTrainings.Text.Trim()
+
+        Dim dt As DataTable = TryCast(dgvEmployeeTrainingHistory.DataSource, DataTable)
+        If dt Is Nothing Then Return
+
+        If String.IsNullOrEmpty(searchValue) Then
+            dt.DefaultView.RowFilter = ""
+            Return
+        End If
+        searchValue = searchValue.Replace("'", "''")
+        Dim searchParts() As String = searchValue.Split(" "c, StringSplitOptions.RemoveEmptyEntries)
+        Dim filter As New System.Text.StringBuilder()
+
+        For Each part In searchParts
+            If filter.Length > 0 Then filter.Append(" AND ")
+            filter.AppendFormat("(TrainingTitle LIKE '%{0}%' OR EmployeeName LIKE '%{0}%')", part)
+        Next
+
+        dt.DefaultView.RowFilter = filter.ToString()
+    End Sub
     Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
-    Manager_Dashboard.Show()
-    Me.Hide()
-End Sub
+        Employee_Dashboard.Show()
+        Me.Hide()
+    End Sub
     Private Sub lblMyProfile_Click(sender As Object, e As EventArgs) Handles lblMyProfile.Click
         MyProfile.Show()
         Me.Hide()
@@ -296,7 +389,6 @@ End Sub
     Private Sub lblSalary_Click(sender As Object, e As EventArgs) Handles lblSalary.Click
         Salary.Show()
         Me.Hide()
-
     End Sub
     Private Sub lblTrainings_Click(sender As Object, e As EventArgs) Handles lblTrainings.Click
         Trainings.Show()
@@ -305,38 +397,30 @@ End Sub
     Private Sub lblTeamOverview_Click(sender As Object, e As EventArgs) Handles lblTeamOverview.Click
         Team_Overview.Show()
         Me.Hide()
-
     End Sub
-
     Private Sub lblAttendanceTracker_Click(sender As Object, e As EventArgs) Handles lblAttendanceTracker.Click
         Attendance_Tracker.Show()
         Me.Hide()
     End Sub
-
     Private Sub lblLeaveApproval_Click(sender As Object, e As EventArgs) Handles lblLeaveApproval.Click
         Leave_Approval.Show()
         Me.Hide()
     End Sub
-
     Private Sub lblPayrollSummary_Click(sender As Object, e As EventArgs) Handles lblPayrollSummary.Click
         Payroll_Summary.Show()
         Me.Hide()
     End Sub
-
     Private Sub lblEmployeeTrainings_Click(sender As Object, e As EventArgs) Handles lblEmployeeTrainings.Click
         lblEmployeeTrainings.Enabled = False
     End Sub
-
     Private Sub lblDepartment_Click(sender As Object, e As EventArgs) Handles lblDepartment.Click
         Department.Show()
         Me.Hide()
     End Sub
-
     Private Sub lblAmenities_Click(sender As Object, e As EventArgs) Handles lblAmenities.Click
         Amenities.Show()
         Me.Hide()
     End Sub
-
     Private Sub btnSignOut_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
         Dim result As DialogResult = MessageBox.Show(
             "Are you sure you want to sign out?",

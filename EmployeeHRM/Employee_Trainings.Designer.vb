@@ -534,42 +534,43 @@ Partial Class Employee_Trainings
         ' Label5
         ' 
         Label5.AutoSize = True
-        Label5.Font = New Font("Century Gothic", 13F)
+        Label5.Font = New Font("Century Gothic", 13.8F)
         Label5.ForeColor = Color.Black
-        Label5.Location = New Point(147, 242)
+        Label5.Location = New Point(120, 220)
         Label5.Margin = New Padding(4, 0, 4, 0)
         Label5.Name = "Label5"
-        Label5.Size = New Size(136, 25)
+        Label5.Size = New Size(146, 27)
         Label5.TabIndex = 74
         Label5.Text = "Description:"
         ' 
         ' txtTrainingDescription
         ' 
-        txtTrainingDescription.Location = New Point(291, 238)
+        txtTrainingDescription.Font = New Font("Century Gothic", 13.8F, FontStyle.Bold)
+        txtTrainingDescription.Location = New Point(274, 218)
         txtTrainingDescription.Margin = New Padding(4, 3, 4, 3)
         txtTrainingDescription.Multiline = True
         txtTrainingDescription.Name = "txtTrainingDescription"
-        txtTrainingDescription.Size = New Size(619, 103)
+        txtTrainingDescription.Size = New Size(697, 58)
         txtTrainingDescription.TabIndex = 73
         ' 
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Font = New Font("Century Gothic", 13F)
+        Label1.Font = New Font("Century Gothic", 13.8F)
         Label1.ForeColor = Color.Black
-        Label1.Location = New Point(134, 165)
+        Label1.Location = New Point(475, 132)
         Label1.Margin = New Padding(4, 0, 4, 0)
         Label1.Name = "Label1"
-        Label1.Size = New Size(149, 25)
+        Label1.Size = New Size(159, 27)
         Label1.TabIndex = 71
         Label1.Text = "Training Title:"
         ' 
         ' Label21
         ' 
         Label21.AutoSize = True
-        Label21.Font = New Font("Century Gothic", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label21.Font = New Font("Century Gothic", 13.8F)
         Label21.ForeColor = Color.Black
-        Label21.Location = New Point(147, 121)
+        Label21.Location = New Point(132, 132)
         Label21.Margin = New Padding(4, 0, 4, 0)
         Label21.Name = "Label21"
         Label21.Size = New Size(136, 27)
@@ -579,45 +580,48 @@ Partial Class Employee_Trainings
         ' Label6
         ' 
         Label6.AutoSize = True
-        Label6.Font = New Font("Century Gothic", 13F)
+        Label6.Font = New Font("Century Gothic", 13.8F)
         Label6.ForeColor = Color.Black
-        Label6.Location = New Point(124, 207)
+        Label6.Location = New Point(100, 180)
         Label6.Margin = New Padding(4, 0, 4, 0)
         Label6.Name = "Label6"
-        Label6.Size = New Size(159, 25)
+        Label6.Size = New Size(168, 27)
         Label6.TabIndex = 79
         Label6.Text = "Training Type:"
         ' 
         ' txtTrainingID
         ' 
-        txtTrainingID.Location = New Point(291, 112)
+        txtTrainingID.Font = New Font("Century Gothic", 13.8F, FontStyle.Bold)
+        txtTrainingID.Location = New Point(276, 123)
         txtTrainingID.Margin = New Padding(4, 3, 4, 3)
         txtTrainingID.Name = "txtTrainingID"
-        txtTrainingID.Size = New Size(349, 36)
+        txtTrainingID.Size = New Size(144, 36)
         txtTrainingID.TabIndex = 23
         ' 
         ' txtTrainingType
         ' 
-        txtTrainingType.Location = New Point(291, 196)
+        txtTrainingType.Font = New Font("Century Gothic", 13.8F, FontStyle.Bold)
+        txtTrainingType.Location = New Point(276, 171)
         txtTrainingType.Margin = New Padding(4, 3, 4, 3)
         txtTrainingType.Name = "txtTrainingType"
-        txtTrainingType.Size = New Size(619, 36)
+        txtTrainingType.Size = New Size(695, 36)
         txtTrainingType.TabIndex = 80
         ' 
         ' txtTrainingTitle
         ' 
-        txtTrainingTitle.Location = New Point(291, 154)
+        txtTrainingTitle.Font = New Font("Century Gothic", 13.8F, FontStyle.Bold)
+        txtTrainingTitle.Location = New Point(642, 123)
         txtTrainingTitle.Margin = New Padding(4, 3, 4, 3)
         txtTrainingTitle.Name = "txtTrainingTitle"
-        txtTrainingTitle.Size = New Size(619, 36)
+        txtTrainingTitle.Size = New Size(329, 36)
         txtTrainingTitle.TabIndex = 72
         ' 
         ' Label11
         ' 
         Label11.AutoSize = True
-        Label11.Font = New Font("Century Gothic", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label11.Font = New Font("Century Gothic", 13.8F)
         Label11.ForeColor = Color.Black
-        Label11.Location = New Point(122, 37)
+        Label11.Location = New Point(108, 84)
         Label11.Margin = New Padding(4, 0, 4, 0)
         Label11.Name = "Label11"
         Label11.Size = New Size(161, 27)
@@ -655,10 +659,11 @@ Partial Class Employee_Trainings
         ' 
         ' cbEmployeeID
         ' 
+        cbEmployeeID.Font = New Font("Century Gothic", 13.8F, FontStyle.Bold)
         cbEmployeeID.FormattingEnabled = True
-        cbEmployeeID.Location = New Point(291, 29)
+        cbEmployeeID.Location = New Point(276, 76)
         cbEmployeeID.Name = "cbEmployeeID"
-        cbEmployeeID.Size = New Size(349, 35)
+        cbEmployeeID.Size = New Size(144, 35)
         cbEmployeeID.TabIndex = 117
         ' 
         ' btnDeleteTraining
@@ -749,9 +754,9 @@ Partial Class Employee_Trainings
         ' Label12
         ' 
         Label12.AutoSize = True
-        Label12.Font = New Font("Century Gothic", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label12.Font = New Font("Century Gothic", 13.8F)
         Label12.ForeColor = Color.Black
-        Label12.Location = New Point(75, 79)
+        Label12.Location = New Point(426, 84)
         Label12.Margin = New Padding(4, 0, 4, 0)
         Label12.Name = "Label12"
         Label12.Size = New Size(208, 27)
@@ -760,10 +765,11 @@ Partial Class Employee_Trainings
         ' 
         ' txtEmployeeName
         ' 
-        txtEmployeeName.Location = New Point(291, 70)
+        txtEmployeeName.Font = New Font("Century Gothic", 13.8F, FontStyle.Bold)
+        txtEmployeeName.Location = New Point(642, 75)
         txtEmployeeName.Margin = New Padding(4, 3, 4, 3)
         txtEmployeeName.Name = "txtEmployeeName"
-        txtEmployeeName.Size = New Size(349, 36)
+        txtEmployeeName.Size = New Size(329, 36)
         txtEmployeeName.TabIndex = 89
         ' 
         ' Employee_Trainings
