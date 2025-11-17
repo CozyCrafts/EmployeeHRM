@@ -73,8 +73,9 @@ Partial Class Payroll_Summary
         Label21 = New Label()
         Label19 = New Label()
         GroupBox3 = New GroupBox()
+        btnSendToATM = New FontAwesome.Sharp.IconButton()
         btnAddPayroll = New FontAwesome.Sharp.IconButton()
-        btnComputePayroll = New FontAwesome.Sharp.IconButton()
+        btnEditPayroll = New FontAwesome.Sharp.IconButton()
         Label5 = New Label()
         btnDeletePayroll = New FontAwesome.Sharp.IconButton()
         btnCancelPayroll = New FontAwesome.Sharp.IconButton()
@@ -90,7 +91,6 @@ Partial Class Payroll_Summary
         Label11 = New Label()
         txtAllowance = New TextBox()
         txtPayrollID = New TextBox()
-        btnEditPayroll = New FontAwesome.Sharp.IconButton()
         Label28 = New Label()
         txtBasicSalary = New TextBox()
         Label29 = New Label()
@@ -103,11 +103,11 @@ Partial Class Payroll_Summary
         Label16 = New Label()
         txtGrossSalary = New TextBox()
         dtpPaymentDate = New DateTimePicker()
+        btnComputePayroll = New FontAwesome.Sharp.IconButton()
         GroupBox4 = New GroupBox()
         txtSearchPayroll = New TextBox()
         PictureBox1 = New PictureBox()
         dgvPayrollSummary = New DataGridView()
-        btnSendToATM = New FontAwesome.Sharp.IconButton()
         adminheader_pnl.SuspendLayout()
         Panel1.SuspendLayout()
         GroupBox6.SuspendLayout()
@@ -648,7 +648,7 @@ Partial Class Payroll_Summary
         ' 
         GroupBox3.Controls.Add(btnSendToATM)
         GroupBox3.Controls.Add(btnAddPayroll)
-        GroupBox3.Controls.Add(btnComputePayroll)
+        GroupBox3.Controls.Add(btnEditPayroll)
         GroupBox3.Controls.Add(Label5)
         GroupBox3.Controls.Add(btnDeletePayroll)
         GroupBox3.Controls.Add(btnCancelPayroll)
@@ -658,7 +658,6 @@ Partial Class Payroll_Summary
         GroupBox3.Controls.Add(txtNetPay)
         GroupBox3.Controls.Add(GroupBox2)
         GroupBox3.Controls.Add(txtPayrollID)
-        GroupBox3.Controls.Add(btnEditPayroll)
         GroupBox3.Controls.Add(GroupBox1)
         GroupBox3.Controls.Add(Label28)
         GroupBox3.Controls.Add(txtBasicSalary)
@@ -673,6 +672,7 @@ Partial Class Payroll_Summary
         GroupBox3.Controls.Add(txtGrossSalary)
         GroupBox3.Controls.Add(dtpPaymentDate)
         GroupBox3.Controls.Add(Label23)
+        GroupBox3.Controls.Add(btnComputePayroll)
         GroupBox3.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
         GroupBox3.Location = New Point(410, 114)
         GroupBox3.Name = "GroupBox3"
@@ -681,39 +681,56 @@ Partial Class Payroll_Summary
         GroupBox3.TabStop = False
         GroupBox3.Text = "Payroll Computation"
         ' 
+        ' btnSendToATM
+        ' 
+        btnSendToATM.BackColor = SystemColors.InactiveCaption
+        btnSendToATM.Font = New Font("Century Gothic", 11F, FontStyle.Bold)
+        btnSendToATM.IconChar = FontAwesome.Sharp.IconChar.CreditCard
+        btnSendToATM.IconColor = Color.Black
+        btnSendToATM.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSendToATM.IconSize = 30
+        btnSendToATM.ImageAlign = ContentAlignment.MiddleLeft
+        btnSendToATM.Location = New Point(1142, 443)
+        btnSendToATM.Name = "btnSendToATM"
+        btnSendToATM.Size = New Size(171, 44)
+        btnSendToATM.TabIndex = 119
+        btnSendToATM.Text = "Send To ATM"
+        btnSendToATM.TextAlign = ContentAlignment.MiddleRight
+        btnSendToATM.UseVisualStyleBackColor = False
+        ' 
         ' btnAddPayroll
         ' 
         btnAddPayroll.BackColor = SystemColors.InactiveCaption
-        btnAddPayroll.Font = New Font("Century Gothic", 10F, FontStyle.Bold)
+        btnAddPayroll.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnAddPayroll.IconChar = FontAwesome.Sharp.IconChar.Edit
         btnAddPayroll.IconColor = Color.Black
         btnAddPayroll.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnAddPayroll.IconSize = 25
+        btnAddPayroll.IconSize = 30
         btnAddPayroll.ImageAlign = ContentAlignment.MiddleLeft
-        btnAddPayroll.Location = New Point(175, 369)
+        btnAddPayroll.Location = New Point(369, 367)
         btnAddPayroll.Name = "btnAddPayroll"
-        btnAddPayroll.Size = New Size(171, 44)
+        btnAddPayroll.Size = New Size(159, 93)
         btnAddPayroll.TabIndex = 118
         btnAddPayroll.Text = "Add Payroll"
         btnAddPayroll.TextAlign = ContentAlignment.MiddleRight
         btnAddPayroll.UseVisualStyleBackColor = False
         ' 
-        ' btnComputePayroll
+        ' btnEditPayroll
         ' 
-        btnComputePayroll.BackColor = SystemColors.InactiveCaption
-        btnComputePayroll.Font = New Font("Century Gothic", 10F, FontStyle.Bold)
-        btnComputePayroll.IconChar = FontAwesome.Sharp.IconChar.Calculator
-        btnComputePayroll.IconColor = Color.Black
-        btnComputePayroll.IconFont = FontAwesome.Sharp.IconFont.Solid
-        btnComputePayroll.IconSize = 25
-        btnComputePayroll.ImageAlign = ContentAlignment.MiddleLeft
-        btnComputePayroll.Location = New Point(175, 369)
-        btnComputePayroll.Name = "btnComputePayroll"
-        btnComputePayroll.Size = New Size(171, 44)
-        btnComputePayroll.TabIndex = 115
-        btnComputePayroll.Text = "Compute Payroll"
-        btnComputePayroll.TextAlign = ContentAlignment.MiddleRight
-        btnComputePayroll.UseVisualStyleBackColor = False
+        btnEditPayroll.BackColor = SystemColors.InactiveCaption
+        btnEditPayroll.Font = New Font("Century Gothic", 10F, FontStyle.Bold)
+        btnEditPayroll.IconChar = FontAwesome.Sharp.IconChar.Edit
+        btnEditPayroll.IconColor = Color.Black
+        btnEditPayroll.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnEditPayroll.IconSize = 25
+        btnEditPayroll.ImageAlign = ContentAlignment.MiddleLeft
+        btnEditPayroll.Location = New Point(192, 367)
+        btnEditPayroll.Name = "btnEditPayroll"
+        btnEditPayroll.Size = New Size(171, 44)
+        btnEditPayroll.TabIndex = 115
+        btnEditPayroll.Text = "Edit Payroll"
+        btnEditPayroll.TextAlign = ContentAlignment.MiddleRight
+        btnEditPayroll.UseVisualStyleBackColor = False
         ' 
         ' Label5
         ' 
@@ -734,7 +751,7 @@ Partial Class Payroll_Summary
         btnDeletePayroll.IconFont = FontAwesome.Sharp.IconFont.Solid
         btnDeletePayroll.IconSize = 25
         btnDeletePayroll.ImageAlign = ContentAlignment.MiddleLeft
-        btnDeletePayroll.Location = New Point(362, 420)
+        btnDeletePayroll.Location = New Point(193, 417)
         btnDeletePayroll.Name = "btnDeletePayroll"
         btnDeletePayroll.Size = New Size(171, 44)
         btnDeletePayroll.TabIndex = 116
@@ -751,9 +768,9 @@ Partial Class Payroll_Summary
         btnCancelPayroll.IconFont = FontAwesome.Sharp.IconFont.Solid
         btnCancelPayroll.IconSize = 25
         btnCancelPayroll.ImageAlign = ContentAlignment.MiddleLeft
-        btnCancelPayroll.Location = New Point(362, 419)
+        btnCancelPayroll.Location = New Point(362, 417)
         btnCancelPayroll.Name = "btnCancelPayroll"
-        btnCancelPayroll.Size = New Size(105, 43)
+        btnCancelPayroll.Size = New Size(165, 43)
         btnCancelPayroll.TabIndex = 116
         btnCancelPayroll.Text = "Cancel"
         btnCancelPayroll.TextAlign = ContentAlignment.MiddleRight
@@ -776,9 +793,9 @@ Partial Class Payroll_Summary
         btnSavePayroll.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnSavePayroll.IconSize = 25
         btnSavePayroll.ImageAlign = ContentAlignment.MiddleLeft
-        btnSavePayroll.Location = New Point(241, 419)
+        btnSavePayroll.Location = New Point(193, 417)
         btnSavePayroll.Name = "btnSavePayroll"
-        btnSavePayroll.Size = New Size(105, 44)
+        btnSavePayroll.Size = New Size(163, 44)
         btnSavePayroll.TabIndex = 117
         btnSavePayroll.Text = "Save "
         btnSavePayroll.TextAlign = ContentAlignment.MiddleRight
@@ -883,23 +900,6 @@ Partial Class Payroll_Summary
         txtPayrollID.Name = "txtPayrollID"
         txtPayrollID.Size = New Size(335, 30)
         txtPayrollID.TabIndex = 103
-        ' 
-        ' btnEditPayroll
-        ' 
-        btnEditPayroll.BackColor = SystemColors.InactiveCaption
-        btnEditPayroll.Font = New Font("Century Gothic", 10F, FontStyle.Bold)
-        btnEditPayroll.IconChar = FontAwesome.Sharp.IconChar.Edit
-        btnEditPayroll.IconColor = Color.Black
-        btnEditPayroll.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnEditPayroll.IconSize = 25
-        btnEditPayroll.ImageAlign = ContentAlignment.MiddleLeft
-        btnEditPayroll.Location = New Point(362, 369)
-        btnEditPayroll.Name = "btnEditPayroll"
-        btnEditPayroll.Size = New Size(171, 44)
-        btnEditPayroll.TabIndex = 115
-        btnEditPayroll.Text = "Edit Payroll"
-        btnEditPayroll.TextAlign = ContentAlignment.MiddleRight
-        btnEditPayroll.UseVisualStyleBackColor = False
         ' 
         ' Label28
         ' 
@@ -1012,6 +1012,23 @@ Partial Class Payroll_Summary
         dtpPaymentDate.Size = New Size(335, 30)
         dtpPaymentDate.TabIndex = 93
         ' 
+        ' btnComputePayroll
+        ' 
+        btnComputePayroll.BackColor = SystemColors.InactiveCaption
+        btnComputePayroll.Font = New Font("Century Gothic", 10F, FontStyle.Bold)
+        btnComputePayroll.IconChar = FontAwesome.Sharp.IconChar.Calculator
+        btnComputePayroll.IconColor = Color.Black
+        btnComputePayroll.IconFont = FontAwesome.Sharp.IconFont.Solid
+        btnComputePayroll.IconSize = 25
+        btnComputePayroll.ImageAlign = ContentAlignment.MiddleLeft
+        btnComputePayroll.Location = New Point(192, 367)
+        btnComputePayroll.Name = "btnComputePayroll"
+        btnComputePayroll.Size = New Size(335, 44)
+        btnComputePayroll.TabIndex = 115
+        btnComputePayroll.Text = "Compute Payroll"
+        btnComputePayroll.TextAlign = ContentAlignment.MiddleRight
+        btnComputePayroll.UseVisualStyleBackColor = False
+        ' 
         ' GroupBox4
         ' 
         GroupBox4.Controls.Add(txtSearchPayroll)
@@ -1055,23 +1072,6 @@ Partial Class Payroll_Summary
         dgvPayrollSummary.RowHeadersWidth = 51
         dgvPayrollSummary.Size = New Size(1294, 382)
         dgvPayrollSummary.TabIndex = 0
-        ' 
-        ' btnSendToATM
-        ' 
-        btnSendToATM.BackColor = SystemColors.InactiveCaption
-        btnSendToATM.Font = New Font("Century Gothic", 11F, FontStyle.Bold)
-        btnSendToATM.IconChar = FontAwesome.Sharp.IconChar.CreditCard
-        btnSendToATM.IconColor = Color.Black
-        btnSendToATM.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnSendToATM.IconSize = 30
-        btnSendToATM.ImageAlign = ContentAlignment.MiddleLeft
-        btnSendToATM.Location = New Point(1142, 443)
-        btnSendToATM.Name = "btnSendToATM"
-        btnSendToATM.Size = New Size(171, 44)
-        btnSendToATM.TabIndex = 119
-        btnSendToATM.Text = "Send To ATM"
-        btnSendToATM.TextAlign = ContentAlignment.MiddleRight
-        btnSendToATM.UseVisualStyleBackColor = False
         ' 
         ' Payroll_Summary
         ' 

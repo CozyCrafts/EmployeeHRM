@@ -4,11 +4,55 @@ Imports System.Globalization
 Imports System.Windows.Forms
 Imports System.Security.Cryptography
 
-
 Public Class Team_Overview
     Private connectionString As String = "server=localhost;userid=root;password=091951;database=db_hrm"
     Private currentMode As String = ""
     Private bsEmployees As BindingSource
+    Private rng As New Random()
+
+    ' ---------------- SAFE DATE SETTERS ----------------
+    Private Sub SafeSetBirthDate(value As DateTime)
+        ' Always set Min/Max before assigning Value
+        dtpBirthDate.MinDate = DateTime.Today.AddYears(-100)
+        dtpBirthDate.MaxDate = DateTime.Today.AddYears(-18)
+
+        Dim safeValue As DateTime
+        If value < dtpBirthDate.MinDate Then
+            safeValue = dtpBirthDate.MinDate
+        ElseIf value > dtpBirthDate.MaxDate Then
+            safeValue = dtpBirthDate.MaxDate
+        Else
+            safeValue = value
+        End If
+
+        dtpBirthDate.Value = safeValue
+    End Sub
+
+    Private Sub SafeSetDateHired(value As DateTime)
+        ' MinHired is birthdate + 18 years; ensure birth date already safe when this is called
+        Dim minHired As DateTime = dtpBirthDate.Value.AddYears(18)
+        Dim maxHired As DateTime = DateTime.Today
+
+        If minHired > maxHired Then
+            minHired = maxHired
+        End If
+
+        dtpDateHired.MinDate = minHired
+        dtpDateHired.MaxDate = maxHired
+
+        Dim safeValue As DateTime
+        If value < dtpDateHired.MinDate Then
+            safeValue = dtpDateHired.MinDate
+        ElseIf value > dtpDateHired.MaxDate Then
+            safeValue = dtpDateHired.MaxDate
+        Else
+            safeValue = value
+        End If
+
+        dtpDateHired.Value = safeValue
+    End Sub
+    ' ---------------------------------------------------
+
     Private Sub Team_Overview_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         cbSex.Items.Clear()
         cbSex.Items.AddRange(New Object() {"Male", "Female", "Other"})
@@ -20,16 +64,52 @@ Public Class Team_Overview
         cbContractType.Items.AddRange(New Object() {"Regular", "Seasonal", "Contractual", "Part-Time"})
         cbUserType.Items.Clear()
         cbUserType.Items.AddRange(New Object() {"Manager", "Staff"})
+
         LoadOtherEmployeeInfo()
+        LoadDepartments()
         DisableAllTextboxes()
         SetButtonVisibility("Default")
+
+        ' Must initialize birth date first, then date hired
+        SafeSetBirthDate(DateTime.Today.AddYears(-18))
+        SafeSetDateHired(DateTime.Today)
+
         txtAge.ReadOnly = True
         txtYearsOfSevice.ReadOnly = True
         txtAge.Text = CalculateAge(dtpBirthDate.Value).ToString()
         txtYearsOfSevice.Text = CalculateYearsOfService(dtpDateHired.Value).ToString("0.00")
+
         AddHandler dtpBirthDate.ValueChanged, AddressOf dtpBirthDate_ValueChanged
-        AddHandler dtpDateHired.ValueChanged, AddressOf dtpDateHired_ValueChanged
+        AddHandler cbDepartment.SelectedIndexChanged, AddressOf cbDepartment_SelectedIndexChanged
     End Sub
+
+    Private Sub cbDepartment_SelectedIndexChanged(sender As Object, e As EventArgs)
+        If cbDepartment.SelectedValue IsNot Nothing Then
+            txtDepartmentID.Text = cbDepartment.SelectedValue.ToString()
+        End If
+    End Sub
+
+    Private Sub LoadDepartments()
+        Try
+            Using dbcon As New MySqlConnection(connectionString)
+                dbcon.Open()
+                Using cmd As New MySqlCommand("SELECT DISTINCT DepartmentID, Name FROM tbldepartment ORDER BY Name", dbcon)
+                    Using reader = cmd.ExecuteReader()
+                        Dim dt As New DataTable()
+                        dt.Load(reader)
+                        dt.Columns.Add("Display", GetType(String), "DepartmentID + ' - ' + Name")
+
+                        cbDepartment.DisplayMember = "Display"
+                        cbDepartment.ValueMember = "DepartmentID"
+                        cbDepartment.DataSource = dt
+                    End Using
+                End Using
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error loading departments: " & ex.Message)
+        End Try
+    End Sub
+
     Private Sub LoadOtherEmployeeInfo()
         Try
             Using dbcon As New MySqlConnection(connectionString)
@@ -55,11 +135,11 @@ Public Class Team_Overview
                 Dim adapter As New MySqlDataAdapter(query, dbcon)
                 Dim table As New DataTable()
                 adapter.Fill(table)
-                dgvOtherInfo.DataSource = table
                 bsEmployees = New BindingSource()
                 bsEmployees.DataSource = table.DefaultView
                 dgvOtherInfo.DataSource = bsEmployees
             End Using
+
             dgvOtherInfo.ScrollBars = ScrollBars.Both
             dgvOtherInfo.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
             dgvOtherInfo.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
@@ -79,41 +159,21 @@ Public Class Team_Overview
             MessageBox.Show("Error loading other info: " & ex.Message)
         End Try
     End Sub
+
     Private Sub txtSearchEmployee_TextChanged(sender As Object, e As EventArgs) Handles txtSearchEmployee.TextChanged
         Dim searchValue As String = txtSearchEmployee.Text.Trim()
-
         If String.IsNullOrEmpty(searchValue) Then
-            ' Reload original data
-            LoadOtherEmployeeInfo()
+            If bsEmployees IsNot Nothing Then bsEmployees.RemoveFilter()
             Return
         End If
-
         Dim searchParts() As String = searchValue.Split(" "c, StringSplitOptions.RemoveEmptyEntries)
+        Dim filters As New List(Of String)
 
-        For Each row As DataGridViewRow In dgvOtherInfo.Rows
-            If Not row.IsNewRow Then
-
-                Dim employeeID As String = row.Cells("EmployeeID").Value.ToString()
-                Dim fullName As String = row.Cells("FullName").Value.ToString()
-
-                Dim match As Boolean =
-                employeeID.IndexOf(searchValue, StringComparison.OrdinalIgnoreCase) >= 0 OrElse
-                fullName.IndexOf(searchValue, StringComparison.OrdinalIgnoreCase) >= 0
-
-                ' If not matched yet, check each search word
-                If Not match Then
-                    For Each part In searchParts
-                        If fullName.IndexOf(part, StringComparison.OrdinalIgnoreCase) >= 0 Then
-                            match = True
-                            Exit For
-                        End If
-                    Next
-                End If
-
-                ' 🔥 This is what makes it filter instead of just highlight
-                row.Visible = match
-            End If
+        For Each part In searchParts
+            Dim cleanPart As String = part.Replace("'", "''")
+            filters.Add(String.Format("(Convert(EmployeeID, 'System.String') LIKE '%{0}%' OR FullName LIKE '%{0}%')", cleanPart))
         Next
+        bsEmployees.Filter = String.Join(" OR ", filters)
     End Sub
 
     Private Sub DisableAllTextboxes()
@@ -140,12 +200,13 @@ Public Class Team_Overview
         txtUsername.Enabled = False
         txtPassword.Enabled = False
         txtDepartmentID.Enabled = False
-        txtDepartment.Enabled = False
+        cbDepartment.Enabled = False
         cbEmployeeStatus.Enabled = False
         dtpDateHired.Enabled = False
         cbContractType.Enabled = False
         txtJobTitle.Enabled = False
     End Sub
+
     Private Sub EnableAllTextboxes()
         txtEmployeeID.Enabled = False
         txtECContactID.Enabled = False
@@ -166,16 +227,17 @@ Public Class Team_Overview
         txtECPhone.Enabled = True
         txtECAddress.Enabled = True
         cbUserType.Enabled = True
-        txtUsername.Enabled = True
-        txtPassword.Enabled = True
-        txtDepartmentID.Enabled = True
-        txtDepartment.Enabled = True
+        txtUsername.Enabled = False
+        txtPassword.Enabled = False
+        txtDepartmentID.Enabled = False
+        cbDepartment.Enabled = True
         cbEmployeeStatus.Enabled = True
         dtpDateHired.Enabled = True
         cbContractType.Enabled = True
         txtJobTitle.Enabled = True
-        txtJobID.Enabled = True
+        txtJobID.Enabled = False
     End Sub
+
     Private Sub ClearAllTextboxes()
         txtEmployeeID.Text = ""
         txtECContactID.Text = ""
@@ -197,15 +259,17 @@ Public Class Team_Overview
         txtUsername.Text = ""
         txtPassword.Text = ""
         txtDepartmentID.Text = ""
-        txtDepartment.Text = ""
+        cbDepartment.Text = ""
         cbEmployeeStatus.Text = ""
-        dtpBirthDate.Value = DateTime.Now
-        dtpDateHired.Value = DateTime.Now
+        ' Use safe setters instead of direct Value assignment
+        SafeSetBirthDate(DateTime.Today.AddYears(-18))
+        SafeSetDateHired(DateTime.Today)
         cbContractType.Text = ""
         txtJobTitle.Text = ""
         txtJobID.Text = ""
         txtYearsOfSevice.Text = ""
     End Sub
+
     Private Sub SetButtonVisibility(mode As String)
         Select Case mode
             Case "Default"
@@ -228,19 +292,20 @@ Public Class Team_Overview
                 btnCancelEmployee.Visible = True
         End Select
     End Sub
+
     Private Sub PopulateTextboxes(row As DataGridViewRow)
         If row Is Nothing Then Return
 
         Dim GetCellValue As Func(Of String, String) =
-            Function(colName As String)
-                If row.DataGridView.Columns.Contains(colName) Then
-                    Return If(row.Cells(colName)?.Value, "").ToString()
-                Else
-                    Return ""
-                End If
-            End Function
+        Function(colName As String)
+            If row.DataGridView.Columns.Contains(colName) Then
+                Return If(row.Cells(colName)?.Value, "").ToString()
+            Else
+                Return ""
+            End If
+        End Function
 
-        txtEmployeeID.Text = If(GetCellValue("EmployeeID") <> "", FormatID("EMP", ExtractNumericID(GetCellValue("EmployeeID")), 4), "")
+        txtEmployeeID.Text = If(GetCellValue("EmployeeID") <> "", GetCellValue("EmployeeID"), "")
         Dim fullName As String = GetCellValue("FullName")
         Dim nameParts() As String = fullName.Split(" "c, StringSplitOptions.RemoveEmptyEntries)
         If nameParts.Length > 0 Then txtFirstName.Text = nameParts(0)
@@ -252,8 +317,13 @@ Public Class Team_Overview
             txtLastName.Text = nameParts(1)
         End If
 
+        ' Use safe setters for incoming dates
         Dim birthDate As DateTime
-        If DateTime.TryParse(GetCellValue("BirthDate"), birthDate) Then dtpBirthDate.Value = birthDate Else dtpBirthDate.Value = DateTime.Now
+        If DateTime.TryParse(GetCellValue("BirthDate"), birthDate) Then
+            SafeSetBirthDate(birthDate)
+        Else
+            SafeSetBirthDate(DateTime.Today.AddYears(-18))
+        End If
 
         cbSex.Text = GetCellValue("Sex")
         cbCivilStatus.Text = GetCellValue("CivilStatus")
@@ -261,54 +331,65 @@ Public Class Team_Overview
         txtEmail.Text = GetCellValue("EmailAddress")
         txtAddress.Text = GetCellValue("Address")
 
-        txtECContactID.Text = If(GetCellValue("EmergencyContactID") <> "", FormatID("EC", ExtractNumericID(GetCellValue("EmergencyContactID")), 4), "")
+        txtECContactID.Text = If(GetCellValue("EmergencyContactID") <> "", GetCellValue("EmergencyContactID"), "")
         txtECName.Text = GetCellValue("EmergencyName")
         txtECRelationship.Text = GetCellValue("Relationship")
         txtECPhone.Text = GetCellValue("EmergencyPhone")
         txtECAddress.Text = GetCellValue("EmergencyAddress")
 
-        txtUserID.Text = If(GetCellValue("UserID") <> "", FormatID("USR", ExtractNumericID(GetCellValue("UserID")), 4), "")
+        txtUserID.Text = If(GetCellValue("UserID") <> "", GetCellValue("UserID"), "")
         cbUserType.Text = GetCellValue("UserType")
         txtUsername.Text = GetCellValue("Username")
         txtPassword.Text = ""
 
         txtDepartmentID.Text = GetCellValue("DepartmentID")
-        txtDepartment.Text = GetCellValue("DepartmentName")
-        txtJobID.Text = If(GetCellValue("JobID") <> "", FormatID("JOB", ExtractNumericID(GetCellValue("JobID")), 4), "")
+        cbDepartment.Text = GetCellValue("DepartmentName")
+        txtJobID.Text = If(GetCellValue("JobID") <> "", GetCellValue("JobID"), "")
         cbEmployeeStatus.Text = GetCellValue("EmploymentStatus")
 
         Dim dateHired As DateTime
-        If DateTime.TryParse(GetCellValue("DateHired"), dateHired) Then dtpDateHired.Value = dateHired Else dtpDateHired.Value = DateTime.Now
+        If DateTime.TryParse(GetCellValue("DateHired"), dateHired) Then
+            SafeSetDateHired(dateHired)
+        Else
+            SafeSetDateHired(DateTime.Today)
+        End If
 
         cbContractType.Text = GetCellValue("ContractType")
         txtJobTitle.Text = GetCellValue("JobTitle")
 
         txtAge.Text = If(String.IsNullOrWhiteSpace(GetCellValue("Age")), CalculateAge(dtpBirthDate.Value).ToString(), GetCellValue("Age"))
-        txtYearsOfSevice.Text = If(String.IsNullOrWhiteSpace(GetCellValue("YearsOfService")), CalculateYearsOfService(dtpDateHired.Value).ToString("0.00"), GetCellValue("YearsOfService"))
+        txtYearsOfSevice.Text = If(String.IsNullOrWhiteSpace(GetCellValue("YearsOfService")),
+                         CalculateYearsOfService(dtpDateHired.Value).ToString("0.00"),
+                         GetCellValue("YearsOfService"))
     End Sub
+
     Private Sub dgvOtherInfo_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvOtherInfo.CellClick
         If e.RowIndex < 0 Then Return
         PopulateTextboxes(dgvOtherInfo.Rows(e.RowIndex))
         SetButtonVisibility("RowSelected")
     End Sub
+
     Private Sub dtpBirthDate_ValueChanged(sender As Object, e As EventArgs)
+        ' When birthdate changes, ensure date hired min is updated and date hired stays valid
         txtAge.Text = CalculateAge(dtpBirthDate.Value).ToString()
+        SafeSetDateHired(dtpDateHired.Value)
     End Sub
-    Private Sub dtpDateHired_ValueChanged(sender As Object, e As EventArgs)
-        txtYearsOfSevice.Text = CalculateYearsOfService(dtpDateHired.Value).ToString("0.00")
-    End Sub
+
     Private Function CalculateAge(birthDate As DateTime) As Integer
         Dim today As DateTime = DateTime.Today
         Dim age As Integer = today.Year - birthDate.Year
         If birthDate > today.AddYears(-age) Then age -= 1
         Return Math.Max(age, 0)
     End Function
+
     Private Function CalculateYearsOfService(startDate As DateTime) As Double
         Return Math.Round(Math.Max((Date.Today - startDate).TotalDays / 365.25, 0), 2)
     End Function
+
     Private Function FormatID(prefix As String, numericId As Integer, digits As Integer) As String
         Return prefix & numericId.ToString().PadLeft(digits, "0"c)
     End Function
+
     Private Function ExtractNumericID(formatted As String) As Integer
         If String.IsNullOrWhiteSpace(formatted) Then Return 0
         Dim digits = New String(formatted.Where(AddressOf Char.IsDigit).ToArray())
@@ -316,30 +397,7 @@ Public Class Team_Overview
         If Integer.TryParse(digits, n) Then Return n
         Return 0
     End Function
-    Private Function ValidateEmployeeInputs() As Boolean
-        If String.IsNullOrWhiteSpace(txtFirstName.Text) Then MessageBox.Show("Enter First Name") : txtFirstName.Focus() : Return False
-        If String.IsNullOrWhiteSpace(txtLastName.Text) Then MessageBox.Show("Enter Last Name") : txtLastName.Focus() : Return False
-        If String.IsNullOrWhiteSpace(cbSex.Text) Then MessageBox.Show("Select Sex") : cbSex.Focus() : Return False
-        If String.IsNullOrWhiteSpace(cbCivilStatus.Text) Then MessageBox.Show("Select Civil Status") : cbCivilStatus.Focus() : Return False
-        If String.IsNullOrWhiteSpace(txtPhone.Text) Then MessageBox.Show("Enter Phone") : txtPhone.Focus() : Return False
-        If String.IsNullOrWhiteSpace(txtEmail.Text) Then MessageBox.Show("Enter Email") : txtEmail.Focus() : Return False
-        If String.IsNullOrWhiteSpace(txtAddress.Text) Then MessageBox.Show("Enter Address") : txtAddress.Focus() : Return False
-        If String.IsNullOrWhiteSpace(txtECName.Text) Then MessageBox.Show("Enter Emergency Contact Name") : txtECName.Focus() : Return False
-        If String.IsNullOrWhiteSpace(txtECRelationship.Text) Then MessageBox.Show("Enter Emergency Relationship") : txtECRelationship.Focus() : Return False
-        If String.IsNullOrWhiteSpace(txtECPhone.Text) Then MessageBox.Show("Enter Emergency Phone") : txtECPhone.Focus() : Return False
-        If String.IsNullOrWhiteSpace(txtECAddress.Text) Then MessageBox.Show("Enter Emergency Address") : txtECAddress.Focus() : Return False
-        If String.IsNullOrWhiteSpace(cbUserType.Text) Then MessageBox.Show("Select User Type") : cbUserType.Focus() : Return False
-        If String.IsNullOrWhiteSpace(txtUsername.Text) Then MessageBox.Show("Enter Username") : txtUsername.Focus() : Return False
-        If currentMode = "Add" AndAlso String.IsNullOrWhiteSpace(txtPassword.Text) Then MessageBox.Show("Enter Password") : txtPassword.Focus() : Return False
-        If String.IsNullOrWhiteSpace(txtDepartment.Text) Then MessageBox.Show("Enter Department") : txtDepartment.Focus() : Return False
-        If String.IsNullOrWhiteSpace(cbEmployeeStatus.Text) Then MessageBox.Show("Select Employment Status") : cbEmployeeStatus.Focus() : Return False
-        If String.IsNullOrWhiteSpace(cbContractType.Text) Then MessageBox.Show("Select Contract Type") : cbContractType.Focus() : Return False
-        If String.IsNullOrWhiteSpace(txtJobTitle.Text) Then MessageBox.Show("Enter Job Title") : txtJobTitle.Focus() : Return False
-        If Not IsValidEmail(txtEmail.Text) Then MessageBox.Show("Invalid Email") : txtEmail.Focus() : Return False
-        If Not IsNumeric(txtPhone.Text) Then MessageBox.Show("Phone must be numeric") : txtPhone.Focus() : Return False
-        If Not IsNumeric(txtECPhone.Text) Then MessageBox.Show("Emergency Phone must be numeric") : txtECPhone.Focus() : Return False
-        Return True
-    End Function
+
     Private Function IsValidEmail(email As String) As Boolean
         Try
             Dim addr = New System.Net.Mail.MailAddress(email)
@@ -348,6 +406,7 @@ Public Class Team_Overview
             Return False
         End Try
     End Function
+
     Private Function HashPassword(password As String) As String
         Using sha256 As SHA256 = SHA256.Create()
             Dim bytes = Encoding.UTF8.GetBytes(password)
@@ -355,7 +414,7 @@ Public Class Team_Overview
             Return BitConverter.ToString(hash).Replace("-", "").ToLower()
         End Using
     End Function
-    Private rng As New Random()
+
     Private Function GenerateTemporaryUsername() As String
         Dim username As String
         Do
@@ -365,6 +424,7 @@ Public Class Team_Overview
         Loop While UsernameExists(username)
         Return username
     End Function
+
     Private Function UsernameExists(username As String) As Boolean
         Using dbcon As New MySqlConnection(connectionString)
             dbcon.Open()
@@ -374,6 +434,7 @@ Public Class Team_Overview
             End Using
         End Using
     End Function
+
     Private Function GenerateTemporaryPassword(length As Integer) As String
         Const chars As String = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*"
         Dim password(length - 1) As Char
@@ -386,36 +447,93 @@ Public Class Team_Overview
 
         Return New String(password)
     End Function
+
+    Private Function HasChanges() As Boolean
+        If dgvOtherInfo.CurrentRow Is Nothing Then Return True
+        Dim row As DataGridViewRow = dgvOtherInfo.CurrentRow
+
+        Dim getCell As Func(Of String, String) =
+            Function(c As String) If(row.DataGridView.Columns.Contains(c) AndAlso row.Cells(c)?.Value IsNot Nothing, row.Cells(c).Value.ToString(), "")
+
+        If txtFirstName.Text <> getCell("First Name") Then Return True
+        If txtMiddleName.Text <> getCell("MiddleName") Then Return True
+        If txtLastName.Text <> getCell("LastName") Then Return True
+
+        Dim cellBirth As String = getCell("BirthDate")
+        Dim cellBirthDt As DateTime
+        If DateTime.TryParse(cellBirth, cellBirthDt) Then
+            If dtpBirthDate.Value.Date <> cellBirthDt.Date Then Return True
+        End If
+
+        If cbSex.Text <> getCell("Sex") Then Return True
+        If cbCivilStatus.Text <> getCell("Civil Status") Then Return True
+        If txtPhone.Text <> getCell("Contact Number") Then Return True
+        If txtEmail.Text <> getCell("Email Address") Then Return True
+        If txtAddress.Text <> getCell("Address") Then Return True
+
+        If txtECName.Text <> getCell("EmergencyName") Then Return True
+        If txtECRelationship.Text <> getCell("Relationship") Then Return True
+        If txtECPhone.Text <> getCell("EmergencyPhone") Then Return True
+        If txtECAddress.Text <> getCell("EmergencyAddress") Then Return True
+
+        If cbUserType.Text <> getCell("UserType") Then Return True
+        If txtUsername.Text <> getCell("Username") Then Return True
+        If cbDepartment.Text <> getCell("DepartmentName") Then Return True
+        If cbEmployeeStatus.Text <> getCell("EmploymentStatus") Then Return True
+
+        Dim cellHired As String = getCell("DateHired")
+        Dim cellHiredDt As DateTime
+        If DateTime.TryParse(cellHired, cellHiredDt) Then
+            If dtpDateHired.Value.Date <> cellHiredDt.Date Then Return True
+        End If
+
+        If cbContractType.Text <> getCell("ContractType") Then Return True
+        If txtJobTitle.Text <> getCell("JobTitle") Then Return True
+
+        Return False
+    End Function
+
     Private Sub btnAddEmployee_Click(sender As Object, e As EventArgs) Handles btnAddEmployee.Click
         ClearAllTextboxes()
         EnableAllTextboxes()
         currentMode = "Add"
         SetButtonVisibility("AddOrEdit")
-        txtEmployeeID.Text = GetNextEmployeeID().ToString()
-        txtDepartmentID.Text = "D" & GetNextDepartmentID().ToString()
-        txtJobID.Text = "J" & GetNextJobID().ToString()
+        txtEmployeeID.Text = GetNextEmployeeID()
+        txtJobID.Text = GetNextJobID()
         txtUserID.Text = GetNextUserID()
         txtUsername.Text = GenerateTemporaryUsername()
         txtPassword.Text = GenerateTemporaryPassword(8)
         txtECContactID.Text = GetNextECID()
 
+        ' Set safe defaults for pickers
+        SafeSetBirthDate(DateTime.Today.AddYears(-18))
+        SafeSetDateHired(DateTime.Today)
     End Sub
+
     Private Sub btnEditEmployee_Click(sender As Object, e As EventArgs) Handles btnEditEmployee.Click
         If String.IsNullOrWhiteSpace(txtEmployeeID.Text) Then Return
         EnableAllTextboxes()
         currentMode = "Edit"
         SetButtonVisibility("AddOrEdit")
     End Sub
+
     Private Sub btnCancelEmployee_Click(sender As Object, e As EventArgs) Handles btnCancelEmployee.Click
         ClearAllTextboxes()
         DisableAllTextboxes()
         SetButtonVisibility("Default")
         currentMode = ""
     End Sub
+
     Private Sub btnSaveEmployee_Click(sender As Object, e As EventArgs) Handles btnSaveEmployee.Click
         If Not ValidateEmployeeInputs() Then Return
+
         txtAge.Text = CalculateAge(dtpBirthDate.Value).ToString()
         txtYearsOfSevice.Text = CalculateYearsOfService(dtpDateHired.Value).ToString("0.00")
+
+        If currentMode = "Edit" AndAlso Not HasChanges() Then
+            MessageBox.Show("No changes were made.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        End If
 
         If currentMode = "Add" Then
             SaveNewEmployee()
@@ -428,6 +546,7 @@ Public Class Team_Overview
         SetButtonVisibility("Default")
         currentMode = ""
     End Sub
+
     Private Sub btnDeleteEmployee_Click(sender As Object, e As EventArgs) Handles btnDeleteEmployee.Click
         If String.IsNullOrWhiteSpace(txtEmployeeID.Text) Then
             MessageBox.Show("Select an employee to delete.")
@@ -442,7 +561,6 @@ Public Class Team_Overview
             dbcon.Open()
             Using tran = dbcon.BeginTransaction()
                 Try
-                    ' Delete from child tables first
                     Using cmd As New MySqlCommand("DELETE FROM tblaccount WHERE EmployeeID=@eid", dbcon, tran)
                         cmd.Parameters.AddWithValue("@eid", txtEmployeeID.Text)
                         cmd.ExecuteNonQuery()
@@ -458,7 +576,6 @@ Public Class Team_Overview
                         cmd.ExecuteNonQuery()
                     End Using
 
-                    ' Finally, delete the employee record
                     Using cmd As New MySqlCommand("DELETE FROM tblemployee WHERE EmployeeID=@eid", dbcon, tran)
                         cmd.Parameters.AddWithValue("@eid", txtEmployeeID.Text)
                         cmd.ExecuteNonQuery()
@@ -477,6 +594,8 @@ Public Class Team_Overview
             End Using
         End Using
     End Sub
+
+    ' ---------------- ID GENERATORS (return formatted strings) ----------------
     Private Function GetNextEmployeeID() As String
         Try
             Using dbcon As New MySqlConnection(connectionString)
@@ -496,6 +615,7 @@ Public Class Team_Overview
             Return "EMP0122"
         End Try
     End Function
+
     Private Function GetNextDepartmentID() As String
         Try
             Using dbcon As New MySqlConnection(connectionString)
@@ -512,6 +632,7 @@ Public Class Team_Overview
             Return "D22"
         End Try
     End Function
+
     Private Function GetNextJobID() As String
         Try
             Using dbcon As New MySqlConnection(connectionString)
@@ -531,6 +652,7 @@ Public Class Team_Overview
             Return "J0122"
         End Try
     End Function
+
     Private Function GetNextECID() As String
         Try
             Using dbcon As New MySqlConnection(connectionString)
@@ -550,6 +672,7 @@ Public Class Team_Overview
             Return "EC0122"
         End Try
     End Function
+
     Private Function GetNextUserID() As String
         Try
             Using dbcon As New MySqlConnection(connectionString)
@@ -569,22 +692,22 @@ Public Class Team_Overview
             Return "U1000"
         End Try
     End Function
-    Private Sub SaveNewEmployee()
-        ' Convert IDs to numeric parts
-        Dim newEmployeeID As Integer = ExtractNumericID(txtEmployeeID.Text)
-        Dim newDepartmentID As Integer = ExtractNumericID(txtDepartmentID.Text)
-        Dim newJobID As Integer = ExtractNumericID(txtJobID.Text)
-        Dim newUserID As Integer = ExtractNumericID(txtUserID.Text)
-        Dim newECID As Integer = ExtractNumericID(If(String.IsNullOrWhiteSpace(txtECContactID.Text), GetNextECID(), txtECContactID.Text))
+    ' ---------------------------------------------------------------------------
 
-        txtECContactID.Text = FormatID("EC", newECID, 4) ' Keep prefix in UI
+    Private Sub SaveNewEmployee()
+        Dim newEmployeeID As String = If(String.IsNullOrWhiteSpace(txtEmployeeID.Text), GetNextEmployeeID(), txtEmployeeID.Text)
+        Dim newDepartmentID As String = txtDepartmentID.Text
+        Dim newJobID As String = If(String.IsNullOrWhiteSpace(txtJobID.Text), GetNextJobID(), txtJobID.Text)
+        Dim newUserID As String = If(String.IsNullOrWhiteSpace(txtUserID.Text), GetNextUserID(), txtUserID.Text)
+        Dim newECID As String = If(String.IsNullOrWhiteSpace(txtECContactID.Text), GetNextECID(), txtECContactID.Text)
+
+        txtECContactID.Text = newECID
         Dim hashedPassword As String = HashPassword(txtPassword.Text)
 
         Using dbcon As New MySqlConnection(connectionString)
             dbcon.Open()
             Using tran = dbcon.BeginTransaction()
                 Try
-                    ' Insert Employee
                     Using cmd As New MySqlCommand(
                     "INSERT INTO tblemployee(EmployeeID, `First Name`, MiddleName, LastName, BirthDate, Age, Sex, `Civil Status`, `Contact Number`, `Email Address`, Address) 
                      VALUES (@eid,@fname,@mname,@lname,@bdate,@age,@sex,@civil,@phone,@email,@address)", dbcon, tran)
@@ -607,7 +730,6 @@ Public Class Team_Overview
                         cmd.ExecuteNonQuery()
                     End Using
 
-                    ' Insert Emergency Contact
                     Using cmd As New MySqlCommand(
                     "INSERT INTO tblemergencycontact(EmergencyContactID, EmployeeID, Name, Relationship, PhoneNumber, Address) 
                      VALUES (@ecid,@eid,@name,@rel,@phone,@addr)", dbcon, tran)
@@ -621,7 +743,6 @@ Public Class Team_Overview
                         cmd.ExecuteNonQuery()
                     End Using
 
-                    ' Insert Account
                     Using cmd As New MySqlCommand("SELECT COUNT(*) FROM tblaccount WHERE EmployeeID=@eid", dbcon, tran)
                         cmd.Parameters.AddWithValue("@eid", newEmployeeID)
                         Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
@@ -633,7 +754,7 @@ Public Class Team_Overview
 
                                 insertCmd.Parameters.AddWithValue("@uid", newUserID)
                                 insertCmd.Parameters.AddWithValue("@eid", newEmployeeID)
-                                insertCmd.Parameters.AddWithValue("@utype", cbUserType.SelectedItem.ToString())
+                                insertCmd.Parameters.AddWithValue("@utype", cbUserType.Text)
                                 insertCmd.Parameters.AddWithValue("@uname", txtUsername.Text)
                                 insertCmd.Parameters.AddWithValue("@password", hashedPassword)
                                 insertCmd.ExecuteNonQuery()
@@ -643,7 +764,7 @@ Public Class Team_Overview
                             "UPDATE tblaccount SET UserType=@utype, Username=@uname, Password=@password WHERE EmployeeID=@eid", dbcon, tran)
 
                                 updateCmd.Parameters.AddWithValue("@eid", newEmployeeID)
-                                updateCmd.Parameters.AddWithValue("@utype", cbUserType.SelectedItem.ToString())
+                                updateCmd.Parameters.AddWithValue("@utype", cbUserType.Text)
                                 updateCmd.Parameters.AddWithValue("@uname", txtUsername.Text)
                                 updateCmd.Parameters.AddWithValue("@password", hashedPassword)
                                 updateCmd.ExecuteNonQuery()
@@ -651,7 +772,6 @@ Public Class Team_Overview
                         End If
                     End Using
 
-                    ' Insert Job Details
                     Using cmd As New MySqlCommand(
                     "INSERT INTO tbljobdetails(JobID, EmployeeID, EmploymentStatus, DateHired, ContractType, JobTitle, YearsOfService, DepartmentID) 
                      VALUES (@jid,@eid,@estatus,@dhired,@ctype,@jtitle,@yos,@did)", dbcon, tran)
@@ -685,15 +805,14 @@ Public Class Team_Overview
     Private Sub UpdateEmployee()
         Dim hashedPassword As String = If(String.IsNullOrWhiteSpace(txtPassword.Text), Nothing, HashPassword(txtPassword.Text))
 
-        Dim numericEmployeeID As Integer = ExtractNumericID(txtEmployeeID.Text)
-        Dim numericDepartmentID As Integer = ExtractNumericID(txtDepartmentID.Text)
-        Dim numericJobID As Integer = ExtractNumericID(txtJobID.Text)
+        Dim employeeID As String = txtEmployeeID.Text
+        Dim departmentID As String = txtDepartmentID.Text
+        Dim jobID As String = txtJobID.Text
 
         Using dbcon As New MySqlConnection(connectionString)
             dbcon.Open()
             Using tran = dbcon.BeginTransaction()
                 Try
-                    ' Update tblemployee
                     Dim age As Integer = 0
                     Integer.TryParse(txtAge.Text, age)
 
@@ -701,7 +820,7 @@ Public Class Team_Overview
                     "UPDATE tblemployee SET `First Name`=@fname, MiddleName=@mname, LastName=@lname, BirthDate=@bdate, Age=@age, Sex=@sex, `Civil Status`=@civil, `Contact Number`=@phone, `Email Address`=@email, Address=@address WHERE EmployeeID=@eid",
                     dbcon, tran)
 
-                        cmd.Parameters.AddWithValue("@eid", numericEmployeeID)
+                        cmd.Parameters.AddWithValue("@eid", employeeID)
                         cmd.Parameters.AddWithValue("@fname", txtFirstName.Text)
                         cmd.Parameters.AddWithValue("@mname", txtMiddleName.Text)
                         cmd.Parameters.AddWithValue("@lname", txtLastName.Text)
@@ -715,12 +834,11 @@ Public Class Team_Overview
                         cmd.ExecuteNonQuery()
                     End Using
 
-                    ' Update Emergency Contact
                     Using cmd As New MySqlCommand(
                     "UPDATE tblemergencycontact SET Name=@name, Relationship=@rel, PhoneNumber=@phone, Address=@addr WHERE EmployeeID=@eid",
                     dbcon, tran)
 
-                        cmd.Parameters.AddWithValue("@eid", numericEmployeeID)
+                        cmd.Parameters.AddWithValue("@eid", employeeID)
                         cmd.Parameters.AddWithValue("@name", txtECName.Text)
                         cmd.Parameters.AddWithValue("@rel", txtECRelationship.Text)
                         cmd.Parameters.AddWithValue("@phone", txtECPhone.Text)
@@ -728,21 +846,19 @@ Public Class Team_Overview
                         cmd.ExecuteNonQuery()
                     End Using
 
-                    ' Update Account
                     Using cmd As New MySqlCommand(
                     "UPDATE tblaccount SET UserType=@utype, Username=@uname" &
                     If(hashedPassword IsNot Nothing, ", Password=@password", "") &
                     " WHERE EmployeeID=@eid",
                     dbcon, tran)
 
-                        cmd.Parameters.AddWithValue("@eid", numericEmployeeID)
+                        cmd.Parameters.AddWithValue("@eid", employeeID)
                         cmd.Parameters.AddWithValue("@utype", cbUserType.Text)
                         cmd.Parameters.AddWithValue("@uname", txtUsername.Text)
                         If hashedPassword IsNot Nothing Then cmd.Parameters.AddWithValue("@password", hashedPassword)
                         cmd.ExecuteNonQuery()
                     End Using
 
-                    ' Update Job Details
                     Dim yos As Double = 0
                     Double.TryParse(txtYearsOfSevice.Text, yos)
 
@@ -750,13 +866,13 @@ Public Class Team_Overview
                     "UPDATE tbljobdetails SET EmploymentStatus=@estatus, DateHired=@dhired, ContractType=@ctype, JobTitle=@jtitle, YearsOfService=@yos, DepartmentID=@did WHERE EmployeeID=@eid",
                     dbcon, tran)
 
-                        cmd.Parameters.AddWithValue("@eid", numericEmployeeID)
+                        cmd.Parameters.AddWithValue("@eid", employeeID)
                         cmd.Parameters.AddWithValue("@estatus", cbEmployeeStatus.Text)
                         cmd.Parameters.AddWithValue("@dhired", dtpDateHired.Value)
                         cmd.Parameters.AddWithValue("@ctype", cbContractType.Text)
                         cmd.Parameters.AddWithValue("@jtitle", txtJobTitle.Text)
                         cmd.Parameters.AddWithValue("@yos", yos)
-                        cmd.Parameters.AddWithValue("@did", numericDepartmentID)
+                        cmd.Parameters.AddWithValue("@did", departmentID)
                         cmd.ExecuteNonQuery()
                     End Using
 
@@ -771,7 +887,175 @@ Public Class Team_Overview
         End Using
     End Sub
 
+    Private Function ValidateDates() As Boolean
+        If dtpBirthDate.Value > DateTime.Today Then
+            MessageBox.Show("Birth Date cannot be in the future.")
+            dtpBirthDate.Focus()
+            Return False
+        End If
 
+        Dim age As Integer = CalculateAge(dtpBirthDate.Value)
+        If age < 18 Then
+            MessageBox.Show("Employee must be at least 18 years old.")
+            dtpBirthDate.Focus()
+            Return False
+        End If
+
+        If dtpDateHired.Value > DateTime.Today Then
+            MessageBox.Show("Date Hired cannot be in the future.")
+            dtpDateHired.Focus()
+            Return False
+        End If
+
+        If dtpDateHired.Value < dtpBirthDate.Value.AddYears(18) Then
+            MessageBox.Show("Date Hired must be after employee turns 18.")
+            dtpDateHired.Focus()
+            Return False
+        End If
+
+        Return True
+    End Function
+
+    Private Function ValidateEmployeeInputs() As Boolean
+        If String.IsNullOrWhiteSpace(txtFirstName.Text) OrElse Not txtFirstName.Text.All(AddressOf Char.IsLetter) Then
+            MessageBox.Show("Enter a valid First Name (letters only).")
+            txtFirstName.Focus()
+            Return False
+        End If
+
+        If String.IsNullOrWhiteSpace(txtLastName.Text) OrElse Not txtLastName.Text.All(AddressOf Char.IsLetter) Then
+            MessageBox.Show("Enter a valid Last Name (letters only).")
+            txtLastName.Focus()
+            Return False
+        End If
+
+        If Not String.IsNullOrWhiteSpace(txtMiddleName.Text) AndAlso Not txtMiddleName.Text.All(AddressOf Char.IsLetter) Then
+            MessageBox.Show("Middle Name must contain letters only.")
+            txtMiddleName.Focus()
+            Return False
+        End If
+
+        If dtpBirthDate.Value > DateTime.Today Then
+            MessageBox.Show("Birth Date cannot be in the future.")
+            dtpBirthDate.Focus()
+            Return False
+        End If
+
+        If CalculateAge(dtpBirthDate.Value) < 18 Then
+            MessageBox.Show("Employee must be at least 18 years old.")
+            dtpBirthDate.Focus()
+            Return False
+        End If
+
+        If dtpDateHired.Value > DateTime.Today Then
+            MessageBox.Show("Date Hired cannot be in the future.")
+            dtpDateHired.Focus()
+            Return False
+        End If
+
+        If dtpDateHired.Value < dtpBirthDate.Value.AddYears(18) Then
+            MessageBox.Show("Date Hired must be after employee turns 18.")
+            dtpDateHired.Focus()
+            Return False
+        End If
+
+        If String.IsNullOrWhiteSpace(txtPhone.Text) OrElse Not txtPhone.Text.All(AddressOf Char.IsDigit) OrElse txtPhone.Text.Length < 10 Then
+            MessageBox.Show("Enter a valid Phone Number (10 digits minimum).")
+            txtPhone.Focus()
+            Return False
+        End If
+
+        If String.IsNullOrWhiteSpace(txtECPhone.Text) OrElse Not txtECPhone.Text.All(AddressOf Char.IsDigit) OrElse txtECPhone.Text.Length < 10 Then
+            MessageBox.Show("Enter a valid Emergency Contact Phone Number.")
+            txtECPhone.Focus()
+            Return False
+        End If
+
+        If String.IsNullOrWhiteSpace(txtEmail.Text) OrElse Not IsValidEmail(txtEmail.Text) Then
+            MessageBox.Show("Enter a valid Email Address.")
+            txtEmail.Focus()
+            Return False
+        End If
+
+        If String.IsNullOrWhiteSpace(cbSex.Text) Then
+            MessageBox.Show("Select Sex")
+            cbSex.Focus()
+            Return False
+        End If
+
+        If String.IsNullOrWhiteSpace(cbCivilStatus.Text) Then
+            MessageBox.Show("Select Civil Status")
+            cbCivilStatus.Focus()
+            Return False
+        End If
+
+        If String.IsNullOrWhiteSpace(cbUserType.Text) Then
+            MessageBox.Show("Select User Type")
+            cbUserType.Focus()
+            Return False
+        End If
+
+        If String.IsNullOrWhiteSpace(cbDepartment.Text) Then
+            MessageBox.Show("Select Department")
+            cbDepartment.Focus()
+            Return False
+        End If
+
+        If String.IsNullOrWhiteSpace(cbEmployeeStatus.Text) Then
+            MessageBox.Show("Select Employment Status")
+            cbEmployeeStatus.Focus()
+            Return False
+        End If
+
+        If String.IsNullOrWhiteSpace(cbContractType.Text) Then
+            MessageBox.Show("Select Contract Type")
+            cbContractType.Focus()
+            Return False
+        End If
+
+        If String.IsNullOrWhiteSpace(txtJobTitle.Text) Then
+            MessageBox.Show("Enter Job Title")
+            txtJobTitle.Focus()
+            Return False
+        End If
+
+        If currentMode = "Add" Then
+            If String.IsNullOrWhiteSpace(txtPassword.Text) OrElse txtPassword.Text.Length < 8 Then
+                MessageBox.Show("Password must be at least 8 characters.")
+                txtPassword.Focus()
+                Return False
+            End If
+        End If
+
+        If EmailExists(txtEmail.Text) Then
+            MessageBox.Show("Email already exists.")
+            txtEmail.Focus()
+            Return False
+        End If
+
+        If UsernameExists(txtUsername.Text) Then
+            MessageBox.Show("Username already exists.")
+            txtUsername.Focus()
+            Return False
+        End If
+
+        Return True
+    End Function
+
+    Private Function EmailExists(email As String) As Boolean
+        Using dbcon As New MySqlConnection(connectionString)
+            dbcon.Open()
+            Using cmd As New MySqlCommand(
+            "SELECT COUNT(*) FROM tblemployee WHERE `Email Address`=@email" &
+            If(currentMode = "Edit", " AND EmployeeID<>@eid", ""), dbcon)
+                cmd.Parameters.AddWithValue("@email", email)
+                If currentMode = "Edit" Then cmd.Parameters.AddWithValue("@eid", txtEmployeeID.Text)
+                Return Convert.ToInt32(cmd.ExecuteScalar()) > 0
+            End Using
+        End Using
+    End Function
+
+    ' Navigation and other UI handlers (unchanged)
     Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
         Employee_Dashboard.Show()
         Me.Hide()

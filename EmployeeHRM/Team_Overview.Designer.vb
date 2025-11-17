@@ -23,6 +23,7 @@ Partial Class Team_Overview
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Team_Overview))
+        Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Panel1 = New Panel()
         lblAmenities = New Label()
         lblTrainings = New Label()
@@ -65,10 +66,10 @@ Partial Class Team_Overview
         PictureBox1 = New PictureBox()
         dgvOtherInfo = New DataGridView()
         GroupBox3 = New GroupBox()
+        cbDepartment = New ComboBox()
         cbContractType = New ComboBox()
         cbEmployeeStatus = New ComboBox()
         dtpDateHired = New DateTimePicker()
-        txtDepartment = New TextBox()
         Label11 = New Label()
         Label25 = New Label()
         Label21 = New Label()
@@ -623,18 +624,26 @@ Partial Class Team_Overview
         dgvOtherInfo.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
         dgvOtherInfo.ColumnHeadersHeight = 29
         dgvOtherInfo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = SystemColors.Window
+        DataGridViewCellStyle1.Font = New Font("Century Gothic", 11F, FontStyle.Bold)
+        DataGridViewCellStyle1.ForeColor = SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = DataGridViewTriState.False
+        dgvOtherInfo.DefaultCellStyle = DataGridViewCellStyle1
         dgvOtherInfo.Location = New Point(15, 86)
         dgvOtherInfo.Name = "dgvOtherInfo"
         dgvOtherInfo.RowHeadersWidth = 51
-        dgvOtherInfo.Size = New Size(1314, 445)
+        dgvOtherInfo.Size = New Size(1314, 441)
         dgvOtherInfo.TabIndex = 90
         ' 
         ' GroupBox3
         ' 
+        GroupBox3.Controls.Add(cbDepartment)
         GroupBox3.Controls.Add(cbContractType)
         GroupBox3.Controls.Add(cbEmployeeStatus)
         GroupBox3.Controls.Add(dtpDateHired)
-        GroupBox3.Controls.Add(txtDepartment)
         GroupBox3.Controls.Add(Label11)
         GroupBox3.Controls.Add(Label25)
         GroupBox3.Controls.Add(Label21)
@@ -648,12 +657,20 @@ Partial Class Team_Overview
         GroupBox3.Controls.Add(Label16)
         GroupBox3.Controls.Add(txtYearsOfSevice)
         GroupBox3.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        GroupBox3.Location = New Point(21, 835)
+        GroupBox3.Location = New Point(21, 836)
         GroupBox3.Name = "GroupBox3"
         GroupBox3.Size = New Size(883, 184)
         GroupBox3.TabIndex = 88
         GroupBox3.TabStop = False
         GroupBox3.Text = "Job Details"
+        ' 
+        ' cbDepartment
+        ' 
+        cbDepartment.FormattingEnabled = True
+        cbDepartment.Location = New Point(170, 139)
+        cbDepartment.Name = "cbDepartment"
+        cbDepartment.Size = New Size(235, 31)
+        cbDepartment.TabIndex = 108
         ' 
         ' cbContractType
         ' 
@@ -680,14 +697,6 @@ Partial Class Team_Overview
         dtpDateHired.Size = New Size(264, 26)
         dtpDateHired.TabIndex = 49
         dtpDateHired.Value = New Date(2025, 9, 13, 1, 11, 7, 0)
-        ' 
-        ' txtDepartment
-        ' 
-        txtDepartment.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtDepartment.Location = New Point(170, 139)
-        txtDepartment.Name = "txtDepartment"
-        txtDepartment.Size = New Size(235, 30)
-        txtDepartment.TabIndex = 20
         ' 
         ' Label11
         ' 
@@ -1224,7 +1233,6 @@ Partial Class Team_Overview
     Friend WithEvents cbEmployeeStatus As ComboBox
     Friend WithEvents dtpDateHired As DateTimePicker
     Friend WithEvents txtUserID As TextBox
-    Friend WithEvents txtDepartment As TextBox
     Friend WithEvents Label11 As Label
     Friend WithEvents Label10 As Label
     Friend WithEvents Label25 As Label
@@ -1248,4 +1256,5 @@ Partial Class Team_Overview
     Friend WithEvents txtUsername As TextBox
     Friend WithEvents Label29 As Label
     Friend WithEvents txtPassword As TextBox
+    Friend WithEvents cbDepartment As ComboBox
 End Class

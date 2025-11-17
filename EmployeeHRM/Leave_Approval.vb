@@ -2,6 +2,8 @@
 Public Class Leave_Approval
     Private connectionString As String = "server=localhost;userid=root;password=091951;database=db_hrm"
     Private bsLeave As BindingSource
+    Private originalStatus As String
+    Private originalApprovedBy As String
     Private Sub Leave_Approval_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadLeaveRequests()
         LockLeaveControls()
@@ -12,7 +14,6 @@ Public Class Leave_Approval
         btnCancelLeave.Visible = False
     End Sub
     Private Sub LoadLeaveRequests()
-
         Try
             Using dbcon As New MySqlConnection(connectionString)
                 dbcon.Open()
@@ -39,12 +40,6 @@ Public Class Leave_Approval
                 bsLeave = New BindingSource()
                 bsLeave.DataSource = table
                 dgvEmployeeLeaveHistory.DataSource = bsLeave
-
-                ' Hide EmployeeID column
-                If dgvEmployeeLeaveHistory.Columns.Contains("EmployeeID") Then
-                    dgvEmployeeLeaveHistory.Columns("EmployeeID").Visible = False
-                End If
-
                 dgvEmployeeLeaveHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
                 dgvEmployeeLeaveHistory.SelectionMode = DataGridViewSelectionMode.FullRowSelect
                 dgvEmployeeLeaveHistory.ReadOnly = True
@@ -74,7 +69,6 @@ Public Class Leave_Approval
     Private Sub dgvEmployeeLeaveHistory_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvEmployeeLeaveHistory.CellClick
         If e.RowIndex < 0 Then Return
 
-        ' Populate textboxes and combo box
         Dim row As DataGridViewRow = dgvEmployeeLeaveHistory.Rows(e.RowIndex)
         txtLeaveID.Text = row.Cells("LeaveID").Value.ToString()
         txtEmployeeID.Text = row.Cells("EmployeeID").Value.ToString()
@@ -85,40 +79,38 @@ Public Class Leave_Approval
         cbStatus.Text = row.Cells("Status").Value.ToString()
         txtApprovedBy.Text = If(row.Cells("ApprovedBy").Value IsNot Nothing, row.Cells("ApprovedBy").Value.ToString(), "")
 
-        ' Lock controls
         LockLeaveControls()
 
-        ' Show Edit button only when a row is selected
         btnEditLeave.Visible = True
         btnSaveLeave.Visible = False
         btnCancelLeave.Visible = False
+        originalStatus = cbStatus.Text
+        originalApprovedBy = txtApprovedBy.Text
+
     End Sub
-    ' ----------------- Edit Button -----------------
     Private Sub btnEditLeave_Click(sender As Object, e As EventArgs) Handles btnEditLeave.Click
-        ' Enable only the editable fields
         cbStatus.Enabled = True
         txtApprovedBy.ReadOnly = False
-
-        ' Show Save and Cancel, hide Edit
         btnEditLeave.Visible = False
         btnSaveLeave.Visible = True
         btnCancelLeave.Visible = True
     End Sub
-    ' ----------------- Cancel Button -----------------
     Private Sub btnCancelLeave_Click(sender As Object, e As EventArgs) Handles btnCancelLeave.Click
-        ' Reload current selected row
         Dim selectedIndex As Integer = dgvEmployeeLeaveHistory.CurrentRow.Index
         dgvEmployeeLeaveHistory_CellClick(dgvEmployeeLeaveHistory, New DataGridViewCellEventArgs(0, selectedIndex))
-
-        ' Reset buttons
         btnEditLeave.Visible = True
         btnSaveLeave.Visible = False
         btnCancelLeave.Visible = False
     End Sub
-
-    ' ----------------- Save Button -----------------
     Private Sub btnSaveLeave_Click(sender As Object, e As EventArgs) Handles btnSaveLeave.Click
-        ' Validate inputs
+
+
+        If cbStatus.Text = originalStatus AndAlso txtApprovedBy.Text.Trim() = originalApprovedBy.Trim() Then
+            MessageBox.Show("No changes were made.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        End If
+
+
         If Not ValidateLeaveEdit() Then Return
 
         Try
@@ -133,10 +125,7 @@ Public Class Leave_Approval
 
             MessageBox.Show("Leave status updated successfully by the manager.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-            ' Reload the data grid view
             LoadLeaveRequests()
-
-            ' Lock controls and reset buttons
             LockLeaveControls()
             btnEditLeave.Visible = True
             btnSaveLeave.Visible = False
@@ -159,41 +148,20 @@ Public Class Leave_Approval
         End If
         Return True
     End Function
-    ' ----------------- Live Search -----------------
     Private Sub txtSearchLeave_TextChanged(sender As Object, e As EventArgs) Handles txtSearchLeave.TextChanged
         Dim searchValue As String = txtSearchLeave.Text.Trim()
-        dgvEmployeeLeaveHistory.ClearSelection() ' clear previous selection
 
-        If String.IsNullOrEmpty(searchValue) Then Return
+        If bsLeave Is Nothing Then Exit Sub
 
-        Dim searchParts() As String = searchValue.Split(" "c, StringSplitOptions.RemoveEmptyEntries)
+        If String.IsNullOrWhiteSpace(searchValue) Then
+            bsLeave.RemoveFilter()
+            Return
+        End If
 
-        For Each row As DataGridViewRow In dgvEmployeeLeaveHistory.Rows
-            If row.IsNewRow Then Continue For
+        searchValue = searchValue.Replace("'", "''")
 
-            Dim employeeName As String = row.Cells("EmployeeName").Value.ToString()
-            Dim matchFound As Boolean = False
-
-            ' Full match check
-            If employeeName.IndexOf(searchValue, StringComparison.OrdinalIgnoreCase) >= 0 Then
-                matchFound = True
-            Else
-                ' Partial match for each word
-                For Each part In searchParts
-                    If employeeName.IndexOf(part, StringComparison.OrdinalIgnoreCase) >= 0 Then
-                        matchFound = True
-                        Exit For
-                    End If
-                Next
-            End If
-
-            ' Select matching rows (blue highlight)
-            row.Selected = matchFound
-        Next
+        bsLeave.Filter = $"EmployeeName LIKE '%{searchValue}%'"
     End Sub
-
-
-
     Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
         Employee_Dashboard.Show()
         Me.Hide()

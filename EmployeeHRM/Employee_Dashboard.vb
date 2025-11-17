@@ -65,6 +65,10 @@ Public Class Employee_Dashboard
         Leave_Approval.Show()
         Me.Hide()
     End Sub
+    Private Sub lblPayrollSummary_Click(sender As Object, e As EventArgs) Handles lblPayrollSummary.Click
+        Payroll_Summary.Show()
+        Me.Hide()
+    End Sub
     Private Sub lblEmployeeTrainings_Click(sender As Object, e As EventArgs) Handles lblEmployeeTrainings.Click
         Employee_Trainings.Show()
         Me.Hide()

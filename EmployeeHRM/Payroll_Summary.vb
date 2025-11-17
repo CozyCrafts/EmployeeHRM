@@ -1,14 +1,22 @@
 ﻿
 Imports MySql.Data.MySqlClient
+Imports System.Globalization
+
 
 Public Class Payroll_Summary
     Private connectionString As String = "server=localhost;userid=root;password=091951;database=db_hrm"
     Private payrollTable As DataTable = Nothing
+    Private originalValues As New Dictionary(Of String, String)
+    Private payrollBindingSource As BindingSource
     Private Sub Payroll_Summary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadPayrollSummary()
         LoadEmployeeIDs()
-        SetInitialButtonState()
         LockFields()
+        ShowButtons(add:=True, edit:=False, delete:=False, compute:=False, save:=False, cancel:=False)
+        btnSendToATM.Visible = False
+        payrollBindingSource = New BindingSource()
+        payrollBindingSource.DataSource = payrollTable
+        dgvPayrollSummary.DataSource = payrollBindingSource
     End Sub
     Private Sub LoadPayrollSummary()
         Try
@@ -20,13 +28,13 @@ Public Class Payroll_Summary
                     CONCAT_WS(' ', e.`First Name`, e.MiddleName, e.LastName) AS EmployeeName,
                     j.JobTitle,
                     p.PayrollID,
-                    p.BasicSalary AS PayrollBasicSalary,   -- alias for payroll table
+                    p.BasicSalary AS PayrollBasicSalary,
                     p.OvertimePay AS PayrollOvertimePay,
                     p.GrossSalary AS PayrollGrossSalary,
                     p.NetPay AS PayrollNetPay,
                     p.PaymentDate AS PayrollPaymentDate,
                     s.SalaryID AS SalaryID,
-                    s.BaseSalary AS SalaryBaseSalary,      -- alias for salary table
+                    s.BaseSalary AS SalaryBaseSalary,
                     s.Allowance AS SalaryAllowance,
                     s.DailyRate AS SalaryDailyRate,
                     s.OvertimeRate AS SalaryOvertimeRate,
@@ -84,10 +92,11 @@ Public Class Payroll_Summary
             Dim row As DataRow = rows(0)
             txtEmployeeName.Text = row("EmployeeName").ToString()
             txtJobTitle.Text = row("JobTitle").ToString()
-            txtBaseSalary.Text = row("SalaryBaseSalary").ToString()
-            txtAllowance.Text = row("SalaryAllowance").ToString()
-            txtDailyRate.Text = row("SalaryDailyRate").ToString()
-            txtOvertimeRate.Text = row("SalaryOvertimeRate").ToString()
+            txtBaseSalary.Text = If(row("SalaryBaseSalary") IsNot DBNull.Value, row("SalaryBaseSalary").ToString(), "0")
+            txtAllowance.Text = If(row("SalaryAllowance") IsNot DBNull.Value, row("SalaryAllowance").ToString(), "0")
+            txtDailyRate.Text = If(row("SalaryDailyRate") IsNot DBNull.Value, row("SalaryDailyRate").ToString(), "0")
+            txtOvertimeRate.Text = If(row("SalaryOvertimeRate") IsNot DBNull.Value, row("SalaryOvertimeRate").ToString(), "0")
+
             Dim payrollID As String = row("PayrollID").ToString()
             If String.IsNullOrEmpty(payrollID) Then
                 txtPayrollID.Text = GenerateNextPayrollID()
@@ -100,7 +109,7 @@ Public Class Payroll_Summary
             txtNetPay.Text = row("PayrollNetPay").ToString()
             Dim paymentDateStr As String = row("PayrollPaymentDate").ToString()
             Dim paymentDate As DateTime
-            If Not String.IsNullOrWhiteSpace(paymentDateStr) AndAlso DateTime.TryParseExact(paymentDateStr, "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture, Globalization.DateTimeStyles.None, paymentDate) Then
+            If row("PayrollPaymentDate") IsNot DBNull.Value AndAlso DateTime.TryParse(row("PayrollPaymentDate").ToString(), paymentDate) Then
                 dtpPaymentDate.Value = paymentDate
             Else
                 Dim today As DateTime = DateTime.Today
@@ -149,28 +158,39 @@ Public Class Payroll_Summary
         txtAllowance.Text = row.Cells("SalaryAllowance").Value.ToString()
         txtDailyRate.Text = row.Cells("SalaryDailyRate").Value.ToString()
         txtOvertimeRate.Text = row.Cells("SalaryOvertimeRate").Value.ToString()
-        txtAttendanceID.Text = row.Cells("AttendanceID").Value.ToString()
+        txtAttendanceID.Text = If(row.Cells("AttendanceID").Value IsNot DBNull.Value, row.Cells("AttendanceID").Value.ToString(), GenerateNextAttendanceID())
         txtTotalHours.Text = row.Cells("AttendanceTotalHours").Value.ToString()
         txtExceededHours.Text = row.Cells("AttendanceExceededHours").Value.ToString()
         txtDaysAttended.Text = row.Cells("AttendanceDaysAttended").Value.ToString()
         txtAbsences.Text = row.Cells("AttendanceAbsences").Value.ToString()
-        txtDeductionID.Text = row.Cells("DeductionID").Value.ToString()
+        txtDeductionID.Text = If(row.Cells("DeductionID").Value IsNot DBNull.Value, row.Cells("DeductionID").Value.ToString(), GenerateNextDeductionID())
         txtUnpaidLeave.Text = row.Cells("DeductionUnpaidLeave").Value.ToString()
         txtSSS.Text = row.Cells("DeductionSSS").Value.ToString()
         txtPhilHealth.Text = row.Cells("DeductionPhilHealth").Value.ToString()
         txtPagIBIG.Text = row.Cells("DeductionPagIBIG").Value.ToString()
         txtTotalDeduction.Text = row.Cells("DeductionTotalDeduction").Value.ToString()
+
+        originalValues.Clear()
+        originalValues("BaseSalary") = txtBaseSalary.Text
+        originalValues("Allowance") = txtAllowance.Text
+        originalValues("DailyRate") = txtDailyRate.Text
+        originalValues("OvertimeRate") = txtOvertimeRate.Text
+        originalValues("BasicSalary") = txtBasicSalary.Text
+        originalValues("OvertimePay") = txtOvertimePay.Text
+        originalValues("GrossSalary") = txtGrossSalary.Text
+        originalValues("NetPay") = txtNetPay.Text
+        originalValues("SSS") = txtSSS.Text
+        originalValues("PhilHealth") = txtPhilHealth.Text
+        originalValues("PagIBIG") = txtPagIBIG.Text
+        originalValues("UnpaidLeave") = txtUnpaidLeave.Text
+        originalValues("TotalDeduction") = txtTotalDeduction.Text
+
         LockFields()
     End Sub
     Private Sub dgvPayrollSummary_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvPayrollSummary.CellClick
         If e.RowIndex >= 0 Then
             PopulateFieldsFromSelectedRow(e.RowIndex)
-            btnAddPayroll.Visible = True
-            btnEditPayroll.Visible = True
-            btnDeletePayroll.Visible = True
-            btnComputePayroll.Visible = True
-            btnSavePayroll.Visible = False
-            btnCancelPayroll.Visible = False
+            ShowButtons(add:=True, edit:=True, delete:=True, compute:=True, save:=False, cancel:=False)
         End If
     End Sub
     Private Sub LockFields()
@@ -238,14 +258,6 @@ Public Class Payroll_Summary
         dtpPaymentDate.Value = New DateTime(today.Year, today.Month, DateTime.DaysInMonth(today.Year, today.Month))
         dtpPaymentDate.Enabled = False
     End Sub
-    Private Sub SetInitialButtonState()
-        btnAddPayroll.Visible = True
-        btnEditPayroll.Visible = False
-        btnDeletePayroll.Visible = False
-        btnComputePayroll.Visible = False
-        btnSavePayroll.Visible = False
-        btnCancelPayroll.Visible = False
-    End Sub
     Private Sub ClearPayrollFields()
         cbEmployeeID.Text = ""
         txtEmployeeName.Text = ""
@@ -286,7 +298,7 @@ Public Class Payroll_Summary
                 If lastIDObj IsNot Nothing AndAlso Not IsDBNull(lastIDObj) Then
                     Dim lastID As String = lastIDObj.ToString()
                     Dim numericPart As Integer
-                    If Integer.TryParse(lastID.Substring(1), numericPart) Then
+                    If lastID.Length > 1 AndAlso Integer.TryParse(lastID.Substring(1), numericPart) Then
                         numericPart += 1
                         nextID = "P" & numericPart.ToString("D3")
                     End If
@@ -295,7 +307,6 @@ Public Class Payroll_Summary
         Catch ex As Exception
             MessageBox.Show("Error generating PayrollID: " & ex.Message)
         End Try
-
         Return nextID
     End Function
     Private Function GenerateNextDeductionID() As String
@@ -308,7 +319,7 @@ Public Class Payroll_Summary
                 If lastIDObj IsNot Nothing AndAlso Not IsDBNull(lastIDObj) Then
                     Dim lastID As String = lastIDObj.ToString()
                     Dim numericPart As Integer
-                    If Integer.TryParse(lastID.Substring(3), numericPart) Then
+                    If lastID.Length > 3 AndAlso Integer.TryParse(lastID.Substring(3), numericPart) Then
                         numericPart += 1
                         nextID = "DDC" & numericPart.ToString("D3")
                     End If
@@ -317,7 +328,6 @@ Public Class Payroll_Summary
         Catch ex As Exception
             MessageBox.Show("Error generating DeductionID: " & ex.Message)
         End Try
-
         Return nextID
     End Function
     Private Function GenerateNextAttendanceID() As String
@@ -330,7 +340,7 @@ Public Class Payroll_Summary
                 If lastIDObj IsNot Nothing AndAlso Not IsDBNull(lastIDObj) Then
                     Dim lastID As String = lastIDObj.ToString()
                     Dim numericPart As Integer
-                    If Integer.TryParse(lastID.Substring(1), numericPart) Then
+                    If lastID.Length > 1 AndAlso Integer.TryParse(lastID.Substring(1), numericPart) Then
                         numericPart += 1
                         nextID = "T" & numericPart.ToString("D3")
                     End If
@@ -351,7 +361,7 @@ Public Class Payroll_Summary
                 If lastIDObj IsNot Nothing AndAlso Not IsDBNull(lastIDObj) Then
                     Dim lastID As String = lastIDObj.ToString()
                     Dim numericPart As Integer
-                    If Integer.TryParse(lastID.Substring(1), numericPart) Then
+                    If lastID.Length > 1 AndAlso Integer.TryParse(lastID.Substring(1), numericPart) Then
                         numericPart += 1
                         nextID = "S" & numericPart.ToString()
                     End If
@@ -360,7 +370,6 @@ Public Class Payroll_Summary
         Catch ex As Exception
             MessageBox.Show("Error generating SalaryID: " & ex.Message)
         End Try
-
         Return nextID
     End Function
     Private Sub ComputePayroll()
@@ -391,12 +400,76 @@ Public Class Payroll_Summary
         txtTotalDeduction.Text = totalDeductions.ToString("F2")
         txtNetPay.Text = netPay.ToString("F2")
     End Sub
+    Private Sub ShowSendToATMButton()
+        Dim netPay As Decimal
+        If Decimal.TryParse(txtNetPay.Text, netPay) AndAlso netPay > 0 Then
+            btnSendToATM.Visible = True
+        Else
+            btnSendToATM.Visible = False
+        End If
+    End Sub
+    Private Function HasChanges() As Boolean
+        If originalValues.Count = 0 Then Return True
+        Return originalValues("BaseSalary") <> txtBaseSalary.Text OrElse
+               originalValues("Allowance") <> txtAllowance.Text OrElse
+               originalValues("DailyRate") <> txtDailyRate.Text OrElse
+               originalValues("OvertimeRate") <> txtOvertimeRate.Text OrElse
+               originalValues("BasicSalary") <> txtBasicSalary.Text OrElse
+               originalValues("OvertimePay") <> txtOvertimePay.Text OrElse
+               originalValues("GrossSalary") <> txtGrossSalary.Text OrElse
+               originalValues("NetPay") <> txtNetPay.Text OrElse
+               originalValues("SSS") <> txtSSS.Text OrElse
+               originalValues("PhilHealth") <> txtPhilHealth.Text OrElse
+               originalValues("PagIBIG") <> txtPagIBIG.Text OrElse
+               originalValues("UnpaidLeave") <> txtUnpaidLeave.Text OrElse
+               originalValues("TotalDeduction") <> txtTotalDeduction.Text
+    End Function
+    Private Function ValidatePayrollFields() As Boolean
+        If String.IsNullOrWhiteSpace(cbEmployeeID.Text) Then
+            MessageBox.Show("Please select an employee.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+
+        If String.IsNullOrWhiteSpace(txtBaseSalary.Text) OrElse Not IsNumeric(txtBaseSalary.Text) Then
+            MessageBox.Show("Base Salary is required and must be numeric.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+
+        If String.IsNullOrWhiteSpace(txtDailyRate.Text) OrElse Not IsNumeric(txtDailyRate.Text) Then
+            MessageBox.Show("Daily Rate is required and must be numeric.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+
+        If String.IsNullOrWhiteSpace(txtOvertimeRate.Text) OrElse Not IsNumeric(txtOvertimeRate.Text) Then
+            MessageBox.Show("Overtime Rate is required and must be numeric.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+
+        If String.IsNullOrWhiteSpace(txtDaysAttended.Text) OrElse Not IsNumeric(txtDaysAttended.Text) Then
+            MessageBox.Show("Days Attended is required and must be numeric.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+
+        If String.IsNullOrWhiteSpace(txtExceededHours.Text) OrElse Not IsNumeric(txtExceededHours.Text) Then
+            MessageBox.Show("Exceeded Hours is required and must be numeric.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+
+        Return True
+    End Function
     Private Sub btnComputePayroll_Click(sender As Object, e As EventArgs) Handles btnComputePayroll.Click
         If String.IsNullOrWhiteSpace(cbEmployeeID.Text) Then
             MessageBox.Show("Please select an employee first.", "Compute Payroll", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
+        If Not ValidatePayrollFields() Then Exit Sub
+
+        If CDbl(txtDailyRate.Text) < 0 OrElse CDbl(txtDaysAttended.Text) < 0 OrElse CDbl(txtExceededHours.Text) < 0 Then
+            MessageBox.Show("Values cannot be negative.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
         ComputePayroll()
+        ShowSendToATMButton()
     End Sub
     Private Sub btnAddPayroll_Click(sender As Object, e As EventArgs) Handles btnAddPayroll.Click
         UnlockFields()
@@ -405,27 +478,82 @@ Public Class Payroll_Summary
         cbEmployeeID.Enabled = True
         txtPayrollID.Text = GenerateNextPayrollID()
         txtDeductionID.Text = GenerateNextDeductionID()
-        btnAddPayroll.Visible = False
-        btnEditPayroll.Visible = False
-        btnDeletePayroll.Visible = False
-        btnComputePayroll.Visible = True
-        btnSavePayroll.Visible = True
-        btnCancelPayroll.Visible = True
+        ShowButtons(add:=False, edit:=False, delete:=False, compute:=True, save:=True, cancel:=True)
+
     End Sub
     Private Sub btnSavePayroll_Click(sender As Object, e As EventArgs) Handles btnSavePayroll.Click
         ComputePayroll()
+        If Not ValidatePayrollFields() Then Exit Sub
+
+        Try
+            Dim gross As Double = CDbl(txtGrossSalary.Text)
+            Dim deduction As Double = CDbl(txtTotalDeduction.Text)
+            Dim net As Double = CDbl(txtNetPay.Text)
+
+            If gross < 0 Then
+                MessageBox.Show("Gross Pay cannot be negative.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Exit Sub
+            End If
+
+            If deduction < 0 Then
+                MessageBox.Show("Total deductions cannot be negative.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Exit Sub
+            End If
+
+            If net < 0 Then
+                MessageBox.Show("Net Pay cannot be negative.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Exit Sub
+            End If
+
+            If deduction > gross Then
+                MessageBox.Show("Total deductions cannot exceed gross pay.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Exit Sub
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show("Invalid numeric values detected.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End Try
+
+
+        Dim changed As Boolean = False
+
+        If originalValues.Count > 0 Then
+            If originalValues("BaseSalary") <> txtBaseSalary.Text Then changed = True
+            If originalValues("Allowance") <> txtAllowance.Text Then changed = True
+            If originalValues("DailyRate") <> txtDailyRate.Text Then changed = True
+            If originalValues("OvertimeRate") <> txtOvertimeRate.Text Then changed = True
+            If originalValues("BasicSalary") <> txtBasicSalary.Text Then changed = True
+            If originalValues("OvertimePay") <> txtOvertimePay.Text Then changed = True
+            If originalValues("GrossSalary") <> txtGrossSalary.Text Then changed = True
+            If originalValues("NetPay") <> txtNetPay.Text Then changed = True
+            If originalValues("SSS") <> txtSSS.Text Then changed = True
+            If originalValues("PhilHealth") <> txtPhilHealth.Text Then changed = True
+            If originalValues("PagIBIG") <> txtPagIBIG.Text Then changed = True
+            If originalValues("UnpaidLeave") <> txtUnpaidLeave.Text Then changed = True
+            If originalValues("TotalDeduction") <> txtTotalDeduction.Text Then changed = True
+        End If
+
+        If Not changed Then
+            MessageBox.Show("No changes detected. Save canceled.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
         Try
             Using conn As New MySqlConnection(connectionString)
                 conn.Open()
                 Dim isNewPayroll As Boolean = String.IsNullOrWhiteSpace(txtPayrollID.Text) OrElse txtPayrollID.Text.StartsWith("P") = False
                 Dim payrollID As String = txtPayrollID.Text
                 Dim deductionID As String = txtDeductionID.Text
-                Dim salaryID As String = " "
+                Dim salaryID As String
                 If isNewPayroll Then
                     payrollID = GenerateNextPayrollID()
                     deductionID = GenerateNextDeductionID()
                     salaryID = GenerateNextSalaryID()
+                Else
+                    salaryID = payrollTable.Select("EmployeeID='" & cbEmployeeID.Text & "'")(0)("SalaryID").ToString()
                 End If
+
                 Dim cmdPayroll As New MySqlCommand("
                 INSERT INTO tblpayroll (PayrollID, EmployeeID, BasicSalary, OvertimePay, GrossSalary, NetPay, PaymentDate)
                 VALUES (@pid, @eid, @basic, @ot, @gross, @net, @date)
@@ -491,34 +619,39 @@ Public Class Payroll_Summary
             MessageBox.Show("Payroll saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
             LockFields()
             ClearPayrollFields()
-            SetInitialButtonState()
+            ShowButtons(add:=True, edit:=False, delete:=False, compute:=False, save:=False, cancel:=False)
             LoadPayrollSummary()
             LoadEmployeeIDs()
         Catch ex As Exception
             MessageBox.Show("Error saving payroll: " & ex.Message)
         End Try
+
     End Sub
     Private Sub btnEditPayroll_Click(sender As Object, e As EventArgs) Handles btnEditPayroll.Click
+        If String.IsNullOrWhiteSpace(txtPayrollID.Text) Then
+            MessageBox.Show("Please select a payroll record to edit.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
         UnlockFields()
         SetPaymentDateToLastDay()
         cbEmployeeID.Enabled = False
-        btnEditPayroll.Visible = False
-        btnDeletePayroll.Visible = False
-        btnComputePayroll.Visible = True
-        btnSavePayroll.Visible = True
-        btnCancelPayroll.Visible = True
+        ShowButtons(add:=False, edit:=False, delete:=False, compute:=True, save:=True, cancel:=True)
     End Sub
     Private Sub btnCancelPayroll_Click(sender As Object, e As EventArgs) Handles btnCancelPayroll.Click
         LockFields()
         ClearPayrollFields()
-        SetInitialButtonState()
+        ShowButtons(add:=True, edit:=False, delete:=False, compute:=False, save:=False, cancel:=False)
     End Sub
     Private Sub btnDeletePayroll_Click(sender As Object, e As EventArgs) Handles btnDeletePayroll.Click
         If String.IsNullOrWhiteSpace(cbEmployeeID.Text) Then
             MessageBox.Show("Please select an employee/payroll to delete.", "Delete Payroll", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
-
+        If String.IsNullOrWhiteSpace(txtPayrollID.Text) Then
+            MessageBox.Show("No payroll record selected.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
         Dim confirmResult As DialogResult = MessageBox.Show(
         "Are you sure you want to delete this payroll and its deductions? This action cannot be undone.",
         "Confirm Delete",
@@ -539,73 +672,34 @@ Public Class Payroll_Summary
                 MessageBox.Show("Payroll and associated deductions deleted successfully.", "Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 ClearPayrollFields()
                 LoadPayrollSummary()
-                SetInitialButtonState()
+                ShowButtons(add:=True, edit:=False, delete:=False, compute:=False, save:=False, cancel:=False)
             Catch ex As Exception
                 MessageBox.Show("Error deleting payroll: " & ex.Message)
             End Try
         End If
     End Sub
-    Private Sub btnSendToATM_Click(sender As Object, e As EventArgs) Handles btnSendToATM.Click
-        Dim requiredFields As TextBox() = {
-        txtEmployeeName, txtJobTitle, txtBaseSalary, txtAllowance, txtDailyRate, txtOvertimeRate,
-        txtBasicSalary, txtOvertimePay, txtGrossSalary, txtNetPay,
-        txtSSS, txtPhilHealth, txtPagIBIG, txtUnpaidLeave, txtTotalDeduction
-    }
-        For Each field In requiredFields
-            If String.IsNullOrWhiteSpace(field.Text) Then
-                MessageBox.Show("Please make sure all payroll fields are filled before sending to ATM.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Return
-            End If
-        Next
-        Dim today As DateTime = DateTime.Today
-        Dim lastDayOfMonth As Integer = DateTime.DaysInMonth(today.Year, today.Month)
-        If today.Day <> lastDayOfMonth Then
-            MessageBox.Show("Payroll can only be sent on the last day of the month.", "Date Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
-        Dim confirmResult As DialogResult = MessageBox.Show(
-        "Are you sure you want to send this payroll to the employee's ATM?",
-        "Confirm Send",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Question)
-        If confirmResult = DialogResult.Yes Then
-            MessageBox.Show("Payroll successfully sent to ATM.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        Else
-            MessageBox.Show("Payroll sending canceled.", "Canceled", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        End If
-    End Sub
     Private Sub txtSearchPayroll_TextChanged(sender As Object, e As EventArgs) Handles txtSearchPayroll.TextChanged
+        If payrollBindingSource Is Nothing OrElse payrollBindingSource.DataSource Is Nothing Then Exit Sub
+
         Dim searchValue As String = txtSearchPayroll.Text.Trim()
-        dgvPayrollSummary.ClearSelection()
+        Dim dt As DataTable = TryCast(payrollBindingSource.DataSource, DataTable)
+        If dt Is Nothing Then Exit Sub
 
-        If String.IsNullOrEmpty(searchValue) Then
-            LoadPayrollSummary()
-            Return
-        End If
-        Dim searchParts() As String = searchValue.Split(" "c, StringSplitOptions.RemoveEmptyEntries)
-        For Each row As DataGridViewRow In dgvPayrollSummary.Rows
-            If Not row.IsNewRow Then
-                Dim employeeID As String = row.Cells("EmployeeID").Value.ToString()
-                Dim fullName As String = row.Cells("EmployeeName").Value.ToString()
-                Dim matchFound As Boolean = False
-                If employeeID.IndexOf(searchValue, StringComparison.OrdinalIgnoreCase) >= 0 OrElse
-               fullName.IndexOf(searchValue, StringComparison.OrdinalIgnoreCase) >= 0 Then
-                    matchFound = True
-                Else
-                    For Each part In searchParts
-                        If fullName.IndexOf(part, StringComparison.OrdinalIgnoreCase) >= 0 Then
-                            matchFound = True
-                            Exit For
-                        End If
-                    Next
-                End If
+        If String.IsNullOrWhiteSpace(searchValue) Then
+            payrollBindingSource.RemoveFilter()
+        Else
+            searchValue = searchValue.Replace("[", "[[]").Replace("%", "[%]").Replace("_", "[_]")
+            Dim isEmployeeIDNumeric As Boolean = dt.Columns("EmployeeID").DataType Is GetType(Integer) OrElse dt.Columns("EmployeeID").DataType Is GetType(Long)
 
-                row.Selected = matchFound
+            If isEmployeeIDNumeric AndAlso IsNumeric(searchValue) Then
+                payrollBindingSource.Filter = $"EmployeeName LIKE '%{searchValue}%' OR EmployeeID = {searchValue}"
+            Else
+                payrollBindingSource.Filter = $"EmployeeName LIKE '%{searchValue}%' OR Convert(EmployeeID, 'System.String') LIKE '%{searchValue}%'"
             End If
-        Next
+        End If
     End Sub
     Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
-         Employee_Dashboard.Show()
+        Employee_Dashboard.Show()
         Me.Hide()
     End Sub
     Private Sub lblMyProfile_Click(sender As Object, e As EventArgs) Handles lblMyProfile.Click
