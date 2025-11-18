@@ -22,9 +22,8 @@ Partial Class Attendance
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Attendance))
         adminheader_pnl = New Panel()
-        pcbTerminate = New PictureBox()
+        btnSignOut = New FontAwesome.Sharp.IconButton()
         Label2 = New Label()
         Panel2 = New Panel()
         lblAmenities = New Label()
@@ -46,8 +45,13 @@ Partial Class Attendance
         lblDashboard = New Label()
         Label51 = New Label()
         gbDetailsAttendance = New GroupBox()
+        btnEditInfo = New FontAwesome.Sharp.IconButton()
+        btnCancelInfo = New FontAwesome.Sharp.IconButton()
+        btnSaveInfo = New FontAwesome.Sharp.IconButton()
         gbDailyTimeRecord = New GroupBox()
         GroupBox2 = New GroupBox()
+        IconButton3 = New FontAwesome.Sharp.IconButton()
+        IconButton4 = New FontAwesome.Sharp.IconButton()
         Label19 = New Label()
         dtpCheckOutPM = New DateTimePicker()
         dtpCheckInPM = New DateTimePicker()
@@ -71,13 +75,7 @@ Partial Class Attendance
         Label21 = New Label()
         gbAttendanceHistory = New GroupBox()
         dgvAttendanceHistory = New DataGridView()
-        IconButton3 = New FontAwesome.Sharp.IconButton()
-        IconButton4 = New FontAwesome.Sharp.IconButton()
-        btnEditInfo = New FontAwesome.Sharp.IconButton()
-        btnCancelInfo = New FontAwesome.Sharp.IconButton()
-        btnSaveInfo = New FontAwesome.Sharp.IconButton()
         adminheader_pnl.SuspendLayout()
-        CType(pcbTerminate, ComponentModel.ISupportInitialize).BeginInit()
         Panel2.SuspendLayout()
         gbDetailsAttendance.SuspendLayout()
         gbDailyTimeRecord.SuspendLayout()
@@ -90,22 +88,28 @@ Partial Class Attendance
         ' adminheader_pnl
         ' 
         adminheader_pnl.BackColor = Color.White
-        adminheader_pnl.Controls.Add(pcbTerminate)
+        adminheader_pnl.Controls.Add(btnSignOut)
         adminheader_pnl.Controls.Add(Label2)
         adminheader_pnl.Location = New Point(338, -17)
         adminheader_pnl.Name = "adminheader_pnl"
         adminheader_pnl.Size = New Size(1608, 107)
         adminheader_pnl.TabIndex = 23
         ' 
-        ' pcbTerminate
+        ' btnSignOut
         ' 
-        pcbTerminate.Image = CType(resources.GetObject("pcbTerminate.Image"), Image)
-        pcbTerminate.Location = New Point(1352, 45)
-        pcbTerminate.Name = "pcbTerminate"
-        pcbTerminate.Size = New Size(55, 54)
-        pcbTerminate.SizeMode = PictureBoxSizeMode.StretchImage
-        pcbTerminate.TabIndex = 65
-        pcbTerminate.TabStop = False
+        btnSignOut.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnSignOut.IconChar = FontAwesome.Sharp.IconChar.SignOut
+        btnSignOut.IconColor = Color.Black
+        btnSignOut.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSignOut.IconSize = 38
+        btnSignOut.ImageAlign = ContentAlignment.MiddleLeft
+        btnSignOut.Location = New Point(1260, 46)
+        btnSignOut.Name = "btnSignOut"
+        btnSignOut.Size = New Size(142, 54)
+        btnSignOut.TabIndex = 38
+        btnSignOut.Text = "Sign Out"
+        btnSignOut.TextAlign = ContentAlignment.MiddleRight
+        btnSignOut.UseVisualStyleBackColor = True
         ' 
         ' Label2
         ' 
@@ -366,6 +370,57 @@ Partial Class Attendance
         gbDetailsAttendance.TabStop = False
         gbDetailsAttendance.Text = "Details"
         ' 
+        ' btnEditInfo
+        ' 
+        btnEditInfo.BackColor = SystemColors.InactiveCaption
+        btnEditInfo.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnEditInfo.IconChar = FontAwesome.Sharp.IconChar.Edit
+        btnEditInfo.IconColor = Color.Black
+        btnEditInfo.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnEditInfo.IconSize = 40
+        btnEditInfo.ImageAlign = ContentAlignment.MiddleLeft
+        btnEditInfo.Location = New Point(161, 389)
+        btnEditInfo.Name = "btnEditInfo"
+        btnEditInfo.Size = New Size(291, 55)
+        btnEditInfo.TabIndex = 115
+        btnEditInfo.Text = "Edit Attendance"
+        btnEditInfo.TextAlign = ContentAlignment.MiddleRight
+        btnEditInfo.UseVisualStyleBackColor = False
+        ' 
+        ' btnCancelInfo
+        ' 
+        btnCancelInfo.BackColor = SystemColors.InactiveCaption
+        btnCancelInfo.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
+        btnCancelInfo.IconChar = FontAwesome.Sharp.IconChar.Cancel
+        btnCancelInfo.IconColor = Color.Black
+        btnCancelInfo.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnCancelInfo.IconSize = 35
+        btnCancelInfo.ImageAlign = ContentAlignment.MiddleLeft
+        btnCancelInfo.Location = New Point(302, 388)
+        btnCancelInfo.Name = "btnCancelInfo"
+        btnCancelInfo.Size = New Size(150, 52)
+        btnCancelInfo.TabIndex = 117
+        btnCancelInfo.Text = "Cancel"
+        btnCancelInfo.TextAlign = ContentAlignment.MiddleRight
+        btnCancelInfo.UseVisualStyleBackColor = False
+        ' 
+        ' btnSaveInfo
+        ' 
+        btnSaveInfo.BackColor = SystemColors.InactiveCaption
+        btnSaveInfo.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
+        btnSaveInfo.IconChar = FontAwesome.Sharp.IconChar.Save
+        btnSaveInfo.IconColor = Color.Black
+        btnSaveInfo.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSaveInfo.IconSize = 35
+        btnSaveInfo.ImageAlign = ContentAlignment.MiddleLeft
+        btnSaveInfo.Location = New Point(161, 389)
+        btnSaveInfo.Name = "btnSaveInfo"
+        btnSaveInfo.Size = New Size(150, 52)
+        btnSaveInfo.TabIndex = 116
+        btnSaveInfo.Text = "Save"
+        btnSaveInfo.TextAlign = ContentAlignment.MiddleRight
+        btnSaveInfo.UseVisualStyleBackColor = False
+        ' 
         ' gbDailyTimeRecord
         ' 
         gbDailyTimeRecord.Controls.Add(GroupBox2)
@@ -396,6 +451,41 @@ Partial Class Attendance
         GroupBox2.TabIndex = 119
         GroupBox2.TabStop = False
         GroupBox2.Text = "PM"
+        ' 
+        ' IconButton3
+        ' 
+        IconButton3.BackColor = SystemColors.InactiveCaption
+        IconButton3.BackgroundImageLayout = ImageLayout.None
+        IconButton3.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold)
+        IconButton3.IconChar = FontAwesome.Sharp.IconChar.ClockRotateLeft
+        IconButton3.IconColor = Color.Black
+        IconButton3.IconFont = FontAwesome.Sharp.IconFont.Auto
+        IconButton3.IconSize = 30
+        IconButton3.ImageAlign = ContentAlignment.MiddleLeft
+        IconButton3.Location = New Point(501, 85)
+        IconButton3.Name = "IconButton3"
+        IconButton3.Size = New Size(154, 56)
+        IconButton3.TabIndex = 118
+        IconButton3.Text = "Check Out"
+        IconButton3.TextAlign = ContentAlignment.MiddleRight
+        IconButton3.UseVisualStyleBackColor = False
+        ' 
+        ' IconButton4
+        ' 
+        IconButton4.BackColor = SystemColors.InactiveCaption
+        IconButton4.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        IconButton4.IconChar = FontAwesome.Sharp.IconChar.ClockFour
+        IconButton4.IconColor = Color.Black
+        IconButton4.IconFont = FontAwesome.Sharp.IconFont.Auto
+        IconButton4.IconSize = 30
+        IconButton4.ImageAlign = ContentAlignment.MiddleLeft
+        IconButton4.Location = New Point(173, 87)
+        IconButton4.Name = "IconButton4"
+        IconButton4.Size = New Size(139, 56)
+        IconButton4.TabIndex = 117
+        IconButton4.Text = "Check In"
+        IconButton4.TextAlign = ContentAlignment.MiddleRight
+        IconButton4.UseVisualStyleBackColor = False
         ' 
         ' Label19
         ' 
@@ -658,92 +748,6 @@ Partial Class Attendance
         dgvAttendanceHistory.Size = New Size(1302, 363)
         dgvAttendanceHistory.TabIndex = 0
         ' 
-        ' IconButton3
-        ' 
-        IconButton3.BackColor = SystemColors.InactiveCaption
-        IconButton3.BackgroundImageLayout = ImageLayout.None
-        IconButton3.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold)
-        IconButton3.IconChar = FontAwesome.Sharp.IconChar.ClockRotateLeft
-        IconButton3.IconColor = Color.Black
-        IconButton3.IconFont = FontAwesome.Sharp.IconFont.Auto
-        IconButton3.IconSize = 30
-        IconButton3.ImageAlign = ContentAlignment.MiddleLeft
-        IconButton3.Location = New Point(501, 85)
-        IconButton3.Name = "IconButton3"
-        IconButton3.Size = New Size(154, 56)
-        IconButton3.TabIndex = 118
-        IconButton3.Text = "Check Out"
-        IconButton3.TextAlign = ContentAlignment.MiddleRight
-        IconButton3.UseVisualStyleBackColor = False
-        ' 
-        ' IconButton4
-        ' 
-        IconButton4.BackColor = SystemColors.InactiveCaption
-        IconButton4.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        IconButton4.IconChar = FontAwesome.Sharp.IconChar.ClockFour
-        IconButton4.IconColor = Color.Black
-        IconButton4.IconFont = FontAwesome.Sharp.IconFont.Auto
-        IconButton4.IconSize = 30
-        IconButton4.ImageAlign = ContentAlignment.MiddleLeft
-        IconButton4.Location = New Point(173, 87)
-        IconButton4.Name = "IconButton4"
-        IconButton4.Size = New Size(139, 56)
-        IconButton4.TabIndex = 117
-        IconButton4.Text = "Check In"
-        IconButton4.TextAlign = ContentAlignment.MiddleRight
-        IconButton4.UseVisualStyleBackColor = False
-        ' 
-        ' btnEditInfo
-        ' 
-        btnEditInfo.BackColor = SystemColors.InactiveCaption
-        btnEditInfo.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnEditInfo.IconChar = FontAwesome.Sharp.IconChar.Edit
-        btnEditInfo.IconColor = Color.Black
-        btnEditInfo.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnEditInfo.IconSize = 40
-        btnEditInfo.ImageAlign = ContentAlignment.MiddleLeft
-        btnEditInfo.Location = New Point(161, 389)
-        btnEditInfo.Name = "btnEditInfo"
-        btnEditInfo.Size = New Size(291, 55)
-        btnEditInfo.TabIndex = 115
-        btnEditInfo.Text = "Edit Attendance"
-        btnEditInfo.TextAlign = ContentAlignment.MiddleRight
-        btnEditInfo.UseVisualStyleBackColor = False
-        ' 
-        ' btnCancelInfo
-        ' 
-        btnCancelInfo.BackColor = SystemColors.InactiveCaption
-        btnCancelInfo.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        btnCancelInfo.IconChar = FontAwesome.Sharp.IconChar.Cancel
-        btnCancelInfo.IconColor = Color.Black
-        btnCancelInfo.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnCancelInfo.IconSize = 35
-        btnCancelInfo.ImageAlign = ContentAlignment.MiddleLeft
-        btnCancelInfo.Location = New Point(302, 388)
-        btnCancelInfo.Name = "btnCancelInfo"
-        btnCancelInfo.Size = New Size(150, 52)
-        btnCancelInfo.TabIndex = 117
-        btnCancelInfo.Text = "Cancel"
-        btnCancelInfo.TextAlign = ContentAlignment.MiddleRight
-        btnCancelInfo.UseVisualStyleBackColor = False
-        ' 
-        ' btnSaveInfo
-        ' 
-        btnSaveInfo.BackColor = SystemColors.InactiveCaption
-        btnSaveInfo.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        btnSaveInfo.IconChar = FontAwesome.Sharp.IconChar.Save
-        btnSaveInfo.IconColor = Color.Black
-        btnSaveInfo.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnSaveInfo.IconSize = 35
-        btnSaveInfo.ImageAlign = ContentAlignment.MiddleLeft
-        btnSaveInfo.Location = New Point(161, 389)
-        btnSaveInfo.Name = "btnSaveInfo"
-        btnSaveInfo.Size = New Size(150, 52)
-        btnSaveInfo.TabIndex = 116
-        btnSaveInfo.Text = "Save"
-        btnSaveInfo.TextAlign = ContentAlignment.MiddleRight
-        btnSaveInfo.UseVisualStyleBackColor = False
-        ' 
         ' Attendance
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
@@ -761,7 +765,6 @@ Partial Class Attendance
         WindowState = FormWindowState.Maximized
         adminheader_pnl.ResumeLayout(False)
         adminheader_pnl.PerformLayout()
-        CType(pcbTerminate, ComponentModel.ISupportInitialize).EndInit()
         Panel2.ResumeLayout(False)
         Panel2.PerformLayout()
         gbDetailsAttendance.ResumeLayout(False)
@@ -779,7 +782,6 @@ Partial Class Attendance
     Friend WithEvents adminheader_pnl As Panel
     Friend WithEvents Label2 As Label
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents pcbTerminate As PictureBox
     Friend WithEvents Label26 As Label
     Friend WithEvents Label27 As Label
     Friend WithEvents lblAmenities As Label
@@ -829,4 +831,5 @@ Partial Class Attendance
     Friend WithEvents btnEditInfo As FontAwesome.Sharp.IconButton
     Friend WithEvents btnCancelInfo As FontAwesome.Sharp.IconButton
     Friend WithEvents btnSaveInfo As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnSignOut As FontAwesome.Sharp.IconButton
 End Class

@@ -1,17 +1,25 @@
 ﻿Imports MySql.Data.MySqlClient
-
+Imports System.Globalization
 Public Class Amenities
 
     Private connectionString As String = "server=localhost;userid=root;password=091951;database=db_hrm"
     Private isAddingAmenity As Boolean = False
     Private originalAmenityValues As New Dictionary(Of String, String)
 
+    Private Sub CapitalizeWords(sender As Object, e As EventArgs)
+        Dim tb As TextBox = DirectCast(sender, TextBox)
+        Dim selStart As Integer = tb.SelectionStart
+        tb.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(tb.Text.ToLower())
+        tb.SelectionStart = selStart
+    End Sub
     Private Sub Amenities_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadAmenities()
         cbConditionAmenities.Items.AddRange({"Good", "Needs Repair", "Excellent", "Fair"})
         cbConditionAmenities.SelectedIndex = -1
         LockControls()
         SetDefaultAmenityButtons()
+        AddHandler txtNameAmenities.TextChanged, AddressOf CapitalizeWords
+        AddHandler txtLocationAmenities.TextChanged, AddressOf CapitalizeWords
     End Sub
     Private Sub LoadAmenities()
         Dim query As String = "
@@ -349,15 +357,18 @@ Public Class Amenities
     End Sub
     Private Sub btnSignOut_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
         Dim result As DialogResult = MessageBox.Show(
-            "Are you sure you want to sign out?",
-            "Confirm Sign Out",
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Question
-        )
+        "Are you sure you want to sign out?",
+        "Confirm Sign Out",
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Question
+    )
         If result = DialogResult.Yes Then
+            Login_frm.ClearLoginFields()
+            LoggedInEmployeeID = ""
+            LoggedInUsername = ""
+            LoggedInUserType = ""
             Login_frm.Show()
             Me.Hide()
         End If
     End Sub
-
 End Class

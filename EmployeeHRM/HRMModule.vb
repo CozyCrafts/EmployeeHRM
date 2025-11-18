@@ -1,12 +1,10 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Module HRMModule
-    ' 🌟 Add these lines at the top
     Public LoggedInEmployeeID As String
     Public LoggedInUsername As String
-    Public LoggedInRole As String
+    Public LoggedInUserType As String
 
-    ' Existing database variables
     Public dbcon As MySqlConnection
     Public dbcmd As MySqlCommand
     Public dbadapter As MySqlDataAdapter

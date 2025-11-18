@@ -30,7 +30,7 @@ Partial Class Login_frm
         Label1 = New Label()
         txtUsername = New TextBox()
         txtPassword = New TextBox()
-        cmbRole = New ComboBox()
+        cbUserType = New ComboBox()
         btnLogIn = New Button()
         btne = New Button()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
@@ -106,27 +106,27 @@ Partial Class Login_frm
         txtPassword.Size = New Size(244, 34)
         txtPassword.TabIndex = 6
         ' 
-        ' cmbRole
+        ' cbUserType
         ' 
-        cmbRole.DropDownStyle = ComboBoxStyle.DropDownList
-        cmbRole.Font = New Font("Palatino Linotype", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        cmbRole.FormattingEnabled = True
-        cmbRole.Items.AddRange(New Object() {"Manager", "Staff"})
-        cmbRole.Location = New Point(76, 303)
-        cmbRole.Name = "cmbRole"
-        cmbRole.Size = New Size(245, 32)
-        cmbRole.TabIndex = 7
+        cbUserType.DropDownStyle = ComboBoxStyle.DropDownList
+        cbUserType.Font = New Font("Palatino Linotype", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        cbUserType.FormattingEnabled = True
+        cbUserType.Items.AddRange(New Object() {"Manager", "Staff"})
+        cbUserType.Location = New Point(76, 303)
+        cbUserType.Name = "cbUserType"
+        cbUserType.Size = New Size(245, 32)
+        cbUserType.TabIndex = 7
         ' 
         ' btnLogIn
         ' 
         btnLogIn.BackColor = Color.White
         btnLogIn.Font = New Font("Perpetua", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnLogIn.ForeColor = SystemColors.MenuHighlight
-        btnLogIn.Location = New Point(31, 498)
+        btnLogIn.Location = New Point(69, 486)
         btnLogIn.Name = "btnLogIn"
         btnLogIn.Size = New Size(101, 47)
         btnLogIn.TabIndex = 8
-        btnLogIn.Text = "Login"
+        btnLogIn.Text = "Log In"
         btnLogIn.UseVisualStyleBackColor = False
         ' 
         ' btne
@@ -136,7 +136,7 @@ Partial Class Login_frm
         btne.ForeColor = SystemColors.MenuHighlight
         btne.Location = New Point(193, 486)
         btne.Name = "btne"
-        btne.Size = New Size(101, 47)
+        btne.Size = New Size(145, 47)
         btne.TabIndex = 9
         btne.Text = "eto muna"
         btne.UseVisualStyleBackColor = False
@@ -149,7 +149,7 @@ Partial Class Login_frm
         ClientSize = New Size(394, 557)
         Controls.Add(btne)
         Controls.Add(btnLogIn)
-        Controls.Add(cmbRole)
+        Controls.Add(cbUserType)
         Controls.Add(txtPassword)
         Controls.Add(txtUsername)
         Controls.Add(Label1)
@@ -172,7 +172,7 @@ Partial Class Login_frm
     Friend WithEvents Label1 As Label
     Friend WithEvents txtUsername As TextBox
     Friend WithEvents txtPassword As TextBox
-    Friend WithEvents cmbRole As ComboBox
+    Friend WithEvents cbUserType As ComboBox
     Friend WithEvents btnLogIn As Button
     Friend WithEvents btne As Button
 End Class

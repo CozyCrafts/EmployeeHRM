@@ -373,7 +373,7 @@ Partial Class Leave_Management
         btnApplyforLeave.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnApplyforLeave.IconSize = 30
         btnApplyforLeave.ImageAlign = ContentAlignment.MiddleLeft
-        btnApplyforLeave.Location = New Point(937, 236)
+        btnApplyforLeave.Location = New Point(926, 233)
         btnApplyforLeave.Name = "btnApplyforLeave"
         btnApplyforLeave.Size = New Size(323, 77)
         btnApplyforLeave.TabIndex = 94

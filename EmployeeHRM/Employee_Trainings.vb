@@ -1,13 +1,23 @@
 ﻿Imports MySql.Data.MySqlClient
+Imports System.Globalization
 
 Public Class Employee_Trainings
     Private connectionString As String = "server=localhost;userid=root;password=091951;database=db_hrm"
     Private isAdding As Boolean = False
+    Private Sub CapitalizeWords(sender As Object, e As EventArgs)
+        Dim tb As TextBox = DirectCast(sender, TextBox)
+        Dim selStart As Integer = tb.SelectionStart
+        tb.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(tb.Text.ToLower())
+        tb.SelectionStart = selStart
+    End Sub
     Private Sub Employee_Trainings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadEmployees()
         LoadTrainings()
         LockControls()
         SetDefaultButtonState()
+        AddHandler txtTrainingTitle.TextChanged, AddressOf CapitalizeWords
+        AddHandler txtTrainingType.TextChanged, AddressOf CapitalizeWords
+        AddHandler txtTrainingDescription.TextChanged, AddressOf CapitalizeWords
     End Sub
     Private Sub SetDefaultButtonState()
         btnAddTraining.Visible = True

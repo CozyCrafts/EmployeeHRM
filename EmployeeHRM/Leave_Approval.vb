@@ -215,15 +215,18 @@ Public Class Leave_Approval
     End Sub
     Private Sub btnSignOut_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
         Dim result As DialogResult = MessageBox.Show(
-            "Are you sure you want to sign out?",
-            "Confirm Sign Out",
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Question
-        )
+        "Are you sure you want to sign out?",
+        "Confirm Sign Out",
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Question
+    )
         If result = DialogResult.Yes Then
+            Login_frm.ClearLoginFields()
+            LoggedInEmployeeID = ""
+            LoggedInUsername = ""
+            LoggedInUserType = ""
             Login_frm.Show()
             Me.Hide()
         End If
     End Sub
-
 End Class

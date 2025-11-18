@@ -1,4 +1,5 @@
 ﻿Imports MySql.Data.MySqlClient
+Imports System.Globalization
 
 Public Class Attendance_Tracker
     Private connectionString As String = "server=localhost;userid=root;password=091951;database=db_hrm"
@@ -8,6 +9,12 @@ Public Class Attendance_Tracker
         If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then
             e.Handled = True
         End If
+    End Sub
+    Private Sub CapitalizeWords(sender As Object, e As EventArgs)
+        Dim tb As TextBox = DirectCast(sender, TextBox)
+        Dim selStart As Integer = tb.SelectionStart
+        tb.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(tb.Text.ToLower())
+        tb.SelectionStart = selStart
     End Sub
     Private Sub Attendance_Tracker_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadAttendanceList()
@@ -24,6 +31,7 @@ Public Class Attendance_Tracker
         AddHandler txtExceededHours.KeyPress, AddressOf NumericOnly
         AddHandler txtAbsences.KeyPress, AddressOf NumericOnly
         AddHandler txtDaysAttended.KeyPress, AddressOf NumericOnly
+        AddHandler txtDepartmentName.TextChanged, AddressOf CapitalizeWords
     End Sub
     Private Sub SetupDateAndTimePickers()
         dtpDate.Format = DateTimePickerFormat.Custom
@@ -394,12 +402,16 @@ Public Class Attendance_Tracker
     End Sub
     Private Sub btnSignOut_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
         Dim result As DialogResult = MessageBox.Show(
-            "Are you sure you want to sign out?",
-            "Confirm Sign Out",
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Question
-        )
+        "Are you sure you want to sign out?",
+        "Confirm Sign Out",
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Question
+    )
         If result = DialogResult.Yes Then
+            Login_frm.ClearLoginFields()
+            LoggedInEmployeeID = ""
+            LoggedInUsername = ""
+            LoggedInUserType = ""
             Login_frm.Show()
             Me.Hide()
         End If

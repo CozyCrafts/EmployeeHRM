@@ -1,11 +1,17 @@
 ﻿Imports MySql.Data.MySqlClient
-
+Imports System.Globalization
 Public Class Department
     Private conn As MySqlConnection
     Private connectionString As String = "server=localhost;userid=root;password=091951;database=db_hrm"
     Private isAdding As Boolean = False
     Private originalValues As New Dictionary(Of String, String)
 
+    Private Sub CapitalizeWords(sender As Object, e As EventArgs)
+        Dim tb As TextBox = DirectCast(sender, TextBox)
+        Dim selStart As Integer = tb.SelectionStart
+        tb.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(tb.Text.ToLower())
+        tb.SelectionStart = selStart
+    End Sub
     Private Sub Department_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             conn = New MySqlConnection(connectionString)
@@ -20,6 +26,9 @@ Public Class Department
         End Try
         LockTextBoxes()
         SetDefaultButtonState()
+        AddHandler txtDepartmentName.TextChanged, AddressOf CapitalizeWords
+        AddHandler txtDepartmentDescription.TextChanged, AddressOf CapitalizeWords
+
     End Sub
     Private Sub LoadDepartments()
         Dim query As String = "
@@ -326,16 +335,19 @@ Public Class Department
     End Sub
     Private Sub btnSignOut_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
         Dim result As DialogResult = MessageBox.Show(
-            "Are you sure you want to sign out?",
-            "Confirm Sign Out",
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Question
-        )
+        "Are you sure you want to sign out?",
+        "Confirm Sign Out",
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Question
+    )
         If result = DialogResult.Yes Then
+            Login_frm.ClearLoginFields()
+            LoggedInEmployeeID = ""
+            LoggedInUsername = ""
+            LoggedInUserType = ""
             Login_frm.Show()
             Me.Hide()
         End If
     End Sub
-
 End Class
 

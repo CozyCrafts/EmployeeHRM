@@ -4,11 +4,20 @@ Public Class Attendance
     Public Property UserRole As String
 
     Private Sub Attendance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Load attendance records for the logged-in employee
+        If LoggedInUserType = "Staff" Then
+
+            lblTeamOverview.Visible = False
+            lblAttendanceTracker.Visible = False
+            lblLeaveApproval.Visible = False
+            lblPayrollSummary.Visible = False
+            lblEmployeeTrainings.Visible = False
+            lblDepartment.Visible = False
+            lblAmenities.Visible = False
+        End If
         Try
             OpenCon() ' Ensure database connection is open
 
-            Dim query As String = "SELECT date, time_in, time_out, status FROM attendance WHERE employee_id = @empID ORDER BY date DESC"
+            Dim query As String = "SELECT date, time_in, time_out, status FROM tblattendance WHERE employee_id = @empID ORDER BY date DESC"
             dbcmd = New MySqlCommand(query, dbcon)
             dbcmd.Parameters.AddWithValue("@empID", LoggedInEmployeeID)
 
@@ -16,7 +25,7 @@ Public Class Attendance
             dbtable = New DataTable()
             dbadapter.Fill(dbtable)
 
-            ' Assuming you have a DataGridView named DataGridView1
+            ' Bind the data to DataGridView
             dgvAttendanceHistory.DataSource = dbtable
 
         Catch ex As Exception
@@ -26,7 +35,8 @@ Public Class Attendance
 
     ' --- Navigation buttons ---
     Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
-        lblDashboard.Enabled = False
+        Employee_Dashboard.Show()
+        Me.Hide()
     End Sub
 
     Private Sub lblMyProfile_Click(sender As Object, e As EventArgs) Handles lblMyProfile.Click
@@ -88,14 +98,21 @@ Public Class Attendance
         Me.Hide()
     End Sub
 
-    Private Sub pcbTerminate_Click(sender As Object, e As EventArgs) Handles pcbTerminate.Click
-        Dim result As DialogResult = MessageBox.Show("Are you sure you want to exit the system?",
-                                                "Confirm Exit",
-                                                MessageBoxButtons.YesNo,
-                                                MessageBoxIcon.Question)
+
+    Private Sub btnSignOut_Click_1(sender As Object, e As EventArgs) Handles btnSignOut.Click
+        Dim result = MessageBox.Show(
+         "Are you sure you want to sign out?",
+         "Confirm Sign Out",
+         MessageBoxButtons.YesNo,
+         MessageBoxIcon.Question
+     )
         If result = DialogResult.Yes Then
-            Application.Exit()
+            Login_frm.ClearLoginFields()
+            LoggedInEmployeeID = ""
+            LoggedInUsername = ""
+            LoggedInUserType = ""
+            Login_frm.Show()
+            Hide()
         End If
     End Sub
-
 End Class
