@@ -45,23 +45,25 @@ Partial Class Attendance
         lblDashboard = New Label()
         Label51 = New Label()
         gbDetailsAttendance = New GroupBox()
-        btnEditInfo = New FontAwesome.Sharp.IconButton()
-        btnCancelInfo = New FontAwesome.Sharp.IconButton()
-        btnSaveInfo = New FontAwesome.Sharp.IconButton()
+        Label1 = New Label()
+        txtAttendanceID = New TextBox()
+        btnRecordAttendance = New FontAwesome.Sharp.IconButton()
+        btnCancelAttendance = New FontAwesome.Sharp.IconButton()
+        btnSaveAttendance = New FontAwesome.Sharp.IconButton()
         gbDailyTimeRecord = New GroupBox()
         GroupBox2 = New GroupBox()
-        IconButton3 = New FontAwesome.Sharp.IconButton()
-        IconButton4 = New FontAwesome.Sharp.IconButton()
+        btnCheckOutPM = New FontAwesome.Sharp.IconButton()
+        btnCheckInPM = New FontAwesome.Sharp.IconButton()
         Label19 = New Label()
         dtpCheckOutPM = New DateTimePicker()
         dtpCheckInPM = New DateTimePicker()
         Label17 = New Label()
         GroupBox1 = New GroupBox()
-        IconButton2 = New FontAwesome.Sharp.IconButton()
+        btnCheckOutAM = New FontAwesome.Sharp.IconButton()
         dtpCheckInAM = New DateTimePicker()
         Label18 = New Label()
         dtpCheckOutAM = New DateTimePicker()
-        IconButton1 = New FontAwesome.Sharp.IconButton()
+        btnCheckInAM = New FontAwesome.Sharp.IconButton()
         Label16 = New Label()
         Label14 = New Label()
         dtpDateAttendance = New DateTimePicker()
@@ -347,9 +349,11 @@ Partial Class Attendance
         ' 
         ' gbDetailsAttendance
         ' 
-        gbDetailsAttendance.Controls.Add(btnEditInfo)
-        gbDetailsAttendance.Controls.Add(btnCancelInfo)
-        gbDetailsAttendance.Controls.Add(btnSaveInfo)
+        gbDetailsAttendance.Controls.Add(Label1)
+        gbDetailsAttendance.Controls.Add(txtAttendanceID)
+        gbDetailsAttendance.Controls.Add(btnRecordAttendance)
+        gbDetailsAttendance.Controls.Add(btnCancelAttendance)
+        gbDetailsAttendance.Controls.Add(btnSaveAttendance)
         gbDetailsAttendance.Controls.Add(gbDailyTimeRecord)
         gbDetailsAttendance.Controls.Add(txtJobTitle)
         gbDetailsAttendance.Controls.Add(Label9)
@@ -365,61 +369,81 @@ Partial Class Attendance
         gbDetailsAttendance.Margin = New Padding(4, 3, 4, 3)
         gbDetailsAttendance.Name = "gbDetailsAttendance"
         gbDetailsAttendance.Padding = New Padding(4, 3, 4, 3)
-        gbDetailsAttendance.Size = New Size(1354, 598)
+        gbDetailsAttendance.Size = New Size(1354, 533)
         gbDetailsAttendance.TabIndex = 84
         gbDetailsAttendance.TabStop = False
         gbDetailsAttendance.Text = "Details"
         ' 
-        ' btnEditInfo
+        ' Label1
         ' 
-        btnEditInfo.BackColor = SystemColors.InactiveCaption
-        btnEditInfo.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnEditInfo.IconChar = FontAwesome.Sharp.IconChar.Edit
-        btnEditInfo.IconColor = Color.Black
-        btnEditInfo.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnEditInfo.IconSize = 40
-        btnEditInfo.ImageAlign = ContentAlignment.MiddleLeft
-        btnEditInfo.Location = New Point(161, 389)
-        btnEditInfo.Name = "btnEditInfo"
-        btnEditInfo.Size = New Size(291, 55)
-        btnEditInfo.TabIndex = 115
-        btnEditInfo.Text = "Edit Attendance"
-        btnEditInfo.TextAlign = ContentAlignment.MiddleRight
-        btnEditInfo.UseVisualStyleBackColor = False
+        Label1.AutoSize = True
+        Label1.Font = New Font("Century Gothic", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label1.ForeColor = Color.Black
+        Label1.Location = New Point(44, 121)
+        Label1.Margin = New Padding(4, 0, 4, 0)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(185, 27)
+        Label1.TabIndex = 119
+        Label1.Text = "Attendance ID:"
         ' 
-        ' btnCancelInfo
+        ' txtAttendanceID
         ' 
-        btnCancelInfo.BackColor = SystemColors.InactiveCaption
-        btnCancelInfo.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        btnCancelInfo.IconChar = FontAwesome.Sharp.IconChar.Cancel
-        btnCancelInfo.IconColor = Color.Black
-        btnCancelInfo.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnCancelInfo.IconSize = 35
-        btnCancelInfo.ImageAlign = ContentAlignment.MiddleLeft
-        btnCancelInfo.Location = New Point(302, 388)
-        btnCancelInfo.Name = "btnCancelInfo"
-        btnCancelInfo.Size = New Size(150, 52)
-        btnCancelInfo.TabIndex = 117
-        btnCancelInfo.Text = "Cancel"
-        btnCancelInfo.TextAlign = ContentAlignment.MiddleRight
-        btnCancelInfo.UseVisualStyleBackColor = False
+        txtAttendanceID.Location = New Point(237, 112)
+        txtAttendanceID.Margin = New Padding(4, 3, 4, 3)
+        txtAttendanceID.Name = "txtAttendanceID"
+        txtAttendanceID.Size = New Size(347, 36)
+        txtAttendanceID.TabIndex = 118
         ' 
-        ' btnSaveInfo
+        ' btnRecordAttendance
         ' 
-        btnSaveInfo.BackColor = SystemColors.InactiveCaption
-        btnSaveInfo.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        btnSaveInfo.IconChar = FontAwesome.Sharp.IconChar.Save
-        btnSaveInfo.IconColor = Color.Black
-        btnSaveInfo.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnSaveInfo.IconSize = 35
-        btnSaveInfo.ImageAlign = ContentAlignment.MiddleLeft
-        btnSaveInfo.Location = New Point(161, 389)
-        btnSaveInfo.Name = "btnSaveInfo"
-        btnSaveInfo.Size = New Size(150, 52)
-        btnSaveInfo.TabIndex = 116
-        btnSaveInfo.Text = "Save"
-        btnSaveInfo.TextAlign = ContentAlignment.MiddleRight
-        btnSaveInfo.UseVisualStyleBackColor = False
+        btnRecordAttendance.BackColor = SystemColors.InactiveCaption
+        btnRecordAttendance.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnRecordAttendance.IconChar = FontAwesome.Sharp.IconChar.Edit
+        btnRecordAttendance.IconColor = Color.Black
+        btnRecordAttendance.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnRecordAttendance.IconSize = 40
+        btnRecordAttendance.ImageAlign = ContentAlignment.MiddleLeft
+        btnRecordAttendance.Location = New Point(236, 371)
+        btnRecordAttendance.Name = "btnRecordAttendance"
+        btnRecordAttendance.Size = New Size(347, 55)
+        btnRecordAttendance.TabIndex = 115
+        btnRecordAttendance.Text = "Record Attendance"
+        btnRecordAttendance.TextAlign = ContentAlignment.MiddleRight
+        btnRecordAttendance.UseVisualStyleBackColor = False
+        ' 
+        ' btnCancelAttendance
+        ' 
+        btnCancelAttendance.BackColor = SystemColors.InactiveCaption
+        btnCancelAttendance.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
+        btnCancelAttendance.IconChar = FontAwesome.Sharp.IconChar.Cancel
+        btnCancelAttendance.IconColor = Color.Black
+        btnCancelAttendance.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnCancelAttendance.IconSize = 35
+        btnCancelAttendance.ImageAlign = ContentAlignment.MiddleLeft
+        btnCancelAttendance.Location = New Point(409, 372)
+        btnCancelAttendance.Name = "btnCancelAttendance"
+        btnCancelAttendance.Size = New Size(174, 52)
+        btnCancelAttendance.TabIndex = 117
+        btnCancelAttendance.Text = "Cancel"
+        btnCancelAttendance.TextAlign = ContentAlignment.MiddleRight
+        btnCancelAttendance.UseVisualStyleBackColor = False
+        ' 
+        ' btnSaveAttendance
+        ' 
+        btnSaveAttendance.BackColor = SystemColors.InactiveCaption
+        btnSaveAttendance.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
+        btnSaveAttendance.IconChar = FontAwesome.Sharp.IconChar.Save
+        btnSaveAttendance.IconColor = Color.Black
+        btnSaveAttendance.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSaveAttendance.IconSize = 35
+        btnSaveAttendance.ImageAlign = ContentAlignment.MiddleLeft
+        btnSaveAttendance.Location = New Point(237, 372)
+        btnSaveAttendance.Name = "btnSaveAttendance"
+        btnSaveAttendance.Size = New Size(174, 52)
+        btnSaveAttendance.TabIndex = 116
+        btnSaveAttendance.Text = "Save"
+        btnSaveAttendance.TextAlign = ContentAlignment.MiddleRight
+        btnSaveAttendance.UseVisualStyleBackColor = False
         ' 
         ' gbDailyTimeRecord
         ' 
@@ -428,71 +452,71 @@ Partial Class Attendance
         gbDailyTimeRecord.Controls.Add(Label14)
         gbDailyTimeRecord.Controls.Add(dtpDateAttendance)
         gbDailyTimeRecord.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        gbDailyTimeRecord.Location = New Point(580, 35)
+        gbDailyTimeRecord.Location = New Point(622, 35)
         gbDailyTimeRecord.Margin = New Padding(4, 3, 4, 3)
         gbDailyTimeRecord.Name = "gbDailyTimeRecord"
         gbDailyTimeRecord.Padding = New Padding(4, 3, 4, 3)
-        gbDailyTimeRecord.Size = New Size(743, 534)
+        gbDailyTimeRecord.Size = New Size(701, 471)
         gbDailyTimeRecord.TabIndex = 114
         gbDailyTimeRecord.TabStop = False
         gbDailyTimeRecord.Text = "Daily Time Record"
         ' 
         ' GroupBox2
         ' 
-        GroupBox2.Controls.Add(IconButton3)
-        GroupBox2.Controls.Add(IconButton4)
+        GroupBox2.Controls.Add(btnCheckOutPM)
+        GroupBox2.Controls.Add(btnCheckInPM)
         GroupBox2.Controls.Add(Label19)
         GroupBox2.Controls.Add(dtpCheckOutPM)
         GroupBox2.Controls.Add(dtpCheckInPM)
         GroupBox2.Controls.Add(Label17)
-        GroupBox2.Location = New Point(34, 313)
+        GroupBox2.Location = New Point(19, 287)
         GroupBox2.Name = "GroupBox2"
-        GroupBox2.Size = New Size(684, 168)
+        GroupBox2.Size = New Size(666, 168)
         GroupBox2.TabIndex = 119
         GroupBox2.TabStop = False
         GroupBox2.Text = "PM"
         ' 
-        ' IconButton3
+        ' btnCheckOutPM
         ' 
-        IconButton3.BackColor = SystemColors.InactiveCaption
-        IconButton3.BackgroundImageLayout = ImageLayout.None
-        IconButton3.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold)
-        IconButton3.IconChar = FontAwesome.Sharp.IconChar.ClockRotateLeft
-        IconButton3.IconColor = Color.Black
-        IconButton3.IconFont = FontAwesome.Sharp.IconFont.Auto
-        IconButton3.IconSize = 30
-        IconButton3.ImageAlign = ContentAlignment.MiddleLeft
-        IconButton3.Location = New Point(501, 85)
-        IconButton3.Name = "IconButton3"
-        IconButton3.Size = New Size(154, 56)
-        IconButton3.TabIndex = 118
-        IconButton3.Text = "Check Out"
-        IconButton3.TextAlign = ContentAlignment.MiddleRight
-        IconButton3.UseVisualStyleBackColor = False
+        btnCheckOutPM.BackColor = SystemColors.InactiveCaption
+        btnCheckOutPM.BackgroundImageLayout = ImageLayout.None
+        btnCheckOutPM.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold)
+        btnCheckOutPM.IconChar = FontAwesome.Sharp.IconChar.ClockRotateLeft
+        btnCheckOutPM.IconColor = Color.Black
+        btnCheckOutPM.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnCheckOutPM.IconSize = 30
+        btnCheckOutPM.ImageAlign = ContentAlignment.MiddleLeft
+        btnCheckOutPM.Location = New Point(496, 88)
+        btnCheckOutPM.Name = "btnCheckOutPM"
+        btnCheckOutPM.Size = New Size(154, 56)
+        btnCheckOutPM.TabIndex = 118
+        btnCheckOutPM.Text = "Check Out"
+        btnCheckOutPM.TextAlign = ContentAlignment.MiddleRight
+        btnCheckOutPM.UseVisualStyleBackColor = False
         ' 
-        ' IconButton4
+        ' btnCheckInPM
         ' 
-        IconButton4.BackColor = SystemColors.InactiveCaption
-        IconButton4.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        IconButton4.IconChar = FontAwesome.Sharp.IconChar.ClockFour
-        IconButton4.IconColor = Color.Black
-        IconButton4.IconFont = FontAwesome.Sharp.IconFont.Auto
-        IconButton4.IconSize = 30
-        IconButton4.ImageAlign = ContentAlignment.MiddleLeft
-        IconButton4.Location = New Point(173, 87)
-        IconButton4.Name = "IconButton4"
-        IconButton4.Size = New Size(139, 56)
-        IconButton4.TabIndex = 117
-        IconButton4.Text = "Check In"
-        IconButton4.TextAlign = ContentAlignment.MiddleRight
-        IconButton4.UseVisualStyleBackColor = False
+        btnCheckInPM.BackColor = SystemColors.InactiveCaption
+        btnCheckInPM.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnCheckInPM.IconChar = FontAwesome.Sharp.IconChar.ClockFour
+        btnCheckInPM.IconColor = Color.Black
+        btnCheckInPM.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnCheckInPM.IconSize = 30
+        btnCheckInPM.ImageAlign = ContentAlignment.MiddleLeft
+        btnCheckInPM.Location = New Point(168, 90)
+        btnCheckInPM.Name = "btnCheckInPM"
+        btnCheckInPM.Size = New Size(139, 56)
+        btnCheckInPM.TabIndex = 117
+        btnCheckInPM.Text = "Check In"
+        btnCheckInPM.TextAlign = ContentAlignment.MiddleRight
+        btnCheckInPM.UseVisualStyleBackColor = False
         ' 
         ' Label19
         ' 
         Label19.AutoSize = True
         Label19.Font = New Font("Century Gothic", 13F)
         Label19.ForeColor = Color.Black
-        Label19.Location = New Point(337, 56)
+        Label19.Location = New Point(332, 59)
         Label19.Margin = New Padding(4, 0, 4, 0)
         Label19.Name = "Label19"
         Label19.Size = New Size(157, 25)
@@ -504,7 +528,7 @@ Partial Class Attendance
         dtpCheckOutPM.CustomFormat = "hh:mm tt"
         dtpCheckOutPM.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
         dtpCheckOutPM.Format = DateTimePickerFormat.Custom
-        dtpCheckOutPM.Location = New Point(501, 47)
+        dtpCheckOutPM.Location = New Point(496, 50)
         dtpCheckOutPM.Name = "dtpCheckOutPM"
         dtpCheckOutPM.Size = New Size(154, 32)
         dtpCheckOutPM.TabIndex = 110
@@ -514,7 +538,7 @@ Partial Class Attendance
         dtpCheckInPM.CustomFormat = "hh:mm tt"
         dtpCheckInPM.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
         dtpCheckInPM.Format = DateTimePickerFormat.Custom
-        dtpCheckInPM.Location = New Point(173, 49)
+        dtpCheckInPM.Location = New Point(168, 52)
         dtpCheckInPM.Name = "dtpCheckInPM"
         dtpCheckInPM.Size = New Size(140, 32)
         dtpCheckInPM.TabIndex = 112
@@ -524,7 +548,7 @@ Partial Class Attendance
         Label17.AutoSize = True
         Label17.Font = New Font("Century Gothic", 13F)
         Label17.ForeColor = Color.Black
-        Label17.Location = New Point(30, 54)
+        Label17.Location = New Point(25, 57)
         Label17.Margin = New Padding(4, 0, 4, 0)
         Label17.Name = "Label17"
         Label17.Size = New Size(136, 25)
@@ -533,43 +557,43 @@ Partial Class Attendance
         ' 
         ' GroupBox1
         ' 
-        GroupBox1.Controls.Add(IconButton2)
+        GroupBox1.Controls.Add(btnCheckOutAM)
         GroupBox1.Controls.Add(dtpCheckInAM)
         GroupBox1.Controls.Add(Label18)
         GroupBox1.Controls.Add(dtpCheckOutAM)
-        GroupBox1.Controls.Add(IconButton1)
+        GroupBox1.Controls.Add(btnCheckInAM)
         GroupBox1.Controls.Add(Label16)
-        GroupBox1.Location = New Point(34, 120)
+        GroupBox1.Location = New Point(19, 120)
         GroupBox1.Name = "GroupBox1"
-        GroupBox1.Size = New Size(684, 161)
+        GroupBox1.Size = New Size(666, 161)
         GroupBox1.TabIndex = 118
         GroupBox1.TabStop = False
         GroupBox1.Text = "AM"
         ' 
-        ' IconButton2
+        ' btnCheckOutAM
         ' 
-        IconButton2.BackColor = SystemColors.InactiveCaption
-        IconButton2.BackgroundImageLayout = ImageLayout.None
-        IconButton2.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold)
-        IconButton2.IconChar = FontAwesome.Sharp.IconChar.ClockRotateLeft
-        IconButton2.IconColor = Color.Black
-        IconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto
-        IconButton2.IconSize = 30
-        IconButton2.ImageAlign = ContentAlignment.MiddleLeft
-        IconButton2.Location = New Point(501, 83)
-        IconButton2.Name = "IconButton2"
-        IconButton2.Size = New Size(154, 56)
-        IconButton2.TabIndex = 116
-        IconButton2.Text = "Check Out"
-        IconButton2.TextAlign = ContentAlignment.MiddleRight
-        IconButton2.UseVisualStyleBackColor = False
+        btnCheckOutAM.BackColor = SystemColors.InactiveCaption
+        btnCheckOutAM.BackgroundImageLayout = ImageLayout.None
+        btnCheckOutAM.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold)
+        btnCheckOutAM.IconChar = FontAwesome.Sharp.IconChar.ClockRotateLeft
+        btnCheckOutAM.IconColor = Color.Black
+        btnCheckOutAM.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnCheckOutAM.IconSize = 30
+        btnCheckOutAM.ImageAlign = ContentAlignment.MiddleLeft
+        btnCheckOutAM.Location = New Point(496, 87)
+        btnCheckOutAM.Name = "btnCheckOutAM"
+        btnCheckOutAM.Size = New Size(154, 56)
+        btnCheckOutAM.TabIndex = 116
+        btnCheckOutAM.Text = "Check Out"
+        btnCheckOutAM.TextAlign = ContentAlignment.MiddleRight
+        btnCheckOutAM.UseVisualStyleBackColor = False
         ' 
         ' dtpCheckInAM
         ' 
         dtpCheckInAM.CustomFormat = "hh:mm tt"
         dtpCheckInAM.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
         dtpCheckInAM.Format = DateTimePickerFormat.Custom
-        dtpCheckInAM.Location = New Point(173, 45)
+        dtpCheckInAM.Location = New Point(168, 49)
         dtpCheckInAM.Name = "dtpCheckInAM"
         dtpCheckInAM.Size = New Size(139, 32)
         dtpCheckInAM.TabIndex = 109
@@ -579,7 +603,7 @@ Partial Class Attendance
         Label18.AutoSize = True
         Label18.Font = New Font("Century Gothic", 13F)
         Label18.ForeColor = Color.Black
-        Label18.Location = New Point(333, 52)
+        Label18.Location = New Point(328, 56)
         Label18.Margin = New Padding(4, 0, 4, 0)
         Label18.Name = "Label18"
         Label18.Size = New Size(161, 25)
@@ -591,34 +615,34 @@ Partial Class Attendance
         dtpCheckOutAM.CustomFormat = "hh:mm tt"
         dtpCheckOutAM.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
         dtpCheckOutAM.Format = DateTimePickerFormat.Custom
-        dtpCheckOutAM.Location = New Point(501, 45)
+        dtpCheckOutAM.Location = New Point(496, 49)
         dtpCheckOutAM.Name = "dtpCheckOutAM"
         dtpCheckOutAM.Size = New Size(154, 32)
         dtpCheckOutAM.TabIndex = 111
         ' 
-        ' IconButton1
+        ' btnCheckInAM
         ' 
-        IconButton1.BackColor = SystemColors.InactiveCaption
-        IconButton1.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        IconButton1.IconChar = FontAwesome.Sharp.IconChar.ClockFour
-        IconButton1.IconColor = Color.Black
-        IconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto
-        IconButton1.IconSize = 30
-        IconButton1.ImageAlign = ContentAlignment.MiddleLeft
-        IconButton1.Location = New Point(173, 83)
-        IconButton1.Name = "IconButton1"
-        IconButton1.Size = New Size(139, 56)
-        IconButton1.TabIndex = 115
-        IconButton1.Text = "Check In"
-        IconButton1.TextAlign = ContentAlignment.MiddleRight
-        IconButton1.UseVisualStyleBackColor = False
+        btnCheckInAM.BackColor = SystemColors.InactiveCaption
+        btnCheckInAM.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnCheckInAM.IconChar = FontAwesome.Sharp.IconChar.ClockFour
+        btnCheckInAM.IconColor = Color.Black
+        btnCheckInAM.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnCheckInAM.IconSize = 30
+        btnCheckInAM.ImageAlign = ContentAlignment.MiddleLeft
+        btnCheckInAM.Location = New Point(168, 87)
+        btnCheckInAM.Name = "btnCheckInAM"
+        btnCheckInAM.Size = New Size(139, 56)
+        btnCheckInAM.TabIndex = 115
+        btnCheckInAM.Text = "Check In"
+        btnCheckInAM.TextAlign = ContentAlignment.MiddleRight
+        btnCheckInAM.UseVisualStyleBackColor = False
         ' 
         ' Label16
         ' 
         Label16.AutoSize = True
         Label16.Font = New Font("Century Gothic", 13F)
         Label16.ForeColor = Color.Black
-        Label16.Location = New Point(26, 52)
+        Label16.Location = New Point(21, 56)
         Label16.Margin = New Padding(4, 0, 4, 0)
         Label16.Name = "Label16"
         Label16.Size = New Size(140, 25)
@@ -647,10 +671,10 @@ Partial Class Attendance
         ' 
         ' txtJobTitle
         ' 
-        txtJobTitle.Location = New Point(161, 266)
+        txtJobTitle.Location = New Point(237, 268)
         txtJobTitle.Margin = New Padding(4, 3, 4, 3)
         txtJobTitle.Name = "txtJobTitle"
-        txtJobTitle.Size = New Size(291, 36)
+        txtJobTitle.Size = New Size(347, 36)
         txtJobTitle.TabIndex = 106
         ' 
         ' Label9
@@ -658,7 +682,7 @@ Partial Class Attendance
         Label9.AutoSize = True
         Label9.Font = New Font("Century Gothic", 13F)
         Label9.ForeColor = Color.Black
-        Label9.Location = New Point(113, 233)
+        Label9.Location = New Point(122, 279)
         Label9.Margin = New Padding(4, 0, 4, 0)
         Label9.Name = "Label9"
         Label9.Size = New Size(107, 25)
@@ -667,10 +691,10 @@ Partial Class Attendance
         ' 
         ' txtEmployeeName
         ' 
-        txtEmployeeName.Location = New Point(161, 110)
+        txtEmployeeName.Location = New Point(237, 216)
         txtEmployeeName.Margin = New Padding(4, 3, 4, 3)
         txtEmployeeName.Name = "txtEmployeeName"
-        txtEmployeeName.Size = New Size(291, 36)
+        txtEmployeeName.Size = New Size(347, 36)
         txtEmployeeName.TabIndex = 86
         ' 
         ' Label11
@@ -678,7 +702,7 @@ Partial Class Attendance
         Label11.AutoSize = True
         Label11.Font = New Font("Century Gothic", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label11.ForeColor = Color.Black
-        Label11.Location = New Point(113, 75)
+        Label11.Location = New Point(21, 225)
         Label11.Margin = New Padding(4, 0, 4, 0)
         Label11.Name = "Label11"
         Label11.Size = New Size(208, 27)
@@ -690,7 +714,7 @@ Partial Class Attendance
         Label10.AutoSize = True
         Label10.Font = New Font("Century Gothic", 13F)
         Label10.ForeColor = Color.Black
-        Label10.Location = New Point(113, 310)
+        Label10.Location = New Point(147, 330)
         Label10.Margin = New Padding(4, 0, 4, 0)
         Label10.Name = "Label10"
         Label10.Size = New Size(82, 25)
@@ -700,17 +724,17 @@ Partial Class Attendance
         ' cbAttendanceStatus
         ' 
         cbAttendanceStatus.FormattingEnabled = True
-        cbAttendanceStatus.Location = New Point(161, 343)
+        cbAttendanceStatus.Location = New Point(236, 320)
         cbAttendanceStatus.Name = "cbAttendanceStatus"
-        cbAttendanceStatus.Size = New Size(291, 35)
+        cbAttendanceStatus.Size = New Size(347, 35)
         cbAttendanceStatus.TabIndex = 84
         ' 
         ' txtEmployeeID
         ' 
-        txtEmployeeID.Location = New Point(161, 189)
+        txtEmployeeID.Location = New Point(237, 164)
         txtEmployeeID.Margin = New Padding(4, 3, 4, 3)
         txtEmployeeID.Name = "txtEmployeeID"
-        txtEmployeeID.Size = New Size(291, 36)
+        txtEmployeeID.Size = New Size(347, 36)
         txtEmployeeID.TabIndex = 23
         ' 
         ' Label21
@@ -718,7 +742,7 @@ Partial Class Attendance
         Label21.AutoSize = True
         Label21.Font = New Font("Century Gothic", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label21.ForeColor = Color.Black
-        Label21.Location = New Point(113, 154)
+        Label21.Location = New Point(68, 173)
         Label21.Margin = New Padding(4, 0, 4, 0)
         Label21.Name = "Label21"
         Label21.Size = New Size(161, 27)
@@ -729,23 +753,30 @@ Partial Class Attendance
         ' 
         gbAttendanceHistory.Controls.Add(dgvAttendanceHistory)
         gbAttendanceHistory.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        gbAttendanceHistory.Location = New Point(386, 774)
+        gbAttendanceHistory.Location = New Point(386, 677)
         gbAttendanceHistory.Margin = New Padding(4, 3, 4, 3)
         gbAttendanceHistory.Name = "gbAttendanceHistory"
         gbAttendanceHistory.Padding = New Padding(4, 3, 4, 3)
-        gbAttendanceHistory.Size = New Size(1338, 440)
+        gbAttendanceHistory.Size = New Size(1338, 380)
         gbAttendanceHistory.TabIndex = 85
         gbAttendanceHistory.TabStop = False
         gbAttendanceHistory.Text = "Attendance History"
         ' 
         ' dgvAttendanceHistory
         ' 
+        dgvAttendanceHistory.AllowUserToAddRows = False
+        dgvAttendanceHistory.AllowUserToDeleteRows = False
+        dgvAttendanceHistory.AllowUserToResizeColumns = False
+        dgvAttendanceHistory.AllowUserToResizeRows = False
+        dgvAttendanceHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         dgvAttendanceHistory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        dgvAttendanceHistory.Location = New Point(21, 48)
+        dgvAttendanceHistory.Location = New Point(44, 57)
         dgvAttendanceHistory.Margin = New Padding(4, 3, 4, 3)
         dgvAttendanceHistory.Name = "dgvAttendanceHistory"
+        dgvAttendanceHistory.ReadOnly = True
         dgvAttendanceHistory.RowHeadersWidth = 51
-        dgvAttendanceHistory.Size = New Size(1302, 363)
+        dgvAttendanceHistory.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        dgvAttendanceHistory.Size = New Size(1255, 282)
         dgvAttendanceHistory.TabIndex = 0
         ' 
         ' Attendance
@@ -822,14 +853,16 @@ Partial Class Attendance
     Friend WithEvents dtpCheckOutPM As DateTimePicker
     Friend WithEvents dtpCheckInAM As DateTimePicker
     Friend WithEvents gbDailyTimeRecord As GroupBox
-    Friend WithEvents IconButton1 As FontAwesome.Sharp.IconButton
-    Friend WithEvents IconButton2 As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnCheckInAM As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnCheckOutAM As FontAwesome.Sharp.IconButton
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents IconButton3 As FontAwesome.Sharp.IconButton
-    Friend WithEvents IconButton4 As FontAwesome.Sharp.IconButton
-    Friend WithEvents btnEditInfo As FontAwesome.Sharp.IconButton
-    Friend WithEvents btnCancelInfo As FontAwesome.Sharp.IconButton
-    Friend WithEvents btnSaveInfo As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnCheckOutPM As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnCheckInPM As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnRecordAttendance As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnCancelAttendance As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnSaveAttendance As FontAwesome.Sharp.IconButton
     Friend WithEvents btnSignOut As FontAwesome.Sharp.IconButton
+    Friend WithEvents Label1 As Label
+    Friend WithEvents txtAttendanceID As TextBox
 End Class

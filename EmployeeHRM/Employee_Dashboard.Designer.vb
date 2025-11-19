@@ -29,7 +29,7 @@ Partial Class Employee_Dashboard
         btnApplyforLeave = New FontAwesome.Sharp.IconButton()
         btnCheckInOut = New FontAwesome.Sharp.IconButton()
         GroupBox1 = New GroupBox()
-        IconButton2 = New FontAwesome.Sharp.IconButton()
+        btnSafetyInfo = New FontAwesome.Sharp.IconButton()
         btnHolidayCalendar = New FontAwesome.Sharp.IconButton()
         btnPolicies = New FontAwesome.Sharp.IconButton()
         btnEmployeeHandbook = New FontAwesome.Sharp.IconButton()
@@ -158,7 +158,7 @@ Partial Class Employee_Dashboard
         ' 
         ' GroupBox1
         ' 
-        GroupBox1.Controls.Add(IconButton2)
+        GroupBox1.Controls.Add(btnSafetyInfo)
         GroupBox1.Controls.Add(btnHolidayCalendar)
         GroupBox1.Controls.Add(btnPolicies)
         GroupBox1.Controls.Add(btnEmployeeHandbook)
@@ -170,21 +170,21 @@ Partial Class Employee_Dashboard
         GroupBox1.TabStop = False
         GroupBox1.Text = "Employee Resources"
         ' 
-        ' IconButton2
+        ' btnSafetyInfo
         ' 
-        IconButton2.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        IconButton2.IconChar = FontAwesome.Sharp.IconChar.ShieldBlank
-        IconButton2.IconColor = Color.Black
-        IconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto
-        IconButton2.IconSize = 35
-        IconButton2.ImageAlign = ContentAlignment.MiddleLeft
-        IconButton2.Location = New Point(408, 149)
-        IconButton2.Name = "IconButton2"
-        IconButton2.Size = New Size(320, 69)
-        IconButton2.TabIndex = 82
-        IconButton2.Text = "Safety Info"
-        IconButton2.TextAlign = ContentAlignment.MiddleRight
-        IconButton2.UseVisualStyleBackColor = True
+        btnSafetyInfo.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
+        btnSafetyInfo.IconChar = FontAwesome.Sharp.IconChar.ShieldBlank
+        btnSafetyInfo.IconColor = Color.Black
+        btnSafetyInfo.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSafetyInfo.IconSize = 35
+        btnSafetyInfo.ImageAlign = ContentAlignment.MiddleLeft
+        btnSafetyInfo.Location = New Point(408, 149)
+        btnSafetyInfo.Name = "btnSafetyInfo"
+        btnSafetyInfo.Size = New Size(320, 69)
+        btnSafetyInfo.TabIndex = 82
+        btnSafetyInfo.Text = "Safety Info"
+        btnSafetyInfo.TextAlign = ContentAlignment.MiddleRight
+        btnSafetyInfo.UseVisualStyleBackColor = True
         ' 
         ' btnHolidayCalendar
         ' 
@@ -725,7 +725,7 @@ Partial Class Employee_Dashboard
     Friend WithEvents Label6 As Label
     Friend WithEvents btnHolidayCalendar As FontAwesome.Sharp.IconButton
     Friend WithEvents btnPolicies As FontAwesome.Sharp.IconButton
-    Friend WithEvents IconButton2 As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnSafetyInfo As FontAwesome.Sharp.IconButton
     Friend WithEvents btnSeeTrainings As FontAwesome.Sharp.IconButton
     Friend WithEvents btnViewSalary As FontAwesome.Sharp.IconButton
     Friend WithEvents btnCheckInOut As FontAwesome.Sharp.IconButton

@@ -77,8 +77,8 @@ Public Class Login_frm
         cbUserType.SelectedIndex = -1
     End Sub
 
-    Private Sub btne_Click(sender As Object, e As EventArgs) Handles btne.Click
-        Employee_Dashboard.Show()
-        Me.Hide()
+    Private Sub btne_Click(sender As Object, e As EventArgs)
+        Employee_Dashboard.Show
+        Hide
     End Sub
 End Class
