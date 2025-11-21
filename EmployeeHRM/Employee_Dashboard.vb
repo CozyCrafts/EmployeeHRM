@@ -7,6 +7,7 @@ Public Class Employee_Dashboard
         lblWelcome.Text = "Welcome, " & LoggedInUsername
 
         If LoggedInUserType = "Staff" Then
+            lblManagement.Visible = False
             lblTeamOverview.Visible = False
             lblAttendanceTracker.Visible = False
             lblLeaveApproval.Visible = False
@@ -322,9 +323,8 @@ Public Class Employee_Dashboard
         Dim viewer As New frmInfoViewer()
         viewer.ShowInfo("Holiday Calendar – Sundowners Resort", content, boldWords, italicBoldWords)
     End Sub
-
     Private Sub btnPolicies_Click(sender As Object, e As EventArgs) Handles btnPolicies.Click
-        Dim content As String =
+        Dim content =
         "Policies – Sundowners Resort (Expanded)" & vbCrLf & vbCrLf &
         "Sundowners Resort is committed to maintaining a professional, safe, and respectful work environment. All employees are expected to follow these policies to ensure smooth operations, exceptional guest service, and a positive workplace culture." & vbCrLf & vbCrLf &
         "Workplace Conduct" & vbCrLf &
@@ -454,10 +454,9 @@ Public Class Employee_Dashboard
         "Annual Awards Ceremony"
     }
 
-        Dim viewer As New frmInfoViewer()
+        Dim viewer As New frmInfoViewer
         viewer.ShowInfo("Policies – Sundowners Resort", content, boldWords, italicBoldWords)
     End Sub
-
     Private Sub btnSafetyInfo_Click(sender As Object, e As EventArgs) Handles btnSafetyInfo.Click
         Dim content As String =
         "Safety and Emergency Information – Sundowners Resort" & vbCrLf & vbCrLf &
@@ -554,21 +553,20 @@ Public Class Employee_Dashboard
         Dim viewer As New frmInfoViewer()
         viewer.ShowInfo("Safety and Emergency Information – Sundowners Resort", content, boldWords, italicBoldWords)
     End Sub
-
     Private Sub btnSignOut_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
-        Dim result As DialogResult = MessageBox.Show(
+        Dim result = MessageBox.Show(
         "Are you sure you want to sign out?",
         "Confirm Sign Out",
         MessageBoxButtons.YesNo,
         MessageBoxIcon.Question
     )
         If result = DialogResult.Yes Then
-            Login_frm.ClearLoginFields()
+            Login_frm.ClearLoginFields
             LoggedInEmployeeID = ""
             LoggedInUsername = ""
             LoggedInUserType = ""
-            Login_frm.Show()
-            Me.Hide()
+            Login_frm.Show
+            Hide
         End If
     End Sub
 

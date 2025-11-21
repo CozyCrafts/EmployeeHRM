@@ -34,7 +34,6 @@ Partial Class Employee_Dashboard
         btnPolicies = New FontAwesome.Sharp.IconButton()
         btnEmployeeHandbook = New FontAwesome.Sharp.IconButton()
         adminheader_pnl = New Panel()
-        btnSignOut = New FontAwesome.Sharp.IconButton()
         Label2 = New Label()
         Panel2 = New Panel()
         lblAmenities = New Label()
@@ -44,7 +43,7 @@ Partial Class Employee_Dashboard
         lblDepartment = New Label()
         lblAttendanceTracker = New Label()
         lblTeamOverview = New Label()
-        Label1 = New Label()
+        lblManagement = New Label()
         lblTrainings = New Label()
         lblSalary = New Label()
         Label26 = New Label()
@@ -70,6 +69,7 @@ Partial Class Employee_Dashboard
         Label4 = New Label()
         Label7 = New Label()
         Label10 = New Label()
+        btnSignOut = New FontAwesome.Sharp.IconButton()
         GroupBox2.SuspendLayout()
         GroupBox1.SuspendLayout()
         adminheader_pnl.SuspendLayout()
@@ -237,28 +237,11 @@ Partial Class Employee_Dashboard
         ' adminheader_pnl
         ' 
         adminheader_pnl.BackColor = Color.White
-        adminheader_pnl.Controls.Add(btnSignOut)
         adminheader_pnl.Controls.Add(Label2)
         adminheader_pnl.Location = New Point(338, -17)
         adminheader_pnl.Name = "adminheader_pnl"
         adminheader_pnl.Size = New Size(1608, 107)
         adminheader_pnl.TabIndex = 79
-        ' 
-        ' btnSignOut
-        ' 
-        btnSignOut.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnSignOut.IconChar = FontAwesome.Sharp.IconChar.SignOut
-        btnSignOut.IconColor = Color.Black
-        btnSignOut.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnSignOut.IconSize = 38
-        btnSignOut.ImageAlign = ContentAlignment.MiddleLeft
-        btnSignOut.Location = New Point(1258, 46)
-        btnSignOut.Name = "btnSignOut"
-        btnSignOut.Size = New Size(142, 54)
-        btnSignOut.TabIndex = 39
-        btnSignOut.Text = "Sign Out"
-        btnSignOut.TextAlign = ContentAlignment.MiddleRight
-        btnSignOut.UseVisualStyleBackColor = True
         ' 
         ' Label2
         ' 
@@ -280,7 +263,7 @@ Partial Class Employee_Dashboard
         Panel2.Controls.Add(lblDepartment)
         Panel2.Controls.Add(lblAttendanceTracker)
         Panel2.Controls.Add(lblTeamOverview)
-        Panel2.Controls.Add(Label1)
+        Panel2.Controls.Add(lblManagement)
         Panel2.Controls.Add(lblTrainings)
         Panel2.Controls.Add(lblSalary)
         Panel2.Controls.Add(Label26)
@@ -373,16 +356,16 @@ Partial Class Employee_Dashboard
         lblTeamOverview.TabIndex = 71
         lblTeamOverview.Text = "Team Overview"
         ' 
-        ' Label1
+        ' lblManagement
         ' 
-        Label1.AutoSize = True
-        Label1.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label1.ForeColor = Color.White
-        Label1.Location = New Point(30, 500)
-        Label1.Name = "Label1"
-        Label1.Size = New Size(135, 22)
-        Label1.TabIndex = 70
-        Label1.Text = "MANAGEMENT"
+        lblManagement.AutoSize = True
+        lblManagement.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblManagement.ForeColor = Color.White
+        lblManagement.Location = New Point(30, 500)
+        lblManagement.Name = "lblManagement"
+        lblManagement.Size = New Size(135, 22)
+        lblManagement.TabIndex = 70
+        lblManagement.Text = "MANAGEMENT"
         ' 
         ' lblTrainings
         ' 
@@ -652,12 +635,31 @@ Partial Class Employee_Dashboard
         Label10.TabIndex = 0
         Label10.Text = "Employee ID:"
         ' 
+        ' btnSignOut
+        ' 
+        btnSignOut.BackColor = Color.SteelBlue
+        btnSignOut.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnSignOut.ForeColor = Color.White
+        btnSignOut.IconChar = FontAwesome.Sharp.IconChar.SignOut
+        btnSignOut.IconColor = Color.White
+        btnSignOut.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSignOut.IconSize = 38
+        btnSignOut.ImageAlign = ContentAlignment.MiddleLeft
+        btnSignOut.Location = New Point(30, 1080)
+        btnSignOut.Name = "btnSignOut"
+        btnSignOut.Size = New Size(308, 54)
+        btnSignOut.TabIndex = 99
+        btnSignOut.Text = "Sign Out"
+        btnSignOut.TextAlign = ContentAlignment.MiddleRight
+        btnSignOut.UseVisualStyleBackColor = False
+        ' 
         ' Employee_Dashboard
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1761, 1033)
         ControlBox = False
+        Controls.Add(btnSignOut)
         Controls.Add(gbInfo)
         Controls.Add(Panel2)
         Controls.Add(adminheader_pnl)
@@ -713,7 +715,7 @@ Partial Class Employee_Dashboard
     Friend WithEvents lblDepartment As Label
     Friend WithEvents lblAttendanceTracker As Label
     Friend WithEvents lblTeamOverview As Label
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblManagement As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents lblWelcome As Label
     Friend WithEvents Label5 As Label
@@ -730,4 +732,5 @@ Partial Class Employee_Dashboard
     Friend WithEvents btnViewSalary As FontAwesome.Sharp.IconButton
     Friend WithEvents btnCheckInOut As FontAwesome.Sharp.IconButton
     Friend WithEvents PictureBox1 As PictureBox
+
 End Class

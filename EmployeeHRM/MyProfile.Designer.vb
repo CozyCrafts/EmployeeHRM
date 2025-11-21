@@ -23,9 +23,9 @@ Partial Class MyProfile
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         adminheader_pnl = New Panel()
-        btnSignOut = New FontAwesome.Sharp.IconButton()
         Label2 = New Label()
         Panel2 = New Panel()
+        btnSignOut = New FontAwesome.Sharp.IconButton()
         lblAmenities = New Label()
         lblTrainings = New Label()
         lblLeaveApproval = New Label()
@@ -124,28 +124,11 @@ Partial Class MyProfile
         ' adminheader_pnl
         ' 
         adminheader_pnl.BackColor = Color.White
-        adminheader_pnl.Controls.Add(btnSignOut)
         adminheader_pnl.Controls.Add(Label2)
         adminheader_pnl.Location = New Point(322, -17)
         adminheader_pnl.Name = "adminheader_pnl"
         adminheader_pnl.Size = New Size(1608, 107)
         adminheader_pnl.TabIndex = 21
-        ' 
-        ' btnSignOut
-        ' 
-        btnSignOut.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnSignOut.IconChar = FontAwesome.Sharp.IconChar.SignOut
-        btnSignOut.IconColor = Color.Black
-        btnSignOut.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnSignOut.IconSize = 38
-        btnSignOut.ImageAlign = ContentAlignment.MiddleLeft
-        btnSignOut.Location = New Point(1265, 46)
-        btnSignOut.Name = "btnSignOut"
-        btnSignOut.Size = New Size(142, 54)
-        btnSignOut.TabIndex = 39
-        btnSignOut.Text = "Sign Out"
-        btnSignOut.TextAlign = ContentAlignment.MiddleRight
-        btnSignOut.UseVisualStyleBackColor = True
         ' 
         ' Label2
         ' 
@@ -160,6 +143,7 @@ Partial Class MyProfile
         ' Panel2
         ' 
         Panel2.BackColor = Color.SteelBlue
+        Panel2.Controls.Add(btnSignOut)
         Panel2.Controls.Add(lblAmenities)
         Panel2.Controls.Add(lblTrainings)
         Panel2.Controls.Add(lblLeaveApproval)
@@ -182,6 +166,24 @@ Partial Class MyProfile
         Panel2.Name = "Panel2"
         Panel2.Size = New Size(350, 1357)
         Panel2.TabIndex = 28
+        ' 
+        ' btnSignOut
+        ' 
+        btnSignOut.BackColor = Color.SteelBlue
+        btnSignOut.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnSignOut.ForeColor = Color.White
+        btnSignOut.IconChar = FontAwesome.Sharp.IconChar.SignOut
+        btnSignOut.IconColor = Color.White
+        btnSignOut.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSignOut.IconSize = 38
+        btnSignOut.ImageAlign = ContentAlignment.MiddleLeft
+        btnSignOut.Location = New Point(30, 1080)
+        btnSignOut.Name = "btnSignOut"
+        btnSignOut.Size = New Size(308, 54)
+        btnSignOut.TabIndex = 80
+        btnSignOut.Text = "Sign Out"
+        btnSignOut.TextAlign = ContentAlignment.MiddleRight
+        btnSignOut.UseVisualStyleBackColor = False
         ' 
         ' lblAmenities
         ' 

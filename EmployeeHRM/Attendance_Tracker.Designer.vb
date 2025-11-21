@@ -24,9 +24,9 @@ Partial Class Attendance_Tracker
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Attendance_Tracker))
         adminheader_pnl = New Panel()
-        btnSignOut = New FontAwesome.Sharp.IconButton()
         Label2 = New Label()
         Panel1 = New Panel()
+        btnSignOut = New FontAwesome.Sharp.IconButton()
         lblAmenities = New Label()
         lblTrainings = New Label()
         lblLeaveApproval = New Label()
@@ -50,6 +50,7 @@ Partial Class Attendance_Tracker
         PictureBox1 = New PictureBox()
         dgvAttendanceList = New DataGridView()
         gbAttendanceDetails = New GroupBox()
+        cbEmployeeID = New ComboBox()
         gbDailyTimeRecord = New GroupBox()
         dtpTimeOutPM = New DateTimePicker()
         dtpTimeInPM = New DateTimePicker()
@@ -83,7 +84,6 @@ Partial Class Attendance_Tracker
         Label21 = New Label()
         Label1 = New Label()
         Label5 = New Label()
-        cbEmployeeID = New ComboBox()
         adminheader_pnl.SuspendLayout()
         Panel1.SuspendLayout()
         gbAttendanceList.SuspendLayout()
@@ -96,28 +96,11 @@ Partial Class Attendance_Tracker
         ' adminheader_pnl
         ' 
         adminheader_pnl.BackColor = Color.White
-        adminheader_pnl.Controls.Add(btnSignOut)
         adminheader_pnl.Controls.Add(Label2)
         adminheader_pnl.Location = New Point(338, -17)
         adminheader_pnl.Name = "adminheader_pnl"
         adminheader_pnl.Size = New Size(1608, 107)
         adminheader_pnl.TabIndex = 4
-        ' 
-        ' btnSignOut
-        ' 
-        btnSignOut.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnSignOut.IconChar = FontAwesome.Sharp.IconChar.SignOut
-        btnSignOut.IconColor = Color.Black
-        btnSignOut.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnSignOut.IconSize = 38
-        btnSignOut.ImageAlign = ContentAlignment.MiddleLeft
-        btnSignOut.Location = New Point(1265, 46)
-        btnSignOut.Name = "btnSignOut"
-        btnSignOut.Size = New Size(142, 54)
-        btnSignOut.TabIndex = 40
-        btnSignOut.Text = "Sign Out"
-        btnSignOut.TextAlign = ContentAlignment.MiddleRight
-        btnSignOut.UseVisualStyleBackColor = True
         ' 
         ' Label2
         ' 
@@ -132,6 +115,7 @@ Partial Class Attendance_Tracker
         ' Panel1
         ' 
         Panel1.BackColor = Color.SteelBlue
+        Panel1.Controls.Add(btnSignOut)
         Panel1.Controls.Add(lblAmenities)
         Panel1.Controls.Add(lblTrainings)
         Panel1.Controls.Add(lblLeaveApproval)
@@ -154,6 +138,24 @@ Partial Class Attendance_Tracker
         Panel1.Name = "Panel1"
         Panel1.Size = New Size(350, 1357)
         Panel1.TabIndex = 5
+        ' 
+        ' btnSignOut
+        ' 
+        btnSignOut.BackColor = Color.SteelBlue
+        btnSignOut.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnSignOut.ForeColor = Color.White
+        btnSignOut.IconChar = FontAwesome.Sharp.IconChar.SignOut
+        btnSignOut.IconColor = Color.White
+        btnSignOut.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSignOut.IconSize = 38
+        btnSignOut.ImageAlign = ContentAlignment.MiddleLeft
+        btnSignOut.Location = New Point(30, 1080)
+        btnSignOut.Name = "btnSignOut"
+        btnSignOut.Size = New Size(308, 54)
+        btnSignOut.TabIndex = 80
+        btnSignOut.Text = "Sign Out"
+        btnSignOut.TextAlign = ContentAlignment.MiddleRight
+        btnSignOut.UseVisualStyleBackColor = False
         ' 
         ' lblAmenities
         ' 
@@ -437,6 +439,14 @@ Partial Class Attendance_Tracker
         gbAttendanceDetails.TabIndex = 83
         gbAttendanceDetails.TabStop = False
         gbAttendanceDetails.Text = "Details"
+        ' 
+        ' cbEmployeeID
+        ' 
+        cbEmployeeID.FormattingEnabled = True
+        cbEmployeeID.Location = New Point(249, 54)
+        cbEmployeeID.Name = "cbEmployeeID"
+        cbEmployeeID.Size = New Size(256, 35)
+        cbEmployeeID.TabIndex = 126
         ' 
         ' gbDailyTimeRecord
         ' 
@@ -810,19 +820,11 @@ Partial Class Attendance_Tracker
         Label5.TabIndex = 74
         Label5.Text = "Total Hours:"
         ' 
-        ' cbEmployeeID
-        ' 
-        cbEmployeeID.FormattingEnabled = True
-        cbEmployeeID.Location = New Point(249, 54)
-        cbEmployeeID.Name = "cbEmployeeID"
-        cbEmployeeID.Size = New Size(256, 35)
-        cbEmployeeID.TabIndex = 126
-        ' 
         ' Attendance_Tracker
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1781, 1033)
+        ClientSize = New Size(1761, 1033)
         ControlBox = False
         Controls.Add(gbAttendanceDetails)
         Controls.Add(gbAttendanceList)
@@ -905,8 +907,8 @@ Partial Class Attendance_Tracker
     Friend WithEvents btnCancelAttendance As FontAwesome.Sharp.IconButton
     Friend WithEvents btnSaveAttendance As FontAwesome.Sharp.IconButton
     Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents btnSignOut As FontAwesome.Sharp.IconButton
     Friend WithEvents txtDepartmentName As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents cbEmployeeID As ComboBox
+    Friend WithEvents btnSignOut As FontAwesome.Sharp.IconButton
 End Class

@@ -27,6 +27,7 @@ Partial Class Department
         Dim DataGridViewCellStyle2 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Panel1 = New Panel()
+        btnSignOut = New FontAwesome.Sharp.IconButton()
         lblAmenities = New Label()
         lblTrainings = New Label()
         lblLeaveApproval = New Label()
@@ -46,7 +47,6 @@ Partial Class Department
         lblDashboard = New Label()
         lblMain = New Label()
         adminheader_pnl = New Panel()
-        btnSignOut = New FontAwesome.Sharp.IconButton()
         Label2 = New Label()
         gbDepartmentRecords = New GroupBox()
         txtSearchDepartment = New TextBox()
@@ -75,6 +75,7 @@ Partial Class Department
         ' Panel1
         ' 
         Panel1.BackColor = Color.SteelBlue
+        Panel1.Controls.Add(btnSignOut)
         Panel1.Controls.Add(lblAmenities)
         Panel1.Controls.Add(lblTrainings)
         Panel1.Controls.Add(lblLeaveApproval)
@@ -97,6 +98,24 @@ Partial Class Department
         Panel1.Name = "Panel1"
         Panel1.Size = New Size(350, 1357)
         Panel1.TabIndex = 2
+        ' 
+        ' btnSignOut
+        ' 
+        btnSignOut.BackColor = Color.SteelBlue
+        btnSignOut.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnSignOut.ForeColor = Color.White
+        btnSignOut.IconChar = FontAwesome.Sharp.IconChar.SignOut
+        btnSignOut.IconColor = Color.White
+        btnSignOut.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSignOut.IconSize = 38
+        btnSignOut.ImageAlign = ContentAlignment.MiddleLeft
+        btnSignOut.Location = New Point(30, 1080)
+        btnSignOut.Name = "btnSignOut"
+        btnSignOut.Size = New Size(308, 54)
+        btnSignOut.TabIndex = 80
+        btnSignOut.Text = "Sign Out"
+        btnSignOut.TextAlign = ContentAlignment.MiddleRight
+        btnSignOut.UseVisualStyleBackColor = False
         ' 
         ' lblAmenities
         ' 
@@ -299,28 +318,11 @@ Partial Class Department
         ' adminheader_pnl
         ' 
         adminheader_pnl.BackColor = Color.White
-        adminheader_pnl.Controls.Add(btnSignOut)
         adminheader_pnl.Controls.Add(Label2)
         adminheader_pnl.Location = New Point(338, -17)
         adminheader_pnl.Name = "adminheader_pnl"
         adminheader_pnl.Size = New Size(1608, 107)
         adminheader_pnl.TabIndex = 3
-        ' 
-        ' btnSignOut
-        ' 
-        btnSignOut.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnSignOut.IconChar = FontAwesome.Sharp.IconChar.SignOut
-        btnSignOut.IconColor = Color.Black
-        btnSignOut.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnSignOut.IconSize = 38
-        btnSignOut.ImageAlign = ContentAlignment.MiddleLeft
-        btnSignOut.Location = New Point(1249, 38)
-        btnSignOut.Name = "btnSignOut"
-        btnSignOut.Size = New Size(142, 54)
-        btnSignOut.TabIndex = 38
-        btnSignOut.Text = "Sign Out"
-        btnSignOut.TextAlign = ContentAlignment.MiddleRight
-        btnSignOut.UseVisualStyleBackColor = True
         ' 
         ' Label2
         ' 
@@ -633,10 +635,10 @@ Partial Class Department
     Friend WithEvents txtDepartmentDescription As TextBox
     Friend WithEvents txtSearchDepartment As TextBox
     Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents btnSignOut As FontAwesome.Sharp.IconButton
     Friend WithEvents btnDeleteDepartment As FontAwesome.Sharp.IconButton
     Friend WithEvents btnAddDepartment As FontAwesome.Sharp.IconButton
     Friend WithEvents btnEditDepartment As FontAwesome.Sharp.IconButton
     Friend WithEvents btnCancelDepartment As FontAwesome.Sharp.IconButton
     Friend WithEvents btnSaveDepartment As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnSignOut As FontAwesome.Sharp.IconButton
 End Class

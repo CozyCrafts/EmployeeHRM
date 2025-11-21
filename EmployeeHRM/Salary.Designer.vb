@@ -23,7 +23,6 @@ Partial Class Salary
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         adminheader_pnl = New Panel()
-        btnSignOut = New FontAwesome.Sharp.IconButton()
         Label2 = New Label()
         Panel2 = New Panel()
         lblAmenities = New Label()
@@ -34,7 +33,7 @@ Partial Class Salary
         lblDepartment = New Label()
         lblAttendanceTracker = New Label()
         lblTeamOverview = New Label()
-        Label28 = New Label()
+        lblManagement = New Label()
         lblMyProfile = New Label()
         lblAttendance = New Label()
         lblLeaveManagement = New Label()
@@ -47,6 +46,7 @@ Partial Class Salary
         GroupBox4 = New GroupBox()
         dgvSalaryHistory = New DataGridView()
         GroupBox3 = New GroupBox()
+        rbSalarySent = New RadioButton()
         txtEmployeeID = New TextBox()
         Label5 = New Label()
         txtJobTitle = New TextBox()
@@ -98,7 +98,7 @@ Partial Class Salary
         txtGrossSalary = New TextBox()
         dtpPaymentDate = New DateTimePicker()
         Label23 = New Label()
-        rbSalarySent = New RadioButton()
+        btnSignOut = New FontAwesome.Sharp.IconButton()
         adminheader_pnl.SuspendLayout()
         Panel2.SuspendLayout()
         GroupBox4.SuspendLayout()
@@ -112,28 +112,11 @@ Partial Class Salary
         ' adminheader_pnl
         ' 
         adminheader_pnl.BackColor = Color.White
-        adminheader_pnl.Controls.Add(btnSignOut)
         adminheader_pnl.Controls.Add(Label2)
         adminheader_pnl.Location = New Point(338, -17)
         adminheader_pnl.Name = "adminheader_pnl"
         adminheader_pnl.Size = New Size(1608, 107)
         adminheader_pnl.TabIndex = 23
-        ' 
-        ' btnSignOut
-        ' 
-        btnSignOut.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnSignOut.IconChar = FontAwesome.Sharp.IconChar.SignOut
-        btnSignOut.IconColor = Color.Black
-        btnSignOut.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnSignOut.IconSize = 38
-        btnSignOut.ImageAlign = ContentAlignment.MiddleLeft
-        btnSignOut.Location = New Point(1246, 46)
-        btnSignOut.Name = "btnSignOut"
-        btnSignOut.Size = New Size(142, 54)
-        btnSignOut.TabIndex = 40
-        btnSignOut.Text = "Sign Out"
-        btnSignOut.TextAlign = ContentAlignment.MiddleRight
-        btnSignOut.UseVisualStyleBackColor = True
         ' 
         ' Label2
         ' 
@@ -156,7 +139,7 @@ Partial Class Salary
         Panel2.Controls.Add(lblDepartment)
         Panel2.Controls.Add(lblAttendanceTracker)
         Panel2.Controls.Add(lblTeamOverview)
-        Panel2.Controls.Add(Label28)
+        Panel2.Controls.Add(lblManagement)
         Panel2.Controls.Add(lblMyProfile)
         Panel2.Controls.Add(lblAttendance)
         Panel2.Controls.Add(lblLeaveManagement)
@@ -259,16 +242,16 @@ Partial Class Salary
         lblTeamOverview.TabIndex = 84
         lblTeamOverview.Text = "Team Overview"
         ' 
-        ' Label28
+        ' lblManagement
         ' 
-        Label28.AutoSize = True
-        Label28.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label28.ForeColor = Color.White
-        Label28.Location = New Point(30, 500)
-        Label28.Name = "Label28"
-        Label28.Size = New Size(135, 22)
-        Label28.TabIndex = 83
-        Label28.Text = "MANAGEMENT"
+        lblManagement.AutoSize = True
+        lblManagement.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblManagement.ForeColor = Color.White
+        lblManagement.Location = New Point(30, 500)
+        lblManagement.Name = "lblManagement"
+        lblManagement.Size = New Size(135, 22)
+        lblManagement.TabIndex = 83
+        lblManagement.Text = "MANAGEMENT"
         ' 
         ' lblMyProfile
         ' 
@@ -419,6 +402,18 @@ Partial Class Salary
         GroupBox3.TabIndex = 97
         GroupBox3.TabStop = False
         GroupBox3.Text = "Payroll Computation"
+        ' 
+        ' rbSalarySent
+        ' 
+        rbSalarySent.AutoSize = True
+        rbSalarySent.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        rbSalarySent.Location = New Point(189, 458)
+        rbSalarySent.Name = "rbSalarySent"
+        rbSalarySent.Size = New Size(209, 27)
+        rbSalarySent.TabIndex = 114
+        rbSalarySent.TabStop = True
+        rbSalarySent.Text = "Salary Sent to ATM"
+        rbSalarySent.UseVisualStyleBackColor = True
         ' 
         ' txtEmployeeID
         ' 
@@ -914,17 +909,23 @@ Partial Class Salary
         Label23.TabIndex = 0
         Label23.Text = "Payment Date:"
         ' 
-        ' rbSalarySent
+        ' btnSignOut
         ' 
-        rbSalarySent.AutoSize = True
-        rbSalarySent.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        rbSalarySent.Location = New Point(189, 458)
-        rbSalarySent.Name = "rbSalarySent"
-        rbSalarySent.Size = New Size(209, 27)
-        rbSalarySent.TabIndex = 114
-        rbSalarySent.TabStop = True
-        rbSalarySent.Text = "Salary Sent to ATM"
-        rbSalarySent.UseVisualStyleBackColor = True
+        btnSignOut.BackColor = Color.SteelBlue
+        btnSignOut.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnSignOut.ForeColor = Color.White
+        btnSignOut.IconChar = FontAwesome.Sharp.IconChar.SignOut
+        btnSignOut.IconColor = Color.White
+        btnSignOut.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSignOut.IconSize = 38
+        btnSignOut.ImageAlign = ContentAlignment.MiddleLeft
+        btnSignOut.Location = New Point(30, 1080)
+        btnSignOut.Name = "btnSignOut"
+        btnSignOut.Size = New Size(308, 54)
+        btnSignOut.TabIndex = 98
+        btnSignOut.Text = "Sign Out"
+        btnSignOut.TextAlign = ContentAlignment.MiddleRight
+        btnSignOut.UseVisualStyleBackColor = False
         ' 
         ' Salary
         ' 
@@ -932,6 +933,7 @@ Partial Class Salary
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1761, 1033)
         ControlBox = False
+        Controls.Add(btnSignOut)
         Controls.Add(GroupBox3)
         Controls.Add(GroupBox4)
         Controls.Add(Panel2)
@@ -972,7 +974,7 @@ Partial Class Salary
     Friend WithEvents lblDepartment As Label
     Friend WithEvents lblAttendanceTracker As Label
     Friend WithEvents lblTeamOverview As Label
-    Friend WithEvents Label28 As Label
+    Friend WithEvents lblManagement As Label
     Friend WithEvents lblMyProfile As Label
     Friend WithEvents lblAttendance As Label
     Friend WithEvents lblLeaveManagement As Label
@@ -980,7 +982,6 @@ Partial Class Salary
     Friend WithEvents Label49 As Label
     Friend WithEvents GroupBox4 As GroupBox
     Friend WithEvents dgvSalaryHistory As DataGridView
-    Friend WithEvents btnSignOut As FontAwesome.Sharp.IconButton
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents Label5 As Label
     Friend WithEvents txtJobTitle As TextBox
@@ -1034,4 +1035,5 @@ Partial Class Salary
     Friend WithEvents Label23 As Label
     Friend WithEvents txtEmployeeID As TextBox
     Friend WithEvents rbSalarySent As RadioButton
+    Friend WithEvents btnSignOut As FontAwesome.Sharp.IconButton
 End Class

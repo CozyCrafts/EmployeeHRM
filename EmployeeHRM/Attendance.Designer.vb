@@ -23,9 +23,9 @@ Partial Class Attendance
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         adminheader_pnl = New Panel()
-        btnSignOut = New FontAwesome.Sharp.IconButton()
         Label2 = New Label()
         Panel2 = New Panel()
+        btnSignOut = New FontAwesome.Sharp.IconButton()
         lblAmenities = New Label()
         lblTrainings = New Label()
         lblLeaveApproval = New Label()
@@ -34,7 +34,7 @@ Partial Class Attendance
         lblDepartment = New Label()
         lblAttendanceTracker = New Label()
         lblTeamOverview = New Label()
-        Label5 = New Label()
+        lblManagement = New Label()
         lblMyProfile = New Label()
         lblAttendance = New Label()
         lblLeaveManagement = New Label()
@@ -45,9 +45,10 @@ Partial Class Attendance
         lblDashboard = New Label()
         Label51 = New Label()
         gbDetailsAttendance = New GroupBox()
+        btnRecordAttendance = New FontAwesome.Sharp.IconButton()
         Label1 = New Label()
         txtAttendanceID = New TextBox()
-        btnRecordAttendance = New FontAwesome.Sharp.IconButton()
+        btnEditAttendance = New FontAwesome.Sharp.IconButton()
         btnCancelAttendance = New FontAwesome.Sharp.IconButton()
         btnSaveAttendance = New FontAwesome.Sharp.IconButton()
         gbDailyTimeRecord = New GroupBox()
@@ -90,28 +91,11 @@ Partial Class Attendance
         ' adminheader_pnl
         ' 
         adminheader_pnl.BackColor = Color.White
-        adminheader_pnl.Controls.Add(btnSignOut)
         adminheader_pnl.Controls.Add(Label2)
         adminheader_pnl.Location = New Point(338, -17)
         adminheader_pnl.Name = "adminheader_pnl"
         adminheader_pnl.Size = New Size(1608, 107)
         adminheader_pnl.TabIndex = 23
-        ' 
-        ' btnSignOut
-        ' 
-        btnSignOut.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnSignOut.IconChar = FontAwesome.Sharp.IconChar.SignOut
-        btnSignOut.IconColor = Color.Black
-        btnSignOut.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnSignOut.IconSize = 38
-        btnSignOut.ImageAlign = ContentAlignment.MiddleLeft
-        btnSignOut.Location = New Point(1260, 46)
-        btnSignOut.Name = "btnSignOut"
-        btnSignOut.Size = New Size(142, 54)
-        btnSignOut.TabIndex = 38
-        btnSignOut.Text = "Sign Out"
-        btnSignOut.TextAlign = ContentAlignment.MiddleRight
-        btnSignOut.UseVisualStyleBackColor = True
         ' 
         ' Label2
         ' 
@@ -126,6 +110,7 @@ Partial Class Attendance
         ' Panel2
         ' 
         Panel2.BackColor = Color.SteelBlue
+        Panel2.Controls.Add(btnSignOut)
         Panel2.Controls.Add(lblAmenities)
         Panel2.Controls.Add(lblTrainings)
         Panel2.Controls.Add(lblLeaveApproval)
@@ -134,7 +119,7 @@ Partial Class Attendance
         Panel2.Controls.Add(lblDepartment)
         Panel2.Controls.Add(lblAttendanceTracker)
         Panel2.Controls.Add(lblTeamOverview)
-        Panel2.Controls.Add(Label5)
+        Panel2.Controls.Add(lblManagement)
         Panel2.Controls.Add(lblMyProfile)
         Panel2.Controls.Add(lblAttendance)
         Panel2.Controls.Add(lblLeaveManagement)
@@ -148,6 +133,24 @@ Partial Class Attendance
         Panel2.Name = "Panel2"
         Panel2.Size = New Size(350, 1357)
         Panel2.TabIndex = 28
+        ' 
+        ' btnSignOut
+        ' 
+        btnSignOut.BackColor = Color.SteelBlue
+        btnSignOut.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnSignOut.ForeColor = Color.White
+        btnSignOut.IconChar = FontAwesome.Sharp.IconChar.SignOut
+        btnSignOut.IconColor = Color.White
+        btnSignOut.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSignOut.IconSize = 38
+        btnSignOut.ImageAlign = ContentAlignment.MiddleLeft
+        btnSignOut.Location = New Point(30, 1080)
+        btnSignOut.Name = "btnSignOut"
+        btnSignOut.Size = New Size(308, 54)
+        btnSignOut.TabIndex = 112
+        btnSignOut.Text = "Sign Out"
+        btnSignOut.TextAlign = ContentAlignment.MiddleRight
+        btnSignOut.UseVisualStyleBackColor = False
         ' 
         ' lblAmenities
         ' 
@@ -237,16 +240,16 @@ Partial Class Attendance
         lblTeamOverview.TabIndex = 104
         lblTeamOverview.Text = "Team Overview"
         ' 
-        ' Label5
+        ' lblManagement
         ' 
-        Label5.AutoSize = True
-        Label5.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label5.ForeColor = Color.White
-        Label5.Location = New Point(30, 500)
-        Label5.Name = "Label5"
-        Label5.Size = New Size(135, 22)
-        Label5.TabIndex = 103
-        Label5.Text = "MANAGEMENT"
+        lblManagement.AutoSize = True
+        lblManagement.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblManagement.ForeColor = Color.White
+        lblManagement.Location = New Point(30, 500)
+        lblManagement.Name = "lblManagement"
+        lblManagement.Size = New Size(135, 22)
+        lblManagement.TabIndex = 103
+        lblManagement.Text = "MANAGEMENT"
         ' 
         ' lblMyProfile
         ' 
@@ -349,9 +352,10 @@ Partial Class Attendance
         ' 
         ' gbDetailsAttendance
         ' 
+        gbDetailsAttendance.Controls.Add(btnRecordAttendance)
         gbDetailsAttendance.Controls.Add(Label1)
         gbDetailsAttendance.Controls.Add(txtAttendanceID)
-        gbDetailsAttendance.Controls.Add(btnRecordAttendance)
+        gbDetailsAttendance.Controls.Add(btnEditAttendance)
         gbDetailsAttendance.Controls.Add(btnCancelAttendance)
         gbDetailsAttendance.Controls.Add(btnSaveAttendance)
         gbDetailsAttendance.Controls.Add(gbDailyTimeRecord)
@@ -374,6 +378,23 @@ Partial Class Attendance
         gbDetailsAttendance.TabStop = False
         gbDetailsAttendance.Text = "Details"
         ' 
+        ' btnRecordAttendance
+        ' 
+        btnRecordAttendance.BackColor = SystemColors.InactiveCaption
+        btnRecordAttendance.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnRecordAttendance.IconChar = FontAwesome.Sharp.IconChar.ClipboardCheck
+        btnRecordAttendance.IconColor = Color.Black
+        btnRecordAttendance.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnRecordAttendance.IconSize = 40
+        btnRecordAttendance.ImageAlign = ContentAlignment.MiddleLeft
+        btnRecordAttendance.Location = New Point(237, 440)
+        btnRecordAttendance.Name = "btnRecordAttendance"
+        btnRecordAttendance.Size = New Size(347, 55)
+        btnRecordAttendance.TabIndex = 120
+        btnRecordAttendance.Text = "Record Attendance"
+        btnRecordAttendance.TextAlign = ContentAlignment.MiddleRight
+        btnRecordAttendance.UseVisualStyleBackColor = False
+        ' 
         ' Label1
         ' 
         Label1.AutoSize = True
@@ -394,22 +415,22 @@ Partial Class Attendance
         txtAttendanceID.Size = New Size(347, 36)
         txtAttendanceID.TabIndex = 118
         ' 
-        ' btnRecordAttendance
+        ' btnEditAttendance
         ' 
-        btnRecordAttendance.BackColor = SystemColors.InactiveCaption
-        btnRecordAttendance.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnRecordAttendance.IconChar = FontAwesome.Sharp.IconChar.Edit
-        btnRecordAttendance.IconColor = Color.Black
-        btnRecordAttendance.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnRecordAttendance.IconSize = 40
-        btnRecordAttendance.ImageAlign = ContentAlignment.MiddleLeft
-        btnRecordAttendance.Location = New Point(236, 371)
-        btnRecordAttendance.Name = "btnRecordAttendance"
-        btnRecordAttendance.Size = New Size(347, 55)
-        btnRecordAttendance.TabIndex = 115
-        btnRecordAttendance.Text = "Record Attendance"
-        btnRecordAttendance.TextAlign = ContentAlignment.MiddleRight
-        btnRecordAttendance.UseVisualStyleBackColor = False
+        btnEditAttendance.BackColor = SystemColors.InactiveCaption
+        btnEditAttendance.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnEditAttendance.IconChar = FontAwesome.Sharp.IconChar.Edit
+        btnEditAttendance.IconColor = Color.Black
+        btnEditAttendance.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnEditAttendance.IconSize = 40
+        btnEditAttendance.ImageAlign = ContentAlignment.MiddleLeft
+        btnEditAttendance.Location = New Point(236, 371)
+        btnEditAttendance.Name = "btnEditAttendance"
+        btnEditAttendance.Size = New Size(347, 55)
+        btnEditAttendance.TabIndex = 115
+        btnEditAttendance.Text = "Edit Attendance"
+        btnEditAttendance.TextAlign = ContentAlignment.MiddleRight
+        btnEditAttendance.UseVisualStyleBackColor = False
         ' 
         ' btnCancelAttendance
         ' 
@@ -823,7 +844,7 @@ Partial Class Attendance
     Friend WithEvents lblDepartment As Label
     Friend WithEvents lblAttendanceTracker As Label
     Friend WithEvents lblTeamOverview As Label
-    Friend WithEvents Label5 As Label
+    Friend WithEvents lblManagement As Label
     Friend WithEvents lblMyProfile As Label
     Friend WithEvents lblAttendance As Label
     Friend WithEvents lblLeaveManagement As Label
@@ -859,10 +880,11 @@ Partial Class Attendance
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents btnCheckOutPM As FontAwesome.Sharp.IconButton
     Friend WithEvents btnCheckInPM As FontAwesome.Sharp.IconButton
-    Friend WithEvents btnRecordAttendance As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnEditAttendance As FontAwesome.Sharp.IconButton
     Friend WithEvents btnCancelAttendance As FontAwesome.Sharp.IconButton
     Friend WithEvents btnSaveAttendance As FontAwesome.Sharp.IconButton
-    Friend WithEvents btnSignOut As FontAwesome.Sharp.IconButton
     Friend WithEvents Label1 As Label
     Friend WithEvents txtAttendanceID As TextBox
+    Friend WithEvents btnSignOut As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnRecordAttendance As FontAwesome.Sharp.IconButton
 End Class

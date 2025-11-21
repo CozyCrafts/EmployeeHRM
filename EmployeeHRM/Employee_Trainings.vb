@@ -431,17 +431,18 @@ Handles rbInProgress.CheckedChanged, rbCompleted.CheckedChanged, rbPostponed.Che
         Amenities.Show()
         Me.Hide()
     End Sub
-    Private Sub btnSignOut_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
-        Dim result As DialogResult = MessageBox.Show(
-            "Are you sure you want to sign out?",
-            "Confirm Sign Out",
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Question
-        )
+
+
+    Private Sub btnSignOut_Click_1(sender As Object, e As EventArgs) Handles btnSignOut.Click
+        Dim result = MessageBox.Show(
+                "Are you sure you want to sign out?",
+                "Confirm Sign Out",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            )
         If result = DialogResult.Yes Then
             Login_frm.Show()
-            Me.Hide()
+            Hide()
         End If
     End Sub
-
 End Class

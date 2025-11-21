@@ -24,13 +24,13 @@ Partial Class Trainings
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Trainings))
         adminheader_pnl = New Panel()
-        btnSignOut = New FontAwesome.Sharp.IconButton()
         pcbTerminate = New PictureBox()
         Label2 = New Label()
         GroupBox1 = New GroupBox()
         dgvTrainingHistory = New DataGridView()
         btnSaveTraining = New FontAwesome.Sharp.IconButton()
         Panel2 = New Panel()
+        btnSignOut = New FontAwesome.Sharp.IconButton()
         lblAmenities = New Label()
         lblTrainings = New Label()
         lblLeaveApproval = New Label()
@@ -39,7 +39,7 @@ Partial Class Trainings
         lblDepartment = New Label()
         lblAttendanceTracker = New Label()
         lblTeamOverview = New Label()
-        Label28 = New Label()
+        lblManagement = New Label()
         lblMyProfile = New Label()
         lblAttendance = New Label()
         lblLeaveManagement = New Label()
@@ -83,7 +83,6 @@ Partial Class Trainings
         ' adminheader_pnl
         ' 
         adminheader_pnl.BackColor = Color.White
-        adminheader_pnl.Controls.Add(btnSignOut)
         adminheader_pnl.Controls.Add(pcbTerminate)
         adminheader_pnl.Controls.Add(Label2)
         adminheader_pnl.Location = New Point(322, -17)
@@ -91,22 +90,6 @@ Partial Class Trainings
         adminheader_pnl.Name = "adminheader_pnl"
         adminheader_pnl.Size = New Size(2412, 103)
         adminheader_pnl.TabIndex = 23
-        ' 
-        ' btnSignOut
-        ' 
-        btnSignOut.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnSignOut.IconChar = FontAwesome.Sharp.IconChar.SignOut
-        btnSignOut.IconColor = Color.Black
-        btnSignOut.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnSignOut.IconSize = 38
-        btnSignOut.ImageAlign = ContentAlignment.MiddleLeft
-        btnSignOut.Location = New Point(1265, 46)
-        btnSignOut.Name = "btnSignOut"
-        btnSignOut.Size = New Size(142, 54)
-        btnSignOut.TabIndex = 38
-        btnSignOut.Text = "Sign Out"
-        btnSignOut.TextAlign = ContentAlignment.MiddleRight
-        btnSignOut.UseVisualStyleBackColor = True
         ' 
         ' pcbTerminate
         ' 
@@ -138,7 +121,7 @@ Partial Class Trainings
         GroupBox1.Margin = New Padding(4, 3, 4, 3)
         GroupBox1.Name = "GroupBox1"
         GroupBox1.Padding = New Padding(4, 3, 4, 3)
-        GroupBox1.Size = New Size(1357, 574)
+        GroupBox1.Size = New Size(1358, 660)
         GroupBox1.TabIndex = 66
         GroupBox1.TabStop = False
         GroupBox1.Text = "Training History"
@@ -176,6 +159,7 @@ Partial Class Trainings
         ' Panel2
         ' 
         Panel2.BackColor = Color.SteelBlue
+        Panel2.Controls.Add(btnSignOut)
         Panel2.Controls.Add(lblAmenities)
         Panel2.Controls.Add(lblTrainings)
         Panel2.Controls.Add(lblLeaveApproval)
@@ -184,7 +168,7 @@ Partial Class Trainings
         Panel2.Controls.Add(lblDepartment)
         Panel2.Controls.Add(lblAttendanceTracker)
         Panel2.Controls.Add(lblTeamOverview)
-        Panel2.Controls.Add(Label28)
+        Panel2.Controls.Add(lblManagement)
         Panel2.Controls.Add(lblMyProfile)
         Panel2.Controls.Add(lblAttendance)
         Panel2.Controls.Add(lblLeaveManagement)
@@ -199,6 +183,24 @@ Partial Class Trainings
         Panel2.Name = "Panel2"
         Panel2.Size = New Size(350, 1357)
         Panel2.TabIndex = 26
+        ' 
+        ' btnSignOut
+        ' 
+        btnSignOut.BackColor = Color.SteelBlue
+        btnSignOut.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnSignOut.ForeColor = Color.White
+        btnSignOut.IconChar = FontAwesome.Sharp.IconChar.SignOut
+        btnSignOut.IconColor = Color.White
+        btnSignOut.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSignOut.IconSize = 38
+        btnSignOut.ImageAlign = ContentAlignment.MiddleLeft
+        btnSignOut.Location = New Point(30, 1080)
+        btnSignOut.Name = "btnSignOut"
+        btnSignOut.Size = New Size(308, 54)
+        btnSignOut.TabIndex = 102
+        btnSignOut.Text = "Sign Out"
+        btnSignOut.TextAlign = ContentAlignment.MiddleRight
+        btnSignOut.UseVisualStyleBackColor = False
         ' 
         ' lblAmenities
         ' 
@@ -296,17 +298,17 @@ Partial Class Trainings
         lblTeamOverview.TabIndex = 94
         lblTeamOverview.Text = "Team Overview"
         ' 
-        ' Label28
+        ' lblManagement
         ' 
-        Label28.AutoSize = True
-        Label28.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label28.ForeColor = Color.White
-        Label28.Location = New Point(30, 500)
-        Label28.Margin = New Padding(4, 0, 4, 0)
-        Label28.Name = "Label28"
-        Label28.Size = New Size(135, 22)
-        Label28.TabIndex = 93
-        Label28.Text = "MANAGEMENT"
+        lblManagement.AutoSize = True
+        lblManagement.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblManagement.ForeColor = Color.White
+        lblManagement.Location = New Point(30, 500)
+        lblManagement.Margin = New Padding(4, 0, 4, 0)
+        lblManagement.Name = "lblManagement"
+        lblManagement.Size = New Size(135, 22)
+        lblManagement.TabIndex = 93
+        lblManagement.Text = "MANAGEMENT"
         ' 
         ' lblMyProfile
         ' 
@@ -610,11 +612,11 @@ Partial Class Trainings
         GroupBox3.Controls.Add(dtpStarted)
         GroupBox3.Controls.Add(dtpCompleted)
         GroupBox3.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        GroupBox3.Location = New Point(1078, 134)
+        GroupBox3.Location = New Point(1078, 114)
         GroupBox3.Margin = New Padding(4, 3, 4, 3)
         GroupBox3.Name = "GroupBox3"
         GroupBox3.Padding = New Padding(4, 3, 4, 3)
-        GroupBox3.Size = New Size(651, 317)
+        GroupBox3.Size = New Size(651, 337)
         GroupBox3.TabIndex = 78
         GroupBox3.TabStop = False
         GroupBox3.Text = " Duration"
@@ -687,6 +689,7 @@ Partial Class Trainings
         ' 
         AutoScaleDimensions = New SizeF(12F, 23F)
         AutoScaleMode = AutoScaleMode.Font
+        AutoSize = True
         ClientSize = New Size(1761, 1033)
         ControlBox = False
         Controls.Add(GroupBox4)
@@ -734,7 +737,7 @@ Partial Class Trainings
     Friend WithEvents lblDepartment As Label
     Friend WithEvents lblAttendanceTracker As Label
     Friend WithEvents lblTeamOverview As Label
-    Friend WithEvents Label28 As Label
+    Friend WithEvents lblManagement As Label
     Friend WithEvents lblMyProfile As Label
     Friend WithEvents lblAttendance As Label
     Friend WithEvents lblLeaveManagement As Label
@@ -761,8 +764,8 @@ Partial Class Trainings
     Friend WithEvents txtTrainingType As TextBox
     Friend WithEvents rbPostponed As RadioButton
     Friend WithEvents GroupBox4 As GroupBox
-    Friend WithEvents btnSignOut As FontAwesome.Sharp.IconButton
     Friend WithEvents btnUpdateTraining As FontAwesome.Sharp.IconButton
     Friend WithEvents btnSaveTraining As FontAwesome.Sharp.IconButton
     Friend WithEvents btnCancelTraining As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnSignOut As FontAwesome.Sharp.IconButton
 End Class
