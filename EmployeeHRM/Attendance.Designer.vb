@@ -511,7 +511,7 @@ Partial Class Attendance
         btnCheckOutPM.Name = "btnCheckOutPM"
         btnCheckOutPM.Size = New Size(154, 56)
         btnCheckOutPM.TabIndex = 118
-        btnCheckOutPM.Text = "Check Out"
+        btnCheckOutPM.Text = "Time Out"
         btnCheckOutPM.TextAlign = ContentAlignment.MiddleRight
         btnCheckOutPM.UseVisualStyleBackColor = False
         ' 
@@ -528,7 +528,7 @@ Partial Class Attendance
         btnCheckInPM.Name = "btnCheckInPM"
         btnCheckInPM.Size = New Size(139, 56)
         btnCheckInPM.TabIndex = 117
-        btnCheckInPM.Text = "Check In"
+        btnCheckInPM.Text = "Time In"
         btnCheckInPM.TextAlign = ContentAlignment.MiddleRight
         btnCheckInPM.UseVisualStyleBackColor = False
         ' 
@@ -605,7 +605,7 @@ Partial Class Attendance
         btnCheckOutAM.Name = "btnCheckOutAM"
         btnCheckOutAM.Size = New Size(154, 56)
         btnCheckOutAM.TabIndex = 116
-        btnCheckOutAM.Text = "Check Out"
+        btnCheckOutAM.Text = "Time Out"
         btnCheckOutAM.TextAlign = ContentAlignment.MiddleRight
         btnCheckOutAM.UseVisualStyleBackColor = False
         ' 
@@ -654,7 +654,7 @@ Partial Class Attendance
         btnCheckInAM.Name = "btnCheckInAM"
         btnCheckInAM.Size = New Size(139, 56)
         btnCheckInAM.TabIndex = 115
-        btnCheckInAM.Text = "Check In"
+        btnCheckInAM.Text = "Time In"
         btnCheckInAM.TextAlign = ContentAlignment.MiddleRight
         btnCheckInAM.UseVisualStyleBackColor = False
         ' 
