@@ -387,7 +387,7 @@ Partial Class Attendance
         btnRecordAttendance.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnRecordAttendance.IconSize = 40
         btnRecordAttendance.ImageAlign = ContentAlignment.MiddleLeft
-        btnRecordAttendance.Location = New Point(237, 440)
+        btnRecordAttendance.Location = New Point(237, 370)
         btnRecordAttendance.Name = "btnRecordAttendance"
         btnRecordAttendance.Size = New Size(347, 55)
         btnRecordAttendance.TabIndex = 120

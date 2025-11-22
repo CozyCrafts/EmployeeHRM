@@ -20,6 +20,7 @@
                 startIndex += word.Length
             Loop
         Next
+
         For Each word In italicBoldWords
             Dim startIndex As Integer = 0
             Do
@@ -30,9 +31,16 @@
                 startIndex += word.Length
             Loop
         Next
-
         rtbContent.SelectionStart = 0
         rtbContent.ScrollToCaret()
+        rtbContent.ReadOnly = True
+        rtbContent.TabStop = False
+        rtbContent.Cursor = Cursors.Default
+
+
+        AddHandler rtbContent.SelectionChanged, Sub(sender, e)
+                                                    rtbContent.SelectionLength = 0
+                                                End Sub
 
         Me.ShowDialog()
     End Sub

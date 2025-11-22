@@ -325,7 +325,7 @@ Public Class Employee_Dashboard
     End Sub
     Private Sub btnPolicies_Click(sender As Object, e As EventArgs) Handles btnPolicies.Click
         Dim content =
-        "Policies – Sundowners Resort (Expanded)" & vbCrLf & vbCrLf &
+        "Policies – Sundowners Resort" & vbCrLf & vbCrLf &
         "Sundowners Resort is committed to maintaining a professional, safe, and respectful work environment. All employees are expected to follow these policies to ensure smooth operations, exceptional guest service, and a positive workplace culture." & vbCrLf & vbCrLf &
         "Workplace Conduct" & vbCrLf &
         "   Professionalism: Employees must conduct themselves with integrity, courtesy, and respect at all times, whether interacting with guests, colleagues, or management." & vbCrLf &
@@ -338,59 +338,59 @@ Public Class Employee_Dashboard
         "   Teamwork: Cooperation, effective communication, and support for colleagues are essential for smooth operations." & vbCrLf &
         "   Guest Service: Deliver exceptional service at all times, responding to guest needs promptly and professionally." & vbCrLf &
         "   Confidentiality: Protect all confidential information, including guest data, financial records, and proprietary operations procedures." & vbCrLf &
-        "**_Ethical Behavior_** Avoid conflicts of interest, bribery, or any unethical activities that could harm the resort’s reputation." & vbCrLf & vbCrLf &
+        "   Ethical Behavior: Avoid conflicts of interest, bribery, or any unethical activities that could harm the resort’s reputation." & vbCrLf & vbCrLf &
         "Attendance and Leave" & vbCrLf &
         "Work Schedules: Shift schedules are posted weekly. Employees must adhere to assigned shifts and notify supervisors of conflicts or emergencies." & vbCrLf &
-        "**_Leave Requests_**: Leave must be requested at least 30 days in advance. Approval depends on operational requirements." & vbCrLf &
-        "**_Types of Leave_**:" & vbCrLf &
+        "   Leave Requests: Leave must be requested at least 30 days in advance. Approval depends on operational requirements." & vbCrLf &
+        "   Types of Leave:" & vbCrLf &
         "- Vacation Leave: Accrued per employment contract and Philippine labor law." & vbCrLf &
         "- Sick Leave: Paid sick leave with a doctor’s certificate for extended absences." & vbCrLf &
         "- Emergency Leave: For urgent personal or family matters." & vbCrLf &
         "- Maternity/Paternity Leave: Provided per Philippine labor law." & vbCrLf &
         "- Special Leave: For personal, religious, or cultural observances." & vbCrLf & vbCrLf &
         "Compensation and Benefits" & vbCrLf &
-        "**_Salary & Wages_**: Paid monthly according to employment classification." & vbCrLf &
-        "**_Overtime Pay_**: Employees working beyond regular hours are compensated per Philippine labor law." & vbCrLf &
-        "**_Holiday Pay_**: Regular holiday work receives 100% pay plus applicable overtime, while special holiday work is compensated per labor regulations." & vbCrLf &
-        "**_Employee Benefits_**: Health insurance, meal allowances, employee discounts, training programs, and wellness initiatives." & vbCrLf &
-        "**_Performance Incentives_**: Spot bonuses or recognition awards for exceptional work." & vbCrLf & vbCrLf &
+        "   Salary & Wages: Paid monthly according to employment classification." & vbCrLf &
+        "   Overtime Pay: Employees working beyond regular hours are compensated per Philippine labor law." & vbCrLf &
+        "   Holiday Pay: Regular holiday work receives 100% pay plus applicable overtime, while special holiday work is compensated per labor regulations." & vbCrLf &
+        "   Employee Benefits: Health insurance, meal allowances, employee discounts, training programs, and wellness initiatives." & vbCrLf &
+        "   Performance Incentives: Spot bonuses or recognition awards for exceptional work." & vbCrLf & vbCrLf &
         "Safety, Security, and Emergency Procedures" & vbCrLf &
-        "**_Workplace Safety_**: Follow all safety protocols and immediately report unsafe conditions." & vbCrLf &
-        "**_Fire & Emergency Preparedness_**: Know evacuation routes, emergency exits, and fire safety procedures. Participate in regular drills." & vbCrLf &
-        "**_Guest & Property Security_**: Protect guest belongings and resort property. Theft or negligence may result in immediate termination." & vbCrLf &
-        "**_Accident Reporting_**: Report all workplace accidents or injuries immediately to a supervisor." & vbCrLf & vbCrLf &
+        "   Workplace Safety: Follow all safety protocols and immediately report unsafe conditions." & vbCrLf &
+        "   Fire & Emergency Preparedness: Know evacuation routes, emergency exits, and fire safety procedures. Participate in regular drills." & vbCrLf &
+        "   Guest & Property Security: Protect guest belongings and resort property. Theft or negligence may result in immediate termination." & vbCrLf &
+        "   Accident Reporting: Report all workplace accidents or injuries immediately to a supervisor." & vbCrLf & vbCrLf &
         "Technology and Social Media" & vbCrLf &
-        "**_Use of Company Systems_**: Resort computers, phones, and other equipment are for work purposes only." & vbCrLf &
-        "**_Social Media Policy_**: Do not post confidential resort or guest information. Public posts representing Sundowners Resort should maintain professionalism." & vbCrLf &
-        "**_Email and Communication_**: Maintain professional conduct in all internal and external communications." & vbCrLf & vbCrLf &
+        "   Use of Company Systems: Resort computers, phones, and other equipment are for work purposes only." & vbCrLf &
+        "   Social Media Policy: Do not post confidential resort or guest information. Public posts representing Sundowners Resort should maintain professionalism." & vbCrLf &
+        "   Email and Communication: Maintain professional conduct in all internal and external communications." & vbCrLf & vbCrLf &
         "Performance and Training" & vbCrLf &
-        "**_Orientation & Training_**: New employees complete mandatory orientation and department-specific training." & vbCrLf &
-        "**_Continuous Development_**: Employees are encouraged to attend workshops, courses, and certification programs." & vbCrLf &
-        "**_Performance Reviews_**: Conducted annually to provide feedback and support career growth." & vbCrLf &
-        "**_Promotion & Career Development_**: Opportunities based on performance, merit, and skill development." & vbCrLf & vbCrLf &
+        "   Orientation & Training: New employees complete mandatory orientation and department-specific training." & vbCrLf &
+        "   Continuous Development: Employees are encouraged to attend workshops, courses, and certification programs." & vbCrLf &
+        "   Performance Reviews: Conducted annually to provide feedback and support career growth." & vbCrLf &
+        "   Promotion & Career Development: Opportunities based on performance, merit, and skill development." & vbCrLf & vbCrLf &
         "Discipline and Termination" & vbCrLf &
-        "**_Progressive Discipline_**: Verbal warning → Written warning → Suspension → Termination" & vbCrLf &
-        "**_Immediate Termination_**: Theft, violence, harassment, major safety violations, or breach of confidentiality." & vbCrLf &
-        "**_Grievance Reporting_**: Employees can report workplace concerns to HR or supervisors without fear of retaliation." & vbCrLf & vbCrLf &
+        "   Progressive Discipline: Verbal warning → Written warning → Suspension → Termination" & vbCrLf &
+        "   Immediate Termination: Theft, violence, harassment, major safety violations, or breach of confidentiality." & vbCrLf &
+        "   Grievance Reporting: Employees can report workplace concerns to HR or supervisors without fear of retaliation." & vbCrLf & vbCrLf &
         "Environmental and Social Responsibility" & vbCrLf &
-        "**_Sustainability Practices_**: Reduce waste, conserve energy, and follow eco-friendly procedures." & vbCrLf &
-        "**_Responsible Tourism_**: Support and promote sustainable tourism initiatives with guests." & vbCrLf &
-        "**_Community Engagement_**: Participate in local community programs and charitable activities organized by the resort." & vbCrLf & vbCrLf &
+        "   Sustainability Practices: Reduce waste, conserve energy, and follow eco-friendly procedures." & vbCrLf &
+        "   Responsible Tourism: Support and promote sustainable tourism initiatives with guests." & vbCrLf &
+        "   Community Engagement: Participate in local community programs and charitable activities organized by the resort." & vbCrLf & vbCrLf &
         "Guest Interaction Guidelines" & vbCrLf &
-        "**_Customer Service Excellence_**: Greet guests warmly, anticipate needs, and handle complaints efficiently." & vbCrLf &
-        "**_Cultural Sensitivity_**: Respect the diverse backgrounds of guests and colleagues." & vbCrLf &
-        "**_Problem Resolution_**: Resolve issues promptly or escalate to supervisors as needed." & vbCrLf &
-        "**_Privacy_**: Maintain strict confidentiality regarding guest information and activities." & vbCrLf & vbCrLf &
+        "   Customer Service Excellence: Greet guests warmly, anticipate needs, and handle complaints efficiently." & vbCrLf &
+        "   Cultural Sensitivity: Respect the diverse backgrounds of guests and colleagues." & vbCrLf &
+        "   Problem Resolution: Resolve issues promptly or escalate to supervisors as needed." & vbCrLf &
+        "   Privacy: Maintain strict confidentiality regarding guest information and activities." & vbCrLf & vbCrLf &
         "Employee Wellness and Support" & vbCrLf &
-        "**_Wellness Programs_**: Access to fitness activities, spa discounts, and mental health resources." & vbCrLf &
-        "**_Stress Management_**: Supervisors are encouraged to monitor workloads and support staff during high-demand periods." & vbCrLf &
-        "**_Work-Life Balance_**: Scheduling attempts to balance operational needs with personal time off." & vbCrLf &
-        "**_Open-Door Policy_**: Employees may approach management or HR with questions, suggestions, or concerns." & vbCrLf & vbCrLf &
+        "   Wellness Programs: Access to fitness activities, spa discounts, and mental health resources." & vbCrLf &
+        "   Stress Management: Supervisors are encouraged to monitor workloads and support staff during high-demand periods." & vbCrLf &
+        "   Work-Life Balance: Scheduling attempts to balance operational needs with personal time off." & vbCrLf &
+        "   Open-Door Policy: Employees may approach management or HR with questions, suggestions, or concerns." & vbCrLf & vbCrLf &
         "Recognition and Rewards" & vbCrLf &
-        "**_Employee of the Month_**: Recognizes consistent excellence in service and teamwork." & vbCrLf &
-        "**_Spot Awards_**: For outstanding performance, initiative, or exceptional guest feedback." & vbCrLf &
-        "**_Team Events_**: Regular team-building activities and wellness programs." & vbCrLf &
-        "**_Annual Awards Ceremony_**: Celebrates top performers and departmental achievements."
+        "   Employee of the Month: Recognizes consistent excellence in service and teamwork." & vbCrLf &
+        "   Spot Awards: For outstanding performance, initiative, or exceptional guest feedback." & vbCrLf &
+        "   Team Events: Regular team-building activities and wellness programs." & vbCrLf &
+        "   Annual Awards Ceremony: Celebrates top performers and departmental achievements."
 
         Dim boldWords As New List(Of String) From {
         "Policies – Sundowners Resort (Expanded)",
@@ -462,43 +462,43 @@ Public Class Employee_Dashboard
         "Safety and Emergency Information – Sundowners Resort" & vbCrLf & vbCrLf &
         "At Sundowners Resort, the safety of our guests, employees, and property is our highest priority. All staff are expected to comply with safety policies, participate in emergency preparedness programs, and take proactive steps to prevent accidents." & vbCrLf & vbCrLf &
         "General Workplace Safety" & vbCrLf &
-        "**_Hazard Awareness_**: Report unsafe conditions, broken equipment, or spills immediately." & vbCrLf &
-        "**_Equipment Safety_**: Operate machinery, kitchen equipment, and cleaning tools only if trained and authorized." & vbCrLf &
-        "**_Personal Protective Equipment (PPE)_**: Always wear required PPE in kitchens, maintenance areas, housekeeping, or other high-risk departments." & vbCrLf &
-        "**_Ergonomics & Injury Prevention_**: Lift objects safely, use proper posture, take breaks to prevent strain, and seek assistance when handling heavy items." & vbCrLf &
-        "**_Chemical Safety_**: Follow instructions when handling cleaning chemicals, store chemicals safely, and use protective gloves or masks as required." & vbCrLf & vbCrLf &
+        "   Hazard Awareness: Report unsafe conditions, broken equipment, or spills immediately." & vbCrLf &
+        "   Equipment Safety: Operate machinery, kitchen equipment, and cleaning tools only if trained and authorized." & vbCrLf &
+        "   Personal Protective Equipment (PPE)_**: Always wear required PPE in kitchens, maintenance areas, housekeeping, or other high-risk departments." & vbCrLf &
+        "   Ergonomics & Injury Prevention_**: Lift objects safely, use proper posture, take breaks to prevent strain, and seek assistance when handling heavy items." & vbCrLf &
+        "   Chemical Safety: Follow instructions when handling cleaning chemicals, store chemicals safely, and use protective gloves or masks as required." & vbCrLf & vbCrLf &
         "Fire Safety" & vbCrLf &
-        "**_Fire Prevention_**: Keep corridors, emergency exits, and stairways clear. Report faulty wiring, exposed circuits, or flammable materials immediately." & vbCrLf &
-        "**_Fire Extinguishers_**: Know locations and proper use of fire extinguishers in your area." & vbCrLf &
-        "**_Fire Drills_**: Participate actively and familiarize yourself with evacuation routes and assembly points." & vbCrLf &
-        "**_In Case of Fire_**: Alert nearby guests and staff. Activate the nearest fire alarm. Evacuate calmly via the designated route. Assemble at the designated safety point and follow instructions from the Safety Officer." & vbCrLf & vbCrLf &
-        "Medical Emergencies" & vbCrLf &
-        "**_First Aid_**: First aid kits are available in all departments. Staff trained in first aid should respond until professional help arrives." & vbCrLf &
-        "**_Accident Reporting_**: Report all injuries, no matter how minor, to supervisors and complete an incident report." & vbCrLf &
-        "**_Emergency Medical Contacts_**: Keep local hospital, ambulance, and resort emergency numbers accessible." & vbCrLf & vbCrLf &
+        "   Fire Prevention: Keep corridors, emergency exits, and stairways clear. Report faulty wiring, exposed circuits, or flammable materials immediately." & vbCrLf &
+        "   Fire Extinguishers: Know locations and proper use of fire extinguishers in your area." & vbCrLf &
+        "   Fire Drills: Participate actively and familiarize yourself with evacuation routes and assembly points." & vbCrLf &
+        "   In Case of Fire: Alert nearby guests and staff. Activate the nearest fire alarm. Evacuate calmly via the designated route. Assemble at the designated safety point and follow instructions from the Safety Officer." & vbCrLf & vbCrLf &
+        "   Medical Emergencies" & vbCrLf &
+        "   First Aid: First aid kits are available in all departments. Staff trained in first aid should respond until professional help arrives." & vbCrLf &
+        "   Accident Reporting: Report all injuries, no matter how minor, to supervisors and complete an incident report." & vbCrLf &
+        "   Emergency Medical Contacts_**: Keep local hospital, ambulance, and resort emergency numbers accessible." & vbCrLf & vbCrLf &
         "Natural Disasters" & vbCrLf &
-        "**_Typhoons/Storms_**: Secure outdoor furniture, equipment, and windows. Move guests to safe areas if necessary." & vbCrLf &
-        "**_Earthquakes_**: Drop, cover, and hold on. Evacuate calmly after shaking stops. Avoid elevators." & vbCrLf &
-        "**_Floods/Landslides_**: Move to higher ground and follow management and local authority instructions." & vbCrLf & vbCrLf &
+        "   Typhoons/Storms: Secure outdoor furniture, equipment, and windows. Move guests to safe areas if necessary." & vbCrLf &
+        "   Earthquakes: Drop, cover, and hold on. Evacuate calmly after shaking stops. Avoid elevators." & vbCrLf &
+        "   Floods/Landslides: Move to higher ground and follow management and local authority instructions." & vbCrLf & vbCrLf &
         "Guest Safety and Special Areas" & vbCrLf &
-        "**_Pools and Water Activities_**: Lifeguards or trained staff must always be present. Enforce pool rules and monitor guests. Respond to accidents promptly following CPR/first aid protocols." & vbCrLf &
-        "**_Kitchen & Food Safety_**: Follow hygiene standards, prevent cross-contamination, use heat-resistant gloves and cut-resistant tools, report gas leaks or equipment malfunctions immediately." & vbCrLf &
-        "**_Maintenance & Equipment Safety_**: Only trained staff may operate machinery. Lockout/tagout procedures must be followed. Report broken equipment promptly." & vbCrLf &
-        "**_Guest Rooms and Housekeeping_**: Use ladders safely, follow chemical safety protocols, mark wet floors, respect guest privacy." & vbCrLf & vbCrLf &
+        "   Pools and Water Activities: Lifeguards or trained staff must always be present. Enforce pool rules and monitor guests. Respond to accidents promptly following CPR/first aid protocols." & vbCrLf &
+        "   Kitchen & Food Safety: Follow hygiene standards, prevent cross-contamination, use heat-resistant gloves and cut-resistant tools, report gas leaks or equipment malfunctions immediately." & vbCrLf &
+        "   Maintenance & Equipment Safety: Only trained staff may operate machinery. Lockout/tagout procedures must be followed. Report broken equipment promptly." & vbCrLf &
+        "   Guest Rooms and Housekeeping: Use ladders safely, follow chemical safety protocols, mark wet floors, respect guest privacy." & vbCrLf & vbCrLf &
         "Fire, Earthquake, and Emergency Drills" & vbCrLf &
         "Conducted regularly in all departments. Employees must know evacuation routes, assembly points, and participate actively to assist guests." & vbCrLf & vbCrLf &
         "Emergency Communication" & vbCrLf &
-        "**_Internal Communication_**: Use radios, phones, or messaging systems to report incidents." & vbCrLf &
-        "**_External Contacts_**: Local Police: 117, Fire Department: 160, Local Hospital/Ambulance: [Insert contact], Resort Security: [Insert contact], Front Desk/Reception: [Insert contact]" & vbCrLf & vbCrLf &
+        "   Internal Communication: Use radios, phones, or messaging systems to report incidents." & vbCrLf &
+        "   External Contacts: Local Police: 117, Fire Department: 160, Local Hospital/Ambulance: [Insert contact], Resort Security: [Insert contact], Front Desk/Reception: [Insert contact]" & vbCrLf & vbCrLf &
         "Health and Wellness Safety" & vbCrLf &
-        "**_Infectious Diseases_**: Follow sanitation protocols, hand hygiene, mask policies during outbreaks." & vbCrLf &
-        "**_Sanitation_**: Maintain clean workspaces, kitchens, and guest areas. Dispose of waste safely." & vbCrLf &
-        "**_Heat & Sun Safety_**: Stay hydrated, wear sun protection, take scheduled breaks." & vbCrLf &
-        "**_Mental Health_**: Supervisors monitor workloads to prevent stress. Access to wellness programs and counseling is available." & vbCrLf & vbCrLf &
+        "   Infectious Diseases: Follow sanitation protocols, hand hygiene, mask policies during outbreaks." & vbCrLf &
+        "   Sanitation: Maintain clean workspaces, kitchens, and guest areas. Dispose of waste safely." & vbCrLf &
+        "   Heat & Sun Safety_**: Stay hydrated, wear sun protection, take scheduled breaks." & vbCrLf &
+        "   Mental Health: Supervisors monitor workloads to prevent stress. Access to wellness programs and counseling is available." & vbCrLf & vbCrLf &
         "Emergency Roles and Responsibilities" & vbCrLf &
-        "**_Employees_**: Follow procedures, report hazards, assist guests." & vbCrLf &
-        "**_Supervisors_**: Ensure staff trained, monitor compliance, coordinate response." & vbCrLf &
-        "**_Management_**: Conduct risk assessments, update policies, provide training and resources." & vbCrLf & vbCrLf &
+        "   Employees: Follow procedures, report hazards, assist guests." & vbCrLf &
+        "   Supervisors: Ensure staff trained, monitor compliance, coordinate response." & vbCrLf &
+        "   Management: Conduct risk assessments, update policies, provide training and resources." & vbCrLf & vbCrLf &
         "Incident Reporting" & vbCrLf &
         "Report all accidents, near misses, or security breaches immediately to supervisors and HR. Document incidents properly for follow-up." & vbCrLf & vbCrLf &
         "Preparedness and Training" & vbCrLf &

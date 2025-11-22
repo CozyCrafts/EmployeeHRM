@@ -1,16 +1,18 @@
 ﻿Imports MySql.Data.MySqlClient
-Imports System.Globalization
+Imports System.Data
 
 Public Class Attendance
-    Private connectionString As String = "server=localhost;userid=root;password=091951;database=db_hrm"
-    Private dbcon As MySqlConnection = Nothing
-    Private dbcmd As MySqlCommand = Nothing
-
-    Private todayAttendanceID As String = ""
     Private originalValues As New Dictionary(Of String, Object)
-    Private isRecordingAttendance As Boolean = False
-
     Private Sub Attendance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LockFields()
+        DisableAllTimeButtons()
+        LoadAttendanceData()
+        PopulateAttendanceStatusCombo()
+        dtpDateAttendance.Value = DateTime.Today
+        dtpDateAttendance.Enabled = False
+        btnRecordAttendance.Enabled = True
+        btnSaveAttendance.Visible = False
+        btnCancelAttendance.Visible = False
         If LoggedInUserType = "Staff" Then
             lblManagement.Visible = False
             lblTeamOverview.Visible = False
@@ -21,668 +23,438 @@ Public Class Attendance
             lblDepartment.Visible = False
             lblAmenities.Visible = False
         End If
-
-        SetupDateAndTimePickers()
-        LockAllFields()
-        PopulateAttendanceStatusCombo()
-        LoadAttendanceHistory()
-        LoadEmployeeInfo()
-        SetDefaultDateToToday()
-        UpdateCheckButtonsState()
     End Sub
-    Private Sub PopulateAttendanceStatusCombo()
-        cbAttendanceStatus.Items.Clear()
-        cbAttendanceStatus.Items.Add("Present")
-        cbAttendanceStatus.Items.Add("Absent")
-        cbAttendanceStatus.Items.Add("Late")
-        cbAttendanceStatus.Items.Add("On Leave")
-    End Sub
-    Private Sub OpenCon()
-        If dbcon Is Nothing Then dbcon = New MySqlConnection(connectionString)
-        If dbcon.State = ConnectionState.Closed Then dbcon.Open()
-    End Sub
-    Private Sub CloseCon()
-        If dbcon IsNot Nothing AndAlso dbcon.State <> ConnectionState.Closed Then dbcon.Close()
-    End Sub
-    Private Sub SetupDateAndTimePickers()
-        dtpDateAttendance.Format = DateTimePickerFormat.Custom
-        dtpDateAttendance.CustomFormat = "MMMM dd, yyyy"
-        dtpDateAttendance.Enabled = False
+    Private Sub LoadAttendanceData()
+        Try
+            OpenCon()
 
-        For Each dtp As DateTimePicker In {dtpCheckInAM, dtpCheckOutAM, dtpCheckInPM, dtpCheckOutPM}
-            dtp.Format = DateTimePickerFormat.Custom
-            dtp.CustomFormat = "HH:mm:ss"
-            dtp.ShowUpDown = True
-            dtp.ShowCheckBox = True      ' << Add this
-            dtp.Checked = False          ' Initially unchecked
-            dtp.Enabled = False
-        Next
+            Dim query As String = "
+            SELECT 
+                a.AttendanceID,
+                e.EmployeeID,
+                CONCAT(e.`First Name`, ' ', e.MiddleName, ' ', e.LastName) AS EmployeeName,
+                j.JobTitle,
+                a.AttendanceStatus,
+                a.TotalHours,
+                a.ExceededHours,
+                a.Absences,
+                a.DaysAttended,
+                DATE(a.Date) AS Date,
+                a.TimeIn_AM,
+                a.TimeOut_AM,
+                a.TimeIn_PM,
+                a.TimeOut_PM
+            FROM tblattendance a
+            INNER JOIN tblemployee e ON a.EmployeeID = e.EmployeeID
+            INNER JOIN tbljobdetails j ON e.EmployeeID = j.EmployeeID
+            WHERE a.EmployeeID = @empID;
+        "
+
+            Dim cmd As New MySqlCommand(query, dbcon)
+            cmd.Parameters.AddWithValue("@empID", LoggedInEmployeeID)
+
+            dbadapter = New MySqlDataAdapter(cmd)
+            dbtable = New DataTable()
+            dbadapter.Fill(dbtable)
+
+            For Each r As DataRow In dbtable.Rows
+                If Not IsDBNull(r("Date")) Then
+                    r("Date") = CDate(r("Date")).Date
+                End If
+            Next
+
+            dgvAttendanceHistory.DataSource = dbtable
+
+            dgvAttendanceHistory.Columns("AttendanceID").HeaderText = "Attendance ID"
+            dgvAttendanceHistory.Columns("EmployeeID").HeaderText = "Employee ID"
+            dgvAttendanceHistory.Columns("EmployeeName").HeaderText = "Employee Name"
+            dgvAttendanceHistory.Columns("JobTitle").HeaderText = "Job Title"
+            dgvAttendanceHistory.Columns("AttendanceStatus").HeaderText = "Status"
+            dgvAttendanceHistory.Columns("TotalHours").HeaderText = "Total Hours"
+            dgvAttendanceHistory.Columns("ExceededHours").HeaderText = "Exceeded Hours"
+            dgvAttendanceHistory.Columns("Absences").HeaderText = "Absences"
+            dgvAttendanceHistory.Columns("DaysAttended").HeaderText = "Days Attended"
+            dgvAttendanceHistory.Columns("Date").HeaderText = "Date"
+            dgvAttendanceHistory.Columns("EmployeeName").Visible = False
+            dgvAttendanceHistory.Columns("JobTitle").Visible = False
+            dgvAttendanceHistory.Columns("Date").DefaultCellStyle.Format = "yyyy-MM-dd"
+            dgvAttendanceHistory.Columns("TotalHours").DefaultCellStyle.Format = "F2"
+            dgvAttendanceHistory.Columns("ExceededHours").DefaultCellStyle.Format = "F2"
+
+            Dim timeCols = New String() {"TimeIn_AM", "TimeOut_AM", "TimeIn_PM", "TimeOut_PM"}
+            For Each tc In timeCols
+                If dgvAttendanceHistory.Columns.Contains(tc) Then
+                    dgvAttendanceHistory.Columns(tc).DefaultCellStyle.Format = "HH:mm:ss"
+                End If
+            Next
+
+            dgvAttendanceHistory.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            dgvAttendanceHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+
+        Catch ex As Exception
+            MessageBox.Show("LoadAttendanceData error: " & ex.Message)
+        Finally
+            If dbcon.State = ConnectionState.Open Then dbcon.Close()
+        End Try
     End Sub
-
-
-    Private Sub LockAllFields()
-        isRecordingAttendance = False ' Reset mode
-
-        ' Employee info stays read-only but visible
+    Private Sub LockFields()
+        txtAttendanceID.ReadOnly = True
         txtEmployeeID.ReadOnly = True
         txtEmployeeName.ReadOnly = True
         txtJobTitle.ReadOnly = True
-
-        ' Attendance fields disabled and cleared
-        txtAttendanceID.Clear()
-        cbAttendanceStatus.Enabled = False
-        cbAttendanceStatus.SelectedIndex = -1
-
-        dtpDateAttendance.Enabled = False
         dtpCheckInAM.Enabled = False
         dtpCheckOutAM.Enabled = False
         dtpCheckInPM.Enabled = False
         dtpCheckOutPM.Enabled = False
-
-        dtpCheckInAM.Checked = False
-        dtpCheckOutAM.Checked = False
-        dtpCheckInPM.Checked = False
-        dtpCheckOutPM.Checked = False
-
-        ' Buttons disabled except Record Attendance
+        dtpDateAttendance.Enabled = False
+        cbAttendanceStatus.Enabled = False
+    End Sub
+    Private Sub PopulateAttendanceStatusCombo()
+        cbAttendanceStatus.Items.Clear()
+        cbAttendanceStatus.Items.AddRange(New String() {"Present", "Late", "Absent", "On Leave", "Break", "Lunch Break", "Left"})
+        cbAttendanceStatus.SelectedIndex = -1
+    End Sub
+    Private Sub DisableAllTimeButtons()
         btnCheckInAM.Enabled = False
         btnCheckOutAM.Enabled = False
         btnCheckInPM.Enabled = False
         btnCheckOutPM.Enabled = False
-
-        btnSaveAttendance.Visible = False
-        btnCancelAttendance.Visible = False
-
-        btnEditAttendance.Visible = False
-        btnRecordAttendance.Visible = True
     End Sub
+    Private Function GetTimeSpanRobust(raw As String) As TimeSpan
+        If String.IsNullOrWhiteSpace(raw) Then Return TimeSpan.Zero
 
-
-    Private Sub UnlockForRecording()
-        cbAttendanceStatus.Enabled = True
-        dtpCheckInAM.Enabled = True
-        dtpCheckOutAM.Enabled = True
-        dtpCheckInPM.Enabled = True
-        dtpCheckOutPM.Enabled = True
-
-        btnSaveAttendance.Visible = True
-        btnCancelAttendance.Visible = True
-
-        btnEditAttendance.Visible = False
-        btnRecordAttendance.Visible = False
-
-        UpdateCheckButtonsState()
-    End Sub
-
-    Private Sub SetDefaultDateToToday()
-        dtpDateAttendance.Value = Date.Today
-    End Sub
-    Private Function GetHours(startTime As Object, endTime As Object) As Double
-        Try
-            If startTime Is Nothing OrElse startTime Is DBNull.Value Then Return 0
-            If endTime Is Nothing OrElse endTime Is DBNull.Value Then Return 0
-
-            Dim startDt As DateTime = Convert.ToDateTime(startTime)
-            Dim endDt As DateTime = Convert.ToDateTime(endTime)
-
-            Dim diff As TimeSpan = endDt - startDt
-            If diff.TotalHours < 0 Then Return 0
-            Return diff.TotalHours
-        Catch
-            Return 0
-        End Try
-    End Function
-    Private Sub LoadAttendanceHistory()
-        Try
-            OpenCon()
-            Dim sql As String = "SELECT * FROM tblattendance WHERE EmployeeID = @empID ORDER BY Date DESC"
-            Using cmd As New MySqlCommand(sql, dbcon)
-                cmd.Parameters.AddWithValue("@empID", LoggedInEmployeeID)
-                Using adapter As New MySqlDataAdapter(cmd)
-                    Dim table As New DataTable()
-                    adapter.Fill(table)
-
-                    ' Add calculated columns
-                    If Not table.Columns.Contains("TotalHours") Then table.Columns.Add("TotalHours", GetType(Double))
-                    If Not table.Columns.Contains("Absences") Then table.Columns.Add("Absences", GetType(Integer))
-                    If Not table.Columns.Contains("DaysAttended") Then table.Columns.Add("DaysAttended", GetType(Integer))
-
-                    Dim daysAttended As Integer = 0
-
-                    For Each row As DataRow In table.Rows
-                        ' Total hours worked
-                        Dim totalHours As Double = 0
-                        totalHours += GetHours(row("TimeIn_AM"), row("TimeOut_AM"))
-                        totalHours += GetHours(row("TimeIn_PM"), row("TimeOut_PM"))
-                        row("TotalHours") = Math.Round(totalHours, 2)
-
-                        ' Count absences
-                        If row("AttendanceStatus") IsNot DBNull.Value AndAlso row("AttendanceStatus").ToString().ToLower() = "absent" Then
-                            row("Absences") = 1
-                        Else
-                            row("Absences") = 0
-                            daysAttended += 1
-                        End If
-
-                        ' Set cumulative days attended
-                        row("DaysAttended") = daysAttended
-                    Next
-
-                    dgvAttendanceHistory.DataSource = table
-                    dgvAttendanceHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
-                    dgvAttendanceHistory.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-                    dgvAttendanceHistory.ReadOnly = True
-                    dgvAttendanceHistory.AllowUserToAddRows = False
-                    dgvAttendanceHistory.AllowUserToDeleteRows = False
-                    dgvAttendanceHistory.AutoGenerateColumns = True
-                End Using
-            End Using
-        Catch ex As Exception
-            MessageBox.Show("Error loading attendance history: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-    End Sub
-    Private Sub LoadEmployeeInfo()
-        Try
-            OpenCon()
-            Dim q As String = "
-        SELECT EmployeeID, `First Name`, MiddleName, LastName,
-               (SELECT JobTitle FROM tbljobdetails j WHERE j.EmployeeID = e.EmployeeID LIMIT 1) AS JobTitle
-        FROM tblemployee e
-        WHERE EmployeeID = @id LIMIT 1
-        "
-            Using cmd As New MySqlCommand(q, dbcon)
-                cmd.Parameters.AddWithValue("@id", LoggedInEmployeeID)
-                Using r As MySqlDataReader = cmd.ExecuteReader()
-                    If r.Read() Then
-                        txtEmployeeID.Text = r("EmployeeID").ToString()
-                        txtEmployeeName.Text = String.Format("{0} {1} {2}",
-                        r("First Name").ToString(),
-                        r("MiddleName").ToString(),
-                        r("LastName").ToString()).Trim()
-                        txtJobTitle.Text = If(r("JobTitle") IsNot DBNull.Value, r("JobTitle").ToString(), "")
-                    End If
-                End Using
-            End Using
-        Catch ex As Exception
-            MessageBox.Show("Error loading employee info: " & ex.Message)
-        End Try
-    End Sub
-
-    Private Sub LoadTodayAttendance()
-        Try
-            OpenCon()
-            Dim q As String = "SELECT * FROM tblattendance WHERE EmployeeID=@id AND `Date`=@date"
-            Using cmd As New MySqlCommand(q, dbcon)
-                cmd.Parameters.AddWithValue("@id", LoggedInEmployeeID)
-                cmd.Parameters.AddWithValue("@date", Date.Today.ToString("yyyy-MM-dd"))
-
-                Using adapter As New MySqlDataAdapter(cmd)
-                    Dim table As New DataTable()
-                    adapter.Fill(table)
-
-                    If Not table.Columns.Contains("TotalHours") Then table.Columns.Add("TotalHours", GetType(Double))
-                    If Not table.Columns.Contains("Absences") Then table.Columns.Add("Absences", GetType(Integer))
-                    If Not table.Columns.Contains("DaysAttended") Then table.Columns.Add("DaysAttended", GetType(Integer))
-
-                    Dim daysAttended As Integer = 0
-
-                    If table.Rows.Count > 0 Then
-                        ' Load existing record
-                        Dim row = table.Rows(0)
-                        todayAttendanceID = row("AttendanceID").ToString()
-                        txtAttendanceID.Text = todayAttendanceID
-                        cbAttendanceStatus.Text = If(row("AttendanceStatus") IsNot DBNull.Value, row("AttendanceStatus").ToString(), "Present")
-
-                        Dim timeInAM = SafeDateTimeFromDb(row("TimeIn_AM"))
-                        Dim timeOutAM = SafeDateTimeFromDb(row("TimeOut_AM"))
-                        Dim timeInPM = SafeDateTimeFromDb(row("TimeIn_PM"))
-                        Dim timeOutPM = SafeDateTimeFromDb(row("TimeOut_PM"))
-
-                        dtpCheckInAM.Checked = timeInAM.HasValue
-                        If dtpCheckInAM.Checked Then dtpCheckInAM.Value = timeInAM.Value
-
-                        dtpCheckOutAM.Checked = timeOutAM.HasValue
-                        If dtpCheckOutAM.Checked Then dtpCheckOutAM.Value = timeOutAM.Value
-
-                        dtpCheckInPM.Checked = timeInPM.HasValue
-                        If dtpCheckInPM.Checked Then dtpCheckInPM.Value = timeInPM.Value
-
-                        dtpCheckOutPM.Checked = timeOutPM.HasValue
-                        If dtpCheckOutPM.Checked Then dtpCheckOutPM.Value = timeOutPM.Value
-
-                        Dim totalHours As Double = GetHours(timeInAM, timeOutAM) + GetHours(timeInPM, timeOutPM)
-                        row("TotalHours") = Math.Round(totalHours, 2)
-
-                        If row("AttendanceStatus") IsNot DBNull.Value AndAlso row("AttendanceStatus").ToString().ToLower() = "absent" Then
-                            row("Absences") = 1
-                            daysAttended = 0
-                        Else
-                            row("Absences") = 0
-                            daysAttended = 1
-                        End If
-                        row("DaysAttended") = daysAttended
-
-                        dgvAttendanceHistory.DataSource = table
-                        btnEditAttendance.Enabled = (Convert.ToDateTime(row("Date")).Date = Date.Today)
-                    Else
-                        ' Only generate a new row if table is empty (no duplicate row)
-                        Dim dt As New DataTable()
-                        dt.Columns.Add("AttendanceID")
-                        dt.Columns.Add("EmployeeID")
-                        dt.Columns.Add("Date")
-                        dt.Columns.Add("TimeIn_AM")
-                        dt.Columns.Add("TimeOut_AM")
-                        dt.Columns.Add("TimeIn_PM")
-                        dt.Columns.Add("TimeOut_PM")
-                        dt.Columns.Add("AttendanceStatus")
-                        dt.Columns.Add("TotalHours", GetType(Double))
-                        dt.Columns.Add("Absences", GetType(Integer))
-                        dt.Columns.Add("DaysAttended", GetType(Integer))
-
-                        Dim newRow = dt.NewRow()
-                        todayAttendanceID = GenerateNextAttendanceID() ' only generate once
-                        newRow("AttendanceID") = todayAttendanceID
-                        txtAttendanceID.Text = todayAttendanceID
-                        newRow("EmployeeID") = LoggedInEmployeeID
-                        newRow("Date") = Date.Today.ToString("yyyy-MM-dd")
-                        newRow("AttendanceStatus") = "Present"
-                        newRow("TimeIn_AM") = DBNull.Value
-                        newRow("TimeOut_AM") = DBNull.Value
-                        newRow("TimeIn_PM") = DBNull.Value
-                        newRow("TimeOut_PM") = DBNull.Value
-                        newRow("TotalHours") = 0
-                        newRow("Absences") = 0
-                        newRow("DaysAttended") = 1
-                        dt.Rows.Add(newRow)
-
-                        dgvAttendanceHistory.DataSource = dt
-
-                        cbAttendanceStatus.Text = "Present"
-                        dtpCheckInAM.Checked = False
-                        dtpCheckOutAM.Checked = False
-                        dtpCheckInPM.Checked = False
-                        dtpCheckOutPM.Checked = False
-
-                        btnEditAttendance.Enabled = True
-                    End If
-
-                    dgvAttendanceHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
-                    dgvAttendanceHistory.ReadOnly = True
-                    dgvAttendanceHistory.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-                    dgvAttendanceHistory.AllowUserToAddRows = False
-                    dgvAttendanceHistory.AllowUserToDeleteRows = False
-                    dgvAttendanceHistory.AutoGenerateColumns = True
-                End Using
-            End Using
-
-            UpdateCheckButtonsState()
-        Catch ex As Exception
-            MessageBox.Show("Error loading today's attendance: " & ex.Message)
-        End Try
-    End Sub
-    Private Function SafeDateTimeFromDb(dbValue As Object) As Nullable(Of DateTime)
-        Try
-            If dbValue Is Nothing OrElse dbValue Is DBNull.Value Then Return Nothing
-            Dim d As DateTime
-            If DateTime.TryParse(dbValue.ToString(), d) Then Return d
-            Return Nothing
-        Catch
-            Return Nothing
-        End Try
-    End Function
-
-    Private Sub UpdateCheckButtonsState()
-        btnCheckInAM.Enabled = False
-        btnCheckOutAM.Enabled = False
-        btnCheckInPM.Enabled = False
-        btnCheckOutPM.Enabled = False
-
-        If Not isRecordingAttendance Then Return
-        If dtpDateAttendance.Value.Date <> Date.Today Then Return
-
-        Dim now = DateTime.Now
-
-        Dim hasCheckInAM As Boolean = dtpCheckInAM.Checked
-        Dim hasCheckOutAM As Boolean = dtpCheckOutAM.Checked
-        Dim hasCheckInPM As Boolean = dtpCheckInPM.Checked
-        Dim hasCheckOutPM As Boolean = dtpCheckOutPM.Checked
-
-        If now.Hour < 12 Then
-            If Not hasCheckInAM Then btnCheckInAM.Enabled = True
-            If hasCheckInAM AndAlso Not hasCheckOutAM Then btnCheckOutAM.Enabled = True
-        Else
-            If Not hasCheckInPM Then btnCheckInPM.Enabled = True
-            If hasCheckInPM AndAlso Not hasCheckOutPM Then btnCheckOutPM.Enabled = True
+        Dim s = raw.Trim()
+        Dim ts As TimeSpan
+        If TimeSpan.TryParse(s, ts) Then
+            Return ts
         End If
-    End Sub
-    Private Function GenerateNextAttendanceID() As String
-        Try
-            Using conn As New MySqlConnection(connectionString)
-                conn.Open()
-                ' Lock the table to prevent race conditions
-                Using trans = conn.BeginTransaction(IsolationLevel.Serializable)
-                    Dim lastID As String = ""
-                    Dim q As String = "SELECT AttendanceID FROM tblattendance ORDER BY AttendanceID DESC LIMIT 1 FOR UPDATE"
-                    Using cmd As New MySqlCommand(q, conn, trans)
-                        Dim result = cmd.ExecuteScalar()
-                        If result IsNot Nothing AndAlso result IsNot DBNull.Value Then
-                            lastID = result.ToString()
-                        End If
-                    End Using
+        Dim dt As DateTime
+        If DateTime.TryParse(s, dt) Then
+            Return dt.TimeOfDay
+        End If
+        Dim parts = s.Split(" "c)(0)
+        If TimeSpan.TryParse(parts, ts) Then Return ts
 
-                    Dim nextID As String
-                    If String.IsNullOrEmpty(lastID) Then
-                        nextID = "T001"
-                    Else
-                        Dim numericPart As Integer = 0
-                        If Integer.TryParse(lastID.Substring(1), numericPart) Then
-                            numericPart += 1
-                        Else
-                            numericPart = 1
-                        End If
-                        nextID = "T" & numericPart.ToString("D3")
-                    End If
-
-                    trans.Commit()
-                    Return nextID
-                End Using
-            End Using
-        Catch ex As Exception
-            MessageBox.Show("Error generating AttendanceID: " & ex.Message)
-            Return "T001"
-        End Try
-    End Function
-
-
-    Private Sub btnEditAttendance_Click(sender As Object, e As EventArgs) Handles btnEditAttendance.Click
-        If String.IsNullOrEmpty(todayAttendanceID) Then
-            MessageBox.Show("No attendance record found for today to edit.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Return
+        Dim m = System.Text.RegularExpressions.Regex.Match(s, "(\d{1,2})[:\s](\d{1,2})([:\s](\d{1,2}))?")
+        If m.Success Then
+            Dim hh = Integer.Parse(m.Groups(1).Value)
+            Dim mm = Integer.Parse(m.Groups(2).Value)
+            Dim ss = 0
+            If m.Groups(4).Success Then Integer.TryParse(m.Groups(4).Value, ss)
+            Return New TimeSpan(hh, mm, ss)
         End If
 
-        ' Ensure editing is only allowed for today's record
-        If dtpDateAttendance.Value.Date <> Date.Today Then
-            MessageBox.Show("You can only edit today's attendance.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
-
-        UnlockForRecording()
-        isRecordingAttendance = True
-        StoreOriginalValues()
-    End Sub
-
-    Private Sub btnRecordAttendance_Click(sender As Object, e As EventArgs) Handles btnRecordAttendance.Click
+        Return TimeSpan.Zero
+    End Function
+    Private Sub UpdateAttendanceTime(columnName As String, dtp As DateTimePicker)
         Try
-            dtpDateAttendance.Value = Date.Today
             OpenCon()
 
-            ' Check if attendance already exists for today
-            Dim q As String = "SELECT AttendanceID FROM tblattendance WHERE EmployeeID=@eid AND `Date`=@date LIMIT 1"
-            Using cmd As New MySqlCommand(q, dbcon)
-                cmd.Parameters.AddWithValue("@eid", LoggedInEmployeeID)
-                cmd.Parameters.AddWithValue("@date", Date.Today.ToString("yyyy-MM-dd"))
-                Dim result = cmd.ExecuteScalar()
+            Dim updateQuery As String = $"UPDATE tblattendance 
+                                         SET {columnName}=@time, Date=@today
+                                         WHERE EmployeeID=@empID"
 
-                If result IsNot Nothing Then
-                    ' Record exists
-                    todayAttendanceID = result.ToString()
-                    txtAttendanceID.Text = todayAttendanceID
-                    MessageBox.Show("An attendance record for today already exists. You can edit it.",
-                                "Attendance Exists", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    LoadTodayAttendance()
+            Using cmdUpdate As New MySqlCommand(updateQuery, dbcon)
+                cmdUpdate.Parameters.AddWithValue("@time", DateTime.Now.ToString("HH:mm:ss"))
+                cmdUpdate.Parameters.AddWithValue("@today", dtpDateAttendance.Value.Date)
+                cmdUpdate.Parameters.AddWithValue("@empID", LoggedInEmployeeID)
+                Dim affected = cmdUpdate.ExecuteNonQuery()
+                If affected = 0 Then
+                    MessageBox.Show("No attendance record exists for this employee. Please contact admin.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Else
-                    ' New record
-                    todayAttendanceID = GenerateNextAttendanceID()
-                    txtAttendanceID.Text = todayAttendanceID
-
-                    ' Clear all check-in/out fields and attendance status
-                    cbAttendanceStatus.SelectedIndex = -1
-                    dtpCheckInAM.Checked = False
-                    dtpCheckOutAM.Checked = False
-                    dtpCheckInPM.Checked = False
-                    dtpCheckOutPM.Checked = False
-
-                    dgvAttendanceHistory.ClearSelection()
+                    RecalculateTotals()
+                    RecalculateDaysAttended()
+                    LoadAttendanceData()
+                    Dim btn As Button = TryCast(dtp.Tag, Button)
+                    If btn IsNot Nothing Then btn.Enabled = False
                 End If
             End Using
 
-            ' Unlock fields for recording
-            UnlockForRecording()
-
-            ' Important: set isRecordingAttendance BEFORE updating buttons
-            isRecordingAttendance = True
-            StoreOriginalValues()
-
-            ' Enable the correct check-in/out buttons
-            UpdateCheckButtonsState()
-
         Catch ex As Exception
-            MessageBox.Show("Error preparing attendance: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error updating attendance: " & ex.Message)
+        Finally
+            If dbcon.State = ConnectionState.Open Then dbcon.Close()
         End Try
     End Sub
-
-    Private Function GetTodayAttendanceID(empID As String, [date] As Date) As String
+    Private Sub RecalculateTotals()
         Try
-            Dim q As String = "SELECT AttendanceID FROM tblattendance WHERE EmployeeID=@eid AND `Date`=@date LIMIT 1"
-            Using cmd As New MySqlCommand(q, dbcon)
-                cmd.Parameters.AddWithValue("@eid", empID)
-                cmd.Parameters.AddWithValue("@date", [date].ToString("yyyy-MM-dd"))
-                Dim result = cmd.ExecuteScalar()
-                If result IsNot Nothing Then Return result.ToString()
-            End Using
-        Catch
-        End Try
-        Return ""
-    End Function
+            OpenCon()
+            Dim query As String = "SELECT TimeIn_AM, TimeOut_AM, TimeIn_PM, TimeOut_PM FROM tblattendance WHERE EmployeeID=@empID AND Date=@attDate"
+            Using cmd As New MySqlCommand(query, dbcon)
+                cmd.Parameters.AddWithValue("@empID", LoggedInEmployeeID)
+                cmd.Parameters.AddWithValue("@attDate", dtpDateAttendance.Value.Date)
+                Using reader = cmd.ExecuteReader()
+                    If reader.Read() Then
+                        Dim tInAM = GetTimeSpanFromDb(reader("TimeIn_AM"))
+                        Dim tOutAM = GetTimeSpanFromDb(reader("TimeOut_AM"))
+                        Dim tInPM = GetTimeSpanFromDb(reader("TimeIn_PM"))
+                        Dim tOutPM = GetTimeSpanFromDb(reader("TimeOut_PM"))
+                        reader.Close()
 
+                        Dim totalHours As Double = 0
+                        If tOutAM > tInAM Then totalHours += (tOutAM - tInAM).TotalHours
+                        If tOutPM > tInPM Then totalHours += (tOutPM - tInPM).TotalHours
+
+                        Dim standardHours As Double = 8
+                        Dim exceededHours As Double = Math.Max(0, totalHours - standardHours)
+                        Dim absence As Integer = If(totalHours < 4, 1, 0)
+
+                        Dim updateQuery As String = "
+                            UPDATE tblattendance
+                            SET TotalHours=@total,
+                                ExceededHours=@exceed,
+                                Absences=@abs
+                            WHERE EmployeeID=@empID AND Date=@attDate"
+                        Using cmdUpdate As New MySqlCommand(updateQuery, dbcon)
+                            cmdUpdate.Parameters.AddWithValue("@total", totalHours)
+                            cmdUpdate.Parameters.AddWithValue("@exceed", exceededHours)
+                            cmdUpdate.Parameters.AddWithValue("@abs", absence)
+                            cmdUpdate.Parameters.AddWithValue("@empID", LoggedInEmployeeID)
+                            cmdUpdate.Parameters.AddWithValue("@attDate", dtpDateAttendance.Value.Date)
+                            cmdUpdate.ExecuteNonQuery()
+                        End Using
+                    End If
+                End Using
+            End Using
+
+        Catch ex As Exception
+            MessageBox.Show("Error recalculating totals: " & ex.Message)
+        Finally
+            If dbcon.State = ConnectionState.Open Then dbcon.Close()
+        End Try
+    End Sub
+    Private Function GetTimeSpanFromDb(obj As Object) As TimeSpan
+        If IsDBNull(obj) OrElse String.IsNullOrEmpty(obj.ToString()) Then Return TimeSpan.Zero
+        Dim ts As TimeSpan
+        If TimeSpan.TryParse(obj.ToString(), ts) Then Return ts
+        Return TimeSpan.Zero
+    End Function
+    Private Sub RecalculateDaysAttended()
+        Try
+            OpenCon()
+            Dim query As String = "
+                UPDATE tblattendance a
+                JOIN (
+                    SELECT EmployeeID, COUNT(*) AS DaysCount
+                    FROM tblattendance
+                    WHERE EmployeeID=@empID AND TotalHours > 0 AND MONTH(Date)=MONTH(@attDate) AND YEAR(Date)=YEAR(@attDate)
+                    GROUP BY EmployeeID
+                ) b ON a.EmployeeID=b.EmployeeID
+                SET a.DaysAttended=b.DaysCount
+                WHERE a.EmployeeID=@empID"
+            Using cmd As New MySqlCommand(query, dbcon)
+                cmd.Parameters.AddWithValue("@empID", LoggedInEmployeeID)
+                cmd.Parameters.AddWithValue("@attDate", dtpDateAttendance.Value.Date)
+                cmd.ExecuteNonQuery()
+            End Using
+
+        Catch ex As Exception
+            MessageBox.Show("Error recalculating days attended: " & ex.Message)
+        Finally
+            If dbcon.State = ConnectionState.Open Then dbcon.Close()
+        End Try
+    End Sub
+    Private Sub btnRecordAttendance_Click(sender As Object, e As EventArgs) Handles btnRecordAttendance.Click
+        Try
+            OpenCon()
+
+            Dim cmdCheck As New MySqlCommand("SELECT AttendanceID FROM tblattendance WHERE EmployeeID=@empID", dbcon)
+            cmdCheck.Parameters.AddWithValue("@empID", LoggedInEmployeeID)
+            Dim attendanceID = cmdCheck.ExecuteScalar()
+
+            If attendanceID IsNot Nothing Then
+                Dim clearQuery As String = "
+                UPDATE tblattendance
+                SET Date=@attDate,
+                    TimeIn_AM=NULL,
+                    TimeOut_AM=NULL,
+                    TimeIn_PM=NULL,
+                    TimeOut_PM=NULL,
+                    AttendanceStatus=NULL
+                WHERE EmployeeID=@empID
+            "
+                Using cmdClear As New MySqlCommand(clearQuery, dbcon)
+                    cmdClear.Parameters.AddWithValue("@empID", LoggedInEmployeeID)
+                    cmdClear.Parameters.AddWithValue("@attDate", dtpDateAttendance.Value.Date)
+                    cmdClear.ExecuteNonQuery()
+                End Using
+
+                btnRecordAttendance.Visible = False
+
+                Dim nowTime As TimeSpan = DateTime.Now.TimeOfDay
+
+                btnCheckInAM.Enabled = False
+                btnCheckOutAM.Enabled = False
+                btnCheckInPM.Enabled = False
+                btnCheckOutPM.Enabled = False
+                If nowTime < TimeSpan.Parse("12:00") Then
+                    btnCheckInAM.Enabled = True
+                    MessageBox.Show($"You may check-in AM at {DateTime.Now:HH:mm} on {DateTime.Today:yyyy-MM-dd}", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Else
+                    btnCheckInPM.Enabled = True
+                    MessageBox.Show($"You may check-in PM at {DateTime.Now:HH:mm} on {DateTime.Today:yyyy-MM-dd}", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+
+                btnEditAttendance.Visible = True
+                btnSaveAttendance.Visible = True
+                btnCancelAttendance.Visible = True
+
+                LoadAttendanceData()
+            Else
+                MessageBox.Show("No attendance record exists for this employee. Please contact admin.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show("Error recording attendance: " & ex.Message)
+        Finally
+            If dbcon.State = ConnectionState.Open Then dbcon.Close()
+        End Try
+    End Sub
+    Private Sub btnEditAttendance_Click(sender As Object, e As EventArgs) Handles btnEditAttendance.Click
+        Try
+            OpenCon()
+
+            btnEditAttendance.Visible = False
+            btnSaveAttendance.Visible = True
+            btnCancelAttendance.Visible = True
+            originalValues.Clear()
+            Dim query As String = "SELECT TimeIn_AM, TimeOut_AM, TimeIn_PM, TimeOut_PM, AttendanceStatus FROM tblattendance WHERE EmployeeID=@empID AND Date=@attDate"
+            Using cmd As New MySqlCommand(query, dbcon)
+                cmd.Parameters.AddWithValue("@empID", LoggedInEmployeeID)
+                cmd.Parameters.AddWithValue("@attDate", dtpDateAttendance.Value.Date)
+
+                Using reader = cmd.ExecuteReader()
+                    If reader.Read() Then
+                        originalValues("TimeIn_AM") = If(IsDBNull(reader("TimeIn_AM")), Nothing, reader("TimeIn_AM"))
+                        originalValues("TimeOut_AM") = If(IsDBNull(reader("TimeOut_AM")), Nothing, reader("TimeOut_AM"))
+                        originalValues("TimeIn_PM") = If(IsDBNull(reader("TimeIn_PM")), Nothing, reader("TimeIn_PM"))
+                        originalValues("TimeOut_PM") = If(IsDBNull(reader("TimeOut_PM")), Nothing, reader("TimeOut_PM"))
+                        originalValues("AttendanceStatus") = If(IsDBNull(reader("AttendanceStatus")), Nothing, reader("AttendanceStatus"))
+
+                        btnCheckOutAM.Enabled = IsDBNull(reader("TimeOut_AM")) AndAlso Not IsDBNull(reader("TimeIn_AM"))
+                        btnCheckOutPM.Enabled = IsDBNull(reader("TimeOut_PM")) AndAlso Not IsDBNull(reader("TimeIn_PM"))
+
+                        btnCheckInAM.Enabled = False
+                        btnCheckInPM.Enabled = False
+                    End If
+                End Using
+            End Using
+
+        Catch ex As Exception
+            MessageBox.Show("Error editing attendance: " & ex.Message)
+        Finally
+            If dbcon.State = ConnectionState.Open Then dbcon.Close()
+        End Try
+    End Sub
     Private Sub btnSaveAttendance_Click(sender As Object, e As EventArgs) Handles btnSaveAttendance.Click
         Try
-            If String.IsNullOrWhiteSpace(cbAttendanceStatus.Text) AndAlso
-           Not dtpCheckInAM.Checked AndAlso
-           Not dtpCheckOutAM.Checked AndAlso
-           Not dtpCheckInPM.Checked AndAlso
-           Not dtpCheckOutPM.Checked Then
-                MessageBox.Show("Please record a check-in/check-out or set an attendance status before saving.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Return
-            End If
-
             OpenCon()
-            If dtpDateAttendance.Value.Date <> Date.Today Then
-                MessageBox.Show("You can only save attendance for today.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Return
-            End If
-
-            ' --- Check if record exists BEFORE generating a new ID
-            Dim recordExists As Boolean = AttendanceExistsForToday(LoggedInEmployeeID, Date.Today)
-            If recordExists Then
-                todayAttendanceID = GetTodayAttendanceID(LoggedInEmployeeID, Date.Today)
-            Else
-                todayAttendanceID = GenerateNextAttendanceID()
-            End If
-
-            txtAttendanceID.Text = todayAttendanceID
-
-            If recordExists Then
-                ' UPDATE
-                Dim qUpdate As String = "
-            UPDATE tblattendance SET 
-                TimeIn_AM=@t_in_am,
-                TimeOut_AM=@t_out_am,
-                TimeIn_PM=@t_in_pm,
-                TimeOut_PM=@t_out_pm,
-                AttendanceStatus=@status
-            WHERE EmployeeID=@eid AND `Date`=@date
-        "
-                Using cmd As New MySqlCommand(qUpdate, dbcon)
-                    cmd.Parameters.AddWithValue("@eid", LoggedInEmployeeID)
-                    cmd.Parameters.AddWithValue("@date", Date.Today.ToString("yyyy-MM-dd"))
-                    cmd.Parameters.AddWithValue("@t_in_am", FormatTimeForDb(dtpCheckInAM))
-                    cmd.Parameters.AddWithValue("@t_out_am", FormatTimeForDb(dtpCheckOutAM))
-                    cmd.Parameters.AddWithValue("@t_in_pm", FormatTimeForDb(dtpCheckInPM))
-                    cmd.Parameters.AddWithValue("@t_out_pm", FormatTimeForDb(dtpCheckOutPM))
-                    cmd.Parameters.AddWithValue("@status", cbAttendanceStatus.Text)
-                    cmd.ExecuteNonQuery()
+            Dim currentValues As New Dictionary(Of String, Object)
+            Dim query As String = "SELECT TimeIn_AM, TimeOut_AM, TimeIn_PM, TimeOut_PM, AttendanceStatus FROM tblattendance WHERE EmployeeID=@empID AND Date=@attDate"
+            Using cmd As New MySqlCommand(query, dbcon)
+                cmd.Parameters.AddWithValue("@empID", LoggedInEmployeeID)
+                cmd.Parameters.AddWithValue("@attDate", dtpDateAttendance.Value.Date)
+                Using reader = cmd.ExecuteReader()
+                    If reader.Read() Then
+                        currentValues("TimeIn_AM") = If(IsDBNull(reader("TimeIn_AM")), Nothing, reader("TimeIn_AM"))
+                        currentValues("TimeOut_AM") = If(IsDBNull(reader("TimeOut_AM")), Nothing, reader("TimeOut_AM"))
+                        currentValues("TimeIn_PM") = If(IsDBNull(reader("TimeIn_PM")), Nothing, reader("TimeIn_PM"))
+                        currentValues("TimeOut_PM") = If(IsDBNull(reader("TimeOut_PM")), Nothing, reader("TimeOut_PM"))
+                        currentValues("AttendanceStatus") = If(IsDBNull(reader("AttendanceStatus")), Nothing, reader("AttendanceStatus"))
+                    End If
                 End Using
-            Else
-                ' INSERT
-                Dim qInsert As String = "
-            INSERT INTO tblattendance
-            (AttendanceID, EmployeeID, `Date`, TimeIn_AM, TimeOut_AM, TimeIn_PM, TimeOut_PM, AttendanceStatus)
-            VALUES
-            (@aid, @eid, @date, @t_in_am, @t_out_am, @t_in_pm, @t_out_pm, @status)
-        "
-                Using cmd As New MySqlCommand(qInsert, dbcon)
-                    cmd.Parameters.AddWithValue("@aid", todayAttendanceID)
-                    cmd.Parameters.AddWithValue("@eid", LoggedInEmployeeID)
-                    cmd.Parameters.AddWithValue("@date", Date.Today.ToString("yyyy-MM-dd"))
-                    cmd.Parameters.AddWithValue("@t_in_am", FormatTimeForDb(dtpCheckInAM))
-                    cmd.Parameters.AddWithValue("@t_out_am", FormatTimeForDb(dtpCheckOutAM))
-                    cmd.Parameters.AddWithValue("@t_in_pm", FormatTimeForDb(dtpCheckInPM))
-                    cmd.Parameters.AddWithValue("@t_out_pm", FormatTimeForDb(dtpCheckOutPM))
-                    cmd.Parameters.AddWithValue("@status", cbAttendanceStatus.Text)
-                    cmd.ExecuteNonQuery()
-                End Using
-            End If
+            End Using
+            Dim changed As Boolean = False
+            For Each key In originalValues.Keys
+                If Not Object.Equals(originalValues(key), currentValues(key)) Then
+                    changed = True
+                    Exit For
+                End If
+            Next
 
-            LoadAttendanceHistory()
-            LoadTodayAttendance()
-            LockAllFields()
-            UpdateCheckButtonsState()
-            MessageBox.Show("Attendance saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            If Not changed Then
+                MessageBox.Show("No changes were made.")
+            Else
+                RecalculateTotals()
+                RecalculateDaysAttended()
+                LoadAttendanceData()
+                MessageBox.Show("Attendance saved successfully!")
+            End If
 
         Catch ex As Exception
-            MessageBox.Show("Error saving attendance: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error saving attendance: " & ex.Message)
+        Finally
+            btnSaveAttendance.Visible = False
+            btnCancelAttendance.Visible = False
+            btnEditAttendance.Visible = True
+            DisableAllTimeButtons()
+            If dbcon.State = ConnectionState.Open Then dbcon.Close()
         End Try
-    End Sub
-
-
-
-    Private Function AttendanceExistsForToday(empID As String, [date] As Date) As Boolean
-        Dim exists As Boolean = False
-        Try
-            Dim q As String = "SELECT COUNT(*) FROM tblattendance WHERE EmployeeID=@eid AND `Date`=@date"
-            Using cmd As New MySqlCommand(q, dbcon)
-                cmd.Parameters.AddWithValue("@eid", empID)
-                cmd.Parameters.AddWithValue("@date", [date].ToString("yyyy-MM-dd"))
-                exists = Convert.ToInt32(cmd.ExecuteScalar()) > 0
-            End Using
-        Catch
-            exists = False
-        End Try
-        Return exists
-    End Function
-    Private Function AttendanceExists(aid As String) As Boolean
-        Dim exists As Boolean = False
-        Try
-            Dim q As String = "SELECT COUNT(*) FROM tblattendance WHERE AttendanceID=@aid"
-            Using cmd As New MySqlCommand(q, dbcon)
-                cmd.Parameters.AddWithValue("@aid", aid)
-                exists = Convert.ToInt32(cmd.ExecuteScalar()) > 0
-            End Using
-        Catch
-            exists = False
-        End Try
-        Return exists
-    End Function
-
-    Private Sub StoreOriginalValues()
-        originalValues.Clear()
-        originalValues("AttendanceID") = todayAttendanceID
-        originalValues("AttendanceStatus") = cbAttendanceStatus.Text
-        originalValues("TimeIn_AM") = If(dtpCheckInAM.Checked, dtpCheckInAM.Value, Nothing)
-        originalValues("TimeOut_AM") = If(dtpCheckOutAM.Checked, dtpCheckOutAM.Value, Nothing)
-        originalValues("TimeIn_PM") = If(dtpCheckInPM.Checked, dtpCheckInPM.Value, Nothing)
-        originalValues("TimeOut_PM") = If(dtpCheckOutPM.Checked, dtpCheckOutPM.Value, Nothing)
-        originalValues("Date") = dtpDateAttendance.Value.Date
     End Sub
     Private Sub btnCancelAttendance_Click(sender As Object, e As EventArgs) Handles btnCancelAttendance.Click
-        If originalValues.Count > 0 Then
-            cbAttendanceStatus.Text = If(originalValues.ContainsKey("AttendanceStatus"), originalValues("AttendanceStatus").ToString(), "")
+        btnSaveAttendance.Visible = False
+        btnCancelAttendance.Visible = False
+        btnEditAttendance.Visible = True
+        DisableAllTimeButtons()
+        LoadAttendanceData()
+        MessageBox.Show("Attendance editing cancelled.")
+    End Sub
+    Private Sub btnCheckInAM_Click(sender As Object, e As EventArgs) Handles btnCheckInAM.Click
+        UpdateAttendanceTime("TimeIn_AM", dtpCheckInAM)
+        SetAttendanceStatusAfterCheckIn()
+        btnCheckInAM.Enabled = False
+        btnSaveAttendance.Visible = True
+        btnCancelAttendance.Visible = True
+    End Sub
+    Private Sub btnCheckOutAM_Click(sender As Object, e As EventArgs) Handles btnCheckOutAM.Click
+        UpdateAttendanceTime("TimeOut_AM", dtpCheckOutAM)
+        SetAttendanceStatusAfterCheckOut()
+        btnCheckOutAM.Enabled = False
+    End Sub
+    Private Sub btnCheckInPM_Click(sender As Object, e As EventArgs) Handles btnCheckInPM.Click
+        UpdateAttendanceTime("TimeIn_PM", dtpCheckInPM)
+        SetAttendanceStatusAfterCheckIn()
+        btnCheckInPM.Enabled = False
+        btnSaveAttendance.Visible = True
+        btnCancelAttendance.Visible = True
+    End Sub
+    Private Sub btnCheckOutPM_Click(sender As Object, e As EventArgs) Handles btnCheckOutPM.Click
+        UpdateAttendanceTime("TimeOut_PM", dtpCheckOutPM)
+        SetAttendanceStatusAfterCheckOut()
+        btnCheckOutPM.Enabled = False
+    End Sub
+    Private Sub SetAttendanceStatusAfterCheckIn()
+        Dim shiftStartAM As TimeSpan = TimeSpan.Parse("08:00")
+        Dim shiftStartPM As TimeSpan = TimeSpan.Parse("13:00")
+        Dim nowTime As TimeSpan = DateTime.Now.TimeOfDay
 
-            ' Restore AM
-            If originalValues("TimeIn_AM") IsNot Nothing Then
-                dtpCheckInAM.Value = Date.Today.Date + CType(originalValues("TimeIn_AM"), DateTime).TimeOfDay
-                dtpCheckInAM.Checked = True
-            Else
-                dtpCheckInAM.Checked = False
-            End If
+        If nowTime <= shiftStartAM Or nowTime <= shiftStartPM Then
+            cbAttendanceStatus.SelectedItem = "Present"
+        Else
+            cbAttendanceStatus.SelectedItem = "Late"
+        End If
+    End Sub
+    Private Sub SetAttendanceStatusAfterCheckOut()
+        Dim dtRow = dbtable.Select($"EmployeeID='{LoggedInEmployeeID}' AND Date=DATE('{DateTime.Today:yyyy-MM-dd}')")
+        If dtRow.Length > 0 Then
+            Dim row = dtRow(0)
+            Dim amOut = If(IsDBNull(row("TimeOut_AM")), Nothing, row("TimeOut_AM"))
+            Dim pmOut = If(IsDBNull(row("TimeOut_PM")), Nothing, row("TimeOut_PM"))
 
-            If originalValues("TimeOut_AM") IsNot Nothing Then
-                dtpCheckOutAM.Value = Date.Today.Date + CType(originalValues("TimeOut_AM"), DateTime).TimeOfDay
-                dtpCheckOutAM.Checked = True
-            Else
-                dtpCheckOutAM.Checked = False
-            End If
-
-            ' Restore PM
-            If originalValues("TimeIn_PM") IsNot Nothing Then
-                dtpCheckInPM.Value = Date.Today.Date + CType(originalValues("TimeIn_PM"), DateTime).TimeOfDay
-                dtpCheckInPM.Checked = True
-            Else
-                dtpCheckInPM.Checked = False
-            End If
-
-            If originalValues("TimeOut_PM") IsNot Nothing Then
-                dtpCheckOutPM.Value = Date.Today.Date + CType(originalValues("TimeOut_PM"), DateTime).TimeOfDay
-                dtpCheckOutPM.Checked = True
-            Else
-                dtpCheckOutPM.Checked = False
+            If Not IsNothing(amOut) Or Not IsNothing(pmOut) Then
+                cbAttendanceStatus.SelectedItem = "Left"
             End If
         End If
-
-        LockAllFields()
-        UpdateCheckButtonsState()
     End Sub
-
-    Private Sub btnCheckInAM_Click(sender As Object, e As EventArgs) Handles btnCheckInAM.Click
-        dtpCheckInAM.Value = DateTime.Now
-        UnlockForRecording()
-        StoreOriginalValues()
-        UpdateCheckButtonsState()
+    Private Sub dgvAttendanceHistory_SelectionChanged(sender As Object, e As EventArgs) Handles dgvAttendanceHistory.SelectionChanged
+        If dgvAttendanceHistory.SelectedRows.Count > 0 Then
+            Dim row As DataGridViewRow = dgvAttendanceHistory.SelectedRows(0)
+            txtAttendanceID.Text = row.Cells("AttendanceID").Value.ToString()
+            txtEmployeeID.Text = row.Cells("EmployeeID").Value.ToString()
+            txtEmployeeName.Text = row.Cells("EmployeeName").Value.ToString()
+            txtJobTitle.Text = row.Cells("JobTitle").Value.ToString()
+        End If
     End Sub
-
-    Private Sub btnCheckOutAM_Click(sender As Object, e As EventArgs) Handles btnCheckOutAM.Click
-        dtpCheckOutAM.Value = DateTime.Now
-        UnlockForRecording()
-        UpdateCheckButtonsState()
-    End Sub
-
-    Private Sub btnCheckInPM_Click(sender As Object, e As EventArgs) Handles btnCheckInPM.Click
-        dtpCheckInPM.Value = DateTime.Now
-        UnlockForRecording()
-        StoreOriginalValues()
-        UpdateCheckButtonsState()
-    End Sub
-
-    Private Sub btnCheckOutPM_Click(sender As Object, e As EventArgs) Handles btnCheckOutPM.Click
-        dtpCheckOutPM.Value = DateTime.Now
-        UnlockForRecording()
-        UpdateCheckButtonsState()
-    End Sub
-    Private Function FormatTimeForDb(dtp As DateTimePicker) As Object
-        If Not dtp.Checked Then Return DBNull.Value
-        ' Only use TimeOfDay
-        Return dtp.Value.ToString("HH:mm:ss")
-    End Function
-    Private Function ChangesExist() As Boolean
-        If originalValues.Count = 0 Then Return True
-        If originalValues("AttendanceStatus").ToString() <> cbAttendanceStatus.Text Then Return True
-
-        Dim mappings As New Dictionary(Of String, DateTimePicker) From {
-        {"TimeIn_AM", dtpCheckInAM},
-        {"TimeOut_AM", dtpCheckOutAM},
-        {"TimeIn_PM", dtpCheckInPM},
-        {"TimeOut_PM", dtpCheckOutPM}
-    }
-
-        For Each key In mappings.Keys
-            Dim origTime As TimeSpan = If(originalValues(key) IsNot Nothing, CType(originalValues(key), DateTime).TimeOfDay, TimeSpan.Zero)
-            Dim currentTime As TimeSpan = mappings(key).Value.TimeOfDay
-            If origTime <> currentTime Then Return True
-        Next
-
-        Return False
-    End Function
     Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
         Employee_Dashboard.Show()
         Me.Hide()
@@ -734,25 +506,8 @@ Public Class Attendance
         Amenities.Show()
         Me.Hide()
     End Sub
-    Private Sub btnSignOut_Click(sender As Object, e As EventArgs)
-        Dim result = MessageBox.Show("Are you sure you want to sign out?", "Confirm Sign Out", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-        If result = DialogResult.Yes Then
-            Login_frm.ClearLoginFields
-            LoggedInEmployeeID = ""
-            LoggedInUsername = ""
-            LoggedInUserType = ""
-            Login_frm.Show
-            Hide
-        End If
-    End Sub
-
     Private Sub btnSignOut_Click_1(sender As Object, e As EventArgs) Handles btnSignOut.Click
-        Dim result As DialogResult = MessageBox.Show(
-        "Are you sure you want to sign out?",
-        "Confirm Sign Out",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Question
-    )
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to sign out?", "Confirm Sign Out", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If result = DialogResult.Yes Then
             Login_frm.ClearLoginFields()
             LoggedInEmployeeID = ""
@@ -761,6 +516,6 @@ Public Class Attendance
             Login_frm.Show()
             Me.Hide()
         End If
-
     End Sub
+
 End Class
