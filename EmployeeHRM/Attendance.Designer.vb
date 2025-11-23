@@ -42,7 +42,7 @@ Partial Class Attendance
         Label6 = New Label()
         Label26 = New Label()
         Label27 = New Label()
-        lblDashboard = New Label()
+        lblEmpDashboard = New Label()
         Label51 = New Label()
         gbDetailsAttendance = New GroupBox()
         btnRecordAttendance = New FontAwesome.Sharp.IconButton()
@@ -127,7 +127,7 @@ Partial Class Attendance
         Panel2.Controls.Add(Label6)
         Panel2.Controls.Add(Label26)
         Panel2.Controls.Add(Label27)
-        Panel2.Controls.Add(lblDashboard)
+        Panel2.Controls.Add(lblEmpDashboard)
         Panel2.Controls.Add(Label51)
         Panel2.Location = New Point(-6, -6)
         Panel2.Name = "Panel2"
@@ -328,16 +328,16 @@ Partial Class Attendance
         Label27.TabIndex = 96
         Label27.Text = "                                                  "
         ' 
-        ' lblDashboard
+        ' lblEmpDashboard
         ' 
-        lblDashboard.AutoSize = True
-        lblDashboard.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblDashboard.ForeColor = Color.White
-        lblDashboard.Location = New Point(53, 160)
-        lblDashboard.Name = "lblDashboard"
-        lblDashboard.Size = New Size(138, 27)
-        lblDashboard.TabIndex = 91
-        lblDashboard.Text = "Dashboard"
+        lblEmpDashboard.AutoSize = True
+        lblEmpDashboard.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblEmpDashboard.ForeColor = Color.White
+        lblEmpDashboard.Location = New Point(53, 160)
+        lblEmpDashboard.Name = "lblEmpDashboard"
+        lblEmpDashboard.Size = New Size(138, 27)
+        lblEmpDashboard.TabIndex = 91
+        lblEmpDashboard.Text = "Dashboard"
         ' 
         ' Label51
         ' 
@@ -849,7 +849,7 @@ Partial Class Attendance
     Friend WithEvents lblLeaveManagement As Label
     Friend WithEvents lblSalary As Label
     Friend WithEvents Label6 As Label
-    Friend WithEvents lblDashboard As Label
+    Friend WithEvents lblEmpDashboard As Label
     Friend WithEvents Label51 As Label
     Friend WithEvents gbDetailsAttendance As GroupBox
     Friend WithEvents txtJobTitle As TextBox

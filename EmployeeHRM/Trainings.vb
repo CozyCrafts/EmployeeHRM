@@ -6,9 +6,10 @@ Public Class Trainings
     Private originalStatus As String = ""
     Private originalDateStarted As Date
     Private originalDateCompleted As Date
+
     Private Sub Trainings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        If LoggedInUserType = "Staff" Then
+        If HRMModule.CurrentUser.UserType = "Staff" Then
             lblManagement.Visible = False
             lblTeamOverview.Visible = False
             lblAttendanceTracker.Visible = False
@@ -23,26 +24,22 @@ Public Class Trainings
         LockControls()
     End Sub
     Private Sub LoadTrainings()
+        Dim query As String = "
+            SELECT TrainingID, TrainingTitle, TrainingType, Status, DateStarted, DateCompleted, Description
+            FROM tbltrainingdevelopment
+            WHERE EmployeeID=@empID
+            ORDER BY DateStarted DESC
+        "
+        Dim parameters As New List(Of MySqlParameter) From {
+            New MySqlParameter("@empID", HRMModule.CurrentUser.EmployeeID)
+        }
+
         Try
-            OpenCon()
-            Dim query As String = "
-                SELECT TrainingID, TrainingTitle, TrainingType, Status, DateStarted, DateCompleted, Description
-                FROM tbltrainingdevelopment
-                WHERE EmployeeID=@empID
-                ORDER BY DateStarted DESC
-            "
-            dbcmd = New MySqlCommand(query, dbcon)
-            dbcmd.Parameters.AddWithValue("@empID", LoggedInEmployeeID)
-
-            dbadapter = New MySqlDataAdapter(dbcmd)
-            dbtable = New DataTable()
-            dbadapter.Fill(dbtable)
-
-            dgvTrainingHistory.DataSource = dbtable
+            Dim dt As DataTable = HRMModule.ExecuteQuery(query, parameters)
+            dgvTrainingHistory.DataSource = dt
             dgvTrainingHistory.ReadOnly = True
             dgvTrainingHistory.SelectionMode = DataGridViewSelectionMode.FullRowSelect
             dgvTrainingHistory.MultiSelect = False
-
         Catch ex As Exception
             MessageBox.Show("Error loading trainings: " & ex.Message)
         End Try
@@ -106,17 +103,17 @@ Public Class Trainings
     Private Sub btnSaveTraining_Click(sender As Object, e As EventArgs) Handles btnSaveTraining.Click
         If Not isEditing Then Return
 
-        ' Get the selected row
         Dim selectedRow As DataGridViewRow = dgvTrainingHistory.CurrentRow
         Dim trainingID As String = selectedRow.Cells("TrainingID").Value.ToString()
 
-        ' Check if this training already exists in the database
+        Dim checkQuery As String = "SELECT COUNT(*) FROM tbltrainingdevelopment WHERE TrainingID=@trainingID"
+        Dim checkParams As New List(Of MySqlParameter) From {
+            New MySqlParameter("@trainingID", trainingID)
+        }
+
         Try
-            OpenCon()
-            Dim checkQuery As String = "SELECT COUNT(*) FROM tbltrainingdevelopment WHERE TrainingID=@trainingID"
-            dbcmd = New MySqlCommand(checkQuery, dbcon)
-            dbcmd.Parameters.AddWithValue("@trainingID", trainingID)
-            Dim exists As Integer = Convert.ToInt32(dbcmd.ExecuteScalar())
+            Dim existsObj As Object = HRMModule.ExecuteScalar(checkQuery, checkParams)
+            Dim exists As Integer = If(existsObj IsNot Nothing, Convert.ToInt32(existsObj), 0)
 
             If exists > 0 Then
                 MessageBox.Show("This training already exists and is not new. You cannot save as new.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -129,7 +126,6 @@ Public Class Trainings
             Return
         End Try
 
-        ' Proceed with update as before
         Dim newStatus As String = If(rbPlanned.Checked, "Planned",
                              If(rbInProgress.Checked, "In Progress",
                              If(rbCompleted.Checked, "Completed", "Postponed")))
@@ -144,7 +140,6 @@ Public Class Trainings
             dateCompleted = Date.Now
         End If
 
-        ' Check if nothing changed
         If originalStatus = newStatus AndAlso originalDateStarted = dateStarted AndAlso originalDateCompleted = dateCompleted Then
             MessageBox.Show("No changes were made.")
             LockControls()
@@ -152,25 +147,26 @@ Public Class Trainings
             Return
         End If
 
-        ' Update training
-        Try
-            Dim query As String = "
+        Dim updateQuery As String = "
             UPDATE tbltrainingdevelopment
             SET Status=@status, DateStarted=@dateStarted, DateCompleted=@dateCompleted
             WHERE TrainingID=@trainingID
         "
-            dbcmd = New MySqlCommand(query, dbcon)
-            dbcmd.Parameters.AddWithValue("@status", newStatus)
-            dbcmd.Parameters.AddWithValue("@dateStarted", dateStarted)
-            dbcmd.Parameters.AddWithValue("@dateCompleted", dateCompleted)
-            dbcmd.Parameters.AddWithValue("@trainingID", trainingID)
-            dbcmd.ExecuteNonQuery()
+        Dim updateParams As New List(Of MySqlParameter) From {
+            New MySqlParameter("@status", newStatus),
+            New MySqlParameter("@dateStarted", dateStarted),
+            New MySqlParameter("@dateCompleted", dateCompleted),
+            New MySqlParameter("@trainingID", trainingID)
+        }
 
-            MessageBox.Show("Training updated successfully.")
+        Try
+            Dim rowsAffected As Integer = HRMModule.ExecuteNonQuery(updateQuery, updateParams)
+            If rowsAffected > 0 Then
+                MessageBox.Show("Training updated successfully.")
+            End If
             LoadTrainings()
             LockControls()
             isEditing = False
-
         Catch ex As Exception
             MessageBox.Show("Error updating training: " & ex.Message)
         End Try
@@ -228,8 +224,6 @@ Public Class Trainings
         rbPostponed.Enabled = False
     End Sub
 
-
-
     Private Sub rbStatus_CheckedChanged(sender As Object, e As EventArgs) Handles rbInProgress.CheckedChanged, rbCompleted.CheckedChanged
         If Not isEditing Then Return
 
@@ -244,6 +238,7 @@ Public Class Trainings
             dtpStarted.Enabled = False
         End If
     End Sub
+
 
     Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
         Employee_Dashboard.Show()
@@ -296,20 +291,14 @@ Public Class Trainings
         Amenities.Show()
         Me.Hide()
     End Sub
-    Private Sub btnSignOut_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
-        Dim result = MessageBox.Show(
-            "Are you sure you want to sign out?",
-            "Confirm Sign Out",
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Question
-        )
+    Private Sub btnSignout_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to sign out?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
         If result = DialogResult.Yes Then
-            Login_frm.ClearLoginFields()
-            LoggedInEmployeeID = ""
-            LoggedInUsername = ""
-            LoggedInUserType = ""
-            Login_frm.Show()
-            Hide()
+            HRMModule.SignOut(Me)
+            MessageBox.Show("You have been signed out.", "Logged Out", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
+
+
 End Class

@@ -1,6 +1,6 @@
 ﻿Imports MySql.Data.MySqlClient
+
 Public Class Leave_Approval
-    Private connectionString As String = "server=localhost;userid=root;password=091951;database=db_hrm"
     Private bsLeave As BindingSource
     Private originalStatus As String
     Private originalApprovedBy As String
@@ -14,38 +14,34 @@ Public Class Leave_Approval
         btnCancelLeave.Visible = False
     End Sub
     Private Sub LoadLeaveRequests()
-        Try
-            Using dbcon As New MySqlConnection(connectionString)
-                dbcon.Open()
-                Dim query As String = "
-                SELECT 
-                    l.LeaveID,
-                    e.EmployeeID,
-                    CONCAT(e.`First Name`, ' ', IFNULL(e.MiddleName, ''), ' ', e.LastName) AS EmployeeName,
-                    j.JobTitle,
-                    l.LeaveType,
-                    l.Reason,
-                    l.ApprovedBy,
-                    l.Status,
-                    l.DurationDateFrom,
-                    l.DurationDateTo
-                FROM tblleave l
-                LEFT JOIN tblemployee e ON l.EmployeeID = e.EmployeeID
-                LEFT JOIN tbljobdetails j ON e.EmployeeID = j.EmployeeID;
-            "
-                Dim adapter As New MySqlDataAdapter(query, dbcon)
-                Dim table As New DataTable()
-                adapter.Fill(table)
+        Dim query As String = "
+            SELECT 
+                l.LeaveID,
+                e.EmployeeID,
+                CONCAT(e.`First Name`, ' ', IFNULL(e.MiddleName, ''), ' ', e.LastName) AS EmployeeName,
+                j.JobTitle,
+                l.LeaveType,
+                l.Reason,
+                l.ApprovedBy,
+                l.Status,
+                l.DurationDateFrom,
+                l.DurationDateTo
+            FROM tblleave l
+            LEFT JOIN tblemployee e ON l.EmployeeID = e.EmployeeID
+            LEFT JOIN tbljobdetails j ON e.EmployeeID = j.EmployeeID;
+        "
 
-                bsLeave = New BindingSource()
-                bsLeave.DataSource = table
-                dgvEmployeeLeaveHistory.DataSource = bsLeave
-                dgvEmployeeLeaveHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
-                dgvEmployeeLeaveHistory.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-                dgvEmployeeLeaveHistory.ReadOnly = True
-                dgvEmployeeLeaveHistory.AllowUserToAddRows = False
-                dgvEmployeeLeaveHistory.AllowUserToDeleteRows = False
-            End Using
+        Try
+            Dim table As DataTable = HRMModule.ExecuteQuery(query)
+            bsLeave = New BindingSource()
+            bsLeave.DataSource = table
+            dgvEmployeeLeaveHistory.DataSource = bsLeave
+
+            dgvEmployeeLeaveHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+            dgvEmployeeLeaveHistory.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            dgvEmployeeLeaveHistory.ReadOnly = True
+            dgvEmployeeLeaveHistory.AllowUserToAddRows = False
+            dgvEmployeeLeaveHistory.AllowUserToDeleteRows = False
         Catch ex As Exception
             MessageBox.Show("Error loading leave requests: " & ex.Message)
         End Try
@@ -86,7 +82,6 @@ Public Class Leave_Approval
         btnCancelLeave.Visible = False
         originalStatus = cbStatus.Text
         originalApprovedBy = txtApprovedBy.Text
-
     End Sub
     Private Sub btnEditLeave_Click(sender As Object, e As EventArgs) Handles btnEditLeave.Click
         cbStatus.Enabled = True
@@ -103,38 +98,32 @@ Public Class Leave_Approval
         btnCancelLeave.Visible = False
     End Sub
     Private Sub btnSaveLeave_Click(sender As Object, e As EventArgs) Handles btnSaveLeave.Click
-
-
         If cbStatus.Text = originalStatus AndAlso txtApprovedBy.Text.Trim() = originalApprovedBy.Trim() Then
             MessageBox.Show("No changes were made.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Return
         End If
 
-
         If Not ValidateLeaveEdit() Then Return
 
-        Try
-            Using dbcon As New MySqlConnection(connectionString)
-                dbcon.Open()
-                Dim cmd As New MySqlCommand("UPDATE tblleave SET Status=@status, ApprovedBy=@manager WHERE LeaveID=@lid", dbcon)
-                cmd.Parameters.AddWithValue("@status", cbStatus.Text)
-                cmd.Parameters.AddWithValue("@manager", txtApprovedBy.Text)
-                cmd.Parameters.AddWithValue("@lid", txtLeaveID.Text)
-                cmd.ExecuteNonQuery()
-            End Using
+        Dim query As String = "UPDATE tblleave SET Status=@status, ApprovedBy=@manager WHERE LeaveID=@lid"
+        Dim parameters As New List(Of MySqlParameter) From {
+            New MySqlParameter("@status", cbStatus.Text),
+            New MySqlParameter("@manager", txtApprovedBy.Text),
+            New MySqlParameter("@lid", txtLeaveID.Text)
+        }
 
+        If HRMModule.ExecuteNonQuery(query, parameters) >= 0 Then
             MessageBox.Show("Leave status updated successfully by the manager.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
             LoadLeaveRequests()
             LockLeaveControls()
             btnEditLeave.Visible = True
             btnSaveLeave.Visible = False
             btnCancelLeave.Visible = False
-
-        Catch ex As Exception
-            MessageBox.Show("Error updating leave: " & ex.Message)
-        End Try
+        Else
+            MessageBox.Show("Error updating leave. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
     End Sub
+
     Private Function ValidateLeaveEdit() As Boolean
         If String.IsNullOrWhiteSpace(cbStatus.Text) Then
             MessageBox.Show("Please select a status.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -148,6 +137,7 @@ Public Class Leave_Approval
         End If
         Return True
     End Function
+
     Private Sub txtSearchLeave_TextChanged(sender As Object, e As EventArgs) Handles txtSearchLeave.TextChanged
         Dim searchValue As String = txtSearchLeave.Text.Trim()
 
@@ -159,7 +149,6 @@ Public Class Leave_Approval
         End If
 
         searchValue = searchValue.Replace("'", "''")
-
         bsLeave.Filter = $"EmployeeName LIKE '%{searchValue}%'"
     End Sub
     Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
@@ -215,22 +204,13 @@ Public Class Leave_Approval
     End Sub
 
 
-    Private Sub btnSignOut_Click_1(sender As Object, e As EventArgs) Handles btnSignOut.Click
-        Dim result = MessageBox.Show(
-              "Are you sure you want to sign out?",
-              "Confirm Sign Out",
-              MessageBoxButtons.YesNo,
-              MessageBoxIcon.Question
-          )
+    Private Sub btnSignout_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to sign out?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
         If result = DialogResult.Yes Then
-            Login_frm.ClearLoginFields()
-            LoggedInEmployeeID = ""
-            LoggedInUsername = ""
-            LoggedInUserType = ""
-            Login_frm.Show()
-            Hide()
+            HRMModule.SignOut(Me)
+            MessageBox.Show("You have been signed out.", "Logged Out", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
-
 
 End Class

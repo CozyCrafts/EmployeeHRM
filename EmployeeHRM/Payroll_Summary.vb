@@ -4,7 +4,6 @@ Imports System.Globalization
 
 
 Public Class Payroll_Summary
-    Private connectionString As String = "server=localhost;userid=root;password=091951;database=db_hrm"
     Private payrollTable As DataTable = Nothing
     Private originalValues As New Dictionary(Of String, String)
     Private payrollBindingSource As BindingSource
@@ -19,67 +18,54 @@ Public Class Payroll_Summary
         dgvPayrollSummary.DataSource = payrollBindingSource
     End Sub
     Private Sub LoadPayrollSummary()
-        Try
-            Using conn As New MySqlConnection(connectionString)
-                conn.Open()
-                Dim query As String = "
-                SELECT 
-                    e.EmployeeID,
-                    CONCAT_WS(' ', e.`First Name`, e.MiddleName, e.LastName) AS EmployeeName,
-                    j.JobTitle,
-                    p.PayrollID,
-                    p.BasicSalary AS PayrollBasicSalary,
-                    p.OvertimePay AS PayrollOvertimePay,
-                    p.GrossSalary AS PayrollGrossSalary,
-                    p.NetPay AS PayrollNetPay,
-                    p.PaymentDate AS PayrollPaymentDate,
-                    s.SalaryID AS SalaryID,
-                    s.BaseSalary AS SalaryBaseSalary,
-                    s.Allowance AS SalaryAllowance,
-                    s.DailyRate AS SalaryDailyRate,
-                    s.OvertimeRate AS SalaryOvertimeRate,
-                    a.AttendanceID AS AttendanceID,
-                    a.TotalHours AS AttendanceTotalHours,
-                    a.ExceededHours AS AttendanceExceededHours,
-                    a.DaysAttended AS AttendanceDaysAttended,
-                    a.Absences AS AttendanceAbsences,
-                    d.DeductionID AS DeductionID,
-                    d.UnpaidLeave AS DeductionUnpaidLeave,
-                    d.SSS AS DeductionSSS,
-                    d.PagIBIG AS DeductionPagIBIG,
-                    d.PhilHealth AS DeductionPhilHealth,
-                    d.TotalDeduction AS DeductionTotalDeduction
-                FROM tblemployee e
-                LEFT JOIN tbljobdetails j ON e.EmployeeID = j.EmployeeID
-                LEFT JOIN tblpayroll p ON e.EmployeeID = p.EmployeeID
-                LEFT JOIN tblsalary s ON e.EmployeeID = s.EmployeeID
-                LEFT JOIN tblattendance a ON e.EmployeeID = a.EmployeeID
-                LEFT JOIN tbldeduction d ON e.EmployeeID = d.EmployeeID
-                ORDER BY e.EmployeeID;
-                "
-                Using cmd As New MySqlCommand(query, conn)
-                    Using adapter As New MySqlDataAdapter(cmd)
-                        payrollTable = New DataTable()
-                        adapter.Fill(payrollTable)
-                        dgvPayrollSummary.DataSource = payrollTable
-                        dgvPayrollSummary.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
-                        dgvPayrollSummary.RowTemplate.Height = 30
-                        dgvPayrollSummary.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None
-                    End Using
-                End Using
-            End Using
-        Catch ex As Exception
-            MessageBox.Show("Error loading payroll summary: " & ex.Message)
-        End Try
+        Dim query As String = "
+        SELECT 
+            e.EmployeeID,
+            CONCAT_WS(' ', e.`First Name`, e.MiddleName, e.LastName) AS EmployeeName,
+            j.JobTitle,
+            p.PayrollID,
+            p.BasicSalary AS PayrollBasicSalary,
+            p.OvertimePay AS PayrollOvertimePay,
+            p.GrossSalary AS PayrollGrossSalary,
+            p.NetPay AS PayrollNetPay,
+            p.PaymentDate AS PayrollPaymentDate,
+            s.SalaryID AS SalaryID,
+            s.BaseSalary AS SalaryBaseSalary,
+            s.Allowance AS SalaryAllowance,
+            s.DailyRate AS SalaryDailyRate,
+            s.OvertimeRate AS SalaryOvertimeRate,
+            a.AttendanceID AS AttendanceID,
+            a.TotalHours AS AttendanceTotalHours,
+            a.ExceededHours AS AttendanceExceededHours,
+            a.DaysAttended AS AttendanceDaysAttended,
+            a.Absences AS AttendanceAbsences,
+            d.DeductionID AS DeductionID,
+            d.UnpaidLeave AS DeductionUnpaidLeave,
+            d.SSS AS DeductionSSS,
+            d.PagIBIG AS DeductionPagIBIG,
+            d.PhilHealth AS DeductionPhilHealth,
+            d.TotalDeduction AS DeductionTotalDeduction
+        FROM tblemployee e
+        LEFT JOIN tbljobdetails j ON e.EmployeeID = j.EmployeeID
+        LEFT JOIN tblpayroll p ON e.EmployeeID = p.EmployeeID
+        LEFT JOIN tblsalary s ON e.EmployeeID = s.EmployeeID
+        LEFT JOIN tblattendance a ON e.EmployeeID = a.EmployeeID
+        LEFT JOIN tbldeduction d ON e.EmployeeID = d.EmployeeID
+        ORDER BY e.EmployeeID;
+    "
+
+        payrollTable = HRMModule.ExecuteQuery(query)
+        dgvPayrollSummary.DataSource = payrollTable
+        dgvPayrollSummary.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+        dgvPayrollSummary.RowTemplate.Height = 30
+        dgvPayrollSummary.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None
     End Sub
     Private Sub LoadEmployeeIDs()
         cbEmployeeID.Items.Clear()
         If payrollTable IsNot Nothing AndAlso payrollTable.Rows.Count > 0 Then
             For Each row As DataRow In payrollTable.Rows
                 Dim empID As String = row("EmployeeID").ToString()
-                If Not cbEmployeeID.Items.Contains(empID) Then
-                    cbEmployeeID.Items.Add(empID)
-                End If
+                If Not cbEmployeeID.Items.Contains(empID) Then cbEmployeeID.Items.Add(empID)
             Next
         End If
     End Sub
@@ -87,52 +73,66 @@ Public Class Payroll_Summary
         If Not cbEmployeeID.Enabled Then Exit Sub
         Dim selectedID As String = cbEmployeeID.Text
         If String.IsNullOrWhiteSpace(selectedID) Then Exit Sub
+
         Dim rows() As DataRow = payrollTable.Select("EmployeeID = '" & selectedID & "'")
         If rows.Length > 0 Then
-            Dim row As DataRow = rows(0)
-            txtEmployeeName.Text = row("EmployeeName").ToString()
-            txtJobTitle.Text = row("JobTitle").ToString()
-            txtBaseSalary.Text = If(row("SalaryBaseSalary") IsNot DBNull.Value, row("SalaryBaseSalary").ToString(), "0")
-            txtAllowance.Text = If(row("SalaryAllowance") IsNot DBNull.Value, row("SalaryAllowance").ToString(), "0")
-            txtDailyRate.Text = If(row("SalaryDailyRate") IsNot DBNull.Value, row("SalaryDailyRate").ToString(), "0")
-            txtOvertimeRate.Text = If(row("SalaryOvertimeRate") IsNot DBNull.Value, row("SalaryOvertimeRate").ToString(), "0")
-
-            Dim payrollID As String = row("PayrollID").ToString()
-            If String.IsNullOrEmpty(payrollID) Then
-                txtPayrollID.Text = GenerateNextPayrollID()
-            Else
-                txtPayrollID.Text = payrollID
-            End If
-            txtBasicSalary.Text = row("PayrollBasicSalary").ToString()
-            txtOvertimePay.Text = row("PayrollOvertimePay").ToString()
-            txtGrossSalary.Text = row("PayrollGrossSalary").ToString()
-            txtNetPay.Text = row("PayrollNetPay").ToString()
-            Dim paymentDateStr As String = row("PayrollPaymentDate").ToString()
-            Dim paymentDate As DateTime
-            If row("PayrollPaymentDate") IsNot DBNull.Value AndAlso DateTime.TryParse(row("PayrollPaymentDate").ToString(), paymentDate) Then
-                dtpPaymentDate.Value = paymentDate
-            Else
-                Dim today As DateTime = DateTime.Today
-                dtpPaymentDate.Value = New DateTime(today.Year, today.Month, DateTime.DaysInMonth(today.Year, today.Month))
-            End If
-            txtAttendanceID.Text = row("AttendanceID").ToString()
-            txtTotalHours.Text = row("AttendanceTotalHours").ToString()
-            txtExceededHours.Text = row("AttendanceExceededHours").ToString()
-            txtDaysAttended.Text = row("AttendanceDaysAttended").ToString()
-            txtAbsences.Text = row("AttendanceAbsences").ToString()
-            If row("DeductionID") IsNot Nothing AndAlso Not IsDBNull(row("DeductionID")) Then
-                txtDeductionID.Text = row("DeductionID").ToString()
-            Else
-                txtDeductionID.Text = GenerateNextDeductionID()
-            End If
-            txtUnpaidLeave.Text = If(row("DeductionUnpaidLeave") IsNot DBNull.Value, row("DeductionUnpaidLeave").ToString(), "0")
-            txtSSS.Text = If(row("DeductionSSS") IsNot DBNull.Value, row("DeductionSSS").ToString(), "0")
-            txtPhilHealth.Text = If(row("DeductionPhilHealth") IsNot DBNull.Value, row("DeductionPhilHealth").ToString(), "0")
-            txtPagIBIG.Text = If(row("DeductionPagIBIG") IsNot DBNull.Value, row("DeductionPagIBIG").ToString(), "0")
-            txtTotalDeduction.Text = If(row("DeductionTotalDeduction") IsNot DBNull.Value, row("DeductionTotalDeduction").ToString(), "0")
+            PopulateFieldsFromDataRow(rows(0))
         Else
             ClearPayrollFields()
         End If
+    End Sub
+    Private Sub PopulateFieldsFromDataRow(row As DataRow)
+        txtEmployeeName.Text = row("EmployeeName").ToString()
+        txtJobTitle.Text = row("JobTitle").ToString()
+        txtBaseSalary.Text = If(row("SalaryBaseSalary") IsNot DBNull.Value, row("SalaryBaseSalary").ToString(), "0")
+        txtAllowance.Text = If(row("SalaryAllowance") IsNot DBNull.Value, row("SalaryAllowance").ToString(), "0")
+        txtDailyRate.Text = If(row("SalaryDailyRate") IsNot DBNull.Value, row("SalaryDailyRate").ToString(), "0")
+        txtOvertimeRate.Text = If(row("SalaryOvertimeRate") IsNot DBNull.Value, row("SalaryOvertimeRate").ToString(), "0")
+
+        txtPayrollID.Text = If(String.IsNullOrEmpty(row("PayrollID").ToString()), GenerateNextPayrollID(), row("PayrollID").ToString())
+        txtBasicSalary.Text = row("PayrollBasicSalary").ToString()
+        txtOvertimePay.Text = row("PayrollOvertimePay").ToString()
+        txtGrossSalary.Text = row("PayrollGrossSalary").ToString()
+        txtNetPay.Text = row("PayrollNetPay").ToString()
+
+        Dim paymentDate As DateTime
+        If row("PayrollPaymentDate") IsNot DBNull.Value AndAlso DateTime.TryParse(row("PayrollPaymentDate").ToString(), paymentDate) Then
+            dtpPaymentDate.Value = paymentDate
+        Else
+            Dim today As DateTime = DateTime.Today
+            dtpPaymentDate.Value = New DateTime(today.Year, today.Month, DateTime.DaysInMonth(today.Year, today.Month))
+        End If
+
+        txtAttendanceID.Text = If(row("AttendanceID") IsNot DBNull.Value, row("AttendanceID").ToString(), GenerateNextAttendanceID())
+        txtTotalHours.Text = row("AttendanceTotalHours").ToString()
+        txtExceededHours.Text = row("AttendanceExceededHours").ToString()
+        txtDaysAttended.Text = row("AttendanceDaysAttended").ToString()
+        txtAbsences.Text = row("AttendanceAbsences").ToString()
+        txtDeductionID.Text = If(row("DeductionID") IsNot DBNull.Value, row("DeductionID").ToString(), GenerateNextDeductionID())
+        txtUnpaidLeave.Text = If(row("DeductionUnpaidLeave") IsNot DBNull.Value, row("DeductionUnpaidLeave").ToString(), "0")
+        txtSSS.Text = If(row("DeductionSSS") IsNot DBNull.Value, row("DeductionSSS").ToString(), "0")
+        txtPhilHealth.Text = If(row("DeductionPhilHealth") IsNot DBNull.Value, row("DeductionPhilHealth").ToString(), "0")
+        txtPagIBIG.Text = If(row("DeductionPagIBIG") IsNot DBNull.Value, row("DeductionPagIBIG").ToString(), "0")
+        txtTotalDeduction.Text = If(row("DeductionTotalDeduction") IsNot DBNull.Value, row("DeductionTotalDeduction").ToString(), "0")
+
+        StoreOriginalValues()
+        LockFields()
+    End Sub
+    Private Sub StoreOriginalValues()
+        originalValues.Clear()
+        originalValues("BaseSalary") = txtBaseSalary.Text
+        originalValues("Allowance") = txtAllowance.Text
+        originalValues("DailyRate") = txtDailyRate.Text
+        originalValues("OvertimeRate") = txtOvertimeRate.Text
+        originalValues("BasicSalary") = txtBasicSalary.Text
+        originalValues("OvertimePay") = txtOvertimePay.Text
+        originalValues("GrossSalary") = txtGrossSalary.Text
+        originalValues("NetPay") = txtNetPay.Text
+        originalValues("SSS") = txtSSS.Text
+        originalValues("PhilHealth") = txtPhilHealth.Text
+        originalValues("PagIBIG") = txtPagIBIG.Text
+        originalValues("UnpaidLeave") = txtUnpaidLeave.Text
+        originalValues("TotalDeduction") = txtTotalDeduction.Text
     End Sub
     Private Sub PopulateFieldsFromSelectedRow(rowIndex As Integer)
         Dim row As DataGridViewRow = dgvPayrollSummary.Rows(rowIndex)
@@ -289,87 +289,49 @@ Public Class Payroll_Summary
         Return value
     End Function
     Private Function GenerateNextPayrollID() As String
+        Dim lastIDObj = HRMModule.ExecuteScalar("SELECT PayrollID FROM tblpayroll ORDER BY PayrollID DESC LIMIT 1")
         Dim nextID As String = "P001"
-        Try
-            Using conn As New MySqlConnection(connectionString)
-                conn.Open()
-                Dim cmd As New MySqlCommand("SELECT PayrollID FROM tblpayroll ORDER BY PayrollID DESC LIMIT 1", conn)
-                Dim lastIDObj = cmd.ExecuteScalar()
-                If lastIDObj IsNot Nothing AndAlso Not IsDBNull(lastIDObj) Then
-                    Dim lastID As String = lastIDObj.ToString()
-                    Dim numericPart As Integer
-                    If lastID.Length > 1 AndAlso Integer.TryParse(lastID.Substring(1), numericPart) Then
-                        numericPart += 1
-                        nextID = "P" & numericPart.ToString("D3")
-                    End If
-                End If
-            End Using
-        Catch ex As Exception
-            MessageBox.Show("Error generating PayrollID: " & ex.Message)
-        End Try
+        If lastIDObj IsNot Nothing AndAlso Not IsDBNull(lastIDObj) Then
+            Dim lastID As String = lastIDObj.ToString()
+            Dim numericPart As Integer
+            If lastID.Length > 1 AndAlso Integer.TryParse(lastID.Substring(1), numericPart) Then
+                nextID = "P" & (numericPart + 1).ToString("D3")
+            End If
+        End If
         Return nextID
     End Function
+
     Private Function GenerateNextDeductionID() As String
+        Dim lastID = HRMModule.ExecuteScalar("SELECT DeductionID FROM tbldeduction ORDER BY DeductionID DESC LIMIT 1")
         Dim nextID As String = "DDC001"
-        Try
-            Using conn As New MySqlConnection(connectionString)
-                conn.Open()
-                Dim cmd As New MySqlCommand("SELECT DeductionID FROM tbldeduction ORDER BY DeductionID DESC LIMIT 1", conn)
-                Dim lastIDObj = cmd.ExecuteScalar()
-                If lastIDObj IsNot Nothing AndAlso Not IsDBNull(lastIDObj) Then
-                    Dim lastID As String = lastIDObj.ToString()
-                    Dim numericPart As Integer
-                    If lastID.Length > 3 AndAlso Integer.TryParse(lastID.Substring(3), numericPart) Then
-                        numericPart += 1
-                        nextID = "DDC" & numericPart.ToString("D3")
-                    End If
-                End If
-            End Using
-        Catch ex As Exception
-            MessageBox.Show("Error generating DeductionID: " & ex.Message)
-        End Try
+        If lastID IsNot Nothing AndAlso Not IsDBNull(lastID) Then
+            Dim numericPart As Integer
+            If Integer.TryParse(lastID.ToString().Substring(3), numericPart) Then
+                nextID = "DDC" & (numericPart + 1).ToString("D3")
+            End If
+        End If
         Return nextID
     End Function
     Private Function GenerateNextAttendanceID() As String
+        Dim lastID = HRMModule.ExecuteScalar("SELECT AttendanceID FROM tblattendance ORDER BY AttendanceID DESC LIMIT 1")
         Dim nextID As String = "T001"
-        Try
-            Using conn As New MySqlConnection(connectionString)
-                conn.Open()
-                Dim cmd As New MySqlCommand("SELECT AttendanceID FROM tblattendance ORDER BY AttendanceID DESC LIMIT 1", conn)
-                Dim lastIDObj = cmd.ExecuteScalar()
-                If lastIDObj IsNot Nothing AndAlso Not IsDBNull(lastIDObj) Then
-                    Dim lastID As String = lastIDObj.ToString()
-                    Dim numericPart As Integer
-                    If lastID.Length > 1 AndAlso Integer.TryParse(lastID.Substring(1), numericPart) Then
-                        numericPart += 1
-                        nextID = "T" & numericPart.ToString("D3")
-                    End If
-                End If
-            End Using
-        Catch ex As Exception
-            MessageBox.Show("Error generating AttendanceID: " & ex.Message)
-        End Try
+        If lastID IsNot Nothing AndAlso Not IsDBNull(lastID) Then
+            Dim numericPart As Integer
+            If Integer.TryParse(lastID.ToString().Substring(1), numericPart) Then
+                nextID = "T" & (numericPart + 1).ToString("D3")
+            End If
+        End If
         Return nextID
     End Function
     Private Function GenerateNextSalaryID() As String
+        Dim lastID = HRMModule.ExecuteScalar("SELECT SalaryID FROM tblsalary ORDER BY SalaryID DESC LIMIT 1")
         Dim nextID As String = "S1"
-        Try
-            Using conn As New MySqlConnection(connectionString)
-                conn.Open()
-                Dim cmd As New MySqlCommand("SELECT SalaryID FROM tblsalary ORDER BY SalaryID DESC LIMIT 1", conn)
-                Dim lastIDObj = cmd.ExecuteScalar()
-                If lastIDObj IsNot Nothing AndAlso Not IsDBNull(lastIDObj) Then
-                    Dim lastID As String = lastIDObj.ToString()
-                    Dim numericPart As Integer
-                    If lastID.Length > 1 AndAlso Integer.TryParse(lastID.Substring(1), numericPart) Then
-                        numericPart += 1
-                        nextID = "S" & numericPart.ToString()
-                    End If
-                End If
-            End Using
-        Catch ex As Exception
-            MessageBox.Show("Error generating SalaryID: " & ex.Message)
-        End Try
+        If lastID IsNot Nothing AndAlso Not IsDBNull(lastID) Then
+            Dim numericPart As Integer
+            If Integer.TryParse(lastID.ToString().Substring(1), numericPart) Then
+                nextID = "S" & (numericPart + 1).ToString()
+            End If
+        End If
         Return nextID
     End Function
     Private Sub ComputePayroll()
@@ -483,150 +445,93 @@ Public Class Payroll_Summary
     End Sub
     Private Sub btnSavePayroll_Click(sender As Object, e As EventArgs) Handles btnSavePayroll.Click
         ComputePayroll()
-        If Not ValidatePayrollFields() Then Exit Sub
-
-        Try
-            Dim gross As Double = CDbl(txtGrossSalary.Text)
-            Dim deduction As Double = CDbl(txtTotalDeduction.Text)
-            Dim net As Double = CDbl(txtNetPay.Text)
-
-            If gross < 0 Then
-                MessageBox.Show("Gross Pay cannot be negative.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Exit Sub
-            End If
-
-            If deduction < 0 Then
-                MessageBox.Show("Total deductions cannot be negative.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Exit Sub
-            End If
-
-            If net < 0 Then
-                MessageBox.Show("Net Pay cannot be negative.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Exit Sub
-            End If
-
-            If deduction > gross Then
-                MessageBox.Show("Total deductions cannot exceed gross pay.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Exit Sub
-            End If
-
-        Catch ex As Exception
-            MessageBox.Show("Invalid numeric values detected.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Exit Sub
-        End Try
-
-
-        Dim changed As Boolean = False
-
-        If originalValues.Count > 0 Then
-            If originalValues("BaseSalary") <> txtBaseSalary.Text Then changed = True
-            If originalValues("Allowance") <> txtAllowance.Text Then changed = True
-            If originalValues("DailyRate") <> txtDailyRate.Text Then changed = True
-            If originalValues("OvertimeRate") <> txtOvertimeRate.Text Then changed = True
-            If originalValues("BasicSalary") <> txtBasicSalary.Text Then changed = True
-            If originalValues("OvertimePay") <> txtOvertimePay.Text Then changed = True
-            If originalValues("GrossSalary") <> txtGrossSalary.Text Then changed = True
-            If originalValues("NetPay") <> txtNetPay.Text Then changed = True
-            If originalValues("SSS") <> txtSSS.Text Then changed = True
-            If originalValues("PhilHealth") <> txtPhilHealth.Text Then changed = True
-            If originalValues("PagIBIG") <> txtPagIBIG.Text Then changed = True
-            If originalValues("UnpaidLeave") <> txtUnpaidLeave.Text Then changed = True
-            If originalValues("TotalDeduction") <> txtTotalDeduction.Text Then changed = True
-        End If
-
-        If Not changed Then
-            MessageBox.Show("No changes detected. Save canceled.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        If String.IsNullOrWhiteSpace(cbEmployeeID.Text) Then
+            MessageBox.Show("Please select an employee.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Exit Sub
         End If
 
-        Try
-            Using conn As New MySqlConnection(connectionString)
-                conn.Open()
-                Dim isNewPayroll As Boolean = String.IsNullOrWhiteSpace(txtPayrollID.Text) OrElse txtPayrollID.Text.StartsWith("P") = False
-                Dim payrollID As String = txtPayrollID.Text
-                Dim deductionID As String = txtDeductionID.Text
-                Dim salaryID As String
-                If isNewPayroll Then
-                    payrollID = GenerateNextPayrollID()
-                    deductionID = GenerateNextDeductionID()
-                    salaryID = GenerateNextSalaryID()
-                Else
-                    salaryID = payrollTable.Select("EmployeeID='" & cbEmployeeID.Text & "'")(0)("SalaryID").ToString()
-                End If
+        Dim payrollID As String = If(String.IsNullOrWhiteSpace(txtPayrollID.Text), GenerateNextPayrollID(), txtPayrollID.Text)
+        Dim deductionID As String = If(String.IsNullOrWhiteSpace(txtDeductionID.Text), GenerateNextDeductionID(), txtDeductionID.Text)
+        Dim salaryID As String = GenerateNextSalaryID()
 
-                Dim cmdPayroll As New MySqlCommand("
-                INSERT INTO tblpayroll (PayrollID, EmployeeID, BasicSalary, OvertimePay, GrossSalary, NetPay, PaymentDate)
-                VALUES (@pid, @eid, @basic, @ot, @gross, @net, @date)
-                ON DUPLICATE KEY UPDATE 
-                    BasicSalary=@basic, OvertimePay=@ot, GrossSalary=@gross, NetPay=@net, PaymentDate=@date
-            ", conn)
-                cmdPayroll.Parameters.AddWithValue("@pid", payrollID)
-                cmdPayroll.Parameters.AddWithValue("@eid", cbEmployeeID.Text)
-                cmdPayroll.Parameters.AddWithValue("@basic", txtBasicSalary.Text)
-                cmdPayroll.Parameters.AddWithValue("@ot", txtOvertimePay.Text)
-                cmdPayroll.Parameters.AddWithValue("@gross", txtGrossSalary.Text)
-                cmdPayroll.Parameters.AddWithValue("@net", txtNetPay.Text)
-                cmdPayroll.Parameters.AddWithValue("@date", dtpPaymentDate.Value)
-                cmdPayroll.ExecuteNonQuery()
-                Dim cmdSalary As New MySqlCommand("
-        INSERT INTO tblsalary (SalaryID, EmployeeID, BaseSalary, Allowance, DailyRate, OvertimeRate)
-        VALUES (@sid, @eid, @base, @allow, @daily, @otrate)
-        ON DUPLICATE KEY UPDATE 
-            BaseSalary=@base, Allowance=@allow, DailyRate=@daily, OvertimeRate=@otrate
-    ", conn)
-                cmdSalary.Parameters.AddWithValue("@sid", salaryID)
-                cmdSalary.Parameters.AddWithValue("@eid", cbEmployeeID.Text)
-                cmdSalary.Parameters.AddWithValue("@base", txtBaseSalary.Text)
-                cmdSalary.Parameters.AddWithValue("@allow", txtAllowance.Text)
-                cmdSalary.Parameters.AddWithValue("@daily", txtDailyRate.Text)
-                cmdSalary.Parameters.AddWithValue("@otrate", txtOvertimeRate.Text)
-                cmdSalary.ExecuteNonQuery()
-                Dim attendanceID As String = txtAttendanceID.Text
-                If String.IsNullOrWhiteSpace(attendanceID) Then
-                    attendanceID = GenerateNextAttendanceID()
-                End If
-                Dim cmdAttendance As New MySqlCommand("
-    INSERT INTO tblattendance (AttendanceID, EmployeeID, TotalHours, ExceededHours, DaysAttended, Absences)
-    VALUES (@aid, @eid, @total, @exceeded, @days, @absences)
-    ON DUPLICATE KEY UPDATE
-        TotalHours=@total, ExceededHours=@exceeded, DaysAttended=@days, Absences=@absences
-", conn)
-                cmdAttendance.Parameters.AddWithValue("@aid", attendanceID)
-                cmdAttendance.Parameters.AddWithValue("@eid", cbEmployeeID.Text)
-                cmdAttendance.Parameters.AddWithValue("@total", txtTotalHours.Text)
-                cmdAttendance.Parameters.AddWithValue("@exceeded", txtExceededHours.Text)
-                cmdAttendance.Parameters.AddWithValue("@days", txtDaysAttended.Text)
-                cmdAttendance.Parameters.AddWithValue("@absences", txtAbsences.Text)
-                cmdAttendance.ExecuteNonQuery()
-                Dim cmdDed As New MySqlCommand("
-                INSERT INTO tbldeduction (DeductionID, EmployeeID, SSS, PhilHealth, PagIBIG, UnpaidLeave, TotalDeduction)
-                VALUES (@did, @eid, @sss, @phil, @pag, @unpaid, @total)
-                ON DUPLICATE KEY UPDATE 
-                    SSS=@sss, PhilHealth=@phil, PagIBIG=@pag, UnpaidLeave=@unpaid, TotalDeduction=@total
-            ", conn)
-                cmdDed.Parameters.AddWithValue("@did", deductionID)
-                cmdDed.Parameters.AddWithValue("@eid", cbEmployeeID.Text)
-                cmdDed.Parameters.AddWithValue("@sss", txtSSS.Text)
-                cmdDed.Parameters.AddWithValue("@phil", txtPhilHealth.Text)
-                cmdDed.Parameters.AddWithValue("@pag", txtPagIBIG.Text)
-                cmdDed.Parameters.AddWithValue("@unpaid", txtUnpaidLeave.Text)
-                cmdDed.Parameters.AddWithValue("@total", txtTotalDeduction.Text)
-                cmdDed.ExecuteNonQuery()
-                txtPayrollID.Text = payrollID
-                txtDeductionID.Text = deductionID
-                txtAttendanceID.Text = attendanceID
-            End Using
-            MessageBox.Show("Payroll saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            LockFields()
-            ClearPayrollFields()
-            ShowButtons(add:=True, edit:=False, delete:=False, compute:=False, save:=False, cancel:=False)
-            LoadPayrollSummary()
-            LoadEmployeeIDs()
-        Catch ex As Exception
-            MessageBox.Show("Error saving payroll: " & ex.Message)
-        End Try
+        Dim queries As New List(Of String)
+        Dim parameters As New List(Of List(Of MySqlParameter))
 
+        queries.Add("
+            INSERT INTO tblpayroll (PayrollID, EmployeeID, BasicSalary, OvertimePay, GrossSalary, NetPay, PaymentDate)
+            VALUES (@pid, @eid, @basic, @ot, @gross, @net, @date)
+            ON DUPLICATE KEY UPDATE 
+                BasicSalary=@basic, OvertimePay=@ot, GrossSalary=@gross, NetPay=@net, PaymentDate=@date
+        ")
+        parameters.Add(New List(Of MySqlParameter) From {
+            New MySqlParameter("@pid", payrollID),
+            New MySqlParameter("@eid", cbEmployeeID.Text),
+            New MySqlParameter("@basic", txtBasicSalary.Text),
+            New MySqlParameter("@ot", txtOvertimePay.Text),
+            New MySqlParameter("@gross", txtGrossSalary.Text),
+            New MySqlParameter("@net", txtNetPay.Text),
+            New MySqlParameter("@date", dtpPaymentDate.Value)
+        })
+
+        queries.Add("
+            INSERT INTO tblsalary (SalaryID, EmployeeID, BaseSalary, Allowance, DailyRate, OvertimeRate)
+            VALUES (@sid, @eid, @base, @allow, @daily, @otrate)
+            ON DUPLICATE KEY UPDATE 
+                BaseSalary=@base, Allowance=@allow, DailyRate=@daily, OvertimeRate=@otrate
+        ")
+        parameters.Add(New List(Of MySqlParameter) From {
+            New MySqlParameter("@sid", salaryID),
+            New MySqlParameter("@eid", cbEmployeeID.Text),
+            New MySqlParameter("@base", txtBaseSalary.Text),
+            New MySqlParameter("@allow", txtAllowance.Text),
+            New MySqlParameter("@daily", txtDailyRate.Text),
+            New MySqlParameter("@otrate", txtOvertimeRate.Text)
+        })
+
+        Dim attendanceID As String = If(String.IsNullOrWhiteSpace(txtAttendanceID.Text), GenerateNextAttendanceID(), txtAttendanceID.Text)
+        queries.Add("
+            INSERT INTO tblattendance (AttendanceID, EmployeeID, TotalHours, ExceededHours, DaysAttended, Absences)
+            VALUES (@aid, @eid, @total, @exceeded, @days, @absences)
+            ON DUPLICATE KEY UPDATE
+                TotalHours=@total, ExceededHours=@exceeded, DaysAttended=@days, Absences=@absences
+        ")
+        parameters.Add(New List(Of MySqlParameter) From {
+            New MySqlParameter("@aid", attendanceID),
+            New MySqlParameter("@eid", cbEmployeeID.Text),
+            New MySqlParameter("@total", txtTotalHours.Text),
+            New MySqlParameter("@exceeded", txtExceededHours.Text),
+            New MySqlParameter("@days", txtDaysAttended.Text),
+            New MySqlParameter("@absences", txtAbsences.Text)
+        })
+
+        queries.Add("
+            INSERT INTO tbldeduction (DeductionID, EmployeeID, SSS, PhilHealth, PagIBIG, UnpaidLeave, TotalDeduction)
+            VALUES (@did, @eid, @sss, @phil, @pag, @unpaid, @total)
+            ON DUPLICATE KEY UPDATE 
+                SSS=@sss, PhilHealth=@phil, PagIBIG=@pag, UnpaidLeave=@unpaid, TotalDeduction=@total
+        ")
+        parameters.Add(New List(Of MySqlParameter) From {
+            New MySqlParameter("@did", deductionID),
+            New MySqlParameter("@eid", cbEmployeeID.Text),
+            New MySqlParameter("@sss", txtSSS.Text),
+            New MySqlParameter("@phil", txtPhilHealth.Text),
+            New MySqlParameter("@pag", txtPagIBIG.Text),
+            New MySqlParameter("@unpaid", txtUnpaidLeave.Text),
+            New MySqlParameter("@total", txtTotalDeduction.Text)
+        })
+
+        For i As Integer = 0 To queries.Count - 1
+            If Not HRMModule.ExecuteNonQuery(queries(i), parameters(i)) Then
+                MessageBox.Show("Error saving payroll data.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Exit Sub
+            End If
+        Next
+
+        MessageBox.Show("Payroll saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        LoadPayrollSummary()
+        LockFields()
     End Sub
+
     Private Sub btnEditPayroll_Click(sender As Object, e As EventArgs) Handles btnEditPayroll.Click
         If String.IsNullOrWhiteSpace(txtPayrollID.Text) Then
             MessageBox.Show("Please select a payroll record to edit.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -644,38 +549,23 @@ Public Class Payroll_Summary
         ShowButtons(add:=True, edit:=False, delete:=False, compute:=False, save:=False, cancel:=False)
     End Sub
     Private Sub btnDeletePayroll_Click(sender As Object, e As EventArgs) Handles btnDeletePayroll.Click
-        If String.IsNullOrWhiteSpace(cbEmployeeID.Text) Then
-            MessageBox.Show("Please select an employee/payroll to delete.", "Delete Payroll", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
-        If String.IsNullOrWhiteSpace(txtPayrollID.Text) Then
-            MessageBox.Show("No payroll record selected.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Exit Sub
-        End If
-        Dim confirmResult As DialogResult = MessageBox.Show(
-        "Are you sure you want to delete this payroll and its deductions? This action cannot be undone.",
-        "Confirm Delete",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Warning
-    )
-        If confirmResult = DialogResult.Yes Then
-            Try
-                Using conn As New MySqlConnection(connectionString)
-                    conn.Open()
-                    Dim cmdPayroll As New MySqlCommand("DELETE FROM tblpayroll WHERE PayrollID = @pid", conn)
-                    cmdPayroll.Parameters.AddWithValue("@pid", txtPayrollID.Text)
-                    cmdPayroll.ExecuteNonQuery()
-                    Dim cmdDeduction As New MySqlCommand("DELETE FROM tbldeduction WHERE DeductionID = @did", conn)
-                    cmdDeduction.Parameters.AddWithValue("@did", txtDeductionID.Text)
-                    cmdDeduction.ExecuteNonQuery()
-                End Using
-                MessageBox.Show("Payroll and associated deductions deleted successfully.", "Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                ClearPayrollFields()
-                LoadPayrollSummary()
-                ShowButtons(add:=True, edit:=False, delete:=False, compute:=False, save:=False, cancel:=False)
-            Catch ex As Exception
-                MessageBox.Show("Error deleting payroll: " & ex.Message)
-            End Try
+        If MessageBox.Show("Are you sure you want to delete this payroll record?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+            Dim queries As New List(Of String)
+            Dim parameters As New List(Of List(Of MySqlParameter))
+
+            queries.Add("DELETE FROM tblpayroll WHERE PayrollID = @pid")
+            parameters.Add(New List(Of MySqlParameter) From {New MySqlParameter("@pid", txtPayrollID.Text)})
+
+            queries.Add("DELETE FROM tbldeduction WHERE DeductionID = @did")
+            parameters.Add(New List(Of MySqlParameter) From {New MySqlParameter("@did", txtDeductionID.Text)})
+
+            For i As Integer = 0 To queries.Count - 1
+                HRMModule.ExecuteNonQuery(queries(i), parameters(i))
+            Next
+
+            MessageBox.Show("Payroll deleted successfully.", "Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            LoadPayrollSummary()
+            ClearPayrollFields()
         End If
     End Sub
     Private Sub txtSearchPayroll_TextChanged(sender As Object, e As EventArgs) Handles txtSearchPayroll.TextChanged
@@ -749,24 +639,14 @@ Public Class Payroll_Summary
         Amenities.Show()
         Me.Hide()
     End Sub
-    Private Sub btnSignOut_Click_1(sender As Object, e As EventArgs) Handles btnSignOut.Click
-        Dim result = MessageBox.Show(
-             "Are you sure you want to sign out?",
-             "Confirm Sign Out",
-             MessageBoxButtons.YesNo,
-             MessageBoxIcon.Question
-         )
+    Private Sub btnSignout_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to sign out?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
         If result = DialogResult.Yes Then
-            Login_frm.ClearLoginFields()
-            LoggedInEmployeeID = ""
-            LoggedInUsername = ""
-            LoggedInUserType = ""
-            Login_frm.Show()
-            Hide()
+            HRMModule.SignOut(Me)
+            MessageBox.Show("You have been signed out.", "Logged Out", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
 
-    Private Sub GroupBox3_Enter(sender As Object, e As EventArgs) Handles GroupBox3.Enter
 
-    End Sub
 End Class

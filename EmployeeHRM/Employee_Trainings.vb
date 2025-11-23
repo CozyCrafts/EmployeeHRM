@@ -2,7 +2,6 @@
 Imports System.Globalization
 
 Public Class Employee_Trainings
-    Private connectionString As String = "server=localhost;userid=root;password=091951;database=db_hrm"
     Private isAdding As Boolean = False
     Private Sub CapitalizeWords(sender As Object, e As EventArgs)
         Dim tb As TextBox = DirectCast(sender, TextBox)
@@ -41,55 +40,37 @@ Public Class Employee_Trainings
         btnCancelTraining.Visible = True
     End Sub
     Private Sub LoadEmployees()
-        Try
-            Using conn As New MySqlConnection(connectionString)
-                conn.Open()
-                Dim query As String = "SELECT EmployeeID, CONCAT(`First Name`, ' ', MiddleName, ' ', LastName) AS FullName FROM tblemployee"
-                Using cmd As New MySqlCommand(query, conn)
-                    Using adapter As New MySqlDataAdapter(cmd)
-                        Dim dt As New DataTable()
-                        adapter.Fill(dt)
-                        cbEmployeeID.DataSource = dt
-                        cbEmployeeID.ValueMember = "EmployeeID"
-                        cbEmployeeID.DisplayMember = "EmployeeID"
-                        cbEmployeeID.SelectedIndex = -1
-                    End Using
-                End Using
-            End Using
-        Catch ex As Exception
-            MessageBox.Show("Error loading employees: " & ex.Message)
-        End Try
+        Dim query As String = "SELECT EmployeeID, CONCAT(`First Name`, ' ', MiddleName, ' ', LastName) AS FullName FROM tblemployee"
+        Dim dt As DataTable = HRMModule.ExecuteQuery(query)
+
+        If dt IsNot Nothing Then
+            cbEmployeeID.DataSource = dt
+            cbEmployeeID.ValueMember = "EmployeeID"
+            cbEmployeeID.DisplayMember = "EmployeeID"
+            cbEmployeeID.SelectedIndex = -1
+        End If
     End Sub
     Private Sub LoadTrainings()
-        Try
-            Using conn As New MySqlConnection(connectionString)
-                conn.Open()
-                Dim query As String = "
-                    SELECT 
-                        td.TrainingID,
-                        td.EmployeeID,
-                        CONCAT_WS(' ', e.`First Name`, e.MiddleName, e.LastName) AS EmployeeName,
-                        td.TrainingTitle,
-                        td.TrainingType,
-                        td.Status,
-                        td.DateStarted,
-                        td.DateCompleted,
-                        td.Description
-                    FROM tbltrainingdevelopment td
-                    LEFT JOIN tblemployee e ON td.EmployeeID = e.EmployeeID
-                    ORDER BY td.TrainingID;
-                "
-                Using cmd As New MySqlCommand(query, conn)
-                    Using adapter As New MySqlDataAdapter(cmd)
-                        Dim table As New DataTable()
-                        adapter.Fill(table)
-                        dgvEmployeeTrainingHistory.DataSource = table
-                    End Using
-                End Using
-            End Using
-        Catch ex As Exception
-            MessageBox.Show("Error loading trainings: " & ex.Message)
-        End Try
+        Dim query As String = "
+            SELECT 
+                td.TrainingID,
+                td.EmployeeID,
+                CONCAT_WS(' ', e.`First Name`, e.MiddleName, e.LastName) AS EmployeeName,
+                td.TrainingTitle,
+                td.TrainingType,
+                td.Status,
+                td.DateStarted,
+                td.DateCompleted,
+                td.Description
+            FROM tbltrainingdevelopment td
+            LEFT JOIN tblemployee e ON td.EmployeeID = e.EmployeeID
+            ORDER BY td.TrainingID;
+        "
+
+        Dim dt As DataTable = HRMModule.ExecuteQuery(query)
+        If dt IsNot Nothing Then
+            dgvEmployeeTrainingHistory.DataSource = dt
+        End If
     End Sub
     Private Sub MakeDateTimePickerReadOnly(dtp As DateTimePicker)
         dtp.Enabled = False
@@ -202,25 +183,21 @@ Handles rbInProgress.CheckedChanged, rbCompleted.CheckedChanged, rbPostponed.Che
     Private Sub cbEmployeeID_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbEmployeeID.SelectedIndexChanged
         If cbEmployeeID.SelectedIndex <> -1 Then
             Dim selectedID As String = cbEmployeeID.SelectedValue.ToString()
-            Try
-                Using conn As New MySqlConnection(connectionString)
-                    conn.Open()
-                    Dim query As String = "SELECT CONCAT(`First Name`, ' ', MiddleName, ' ', LastName) AS FullName FROM tblemployee WHERE EmployeeID=@EmployeeID"
-                    Using cmd As New MySqlCommand(query, conn)
-                        cmd.Parameters.AddWithValue("@EmployeeID", selectedID)
-                        Dim empName = cmd.ExecuteScalar()
-                        txtEmployeeName.Text = If(empName IsNot Nothing, empName.ToString(), "")
-                        txtEmployeeName.ReadOnly = True
-                    End Using
-                End Using
-                cbEmployeeID.Enabled = False
-            Catch ex As Exception
-                MessageBox.Show("Error fetching employee name: " & ex.Message)
-            End Try
+
+            Dim query As String = "SELECT CONCAT(`First Name`, ' ', MiddleName, ' ', LastName) AS FullName FROM tblemployee WHERE EmployeeID=@EmployeeID"
+            Dim params As New List(Of MySqlParameter) From {
+            New MySqlParameter("@EmployeeID", selectedID)
+        }
+
+            Dim empName = HRMModule.ExecuteScalar(query, params)
+            txtEmployeeName.Text = If(empName IsNot Nothing, empName.ToString(), "")
+            txtEmployeeName.ReadOnly = True
+            cbEmployeeID.Enabled = False
         Else
             txtEmployeeName.Clear()
         End If
     End Sub
+
     Private Sub btnEditTraining_Click(sender As Object, e As EventArgs) Handles btnEditTraining.Click
         If String.IsNullOrEmpty(txtTrainingID.Text) Then
             MessageBox.Show("Select a training to edit.")
@@ -268,43 +245,36 @@ Handles rbInProgress.CheckedChanged, rbCompleted.CheckedChanged, rbPostponed.Che
         Return True
     End Function
     Private Sub btnSaveTraining_Click(sender As Object, e As EventArgs) Handles btnSaveTraining.Click
-        If Not ValidateTrainingFields() Then
-            Exit Sub
+        If Not ValidateTrainingFields() Then Exit Sub
+
+        Dim status As String = If(rbPlanned.Checked, "Planned",
+                            If(rbInProgress.Checked, "In Progress",
+                            If(rbCompleted.Checked, "Completed", "Postponed")))
+
+        Dim params As New List(Of MySqlParameter) From {
+            New MySqlParameter("@EmployeeID", cbEmployeeID.SelectedValue.ToString()),
+            New MySqlParameter("@TrainingID", txtTrainingID.Text.Trim()),
+            New MySqlParameter("@TrainingTitle", txtTrainingTitle.Text.Trim()),
+            New MySqlParameter("@TrainingType", txtTrainingType.Text.Trim()),
+            New MySqlParameter("@Status", status),
+            New MySqlParameter("@DateStarted", dtpTrainingStarted.Value),
+            New MySqlParameter("@DateCompleted", dtpTrainingCompleted.Value),
+            New MySqlParameter("@Description", txtTrainingDescription.Text.Trim())
+        }
+
+        Dim query As String
+        If isAdding Then
+            query = "INSERT INTO tbltrainingdevelopment (EmployeeID, TrainingID, TrainingTitle, TrainingType, Status, DateStarted, DateCompleted, Description) " &
+                    "VALUES (@EmployeeID, @TrainingID, @TrainingTitle, @TrainingType, @Status, @DateStarted, @DateCompleted, @Description)"
+        Else
+            query = "UPDATE tbltrainingdevelopment SET TrainingTitle=@TrainingTitle, TrainingType=@TrainingType, Status=@Status, " &
+                    "DateStarted=@DateStarted, DateCompleted=@DateCompleted, Description=@Description WHERE TrainingID=@TrainingID"
         End If
 
-        Dim status As String = If(rbPlanned.Checked, "Planned", If(rbInProgress.Checked, "In Progress", If(rbCompleted.Checked, "Completed", "Postponed")))
-
-        Try
-            Using conn As New MySqlConnection(connectionString)
-                conn.Open()
-                Dim query As String
-                If isAdding Then
-                    query = "INSERT INTO tbltrainingdevelopment (EmployeeID, TrainingID, TrainingTitle, TrainingType, Status, DateStarted, DateCompleted, Description) " &
-                        "VALUES (@EmployeeID, @TrainingID, @TrainingTitle, @TrainingType, @Status, @DateStarted, @DateCompleted, @Description)"
-                Else
-                    query = "UPDATE tbltrainingdevelopment SET TrainingTitle=@TrainingTitle, TrainingType=@TrainingType, Status=@Status, " &
-                        "DateStarted=@DateStarted, DateCompleted=@DateCompleted, Description=@Description WHERE TrainingID=@TrainingID"
-                End If
-
-                Using cmd As New MySqlCommand(query, conn)
-                    cmd.Parameters.AddWithValue("@EmployeeID", cbEmployeeID.SelectedValue.ToString())
-                    cmd.Parameters.AddWithValue("@TrainingID", txtTrainingID.Text.Trim())
-                    cmd.Parameters.AddWithValue("@TrainingTitle", txtTrainingTitle.Text.Trim())
-                    cmd.Parameters.AddWithValue("@TrainingType", txtTrainingType.Text.Trim())
-                    cmd.Parameters.AddWithValue("@Status", status)
-                    cmd.Parameters.AddWithValue("@DateStarted", dtpTrainingStarted.Value)
-                    cmd.Parameters.AddWithValue("@DateCompleted", dtpTrainingCompleted.Value)
-                    cmd.Parameters.AddWithValue("@Description", txtTrainingDescription.Text.Trim())
-                    cmd.ExecuteNonQuery()
-                End Using
-            End Using
-
+        If HRMModule.ExecuteNonQuery(query, params) <> -1 Then
             MessageBox.Show("Training saved successfully.")
             LoadTrainings()
-
-        Catch ex As Exception
-            MessageBox.Show("Error saving training: " & ex.Message)
-        End Try
+        End If
 
         isAdding = False
         LockControls()
@@ -315,24 +285,20 @@ Handles rbInProgress.CheckedChanged, rbCompleted.CheckedChanged, rbPostponed.Che
             MessageBox.Show("Select a training to delete.")
             Return
         End If
+
         If MessageBox.Show("Are you sure you want to delete this training?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-            Try
-                Using conn As New MySqlConnection(connectionString)
-                    conn.Open()
-                    Dim query As String = "DELETE FROM tbltrainingdevelopment WHERE TrainingID=@TrainingID"
-                    Using cmd As New MySqlCommand(query, conn)
-                        cmd.Parameters.AddWithValue("@TrainingID", txtTrainingID.Text.Trim())
-                        cmd.ExecuteNonQuery()
-                    End Using
-                End Using
+            Dim query As String = "DELETE FROM tbltrainingdevelopment WHERE TrainingID=@TrainingID"
+            Dim params As New List(Of MySqlParameter) From {
+                New MySqlParameter("@TrainingID", txtTrainingID.Text.Trim())
+            }
+
+            If HRMModule.ExecuteNonQuery(query, params) <> -1 Then
                 MessageBox.Show("Training deleted successfully.")
                 LoadTrainings()
                 ClearForm()
                 LockControls()
                 SetDefaultButtonState()
-            Catch ex As Exception
-                MessageBox.Show("Error deleting training: " & ex.Message)
-            End Try
+            End If
         End If
     End Sub
     Private Sub btnCancelTraining_Click(sender As Object, e As EventArgs) Handles btnCancelTraining.Click
@@ -344,23 +310,15 @@ Handles rbInProgress.CheckedChanged, rbCompleted.CheckedChanged, rbPostponed.Che
     End Sub
     Private Function GetNextTrainingID() As String
         Dim newID As String = "TR1"
-        Try
-            Using conn As New MySqlConnection(connectionString)
-                conn.Open()
-                Dim query As String = "SELECT TrainingID FROM tbltrainingdevelopment ORDER BY TrainingID DESC LIMIT 1"
-                Using cmd As New MySqlCommand(query, conn)
-                    Dim lastID = cmd.ExecuteScalar()
-                    If lastID IsNot Nothing Then
-                        Dim numPart As Integer
-                        If Integer.TryParse(lastID.ToString().Substring(2), numPart) Then
-                            newID = "TR" & (numPart + 1).ToString()
-                        End If
-                    End If
-                End Using
-            End Using
-        Catch ex As Exception
-            MessageBox.Show("Error generating Training ID: " & ex.Message)
-        End Try
+        Dim query As String = "SELECT TrainingID FROM tbltrainingdevelopment ORDER BY TrainingID DESC LIMIT 1"
+        Dim lastID = HRMModule.ExecuteScalar(query)
+
+        If lastID IsNot Nothing Then
+            Dim numPart As Integer
+            If Integer.TryParse(lastID.ToString().Substring(2), numPart) Then
+                newID = "TR" & (numPart + 1).ToString()
+            End If
+        End If
         Return newID
     End Function
     Private Sub txtSearchTraining_TextChanged(sender As Object, e As EventArgs) Handles txtSearchTrainings.TextChanged
@@ -432,17 +390,13 @@ Handles rbInProgress.CheckedChanged, rbCompleted.CheckedChanged, rbPostponed.Che
         Me.Hide()
     End Sub
 
+    Private Sub btnSignout_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to sign out?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
-    Private Sub btnSignOut_Click_1(sender As Object, e As EventArgs) Handles btnSignOut.Click
-        Dim result = MessageBox.Show(
-                "Are you sure you want to sign out?",
-                "Confirm Sign Out",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question
-            )
         If result = DialogResult.Yes Then
-            Login_frm.Show()
-            Hide()
+            HRMModule.SignOut(Me)
+            MessageBox.Show("You have been signed out.", "Logged Out", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
+
 End Class

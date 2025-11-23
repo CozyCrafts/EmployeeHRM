@@ -4,9 +4,9 @@ Public Class Employee_Dashboard
     Public UserRole As String
 
     Private Sub Employee_Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        lblWelcome.Text = "Welcome, " & LoggedInUsername
+        lblWelcome.Text = "Welcome, " & CurrentUser.Username
 
-        If LoggedInUserType = "Staff" Then
+        If CurrentUser.UserType = "Staff" Then
             lblManagement.Visible = False
             lblTeamOverview.Visible = False
             lblAttendanceTracker.Visible = False
@@ -16,15 +16,16 @@ Public Class Employee_Dashboard
             lblDepartment.Visible = False
             lblAmenities.Visible = False
         End If
+
         txtEmployeeID.ReadOnly = True
         txtName.ReadOnly = True
         txtJobTitle.ReadOnly = True
         txtDepartment.ReadOnly = True
+
         LoadEmployeeInfo()
     End Sub
     Public Sub LoadEmployeeInfo()
         Try
-            OpenCon()
             Dim query As String =
                 "SELECT e.EmployeeID, " &
                 "CONCAT(IFNULL(e.`First Name`, ''), ' ', IFNULL(e.`MiddleName`, ''), ' ', IFNULL(e.`LastName`, '')) AS FullName, " &
@@ -34,18 +35,19 @@ Public Class Employee_Dashboard
                 "LEFT JOIN tbldepartment d ON e.EmployeeID = d.EmployeeID " &
                 "WHERE e.EmployeeID = @empID"
 
-            dbcmd = New MySqlCommand(query, dbcon)
-            dbcmd.Parameters.AddWithValue("@empID", LoggedInEmployeeID)
+            Dim parameters As New List(Of MySqlParameter) From {
+                New MySqlParameter("@empID", CurrentUser.EmployeeID)
+            }
 
-            Dim reader As MySqlDataReader = dbcmd.ExecuteReader()
-            If reader.Read() Then
-                txtEmployeeID.Text = reader("EmployeeID").ToString()
-                txtName.Text = reader("FullName").ToString()
-                txtJobTitle.Text = reader("JobTitle").ToString()
-                txtDepartment.Text = reader("DepartmentName").ToString()
+            Dim dt As DataTable = ExecuteQuery(query, parameters)
+
+            If dt.Rows.Count > 0 Then
+                Dim row = dt.Rows(0)
+                txtEmployeeID.Text = row("EmployeeID").ToString()
+                txtName.Text = row("FullName").ToString()
+                txtJobTitle.Text = row("JobTitle").ToString()
+                txtDepartment.Text = row("DepartmentName").ToString()
             End If
-            reader.Close()
-
         Catch ex As Exception
             MessageBox.Show("Error loading employee info: " & ex.Message)
         End Try
@@ -553,21 +555,14 @@ Public Class Employee_Dashboard
         Dim viewer As New frmInfoViewer()
         viewer.ShowInfo("Safety and Emergency Information – Sundowners Resort", content, boldWords, italicBoldWords)
     End Sub
-    Private Sub btnSignOut_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
-        Dim result = MessageBox.Show(
-        "Are you sure you want to sign out?",
-        "Confirm Sign Out",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Question
-    )
+    Private Sub btnSignout_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to sign out?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
         If result = DialogResult.Yes Then
-            Login_frm.ClearLoginFields
-            LoggedInEmployeeID = ""
-            LoggedInUsername = ""
-            LoggedInUserType = ""
-            Login_frm.Show
-            Hide
+            HRMModule.SignOut(Me)
+            MessageBox.Show("You have been signed out.", "Logged Out", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
+
 
 End Class

@@ -32,7 +32,6 @@ Partial Class Login_frm
         txtPassword = New TextBox()
         cbUserType = New ComboBox()
         btnLogIn = New Button()
-        btne = New Button()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -129,25 +128,12 @@ Partial Class Login_frm
         btnLogIn.Text = "Log In"
         btnLogIn.UseVisualStyleBackColor = False
         ' 
-        ' btne
-        ' 
-        btne.BackColor = Color.White
-        btne.Font = New Font("Perpetua", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btne.ForeColor = SystemColors.MenuHighlight
-        btne.Location = New Point(281, 483)
-        btne.Name = "btne"
-        btne.Size = New Size(101, 47)
-        btne.TabIndex = 9
-        btne.Text = "E"
-        btne.UseVisualStyleBackColor = False
-        ' 
         ' Login_frm
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.White
         ClientSize = New Size(394, 557)
-        Controls.Add(btne)
         Controls.Add(btnLogIn)
         Controls.Add(cbUserType)
         Controls.Add(txtPassword)
@@ -174,5 +160,4 @@ Partial Class Login_frm
     Friend WithEvents txtPassword As TextBox
     Friend WithEvents cbUserType As ComboBox
     Friend WithEvents btnLogIn As Button
-    Friend WithEvents btne As Button
 End Class

@@ -3,15 +3,12 @@
 Public Class Leave_Management
     Public Property UserRole As String
     Private currentSelectedRowIndex As Integer = 0
-    Private dbcon As MySqlConnection
-    Private dbcmd As MySqlCommand
-    Private dbadapter As MySqlDataAdapter
     Private dbtable As DataTable
     Private maxLeaveDays As Integer = 30
 
     Private Sub LeaveManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        If LoggedInUserType = "Staff" Then
+        If HRMModule.CurrentUser.UserType = "Staff" Then
             lblManagement.Visible = False
             lblTeamOverview.Visible = False
             lblAttendanceTracker.Visible = False
@@ -23,7 +20,6 @@ Public Class Leave_Management
         End If
 
         Try
-            OpenCon()
             LoadLeaveHistory()
             AddHandler dgvLeaveHistory.SelectionChanged, AddressOf dgvLeaveHistory_SelectionChanged
 
@@ -55,10 +51,7 @@ Public Class Leave_Management
             dtpDurationDateTo.Value = dtpDurationDateFrom.Value.AddDays(1)
         End If
     End Sub
-    Private Sub OpenCon()
-        dbcon = New MySqlConnection("server=localhost;userid=root;password=091951;database=db_hrm")
-        If dbcon.State = ConnectionState.Closed Then dbcon.Open()
-    End Sub
+
     Private Sub LoadLeaveHistory()
         Try
             Dim query As String = "
@@ -70,11 +63,12 @@ Public Class Leave_Management
                 WHERE l.EmployeeID = @empID
                 ORDER BY l.DurationDateFrom DESC;
             "
-            dbcmd = New MySqlCommand(query, dbcon)
-            dbcmd.Parameters.AddWithValue("@empID", LoggedInEmployeeID)
-            dbadapter = New MySqlDataAdapter(dbcmd)
-            dbtable = New DataTable()
-            dbadapter.Fill(dbtable)
+
+            Dim parameters As New List(Of MySqlParameter) From {
+                New MySqlParameter("@empID", HRMModule.CurrentUser.EmployeeID)
+            }
+
+            dbtable = HRMModule.ExecuteQuery(query, parameters)
 
             dgvLeaveHistory.DataSource = dbtable
             dgvLeaveHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
@@ -154,26 +148,21 @@ Public Class Leave_Management
     End Sub
     Private Sub btnApplyforLeave_Click(sender As Object, e As EventArgs) Handles btnApplyforLeave.Click
         Try
-            OpenCon()
-            Dim query As String = "SELECT LeaveID FROM tblLeave ORDER BY LeaveID DESC LIMIT 1"
-            dbcmd = New MySqlCommand(query, dbcon)
-            Dim lastIDObj = dbcmd.ExecuteScalar()
-            Dim newID As String
+            Dim lastIDObj = HRMModule.ExecuteScalar("SELECT LeaveID FROM tblLeave ORDER BY LeaveID DESC LIMIT 1")
+            Dim newID As String = "L001"
             Dim lastNum As Integer
 
             If lastIDObj IsNot Nothing AndAlso Integer.TryParse(lastIDObj.ToString().Substring(1), lastNum) Then
                 newID = "L" & (lastNum + 1).ToString("D3")
-            Else
-                newID = "L001"
             End If
 
             txtLeaveID.Text = newID
-            txtLeaveType.Text = ""
-            txtLeaveReason.Text = ""
+            txtLeaveType.Clear()
+            txtLeaveReason.Clear()
             txtStatusLeave.Text = "Pending"
-            txtApprovedBy.Text = ""
-            txtEmployeeID.Text = LoggedInEmployeeID
-            txtEmployeeName.Text = LoggedInUsername
+            txtApprovedBy.Clear()
+            txtEmployeeID.Text = HRMModule.CurrentUser.EmployeeID
+            txtEmployeeName.Text = HRMModule.CurrentUser.Username
             dtpDurationDateFrom.Value = DateTime.Today
             dtpDurationDateTo.Value = DateTime.Today
 
@@ -189,7 +178,6 @@ Public Class Leave_Management
     End Sub
     Private Sub btnSaveLeave_Click(sender As Object, e As EventArgs) Handles btnSaveLeave.Click
         Try
-
             If txtLeaveType.Text.Trim() = "" Or txtLeaveReason.Text.Trim() = "" Then
                 MessageBox.Show("Please enter leave type and reason.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Exit Sub
@@ -207,43 +195,39 @@ Public Class Leave_Management
                 MessageBox.Show("Leave end date must be after the start date.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Exit Sub
             End If
-
-            Dim leaveDuration As Integer = (toDate - fromDate).Days + 1
-            If leaveDuration > maxLeaveDays Then
+            If (toDate - fromDate).Days + 1 > maxLeaveDays Then
                 MessageBox.Show($"Leave duration cannot exceed {maxLeaveDays} days.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Exit Sub
             End If
 
-            Dim result As DialogResult = MessageBox.Show(
-            "Are you sure you want to submit this leave request?",
-            "Confirm Save",
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Question
-        )
-            If result = DialogResult.No Then Exit Sub
+            If MessageBox.Show("Are you sure you want to submit this leave request?", "Confirm Save", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then Exit Sub
 
-            OpenCon()
             Dim query As String = "
-            INSERT INTO tblLeave (LeaveID, EmployeeID, LeaveType, Reason, DurationDateFrom, DurationDateTo, Status)
-            VALUES (@LeaveID, @EmployeeID, @LeaveType, @Reason, @DurationDateFrom, @DurationDateTo, @Status)
-        "
-            dbcmd = New MySqlCommand(query, dbcon)
-            dbcmd.Parameters.AddWithValue("@LeaveID", txtLeaveID.Text)
-            dbcmd.Parameters.AddWithValue("@EmployeeID", LoggedInEmployeeID)
-            dbcmd.Parameters.AddWithValue("@LeaveType", txtLeaveType.Text.Trim())
-            dbcmd.Parameters.AddWithValue("@Reason", txtLeaveReason.Text.Trim())
-            dbcmd.Parameters.AddWithValue("@DurationDateFrom", fromDate)
-            dbcmd.Parameters.AddWithValue("@DurationDateTo", toDate)
-            dbcmd.Parameters.AddWithValue("@Status", "Pending")
-            dbcmd.ExecuteNonQuery()
+                INSERT INTO tblLeave (LeaveID, EmployeeID, LeaveType, Reason, DurationDateFrom, DurationDateTo, Status)
+                VALUES (@LeaveID, @EmployeeID, @LeaveType, @Reason, @DurationDateFrom, @DurationDateTo, @Status)
+            "
+            Dim parameters As New List(Of MySqlParameter) From {
+                New MySqlParameter("@LeaveID", txtLeaveID.Text),
+                New MySqlParameter("@EmployeeID", HRMModule.CurrentUser.EmployeeID),
+                New MySqlParameter("@LeaveType", txtLeaveType.Text.Trim()),
+                New MySqlParameter("@Reason", txtLeaveReason.Text.Trim()),
+                New MySqlParameter("@DurationDateFrom", fromDate),
+                New MySqlParameter("@DurationDateTo", toDate),
+                New MySqlParameter("@Status", "Pending")
+            }
 
-            MessageBox.Show("Leave request submitted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            LoadLeaveHistory()
-            btnSaveLeave.Visible = False
-            btnCancelLeave.Visible = False
-            btnApplyforLeave.Visible = True
-            LockTextBoxes()
-            ClearLeaveFields()
+            Dim success = HRMModule.ExecuteNonQuery(query, parameters)
+            If success Then
+                MessageBox.Show("Leave request submitted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                LoadLeaveHistory()
+                btnSaveLeave.Visible = False
+                btnCancelLeave.Visible = False
+                btnApplyforLeave.Visible = True
+                LockTextBoxes()
+                ClearLeaveFields()
+            Else
+                MessageBox.Show("Failed to submit leave request.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
 
         Catch ex As Exception
             MessageBox.Show("Error saving leave request: " & ex.Message)
@@ -312,21 +296,14 @@ Public Class Leave_Management
         Amenities.Show()
         Me.Hide()
     End Sub
-    Private Sub btnSignOut_Click_1(sender As Object, e As EventArgs) Handles btnSignOut.Click
-        Dim result = MessageBox.Show(
-                "Are you sure you want to sign out?",
-                "Confirm Sign Out",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question
-            )
+    Private Sub btnSignout_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to sign out?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
         If result = DialogResult.Yes Then
-            Login_frm.ClearLoginFields()
-            LoggedInEmployeeID = ""
-            LoggedInUsername = ""
-            LoggedInUserType = ""
-            Login_frm.Show()
-            Hide()
+            HRMModule.SignOut(Me)
+            MessageBox.Show("You have been signed out.", "Logged Out", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
+
 
 End Class

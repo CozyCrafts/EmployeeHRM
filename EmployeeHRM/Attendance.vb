@@ -2,11 +2,8 @@
 Imports System.Data
 
 Public Class Attendance
-    Private dbtable As DataTable
-    Private dbadapter As MySqlDataAdapter
     Private originalValues As New Dictionary(Of String, Object)
 
-    ' Load form
     Private Sub Attendance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LockFields()
         DisableAllTimeButtons()
@@ -17,7 +14,7 @@ Public Class Attendance
         btnSaveAttendance.Visible = False
         btnCancelAttendance.Visible = False
 
-        If LoggedInUserType = "Staff" Then
+        If CurrentUser.UserType = "Staff" Then
             lblManagement.Visible = False
             lblTeamOverview.Visible = False
             lblAttendanceTracker.Visible = False
@@ -33,9 +30,7 @@ Public Class Attendance
 
     Private Sub LoadAttendanceData()
         Try
-            Using con As MySqlConnection = HRMModule.GetConnection()
-                con.Open()
-                Dim query As String = "
+            Dim query As String = "
                 SELECT 
                     a.AttendanceID,
                     e.EmployeeID,
@@ -57,15 +52,10 @@ Public Class Attendance
                 WHERE a.EmployeeID=@empID
                 ORDER BY a.Date DESC;
             "
-                Using cmd As New MySqlCommand(query, con)
-                    cmd.Parameters.AddWithValue("@empID", LoggedInEmployeeID)
-                    dbadapter = New MySqlDataAdapter(cmd)
-                    dbtable = New DataTable()
-                    dbadapter.Fill(dbtable)
-                End Using
-            End Using
-
-            dgvAttendanceHistory.DataSource = dbtable
+            Dim dt As DataTable = HRMModule.ExecuteQuery(query, New List(Of MySqlParameter) From {
+                New MySqlParameter("@empID", CurrentUser.EmployeeID)
+            })
+            dgvAttendanceHistory.DataSource = dt
             ConfigureGrid()
         Catch ex As Exception
             MessageBox.Show("Error loading attendance: " & ex.Message)
@@ -122,118 +112,123 @@ Public Class Attendance
 
     Private Sub UpdateAttendanceTime(columnName As String)
         Try
-            Using con As MySqlConnection = HRMModule.GetConnection()
-                con.Open()
-
-                Dim insertQuery As String = "
-                    INSERT INTO tblattendance(EmployeeID, Date)
-                    SELECT @empID, @attDate
-                    WHERE NOT EXISTS (
-                        SELECT 1 FROM tblattendance WHERE EmployeeID=@empID AND Date=@attDate
-                    );"
-                Using cmdInsert As New MySqlCommand(insertQuery, con)
-                    cmdInsert.Parameters.AddWithValue("@empID", LoggedInEmployeeID)
-                    cmdInsert.Parameters.AddWithValue("@attDate", dtpDateAttendance.Value.Date)
-                    cmdInsert.ExecuteNonQuery()
-                End Using
-
-                Dim updateQuery As String = $"UPDATE tblattendance SET {columnName}=@time WHERE EmployeeID=@empID AND Date=@attDate"
-                Using cmdUpdate As New MySqlCommand(updateQuery, con)
-                    cmdUpdate.Parameters.AddWithValue("@time", DateTime.Now.ToString("HH:mm:ss"))
-                    cmdUpdate.Parameters.AddWithValue("@empID", LoggedInEmployeeID)
-                    cmdUpdate.Parameters.AddWithValue("@attDate", dtpDateAttendance.Value.Date)
-                    cmdUpdate.ExecuteNonQuery()
-                End Using
-            End Using
-
+            Dim query As String = $"UPDATE tblattendance SET {columnName}=@time WHERE EmployeeID=@empID AND Date=@attDate"
+            Dim parameters As New List(Of MySqlParameter) From {
+                New MySqlParameter("@time", DateTime.Now.ToString("HH:mm:ss")),
+                New MySqlParameter("@empID", CurrentUser.EmployeeID),
+                New MySqlParameter("@attDate", dtpDateAttendance.Value.ToString("yyyy-MM-dd"))
+            }
+            HRMModule.ExecuteNonQuery(query, parameters)
             LoadAttendanceData()
+            EnableAttendanceButtons()
         Catch ex As Exception
             MessageBox.Show("Error updating attendance time: " & ex.Message)
         End Try
     End Sub
 
     Private Sub btnRecordAttendance_Click(sender As Object, e As EventArgs) Handles btnRecordAttendance.Click
+        RecordOrUpdateAttendance()
+        EnableAttendanceButtons()
+        MessageBox.Show("Attendance ready to record times.")
+        btnRecordAttendance.Visible = False
+        btnEditAttendance.Visible = True
+    End Sub
+
+    Private Sub RecordOrUpdateAttendance()
         Try
-            Using con As MySqlConnection = HRMModule.GetConnection()
-                con.Open()
-
-                Dim cmdCheck As New MySqlCommand("SELECT AttendanceID FROM tblattendance WHERE EmployeeID=@empID AND Date=@attDate", con)
-                cmdCheck.Parameters.AddWithValue("@empID", LoggedInEmployeeID)
-                cmdCheck.Parameters.AddWithValue("@attDate", dtpDateAttendance.Value.Date)
-                Dim attendanceID = cmdCheck.ExecuteScalar()
-
-                If attendanceID Is Nothing Then
-                    Dim insertQuery As String = "INSERT INTO tblattendance(EmployeeID, Date) VALUES(@empID, @attDate)"
-                    Using cmdInsert As New MySqlCommand(insertQuery, con)
-                        cmdInsert.Parameters.AddWithValue("@empID", LoggedInEmployeeID)
-                        cmdInsert.Parameters.AddWithValue("@attDate", dtpDateAttendance.Value.Date)
-                        cmdInsert.ExecuteNonQuery()
-                    End Using
-                End If
-
-                Dim clearTimesQuery As String = "
-                UPDATE tblattendance
-                SET TimeIn_AM=NULL, TimeOut_AM=NULL, TimeIn_PM=NULL, TimeOut_PM=NULL
-                WHERE EmployeeID=@empID AND Date=@attDate"
-                Using cmdClear As New MySqlCommand(clearTimesQuery, con)
-                    cmdClear.Parameters.AddWithValue("@empID", LoggedInEmployeeID)
-                    cmdClear.Parameters.AddWithValue("@attDate", dtpDateAttendance.Value.Date)
-                    cmdClear.ExecuteNonQuery()
-                End Using
-            End Using
-
-            btnRecordAttendance.Visible = False
-            btnEditAttendance.Visible = True
-            btnSaveAttendance.Visible = False
-            btnCancelAttendance.Visible = False
-
-            DisableAllTimeButtons()
+            Dim query As String = "
+                INSERT INTO tblattendance(AttendanceID, EmployeeID, Date) 
+                VALUES(@attID, @empID, @attDate)
+                ON DUPLICATE KEY UPDATE Date=@attDate;
+            "
+            Dim parameters As New List(Of MySqlParameter) From {
+                New MySqlParameter("@attID", CurrentUser.EmployeeID),
+                New MySqlParameter("@empID", CurrentUser.EmployeeID),
+                New MySqlParameter("@attDate", dtpDateAttendance.Value.ToString("yyyy-MM-dd"))
+            }
+            HRMModule.ExecuteNonQuery(query, parameters)
             LoadAttendanceData()
-            MessageBox.Show("Attendance ready to record times.")
         Catch ex As Exception
             MessageBox.Show("Error recording attendance: " & ex.Message)
         End Try
     End Sub
 
+    Private Function IsTodaySelected() As Boolean
+        Return dtpDateAttendance.Value.Date = DateTime.Today
+    End Function
+
+    Private Sub EnableAttendanceButtons()
+        If Not IsTodaySelected() Then
+            DisableAllTimeButtons()
+            Return
+        End If
+
+        Dim TimeInAM = originalValues.GetValueOrDefault("TimeIn_AM")
+        Dim TimeOutAM = originalValues.GetValueOrDefault("TimeOut_AM")
+        Dim TimeInPM = originalValues.GetValueOrDefault("TimeIn_PM")
+        Dim TimeOutPM = originalValues.GetValueOrDefault("TimeOut_PM")
+
+        btnCheckInAM.Enabled = (TimeInAM Is Nothing)
+        btnCheckOutAM.Enabled = (TimeInAM IsNot Nothing AndAlso TimeOutAM Is Nothing)
+        btnCheckInPM.Enabled = (TimeInPM Is Nothing)
+        btnCheckOutPM.Enabled = (TimeInPM IsNot Nothing AndAlso TimeOutPM Is Nothing)
+    End Sub
+
+    Private Function GetAttendanceValue(columnName As String) As Object
+        Try
+            Dim query As String = $"SELECT {columnName} FROM tblattendance WHERE EmployeeID=@empID AND Date=@attDate"
+            Dim parameters As New List(Of MySqlParameter) From {
+                New MySqlParameter("@empID", CurrentUser.EmployeeID),
+                New MySqlParameter("@attDate", dtpDateAttendance.Value.ToString("yyyy-MM-dd"))
+            }
+            Dim dt As DataTable = HRMModule.ExecuteQuery(query, parameters)
+            If dt.Rows.Count > 0 AndAlso dt.Rows(0)(0) IsNot DBNull.Value Then
+                Return dt.Rows(0)(0)
+            Else
+                Return Nothing
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error reading attendance: " & ex.Message)
+            Return Nothing
+        End Try
+    End Function
 
     Private Sub btnEditAttendance_Click(sender As Object, e As EventArgs) Handles btnEditAttendance.Click
         Try
-            OpenCon()
             btnEditAttendance.Visible = False
             btnSaveAttendance.Visible = True
             btnCancelAttendance.Visible = True
+
             originalValues.Clear()
 
-            Dim query As String = "SELECT TimeIn_AM, TimeOut_AM, TimeIn_PM, TimeOut_PM, AttendanceStatus FROM tblattendance WHERE EmployeeID=@empID AND Date=@attDate"
-            Using cmd As New MySqlCommand(query, dbcon)
-                cmd.Parameters.AddWithValue("@empID", LoggedInEmployeeID)
-                cmd.Parameters.AddWithValue("@attDate", dtpDateAttendance.Value.Date)
-                Using reader = cmd.ExecuteReader()
-                    If reader.Read() Then
-                        originalValues("TimeIn_AM") = If(IsDBNull(reader("TimeIn_AM")), Nothing, reader("TimeIn_AM"))
-                        originalValues("TimeOut_AM") = If(IsDBNull(reader("TimeOut_AM")), Nothing, reader("TimeOut_AM"))
-                        originalValues("TimeIn_PM") = If(IsDBNull(reader("TimeIn_PM")), Nothing, reader("TimeIn_PM"))
-                        originalValues("TimeOut_PM") = If(IsDBNull(reader("TimeOut_PM")), Nothing, reader("TimeOut_PM"))
-                        originalValues("AttendanceStatus") = If(IsDBNull(reader("AttendanceStatus")), Nothing, reader("AttendanceStatus"))
+            Dim query As String = "
+                SELECT TimeIn_AM, TimeOut_AM, TimeIn_PM, TimeOut_PM, AttendanceStatus
+                FROM tblattendance
+                WHERE EmployeeID=@empID AND Date=@attDate
+            "
+            Dim parameters As New List(Of MySqlParameter) From {
+                New MySqlParameter("@empID", CurrentUser.EmployeeID),
+                New MySqlParameter("@attDate", dtpDateAttendance.Value.ToString("yyyy-MM-dd"))
+            }
+            Dim dt As DataTable = HRMModule.ExecuteQuery(query, parameters)
 
-                        btnCheckInAM.Enabled = IsNothing(originalValues("TimeIn_AM"))
-                        btnCheckOutAM.Enabled = Not IsNothing(originalValues("TimeIn_AM")) AndAlso IsNothing(originalValues("TimeOut_AM"))
-                        btnCheckInPM.Enabled = IsNothing(originalValues("TimeIn_PM"))
-                        btnCheckOutPM.Enabled = Not IsNothing(originalValues("TimeIn_PM")) AndAlso IsNothing(originalValues("TimeOut_PM"))
-                    End If
-                End Using
-            End Using
+            If dt.Rows.Count > 0 Then
+                Dim row = dt.Rows(0)
+                originalValues("TimeIn_AM") = If(row("TimeIn_AM") Is DBNull.Value OrElse row("TimeIn_AM").ToString() = "00:00:00", Nothing, row("TimeIn_AM"))
+                originalValues("TimeOut_AM") = If(row("TimeOut_AM") Is DBNull.Value OrElse row("TimeOut_AM").ToString() = "00:00:00", Nothing, row("TimeOut_AM"))
+                originalValues("TimeIn_PM") = If(row("TimeIn_PM") Is DBNull.Value OrElse row("TimeIn_PM").ToString() = "00:00:00", Nothing, row("TimeIn_PM"))
+                originalValues("TimeOut_PM") = If(row("TimeOut_PM") Is DBNull.Value OrElse row("TimeOut_PM").ToString() = "00:00:00", Nothing, row("TimeOut_PM"))
+                originalValues("AttendanceStatus") = If(row("AttendanceStatus") Is DBNull.Value, Nothing, row("AttendanceStatus"))
+            End If
+
+            EnableAttendanceButtons()
         Catch ex As Exception
             MessageBox.Show("Error editing attendance: " & ex.Message)
-        Finally
-            If dbcon.State = ConnectionState.Open Then dbcon.Close()
         End Try
     End Sub
 
     Private Sub btnSaveAttendance_Click(sender As Object, e As EventArgs) Handles btnSaveAttendance.Click
         Try
-            OpenCon()
-
             LoadAttendanceData()
             MessageBox.Show("Attendance saved successfully!")
         Catch ex As Exception
@@ -243,10 +238,8 @@ Public Class Attendance
             btnCancelAttendance.Visible = False
             btnEditAttendance.Visible = True
             DisableAllTimeButtons()
-            If dbcon.State = ConnectionState.Open Then dbcon.Close()
         End Try
     End Sub
-
 
     Private Sub btnCancelAttendance_Click(sender As Object, e As EventArgs) Handles btnCancelAttendance.Click
         btnSaveAttendance.Visible = False
@@ -257,6 +250,24 @@ Public Class Attendance
         MessageBox.Show("Attendance editing cancelled.")
     End Sub
 
+    Private Sub UpdateTotalHours()
+        Try
+            Dim query As String = "
+                UPDATE tblattendance
+                SET TotalHours = 
+                    (IFNULL(TIMESTAMPDIFF(SECOND, TimeIn_AM, TimeOut_AM),0) +
+                     IFNULL(TIMESTAMPDIFF(SECOND, TimeIn_PM, TimeOut_PM),0)) / 3600
+                WHERE EmployeeID=@empID AND Date=@attDate
+            "
+            Dim parameters As New List(Of MySqlParameter) From {
+                New MySqlParameter("@empID", CurrentUser.EmployeeID),
+                New MySqlParameter("@attDate", dtpDateAttendance.Value.Date)
+            }
+            HRMModule.ExecuteNonQuery(query, parameters)
+        Catch ex As Exception
+            MessageBox.Show("Error updating total hours: " & ex.Message)
+        End Try
+    End Sub
 
     Private Sub btnCheckInAM_Click(sender As Object, e As EventArgs) Handles btnCheckInAM.Click
         UpdateAttendanceTime("TimeIn_AM")
@@ -281,12 +292,12 @@ Public Class Attendance
 
     Private Sub btnCheckOutPM_Click(sender As Object, e As EventArgs) Handles btnCheckOutPM.Click
         UpdateAttendanceTime("TimeOut_PM")
+        UpdateTotalHours()
         btnCheckOutPM.Enabled = False
         cbAttendanceStatus.SelectedItem = "Left"
-        MessageBox.Show("PM Check-out recorded.")
+        MessageBox.Show("PM Check-out recorded and total hours updated.")
     End Sub
 
-    ' Grid selection
     Private Sub dgvAttendanceHistory_SelectionChanged(sender As Object, e As EventArgs) Handles dgvAttendanceHistory.SelectionChanged
         If dgvAttendanceHistory.SelectedRows.Count > 0 Then
             Dim row As DataGridViewRow = dgvAttendanceHistory.SelectedRows(0)
@@ -297,81 +308,64 @@ Public Class Attendance
         End If
     End Sub
 
-
-    ' Navigation labels
-    Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
-        Employee_Dashboard.Show()
+    Private Sub lblEmpDashboard_Click(sender As Object, e As EventArgs) Handles lblEmpDashboard.Click
+        Employee_Trainings.Show()
         Me.Hide()
     End Sub
-
     Private Sub lblMyProfile_Click(sender As Object, e As EventArgs) Handles lblMyProfile.Click
         MyProfile.Show()
         Me.Hide()
     End Sub
-
     Private Sub lblAttendance_Click(sender As Object, e As EventArgs) Handles lblAttendance.Click
         lblAttendance.Enabled = False
     End Sub
-
     Private Sub lblLeaveManagement_Click(sender As Object, e As EventArgs) Handles lblLeaveManagement.Click
         Leave_Management.Show()
         Me.Hide()
     End Sub
-
     Private Sub lblSalary_Click(sender As Object, e As EventArgs) Handles lblSalary.Click
         Salary.Show()
         Me.Hide()
     End Sub
-
     Private Sub lblTrainings_Click(sender As Object, e As EventArgs) Handles lblTrainings.Click
         Trainings.Show()
         Me.Hide()
     End Sub
-
     Private Sub lblTeamOverview_Click(sender As Object, e As EventArgs) Handles lblTeamOverview.Click
         Team_Overview.Show()
         Me.Hide()
     End Sub
-
     Private Sub lblAttendanceTracker_Click(sender As Object, e As EventArgs) Handles lblAttendanceTracker.Click
         Attendance_Tracker.Show()
         Me.Hide()
     End Sub
-
     Private Sub lblLeaveApproval_Click(sender As Object, e As EventArgs) Handles lblLeaveApproval.Click
         Leave_Approval.Show()
         Me.Hide()
     End Sub
-
     Private Sub lblPayrollSummary_Click(sender As Object, e As EventArgs) Handles lblPayrollSummary.Click
         Payroll_Summary.Show()
         Me.Hide()
     End Sub
-
     Private Sub lblEmployeeTrainings_Click(sender As Object, e As EventArgs) Handles lblEmployeeTrainings.Click
         Employee_Trainings.Show()
         Me.Hide()
     End Sub
-
     Private Sub lblDepartment_Click(sender As Object, e As EventArgs) Handles lblDepartment.Click
         Department.Show()
         Me.Hide()
     End Sub
-
     Private Sub lblAmenities_Click(sender As Object, e As EventArgs) Handles lblAmenities.Click
         Amenities.Show()
         Me.Hide()
     End Sub
 
-    ' Sign out
-    Private Sub btnSignOut_Click_1(sender As Object, e As EventArgs) Handles btnSignOut.Click
-        If MessageBox.Show("Are you sure you want to sign out?", "Confirm Sign Out", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-            Login_frm.ClearLoginFields()
-            LoggedInEmployeeID = ""
-            LoggedInUsername = ""
-            LoggedInUserType = ""
-            Login_frm.Show()
-            Me.Hide()
+    Private Sub btnSignout_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to sign out?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+        If result = DialogResult.Yes Then
+            HRMModule.SignOut(Me)
+            MessageBox.Show("You have been signed out.", "Logged Out", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
 

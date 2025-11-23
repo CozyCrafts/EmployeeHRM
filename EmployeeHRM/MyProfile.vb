@@ -3,14 +3,21 @@ Imports System.Security.Cryptography
 Imports System.Text
 
 Public Class MyProfile
-    Private dbcon As MySqlConnection
-    Private dbcmd As MySqlCommand
-    Private LoggedInUserID As String = LoggedInEmployeeID
-    Private Sub OpenCon()
-        If dbcon Is Nothing Then
-            dbcon = New MySqlConnection("server=localhost;userid=root;password=091951;database=db_hrm")
+
+    Private LoggedInUserID As String = HRMModule.CurrentUser.EmployeeID
+    Private Sub MyProfile_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If HRMModule.CurrentUser.UserType = "Staff" Then
+            lblManagement.Visible = False
+            lblTeamOverview.Visible = False
+            lblAttendanceTracker.Visible = False
+            lblLeaveApproval.Visible = False
+            lblPayrollSummary.Visible = False
+            lblEmployeeTrainings.Visible = False
+            lblDepartment.Visible = False
+            lblAmenities.Visible = False
         End If
-        If dbcon.State = ConnectionState.Closed Then dbcon.Open()
+
+        LoadMyProfile()
     End Sub
     Private Sub LockAllFields()
         txtEmployeeID.Enabled = False
@@ -42,28 +49,8 @@ Public Class MyProfile
         txtDepartmentID.Enabled = False
         txtDepartment.ReadOnly = True
     End Sub
-    Private Sub MyProfile_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If LoggedInUserType = "Staff" Then
-            lblManagement.Visible = False
-            lblTeamOverview.Visible = False
-            lblAttendanceTracker.Visible = False
-            lblLeaveApproval.Visible = False
-            lblPayrollSummary.Visible = False
-            lblEmployeeTrainings.Visible = False
-            lblDepartment.Visible = False
-            lblAmenities.Visible = False
-        End If
-
-        Try
-            OpenCon()
-            LoadMyProfile()
-        Catch ex As Exception
-            MessageBox.Show("Error loading profile: " & ex.Message)
-        End Try
-    End Sub
     Private Sub LoadMyProfile()
         Try
-            OpenCon()
             Dim query As String = "
                 SELECT 
                     e.EmployeeID,
@@ -78,58 +65,53 @@ Public Class MyProfile
                 LEFT JOIN tblaccount a ON e.EmployeeID = a.EmployeeID
                 LEFT JOIN tblemergencycontact ec ON e.EmployeeID = ec.EmployeeID
                 WHERE e.EmployeeID=@empID
-                "
+            "
 
-            Using dbcmd = New MySqlCommand(query, dbcon)
-                dbcmd.Parameters.AddWithValue("@empID", LoggedInUserID)
-                Using reader As MySqlDataReader = dbcmd.ExecuteReader()
-                    If reader.Read() Then
-                        txtEmployeeID.Text = reader("EmployeeID").ToString()
-                        txtFirstName.Text = reader("First Name").ToString()
-                        txtMiddleName.Text = reader("MiddleName").ToString()
-                        txtLastName.Text = reader("LastName").ToString()
-                        txtAddress.Text = reader("Address").ToString()
-                        txtPhone.Text = reader("Contact Number").ToString()
-                        txtEmail.Text = reader("Email Address").ToString()
-                        txtAge.Text = reader("Age").ToString()
-                        cbSex.Text = reader("Sex").ToString()
-                        cbCivilStatus.Text = reader("Civil Status").ToString()
+            Dim dt As DataTable = HRMModule.ExecuteQuery(query, New List(Of MySqlParameter) From {
+                New MySqlParameter("@empID", LoggedInUserID)
+            })
 
-                        If Not IsDBNull(reader("BirthDate")) Then
-                            dtpBirthDate.Value = DateTime.ParseExact(reader("BirthDate").ToString(), "M/d/yyyy",
-                                             Globalization.CultureInfo.InvariantCulture)
-                        End If
+            If dt.Rows.Count > 0 Then
+                Dim row = dt.Rows(0)
 
-                        txtJobID.Text = If(reader("JobID") IsNot DBNull.Value, reader("JobID").ToString(), "")
-                        txtJobTitle.Text = If(reader("JobTitle") IsNot DBNull.Value, reader("JobTitle").ToString(), "")
-                        txtYearsOfSevice.Text = If(reader("YearsOfService") IsNot DBNull.Value, reader("YearsOfService").ToString(), "")
-                        cbContractType.Text = If(reader("ContractType") IsNot DBNull.Value, reader("ContractType").ToString(), "")
-                        cbEmployeeStatus.Text = If(reader("EmploymentStatus") IsNot DBNull.Value, reader("EmploymentStatus").ToString(), "")
+                txtEmployeeID.Text = row("EmployeeID").ToString()
+                txtFirstName.Text = row("First Name").ToString()
+                txtMiddleName.Text = row("MiddleName").ToString()
+                txtLastName.Text = row("LastName").ToString()
+                txtAddress.Text = row("Address").ToString()
+                txtPhone.Text = row("Contact Number").ToString()
+                txtEmail.Text = row("Email Address").ToString()
+                txtAge.Text = row("Age").ToString()
+                cbSex.Text = row("Sex").ToString()
+                cbCivilStatus.Text = row("Civil Status").ToString()
 
-                        If Not IsDBNull(reader("DateHired")) Then
-                            dtpDateHired.Value = DateTime.ParseExact(reader("DateHired").ToString(), "M/d/yyyy",
-                                             Globalization.CultureInfo.InvariantCulture)
-                        End If
-                        txtDepartmentID.Text = If(reader("DepartmentID") IsNot DBNull.Value, reader("DepartmentID").ToString(), "")
-                        txtDepartment.Text = If(reader("DepartmentName") IsNot DBNull.Value, reader("DepartmentName").ToString(), "")
+                If Not IsDBNull(row("BirthDate")) Then dtpBirthDate.Value = CDate(row("BirthDate"))
 
-                        txtUserID.Text = If(reader("UserID") IsNot DBNull.Value, reader("UserID").ToString(), "")
-                        txtUsername.Text = If(reader("Username") IsNot DBNull.Value, reader("Username").ToString(), "")
-                        txtPassword.Text = If(reader("Password") IsNot DBNull.Value, reader("Password").ToString(), "")
-                        cbUserType.Text = If(reader("UserType") IsNot DBNull.Value, reader("UserType").ToString(), "")
+                txtJobID.Text = If(row("JobID") IsNot DBNull.Value, row("JobID").ToString(), "")
+                txtJobTitle.Text = If(row("JobTitle") IsNot DBNull.Value, row("JobTitle").ToString(), "")
+                txtYearsOfSevice.Text = If(row("YearsOfService") IsNot DBNull.Value, row("YearsOfService").ToString(), "")
+                cbContractType.Text = If(row("ContractType") IsNot DBNull.Value, row("ContractType").ToString(), "")
+                cbEmployeeStatus.Text = If(row("EmploymentStatus") IsNot DBNull.Value, row("EmploymentStatus").ToString(), "")
+                If Not IsDBNull(row("DateHired")) Then dtpDateHired.Value = CDate(row("DateHired"))
+                txtDepartmentID.Text = If(row("DepartmentID") IsNot DBNull.Value, row("DepartmentID").ToString(), "")
+                txtDepartment.Text = If(row("DepartmentName") IsNot DBNull.Value, row("DepartmentName").ToString(), "")
 
-                        txtECContactID.Text = If(reader("EmergencyContactID") IsNot DBNull.Value, reader("EmergencyContactID").ToString(), "")
-                        txtECName.Text = If(reader("ECName") IsNot DBNull.Value, reader("ECName").ToString(), "")
-                        txtECAddress.Text = If(reader("ECAddress") IsNot DBNull.Value, reader("ECAddress").ToString(), "")
-                        txtECPhone.Text = If(reader("ECPhone") IsNot DBNull.Value, reader("ECPhone").ToString(), "")
-                        txtECRelationship.Text = If(reader("ECRelationship") IsNot DBNull.Value, reader("ECRelationship").ToString(), "")
-                    End If
-                End Using
-            End Using
+                txtUserID.Text = If(row("UserID") IsNot DBNull.Value, row("UserID").ToString(), "")
+                txtUsername.Text = If(row("Username") IsNot DBNull.Value, row("Username").ToString(), "")
+                txtPassword.Text = If(row("Password") IsNot DBNull.Value, row("Password").ToString(), "")
+                cbUserType.Text = If(row("UserType") IsNot DBNull.Value, row("UserType").ToString(), "")
+
+                txtECContactID.Text = If(row("EmergencyContactID") IsNot DBNull.Value, row("EmergencyContactID").ToString(), "")
+                txtECName.Text = If(row("ECName") IsNot DBNull.Value, row("ECName").ToString(), "")
+                txtECAddress.Text = If(row("ECAddress") IsNot DBNull.Value, row("ECAddress").ToString(), "")
+                txtECPhone.Text = If(row("ECPhone") IsNot DBNull.Value, row("ECPhone").ToString(), "")
+                txtECRelationship.Text = If(row("ECRelationship") IsNot DBNull.Value, row("ECRelationship").ToString(), "")
+            End If
 
             LockAllFields()
+
         Catch ex As Exception
-            MessageBox.Show("Error loading profile: " & ex.Message)
+            MessageBox.Show("Error loading profile. Please contact admin.")
         End Try
     End Sub
     Private Sub btnEditContact_Click(sender As Object, e As EventArgs) Handles btnEditContact.Click
@@ -153,75 +135,36 @@ Public Class MyProfile
     End Sub
     Private Sub btnSaveContact_Click(sender As Object, e As EventArgs) Handles btnSaveContact.Click
         Try
-            If String.IsNullOrWhiteSpace(txtECName.Text) Then
-                MessageBox.Show("Emergency contact name cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                txtECName.Focus()
-                Return
-            End If
-            If String.IsNullOrWhiteSpace(txtECRelationship.Text) Then
-                MessageBox.Show("Relationship cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                txtECRelationship.Focus()
-                Return
-            End If
-            If String.IsNullOrWhiteSpace(txtECPhone.Text) Then
-                MessageBox.Show("Phone number cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                txtECPhone.Focus()
-                Return
-            End If
-            If String.IsNullOrWhiteSpace(txtECAddress.Text) Then
-                MessageBox.Show("Address cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                txtECAddress.Focus()
-                Return
-            End If
-            Dim currentName As String = ""
-            Dim currentRel As String = ""
-            Dim currentPhone As String = ""
-            Dim currentAddr As String = ""
-
-            Using dbcmd = New MySqlCommand("SELECT Name, Relationship, PhoneNumber, Address FROM tblemergencycontact WHERE EmployeeID=@id", dbcon)
-                dbcmd.Parameters.AddWithValue("@id", LoggedInUserID)
-                Using reader = dbcmd.ExecuteReader()
-                    If reader.Read() Then
-                        currentName = reader("Name").ToString()
-                        currentRel = reader("Relationship").ToString()
-                        currentPhone = reader("PhoneNumber").ToString()
-                        currentAddr = reader("Address").ToString()
-                    End If
-                End Using
-            End Using
-
-            If txtECName.Text = currentName AndAlso
-           txtECRelationship.Text = currentRel AndAlso
-           txtECPhone.Text = currentPhone AndAlso
-           txtECAddress.Text = currentAddr Then
-                MessageBox.Show("No changes were made to emergency contact info.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            If String.IsNullOrWhiteSpace(txtECName.Text) OrElse
+               String.IsNullOrWhiteSpace(txtECRelationship.Text) OrElse
+               String.IsNullOrWhiteSpace(txtECPhone.Text) OrElse
+               String.IsNullOrWhiteSpace(txtECAddress.Text) Then
+                MessageBox.Show("All emergency contact fields must be filled.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
             End If
 
             Dim query As String = "
-            UPDATE tblemergencycontact
-            SET Name=@name, Relationship=@rel, PhoneNumber=@phone, Address=@addr
-            WHERE EmployeeID=@id
-        "
+                UPDATE tblemergencycontact
+                SET Name=@name, Relationship=@rel, PhoneNumber=@phone, Address=@addr
+                WHERE EmployeeID=@id
+            "
 
-            Using dbcmd = New MySqlCommand(query, dbcon)
-                dbcmd.Parameters.AddWithValue("@name", txtECName.Text)
-                dbcmd.Parameters.AddWithValue("@rel", txtECRelationship.Text)
-                dbcmd.Parameters.AddWithValue("@phone", txtECPhone.Text)
-                dbcmd.Parameters.AddWithValue("@addr", txtECAddress.Text)
-                dbcmd.Parameters.AddWithValue("@id", LoggedInUserID)
-                dbcmd.ExecuteNonQuery()
-            End Using
+            Dim rows = HRMModule.ExecuteNonQuery(query, New List(Of MySqlParameter) From {
+                New MySqlParameter("@name", txtECName.Text),
+                New MySqlParameter("@rel", txtECRelationship.Text),
+                New MySqlParameter("@phone", txtECPhone.Text),
+                New MySqlParameter("@addr", txtECAddress.Text),
+                New MySqlParameter("@id", LoggedInUserID)
+            })
 
-            MessageBox.Show("Emergency contact updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
+            If rows > 0 Then MessageBox.Show("Emergency contact updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
             LockAllFields()
             btnEditContact.Visible = True
             btnSaveContact.Visible = False
             btnCancelContact.Visible = False
 
         Catch ex As Exception
-            MessageBox.Show("Error saving emergency contact: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error saving emergency contact info.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
     Private Sub btnEditAccount_Click(sender As Object, e As EventArgs) Handles btnEditAccount.Click
@@ -243,72 +186,37 @@ Public Class MyProfile
     End Sub
     Private Sub btnSaveAccount_Click(sender As Object, e As EventArgs) Handles btnSaveAccount.Click
         Try
-            If String.IsNullOrWhiteSpace(txtUsername.Text) Then
-                MessageBox.Show("Username cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                txtUsername.Focus()
-                Return
-            End If
-
-            If String.IsNullOrWhiteSpace(txtPassword.Text) Then
-                MessageBox.Show("Password cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                txtPassword.Focus()
-                Return
-            End If
-
-            If String.IsNullOrWhiteSpace(cbUserType.Text) Then
-                MessageBox.Show("User type must be selected.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                cbUserType.Focus()
-                Return
-            End If
-            Dim currentUsername As String = ""
-            Dim currentPassword As String = ""
-            Dim currentUserType As String = ""
-            Using dbcmd = New MySqlCommand("SELECT Username, Password, UserType FROM tblaccount WHERE EmployeeID=@id", dbcon)
-                dbcmd.Parameters.AddWithValue("@id", LoggedInUserID)
-                Using reader = dbcmd.ExecuteReader()
-                    If reader.Read() Then
-                        currentUsername = reader("Username").ToString()
-                        currentPassword = reader("Password").ToString()
-                        currentUserType = reader("UserType").ToString()
-                    End If
-                End Using
-            End Using
-
-            If txtUsername.Text = currentUsername AndAlso
-           txtPassword.Text = currentPassword AndAlso
-           cbUserType.Text = currentUserType Then
-                MessageBox.Show("No changes were made to the account.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            If String.IsNullOrWhiteSpace(txtUsername.Text) OrElse String.IsNullOrWhiteSpace(txtPassword.Text) OrElse String.IsNullOrWhiteSpace(cbUserType.Text) Then
+                MessageBox.Show("All account fields must be filled.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
             End If
 
             Dim query As String = "
-            UPDATE tblaccount 
-            SET Username=@user, Password=@pass, UserType=@type
-            WHERE EmployeeID=@id
-        "
+                UPDATE tblaccount 
+                SET Username=@user, Password=@pass, UserType=@type
+                WHERE EmployeeID=@id
+            "
 
-            Using dbcmd = New MySqlCommand(query, dbcon)
-                dbcmd.Parameters.AddWithValue("@user", txtUsername.Text)
-                dbcmd.Parameters.AddWithValue("@pass", txtPassword.Text)
-                dbcmd.Parameters.AddWithValue("@type", cbUserType.Text)
-                dbcmd.Parameters.AddWithValue("@id", LoggedInUserID)
-                dbcmd.ExecuteNonQuery()
-            End Using
+            Dim rows = HRMModule.ExecuteNonQuery(query, New List(Of MySqlParameter) From {
+                New MySqlParameter("@user", txtUsername.Text),
+                New MySqlParameter("@pass", txtPassword.Text),
+                New MySqlParameter("@type", cbUserType.Text),
+                New MySqlParameter("@id", LoggedInUserID)
+            })
 
-            MessageBox.Show("Account info updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
+            If rows > 0 Then MessageBox.Show("Account info updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
             txtUsername.ReadOnly = True
             txtPassword.ReadOnly = True
             cbUserType.Enabled = False
-
             btnEditAccount.Visible = True
             btnSaveAccount.Visible = False
             btnCancelAccount.Visible = False
 
         Catch ex As Exception
-            MessageBox.Show("Error saving account: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error saving account info.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
     Private Sub btnEditInfo_Click(sender As Object, e As EventArgs) Handles btnEditInfo.Click
         cbCivilStatus.Enabled = True
         txtPhone.ReadOnly = False
@@ -330,74 +238,34 @@ Public Class MyProfile
     End Sub
     Private Sub btnSaveInfo_Click(sender As Object, e As EventArgs) Handles btnSaveInfo.Click
         Try
-            If String.IsNullOrWhiteSpace(cbCivilStatus.Text) Then
-                MessageBox.Show("Civil Status cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                cbCivilStatus.Focus()
+            If String.IsNullOrWhiteSpace(cbCivilStatus.Text) OrElse String.IsNullOrWhiteSpace(txtPhone.Text) OrElse
+               String.IsNullOrWhiteSpace(txtEmail.Text) OrElse String.IsNullOrWhiteSpace(txtAddress.Text) Then
+                MessageBox.Show("All personal info fields must be filled.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
             End If
-            If String.IsNullOrWhiteSpace(txtPhone.Text) Then
-                MessageBox.Show("Phone number cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                txtPhone.Focus()
-                Return
-            End If
-            If String.IsNullOrWhiteSpace(txtEmail.Text) Then
-                MessageBox.Show("Email cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                txtEmail.Focus()
-                Return
-            End If
-            If String.IsNullOrWhiteSpace(txtAddress.Text) Then
-                MessageBox.Show("Address cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                txtAddress.Focus()
-                Return
-            End If
-            Dim currentCivil As String = ""
-            Dim currentPhone As String = ""
-            Dim currentEmail As String = ""
-            Dim currentAddress As String = ""
 
-            Using dbcmd = New MySqlCommand("SELECT `Civil Status`, `Contact Number`, `Email Address`, Address FROM tblemployee WHERE EmployeeID=@id", dbcon)
-                dbcmd.Parameters.AddWithValue("@id", LoggedInUserID)
-                Using reader = dbcmd.ExecuteReader()
-                    If reader.Read() Then
-                        currentCivil = reader("Civil Status").ToString()
-                        currentPhone = reader("Contact Number").ToString()
-                        currentEmail = reader("Email Address").ToString()
-                        currentAddress = reader("Address").ToString()
-                    End If
-                End Using
-            End Using
-
-            If cbCivilStatus.Text = currentCivil AndAlso
-           txtPhone.Text = currentPhone AndAlso
-           txtEmail.Text = currentEmail AndAlso
-           txtAddress.Text = currentAddress Then
-                MessageBox.Show("No changes were made to personal info.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Return
-            End If
             Dim query As String = "
-            UPDATE tblemployee 
-            SET `Civil Status`=@civil, `Contact Number`=@phone, `Email Address`=@mail, Address=@addr
-            WHERE EmployeeID=@id
-        "
+                UPDATE tblemployee 
+                SET `Civil Status`=@civil, `Contact Number`=@phone, `Email Address`=@mail, Address=@addr
+                WHERE EmployeeID=@id
+            "
 
-            Using dbcmd = New MySqlCommand(query, dbcon)
-                dbcmd.Parameters.AddWithValue("@civil", cbCivilStatus.Text)
-                dbcmd.Parameters.AddWithValue("@phone", txtPhone.Text)
-                dbcmd.Parameters.AddWithValue("@mail", txtEmail.Text)
-                dbcmd.Parameters.AddWithValue("@addr", txtAddress.Text)
-                dbcmd.Parameters.AddWithValue("@id", LoggedInUserID)
-                dbcmd.ExecuteNonQuery()
-            End Using
+            Dim rows = HRMModule.ExecuteNonQuery(query, New List(Of MySqlParameter) From {
+                New MySqlParameter("@civil", cbCivilStatus.Text),
+                New MySqlParameter("@phone", txtPhone.Text),
+                New MySqlParameter("@mail", txtEmail.Text),
+                New MySqlParameter("@addr", txtAddress.Text),
+                New MySqlParameter("@id", LoggedInUserID)
+            })
 
-            MessageBox.Show("Personal info updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
+            If rows > 0 Then MessageBox.Show("Personal info updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
             LockAllFields()
             btnEditInfo.Visible = True
             btnSaveInfo.Visible = False
             btnCancelInfo.Visible = False
 
         Catch ex As Exception
-            MessageBox.Show("Error saving personal info: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error saving personal info.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
     Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
@@ -452,20 +320,13 @@ Public Class MyProfile
         Me.Hide()
     End Sub
 
-    Private Sub btnSignOut_Click_1(sender As Object, e As EventArgs) Handles btnSignOut.Click
-        Dim result = MessageBox.Show(
-        "Are you sure you want to sign out?",
-        "Confirm Sign Out",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Question
-    )
+    Private Sub btnSignout_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to sign out?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
         If result = DialogResult.Yes Then
-            Login_frm.ClearLoginFields()
-            LoggedInEmployeeID = ""
-            LoggedInUsername = ""
-            LoggedInUserType = ""
-            Login_frm.Show()
-            Hide()
+            HRMModule.SignOut(Me)
+            MessageBox.Show("You have been signed out.", "Logged Out", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
+
 End Class

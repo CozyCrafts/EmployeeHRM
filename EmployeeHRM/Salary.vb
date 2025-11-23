@@ -1,14 +1,14 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class Salary
-    Private connectionString As String = "server=localhost;userid=root;password=091951;database=db_hrm"
     Private salaryTable As DataTable = Nothing
     Private salaryBindingSource As BindingSource
 
     Private Sub Salary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadSalarySummary()
         LockFields()
-        If LoggedInUserType = "Staff" Then
+
+        If HRMModule.CurrentUser.UserType = "Staff" Then
             lblManagement.Visible = False
             lblTeamOverview.Visible = False
             lblAttendanceTracker.Visible = False
@@ -20,62 +20,58 @@ Public Class Salary
         End If
     End Sub
     Private Sub LoadSalarySummary()
-        Try
-            Using conn As New MySqlConnection(connectionString)
-                conn.Open()
-                Dim query As String = "
-                SELECT 
-                    e.EmployeeID,
-                    CONCAT_WS(' ', e.`First Name`, e.MiddleName, e.LastName) AS EmployeeName,
-                    j.JobTitle,
-                    p.PayrollID,
-                    p.BasicSalary AS PayrollBasicSalary,
-                    p.OvertimePay AS PayrollOvertimePay,
-                    p.GrossSalary AS PayrollGrossSalary,
-                    p.NetPay AS PayrollNetPay,
-                    p.PaymentDate AS PayrollPaymentDate,
-                    s.SalaryID AS SalaryID,
-                    s.BaseSalary AS SalaryBaseSalary,
-                    s.Allowance AS SalaryAllowance,
-                    s.DailyRate AS SalaryDailyRate,
-                    s.OvertimeRate AS SalaryOvertimeRate,
-                    a.AttendanceID AS AttendanceID,
-                    a.TotalHours AS AttendanceTotalHours,
-                    a.ExceededHours AS AttendanceExceededHours,
-                    a.DaysAttended AS AttendanceDaysAttended,
-                    a.Absences AS AttendanceAbsences,
-                    d.DeductionID AS DeductionID,
-                    d.UnpaidLeave AS DeductionUnpaidLeave,
-                    d.SSS AS DeductionSSS,
-                    d.PagIBIG AS DeductionPagIBIG,
-                    d.PhilHealth AS DeductionPhilHealth,
-                    d.TotalDeduction AS DeductionTotalDeduction
-                FROM tblemployee e
-                LEFT JOIN tbljobdetails j ON e.EmployeeID = j.EmployeeID
-                LEFT JOIN tblpayroll p ON e.EmployeeID = p.EmployeeID
-                LEFT JOIN tblsalary s ON e.EmployeeID = s.EmployeeID
-                LEFT JOIN tblattendance a ON e.EmployeeID = a.EmployeeID
-                LEFT JOIN tbldeduction d ON e.EmployeeID = d.EmployeeID
-                WHERE e.EmployeeID = @empID
-                ORDER BY p.PaymentDate DESC;
-                "
-                Using cmd As New MySqlCommand(query, conn)
-                    cmd.Parameters.AddWithValue("@empID", LoggedInEmployeeID)
-                    Using adapter As New MySqlDataAdapter(cmd)
-                        salaryTable = New DataTable()
-                        adapter.Fill(salaryTable)
-                        salaryBindingSource = New BindingSource()
-                        salaryBindingSource.DataSource = salaryTable
-                        dgvSalaryHistory.DataSource = salaryBindingSource
+        Dim query As String = "
+            SELECT 
+                e.EmployeeID,
+                CONCAT_WS(' ', e.`First Name`, e.MiddleName, e.LastName) AS EmployeeName,
+                j.JobTitle,
+                p.PayrollID,
+                p.BasicSalary AS PayrollBasicSalary,
+                p.OvertimePay AS PayrollOvertimePay,
+                p.GrossSalary AS PayrollGrossSalary,
+                p.NetPay AS PayrollNetPay,
+                p.PaymentDate AS PayrollPaymentDate,
+                s.SalaryID AS SalaryID,
+                s.BaseSalary AS SalaryBaseSalary,
+                s.Allowance AS SalaryAllowance,
+                s.DailyRate AS SalaryDailyRate,
+                s.OvertimeRate AS SalaryOvertimeRate,
+                a.AttendanceID AS AttendanceID,
+                a.TotalHours AS AttendanceTotalHours,
+                a.ExceededHours AS AttendanceExceededHours,
+                a.DaysAttended AS AttendanceDaysAttended,
+                a.Absences AS AttendanceAbsences,
+                d.DeductionID AS DeductionID,
+                d.UnpaidLeave AS DeductionUnpaidLeave,
+                d.SSS AS DeductionSSS,
+                d.PagIBIG AS DeductionPagIBIG,
+                d.PhilHealth AS DeductionPhilHealth,
+                d.TotalDeduction AS DeductionTotalDeduction
+            FROM tblemployee e
+            LEFT JOIN tbljobdetails j ON e.EmployeeID = j.EmployeeID
+            LEFT JOIN tblpayroll p ON e.EmployeeID = p.EmployeeID
+            LEFT JOIN tblsalary s ON e.EmployeeID = s.EmployeeID
+            LEFT JOIN tblattendance a ON e.EmployeeID = a.EmployeeID
+            LEFT JOIN tbldeduction d ON e.EmployeeID = d.EmployeeID
+            WHERE e.EmployeeID = @empID
+            ORDER BY p.PaymentDate DESC;
+        "
 
-                        dgvSalaryHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
-                        dgvSalaryHistory.RowTemplate.Height = 30
-                        dgvSalaryHistory.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None
-                    End Using
-                End Using
-            End Using
+        Dim parameters As New List(Of MySqlParameter) From {
+            New MySqlParameter("@empID", HRMModule.CurrentUser.EmployeeID)
+        }
+
+        Try
+            salaryTable = HRMModule.ExecuteQuery(query, parameters)
+            salaryBindingSource = New BindingSource()
+            salaryBindingSource.DataSource = salaryTable
+            dgvSalaryHistory.DataSource = salaryBindingSource
+
+            dgvSalaryHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+            dgvSalaryHistory.RowTemplate.Height = 30
+            dgvSalaryHistory.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None
         Catch ex As Exception
-            MessageBox.Show("Error loading salary summary: " & ex.Message)
+            MessageBox.Show("Error loading salary summary. Please contact admin.")
         End Try
     End Sub
     Private Sub LockFields()
@@ -113,46 +109,41 @@ Public Class Salary
     Private Sub PopulateFieldsFromSelectedRow(rowIndex As Integer)
         Dim row As DataGridViewRow = dgvSalaryHistory.Rows(rowIndex)
 
-        txtEmployeeID.Text = row.Cells("EmployeeID").Value.ToString()
-        txtEmployeeName.Text = row.Cells("EmployeeName").Value.ToString()
-        txtJobTitle.Text = row.Cells("JobTitle").Value.ToString()
-        txtPayrollID.Text = row.Cells("PayrollID").Value.ToString()
-        txtBasicSalary.Text = row.Cells("PayrollBasicSalary").Value.ToString()
-        txtOvertimePay.Text = row.Cells("PayrollOvertimePay").Value.ToString()
-        txtGrossSalary.Text = row.Cells("PayrollGrossSalary").Value.ToString()
-        txtNetPay.Text = row.Cells("PayrollNetPay").Value.ToString()
+        txtEmployeeID.Text = row.Cells("EmployeeID").Value?.ToString()
+        txtEmployeeName.Text = row.Cells("EmployeeName").Value?.ToString()
+        txtJobTitle.Text = row.Cells("JobTitle").Value?.ToString()
+        txtPayrollID.Text = row.Cells("PayrollID").Value?.ToString()
+        txtBasicSalary.Text = row.Cells("PayrollBasicSalary").Value?.ToString()
+        txtOvertimePay.Text = row.Cells("PayrollOvertimePay").Value?.ToString()
+        txtGrossSalary.Text = row.Cells("PayrollGrossSalary").Value?.ToString()
+        txtNetPay.Text = row.Cells("PayrollNetPay").Value?.ToString()
 
         Dim paymentDate As DateTime
         If row.Cells("PayrollPaymentDate").Value IsNot DBNull.Value AndAlso DateTime.TryParse(row.Cells("PayrollPaymentDate").Value.ToString(), paymentDate) Then
             dtpPaymentDate.Value = paymentDate
 
-            ' Determine if salary has been sent (last day of month)
             Dim lastDayOfMonth As DateTime = New DateTime(paymentDate.Year, paymentDate.Month, DateTime.DaysInMonth(paymentDate.Year, paymentDate.Month))
-            If paymentDate.Date = lastDayOfMonth Then
-                rbSalarySent.Checked = True   ' Salary sent
-            Else
-                rbSalarySent.Checked = False  ' Salary not sent
-            End If
+            rbSalarySent.Checked = (paymentDate.Date = lastDayOfMonth)
         Else
             dtpPaymentDate.Value = DateTime.Today
             rbSalarySent.Checked = False
         End If
 
-        txtBaseSalary.Text = row.Cells("SalaryBaseSalary").Value.ToString()
-        txtAllowance.Text = row.Cells("SalaryAllowance").Value.ToString()
-        txtDailyRate.Text = row.Cells("SalaryDailyRate").Value.ToString()
-        txtOvertimeRate.Text = row.Cells("SalaryOvertimeRate").Value.ToString()
-        txtAttendanceID.Text = row.Cells("AttendanceID").Value.ToString()
-        txtTotalHours.Text = row.Cells("AttendanceTotalHours").Value.ToString()
-        txtExceededHours.Text = row.Cells("AttendanceExceededHours").Value.ToString()
-        txtDaysAttended.Text = row.Cells("AttendanceDaysAttended").Value.ToString()
-        txtAbsences.Text = row.Cells("AttendanceAbsences").Value.ToString()
-        txtDeductionID.Text = row.Cells("DeductionID").Value.ToString()
-        txtUnpaidLeave.Text = row.Cells("DeductionUnpaidLeave").Value.ToString()
-        txtSSS.Text = row.Cells("DeductionSSS").Value.ToString()
-        txtPhilHealth.Text = row.Cells("DeductionPhilHealth").Value.ToString()
-        txtPagIBIG.Text = row.Cells("DeductionPagIBIG").Value.ToString()
-        txtTotalDeduction.Text = row.Cells("DeductionTotalDeduction").Value.ToString()
+        txtBaseSalary.Text = row.Cells("SalaryBaseSalary").Value?.ToString()
+        txtAllowance.Text = row.Cells("SalaryAllowance").Value?.ToString()
+        txtDailyRate.Text = row.Cells("SalaryDailyRate").Value?.ToString()
+        txtOvertimeRate.Text = row.Cells("SalaryOvertimeRate").Value?.ToString()
+        txtAttendanceID.Text = row.Cells("AttendanceID").Value?.ToString()
+        txtTotalHours.Text = row.Cells("AttendanceTotalHours").Value?.ToString()
+        txtExceededHours.Text = row.Cells("AttendanceExceededHours").Value?.ToString()
+        txtDaysAttended.Text = row.Cells("AttendanceDaysAttended").Value?.ToString()
+        txtAbsences.Text = row.Cells("AttendanceAbsences").Value?.ToString()
+        txtDeductionID.Text = row.Cells("DeductionID").Value?.ToString()
+        txtUnpaidLeave.Text = row.Cells("DeductionUnpaidLeave").Value?.ToString()
+        txtSSS.Text = row.Cells("DeductionSSS").Value?.ToString()
+        txtPhilHealth.Text = row.Cells("DeductionPhilHealth").Value?.ToString()
+        txtPagIBIG.Text = row.Cells("DeductionPagIBIG").Value?.ToString()
+        txtTotalDeduction.Text = row.Cells("DeductionTotalDeduction").Value?.ToString()
     End Sub
     Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
         Employee_Dashboard.Show()
@@ -206,20 +197,13 @@ Public Class Salary
         Me.Hide()
     End Sub
 
-    Private Sub btnSignOut_Click_1(sender As Object, e As EventArgs) Handles btnSignOut.Click
-        Dim result = MessageBox.Show(
-           "Are you sure you want to sign out?",
-           "Confirm Sign Out",
-           MessageBoxButtons.YesNo,
-           MessageBoxIcon.Question
-       )
+
+    Private Sub btnSignout_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to sign out?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
         If result = DialogResult.Yes Then
-            Login_frm.ClearLoginFields()
-            LoggedInEmployeeID = ""
-            LoggedInUsername = ""
-            LoggedInUserType = ""
-            Login_frm.Show()
-            Hide()
+            HRMModule.SignOut(Me)
+            MessageBox.Show("You have been signed out.", "Logged Out", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
 

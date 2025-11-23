@@ -1,8 +1,6 @@
-﻿Imports MySql.Data.MySqlClient
-Imports System.Globalization
+﻿Imports System.Globalization
+Imports MySql.Data.MySqlClient
 Public Class Department
-    Private conn As MySqlConnection
-    Private connectionString As String = "server=localhost;userid=root;password=091951;database=db_hrm"
     Private isAdding As Boolean = False
     Private originalValues As New Dictionary(Of String, String)
 
@@ -12,67 +10,55 @@ Public Class Department
         tb.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(tb.Text.ToLower())
         tb.SelectionStart = selStart
     End Sub
+
     Private Sub Department_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
-            conn = New MySqlConnection(connectionString)
-            conn.Open()
             LoadDepartments()
-        Catch ex As MySqlException
-            MessageBox.Show("Connection failed: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            If conn IsNot Nothing AndAlso conn.State = ConnectionState.Open Then
-                conn.Close()
-            End If
+        Catch ex As Exception
+            MessageBox.Show("Error loading departments: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+
         LockTextBoxes()
         SetDefaultButtonState()
+
         AddHandler txtDepartmentName.TextChanged, AddressOf CapitalizeWords
         AddHandler txtDepartmentDescription.TextChanged, AddressOf CapitalizeWords
-
     End Sub
     Private Sub LoadDepartments()
         Dim query As String = "
-        SELECT 
-            e.EmployeeID,
-            e.`First Name` AS FirstName,
-            e.MiddleName,
-            e.LastName,
-            d.DepartmentID,
-            d.Name AS DepartmentName,
-            d.Description
-        FROM tbldepartment d
-        LEFT JOIN tblemployee e ON e.EmployeeID = d.EmployeeID
-        ORDER BY d.DepartmentID;
-    "
+            SELECT 
+                e.EmployeeID,
+                e.`First Name` AS FirstName,
+                e.MiddleName,
+                e.LastName,
+                d.DepartmentID,
+                d.Name AS DepartmentName,
+                d.Description
+            FROM tbldepartment d
+            LEFT JOIN tblemployee e ON e.EmployeeID = d.EmployeeID
+            ORDER BY d.DepartmentID;
+        "
 
-        Try
-            Using conn As New MySqlConnection(connectionString)
-                Using cmd As New MySqlCommand(query, conn)
-                    Using adapter As New MySqlDataAdapter(cmd)
-                        Dim table As New DataTable()
-                        adapter.Fill(table)
-                        If Not table.Columns.Contains("FullName") Then
-                            table.Columns.Add("FullName", GetType(String))
-                        End If
-                        For Each row As DataRow In table.Rows
-                            Dim firstName As String = If(row("FirstName") IsNot DBNull.Value, row("FirstName").ToString(), "")
-                            Dim middleName As String = If(row("MiddleName") IsNot DBNull.Value, row("MiddleName").ToString(), "")
-                            Dim lastName As String = If(row("LastName") IsNot DBNull.Value, row("LastName").ToString(), "")
+        Dim table As DataTable = HRMModule.ExecuteQuery(query)
 
-                            row("FullName") = (firstName & " " & middleName & " " & lastName).Trim()
-                        Next
-                        dgvDepartmentRecords.DataSource = table
-                        If table.Columns.Contains("EmployeeID") Then dgvDepartmentRecords.Columns("EmployeeID").Visible = False
-                        If table.Columns.Contains("FullName") Then dgvDepartmentRecords.Columns("FullName").Visible = False
-                        If table.Columns.Contains("FirstName") Then dgvDepartmentRecords.Columns("FirstName").Visible = False
-                        If table.Columns.Contains("MiddleName") Then dgvDepartmentRecords.Columns("MiddleName").Visible = False
-                        If table.Columns.Contains("LastName") Then dgvDepartmentRecords.Columns("LastName").Visible = False
-                    End Using
-                End Using
-            End Using
-        Catch ex As Exception
-            MessageBox.Show("Error loading departments: " & ex.Message)
-        End Try
+        If Not table.Columns.Contains("FullName") Then
+            table.Columns.Add("FullName", GetType(String))
+        End If
+
+        For Each row As DataRow In table.Rows
+            Dim firstName As String = If(row("FirstName") IsNot DBNull.Value, row("FirstName").ToString(), "")
+            Dim middleName As String = If(row("MiddleName") IsNot DBNull.Value, row("MiddleName").ToString(), "")
+            Dim lastName As String = If(row("LastName") IsNot DBNull.Value, row("LastName").ToString(), "")
+            row("FullName") = (firstName & " " & middleName & " " & lastName).Trim()
+        Next
+
+        dgvDepartmentRecords.DataSource = table
+
+        ' Hide unnecessary columns
+        Dim columnsToHide = {"EmployeeID", "FullName", "FirstName", "MiddleName", "LastName"}
+        For Each col In columnsToHide
+            If table.Columns.Contains(col) Then dgvDepartmentRecords.Columns(col).Visible = False
+        Next
     End Sub
     Private Sub dgvDepartmentRecords_SelectionChanged(sender As Object, e As EventArgs) Handles dgvDepartmentRecords.SelectionChanged
         If dgvDepartmentRecords.CurrentRow IsNot Nothing Then
@@ -80,10 +66,11 @@ Public Class Department
             txtDepartmentID.Text = If(row.Cells("DepartmentID").Value IsNot DBNull.Value, row.Cells("DepartmentID").Value.ToString(), "")
             txtDepartmentName.Text = If(row.Cells("DepartmentName").Value IsNot DBNull.Value, row.Cells("DepartmentName").Value.ToString(), "")
             txtDepartmentDescription.Text = If(row.Cells("Description").Value IsNot DBNull.Value, row.Cells("Description").Value.ToString(), "")
+
             originalValues("DepartmentName") = txtDepartmentName.Text
             originalValues("Description") = txtDepartmentDescription.Text
-
         End If
+
         LockTextBoxes()
         SetRecordSelectedButtonState()
     End Sub
@@ -123,17 +110,15 @@ Public Class Department
             MessageBox.Show("Please select a department to delete.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
+
         Dim result As DialogResult = MessageBox.Show("Are you sure you want to delete this department?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If result = DialogResult.Yes Then
-            Try
-                Using conn As New MySqlConnection(connectionString)
-                    conn.Open()
-                    Dim query As String = "DELETE FROM tbldepartment WHERE DepartmentID=@DepartmentID"
-                    Using cmd As New MySqlCommand(query, conn)
-                        cmd.Parameters.AddWithValue("@DepartmentID", txtDepartmentID.Text.Trim())
-                        cmd.ExecuteNonQuery()
-                    End Using
-                End Using
+            Dim query As String = "DELETE FROM tbldepartment WHERE DepartmentID=@DepartmentID"
+            Dim parameters As New List(Of MySqlParameter) From {
+                New MySqlParameter("@DepartmentID", txtDepartmentID.Text.Trim())
+            }
+
+            If HRMModule.ExecuteNonQuery(query, parameters) >= 0 Then
                 MessageBox.Show("Department deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 LoadDepartments()
                 txtDepartmentID.Clear()
@@ -141,9 +126,9 @@ Public Class Department
                 txtDepartmentDescription.Clear()
                 LockTextBoxes()
                 SetDefaultButtonState()
-            Catch ex As Exception
-                MessageBox.Show("Error deleting department: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End Try
+            Else
+                MessageBox.Show("Error deleting department.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
         End If
     End Sub
     Private Sub btnAddDepartment_Click(sender As Object, e As EventArgs) Handles btnAddDepartment.Click
@@ -160,8 +145,8 @@ Public Class Department
             MessageBox.Show("Please select a department to edit.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
-        isAdding = False
 
+        isAdding = False
         UnlockTextBoxes()
         SetEditAddButtonState()
     End Sub
@@ -176,81 +161,65 @@ Public Class Department
             txtDepartmentDescription.Focus()
             Return
         End If
+
         If Not isAdding Then
             If txtDepartmentName.Text = originalValues("DepartmentName") AndAlso txtDepartmentDescription.Text = originalValues("Description") Then
                 MessageBox.Show("No changes were made. Nothing to save.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Return
             End If
         End If
-        If isAdding Then
-            SaveNewDepartment()
-        Else
-            UpdateDepartment()
-        End If
 
+        If isAdding Then SaveNewDepartment() Else UpdateDepartment()
         LockTextBoxes()
         SetDefaultButtonState()
     End Sub
+
     Private Sub btnCancelDepartment_Click(sender As Object, e As EventArgs) Handles btnCancelDepartment.Click
         LoadDepartments()
         LockTextBoxes()
         SetDefaultButtonState()
     End Sub
     Private Sub SaveNewDepartment()
-        Try
-            Using conn As New MySqlConnection(connectionString)
-                conn.Open()
-                Dim query As String = "INSERT INTO tbldepartment (DepartmentID, Name, Description) VALUES (@DepartmentID, @Name, @Description)"
-                Using cmd As New MySqlCommand(query, conn)
-                    cmd.Parameters.AddWithValue("@DepartmentID", txtDepartmentID.Text.Trim())
-                    cmd.Parameters.AddWithValue("@Name", txtDepartmentName.Text.Trim())
-                    cmd.Parameters.AddWithValue("@Description", txtDepartmentDescription.Text.Trim())
-                    cmd.ExecuteNonQuery()
-                End Using
-            End Using
+        Dim query As String = "INSERT INTO tbldepartment (DepartmentID, Name, Description) VALUES (@DepartmentID, @Name, @Description)"
+        Dim parameters As New List(Of MySqlParameter) From {
+            New MySqlParameter("@DepartmentID", txtDepartmentID.Text.Trim()),
+            New MySqlParameter("@Name", txtDepartmentName.Text.Trim()),
+            New MySqlParameter("@Description", txtDepartmentDescription.Text.Trim())
+        }
+
+        If HRMModule.ExecuteNonQuery(query, parameters) >= 0 Then
             MessageBox.Show("Department added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
             LoadDepartments()
-        Catch ex As Exception
-            MessageBox.Show("Error adding department: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
+        Else
+            MessageBox.Show("Error adding department.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
     End Sub
     Private Sub UpdateDepartment()
-        Try
-            Using conn As New MySqlConnection(connectionString)
-                conn.Open()
-                Dim query As String = "UPDATE tbldepartment SET Name=@Name, Description=@Description WHERE DepartmentID=@DepartmentID"
-                Using cmd As New MySqlCommand(query, conn)
-                    cmd.Parameters.AddWithValue("@DepartmentID", txtDepartmentID.Text.Trim())
-                    cmd.Parameters.AddWithValue("@Name", txtDepartmentName.Text.Trim())
-                    cmd.Parameters.AddWithValue("@Description", txtDepartmentDescription.Text.Trim())
-                    cmd.ExecuteNonQuery()
-                End Using
-            End Using
+        Dim query As String = "UPDATE tbldepartment SET Name=@Name, Description=@Description WHERE DepartmentID=@DepartmentID"
+        Dim parameters As New List(Of MySqlParameter) From {
+            New MySqlParameter("@DepartmentID", txtDepartmentID.Text.Trim()),
+            New MySqlParameter("@Name", txtDepartmentName.Text.Trim()),
+            New MySqlParameter("@Description", txtDepartmentDescription.Text.Trim())
+        }
+
+        If HRMModule.ExecuteNonQuery(query, parameters) >= 0 Then
             MessageBox.Show("Department updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
             LoadDepartments()
-        Catch ex As Exception
-            MessageBox.Show("Error updating department: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
+        Else
+            MessageBox.Show("Error updating department.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
     End Sub
     Private Function GetNextDepartmentID() As String
         Dim newID As String = "D1"
-        Try
-            Using conn As New MySqlConnection(connectionString)
-                conn.Open()
-                Dim query As String = "SELECT DepartmentID FROM tbldepartment ORDER BY DepartmentID DESC LIMIT 1"
-                Using cmd As New MySqlCommand(query, conn)
-                    Dim lastID = cmd.ExecuteScalar()
-                    If lastID IsNot Nothing Then
-                        Dim numPart As Integer
-                        If Integer.TryParse(lastID.ToString().Substring(1), numPart) Then
-                            newID = "D" & (numPart + 1).ToString()
-                        End If
-                    End If
-                End Using
-            End Using
-        Catch ex As Exception
-            MessageBox.Show("Error generating DepartmentID: " & ex.Message)
-        End Try
+        Dim query As String = "SELECT DepartmentID FROM tbldepartment ORDER BY DepartmentID DESC LIMIT 1"
+        Dim lastID = HRMModule.ExecuteScalar(query)
+
+        If lastID IsNot Nothing AndAlso Integer.TryParse(lastID.ToString().Substring(1), Nothing) Then
+            Dim numPart As Integer
+            Integer.TryParse(lastID.ToString().Substring(1), numPart)
+            newID = "D" & (numPart + 1).ToString()
+        End If
+
         Return newID
     End Function
     Private Sub txtSearchDepartment_TextChanged(sender As Object, e As EventArgs) Handles txtSearchDepartment.TextChanged
@@ -333,21 +302,15 @@ Public Class Department
         Amenities.Show()
         Me.Hide()
     End Sub
-    Private Sub btnSignOut_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
-        Dim result As DialogResult = MessageBox.Show(
-        "Are you sure you want to sign out?",
-        "Confirm Sign Out",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Question
-    )
+    Private Sub btnSignout_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to sign out?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
         If result = DialogResult.Yes Then
-            Login_frm.ClearLoginFields()
-            LoggedInEmployeeID = ""
-            LoggedInUsername = ""
-            LoggedInUserType = ""
-            Login_frm.Show()
-            Me.Hide()
+            HRMModule.SignOut(Me)
+            MessageBox.Show("You have been signed out.", "Logged Out", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
+
+
 End Class
 

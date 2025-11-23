@@ -42,9 +42,11 @@ Partial Class frmInfoViewer
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(800, 450)
         Controls.Add(rtbContent)
+        ForeColor = SystemColors.InactiveCaption
         MaximizeBox = False
         MinimizeBox = False
         Name = "frmInfoViewer"
+        StartPosition = FormStartPosition.CenterScreen
         Text = "frmInfoViewer"
         ResumeLayout(False)
     End Sub

@@ -5,7 +5,6 @@ Imports System.Windows.Forms
 Imports System.Security.Cryptography
 
 Public Class Team_Overview
-    Private connectionString As String = "server=localhost;userid=root;password=091951;database=db_hrm"
     Private currentMode As String = ""
     Private bsEmployees As BindingSource
     Private rng As New Random()
@@ -97,29 +96,20 @@ Public Class Team_Overview
     End Sub
     Private Sub LoadDepartments()
         Try
-            Using dbcon As New MySqlConnection(connectionString)
-                dbcon.Open()
-                Using cmd As New MySqlCommand("SELECT DISTINCT DepartmentID, Name FROM tbldepartment ORDER BY Name", dbcon)
-                    Using reader = cmd.ExecuteReader()
-                        Dim dt As New DataTable()
-                        dt.Load(reader)
-                        dt.Columns.Add("Display", GetType(String), "DepartmentID + ' - ' + Name")
+            Dim query As String = "SELECT DISTINCT DepartmentID, Name FROM tbldepartment ORDER BY Name"
+            Dim dt As DataTable = HRMModule.ExecuteQuery(query)
+            dt.Columns.Add("Display", GetType(String), "DepartmentID + ' - ' + Name")
 
-                        cbDepartment.DisplayMember = "Display"
-                        cbDepartment.ValueMember = "DepartmentID"
-                        cbDepartment.DataSource = dt
-                    End Using
-                End Using
-            End Using
+            cbDepartment.DisplayMember = "Display"
+            cbDepartment.ValueMember = "DepartmentID"
+            cbDepartment.DataSource = dt
         Catch ex As Exception
             MessageBox.Show("Error loading departments: " & ex.Message)
         End Try
     End Sub
     Private Sub LoadOtherEmployeeInfo()
         Try
-            Using dbcon As New MySqlConnection(connectionString)
-                dbcon.Open()
-                Dim query As String = "
+            Dim query As String = "
                  SELECT
                  e.EmployeeID,
                  CONCAT(e.`First Name`, ' ', IFNULL(e.MiddleName, ''), ' ', e.LastName) AS FullName,
@@ -137,13 +127,9 @@ Public Class Team_Overview
                  LEFT JOIN tbljobdetails j ON e.EmployeeID = j.EmployeeID
                  LEFT JOIN tbldepartment d ON j.DepartmentID = d.DepartmentID;
 "
-                Dim adapter As New MySqlDataAdapter(query, dbcon)
-                Dim table As New DataTable()
-                adapter.Fill(table)
-                bsEmployees = New BindingSource()
-                bsEmployees.DataSource = table.DefaultView
-                dgvOtherInfo.DataSource = bsEmployees
-            End Using
+            bsEmployees = New BindingSource()
+            bsEmployees.DataSource = HRMModule.ExecuteQuery(query).DefaultView
+            dgvOtherInfo.DataSource = bsEmployees
 
             dgvOtherInfo.ScrollBars = ScrollBars.Both
             dgvOtherInfo.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
@@ -157,9 +143,7 @@ Public Class Team_Overview
             dgvOtherInfo.AllowUserToDeleteRows = False
             dgvOtherInfo.AutoResizeColumns()
             dgvOtherInfo.AutoResizeRows()
-            If dgvOtherInfo.Columns.Contains("FullName") Then
-                dgvOtherInfo.Columns("FullName").HeaderText = "Full Name"
-            End If
+            If dgvOtherInfo.Columns.Contains("FullName") Then dgvOtherInfo.Columns("FullName").HeaderText = "Full Name"
         Catch ex As Exception
             MessageBox.Show("Error loading other info: " & ex.Message)
         End Try
@@ -412,13 +396,12 @@ Public Class Team_Overview
         Return username
     End Function
     Private Function UsernameExists(username As String) As Boolean
-        Using dbcon As New MySqlConnection(connectionString)
-            dbcon.Open()
-            Using cmd As New MySqlCommand("SELECT COUNT(*) FROM tblaccount WHERE Username=@uname", dbcon)
-                cmd.Parameters.AddWithValue("@uname", username)
-                Return Convert.ToInt32(cmd.ExecuteScalar()) > 0
-            End Using
-        End Using
+        Dim query As String = "SELECT COUNT(*) FROM tblaccount WHERE Username=@uname"
+        Dim param As New List(Of MySqlParameter) From {
+            New MySqlParameter("@uname", username)
+        }
+        Dim result = HRMModule.ExecuteScalar(query, param)
+        Return Convert.ToInt32(result) > 0
     End Function
     Private Function GenerateTemporaryPassword(length As Integer) As String
         Const chars As String = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*"
@@ -525,173 +508,139 @@ Public Class Team_Overview
         currentMode = ""
     End Sub
     Private Sub btnDeleteEmployee_Click(sender As Object, e As EventArgs) Handles btnDeleteEmployee.Click
-        If String.IsNullOrWhiteSpace(txtEmployeeID.Text) Then
+        Dim empID As String = txtEmployeeID.Text.Trim()
+        If String.IsNullOrWhiteSpace(empID) Then
             MessageBox.Show("Select an employee to delete.")
             Return
         End If
 
-        If MessageBox.Show("Are you sure you want to delete this employee? This cannot be undone.", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) <> DialogResult.Yes Then
+        If MessageBox.Show("Are you sure you want to delete this employee? This cannot be undone.",
+                       "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) <> DialogResult.Yes Then
             Return
         End If
 
-        Using dbcon As New MySqlConnection(connectionString)
-            dbcon.Open()
-            Using tran = dbcon.BeginTransaction()
-                Try
-                    Using cmd As New MySqlCommand("DELETE FROM tblaccount WHERE EmployeeID=@eid", dbcon, tran)
-                        cmd.Parameters.AddWithValue("@eid", txtEmployeeID.Text)
-                        cmd.ExecuteNonQuery()
-                    End Using
+        Try
+            Dim paramAcc As New List(Of MySqlParameter) From {New MySqlParameter("@eid", empID)}
+            HRMModule.ExecuteNonQuery("DELETE FROM tblaccount WHERE EmployeeID=@eid", paramAcc)
 
-                    Using cmd As New MySqlCommand("DELETE FROM tblemergencycontact WHERE EmployeeID=@eid", dbcon, tran)
-                        cmd.Parameters.AddWithValue("@eid", txtEmployeeID.Text)
-                        cmd.ExecuteNonQuery()
-                    End Using
+            Dim paramEC As New List(Of MySqlParameter) From {New MySqlParameter("@eid", empID)}
+            HRMModule.ExecuteNonQuery("DELETE FROM tblemergencycontact WHERE EmployeeID=@eid", paramEC)
 
-                    Using cmd As New MySqlCommand("DELETE FROM tbljobdetails WHERE EmployeeID=@eid", dbcon, tran)
-                        cmd.Parameters.AddWithValue("@eid", txtEmployeeID.Text)
-                        cmd.ExecuteNonQuery()
-                    End Using
+            Dim paramJob As New List(Of MySqlParameter) From {New MySqlParameter("@eid", empID)}
+            HRMModule.ExecuteNonQuery("DELETE FROM tbljobdetails WHERE EmployeeID=@eid", paramJob)
 
-                    Using cmd As New MySqlCommand("DELETE FROM tblemployee WHERE EmployeeID=@eid", dbcon, tran)
-                        cmd.Parameters.AddWithValue("@eid", txtEmployeeID.Text)
-                        cmd.ExecuteNonQuery()
-                    End Using
+            Dim paramEmp As New List(Of MySqlParameter) From {New MySqlParameter("@eid", empID)}
+            HRMModule.ExecuteNonQuery("DELETE FROM tblemployee WHERE EmployeeID=@eid", paramEmp)
 
-                    tran.Commit()
-                    MessageBox.Show("Employee deleted successfully.")
-                    ClearAllTextboxes()
-                    DisableAllTextboxes()
-                    SetButtonVisibility("Default")
-                    LoadOtherEmployeeInfo()
-                Catch ex As Exception
-                    tran.Rollback()
-                    MessageBox.Show("Error deleting employee: " & ex.Message)
-                End Try
-            End Using
-        End Using
+            MessageBox.Show("Employee deleted successfully.")
+            ClearAllTextboxes()
+            DisableAllTextboxes()
+            SetButtonVisibility("Default")
+            LoadOtherEmployeeInfo()
+        Catch ex As Exception
+            MessageBox.Show("Error deleting employee: " & ex.Message)
+        End Try
     End Sub
+
     Private Function GetNextEmployeeID() As Integer
         Try
-            Using dbcon As New MySqlConnection(connectionString)
-                dbcon.Open()
+            Dim sql As String = "SELECT EmployeeID FROM tblemployee ORDER BY EmployeeID DESC LIMIT 1"
+            Dim lastID As Object = HRMModule.ExecuteScalar(sql, Nothing)
+            If lastID Is Nothing OrElse lastID Is DBNull.Value Then Return 101
 
-                Dim sql As String = "SELECT EmployeeID FROM tblemployee ORDER BY EmployeeID DESC LIMIT 1"
-                Using cmd As New MySqlCommand(sql, dbcon)
-                    Dim lastID As Object = cmd.ExecuteScalar()
-
-                    If lastID Is Nothing OrElse lastID Is DBNull.Value Then
-                        Return 101
-                    End If
-
-                    Dim numericID As Integer
-
-                    If Integer.TryParse(lastID.ToString(), numericID) Then
-                        Return numericID + 1
-                    Else
-                        Return 101
-                    End If
-                End Using
-            End Using
-
+            Dim numericID As Integer
+            If Integer.TryParse(lastID.ToString(), numericID) Then
+                Return numericID + 1
+            Else
+                Return 101
+            End If
         Catch ex As Exception
             MessageBox.Show("Error generating Employee ID: " & ex.Message)
             Return 101
         End Try
     End Function
+
     Private Function GetNextDepartmentID() As String
         Try
-            Using dbcon As New MySqlConnection(connectionString)
-                dbcon.Open()
-                Dim sql As String = "SELECT MAX(CAST(SUBSTRING(DepartmentID, 2) AS UNSIGNED)) FROM tbldepartment"
-                Using cmd As New MySqlCommand(sql, dbcon)
-                    Dim result = cmd.ExecuteScalar()
-                    Dim nextID As Integer = If(result Is DBNull.Value OrElse result Is Nothing, 22, Convert.ToInt32(result) + 1)
-                    Return "D" & nextID.ToString()
-                End Using
-            End Using
+            Dim sql As String = "SELECT MAX(CAST(SUBSTRING(DepartmentID, 2) AS UNSIGNED)) FROM tbldepartment"
+            Dim result As Object = HRMModule.ExecuteScalar(sql, Nothing)
+            Dim nextID As Integer = If(result Is Nothing OrElse result Is DBNull.Value, 22, Convert.ToInt32(result) + 1)
+            Return "D" & nextID.ToString()
         Catch ex As Exception
             MessageBox.Show("Error generating Department ID: " & ex.Message)
             Return "D22"
         End Try
     End Function
+
     Private Function GetNextJobID() As String
         Try
-            Using dbcon As New MySqlConnection(connectionString)
-                dbcon.Open()
-                Dim sql As String = "SELECT JobID FROM tbljobdetails ORDER BY JobID DESC LIMIT 1"
-                Using cmd As New MySqlCommand(sql, dbcon)
-                    Dim lastID As Object = cmd.ExecuteScalar()
-                    If lastID Is Nothing OrElse lastID Is DBNull.Value Then Return "J0122"
-                    Dim numericPart As Integer = 0
-                    Dim digits = New String(lastID.ToString().Where(AddressOf Char.IsDigit).ToArray())
-                    If Integer.TryParse(digits, numericPart) Then numericPart += 1 Else numericPart = 122
-                    Return "J" & numericPart.ToString("D4")
-                End Using
-            End Using
+            Dim sql As String = "SELECT JobID FROM tbljobdetails ORDER BY JobID DESC LIMIT 1"
+            Dim lastID As Object = HRMModule.ExecuteScalar(sql, Nothing)
+            If lastID Is Nothing OrElse lastID Is DBNull.Value Then Return "J0122"
+
+            Dim digits = New String(lastID.ToString().Where(AddressOf Char.IsDigit).ToArray())
+            Dim numericPart As Integer = 0
+            If Integer.TryParse(digits, numericPart) Then numericPart += 1 Else numericPart = 122
+            Return "J" & numericPart.ToString("D4")
         Catch ex As Exception
             MessageBox.Show("Error generating Job ID: " & ex.Message)
             Return "J0122"
         End Try
     End Function
+
     Private Function GetNextECID() As String
         Try
-            Using dbcon As New MySqlConnection(connectionString)
-                dbcon.Open()
-                Dim sql As String = "SELECT EmergencyContactID FROM tblemergencycontact ORDER BY EmergencyContactID DESC LIMIT 1"
-                Using cmd As New MySqlCommand(sql, dbcon)
-                    Dim lastID As Object = cmd.ExecuteScalar()
-                    If lastID Is Nothing OrElse lastID Is DBNull.Value Then Return "EC0122"
-                    Dim numericPart As Integer = 0
-                    Dim digits = New String(lastID.ToString().Where(AddressOf Char.IsDigit).ToArray())
-                    If Integer.TryParse(digits, numericPart) Then numericPart += 1 Else numericPart = 122
-                    Return "EC" & numericPart.ToString("D4")
-                End Using
-            End Using
+            Dim sql As String = "SELECT EmergencyContactID FROM tblemergencycontact ORDER BY EmergencyContactID DESC LIMIT 1"
+            Dim lastID As Object = HRMModule.ExecuteScalar(sql, Nothing)
+            If lastID Is Nothing OrElse lastID Is DBNull.Value Then Return "EC0122"
+
+            Dim digits = New String(lastID.ToString().Where(AddressOf Char.IsDigit).ToArray())
+            Dim numericPart As Integer = 0
+            If Integer.TryParse(digits, numericPart) Then numericPart += 1 Else numericPart = 122
+            Return "EC" & numericPart.ToString("D4")
         Catch ex As Exception
             MessageBox.Show("Error generating EC ID: " & ex.Message)
             Return "EC0122"
         End Try
     End Function
+
     Private Function GetNextUserID() As String
         Try
-            Using dbcon As New MySqlConnection(connectionString)
-                dbcon.Open()
-                Dim sql As String = "SELECT UserID FROM tblaccount ORDER BY UserID DESC LIMIT 1"
-                Using cmd As New MySqlCommand(sql, dbcon)
-                    Dim lastID As Object = cmd.ExecuteScalar()
-                    If lastID Is Nothing OrElse lastID Is DBNull.Value Then Return "U1000"
-                    Dim numericPart As Integer = 0
-                    Dim digits = New String(lastID.ToString().Where(AddressOf Char.IsDigit).ToArray())
-                    If Integer.TryParse(digits, numericPart) Then numericPart += 1 Else numericPart = 1000
-                    Return "U" & numericPart.ToString("D4")
-                End Using
-            End Using
+            Dim sql As String = "SELECT UserID FROM tblaccount ORDER BY UserID DESC LIMIT 1"
+            Dim lastID As Object = HRMModule.ExecuteScalar(sql, Nothing)
+            If lastID Is Nothing OrElse lastID Is DBNull.Value Then Return "U1000"
+
+            Dim digits = New String(lastID.ToString().Where(AddressOf Char.IsDigit).ToArray())
+            Dim numericPart As Integer = 0
+            If Integer.TryParse(digits, numericPart) Then numericPart += 1 Else numericPart = 1000
+            Return "U" & numericPart.ToString("D4")
         Catch ex As Exception
             MessageBox.Show("Error generating User ID: " & ex.Message)
             Return "U1000"
         End Try
     End Function
+
+
     Private Sub SaveNewEmployee()
         Dim newEmployeeID As String = If(String.IsNullOrWhiteSpace(txtEmployeeID.Text), GetNextEmployeeID(), txtEmployeeID.Text)
-        Dim newDepartmentID As String = txtDepartmentID.Text
         Dim newJobID As String = If(String.IsNullOrWhiteSpace(txtJobID.Text), GetNextJobID(), txtJobID.Text)
         Dim newUserID As String = If(String.IsNullOrWhiteSpace(txtUserID.Text), GetNextUserID(), txtUserID.Text)
         Dim newECID As String = If(String.IsNullOrWhiteSpace(txtECContactID.Text), GetNextECID(), txtECContactID.Text)
+        Dim newDepartmentID As String = txtDepartmentID.Text
 
         txtECContactID.Text = newECID
         Dim hashedPassword As String = HashPassword(txtPassword.Text)
 
-        Using dbcon As New MySqlConnection(connectionString)
+        Dim age As Integer = DateTime.Now.Year - dtpBirthDate.Value.Year
+        If DateTime.Now < dtpBirthDate.Value.AddYears(age) Then age -= 1
+
+        Using dbcon As MySqlConnection = HRMModule.GetConnection()
             dbcon.Open()
             Using tran = dbcon.BeginTransaction()
                 Try
                     Using cmd As New MySqlCommand(
                     "INSERT INTO tblemployee(EmployeeID, `First Name`, MiddleName, LastName, BirthDate, Age, Sex, `Civil Status`, `Contact Number`, `Email Address`, Address) 
                      VALUES (@eid,@fname,@mname,@lname,@bdate,@age,@sex,@civil,@phone,@email,@address)", dbcon, tran)
-
-                        Dim age As Integer = 0
-                        Integer.TryParse(txtAge.Text, age)
 
                         cmd.Parameters.AddWithValue("@eid", newEmployeeID)
                         cmd.Parameters.AddWithValue("@fname", txtFirstName.Text)
@@ -704,7 +653,6 @@ Public Class Team_Overview
                         cmd.Parameters.AddWithValue("@phone", txtPhone.Text)
                         cmd.Parameters.AddWithValue("@email", txtEmail.Text)
                         cmd.Parameters.AddWithValue("@address", txtAddress.Text)
-
                         cmd.ExecuteNonQuery()
                     End Using
 
@@ -765,7 +713,6 @@ Public Class Team_Overview
                         cmd.Parameters.AddWithValue("@jtitle", txtJobTitle.Text)
                         cmd.Parameters.AddWithValue("@yos", yos)
                         cmd.Parameters.AddWithValue("@did", newDepartmentID)
-
                         cmd.ExecuteNonQuery()
                     End Using
 
@@ -779,6 +726,8 @@ Public Class Team_Overview
             End Using
         End Using
     End Sub
+
+
     Private Sub UpdateEmployee()
         Dim hashedPassword As String = If(String.IsNullOrWhiteSpace(txtPassword.Text), Nothing, HashPassword(txtPassword.Text))
 
@@ -786,7 +735,7 @@ Public Class Team_Overview
         Dim departmentID As String = txtDepartmentID.Text
         Dim jobID As String = txtJobID.Text
 
-        Using dbcon As New MySqlConnection(connectionString)
+        Using dbcon As MySqlConnection = HRMModule.GetConnection()
             dbcon.Open()
             Using tran = dbcon.BeginTransaction()
                 Try
@@ -863,6 +812,7 @@ Public Class Team_Overview
             End Using
         End Using
     End Sub
+
     Private Function ValidateDates() As Boolean
         If dtpBirthDate.Value > DateTime.Today Then
             MessageBox.Show("Birth Date cannot be in the future.")
@@ -1017,17 +967,21 @@ Public Class Team_Overview
         Return True
     End Function
     Private Function EmailExists(email As String) As Boolean
-        Using dbcon As New MySqlConnection(connectionString)
+        Using dbcon As MySqlConnection = HRMModule.GetConnection()
             dbcon.Open()
-            Using cmd As New MySqlCommand(
-            "SELECT COUNT(*) FROM tblemployee WHERE `Email Address`=@email" &
-            If(currentMode = "Edit", " AND EmployeeID<>@eid", ""), dbcon)
+            Dim sql As String = "SELECT COUNT(*) FROM tblemployee WHERE `Email Address`=@email"
+            If currentMode = "Edit" Then
+                sql &= " AND EmployeeID<>@eid"
+            End If
+
+            Using cmd As New MySqlCommand(sql, dbcon)
                 cmd.Parameters.AddWithValue("@email", email)
                 If currentMode = "Edit" Then cmd.Parameters.AddWithValue("@eid", txtEmployeeID.Text)
                 Return Convert.ToInt32(cmd.ExecuteScalar()) > 0
             End Using
         End Using
     End Function
+
     Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
         Employee_Dashboard.Show()
         Me.Hide()
@@ -1080,22 +1034,13 @@ Public Class Team_Overview
         Me.Hide()
     End Sub
 
-    Private Sub btnSignOut_Click_1(sender As Object, e As EventArgs) Handles btnSignOut.Click
-        Dim result = MessageBox.Show(
-                "Are you sure you want to sign out?",
-                "Confirm Sign Out",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question
-            )
+    Private Sub btnSignout_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to sign out?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
         If result = DialogResult.Yes Then
-            Login_frm.ClearLoginFields()
-            LoggedInEmployeeID = ""
-            LoggedInUsername = ""
-            LoggedInUserType = ""
-            Login_frm.Show()
-            Hide()
+            HRMModule.SignOut(Me)
+            MessageBox.Show("You have been signed out.", "Logged Out", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
-
 
 End Class

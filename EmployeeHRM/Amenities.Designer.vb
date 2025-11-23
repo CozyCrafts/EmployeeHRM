@@ -23,7 +23,7 @@ Partial Class Amenities
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Amenities))
-        Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Panel1 = New Panel()
         btnSignOut = New FontAwesome.Sharp.IconButton()
         lblAmenities = New Label()
@@ -42,7 +42,7 @@ Partial Class Amenities
         lblLeaveManagement = New Label()
         lblSalary = New Label()
         Label3 = New Label()
-        lblDashboard = New Label()
+        lblEmpDashboard = New Label()
         lblMain = New Label()
         adminheader_pnl = New Panel()
         Label2 = New Label()
@@ -92,7 +92,7 @@ Partial Class Amenities
         Panel1.Controls.Add(lblLeaveManagement)
         Panel1.Controls.Add(lblSalary)
         Panel1.Controls.Add(Label3)
-        Panel1.Controls.Add(lblDashboard)
+        Panel1.Controls.Add(lblEmpDashboard)
         Panel1.Controls.Add(lblMain)
         Panel1.Location = New Point(-6, -6)
         Panel1.Name = "Panel1"
@@ -294,16 +294,16 @@ Partial Class Amenities
         Label3.TabIndex = 3
         Label3.Text = "OVERVIEW"
         ' 
-        ' lblDashboard
+        ' lblEmpDashboard
         ' 
-        lblDashboard.AutoSize = True
-        lblDashboard.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblDashboard.ForeColor = Color.White
-        lblDashboard.Location = New Point(53, 160)
-        lblDashboard.Name = "lblDashboard"
-        lblDashboard.Size = New Size(138, 27)
-        lblDashboard.TabIndex = 2
-        lblDashboard.Text = "Dashboard"
+        lblEmpDashboard.AutoSize = True
+        lblEmpDashboard.Font = New Font("Century Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        lblEmpDashboard.ForeColor = Color.White
+        lblEmpDashboard.Location = New Point(53, 160)
+        lblEmpDashboard.Name = "lblEmpDashboard"
+        lblEmpDashboard.Size = New Size(138, 27)
+        lblEmpDashboard.TabIndex = 2
+        lblEmpDashboard.Text = "Dashboard"
         ' 
         ' lblMain
         ' 
@@ -375,14 +375,14 @@ Partial Class Amenities
         dgvAmenities.AllowUserToResizeRows = False
         dgvAmenities.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         dgvAmenities.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = SystemColors.Window
-        DataGridViewCellStyle1.Font = New Font("Century Gothic", 11F, FontStyle.Bold)
-        DataGridViewCellStyle1.ForeColor = SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = DataGridViewTriState.False
-        dgvAmenities.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = SystemColors.Window
+        DataGridViewCellStyle2.Font = New Font("Century Gothic", 11F, FontStyle.Bold)
+        DataGridViewCellStyle2.ForeColor = SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = DataGridViewTriState.False
+        dgvAmenities.DefaultCellStyle = DataGridViewCellStyle2
         dgvAmenities.Location = New Point(34, 110)
         dgvAmenities.Margin = New Padding(4, 3, 4, 3)
         dgvAmenities.Name = "dgvAmenities"
@@ -625,7 +625,7 @@ Partial Class Amenities
     Friend WithEvents lblLeaveManagement As Label
     Friend WithEvents lblSalary As Label
     Friend WithEvents Label3 As Label
-    Friend WithEvents lblDashboard As Label
+    Friend WithEvents lblEmpDashboard As Label
     Friend WithEvents lblMain As Label
     Friend WithEvents adminheader_pnl As Panel
     Friend WithEvents Label2 As Label
