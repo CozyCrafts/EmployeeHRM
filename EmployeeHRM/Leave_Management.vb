@@ -17,6 +17,11 @@ Public Class Leave_Management
             lblDepartment.Visible = False
             lblAmenities.Visible = False
         End If
+        dtpDurationDateFrom.Format = DateTimePickerFormat.Custom
+        dtpDurationDateFrom.CustomFormat = "yyyy-MM-dd"
+
+        dtpDurationDateTo.Format = DateTimePickerFormat.Custom
+        dtpDurationDateTo.CustomFormat = "yyyy-MM-dd"
         Try
             LoadLeaveHistory()
             AddHandler dgvLeaveHistory.SelectionChanged, AddressOf dgvLeaveHistory_SelectionChanged
@@ -104,28 +109,29 @@ Public Class Leave_Management
         dtpDurationDateTo.Enabled = True
     End Sub
     Private Sub PopulateLeaveDetails(row As DataRow)
-        txtLeaveID.Text = row("LeaveID").ToString()
-        txtLeaveType.Text = row("LeaveType").ToString()
-        txtLeaveReason.Text = row("Reason").ToString()
-        txtStatusLeave.Text = row("Status").ToString()
+        txtLeaveID.Text = If(IsDBNull(row("LeaveID")), "", row("LeaveID").ToString())
+        txtLeaveType.Text = If(IsDBNull(row("LeaveType")), "", row("LeaveType").ToString())
+        txtLeaveReason.Text = If(IsDBNull(row("Reason")), "", row("Reason").ToString())
+        txtStatusLeave.Text = If(IsDBNull(row("Status")), "", row("Status").ToString())
         txtApprovedBy.Text = If(IsDBNull(row("ApprovedBy")), "", row("ApprovedBy").ToString())
-        txtEmployeeID.Text = row("EmployeeID").ToString()
-        txtEmployeeName.Text = row("EmployeeName").ToString()
+        txtEmployeeID.Text = If(IsDBNull(row("EmployeeID")), "", row("EmployeeID").ToString())
+        txtEmployeeName.Text = If(IsDBNull(row("EmployeeName")), "", row("EmployeeName").ToString())
 
         Dim fromDate As DateTime
-        If DateTime.TryParse(row("DurationDateFrom").ToString(), fromDate) Then
+        If Not IsDBNull(row("DurationDateFrom")) AndAlso DateTime.TryParse(row("DurationDateFrom").ToString(), fromDate) Then
             dtpDurationDateFrom.Value = fromDate
         Else
             dtpDurationDateFrom.Value = DateTime.Today
         End If
 
         Dim toDate As DateTime
-        If DateTime.TryParse(row("DurationDateTo").ToString(), toDate) Then
+        If Not IsDBNull(row("DurationDateTo")) AndAlso DateTime.TryParse(row("DurationDateTo").ToString(), toDate) Then
             dtpDurationDateTo.Value = toDate
         Else
             dtpDurationDateTo.Value = DateTime.Today
         End If
     End Sub
+
     Private Sub dgvLeaveHistory_SelectionChanged(sender As Object, e As EventArgs)
         If dgvLeaveHistory.SelectedRows.Count > 0 Then
             currentSelectedRowIndex = dgvLeaveHistory.SelectedRows(0).Index
