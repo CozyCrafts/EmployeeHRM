@@ -52,7 +52,6 @@ Public Class MyProfile
     End Sub
     Private Sub LoadMyProfile()
         Try
-            ' Use consistent aliases for all columns
             Dim query As String = "
             SELECT 
                 e.EmployeeID,
@@ -102,7 +101,7 @@ Public Class MyProfile
 
             Dim row = dt.Rows(0)
 
-            ' Personal Info
+
             txtEmployeeID.Text = If(row("EmployeeID")?.ToString(), "")
             txtFirstName.Text = If(row("FirstName")?.ToString(), "")
             txtMiddleName.Text = If(row("MiddleName")?.ToString(), "")
@@ -120,7 +119,6 @@ Public Class MyProfile
                 dtpBirthDate.Value = birthDateValue
             End If
 
-            ' Job Info
             txtJobID.Text = If(row("JobID")?.ToString(), "")
             txtJobTitle.Text = If(row("JobTitle")?.ToString(), "")
             txtYearsOfSevice.Text = If(row("YearsOfService")?.ToString(), "")
@@ -132,24 +130,21 @@ Public Class MyProfile
                 dtpDateHired.Value = dateHiredValue
             End If
 
-            ' Department
             txtDepartmentID.Text = If(row("DepartmentID")?.ToString(), "")
             txtDepartment.Text = If(row("DepartmentName")?.ToString(), "")
 
-            ' Account Info
+
             txtUserID.Text = If(row("UserID")?.ToString(), "")
             txtUsername.Text = If(row("Username")?.ToString(), "")
             txtPassword.Text = If(row("Password")?.ToString(), "")
             cbUserType.Text = If(row("UserType")?.ToString(), "")
 
-            ' Emergency Contact
             txtECContactID.Text = If(row("EmergencyContactID")?.ToString(), "")
             txtECName.Text = If(row("ECName")?.ToString(), "")
             txtECAddress.Text = If(row("ECAddress")?.ToString(), "")
             txtECPhone.Text = If(row("ECPhone")?.ToString(), "")
             txtECRelationship.Text = If(row("ECRelationship")?.ToString(), "")
 
-            ' Lock fields after loading
             LockAllFields()
 
         Catch ex As Exception
