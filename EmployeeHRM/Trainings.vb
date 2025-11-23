@@ -7,7 +7,9 @@ Public Class Trainings
     Private originalDateStarted As Date
     Private originalDateCompleted As Date
     Private Sub Trainings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         If LoggedInUserType = "Staff" Then
+            lblManagement.Visible = False
             lblTeamOverview.Visible = False
             lblAttendanceTracker.Visible = False
             lblLeaveApproval.Visible = False
@@ -70,6 +72,8 @@ Public Class Trainings
         txtTrainingTitle.ReadOnly = False
         txtTrainingType.ReadOnly = False
         txtTrainingDescription.ReadOnly = False
+        dtpStarted.Enabled = (originalStatus <> "Completed")
+        dtpCompleted.Enabled = (originalStatus <> "Completed")
         SetRadioButtonOptions(originalStatus)
     End Sub
     Private Sub SetRadioButtonOptions(currentStatus As String)
@@ -78,7 +82,7 @@ Public Class Trainings
                 rbPlanned.Enabled = False
                 rbInProgress.Enabled = True
                 rbCompleted.Enabled = False
-                rbPostponed.Enabled = False
+                rbPostponed.Enabled = True
             Case "In Progress"
                 rbPlanned.Enabled = False
                 rbInProgress.Enabled = False
@@ -102,11 +106,32 @@ Public Class Trainings
     Private Sub btnSaveTraining_Click(sender As Object, e As EventArgs) Handles btnSaveTraining.Click
         If Not isEditing Then Return
 
+
         Dim selectedRow As DataGridViewRow = dgvTrainingHistory.CurrentRow
         Dim trainingID As String = selectedRow.Cells("TrainingID").Value.ToString()
+
+
+        Try
+            OpenCon()
+            Dim checkQuery As String = "SELECT COUNT(*) FROM tbltrainingdevelopment WHERE TrainingID=@trainingID"
+            dbcmd = New MySqlCommand(checkQuery, dbcon)
+            dbcmd.Parameters.AddWithValue("@trainingID", trainingID)
+            Dim exists As Integer = Convert.ToInt32(dbcmd.ExecuteScalar())
+
+            If exists > 0 Then
+                MessageBox.Show("This training already exists and is not new. You cannot save as new.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                LockControls()
+                isEditing = False
+                Return
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error validating training: " & ex.Message)
+            Return
+        End Try
+
         Dim newStatus As String = If(rbPlanned.Checked, "Planned",
-                                 If(rbInProgress.Checked, "In Progress",
-                                 If(rbCompleted.Checked, "Completed", "Postponed")))
+                             If(rbInProgress.Checked, "In Progress",
+                             If(rbCompleted.Checked, "Completed", "Postponed")))
 
         Dim dateStarted As Date = originalDateStarted
         Dim dateCompleted As Date = originalDateCompleted
@@ -127,10 +152,10 @@ Public Class Trainings
 
         Try
             Dim query As String = "
-                UPDATE tbltrainingdevelopment
-                SET Status=@status, DateStarted=@dateStarted, DateCompleted=@dateCompleted
-                WHERE TrainingID=@trainingID
-            "
+            UPDATE tbltrainingdevelopment
+            SET Status=@status, DateStarted=@dateStarted, DateCompleted=@dateCompleted
+            WHERE TrainingID=@trainingID
+        "
             dbcmd = New MySqlCommand(query, dbcon)
             dbcmd.Parameters.AddWithValue("@status", newStatus)
             dbcmd.Parameters.AddWithValue("@dateStarted", dateStarted)
@@ -147,12 +172,14 @@ Public Class Trainings
             MessageBox.Show("Error updating training: " & ex.Message)
         End Try
     End Sub
+
     Private Sub btnCancelTraining_Click(sender As Object, e As EventArgs) Handles btnCancelTraining.Click
         LoadTrainings()
         LockControls()
         isEditing = False
     End Sub
     Private Sub dgvTrainingHistory_SelectionChanged(sender As Object, e As EventArgs) Handles dgvTrainingHistory.SelectionChanged
+        If isEditing Then Return
         If dgvTrainingHistory.CurrentRow Is Nothing Then Return
 
         Dim row As DataGridViewRow = dgvTrainingHistory.CurrentRow
@@ -160,35 +187,61 @@ Public Class Trainings
         txtTrainingTitle.Text = row.Cells("TrainingTitle").Value.ToString()
         txtTrainingType.Text = row.Cells("TrainingType").Value.ToString()
         txtTrainingDescription.Text = row.Cells("Description").Value.ToString()
+
         originalStatus = row.Cells("Status").Value.ToString()
         rbInProgress.Checked = (originalStatus = "In Progress")
         rbPlanned.Checked = (originalStatus = "Planned")
         rbCompleted.Checked = (originalStatus = "Completed")
         rbPostponed.Checked = (originalStatus = "Postponed")
-        originalDateStarted = If(IsDBNull(row.Cells("DateStarted").Value), Date.Now, CDate(row.Cells("DateStarted").Value))
-        originalDateCompleted = If(IsDBNull(row.Cells("DateCompleted").Value), Date.Now, CDate(row.Cells("DateCompleted").Value))
+
+        Dim tempDate As DateTime
+        If Not IsDBNull(row.Cells("DateStarted").Value) AndAlso DateTime.TryParse(row.Cells("DateStarted").Value.ToString(), tempDate) Then
+            originalDateStarted = tempDate
+        Else
+            originalDateStarted = Date.Now
+        End If
+
+        If Not IsDBNull(row.Cells("DateCompleted").Value) AndAlso DateTime.TryParse(row.Cells("DateCompleted").Value.ToString(), tempDate) Then
+            originalDateCompleted = tempDate
+        Else
+            originalDateCompleted = Date.Now
+        End If
+
         dtpStarted.Value = originalDateStarted
         dtpCompleted.Value = originalDateCompleted
 
-        LockControls()
-        If originalStatus <> "Completed" Then
-            btnUpdateTraining.Visible = True
-        Else
-            btnUpdateTraining.Visible = False
-        End If
+        btnUpdateTraining.Visible = True
         btnSaveTraining.Visible = False
         btnCancelTraining.Visible = False
+
+        txtTrainingTitle.ReadOnly = True
+        txtTrainingType.ReadOnly = True
+        txtTrainingDescription.ReadOnly = True
+        dtpStarted.Enabled = False
+        dtpCompleted.Enabled = False
+        rbPlanned.Enabled = False
+        rbInProgress.Enabled = False
+        rbCompleted.Enabled = False
+        rbPostponed.Enabled = False
     End Sub
+
+
+
     Private Sub rbStatus_CheckedChanged(sender As Object, e As EventArgs) Handles rbInProgress.CheckedChanged, rbCompleted.CheckedChanged
-        If isEditing Then
-            If rbInProgress.Checked Then
-                dtpStarted.Value = Date.Now
-            End If
-            If rbCompleted.Checked Then
-                dtpCompleted.Value = Date.Now
-            End If
+        If Not isEditing Then Return
+
+        If rbInProgress.Checked And originalStatus <> "Completed" Then
+            dtpStarted.Value = Date.Now
+            dtpStarted.Enabled = True
+        End If
+
+        If rbCompleted.Checked Then
+            dtpCompleted.Value = Date.Now
+            dtpCompleted.Enabled = False
+            dtpStarted.Enabled = False
         End If
     End Sub
+
     Private Sub lblDashboard_Click(sender As Object, e As EventArgs) Handles lblDashboard.Click
         Employee_Dashboard.Show()
         Me.Hide()
@@ -240,7 +293,6 @@ Public Class Trainings
         Amenities.Show()
         Me.Hide()
     End Sub
-
     Private Sub btnSignOut_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
         Dim result = MessageBox.Show(
             "Are you sure you want to sign out?",

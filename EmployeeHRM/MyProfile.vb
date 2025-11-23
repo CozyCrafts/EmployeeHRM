@@ -44,6 +44,7 @@ Public Class MyProfile
     End Sub
     Private Sub MyProfile_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If LoggedInUserType = "Staff" Then
+            lblManagement.Visible = False
             lblTeamOverview.Visible = False
             lblAttendanceTracker.Visible = False
             lblLeaveApproval.Visible = False
