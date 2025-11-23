@@ -355,10 +355,10 @@ Partial Class Salary
         ' GroupBox4
         ' 
         GroupBox4.Controls.Add(dgvSalaryHistory)
-        GroupBox4.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        GroupBox4.Location = New Point(391, 683)
+        GroupBox4.Font = New Font("Century Gothic", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        GroupBox4.Location = New Point(391, 759)
         GroupBox4.Name = "GroupBox4"
-        GroupBox4.Size = New Size(1335, 327)
+        GroupBox4.Size = New Size(1320, 363)
         GroupBox4.TabIndex = 96
         GroupBox4.TabStop = False
         GroupBox4.Text = "Salary History"
@@ -366,10 +366,10 @@ Partial Class Salary
         ' dgvSalaryHistory
         ' 
         dgvSalaryHistory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        dgvSalaryHistory.Location = New Point(17, 51)
+        dgvSalaryHistory.Location = New Point(34, 47)
         dgvSalaryHistory.Name = "dgvSalaryHistory"
         dgvSalaryHistory.RowHeadersWidth = 51
-        dgvSalaryHistory.Size = New Size(1294, 253)
+        dgvSalaryHistory.Size = New Size(1255, 276)
         dgvSalaryHistory.TabIndex = 0
         ' 
         ' GroupBox3
@@ -395,10 +395,10 @@ Partial Class Salary
         GroupBox3.Controls.Add(txtGrossSalary)
         GroupBox3.Controls.Add(dtpPaymentDate)
         GroupBox3.Controls.Add(Label23)
-        GroupBox3.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        GroupBox3.Location = New Point(391, 114)
+        GroupBox3.Font = New Font("Century Gothic", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        GroupBox3.Location = New Point(391, 115)
         GroupBox3.Name = "GroupBox3"
-        GroupBox3.Size = New Size(1335, 567)
+        GroupBox3.Size = New Size(1320, 638)
         GroupBox3.TabIndex = 97
         GroupBox3.TabStop = False
         GroupBox3.Text = "Payroll Computation"
@@ -407,7 +407,7 @@ Partial Class Salary
         ' 
         rbSalarySent.AutoSize = True
         rbSalarySent.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        rbSalarySent.Location = New Point(189, 458)
+        rbSalarySent.Location = New Point(189, 515)
         rbSalarySent.Name = "rbSalarySent"
         rbSalarySent.Size = New Size(209, 27)
         rbSalarySent.TabIndex = 114
@@ -418,7 +418,7 @@ Partial Class Salary
         ' txtEmployeeID
         ' 
         txtEmployeeID.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtEmployeeID.Location = New Point(188, 62)
+        txtEmployeeID.Location = New Point(188, 94)
         txtEmployeeID.Name = "txtEmployeeID"
         txtEmployeeID.Size = New Size(335, 30)
         txtEmployeeID.TabIndex = 113
@@ -427,7 +427,7 @@ Partial Class Salary
         ' 
         Label5.AutoSize = True
         Label5.Font = New Font("Century Gothic", 11F)
-        Label5.Location = New Point(96, 158)
+        Label5.Location = New Point(96, 195)
         Label5.Name = "Label5"
         Label5.Size = New Size(87, 22)
         Label5.TabIndex = 105
@@ -436,7 +436,7 @@ Partial Class Salary
         ' txtJobTitle
         ' 
         txtJobTitle.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtJobTitle.Location = New Point(189, 150)
+        txtJobTitle.Location = New Point(189, 187)
         txtJobTitle.Name = "txtJobTitle"
         txtJobTitle.Size = New Size(335, 30)
         txtJobTitle.TabIndex = 104
@@ -444,7 +444,7 @@ Partial Class Salary
         ' txtNetPay
         ' 
         txtNetPay.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtNetPay.Location = New Point(189, 370)
+        txtNetPay.Location = New Point(189, 422)
         txtNetPay.Name = "txtNetPay"
         txtNetPay.Size = New Size(335, 30)
         txtNetPay.TabIndex = 112
@@ -463,10 +463,10 @@ Partial Class Salary
         GroupBox2.Controls.Add(txtDailyRate)
         GroupBox2.Controls.Add(Label22)
         GroupBox2.Controls.Add(txtBaseSalary)
-        GroupBox2.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        GroupBox2.Location = New Point(545, 34)
+        GroupBox2.Font = New Font("Century Gothic", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        GroupBox2.Location = New Point(545, 61)
         GroupBox2.Name = "GroupBox2"
-        GroupBox2.Size = New Size(768, 201)
+        GroupBox2.Size = New Size(751, 201)
         GroupBox2.TabIndex = 93
         GroupBox2.TabStop = False
         GroupBox2.Text = "Salary"
@@ -475,7 +475,7 @@ Partial Class Salary
         ' 
         Label13.AutoSize = True
         Label13.Font = New Font("Century Gothic", 11F)
-        Label13.Location = New Point(441, 58)
+        Label13.Location = New Point(430, 58)
         Label13.Name = "Label13"
         Label13.Size = New Size(113, 22)
         Label13.TabIndex = 132
@@ -484,7 +484,7 @@ Partial Class Salary
         ' txtTotalHours
         ' 
         txtTotalHours.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtTotalHours.Location = New Point(560, 50)
+        txtTotalHours.Location = New Point(549, 50)
         txtTotalHours.Name = "txtTotalHours"
         txtTotalHours.Size = New Size(183, 30)
         txtTotalHours.TabIndex = 131
@@ -493,7 +493,7 @@ Partial Class Salary
         ' 
         Label12.AutoSize = True
         Label12.Font = New Font("Century Gothic", 11F)
-        Label12.Location = New Point(391, 143)
+        Label12.Location = New Point(380, 143)
         Label12.Name = "Label12"
         Label12.Size = New Size(163, 22)
         Label12.TabIndex = 129
@@ -502,7 +502,7 @@ Partial Class Salary
         ' txtExceededHours
         ' 
         txtExceededHours.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtExceededHours.Location = New Point(560, 132)
+        txtExceededHours.Location = New Point(549, 132)
         txtExceededHours.Name = "txtExceededHours"
         txtExceededHours.Size = New Size(183, 30)
         txtExceededHours.TabIndex = 130
@@ -511,7 +511,7 @@ Partial Class Salary
         ' 
         Label11.AutoSize = True
         Label11.Font = New Font("Century Gothic", 11F)
-        Label11.Location = New Point(44, 145)
+        Label11.Location = New Point(33, 145)
         Label11.Name = "Label11"
         Label11.Size = New Size(108, 22)
         Label11.TabIndex = 97
@@ -520,7 +520,7 @@ Partial Class Salary
         ' txtAllowance
         ' 
         txtAllowance.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtAllowance.Location = New Point(158, 96)
+        txtAllowance.Location = New Point(147, 96)
         txtAllowance.Name = "txtAllowance"
         txtAllowance.Size = New Size(219, 30)
         txtAllowance.TabIndex = 96
@@ -529,7 +529,7 @@ Partial Class Salary
         ' 
         Label19.AutoSize = True
         Label19.Font = New Font("Century Gothic", 11F)
-        Label19.Location = New Point(34, 63)
+        Label19.Location = New Point(23, 63)
         Label19.Name = "Label19"
         Label19.Size = New Size(118, 22)
         Label19.TabIndex = 26
@@ -539,7 +539,7 @@ Partial Class Salary
         ' 
         Label21.AutoSize = True
         Label21.Font = New Font("Century Gothic", 11F)
-        Label21.Location = New Point(403, 99)
+        Label21.Location = New Point(392, 99)
         Label21.Name = "Label21"
         Label21.Size = New Size(151, 22)
         Label21.TabIndex = 25
@@ -548,7 +548,7 @@ Partial Class Salary
         ' txtOvertimeRate
         ' 
         txtOvertimeRate.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtOvertimeRate.Location = New Point(560, 91)
+        txtOvertimeRate.Location = New Point(549, 91)
         txtOvertimeRate.Name = "txtOvertimeRate"
         txtOvertimeRate.Size = New Size(183, 30)
         txtOvertimeRate.TabIndex = 12
@@ -556,7 +556,7 @@ Partial Class Salary
         ' txtDailyRate
         ' 
         txtDailyRate.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtDailyRate.Location = New Point(158, 137)
+        txtDailyRate.Location = New Point(147, 137)
         txtDailyRate.Name = "txtDailyRate"
         txtDailyRate.Size = New Size(219, 30)
         txtDailyRate.TabIndex = 11
@@ -565,7 +565,7 @@ Partial Class Salary
         ' 
         Label22.AutoSize = True
         Label22.Font = New Font("Century Gothic", 11F)
-        Label22.Location = New Point(39, 104)
+        Label22.Location = New Point(28, 104)
         Label22.Name = "Label22"
         Label22.Size = New Size(113, 22)
         Label22.TabIndex = 19
@@ -574,7 +574,7 @@ Partial Class Salary
         ' txtBaseSalary
         ' 
         txtBaseSalary.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtBaseSalary.Location = New Point(158, 55)
+        txtBaseSalary.Location = New Point(147, 55)
         txtBaseSalary.Name = "txtBaseSalary"
         txtBaseSalary.Size = New Size(221, 30)
         txtBaseSalary.TabIndex = 10
@@ -582,7 +582,7 @@ Partial Class Salary
         ' txtPayrollID
         ' 
         txtPayrollID.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtPayrollID.Location = New Point(189, 194)
+        txtPayrollID.Location = New Point(189, 234)
         txtPayrollID.Name = "txtPayrollID"
         txtPayrollID.Size = New Size(335, 30)
         txtPayrollID.TabIndex = 103
@@ -602,10 +602,10 @@ Partial Class Salary
         GroupBox1.Controls.Add(txtUnpaidLeave)
         GroupBox1.Controls.Add(Label17)
         GroupBox1.Controls.Add(txtAttendanceID)
-        GroupBox1.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        GroupBox1.Location = New Point(545, 241)
+        GroupBox1.Font = New Font("Century Gothic", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        GroupBox1.Location = New Point(545, 282)
         GroupBox1.Name = "GroupBox1"
-        GroupBox1.Size = New Size(771, 302)
+        GroupBox1.Size = New Size(751, 302)
         GroupBox1.TabIndex = 92
         GroupBox1.TabStop = False
         GroupBox1.Text = "Deduction"
@@ -614,7 +614,7 @@ Partial Class Salary
         ' 
         Label18.AutoSize = True
         Label18.Font = New Font("Century Gothic", 11F)
-        Label18.Location = New Point(18, 154)
+        Label18.Location = New Point(12, 154)
         Label18.Name = "Label18"
         Label18.Size = New Size(156, 22)
         Label18.TabIndex = 127
@@ -623,7 +623,7 @@ Partial Class Salary
         ' txtDaysAttended
         ' 
         txtDaysAttended.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtDaysAttended.Location = New Point(180, 146)
+        txtDaysAttended.Location = New Point(174, 146)
         txtDaysAttended.Name = "txtDaysAttended"
         txtDaysAttended.Size = New Size(160, 30)
         txtDaysAttended.TabIndex = 126
@@ -632,7 +632,7 @@ Partial Class Salary
         ' 
         Label10.AutoSize = True
         Label10.Font = New Font("Century Gothic", 11F)
-        Label10.Location = New Point(69, 195)
+        Label10.Location = New Point(63, 195)
         Label10.Name = "Label10"
         Label10.Size = New Size(105, 22)
         Label10.TabIndex = 97
@@ -641,7 +641,7 @@ Partial Class Salary
         ' txtAbsences
         ' 
         txtAbsences.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtAbsences.Location = New Point(180, 187)
+        txtAbsences.Location = New Point(174, 187)
         txtAbsences.Name = "txtAbsences"
         txtAbsences.Size = New Size(160, 30)
         txtAbsences.TabIndex = 96
@@ -650,7 +650,7 @@ Partial Class Salary
         ' 
         Label9.AutoSize = True
         Label9.Font = New Font("Century Gothic", 11F)
-        Label9.Location = New Point(38, 72)
+        Label9.Location = New Point(32, 72)
         Label9.Name = "Label9"
         Label9.Size = New Size(136, 22)
         Label9.TabIndex = 95
@@ -660,7 +660,7 @@ Partial Class Salary
         ' 
         Label1.AutoSize = True
         Label1.Font = New Font("Century Gothic", 11F)
-        Label1.Location = New Point(385, 236)
+        Label1.Location = New Point(379, 236)
         Label1.Name = "Label1"
         Label1.Size = New Size(160, 22)
         Label1.TabIndex = 113
@@ -669,7 +669,7 @@ Partial Class Salary
         ' txtDeductionID
         ' 
         txtDeductionID.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtDeductionID.Location = New Point(180, 64)
+        txtDeductionID.Location = New Point(174, 64)
         txtDeductionID.Name = "txtDeductionID"
         txtDeductionID.Size = New Size(160, 30)
         txtDeductionID.TabIndex = 94
@@ -677,7 +677,7 @@ Partial Class Salary
         ' txtTotalDeduction
         ' 
         txtTotalDeduction.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtTotalDeduction.Location = New Point(551, 229)
+        txtTotalDeduction.Location = New Point(545, 229)
         txtTotalDeduction.Name = "txtTotalDeduction"
         txtTotalDeduction.Size = New Size(169, 30)
         txtTotalDeduction.TabIndex = 112
@@ -690,10 +690,10 @@ Partial Class Salary
         GroupBox6.Controls.Add(Label31)
         GroupBox6.Controls.Add(txtSSS)
         GroupBox6.Controls.Add(Label35)
-        GroupBox6.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        GroupBox6.Location = New Point(378, 55)
+        GroupBox6.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        GroupBox6.Location = New Point(372, 55)
         GroupBox6.Name = "GroupBox6"
-        GroupBox6.Size = New Size(373, 159)
+        GroupBox6.Size = New Size(360, 159)
         GroupBox6.TabIndex = 91
         GroupBox6.TabStop = False
         GroupBox6.Text = "Benefits"
@@ -701,7 +701,7 @@ Partial Class Salary
         ' txtPhilHealth
         ' 
         txtPhilHealth.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtPhilHealth.Location = New Point(173, 63)
+        txtPhilHealth.Location = New Point(154, 68)
         txtPhilHealth.Name = "txtPhilHealth"
         txtPhilHealth.Size = New Size(169, 30)
         txtPhilHealth.TabIndex = 31
@@ -709,7 +709,7 @@ Partial Class Salary
         ' txtPagIBIG
         ' 
         txtPagIBIG.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtPagIBIG.Location = New Point(173, 104)
+        txtPagIBIG.Location = New Point(154, 109)
         txtPagIBIG.Name = "txtPagIBIG"
         txtPagIBIG.Size = New Size(169, 30)
         txtPagIBIG.TabIndex = 28
@@ -718,7 +718,7 @@ Partial Class Salary
         ' 
         Label39.AutoSize = True
         Label39.Font = New Font("Century Gothic", 11F)
-        Label39.Location = New Point(71, 101)
+        Label39.Location = New Point(52, 106)
         Label39.Name = "Label39"
         Label39.Size = New Size(96, 22)
         Label39.TabIndex = 25
@@ -728,7 +728,7 @@ Partial Class Salary
         ' 
         Label31.AutoSize = True
         Label31.Font = New Font("Century Gothic", 11F)
-        Label31.Location = New Point(63, 66)
+        Label31.Location = New Point(44, 71)
         Label31.Name = "Label31"
         Label31.Size = New Size(104, 22)
         Label31.TabIndex = 19
@@ -737,7 +737,7 @@ Partial Class Salary
         ' txtSSS
         ' 
         txtSSS.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtSSS.Location = New Point(173, 22)
+        txtSSS.Location = New Point(154, 27)
         txtSSS.Name = "txtSSS"
         txtSSS.Size = New Size(169, 30)
         txtSSS.TabIndex = 10
@@ -746,7 +746,7 @@ Partial Class Salary
         ' 
         Label35.AutoSize = True
         Label35.Font = New Font("Century Gothic", 11F)
-        Label35.Location = New Point(125, 30)
+        Label35.Location = New Point(106, 35)
         Label35.Name = "Label35"
         Label35.Size = New Size(42, 22)
         Label35.TabIndex = 0
@@ -756,7 +756,7 @@ Partial Class Salary
         ' 
         Label14.AutoSize = True
         Label14.Font = New Font("Century Gothic", 11F)
-        Label14.Location = New Point(29, 236)
+        Label14.Location = New Point(23, 236)
         Label14.Name = "Label14"
         Label14.Size = New Size(145, 22)
         Label14.TabIndex = 25
@@ -765,7 +765,7 @@ Partial Class Salary
         ' txtUnpaidLeave
         ' 
         txtUnpaidLeave.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtUnpaidLeave.Location = New Point(180, 228)
+        txtUnpaidLeave.Location = New Point(174, 228)
         txtUnpaidLeave.Name = "txtUnpaidLeave"
         txtUnpaidLeave.Size = New Size(160, 30)
         txtUnpaidLeave.TabIndex = 11
@@ -774,7 +774,7 @@ Partial Class Salary
         ' 
         Label17.AutoSize = True
         Label17.Font = New Font("Century Gothic", 11F)
-        Label17.Location = New Point(20, 113)
+        Label17.Location = New Point(14, 113)
         Label17.Name = "Label17"
         Label17.Size = New Size(154, 22)
         Label17.TabIndex = 19
@@ -783,7 +783,7 @@ Partial Class Salary
         ' txtAttendanceID
         ' 
         txtAttendanceID.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtAttendanceID.Location = New Point(180, 105)
+        txtAttendanceID.Location = New Point(174, 105)
         txtAttendanceID.Name = "txtAttendanceID"
         txtAttendanceID.Size = New Size(160, 30)
         txtAttendanceID.TabIndex = 10
@@ -792,7 +792,7 @@ Partial Class Salary
         ' 
         Label3.AutoSize = True
         Label3.Font = New Font("Century Gothic", 11F)
-        Label3.Location = New Point(85, 202)
+        Label3.Location = New Point(85, 242)
         Label3.Name = "Label3"
         Label3.Size = New Size(98, 22)
         Label3.TabIndex = 102
@@ -801,7 +801,7 @@ Partial Class Salary
         ' txtBasicSalary
         ' 
         txtBasicSalary.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtBasicSalary.Location = New Point(189, 238)
+        txtBasicSalary.Location = New Point(189, 281)
         txtBasicSalary.Name = "txtBasicSalary"
         txtBasicSalary.Size = New Size(335, 30)
         txtBasicSalary.TabIndex = 101
@@ -810,7 +810,7 @@ Partial Class Salary
         ' 
         Label29.AutoSize = True
         Label29.Font = New Font("Century Gothic", 11F)
-        Label29.Location = New Point(41, 290)
+        Label29.Location = New Point(41, 336)
         Label29.Name = "Label29"
         Label29.Size = New Size(142, 22)
         Label29.TabIndex = 100
@@ -820,7 +820,7 @@ Partial Class Salary
         ' 
         Label4.AutoSize = True
         Label4.Font = New Font("Century Gothic", 11F)
-        Label4.Location = New Point(53, 70)
+        Label4.Location = New Point(53, 102)
         Label4.Name = "Label4"
         Label4.Size = New Size(129, 22)
         Label4.TabIndex = 98
@@ -829,7 +829,7 @@ Partial Class Salary
         ' txtEmployeeName
         ' 
         txtEmployeeName.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtEmployeeName.Location = New Point(189, 106)
+        txtEmployeeName.Location = New Point(189, 140)
         txtEmployeeName.Name = "txtEmployeeName"
         txtEmployeeName.Size = New Size(335, 30)
         txtEmployeeName.TabIndex = 97
@@ -838,7 +838,7 @@ Partial Class Salary
         ' 
         Label6.AutoSize = True
         Label6.Font = New Font("Century Gothic", 11F)
-        Label6.Location = New Point(17, 114)
+        Label6.Location = New Point(17, 148)
         Label6.Name = "Label6"
         Label6.Size = New Size(166, 22)
         Label6.TabIndex = 96
@@ -847,7 +847,7 @@ Partial Class Salary
         ' txtOvertimePay
         ' 
         txtOvertimePay.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtOvertimePay.Location = New Point(189, 282)
+        txtOvertimePay.Location = New Point(189, 328)
         txtOvertimePay.Name = "txtOvertimePay"
         txtOvertimePay.Size = New Size(335, 30)
         txtOvertimePay.TabIndex = 95
@@ -856,7 +856,7 @@ Partial Class Salary
         ' 
         Label25.AutoSize = True
         Label25.Font = New Font("Century Gothic", 11F)
-        Label25.Location = New Point(62, 246)
+        Label25.Location = New Point(62, 289)
         Label25.Name = "Label25"
         Label25.Size = New Size(121, 22)
         Label25.TabIndex = 94
@@ -866,7 +866,7 @@ Partial Class Salary
         ' 
         Label15.AutoSize = True
         Label15.Font = New Font("Century Gothic", 11F)
-        Label15.Location = New Point(95, 378)
+        Label15.Location = New Point(95, 430)
         Label15.Name = "Label15"
         Label15.Size = New Size(88, 22)
         Label15.TabIndex = 25
@@ -876,7 +876,7 @@ Partial Class Salary
         ' 
         Label16.AutoSize = True
         Label16.Font = New Font("Century Gothic", 11F)
-        Label16.Location = New Point(59, 336)
+        Label16.Location = New Point(59, 385)
         Label16.Name = "Label16"
         Label16.Size = New Size(124, 22)
         Label16.TabIndex = 19
@@ -885,7 +885,7 @@ Partial Class Salary
         ' txtGrossSalary
         ' 
         txtGrossSalary.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtGrossSalary.Location = New Point(189, 326)
+        txtGrossSalary.Location = New Point(189, 375)
         txtGrossSalary.Name = "txtGrossSalary"
         txtGrossSalary.Size = New Size(335, 30)
         txtGrossSalary.TabIndex = 10
@@ -894,7 +894,7 @@ Partial Class Salary
         ' 
         dtpPaymentDate.CalendarFont = New Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         dtpPaymentDate.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        dtpPaymentDate.Location = New Point(189, 414)
+        dtpPaymentDate.Location = New Point(189, 469)
         dtpPaymentDate.Name = "dtpPaymentDate"
         dtpPaymentDate.Size = New Size(335, 30)
         dtpPaymentDate.TabIndex = 93
@@ -903,7 +903,7 @@ Partial Class Salary
         ' 
         Label23.AutoSize = True
         Label23.Font = New Font("Century Gothic", 11F)
-        Label23.Location = New Point(34, 422)
+        Label23.Location = New Point(34, 477)
         Label23.Name = "Label23"
         Label23.Size = New Size(149, 22)
         Label23.TabIndex = 0

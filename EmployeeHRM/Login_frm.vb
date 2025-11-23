@@ -81,4 +81,9 @@ Public Class Login_frm
         Employee_Dashboard.Show
         Hide
     End Sub
+
+    Private Sub btne_Click_1(sender As Object, e As EventArgs) Handles btne.Click
+        Employee_Dashboard.Show()
+        Me.Hide()
+    End Sub
 End Class

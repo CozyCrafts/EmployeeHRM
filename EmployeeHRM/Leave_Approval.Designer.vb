@@ -99,7 +99,7 @@ Partial Class Leave_Approval
         ' 
         Label2.AutoSize = True
         Label2.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(72, 49)
+        Label2.Location = New Point(53, 58)
         Label2.Name = "Label2"
         Label2.Size = New Size(260, 34)
         Label2.TabIndex = 0
@@ -381,11 +381,11 @@ Partial Class Leave_Approval
         gbLeaveDetails.Controls.Add(btnCancelLeave)
         gbLeaveDetails.Controls.Add(btnSaveLeave)
         gbLeaveDetails.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        gbLeaveDetails.Location = New Point(410, 114)
+        gbLeaveDetails.Location = New Point(391, 114)
         gbLeaveDetails.Margin = New Padding(4, 3, 4, 3)
         gbLeaveDetails.Name = "gbLeaveDetails"
         gbLeaveDetails.Padding = New Padding(4, 3, 4, 3)
-        gbLeaveDetails.Size = New Size(1335, 364)
+        gbLeaveDetails.Size = New Size(1335, 390)
         gbLeaveDetails.TabIndex = 85
         gbLeaveDetails.TabStop = False
         gbLeaveDetails.Text = "Details"
@@ -399,9 +399,9 @@ Partial Class Leave_Approval
         btnEditLeave.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnEditLeave.IconSize = 30
         btnEditLeave.ImageAlign = ContentAlignment.MiddleLeft
-        btnEditLeave.Location = New Point(1048, 261)
+        btnEditLeave.Location = New Point(1026, 275)
         btnEditLeave.Name = "btnEditLeave"
-        btnEditLeave.Size = New Size(270, 48)
+        btnEditLeave.Size = New Size(273, 62)
         btnEditLeave.TabIndex = 116
         btnEditLeave.Text = "Edit Leave Approval"
         btnEditLeave.TextAlign = ContentAlignment.MiddleRight
@@ -412,7 +412,7 @@ Partial Class Leave_Approval
         Label15.AutoSize = True
         Label15.Font = New Font("Century Gothic", 13F)
         Label15.ForeColor = Color.Black
-        Label15.Location = New Point(873, 178)
+        Label15.Location = New Point(854, 180)
         Label15.Margin = New Padding(4, 0, 4, 0)
         Label15.Name = "Label15"
         Label15.Size = New Size(82, 25)
@@ -422,7 +422,7 @@ Partial Class Leave_Approval
         ' cbStatus
         ' 
         cbStatus.FormattingEnabled = True
-        cbStatus.Location = New Point(962, 168)
+        cbStatus.Location = New Point(943, 170)
         cbStatus.Name = "cbStatus"
         cbStatus.Size = New Size(356, 35)
         cbStatus.TabIndex = 114
@@ -432,7 +432,7 @@ Partial Class Leave_Approval
         Label9.AutoSize = True
         Label9.Font = New Font("Century Gothic", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label9.ForeColor = Color.Black
-        Label9.Location = New Point(109, 149)
+        Label9.Location = New Point(109, 160)
         Label9.Margin = New Padding(4, 0, 4, 0)
         Label9.Name = "Label9"
         Label9.Size = New Size(112, 27)
@@ -441,18 +441,18 @@ Partial Class Leave_Approval
         ' 
         ' txtJobTitle
         ' 
-        txtJobTitle.Location = New Point(229, 140)
+        txtJobTitle.Location = New Point(229, 151)
         txtJobTitle.Margin = New Padding(4, 3, 4, 3)
         txtJobTitle.Name = "txtJobTitle"
-        txtJobTitle.Size = New Size(525, 36)
+        txtJobTitle.Size = New Size(505, 36)
         txtJobTitle.TabIndex = 112
         ' 
         ' cbLeaveType
         ' 
         cbLeaveType.FormattingEnabled = True
-        cbLeaveType.Location = New Point(229, 224)
+        cbLeaveType.Location = New Point(229, 250)
         cbLeaveType.Name = "cbLeaveType"
-        cbLeaveType.Size = New Size(525, 35)
+        cbLeaveType.Size = New Size(505, 35)
         cbLeaveType.TabIndex = 107
         ' 
         ' gbLeaveDuration
@@ -462,7 +462,7 @@ Partial Class Leave_Approval
         gbLeaveDuration.Controls.Add(Label14)
         gbLeaveDuration.Controls.Add(dtpLeaveDateFrom)
         gbLeaveDuration.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        gbLeaveDuration.Location = New Point(790, 35)
+        gbLeaveDuration.Location = New Point(771, 34)
         gbLeaveDuration.Margin = New Padding(4, 3, 4, 3)
         gbLeaveDuration.Name = "gbLeaveDuration"
         gbLeaveDuration.Padding = New Padding(4, 3, 4, 3)
@@ -513,7 +513,7 @@ Partial Class Leave_Approval
         ' 
         ' txtApprovedBy
         ' 
-        txtApprovedBy.Location = New Point(962, 209)
+        txtApprovedBy.Location = New Point(943, 217)
         txtApprovedBy.Margin = New Padding(4, 3, 4, 3)
         txtApprovedBy.Name = "txtApprovedBy"
         txtApprovedBy.Size = New Size(356, 36)
@@ -524,7 +524,7 @@ Partial Class Leave_Approval
         Label12.AutoSize = True
         Label12.Font = New Font("Century Gothic", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label12.ForeColor = Color.Black
-        Label12.Location = New Point(15, 107)
+        Label12.Location = New Point(13, 110)
         Label12.Margin = New Padding(4, 0, 4, 0)
         Label12.Name = "Label12"
         Label12.Size = New Size(208, 27)
@@ -533,10 +533,10 @@ Partial Class Leave_Approval
         ' 
         ' txtEmployeeName
         ' 
-        txtEmployeeName.Location = New Point(229, 98)
+        txtEmployeeName.Location = New Point(229, 101)
         txtEmployeeName.Margin = New Padding(4, 3, 4, 3)
         txtEmployeeName.Name = "txtEmployeeName"
-        txtEmployeeName.Size = New Size(525, 36)
+        txtEmployeeName.Size = New Size(505, 36)
         txtEmployeeName.TabIndex = 89
         ' 
         ' Label11
@@ -544,7 +544,7 @@ Partial Class Leave_Approval
         Label11.AutoSize = True
         Label11.Font = New Font("Century Gothic", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label11.ForeColor = Color.Black
-        Label11.Location = New Point(62, 65)
+        Label11.Location = New Point(60, 60)
         Label11.Margin = New Padding(4, 0, 4, 0)
         Label11.Name = "Label11"
         Label11.Size = New Size(161, 27)
@@ -553,26 +553,26 @@ Partial Class Leave_Approval
         ' 
         ' txtLeaveID
         ' 
-        txtLeaveID.Location = New Point(229, 182)
+        txtLeaveID.Location = New Point(229, 200)
         txtLeaveID.Margin = New Padding(4, 3, 4, 3)
         txtLeaveID.Name = "txtLeaveID"
-        txtLeaveID.Size = New Size(525, 36)
+        txtLeaveID.Size = New Size(505, 36)
         txtLeaveID.TabIndex = 85
         ' 
         ' txtReason
         ' 
-        txtReason.Location = New Point(229, 265)
+        txtReason.Location = New Point(229, 299)
         txtReason.Margin = New Padding(4, 3, 4, 3)
         txtReason.Name = "txtReason"
-        txtReason.Size = New Size(525, 36)
+        txtReason.Size = New Size(505, 36)
         txtReason.TabIndex = 80
         ' 
         ' txtEmployeeID
         ' 
-        txtEmployeeID.Location = New Point(229, 56)
+        txtEmployeeID.Location = New Point(229, 51)
         txtEmployeeID.Margin = New Padding(4, 3, 4, 3)
         txtEmployeeID.Name = "txtEmployeeID"
-        txtEmployeeID.Size = New Size(525, 36)
+        txtEmployeeID.Size = New Size(505, 36)
         txtEmployeeID.TabIndex = 23
         ' 
         ' Label6
@@ -580,7 +580,7 @@ Partial Class Leave_Approval
         Label6.AutoSize = True
         Label6.Font = New Font("Century Gothic", 13F)
         Label6.ForeColor = Color.Black
-        Label6.Location = New Point(127, 269)
+        Label6.Location = New Point(125, 311)
         Label6.Margin = New Padding(4, 0, 4, 0)
         Label6.Name = "Label6"
         Label6.Size = New Size(96, 25)
@@ -592,7 +592,7 @@ Partial Class Leave_Approval
         Label21.AutoSize = True
         Label21.Font = New Font("Century Gothic", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label21.ForeColor = Color.Black
-        Label21.Location = New Point(103, 191)
+        Label21.Location = New Point(102, 209)
         Label21.Margin = New Padding(4, 0, 4, 0)
         Label21.Name = "Label21"
         Label21.Size = New Size(119, 27)
@@ -604,7 +604,7 @@ Partial Class Leave_Approval
         Label1.AutoSize = True
         Label1.Font = New Font("Century Gothic", 13F)
         Label1.ForeColor = Color.Black
-        Label1.Location = New Point(80, 234)
+        Label1.Location = New Point(79, 260)
         Label1.Margin = New Padding(4, 0, 4, 0)
         Label1.Name = "Label1"
         Label1.Size = New Size(143, 25)
@@ -616,7 +616,7 @@ Partial Class Leave_Approval
         Label5.AutoSize = True
         Label5.Font = New Font("Century Gothic", 13F)
         Label5.ForeColor = Color.Black
-        Label5.Location = New Point(790, 213)
+        Label5.Location = New Point(771, 228)
         Label5.Margin = New Padding(4, 0, 4, 0)
         Label5.Name = "Label5"
         Label5.Size = New Size(164, 25)
@@ -632,9 +632,9 @@ Partial Class Leave_Approval
         btnCancelLeave.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnCancelLeave.IconSize = 30
         btnCancelLeave.ImageAlign = ContentAlignment.MiddleLeft
-        btnCancelLeave.Location = New Point(1186, 263)
+        btnCancelLeave.Location = New Point(1164, 275)
         btnCancelLeave.Name = "btnCancelLeave"
-        btnCancelLeave.Size = New Size(132, 44)
+        btnCancelLeave.Size = New Size(135, 58)
         btnCancelLeave.TabIndex = 118
         btnCancelLeave.Text = "Cancel"
         btnCancelLeave.TextAlign = ContentAlignment.MiddleRight
@@ -649,9 +649,9 @@ Partial Class Leave_Approval
         btnSaveLeave.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnSaveLeave.IconSize = 30
         btnSaveLeave.ImageAlign = ContentAlignment.MiddleLeft
-        btnSaveLeave.Location = New Point(1049, 263)
+        btnSaveLeave.Location = New Point(1027, 277)
         btnSaveLeave.Name = "btnSaveLeave"
-        btnSaveLeave.Size = New Size(131, 44)
+        btnSaveLeave.Size = New Size(134, 58)
         btnSaveLeave.TabIndex = 117
         btnSaveLeave.Text = "Save"
         btnSaveLeave.TextAlign = ContentAlignment.MiddleRight
@@ -676,11 +676,11 @@ Partial Class Leave_Approval
         gbEmployeeLeaveHistory.Controls.Add(PictureBox1)
         gbEmployeeLeaveHistory.Controls.Add(dgvEmployeeLeaveHistory)
         gbEmployeeLeaveHistory.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        gbEmployeeLeaveHistory.Location = New Point(410, 484)
+        gbEmployeeLeaveHistory.Location = New Point(391, 523)
         gbEmployeeLeaveHistory.Margin = New Padding(4, 3, 4, 3)
         gbEmployeeLeaveHistory.Name = "gbEmployeeLeaveHistory"
         gbEmployeeLeaveHistory.Padding = New Padding(4, 3, 4, 3)
-        gbEmployeeLeaveHistory.Size = New Size(1338, 627)
+        gbEmployeeLeaveHistory.Size = New Size(1338, 588)
         gbEmployeeLeaveHistory.TabIndex = 88
         gbEmployeeLeaveHistory.TabStop = False
         gbEmployeeLeaveHistory.Text = "Employee Leave History"
@@ -688,7 +688,7 @@ Partial Class Leave_Approval
         ' txtSearchLeave
         ' 
         txtSearchLeave.Font = New Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtSearchLeave.Location = New Point(77, 67)
+        txtSearchLeave.Location = New Point(77, 57)
         txtSearchLeave.Margin = New Padding(4, 3, 4, 3)
         txtSearchLeave.Name = "txtSearchLeave"
         txtSearchLeave.Size = New Size(256, 32)
@@ -698,7 +698,7 @@ Partial Class Leave_Approval
         ' 
         PictureBox1.BackgroundImage = CType(resources.GetObject("PictureBox1.BackgroundImage"), Image)
         PictureBox1.BackgroundImageLayout = ImageLayout.Zoom
-        PictureBox1.Location = New Point(11, 51)
+        PictureBox1.Location = New Point(11, 41)
         PictureBox1.Name = "PictureBox1"
         PictureBox1.Size = New Size(77, 48)
         PictureBox1.TabIndex = 103
@@ -711,11 +711,11 @@ Partial Class Leave_Approval
         dgvEmployeeLeaveHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         dgvEmployeeLeaveHistory.ColumnHeadersHeight = 29
         dgvEmployeeLeaveHistory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        dgvEmployeeLeaveHistory.Location = New Point(28, 105)
+        dgvEmployeeLeaveHistory.Location = New Point(26, 107)
         dgvEmployeeLeaveHistory.Margin = New Padding(4, 3, 4, 3)
         dgvEmployeeLeaveHistory.Name = "dgvEmployeeLeaveHistory"
         dgvEmployeeLeaveHistory.RowHeadersWidth = 51
-        dgvEmployeeLeaveHistory.Size = New Size(1315, 506)
+        dgvEmployeeLeaveHistory.Size = New Size(1280, 451)
         dgvEmployeeLeaveHistory.TabIndex = 0
         ' 
         ' Leave_Approval

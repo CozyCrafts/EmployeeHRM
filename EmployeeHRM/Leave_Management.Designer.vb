@@ -35,7 +35,6 @@ Partial Class Leave_Management
         dtpDurationDateTo = New DateTimePicker()
         Label14 = New Label()
         dtpDurationDateFrom = New DateTimePicker()
-        Label10 = New Label()
         txtStatusLeave = New TextBox()
         Label9 = New Label()
         txtApprovedBy = New TextBox()
@@ -91,7 +90,7 @@ Partial Class Leave_Management
         ' 
         Label2.AutoSize = True
         Label2.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(72, 49)
+        Label2.Location = New Point(53, 58)
         Label2.Name = "Label2"
         Label2.Size = New Size(324, 34)
         Label2.TabIndex = 0
@@ -100,12 +99,12 @@ Partial Class Leave_Management
         ' gbLeaveHistory
         ' 
         gbLeaveHistory.Controls.Add(dgvLeaveHistory)
-        gbLeaveHistory.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        gbLeaveHistory.Location = New Point(372, 549)
+        gbLeaveHistory.Font = New Font("Century Gothic", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        gbLeaveHistory.Location = New Point(391, 635)
         gbLeaveHistory.Margin = New Padding(4, 3, 4, 3)
         gbLeaveHistory.Name = "gbLeaveHistory"
         gbLeaveHistory.Padding = New Padding(4, 3, 4, 3)
-        gbLeaveHistory.Size = New Size(1373, 443)
+        gbLeaveHistory.Size = New Size(1319, 469)
         gbLeaveHistory.TabIndex = 90
         gbLeaveHistory.TabStop = False
         gbLeaveHistory.Text = " Leave History"
@@ -116,11 +115,11 @@ Partial Class Leave_Management
         dgvLeaveHistory.AllowUserToResizeRows = False
         dgvLeaveHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         dgvLeaveHistory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        dgvLeaveHistory.Location = New Point(28, 59)
+        dgvLeaveHistory.Location = New Point(37, 59)
         dgvLeaveHistory.Margin = New Padding(4, 3, 4, 3)
         dgvLeaveHistory.Name = "dgvLeaveHistory"
         dgvLeaveHistory.RowHeadersWidth = 51
-        dgvLeaveHistory.Size = New Size(1326, 366)
+        dgvLeaveHistory.Size = New Size(1255, 354)
         dgvLeaveHistory.TabIndex = 0
         ' 
         ' btnApplyforLeave
@@ -132,7 +131,7 @@ Partial Class Leave_Management
         btnApplyforLeave.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnApplyforLeave.IconSize = 30
         btnApplyforLeave.ImageAlign = ContentAlignment.MiddleLeft
-        btnApplyforLeave.Location = New Point(926, 233)
+        btnApplyforLeave.Location = New Point(871, 297)
         btnApplyforLeave.Name = "btnApplyforLeave"
         btnApplyforLeave.Size = New Size(323, 77)
         btnApplyforLeave.TabIndex = 94
@@ -146,7 +145,6 @@ Partial Class Leave_Management
         gbLeaveDetails.Controls.Add(btnSaveLeave)
         gbLeaveDetails.Controls.Add(btnCancelLeave)
         gbLeaveDetails.Controls.Add(gbLeaveDuration)
-        gbLeaveDetails.Controls.Add(Label10)
         gbLeaveDetails.Controls.Add(txtStatusLeave)
         gbLeaveDetails.Controls.Add(Label9)
         gbLeaveDetails.Controls.Add(txtApprovedBy)
@@ -161,12 +159,12 @@ Partial Class Leave_Management
         gbLeaveDetails.Controls.Add(Label21)
         gbLeaveDetails.Controls.Add(Label1)
         gbLeaveDetails.Controls.Add(Label5)
-        gbLeaveDetails.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        gbLeaveDetails.Location = New Point(375, 156)
+        gbLeaveDetails.Font = New Font("Century Gothic", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        gbLeaveDetails.Location = New Point(391, 116)
         gbLeaveDetails.Margin = New Padding(4, 3, 4, 3)
         gbLeaveDetails.Name = "gbLeaveDetails"
         gbLeaveDetails.Padding = New Padding(4, 3, 4, 3)
-        gbLeaveDetails.Size = New Size(1370, 362)
+        gbLeaveDetails.Size = New Size(1319, 508)
         gbLeaveDetails.TabIndex = 89
         gbLeaveDetails.TabStop = False
         gbLeaveDetails.Text = "Details"
@@ -180,7 +178,7 @@ Partial Class Leave_Management
         btnSaveLeave.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnSaveLeave.IconSize = 35
         btnSaveLeave.ImageAlign = ContentAlignment.MiddleLeft
-        btnSaveLeave.Location = New Point(937, 237)
+        btnSaveLeave.Location = New Point(882, 299)
         btnSaveLeave.Name = "btnSaveLeave"
         btnSaveLeave.Size = New Size(153, 74)
         btnSaveLeave.TabIndex = 112
@@ -197,7 +195,7 @@ Partial Class Leave_Management
         btnCancelLeave.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnCancelLeave.IconSize = 35
         btnCancelLeave.ImageAlign = ContentAlignment.MiddleLeft
-        btnCancelLeave.Location = New Point(1096, 238)
+        btnCancelLeave.Location = New Point(1041, 299)
         btnCancelLeave.Name = "btnCancelLeave"
         btnCancelLeave.Size = New Size(153, 72)
         btnCancelLeave.TabIndex = 113
@@ -212,11 +210,11 @@ Partial Class Leave_Management
         gbLeaveDuration.Controls.Add(Label14)
         gbLeaveDuration.Controls.Add(dtpDurationDateFrom)
         gbLeaveDuration.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        gbLeaveDuration.Location = New Point(729, 35)
+        gbLeaveDuration.Location = New Point(727, 64)
         gbLeaveDuration.Margin = New Padding(4, 3, 4, 3)
         gbLeaveDuration.Name = "gbLeaveDuration"
         gbLeaveDuration.Padding = New Padding(4, 3, 4, 3)
-        gbLeaveDuration.Size = New Size(614, 173)
+        gbLeaveDuration.Size = New Size(566, 188)
         gbLeaveDuration.TabIndex = 99
         gbLeaveDuration.TabStop = False
         gbLeaveDuration.Text = "Leave Duration"
@@ -226,7 +224,7 @@ Partial Class Leave_Management
         Label13.AutoSize = True
         Label13.Font = New Font("Century Gothic", 12F)
         Label13.ForeColor = Color.Black
-        Label13.Location = New Point(52, 66)
+        Label13.Location = New Point(33, 60)
         Label13.Margin = New Padding(4, 0, 4, 0)
         Label13.Name = "Label13"
         Label13.Size = New Size(118, 23)
@@ -236,7 +234,7 @@ Partial Class Leave_Management
         ' dtpDurationDateTo
         ' 
         dtpDurationDateTo.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        dtpDurationDateTo.Location = New Point(176, 108)
+        dtpDurationDateTo.Location = New Point(157, 110)
         dtpDurationDateTo.Name = "dtpDurationDateTo"
         dtpDurationDateTo.Size = New Size(364, 32)
         dtpDurationDateTo.TabIndex = 98
@@ -246,7 +244,7 @@ Partial Class Leave_Management
         Label14.AutoSize = True
         Label14.Font = New Font("Century Gothic", 12F)
         Label14.ForeColor = Color.Black
-        Label14.Location = New Point(79, 117)
+        Label14.Location = New Point(60, 119)
         Label14.Margin = New Padding(4, 0, 4, 0)
         Label14.Name = "Label14"
         Label14.Size = New Size(91, 23)
@@ -256,28 +254,17 @@ Partial Class Leave_Management
         ' dtpDurationDateFrom
         ' 
         dtpDurationDateFrom.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        dtpDurationDateFrom.Location = New Point(176, 57)
+        dtpDurationDateFrom.Location = New Point(157, 51)
         dtpDurationDateFrom.Name = "dtpDurationDateFrom"
         dtpDurationDateFrom.Size = New Size(364, 32)
         dtpDurationDateFrom.TabIndex = 97
         ' 
-        ' Label10
-        ' 
-        Label10.AutoSize = True
-        Label10.Font = New Font("Century Gothic", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label10.ForeColor = Color.Black
-        Label10.Location = New Point(619, 261)
-        Label10.Margin = New Padding(4, 0, 4, 0)
-        Label10.Name = "Label10"
-        Label10.Size = New Size(0, 27)
-        Label10.TabIndex = 94
-        ' 
         ' txtStatusLeave
         ' 
-        txtStatusLeave.Location = New Point(247, 245)
+        txtStatusLeave.Location = New Point(251, 342)
         txtStatusLeave.Margin = New Padding(4, 3, 4, 3)
         txtStatusLeave.Name = "txtStatusLeave"
-        txtStatusLeave.Size = New Size(461, 36)
+        txtStatusLeave.Size = New Size(445, 41)
         txtStatusLeave.TabIndex = 93
         ' 
         ' Label9
@@ -285,7 +272,7 @@ Partial Class Leave_Management
         Label9.AutoSize = True
         Label9.Font = New Font("Century Gothic", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label9.ForeColor = Color.Black
-        Label9.Location = New Point(156, 254)
+        Label9.Location = New Point(162, 349)
         Label9.Margin = New Padding(4, 0, 4, 0)
         Label9.Name = "Label9"
         Label9.Size = New Size(84, 27)
@@ -294,10 +281,10 @@ Partial Class Leave_Management
         ' 
         ' txtApprovedBy
         ' 
-        txtApprovedBy.Location = New Point(247, 291)
+        txtApprovedBy.Location = New Point(253, 396)
         txtApprovedBy.Margin = New Padding(4, 3, 4, 3)
         txtApprovedBy.Name = "txtApprovedBy"
-        txtApprovedBy.Size = New Size(460, 36)
+        txtApprovedBy.Size = New Size(444, 41)
         txtApprovedBy.TabIndex = 91
         ' 
         ' Label12
@@ -305,7 +292,7 @@ Partial Class Leave_Management
         Label12.AutoSize = True
         Label12.Font = New Font("Century Gothic", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label12.ForeColor = Color.Black
-        Label12.Location = New Point(31, 86)
+        Label12.Location = New Point(37, 141)
         Label12.Margin = New Padding(4, 0, 4, 0)
         Label12.Name = "Label12"
         Label12.Size = New Size(208, 27)
@@ -314,10 +301,10 @@ Partial Class Leave_Management
         ' 
         ' txtEmployeeName
         ' 
-        txtEmployeeName.Location = New Point(246, 77)
+        txtEmployeeName.Location = New Point(252, 132)
         txtEmployeeName.Margin = New Padding(4, 3, 4, 3)
         txtEmployeeName.Name = "txtEmployeeName"
-        txtEmployeeName.Size = New Size(462, 36)
+        txtEmployeeName.Size = New Size(446, 41)
         txtEmployeeName.TabIndex = 89
         ' 
         ' Label11
@@ -325,7 +312,7 @@ Partial Class Leave_Management
         Label11.AutoSize = True
         Label11.Font = New Font("Century Gothic", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label11.ForeColor = Color.Black
-        Label11.Location = New Point(77, 44)
+        Label11.Location = New Point(83, 90)
         Label11.Margin = New Padding(4, 0, 4, 0)
         Label11.Name = "Label11"
         Label11.Size = New Size(161, 27)
@@ -334,34 +321,34 @@ Partial Class Leave_Management
         ' 
         ' txtLeaveID
         ' 
-        txtLeaveID.Location = New Point(246, 119)
+        txtLeaveID.Location = New Point(252, 187)
         txtLeaveID.Margin = New Padding(4, 3, 4, 3)
         txtLeaveID.Name = "txtLeaveID"
-        txtLeaveID.Size = New Size(462, 36)
+        txtLeaveID.Size = New Size(446, 41)
         txtLeaveID.TabIndex = 85
         ' 
         ' txtLeaveType
         ' 
-        txtLeaveType.Location = New Point(245, 161)
+        txtLeaveType.Location = New Point(251, 238)
         txtLeaveType.Margin = New Padding(4, 3, 4, 3)
         txtLeaveType.Name = "txtLeaveType"
-        txtLeaveType.Size = New Size(462, 36)
+        txtLeaveType.Size = New Size(446, 41)
         txtLeaveType.TabIndex = 72
         ' 
         ' txtLeaveReason
         ' 
-        txtLeaveReason.Location = New Point(245, 203)
+        txtLeaveReason.Location = New Point(251, 289)
         txtLeaveReason.Margin = New Padding(4, 3, 4, 3)
         txtLeaveReason.Name = "txtLeaveReason"
-        txtLeaveReason.Size = New Size(462, 36)
+        txtLeaveReason.Size = New Size(446, 41)
         txtLeaveReason.TabIndex = 80
         ' 
         ' txtEmployeeID
         ' 
-        txtEmployeeID.Location = New Point(245, 35)
+        txtEmployeeID.Location = New Point(251, 81)
         txtEmployeeID.Margin = New Padding(4, 3, 4, 3)
         txtEmployeeID.Name = "txtEmployeeID"
-        txtEmployeeID.Size = New Size(462, 36)
+        txtEmployeeID.Size = New Size(446, 41)
         txtEmployeeID.TabIndex = 23
         ' 
         ' Label6
@@ -369,7 +356,7 @@ Partial Class Leave_Management
         Label6.AutoSize = True
         Label6.Font = New Font("Century Gothic", 13F)
         Label6.ForeColor = Color.Black
-        Label6.Location = New Point(142, 214)
+        Label6.Location = New Point(148, 300)
         Label6.Margin = New Padding(4, 0, 4, 0)
         Label6.Name = "Label6"
         Label6.Size = New Size(96, 25)
@@ -381,7 +368,7 @@ Partial Class Leave_Management
         Label21.AutoSize = True
         Label21.Font = New Font("Century Gothic", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label21.ForeColor = Color.Black
-        Label21.Location = New Point(120, 128)
+        Label21.Location = New Point(126, 196)
         Label21.Margin = New Padding(4, 0, 4, 0)
         Label21.Name = "Label21"
         Label21.Size = New Size(119, 27)
@@ -393,7 +380,7 @@ Partial Class Leave_Management
         Label1.AutoSize = True
         Label1.Font = New Font("Century Gothic", 13F)
         Label1.ForeColor = Color.Black
-        Label1.Location = New Point(95, 172)
+        Label1.Location = New Point(101, 249)
         Label1.Margin = New Padding(4, 0, 4, 0)
         Label1.Name = "Label1"
         Label1.Size = New Size(143, 25)
@@ -405,7 +392,7 @@ Partial Class Leave_Management
         Label5.AutoSize = True
         Label5.Font = New Font("Century Gothic", 13F)
         Label5.ForeColor = Color.Black
-        Label5.Location = New Point(80, 298)
+        Label5.Location = New Point(86, 403)
         Label5.Margin = New Padding(4, 0, 4, 0)
         Label5.Name = "Label5"
         Label5.Size = New Size(160, 25)
@@ -692,7 +679,6 @@ Partial Class Leave_Management
     Friend WithEvents dtpDurationDateTo As DateTimePicker
     Friend WithEvents Label14 As Label
     Friend WithEvents dtpDurationDateFrom As DateTimePicker
-    Friend WithEvents Label10 As Label
     Friend WithEvents txtStatusLeave As TextBox
     Friend WithEvents Label9 As Label
     Friend WithEvents txtApprovedBy As TextBox

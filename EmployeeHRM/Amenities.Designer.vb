@@ -341,11 +341,11 @@ Partial Class Amenities
         gbAmenitiesList.Controls.Add(PictureBox1)
         gbAmenitiesList.Controls.Add(dgvAmenities)
         gbAmenitiesList.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        gbAmenitiesList.Location = New Point(374, 424)
+        gbAmenitiesList.Location = New Point(374, 430)
         gbAmenitiesList.Margin = New Padding(4, 3, 4, 3)
         gbAmenitiesList.Name = "gbAmenitiesList"
         gbAmenitiesList.Padding = New Padding(4, 3, 4, 3)
-        gbAmenitiesList.Size = New Size(1358, 660)
+        gbAmenitiesList.Size = New Size(1358, 673)
         gbAmenitiesList.TabIndex = 67
         gbAmenitiesList.TabStop = False
         gbAmenitiesList.Text = "Amenities List"
@@ -387,7 +387,7 @@ Partial Class Amenities
         dgvAmenities.Margin = New Padding(4, 3, 4, 3)
         dgvAmenities.Name = "dgvAmenities"
         dgvAmenities.RowHeadersWidth = 51
-        dgvAmenities.Size = New Size(1298, 525)
+        dgvAmenities.Size = New Size(1298, 526)
         dgvAmenities.TabIndex = 0
         ' 
         ' gbDetailsAmenities
@@ -410,7 +410,7 @@ Partial Class Amenities
         gbDetailsAmenities.Margin = New Padding(4, 3, 4, 3)
         gbDetailsAmenities.Name = "gbDetailsAmenities"
         gbDetailsAmenities.Padding = New Padding(4, 3, 4, 3)
-        gbDetailsAmenities.Size = New Size(1358, 297)
+        gbDetailsAmenities.Size = New Size(1358, 301)
         gbDetailsAmenities.TabIndex = 82
         gbDetailsAmenities.TabStop = False
         gbDetailsAmenities.Text = "Details"

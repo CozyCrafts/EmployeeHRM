@@ -501,9 +501,9 @@ Partial Class Team_Overview
         GroupBox1.Controls.Add(Label52)
         GroupBox1.Controls.Add(Label10)
         GroupBox1.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        GroupBox1.Location = New Point(910, 835)
+        GroupBox1.Location = New Point(910, 800)
         GroupBox1.Name = "GroupBox1"
-        GroupBox1.Size = New Size(420, 161)
+        GroupBox1.Size = New Size(420, 179)
         GroupBox1.TabIndex = 108
         GroupBox1.TabStop = False
         GroupBox1.Text = "Account "
@@ -512,7 +512,7 @@ Partial Class Team_Overview
         ' 
         Label1.AutoSize = True
         Label1.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label1.Location = New Point(24, 83)
+        Label1.Location = New Point(24, 87)
         Label1.Name = "Label1"
         Label1.Size = New Size(103, 21)
         Label1.TabIndex = 75
@@ -529,7 +529,7 @@ Partial Class Team_Overview
         ' txtUsername
         ' 
         txtUsername.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtUsername.Location = New Point(133, 74)
+        txtUsername.Location = New Point(133, 78)
         txtUsername.Name = "txtUsername"
         txtUsername.Size = New Size(271, 30)
         txtUsername.TabIndex = 76
@@ -538,7 +538,7 @@ Partial Class Team_Overview
         ' 
         Label29.AutoSize = True
         Label29.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label29.Location = New Point(32, 119)
+        Label29.Location = New Point(32, 128)
         Label29.Name = "Label29"
         Label29.Size = New Size(95, 21)
         Label29.TabIndex = 68
@@ -547,7 +547,7 @@ Partial Class Team_Overview
         ' txtPassword
         ' 
         txtPassword.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtPassword.Location = New Point(133, 110)
+        txtPassword.Location = New Point(133, 119)
         txtPassword.Name = "txtPassword"
         txtPassword.Size = New Size(271, 30)
         txtPassword.TabIndex = 71
@@ -585,7 +585,7 @@ Partial Class Team_Overview
         ' cbCivilStatus
         ' 
         cbCivilStatus.FormattingEnabled = True
-        cbCivilStatus.Location = New Point(155, 786)
+        cbCivilStatus.Location = New Point(155, 750)
         cbCivilStatus.Name = "cbCivilStatus"
         cbCivilStatus.Size = New Size(291, 31)
         cbCivilStatus.TabIndex = 106
@@ -593,7 +593,7 @@ Partial Class Team_Overview
         ' cbSex
         ' 
         cbSex.FormattingEnabled = True
-        cbSex.Location = New Point(155, 749)
+        cbSex.Location = New Point(155, 713)
         cbSex.Name = "cbSex"
         cbSex.Size = New Size(291, 31)
         cbSex.TabIndex = 105
@@ -637,7 +637,7 @@ Partial Class Team_Overview
         dgvOtherInfo.Location = New Point(15, 86)
         dgvOtherInfo.Name = "dgvOtherInfo"
         dgvOtherInfo.RowHeadersWidth = 51
-        dgvOtherInfo.Size = New Size(1314, 441)
+        dgvOtherInfo.Size = New Size(1314, 401)
         dgvOtherInfo.TabIndex = 90
         ' 
         ' GroupBox3
@@ -659,7 +659,7 @@ Partial Class Team_Overview
         GroupBox3.Controls.Add(Label16)
         GroupBox3.Controls.Add(txtYearsOfSevice)
         GroupBox3.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        GroupBox3.Location = New Point(21, 836)
+        GroupBox3.Location = New Point(21, 800)
         GroupBox3.Name = "GroupBox3"
         GroupBox3.Size = New Size(883, 184)
         GroupBox3.TabIndex = 88
@@ -825,9 +825,9 @@ Partial Class Team_Overview
         GroupBox5.Controls.Add(Label28)
         GroupBox5.Controls.Add(txtECName)
         GroupBox5.Font = New Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        GroupBox5.Location = New Point(818, 547)
+        GroupBox5.Location = New Point(818, 500)
         GroupBox5.Name = "GroupBox5"
-        GroupBox5.Size = New Size(511, 282)
+        GroupBox5.Size = New Size(511, 293)
         GroupBox5.TabIndex = 87
         GroupBox5.TabStop = False
         GroupBox5.Text = "Emergency Contact"
@@ -926,7 +926,7 @@ Partial Class Team_Overview
         ' txtAddress
         ' 
         txtAddress.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtAddress.Location = New Point(484, 698)
+        txtAddress.Location = New Point(484, 662)
         txtAddress.Multiline = True
         txtAddress.Name = "txtAddress"
         txtAddress.Size = New Size(310, 67)
@@ -935,7 +935,7 @@ Partial Class Team_Overview
         ' txtEmployeeID
         ' 
         txtEmployeeID.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold)
-        txtEmployeeID.Location = New Point(154, 537)
+        txtEmployeeID.Location = New Point(154, 501)
         txtEmployeeID.Name = "txtEmployeeID"
         txtEmployeeID.Size = New Size(291, 30)
         txtEmployeeID.TabIndex = 51
@@ -944,7 +944,7 @@ Partial Class Team_Overview
         ' 
         Label19.AutoSize = True
         Label19.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label19.Location = New Point(484, 674)
+        Label19.Location = New Point(484, 638)
         Label19.Name = "Label19"
         Label19.Size = New Size(85, 21)
         Label19.TabIndex = 4
@@ -953,7 +953,7 @@ Partial Class Team_Overview
         ' txtEmail
         ' 
         txtEmail.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtEmail.Location = New Point(484, 641)
+        txtEmail.Location = New Point(484, 605)
         txtEmail.Name = "txtEmail"
         txtEmail.Size = New Size(310, 30)
         txtEmail.TabIndex = 13
@@ -962,7 +962,7 @@ Partial Class Team_Overview
         ' 
         Label23.AutoSize = True
         Label23.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label23.Location = New Point(484, 617)
+        Label23.Location = New Point(484, 581)
         Label23.Name = "Label23"
         Label23.Size = New Size(135, 21)
         Label23.TabIndex = 1
@@ -971,7 +971,7 @@ Partial Class Team_Overview
         ' txtPhone
         ' 
         txtPhone.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtPhone.Location = New Point(484, 584)
+        txtPhone.Location = New Point(484, 548)
         txtPhone.Name = "txtPhone"
         txtPhone.Size = New Size(310, 30)
         txtPhone.TabIndex = 12
@@ -980,7 +980,7 @@ Partial Class Team_Overview
         ' 
         Label22.AutoSize = True
         Label22.Font = New Font("Century Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label22.Location = New Point(482, 560)
+        Label22.Location = New Point(482, 524)
         Label22.Name = "Label22"
         Label22.Size = New Size(147, 21)
         Label22.TabIndex = 3
@@ -989,7 +989,7 @@ Partial Class Team_Overview
         ' txtAge
         ' 
         txtAge.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold)
-        txtAge.Location = New Point(154, 713)
+        txtAge.Location = New Point(154, 677)
         txtAge.Name = "txtAge"
         txtAge.Size = New Size(291, 30)
         txtAge.TabIndex = 32
@@ -999,7 +999,7 @@ Partial Class Team_Overview
         dtpBirthDate.CalendarFont = New Font("Century Gothic", 9F, FontStyle.Bold)
         dtpBirthDate.CustomFormat = "mm/dd/yyyy"
         dtpBirthDate.Font = New Font("Century Gothic", 9F, FontStyle.Bold)
-        dtpBirthDate.Location = New Point(154, 681)
+        dtpBirthDate.Location = New Point(154, 645)
         dtpBirthDate.Name = "dtpBirthDate"
         dtpBirthDate.Size = New Size(291, 26)
         dtpBirthDate.TabIndex = 48
@@ -1010,7 +1010,7 @@ Partial Class Team_Overview
         Label18.AutoSize = True
         Label18.Font = New Font("Century Gothic", 10.8F)
         Label18.ForeColor = Color.Black
-        Label18.Location = New Point(21, 546)
+        Label18.Location = New Point(21, 510)
         Label18.Name = "Label18"
         Label18.Size = New Size(127, 21)
         Label18.TabIndex = 13
@@ -1021,7 +1021,7 @@ Partial Class Team_Overview
         lblfname.AutoSize = True
         lblfname.Font = New Font("Century Gothic", 10.8F)
         lblfname.ForeColor = Color.Black
-        lblfname.Location = New Point(43, 582)
+        lblfname.Location = New Point(43, 546)
         lblfname.Name = "lblfname"
         lblfname.Size = New Size(105, 21)
         lblfname.TabIndex = 14
@@ -1030,7 +1030,7 @@ Partial Class Team_Overview
         ' txtLastName
         ' 
         txtLastName.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold)
-        txtLastName.Location = New Point(154, 645)
+        txtLastName.Location = New Point(154, 609)
         txtLastName.Name = "txtLastName"
         txtLastName.Size = New Size(291, 30)
         txtLastName.TabIndex = 41
@@ -1038,7 +1038,7 @@ Partial Class Team_Overview
         ' txtFirstName
         ' 
         txtFirstName.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold)
-        txtFirstName.Location = New Point(154, 573)
+        txtFirstName.Location = New Point(154, 537)
         txtFirstName.Name = "txtFirstName"
         txtFirstName.Size = New Size(291, 30)
         txtFirstName.TabIndex = 24
@@ -1048,7 +1048,7 @@ Partial Class Team_Overview
         Label6.AutoSize = True
         Label6.Font = New Font("Century Gothic", 10.8F)
         Label6.ForeColor = Color.Black
-        Label6.Location = New Point(40, 654)
+        Label6.Location = New Point(40, 618)
         Label6.Name = "Label6"
         Label6.Size = New Size(108, 21)
         Label6.TabIndex = 40
@@ -1059,7 +1059,7 @@ Partial Class Team_Overview
         lblage.AutoSize = True
         lblage.Font = New Font("Century Gothic", 10.8F)
         lblage.ForeColor = Color.Black
-        lblage.Location = New Point(94, 722)
+        lblage.Location = New Point(94, 686)
         lblage.Name = "lblage"
         lblage.Size = New Size(54, 21)
         lblage.TabIndex = 29
@@ -1070,7 +1070,7 @@ Partial Class Team_Overview
         Label9.AutoSize = True
         Label9.Font = New Font("Century Gothic", 10.8F)
         Label9.ForeColor = Color.Black
-        Label9.Location = New Point(15, 618)
+        Label9.Location = New Point(15, 582)
         Label9.Name = "Label9"
         Label9.Size = New Size(133, 21)
         Label9.TabIndex = 38
@@ -1081,7 +1081,7 @@ Partial Class Team_Overview
         Label17.AutoSize = True
         Label17.Font = New Font("Century Gothic", 10.8F)
         Label17.ForeColor = Color.Black
-        Label17.Location = New Point(48, 686)
+        Label17.Location = New Point(48, 650)
         Label17.Name = "Label17"
         Label17.Size = New Size(100, 21)
         Label17.TabIndex = 27
@@ -1090,7 +1090,7 @@ Partial Class Team_Overview
         ' txtMiddleName
         ' 
         txtMiddleName.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold)
-        txtMiddleName.Location = New Point(154, 609)
+        txtMiddleName.Location = New Point(154, 573)
         txtMiddleName.Name = "txtMiddleName"
         txtMiddleName.Size = New Size(291, 30)
         txtMiddleName.TabIndex = 37
@@ -1100,7 +1100,7 @@ Partial Class Team_Overview
         Label14.AutoSize = True
         Label14.Font = New Font("Century Gothic", 10.8F)
         Label14.ForeColor = Color.Black
-        Label14.Location = New Point(103, 758)
+        Label14.Location = New Point(103, 722)
         Label14.Name = "Label14"
         Label14.Size = New Size(45, 21)
         Label14.TabIndex = 30
@@ -1111,7 +1111,7 @@ Partial Class Team_Overview
         Label13.AutoSize = True
         Label13.Font = New Font("Century Gothic", 10.8F)
         Label13.ForeColor = Color.Black
-        Label13.Location = New Point(40, 794)
+        Label13.Location = New Point(40, 758)
         Label13.Name = "Label13"
         Label13.Size = New Size(108, 21)
         Label13.TabIndex = 34

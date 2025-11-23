@@ -6,7 +6,6 @@ Public Class Trainings
     Private originalStatus As String = ""
     Private originalDateStarted As Date
     Private originalDateCompleted As Date
-
     Private Sub Trainings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If LoggedInUserType = "Staff" Then
             lblTeamOverview.Visible = False
@@ -242,7 +241,7 @@ Public Class Trainings
         Me.Hide()
     End Sub
 
-    Private Sub btnSignOut_Click_1(sender As Object, e As EventArgs) Handles btnSignOut.Click
+    Private Sub btnSignOut_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
         Dim result = MessageBox.Show(
             "Are you sure you want to sign out?",
             "Confirm Sign Out",

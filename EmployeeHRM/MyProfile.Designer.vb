@@ -417,7 +417,7 @@ Partial Class MyProfile
         btnEditInformation.Font = New Font("Century Gothic", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnEditInformation.Location = New Point(375, 114)
         btnEditInformation.Name = "btnEditInformation"
-        btnEditInformation.Size = New Size(1334, 1030)
+        btnEditInformation.Size = New Size(1355, 1009)
         btnEditInformation.TabIndex = 90
         btnEditInformation.TabStop = False
         btnEditInformation.Text = "Employee Information"
@@ -431,7 +431,7 @@ Partial Class MyProfile
         btnEditInfo.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnEditInfo.IconSize = 40
         btnEditInfo.ImageAlign = ContentAlignment.MiddleLeft
-        btnEditInfo.Location = New Point(857, 228)
+        btnEditInfo.Location = New Point(870, 228)
         btnEditInfo.Name = "btnEditInfo"
         btnEditInfo.Size = New Size(406, 69)
         btnEditInfo.TabIndex = 111
@@ -448,7 +448,7 @@ Partial Class MyProfile
         btnCancelInfo.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnCancelInfo.IconSize = 35
         btnCancelInfo.ImageAlign = ContentAlignment.MiddleLeft
-        btnCancelInfo.Location = New Point(1053, 229)
+        btnCancelInfo.Location = New Point(1066, 229)
         btnCancelInfo.Name = "btnCancelInfo"
         btnCancelInfo.Size = New Size(211, 68)
         btnCancelInfo.TabIndex = 113
@@ -465,7 +465,7 @@ Partial Class MyProfile
         btnSaveInfo.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnSaveInfo.IconSize = 35
         btnSaveInfo.ImageAlign = ContentAlignment.MiddleLeft
-        btnSaveInfo.Location = New Point(857, 229)
+        btnSaveInfo.Location = New Point(870, 229)
         btnSaveInfo.Name = "btnSaveInfo"
         btnSaveInfo.Size = New Size(198, 69)
         btnSaveInfo.TabIndex = 112
@@ -487,9 +487,9 @@ Partial Class MyProfile
         GroupBox1.Controls.Add(btnCancelAccount)
         GroupBox1.Controls.Add(btnSaveAccount)
         GroupBox1.Font = New Font("Century Gothic", 15F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        GroupBox1.Location = New Point(31, 420)
+        GroupBox1.Location = New Point(63, 399)
         GroupBox1.Name = "GroupBox1"
-        GroupBox1.Size = New Size(1274, 155)
+        GroupBox1.Size = New Size(1230, 155)
         GroupBox1.TabIndex = 108
         GroupBox1.TabStop = False
         GroupBox1.Text = "Account "
@@ -503,7 +503,7 @@ Partial Class MyProfile
         btnEditAccount.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnEditAccount.IconSize = 35
         btnEditAccount.ImageAlign = ContentAlignment.MiddleLeft
-        btnEditAccount.Location = New Point(950, 49)
+        btnEditAccount.Location = New Point(929, 49)
         btnEditAccount.Name = "btnEditAccount"
         btnEditAccount.Size = New Size(271, 69)
         btnEditAccount.TabIndex = 108
@@ -515,7 +515,7 @@ Partial Class MyProfile
         ' 
         Label1.AutoSize = True
         Label1.Font = New Font("Century Gothic", 12F)
-        Label1.Location = New Point(478, 58)
+        Label1.Location = New Point(466, 58)
         Label1.Name = "Label1"
         Label1.Size = New Size(113, 23)
         Label1.TabIndex = 75
@@ -533,7 +533,7 @@ Partial Class MyProfile
         ' txtUsername
         ' 
         txtUsername.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        txtUsername.Location = New Point(597, 49)
+        txtUsername.Location = New Point(585, 49)
         txtUsername.Name = "txtUsername"
         txtUsername.Size = New Size(271, 32)
         txtUsername.TabIndex = 76
@@ -542,7 +542,7 @@ Partial Class MyProfile
         ' 
         Label29.AutoSize = True
         Label29.Font = New Font("Century Gothic", 12F)
-        Label29.Location = New Point(483, 101)
+        Label29.Location = New Point(471, 101)
         Label29.Name = "Label29"
         Label29.Size = New Size(108, 23)
         Label29.TabIndex = 68
@@ -551,7 +551,7 @@ Partial Class MyProfile
         ' txtPassword
         ' 
         txtPassword.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        txtPassword.Location = New Point(597, 92)
+        txtPassword.Location = New Point(585, 92)
         txtPassword.Name = "txtPassword"
         txtPassword.Size = New Size(271, 32)
         txtPassword.TabIndex = 71
@@ -595,7 +595,7 @@ Partial Class MyProfile
         btnCancelAccount.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnCancelAccount.IconSize = 35
         btnCancelAccount.ImageAlign = ContentAlignment.MiddleLeft
-        btnCancelAccount.Location = New Point(1086, 48)
+        btnCancelAccount.Location = New Point(1065, 48)
         btnCancelAccount.Name = "btnCancelAccount"
         btnCancelAccount.Size = New Size(135, 68)
         btnCancelAccount.TabIndex = 110
@@ -612,7 +612,7 @@ Partial Class MyProfile
         btnSaveAccount.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnSaveAccount.IconSize = 35
         btnSaveAccount.ImageAlign = ContentAlignment.MiddleLeft
-        btnSaveAccount.Location = New Point(950, 49)
+        btnSaveAccount.Location = New Point(929, 49)
         btnSaveAccount.Name = "btnSaveAccount"
         btnSaveAccount.Size = New Size(137, 69)
         btnSaveAccount.TabIndex = 109
@@ -624,7 +624,7 @@ Partial Class MyProfile
         ' 
         cbCivilStatus.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
         cbCivilStatus.FormattingEnabled = True
-        cbCivilStatus.Location = New Point(215, 355)
+        cbCivilStatus.Location = New Point(247, 355)
         cbCivilStatus.Name = "cbCivilStatus"
         cbCivilStatus.Size = New Size(407, 31)
         cbCivilStatus.TabIndex = 106
@@ -633,7 +633,7 @@ Partial Class MyProfile
         ' 
         cbSex.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
         cbSex.FormattingEnabled = True
-        cbSex.Location = New Point(215, 313)
+        cbSex.Location = New Point(247, 313)
         cbSex.Name = "cbSex"
         cbSex.Size = New Size(407, 31)
         cbSex.TabIndex = 105
@@ -657,9 +657,9 @@ Partial Class MyProfile
         GroupBox3.Controls.Add(Label16)
         GroupBox3.Controls.Add(txtYearsOfSevice)
         GroupBox3.Font = New Font("Century Gothic", 15F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        GroupBox3.Location = New Point(31, 603)
+        GroupBox3.Location = New Point(63, 555)
         GroupBox3.Name = "GroupBox3"
-        GroupBox3.Size = New Size(692, 406)
+        GroupBox3.Size = New Size(650, 406)
         GroupBox3.TabIndex = 88
         GroupBox3.TabStop = False
         GroupBox3.Text = "Job Details"
@@ -668,7 +668,7 @@ Partial Class MyProfile
         ' 
         cbContractType.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
         cbContractType.FormattingEnabled = True
-        cbContractType.Location = New Point(252, 264)
+        cbContractType.Location = New Point(246, 264)
         cbContractType.Name = "cbContractType"
         cbContractType.Size = New Size(357, 31)
         cbContractType.TabIndex = 107
@@ -677,7 +677,7 @@ Partial Class MyProfile
         ' 
         cbEmployeeStatus.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
         cbEmployeeStatus.FormattingEnabled = True
-        cbEmployeeStatus.Location = New Point(252, 222)
+        cbEmployeeStatus.Location = New Point(246, 222)
         cbEmployeeStatus.Name = "cbEmployeeStatus"
         cbEmployeeStatus.Size = New Size(357, 31)
         cbEmployeeStatus.TabIndex = 106
@@ -686,7 +686,7 @@ Partial Class MyProfile
         ' 
         dtpDateHired.CustomFormat = "mm/dd/yyyy"
         dtpDateHired.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        dtpDateHired.Location = New Point(252, 306)
+        dtpDateHired.Location = New Point(246, 306)
         dtpDateHired.Name = "dtpDateHired"
         dtpDateHired.Size = New Size(357, 32)
         dtpDateHired.TabIndex = 49
@@ -695,7 +695,7 @@ Partial Class MyProfile
         ' txtDepartment
         ' 
         txtDepartment.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        txtDepartment.Location = New Point(252, 179)
+        txtDepartment.Location = New Point(246, 179)
         txtDepartment.Name = "txtDepartment"
         txtDepartment.Size = New Size(355, 32)
         txtDepartment.TabIndex = 20
@@ -704,7 +704,7 @@ Partial Class MyProfile
         ' 
         Label11.AutoSize = True
         Label11.Font = New Font("Century Gothic", 12F)
-        Label11.Location = New Point(85, 145)
+        Label11.Location = New Point(79, 145)
         Label11.Name = "Label11"
         Label11.Size = New Size(161, 23)
         Label11.TabIndex = 17
@@ -714,7 +714,7 @@ Partial Class MyProfile
         ' 
         Label25.AutoSize = True
         Label25.Font = New Font("Century Gothic", 12F)
-        Label25.Location = New Point(168, 59)
+        Label25.Location = New Point(162, 59)
         Label25.Name = "Label25"
         Label25.Size = New Size(78, 23)
         Label25.TabIndex = 19
@@ -724,7 +724,7 @@ Partial Class MyProfile
         ' 
         Label21.AutoSize = True
         Label21.Font = New Font("Century Gothic", 12F)
-        Label21.Location = New Point(152, 102)
+        Label21.Location = New Point(146, 102)
         Label21.Name = "Label21"
         Label21.Size = New Size(94, 23)
         Label21.TabIndex = 0
@@ -733,7 +733,7 @@ Partial Class MyProfile
         ' txtJobID
         ' 
         txtJobID.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        txtJobID.Location = New Point(252, 50)
+        txtJobID.Location = New Point(246, 50)
         txtJobID.Name = "txtJobID"
         txtJobID.Size = New Size(355, 32)
         txtJobID.TabIndex = 18
@@ -742,7 +742,7 @@ Partial Class MyProfile
         ' 
         Label20.AutoSize = True
         Label20.Font = New Font("Century Gothic", 12F)
-        Label20.Location = New Point(126, 313)
+        Label20.Location = New Point(120, 313)
         Label20.Name = "Label20"
         Label20.Size = New Size(120, 23)
         Label20.TabIndex = 1
@@ -752,7 +752,7 @@ Partial Class MyProfile
         ' 
         Label15.AutoSize = True
         Label15.Font = New Font("Century Gothic", 12F)
-        Label15.Location = New Point(43, 230)
+        Label15.Location = New Point(37, 230)
         Label15.Name = "Label15"
         Label15.Size = New Size(203, 23)
         Label15.TabIndex = 3
@@ -761,7 +761,7 @@ Partial Class MyProfile
         ' txtDepartmentID
         ' 
         txtDepartmentID.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        txtDepartmentID.Location = New Point(252, 136)
+        txtDepartmentID.Location = New Point(246, 136)
         txtDepartmentID.Name = "txtDepartmentID"
         txtDepartmentID.Size = New Size(355, 32)
         txtDepartmentID.TabIndex = 16
@@ -770,7 +770,7 @@ Partial Class MyProfile
         ' 
         Label12.AutoSize = True
         Label12.Font = New Font("Century Gothic", 12F)
-        Label12.Location = New Point(91, 272)
+        Label12.Location = New Point(85, 272)
         Label12.Name = "Label12"
         Label12.Size = New Size(155, 23)
         Label12.TabIndex = 4
@@ -780,7 +780,7 @@ Partial Class MyProfile
         ' 
         Label48.AutoSize = True
         Label48.Font = New Font("Century Gothic", 12F)
-        Label48.Location = New Point(111, 188)
+        Label48.Location = New Point(105, 188)
         Label48.Name = "Label48"
         Label48.Size = New Size(135, 23)
         Label48.TabIndex = 15
@@ -789,7 +789,7 @@ Partial Class MyProfile
         ' txtJobTitle
         ' 
         txtJobTitle.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        txtJobTitle.Location = New Point(252, 93)
+        txtJobTitle.Location = New Point(246, 93)
         txtJobTitle.Name = "txtJobTitle"
         txtJobTitle.Size = New Size(355, 32)
         txtJobTitle.TabIndex = 10
@@ -798,7 +798,7 @@ Partial Class MyProfile
         ' 
         Label16.AutoSize = True
         Label16.Font = New Font("Century Gothic", 12F)
-        Label16.Location = New Point(73, 358)
+        Label16.Location = New Point(67, 358)
         Label16.Name = "Label16"
         Label16.Size = New Size(171, 23)
         Label16.TabIndex = 15
@@ -807,7 +807,7 @@ Partial Class MyProfile
         ' txtYearsOfSevice
         ' 
         txtYearsOfSevice.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        txtYearsOfSevice.Location = New Point(250, 349)
+        txtYearsOfSevice.Location = New Point(244, 349)
         txtYearsOfSevice.Name = "txtYearsOfSevice"
         txtYearsOfSevice.Size = New Size(357, 32)
         txtYearsOfSevice.TabIndex = 13
@@ -828,9 +828,9 @@ Partial Class MyProfile
         GroupBox5.Controls.Add(Label5)
         GroupBox5.Controls.Add(txtECName)
         GroupBox5.Font = New Font("Century Gothic", 15F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        GroupBox5.Location = New Point(743, 603)
+        GroupBox5.Location = New Point(731, 557)
         GroupBox5.Name = "GroupBox5"
-        GroupBox5.Size = New Size(542, 404)
+        GroupBox5.Size = New Size(562, 404)
         GroupBox5.TabIndex = 87
         GroupBox5.TabStop = False
         GroupBox5.Text = "Emergency Contact"
@@ -844,7 +844,7 @@ Partial Class MyProfile
         btnEditContact.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnEditContact.IconSize = 35
         btnEditContact.ImageAlign = ContentAlignment.MiddleLeft
-        btnEditContact.Location = New Point(184, 328)
+        btnEditContact.Location = New Point(193, 328)
         btnEditContact.Name = "btnEditContact"
         btnEditContact.Size = New Size(325, 62)
         btnEditContact.TabIndex = 111
@@ -861,7 +861,7 @@ Partial Class MyProfile
         btnCancelContact.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnCancelContact.IconSize = 35
         btnCancelContact.ImageAlign = ContentAlignment.MiddleLeft
-        btnCancelContact.Location = New Point(348, 329)
+        btnCancelContact.Location = New Point(357, 329)
         btnCancelContact.Name = "btnCancelContact"
         btnCancelContact.Size = New Size(161, 61)
         btnCancelContact.TabIndex = 113
@@ -878,7 +878,7 @@ Partial Class MyProfile
         btnSaveContact.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnSaveContact.IconSize = 35
         btnSaveContact.ImageAlign = ContentAlignment.MiddleLeft
-        btnSaveContact.Location = New Point(187, 329)
+        btnSaveContact.Location = New Point(196, 329)
         btnSaveContact.Name = "btnSaveContact"
         btnSaveContact.Size = New Size(161, 62)
         btnSaveContact.TabIndex = 112
@@ -889,7 +889,7 @@ Partial Class MyProfile
         ' txtECAddress
         ' 
         txtECAddress.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        txtECAddress.Location = New Point(184, 225)
+        txtECAddress.Location = New Point(193, 225)
         txtECAddress.Multiline = True
         txtECAddress.Name = "txtECAddress"
         txtECAddress.Size = New Size(325, 82)
@@ -899,7 +899,7 @@ Partial Class MyProfile
         ' 
         Label24.AutoSize = True
         Label24.Font = New Font("Century Gothic", 12F)
-        Label24.Location = New Point(55, 54)
+        Label24.Location = New Point(64, 54)
         Label24.Name = "Label24"
         Label24.Size = New Size(123, 23)
         Label24.TabIndex = 75
@@ -908,7 +908,7 @@ Partial Class MyProfile
         ' txtECContactID
         ' 
         txtECContactID.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        txtECContactID.Location = New Point(184, 45)
+        txtECContactID.Location = New Point(193, 45)
         txtECContactID.Name = "txtECContactID"
         txtECContactID.Size = New Size(325, 32)
         txtECContactID.TabIndex = 76
@@ -917,7 +917,7 @@ Partial Class MyProfile
         ' 
         Label54.AutoSize = True
         Label54.Font = New Font("Century Gothic", 12F)
-        Label54.Location = New Point(85, 228)
+        Label54.Location = New Point(94, 228)
         Label54.Name = "Label54"
         Label54.Size = New Size(93, 23)
         Label54.TabIndex = 74
@@ -927,7 +927,7 @@ Partial Class MyProfile
         ' 
         Label3.AutoSize = True
         Label3.Font = New Font("Century Gothic", 12F)
-        Label3.Location = New Point(102, 99)
+        Label3.Location = New Point(111, 99)
         Label3.Name = "Label3"
         Label3.Size = New Size(76, 23)
         Label3.TabIndex = 68
@@ -936,7 +936,7 @@ Partial Class MyProfile
         ' txtECPhone
         ' 
         txtECPhone.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        txtECPhone.Location = New Point(184, 180)
+        txtECPhone.Location = New Point(193, 180)
         txtECPhone.Name = "txtECPhone"
         txtECPhone.Size = New Size(325, 32)
         txtECPhone.TabIndex = 73
@@ -945,7 +945,7 @@ Partial Class MyProfile
         ' 
         Label4.AutoSize = True
         Label4.Font = New Font("Century Gothic", 12F)
-        Label4.Location = New Point(47, 144)
+        Label4.Location = New Point(56, 144)
         Label4.Name = "Label4"
         Label4.Size = New Size(131, 23)
         Label4.TabIndex = 69
@@ -954,7 +954,7 @@ Partial Class MyProfile
         ' txtECRelationship
         ' 
         txtECRelationship.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        txtECRelationship.Location = New Point(184, 135)
+        txtECRelationship.Location = New Point(193, 135)
         txtECRelationship.Name = "txtECRelationship"
         txtECRelationship.Size = New Size(325, 32)
         txtECRelationship.TabIndex = 72
@@ -963,7 +963,7 @@ Partial Class MyProfile
         ' 
         Label5.AutoSize = True
         Label5.Font = New Font("Century Gothic", 12F)
-        Label5.Location = New Point(16, 189)
+        Label5.Location = New Point(25, 189)
         Label5.Name = "Label5"
         Label5.Size = New Size(162, 23)
         Label5.TabIndex = 70
@@ -972,7 +972,7 @@ Partial Class MyProfile
         ' txtECName
         ' 
         txtECName.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        txtECName.Location = New Point(184, 90)
+        txtECName.Location = New Point(193, 90)
         txtECName.Name = "txtECName"
         txtECName.Size = New Size(325, 32)
         txtECName.TabIndex = 71
@@ -980,7 +980,7 @@ Partial Class MyProfile
         ' txtAddress
         ' 
         txtAddress.Font = New Font("Century Gothic", 12F)
-        txtAddress.Location = New Point(857, 141)
+        txtAddress.Location = New Point(870, 141)
         txtAddress.Multiline = True
         txtAddress.Name = "txtAddress"
         txtAddress.Size = New Size(406, 67)
@@ -989,7 +989,7 @@ Partial Class MyProfile
         ' txtEmployeeID
         ' 
         txtEmployeeID.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        txtEmployeeID.Location = New Point(215, 55)
+        txtEmployeeID.Location = New Point(247, 55)
         txtEmployeeID.Name = "txtEmployeeID"
         txtEmployeeID.Size = New Size(407, 32)
         txtEmployeeID.TabIndex = 51
@@ -998,7 +998,7 @@ Partial Class MyProfile
         ' 
         Label19.AutoSize = True
         Label19.Font = New Font("Century Gothic", 12F)
-        Label19.Location = New Point(759, 144)
+        Label19.Location = New Point(772, 144)
         Label19.Name = "Label19"
         Label19.Size = New Size(93, 23)
         Label19.TabIndex = 4
@@ -1007,7 +1007,7 @@ Partial Class MyProfile
         ' txtEmail
         ' 
         txtEmail.Font = New Font("Century Gothic", 12F)
-        txtEmail.Location = New Point(858, 98)
+        txtEmail.Location = New Point(871, 98)
         txtEmail.Name = "txtEmail"
         txtEmail.Size = New Size(407, 32)
         txtEmail.TabIndex = 13
@@ -1016,7 +1016,7 @@ Partial Class MyProfile
         ' 
         Label23.AutoSize = True
         Label23.Font = New Font("Century Gothic", 12F)
-        Label23.Location = New Point(701, 107)
+        Label23.Location = New Point(714, 107)
         Label23.Name = "Label23"
         Label23.Size = New Size(151, 23)
         Label23.TabIndex = 1
@@ -1025,7 +1025,7 @@ Partial Class MyProfile
         ' txtPhone
         ' 
         txtPhone.Font = New Font("Century Gothic", 12F)
-        txtPhone.Location = New Point(856, 55)
+        txtPhone.Location = New Point(869, 55)
         txtPhone.Name = "txtPhone"
         txtPhone.Size = New Size(407, 32)
         txtPhone.TabIndex = 12
@@ -1034,7 +1034,7 @@ Partial Class MyProfile
         ' 
         Label22.AutoSize = True
         Label22.Font = New Font("Century Gothic", 12F)
-        Label22.Location = New Point(688, 64)
+        Label22.Location = New Point(701, 64)
         Label22.Name = "Label22"
         Label22.Size = New Size(162, 23)
         Label22.TabIndex = 3
@@ -1043,7 +1043,7 @@ Partial Class MyProfile
         ' txtAge
         ' 
         txtAge.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        txtAge.Location = New Point(215, 270)
+        txtAge.Location = New Point(247, 270)
         txtAge.Name = "txtAge"
         txtAge.Size = New Size(407, 32)
         txtAge.TabIndex = 32
@@ -1053,7 +1053,7 @@ Partial Class MyProfile
         dtpBirthDate.CalendarFont = New Font("Century Gothic", 9F, FontStyle.Bold)
         dtpBirthDate.CustomFormat = "mm/dd/yyyy"
         dtpBirthDate.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        dtpBirthDate.Location = New Point(215, 227)
+        dtpBirthDate.Location = New Point(247, 227)
         dtpBirthDate.Name = "dtpBirthDate"
         dtpBirthDate.Size = New Size(407, 32)
         dtpBirthDate.TabIndex = 48
@@ -1064,7 +1064,7 @@ Partial Class MyProfile
         Label18.AutoSize = True
         Label18.Font = New Font("Century Gothic", 12F)
         Label18.ForeColor = Color.Black
-        Label18.Location = New Point(69, 64)
+        Label18.Location = New Point(101, 64)
         Label18.Name = "Label18"
         Label18.Size = New Size(140, 23)
         Label18.TabIndex = 13
@@ -1075,7 +1075,7 @@ Partial Class MyProfile
         lblfname.AutoSize = True
         lblfname.Font = New Font("Century Gothic", 12F)
         lblfname.ForeColor = Color.Black
-        lblfname.Location = New Point(93, 109)
+        lblfname.Location = New Point(125, 109)
         lblfname.Name = "lblfname"
         lblfname.Size = New Size(116, 23)
         lblfname.TabIndex = 14
@@ -1084,7 +1084,7 @@ Partial Class MyProfile
         ' txtLastName
         ' 
         txtLastName.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        txtLastName.Location = New Point(215, 184)
+        txtLastName.Location = New Point(247, 184)
         txtLastName.Name = "txtLastName"
         txtLastName.Size = New Size(407, 32)
         txtLastName.TabIndex = 41
@@ -1092,7 +1092,7 @@ Partial Class MyProfile
         ' txtFirstName
         ' 
         txtFirstName.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        txtFirstName.Location = New Point(215, 98)
+        txtFirstName.Location = New Point(247, 98)
         txtFirstName.Name = "txtFirstName"
         txtFirstName.Size = New Size(407, 32)
         txtFirstName.TabIndex = 24
@@ -1102,7 +1102,7 @@ Partial Class MyProfile
         Label6.AutoSize = True
         Label6.Font = New Font("Century Gothic", 12F)
         Label6.ForeColor = Color.Black
-        Label6.Location = New Point(89, 193)
+        Label6.Location = New Point(121, 193)
         Label6.Name = "Label6"
         Label6.Size = New Size(120, 23)
         Label6.TabIndex = 40
@@ -1113,7 +1113,7 @@ Partial Class MyProfile
         lblage.AutoSize = True
         lblage.Font = New Font("Century Gothic", 12F)
         lblage.ForeColor = Color.Black
-        lblage.Location = New Point(153, 279)
+        lblage.Location = New Point(185, 279)
         lblage.Name = "lblage"
         lblage.Size = New Size(56, 23)
         lblage.TabIndex = 29
@@ -1124,7 +1124,7 @@ Partial Class MyProfile
         Label9.AutoSize = True
         Label9.Font = New Font("Century Gothic", 12F)
         Label9.ForeColor = Color.Black
-        Label9.Location = New Point(61, 150)
+        Label9.Location = New Point(93, 150)
         Label9.Name = "Label9"
         Label9.Size = New Size(148, 23)
         Label9.TabIndex = 38
@@ -1135,7 +1135,7 @@ Partial Class MyProfile
         Label17.AutoSize = True
         Label17.Font = New Font("Century Gothic", 12F)
         Label17.ForeColor = Color.Black
-        Label17.Location = New Point(100, 236)
+        Label17.Location = New Point(132, 236)
         Label17.Name = "Label17"
         Label17.Size = New Size(109, 23)
         Label17.TabIndex = 27
@@ -1144,7 +1144,7 @@ Partial Class MyProfile
         ' txtMiddleName
         ' 
         txtMiddleName.Font = New Font("Century Gothic", 12F, FontStyle.Bold)
-        txtMiddleName.Location = New Point(215, 141)
+        txtMiddleName.Location = New Point(247, 141)
         txtMiddleName.Name = "txtMiddleName"
         txtMiddleName.Size = New Size(407, 32)
         txtMiddleName.TabIndex = 37
@@ -1154,7 +1154,7 @@ Partial Class MyProfile
         Label14.AutoSize = True
         Label14.Font = New Font("Century Gothic", 12F)
         Label14.ForeColor = Color.Black
-        Label14.Location = New Point(161, 321)
+        Label14.Location = New Point(193, 321)
         Label14.Name = "Label14"
         Label14.Size = New Size(48, 23)
         Label14.TabIndex = 30
@@ -1165,7 +1165,7 @@ Partial Class MyProfile
         Label13.AutoSize = True
         Label13.Font = New Font("Century Gothic", 12F)
         Label13.ForeColor = Color.Black
-        Label13.Location = New Point(90, 363)
+        Label13.Location = New Point(122, 363)
         Label13.Name = "Label13"
         Label13.Size = New Size(119, 23)
         Label13.TabIndex = 34

@@ -374,4 +374,6 @@ Public Class Attendance
             Me.Hide()
         End If
     End Sub
+
+
 End Class

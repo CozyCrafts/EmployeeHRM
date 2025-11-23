@@ -106,7 +106,7 @@ Partial Class Attendance_Tracker
         ' 
         Label2.AutoSize = True
         Label2.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(72, 49)
+        Label2.Location = New Point(53, 58)
         Label2.Name = "Label2"
         Label2.Size = New Size(326, 34)
         Label2.TabIndex = 0
@@ -361,11 +361,11 @@ Partial Class Attendance_Tracker
         gbAttendanceList.Controls.Add(PictureBox1)
         gbAttendanceList.Controls.Add(dgvAttendanceList)
         gbAttendanceList.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        gbAttendanceList.Location = New Point(410, 545)
+        gbAttendanceList.Location = New Point(391, 519)
         gbAttendanceList.Margin = New Padding(4, 3, 4, 3)
         gbAttendanceList.Name = "gbAttendanceList"
         gbAttendanceList.Padding = New Padding(4, 3, 4, 3)
-        gbAttendanceList.Size = New Size(1335, 573)
+        gbAttendanceList.Size = New Size(1320, 600)
         gbAttendanceList.TabIndex = 68
         gbAttendanceList.TabStop = False
         gbAttendanceList.Text = "Attendance List"
@@ -397,11 +397,11 @@ Partial Class Attendance_Tracker
         dgvAttendanceList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         dgvAttendanceList.ColumnHeadersHeight = 29
         dgvAttendanceList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        dgvAttendanceList.Location = New Point(33, 92)
+        dgvAttendanceList.Location = New Point(33, 101)
         dgvAttendanceList.Margin = New Padding(4, 3, 4, 3)
         dgvAttendanceList.Name = "dgvAttendanceList"
         dgvAttendanceList.RowHeadersWidth = 51
-        dgvAttendanceList.Size = New Size(1268, 454)
+        dgvAttendanceList.Size = New Size(1259, 451)
         dgvAttendanceList.TabIndex = 0
         ' 
         ' gbAttendanceDetails
@@ -431,11 +431,11 @@ Partial Class Attendance_Tracker
         gbAttendanceDetails.Controls.Add(Label1)
         gbAttendanceDetails.Controls.Add(Label5)
         gbAttendanceDetails.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        gbAttendanceDetails.Location = New Point(410, 154)
+        gbAttendanceDetails.Location = New Point(391, 114)
         gbAttendanceDetails.Margin = New Padding(4, 3, 4, 3)
         gbAttendanceDetails.Name = "gbAttendanceDetails"
         gbAttendanceDetails.Padding = New Padding(4, 3, 4, 3)
-        gbAttendanceDetails.Size = New Size(1335, 385)
+        gbAttendanceDetails.Size = New Size(1320, 384)
         gbAttendanceDetails.TabIndex = 83
         gbAttendanceDetails.TabStop = False
         gbAttendanceDetails.Text = "Details"
@@ -461,7 +461,7 @@ Partial Class Attendance_Tracker
         gbDailyTimeRecord.Controls.Add(Label16)
         gbDailyTimeRecord.Controls.Add(Label14)
         gbDailyTimeRecord.Font = New Font("Century Gothic", 14F, FontStyle.Bold)
-        gbDailyTimeRecord.Location = New Point(934, 40)
+        gbDailyTimeRecord.Location = New Point(928, 40)
         gbDailyTimeRecord.Margin = New Padding(4, 3, 4, 3)
         gbDailyTimeRecord.Name = "gbDailyTimeRecord"
         gbDailyTimeRecord.Padding = New Padding(4, 3, 4, 3)
