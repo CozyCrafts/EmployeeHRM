@@ -5,6 +5,7 @@ Public Class Attendance
     Private originalValues As New Dictionary(Of String, Object)
 
     Private Sub Attendance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        HRMModule.HideManagerLabelsForStaff(Me)
         LockFields()
         DisableAllTimeButtons()
         PopulateAttendanceStatusCombo()
@@ -13,18 +14,6 @@ Public Class Attendance
         btnRecordAttendance.Enabled = True
         btnSaveAttendance.Visible = False
         btnCancelAttendance.Visible = False
-
-        If CurrentUser.UserType = "Staff" Then
-            lblManagement.Visible = False
-            lblTeamOverview.Visible = False
-            lblAttendanceTracker.Visible = False
-            lblLeaveApproval.Visible = False
-            lblPayrollSummary.Visible = False
-            lblEmployeeTrainings.Visible = False
-            lblDepartment.Visible = False
-            lblAmenities.Visible = False
-        End If
-
         LoadAttendanceData()
     End Sub
 
