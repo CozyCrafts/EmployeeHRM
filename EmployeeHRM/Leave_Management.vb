@@ -55,8 +55,12 @@ Public Class Leave_Management
         Try
             Dim query As String = "
             SELECT 
-                l.LeaveID, l.LeaveType, l.Reason, l.DurationDateFrom, l.DurationDateTo, l.Status, l.ApprovedBy,
-                e.EmployeeID, CONCAT(e.`First Name`, ' ', IFNULL(e.MiddleName, ''), ' ', e.LastName) AS EmployeeName
+                l.LeaveID, l.LeaveType, l.Reason, 
+                DATE(l.DurationDateFrom) AS DurationDateFrom, 
+                DATE(l.DurationDateTo) AS DurationDateTo, 
+                l.Status, l.ApprovedBy,
+                e.EmployeeID, 
+                CONCAT(e.`First Name`, ' ', IFNULL(e.MiddleName, ''), ' ', e.LastName) AS EmployeeName
             FROM tblLeave l
             JOIN tblEmployee e ON l.EmployeeID = e.EmployeeID
             WHERE l.EmployeeID = @empID
@@ -69,15 +73,20 @@ Public Class Leave_Management
 
             dbtable = HRMModule.ExecuteQuery(query, parameters)
 
+            dbtable.Columns("DurationDateFrom").DataType = GetType(DateTime)
+            dbtable.Columns("DurationDateTo").DataType = GetType(DateTime)
+
             dgvLeaveHistory.DataSource = dbtable
 
             If dgvLeaveHistory.Columns.Contains("DurationDateFrom") Then
                 dgvLeaveHistory.Columns("DurationDateFrom").DefaultCellStyle.Format = "yyyy-MM-dd"
             End If
-
             If dgvLeaveHistory.Columns.Contains("DurationDateTo") Then
                 dgvLeaveHistory.Columns("DurationDateTo").DefaultCellStyle.Format = "yyyy-MM-dd"
             End If
+
+            If dgvLeaveHistory.Columns.Contains("EmployeeID") Then dgvLeaveHistory.Columns("EmployeeID").Visible = False
+            If dgvLeaveHistory.Columns.Contains("EmployeeName") Then dgvLeaveHistory.Columns("EmployeeName").Visible = False
 
             dgvLeaveHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
             dgvLeaveHistory.SelectionMode = DataGridViewSelectionMode.FullRowSelect
@@ -97,6 +106,7 @@ Public Class Leave_Management
         End Try
     End Sub
 
+
     Private Sub LockTextBoxes()
         txtLeaveID.ReadOnly = True
         txtEmployeeID.ReadOnly = True
@@ -114,6 +124,7 @@ Public Class Leave_Management
         dtpDurationDateFrom.Enabled = True
         dtpDurationDateTo.Enabled = True
     End Sub
+
     Private Sub PopulateLeaveDetails(row As DataRow)
         txtLeaveID.Text = If(IsDBNull(row("LeaveID")), "", row("LeaveID").ToString())
         txtLeaveType.Text = If(IsDBNull(row("LeaveType")), "", row("LeaveType").ToString())
@@ -122,19 +133,21 @@ Public Class Leave_Management
         txtApprovedBy.Text = If(IsDBNull(row("ApprovedBy")), "", row("ApprovedBy").ToString())
         txtEmployeeID.Text = If(IsDBNull(row("EmployeeID")), "", row("EmployeeID").ToString())
         txtEmployeeName.Text = If(IsDBNull(row("EmployeeName")), "", row("EmployeeName").ToString())
+
         Dim fromDate As DateTime
+        Dim toDate As DateTime
+
         If Not IsDBNull(row("DurationDateFrom")) AndAlso DateTime.TryParse(row("DurationDateFrom").ToString(), fromDate) Then
             dtpDurationDateFrom.Value = fromDate.Date
         Else
             dtpDurationDateFrom.Value = DateTime.Today
         End If
 
-        Dim toDate As DateTime
         If Not IsDBNull(row("DurationDateTo")) AndAlso DateTime.TryParse(row("DurationDateTo").ToString(), toDate) Then
             dtpDurationDateTo.Value = toDate.Date
+        Else
             dtpDurationDateTo.Value = DateTime.Today
         End If
-
     End Sub
 
     Private Sub dgvLeaveHistory_SelectionChanged(sender As Object, e As EventArgs)
@@ -155,6 +168,7 @@ Public Class Leave_Management
         dtpDurationDateFrom.Value = DateTime.Today
         dtpDurationDateTo.Value = DateTime.Today
     End Sub
+
     Private Sub btnApplyforLeave_Click(sender As Object, e As EventArgs) Handles btnApplyforLeave.Click
         Try
             Dim lastIDObj = HRMModule.ExecuteScalar("SELECT LeaveID FROM tblLeave ORDER BY LeaveID DESC LIMIT 1")
@@ -165,13 +179,18 @@ Public Class Leave_Management
                 newID = "L" & (lastNum + 1).ToString("D3")
             End If
 
+            Dim query As String = "SELECT CONCAT(`First Name`, ' ', IFNULL(MiddleName, ''), ' ', LastName) AS FullName FROM tblEmployee WHERE EmployeeID = @empID"
+            Dim param As New List(Of MySqlParameter) From {New MySqlParameter("@empID", HRMModule.CurrentUser.EmployeeID)}
+            Dim dt As DataTable = HRMModule.ExecuteQuery(query, param)
+            Dim fullName As String = If(dt.Rows.Count > 0, dt.Rows(0)("FullName").ToString().Trim(), "")
+
             txtLeaveID.Text = newID
             txtLeaveType.Clear()
             txtLeaveReason.Clear()
             txtStatusLeave.Text = "Pending"
             txtApprovedBy.Clear()
             txtEmployeeID.Text = HRMModule.CurrentUser.EmployeeID
-            txtEmployeeName.Text = HRMModule.CurrentUser.Username
+            txtEmployeeName.Text = fullName
             dtpDurationDateFrom.Value = DateTime.Today
             dtpDurationDateTo.Value = DateTime.Today
 
@@ -185,6 +204,7 @@ Public Class Leave_Management
             MessageBox.Show("Error generating Leave ID: " & ex.Message)
         End Try
     End Sub
+
     Private Sub btnSaveLeave_Click(sender As Object, e As EventArgs) Handles btnSaveLeave.Click
         Try
             If txtLeaveType.Text.Trim() = "" Or txtLeaveReason.Text.Trim() = "" Then
