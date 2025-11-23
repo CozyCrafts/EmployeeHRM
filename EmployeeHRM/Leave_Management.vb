@@ -54,22 +54,31 @@ Public Class Leave_Management
     Private Sub LoadLeaveHistory()
         Try
             Dim query As String = "
-                SELECT 
-                    l.LeaveID, l.LeaveType, l.Reason, l.DurationDateFrom, l.DurationDateTo, l.Status, l.ApprovedBy,
-                    e.EmployeeID, CONCAT(e.`First Name`, ' ', IFNULL(e.MiddleName, ''), ' ', e.LastName) AS EmployeeName
-                FROM tblLeave l
-                JOIN tblEmployee e ON l.EmployeeID = e.EmployeeID
-                WHERE l.EmployeeID = @empID
-                ORDER BY l.DurationDateFrom DESC;
-            "
+            SELECT 
+                l.LeaveID, l.LeaveType, l.Reason, l.DurationDateFrom, l.DurationDateTo, l.Status, l.ApprovedBy,
+                e.EmployeeID, CONCAT(e.`First Name`, ' ', IFNULL(e.MiddleName, ''), ' ', e.LastName) AS EmployeeName
+            FROM tblLeave l
+            JOIN tblEmployee e ON l.EmployeeID = e.EmployeeID
+            WHERE l.EmployeeID = @empID
+            ORDER BY l.DurationDateFrom DESC;
+        "
 
             Dim parameters As New List(Of MySqlParameter) From {
-                New MySqlParameter("@empID", HRMModule.CurrentUser.EmployeeID)
-            }
+            New MySqlParameter("@empID", HRMModule.CurrentUser.EmployeeID)
+        }
 
             dbtable = HRMModule.ExecuteQuery(query, parameters)
 
             dgvLeaveHistory.DataSource = dbtable
+
+            If dgvLeaveHistory.Columns.Contains("DurationDateFrom") Then
+                dgvLeaveHistory.Columns("DurationDateFrom").DefaultCellStyle.Format = "yyyy-MM-dd"
+            End If
+
+            If dgvLeaveHistory.Columns.Contains("DurationDateTo") Then
+                dgvLeaveHistory.Columns("DurationDateTo").DefaultCellStyle.Format = "yyyy-MM-dd"
+            End If
+
             dgvLeaveHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
             dgvLeaveHistory.SelectionMode = DataGridViewSelectionMode.FullRowSelect
             dgvLeaveHistory.ReadOnly = True
@@ -87,6 +96,7 @@ Public Class Leave_Management
             MessageBox.Show("Error loading leave history: " & ex.Message)
         End Try
     End Sub
+
     Private Sub LockTextBoxes()
         txtLeaveID.ReadOnly = True
         txtEmployeeID.ReadOnly = True
