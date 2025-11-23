@@ -10,6 +10,7 @@ Public Class Employee_Trainings
         tb.SelectionStart = selStart
     End Sub
     Private Sub Employee_Trainings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        HRMModule.RequireManagerAccess(Me)
         LoadEmployees()
         LoadTrainings()
         LockControls()

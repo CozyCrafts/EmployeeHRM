@@ -16,6 +16,7 @@ Public Class Amenities
     End Sub
 
     Private Sub Amenities_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        HRMModule.RequireManagerAccess(Me)
         LoadAmenities()
         cbConditionAmenities.Items.AddRange({"Good", "Needs Repair", "Excellent", "Fair"})
         cbConditionAmenities.SelectedIndex = -1

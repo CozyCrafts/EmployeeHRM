@@ -22,6 +22,7 @@ Public Class Attendance_Tracker
     End Sub
 
     Private Sub Attendance_Tracker_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        HRMModule.RequireManagerAccess(Me)
         LoadAttendanceList()
         LockAllFields()
         SetupDateAndTimePickers()

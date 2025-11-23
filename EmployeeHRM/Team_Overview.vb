@@ -52,6 +52,7 @@ Public Class Team_Overview
         tb.SelectionStart = selStart
     End Sub
     Private Sub Team_Overview_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        HRMModule.RequireManagerAccess(Me)
         cbSex.Items.Clear()
         cbSex.Items.AddRange(New Object() {"Male", "Female", "Other"})
         cbCivilStatus.Items.Clear()

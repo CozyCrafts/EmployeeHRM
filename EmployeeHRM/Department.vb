@@ -12,6 +12,7 @@ Public Class Department
     End Sub
 
     Private Sub Department_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        HRMModule.RequireManagerAccess(Me)
         Try
             LoadDepartments()
         Catch ex As Exception

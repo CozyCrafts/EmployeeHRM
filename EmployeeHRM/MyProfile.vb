@@ -7,17 +7,7 @@ Public Class MyProfile
 
     Private LoggedInUserID As String = HRMModule.CurrentUser.EmployeeID
     Private Sub MyProfile_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If HRMModule.CurrentUser.UserType = "Staff" Then
-            lblManagement.Visible = False
-            lblTeamOverview.Visible = False
-            lblAttendanceTracker.Visible = False
-            lblLeaveApproval.Visible = False
-            lblPayrollSummary.Visible = False
-            lblEmployeeTrainings.Visible = False
-            lblDepartment.Visible = False
-            lblAmenities.Visible = False
-        End If
-
+        HRMModule.HideManagerLabelsForStaff(Me)
         LoadMyProfile()
     End Sub
     Private Sub LockAllFields()

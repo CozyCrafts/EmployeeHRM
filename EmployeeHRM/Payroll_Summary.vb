@@ -8,6 +8,7 @@ Public Class Payroll_Summary
     Private originalValues As New Dictionary(Of String, String)
     Private payrollBindingSource As BindingSource
     Private Sub Payroll_Summary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        HRMModule.RequireManagerAccess(Me)
         LoadPayrollSummary()
         LoadEmployeeIDs()
         LockFields()

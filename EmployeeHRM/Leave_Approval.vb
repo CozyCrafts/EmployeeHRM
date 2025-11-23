@@ -5,6 +5,7 @@ Public Class Leave_Approval
     Private originalStatus As String
     Private originalApprovedBy As String
     Private Sub Leave_Approval_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        HRMModule.RequireManagerAccess(Me)
         LoadLeaveRequests()
         LockLeaveControls()
         cbStatus.Items.Clear()
