@@ -106,11 +106,11 @@ Public Class Trainings
     Private Sub btnSaveTraining_Click(sender As Object, e As EventArgs) Handles btnSaveTraining.Click
         If Not isEditing Then Return
 
-
+        ' Get the selected row
         Dim selectedRow As DataGridViewRow = dgvTrainingHistory.CurrentRow
         Dim trainingID As String = selectedRow.Cells("TrainingID").Value.ToString()
 
-
+        ' Check if this training already exists in the database
         Try
             OpenCon()
             Dim checkQuery As String = "SELECT COUNT(*) FROM tbltrainingdevelopment WHERE TrainingID=@trainingID"
@@ -129,6 +129,7 @@ Public Class Trainings
             Return
         End Try
 
+        ' Proceed with update as before
         Dim newStatus As String = If(rbPlanned.Checked, "Planned",
                              If(rbInProgress.Checked, "In Progress",
                              If(rbCompleted.Checked, "Completed", "Postponed")))
@@ -143,6 +144,7 @@ Public Class Trainings
             dateCompleted = Date.Now
         End If
 
+        ' Check if nothing changed
         If originalStatus = newStatus AndAlso originalDateStarted = dateStarted AndAlso originalDateCompleted = dateCompleted Then
             MessageBox.Show("No changes were made.")
             LockControls()
@@ -150,6 +152,7 @@ Public Class Trainings
             Return
         End If
 
+        ' Update training
         Try
             Dim query As String = "
             UPDATE tbltrainingdevelopment
