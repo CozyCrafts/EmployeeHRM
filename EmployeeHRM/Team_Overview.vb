@@ -52,7 +52,16 @@ Public Class Team_Overview
         tb.SelectionStart = selStart
     End Sub
     Private Sub Team_Overview_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        HRMModule.RequireManagerAccess(Me)
+        If CurrentUser.UserType = "Staff" Then
+            lblManagement.Visible = False
+            lblTeamOverview.Visible = False
+            lblAttandanceTracker.Visible = False
+            lblLeaveApproval.Visible = False
+            lblPayrollSummary.Visible = False
+            lblEmployeeTrainings.Visible = False
+            lblDepartment.Visible = False
+            lblAmenities.Visible = False
+        End If
         cbSex.Items.Clear()
         cbSex.Items.AddRange(New Object() {"Male", "Female", "Other"})
         cbCivilStatus.Items.Clear()

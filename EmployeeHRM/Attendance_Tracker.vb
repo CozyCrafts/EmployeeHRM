@@ -22,7 +22,16 @@ Public Class Attendance_Tracker
     End Sub
 
     Private Sub Attendance_Tracker_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        HRMModule.RequireManagerAccess(Me)
+        If CurrentUser.UserType = "Staff" Then
+            lblManagement.Visible = False
+            lblTeamOverview.Visible = False
+            lblAttendanceTracker.Visible = False
+            lblLeaveApproval.Visible = False
+            lblPayrollSummary.Visible = False
+            lblEmployeeTrainings.Visible = False
+            lblDepartment.Visible = False
+            lblAmenities.Visible = False
+        End If
         LoadAttendanceList()
         LockAllFields()
         SetupDateAndTimePickers()

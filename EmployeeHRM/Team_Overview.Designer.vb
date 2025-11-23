@@ -23,7 +23,7 @@ Partial Class Team_Overview
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Team_Overview))
-        Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Panel1 = New Panel()
         btnSignOut = New FontAwesome.Sharp.IconButton()
         lblAmenities = New Label()
@@ -36,7 +36,7 @@ Partial Class Team_Overview
         Label7 = New Label()
         lblAttandanceTracker = New Label()
         lblTeamOverview = New Label()
-        Label4 = New Label()
+        lblManagement = New Label()
         lblMyProfile = New Label()
         lblAttendance = New Label()
         lblLeaveManagement = New Label()
@@ -138,7 +138,7 @@ Partial Class Team_Overview
         Panel1.Controls.Add(Label7)
         Panel1.Controls.Add(lblAttandanceTracker)
         Panel1.Controls.Add(lblTeamOverview)
-        Panel1.Controls.Add(Label4)
+        Panel1.Controls.Add(lblManagement)
         Panel1.Controls.Add(lblMyProfile)
         Panel1.Controls.Add(lblAttendance)
         Panel1.Controls.Add(lblLeaveManagement)
@@ -279,16 +279,16 @@ Partial Class Team_Overview
         lblTeamOverview.TabIndex = 27
         lblTeamOverview.Text = "Team Overview"
         ' 
-        ' Label4
+        ' lblManagement
         ' 
-        Label4.AutoSize = True
-        Label4.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label4.ForeColor = Color.White
-        Label4.Location = New Point(30, 500)
-        Label4.Name = "Label4"
-        Label4.Size = New Size(135, 22)
-        Label4.TabIndex = 26
-        Label4.Text = "MANAGEMENT"
+        lblManagement.AutoSize = True
+        lblManagement.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblManagement.ForeColor = Color.White
+        lblManagement.Location = New Point(30, 500)
+        lblManagement.Name = "lblManagement"
+        lblManagement.Size = New Size(135, 22)
+        lblManagement.TabIndex = 26
+        lblManagement.Text = "MANAGEMENT"
         ' 
         ' lblMyProfile
         ' 
@@ -626,14 +626,14 @@ Partial Class Team_Overview
         dgvOtherInfo.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
         dgvOtherInfo.ColumnHeadersHeight = 29
         dgvOtherInfo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = SystemColors.Window
-        DataGridViewCellStyle1.Font = New Font("Century Gothic", 11F, FontStyle.Bold)
-        DataGridViewCellStyle1.ForeColor = SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = DataGridViewTriState.False
-        dgvOtherInfo.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = SystemColors.Window
+        DataGridViewCellStyle2.Font = New Font("Century Gothic", 11F, FontStyle.Bold)
+        DataGridViewCellStyle2.ForeColor = SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = DataGridViewTriState.False
+        dgvOtherInfo.DefaultCellStyle = DataGridViewCellStyle2
         dgvOtherInfo.Location = New Point(15, 86)
         dgvOtherInfo.Name = "dgvOtherInfo"
         dgvOtherInfo.RowHeadersWidth = 51
@@ -1183,7 +1183,7 @@ Partial Class Team_Overview
     Friend WithEvents Label7 As Label
     Friend WithEvents lblAttandanceTracker As Label
     Friend WithEvents lblTeamOverview As Label
-    Friend WithEvents Label4 As Label
+    Friend WithEvents lblManagement As Label
     Friend WithEvents lblMyProfile As Label
     Friend WithEvents lblAttendance As Label
     Friend WithEvents lblLeaveManagement As Label

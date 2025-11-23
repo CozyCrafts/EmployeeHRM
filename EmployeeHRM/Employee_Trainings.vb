@@ -10,7 +10,16 @@ Public Class Employee_Trainings
         tb.SelectionStart = selStart
     End Sub
     Private Sub Employee_Trainings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        HRMModule.RequireManagerAccess(Me)
+        If CurrentUser.UserType = "Staff" Then
+            lblManagement.Visible = False
+            lblTeamOverview.Visible = False
+            lblAttendanceTracker.Visible = False
+            lblLeaveApproval.Visible = False
+            lblPayrollSummary.Visible = False
+            lblEmployeeTrainings.Visible = False
+            lblDepartment.Visible = False
+            lblAmenities.Visible = False
+        End If
         LoadEmployees()
         LoadTrainings()
         LockControls()

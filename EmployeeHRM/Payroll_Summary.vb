@@ -8,7 +8,16 @@ Public Class Payroll_Summary
     Private originalValues As New Dictionary(Of String, String)
     Private payrollBindingSource As BindingSource
     Private Sub Payroll_Summary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        HRMModule.RequireManagerAccess(Me)
+        If CurrentUser.UserType = "Staff" Then
+            lblManagement.Visible = False
+            lblTeamOverview.Visible = False
+            lblAttendanceTracker.Visible = False
+            lblLeaveApproval.Visible = False
+            lblPayrollSummary.Visible = False
+            lblEmployeeTrainings.Visible = False
+            lblDepartment.Visible = False
+            lblAmenities.Visible = False
+        End If
         LoadPayrollSummary()
         LoadEmployeeIDs()
         LockFields()

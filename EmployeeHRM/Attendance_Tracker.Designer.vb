@@ -37,7 +37,7 @@ Partial Class Attendance_Tracker
         Label7 = New Label()
         lblAttendanceTracker = New Label()
         lblTeamOverview = New Label()
-        Label4 = New Label()
+        lblManagement = New Label()
         lblMyProfile = New Label()
         lblAttendance = New Label()
         lblLeaveManagement = New Label()
@@ -126,7 +126,7 @@ Partial Class Attendance_Tracker
         Panel1.Controls.Add(Label7)
         Panel1.Controls.Add(lblAttendanceTracker)
         Panel1.Controls.Add(lblTeamOverview)
-        Panel1.Controls.Add(Label4)
+        Panel1.Controls.Add(lblManagement)
         Panel1.Controls.Add(lblMyProfile)
         Panel1.Controls.Add(lblAttendance)
         Panel1.Controls.Add(lblLeaveManagement)
@@ -267,16 +267,16 @@ Partial Class Attendance_Tracker
         lblTeamOverview.TabIndex = 9
         lblTeamOverview.Text = "Team Overview"
         ' 
-        ' Label4
+        ' lblManagement
         ' 
-        Label4.AutoSize = True
-        Label4.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label4.ForeColor = Color.White
-        Label4.Location = New Point(30, 500)
-        Label4.Name = "Label4"
-        Label4.Size = New Size(135, 22)
-        Label4.TabIndex = 8
-        Label4.Text = "MANAGEMENT"
+        lblManagement.AutoSize = True
+        lblManagement.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblManagement.ForeColor = Color.White
+        lblManagement.Location = New Point(30, 500)
+        lblManagement.Name = "lblManagement"
+        lblManagement.Size = New Size(135, 22)
+        lblManagement.TabIndex = 8
+        lblManagement.Text = "MANAGEMENT"
         ' 
         ' lblMyProfile
         ' 
@@ -863,7 +863,7 @@ Partial Class Attendance_Tracker
     Friend WithEvents Label7 As Label
     Friend WithEvents lblAttendanceTracker As Label
     Friend WithEvents lblTeamOverview As Label
-    Friend WithEvents Label4 As Label
+    Friend WithEvents lblManagement As Label
     Friend WithEvents lblMyProfile As Label
     Friend WithEvents lblAttendance As Label
     Friend WithEvents lblLeaveManagement As Label

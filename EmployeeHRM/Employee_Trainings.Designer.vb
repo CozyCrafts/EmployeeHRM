@@ -23,7 +23,7 @@ Partial Class Employee_Trainings
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Employee_Trainings))
-        Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Panel1 = New Panel()
         btnSignOut = New FontAwesome.Sharp.IconButton()
         lblAmenities = New Label()
@@ -36,7 +36,7 @@ Partial Class Employee_Trainings
         Label7 = New Label()
         lblAttendanceTracker = New Label()
         lblTeamOverview = New Label()
-        Label4 = New Label()
+        lblManagement = New Label()
         lblMyProfile = New Label()
         lblAttendance = New Label()
         lblLeaveManagement = New Label()
@@ -102,7 +102,7 @@ Partial Class Employee_Trainings
         Panel1.Controls.Add(Label7)
         Panel1.Controls.Add(lblAttendanceTracker)
         Panel1.Controls.Add(lblTeamOverview)
-        Panel1.Controls.Add(Label4)
+        Panel1.Controls.Add(lblManagement)
         Panel1.Controls.Add(lblMyProfile)
         Panel1.Controls.Add(lblAttendance)
         Panel1.Controls.Add(lblLeaveManagement)
@@ -243,16 +243,16 @@ Partial Class Employee_Trainings
         lblTeamOverview.TabIndex = 9
         lblTeamOverview.Text = "Team Overview"
         ' 
-        ' Label4
+        ' lblManagement
         ' 
-        Label4.AutoSize = True
-        Label4.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label4.ForeColor = Color.White
-        Label4.Location = New Point(30, 500)
-        Label4.Name = "Label4"
-        Label4.Size = New Size(135, 22)
-        Label4.TabIndex = 8
-        Label4.Text = "MANAGEMENT"
+        lblManagement.AutoSize = True
+        lblManagement.Font = New Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblManagement.ForeColor = Color.White
+        lblManagement.Location = New Point(30, 500)
+        lblManagement.Name = "lblManagement"
+        lblManagement.Size = New Size(135, 22)
+        lblManagement.TabIndex = 8
+        lblManagement.Text = "MANAGEMENT"
         ' 
         ' lblMyProfile
         ' 
@@ -389,14 +389,14 @@ Partial Class Employee_Trainings
         dgvEmployeeTrainingHistory.AllowUserToResizeColumns = False
         dgvEmployeeTrainingHistory.AllowUserToResizeRows = False
         dgvEmployeeTrainingHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
-        DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = SystemColors.Control
-        DataGridViewCellStyle1.Font = New Font("Century Gothic", 11F, FontStyle.Bold)
-        DataGridViewCellStyle1.ForeColor = SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = DataGridViewTriState.True
-        dgvEmployeeTrainingHistory.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = SystemColors.Control
+        DataGridViewCellStyle2.Font = New Font("Century Gothic", 11F, FontStyle.Bold)
+        DataGridViewCellStyle2.ForeColor = SystemColors.WindowText
+        DataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = DataGridViewTriState.True
+        dgvEmployeeTrainingHistory.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         dgvEmployeeTrainingHistory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         dgvEmployeeTrainingHistory.Location = New Point(27, 92)
         dgvEmployeeTrainingHistory.Margin = New Padding(4, 3, 4, 3)
@@ -818,7 +818,7 @@ Partial Class Employee_Trainings
     Friend WithEvents Label7 As Label
     Friend WithEvents lblAttendanceTracker As Label
     Friend WithEvents lblTeamOverview As Label
-    Friend WithEvents Label4 As Label
+    Friend WithEvents lblManagement As Label
     Friend WithEvents lblMyProfile As Label
     Friend WithEvents lblAttendance As Label
     Friend WithEvents lblLeaveManagement As Label

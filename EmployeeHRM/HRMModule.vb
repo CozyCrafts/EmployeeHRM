@@ -74,33 +74,6 @@ Module HRMModule
             Return Nothing
         End Try
     End Function
-    Public Sub RequireManagerAccess(form As Form)
-        If CurrentUser.UserType <> "Manager" Then
-            MessageBox.Show("Access denied. Managers only.")
-            form.Close()
-            Employee_Dashboard.Show()
-        End If
-    End Sub
-    Public Sub HideManagerLabelsForStaff(form As Form)
-        If CurrentUser.UserType = "Staff" Then
-            For Each ctl As Control In form.Controls
-                If TypeOf ctl Is Label Then
-                    Select Case ctl.Name
-                        Case "lblManagement",
-                         "lblTeamOverview",
-                         "lblAttendanceTracker",
-                         "lblLeaveApproval",
-                         "lblPayrollSummary",
-                         "lblEmployeeTrainings",
-                         "lblDepartment",
-                         "lblAmenities"
-                            ctl.Visible = False
-                    End Select
-                End If
-            Next
-        End If
-    End Sub
-
     Public Sub SignOut(currentForm As Form)
 
         Dim result As DialogResult = MessageBox.Show("Are you sure you want to sign out?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question)

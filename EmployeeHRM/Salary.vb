@@ -5,7 +5,16 @@ Public Class Salary
     Private salaryBindingSource As BindingSource
 
     Private Sub Salary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        HRMModule.HideManagerLabelsForStaff(Me)
+        If CurrentUser.UserType = "Staff" Then
+            lblManagement.Visible = False
+            lblTeamOverview.Visible = False
+            lblAttendanceTracker.Visible = False
+            lblLeaveApproval.Visible = False
+            lblPayrollSummary.Visible = False
+            lblEmployeeTrainings.Visible = False
+            lblDepartment.Visible = False
+            lblAmenities.Visible = False
+        End If
         LoadSalarySummary()
         LockFields()
     End Sub
