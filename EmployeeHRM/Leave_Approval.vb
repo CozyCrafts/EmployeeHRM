@@ -205,12 +205,7 @@ Public Class Leave_Approval
 
 
     Private Sub btnSignout_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
-        Dim result As DialogResult = MessageBox.Show("Are you sure you want to sign out?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-
-        If result = DialogResult.Yes Then
-            HRMModule.SignOut(Me)
-            MessageBox.Show("You have been signed out.", "Logged Out", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        End If
+        HRMModule.SignOut(Me)
     End Sub
 
 End Class

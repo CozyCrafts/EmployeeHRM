@@ -15,8 +15,13 @@ Module HRMModule
     Public LoginFormInstance As Login_frm
 
     Private Function GetConnectionString() As String
-        Return ConfigurationManager.ConnectionStrings("HRMDb").ConnectionString
+        Dim cs = ConfigurationManager.ConnectionStrings("HRMDb")?.ConnectionString
+        If String.IsNullOrEmpty(cs) Then
+            MessageBox.Show("Database connection string 'HRMDb' is missing. Please configure app.config.", "Configuration Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
+        Return cs
     End Function
+
 
     Public Function GetConnection() As MySqlConnection
         Return New MySqlConnection(GetConnectionString())
@@ -85,7 +90,8 @@ Module HRMModule
         End If
 
         currentForm.Close()
+        MessageBox.Show("You have been signed out.", "Logged Out", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
- End Sub
+    End Sub
 
 End Module

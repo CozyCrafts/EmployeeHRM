@@ -1,4 +1,5 @@
 ﻿Imports MySql.Data.MySqlClient
+Imports System.Globalization
 Imports System.Security.Cryptography
 Imports System.Text
 
@@ -51,69 +52,111 @@ Public Class MyProfile
     End Sub
     Private Sub LoadMyProfile()
         Try
+            ' Use consistent aliases for all columns
             Dim query As String = "
-                SELECT 
-                    e.EmployeeID,
-                    e.`First Name`, e.MiddleName, e.LastName, e.Address, e.`Contact Number`, e.`Email Address`, e.BirthDate, e.Age, e.Sex, e.`Civil Status`,
-                    j.JobID, j.EmploymentStatus, j.DateHired, j.ContractType, j.JobTitle, j.YearsOfService,
-                    d.DepartmentID, d.Name AS DepartmentName,
-                    a.UserID, a.UserType, a.Username, a.Password,
-                    ec.EmergencyContactID, ec.Name AS ECName, ec.Address AS ECAddress, ec.PhoneNumber AS ECPhone, ec.Relationship AS ECRelationship
-                FROM tblemployee e
-                LEFT JOIN tbljobdetails j ON e.EmployeeID = j.EmployeeID
-                LEFT JOIN tbldepartment d ON e.EmployeeID = d.EmployeeID
-                LEFT JOIN tblaccount a ON e.EmployeeID = a.EmployeeID
-                LEFT JOIN tblemergencycontact ec ON e.EmployeeID = ec.EmployeeID
-                WHERE e.EmployeeID=@empID
-            "
+            SELECT 
+                e.EmployeeID,
+                e.`First Name` AS FirstName,
+                e.MiddleName AS MiddleName,
+                e.LastName AS LastName,
+                e.Address AS Address,
+                e.`Contact Number` AS ContactNumber,
+                e.`Email Address` AS EmailAddress,
+                e.BirthDate,
+                e.Age,
+                e.Sex,
+                e.`Civil Status` AS CivilStatus,
+                j.JobID AS JobID,
+                j.EmploymentStatus AS EmploymentStatus,
+                j.DateHired AS DateHired,
+                j.ContractType AS ContractType,
+                j.JobTitle AS JobTitle,
+                j.YearsOfService AS YearsOfService,
+                d.DepartmentID AS DepartmentID,
+                d.Name AS DepartmentName,
+                a.UserID AS UserID,
+                a.UserType AS UserType,
+                a.Username AS Username,
+                a.Password AS Password,
+                ec.EmergencyContactID AS EmergencyContactID,
+                ec.Name AS ECName,
+                ec.Address AS ECAddress,
+                ec.PhoneNumber AS ECPhone,
+                ec.Relationship AS ECRelationship
+            FROM tblemployee e
+            LEFT JOIN tbljobdetails j ON e.EmployeeID = j.EmployeeID
+            LEFT JOIN tbldepartment d ON e.EmployeeID = d.EmployeeID
+            LEFT JOIN tblaccount a ON e.EmployeeID = a.EmployeeID
+            LEFT JOIN tblemergencycontact ec ON e.EmployeeID = ec.EmployeeID
+            WHERE e.EmployeeID=@empID
+        "
 
             Dim dt As DataTable = HRMModule.ExecuteQuery(query, New List(Of MySqlParameter) From {
-                New MySqlParameter("@empID", LoggedInUserID)
-            })
+            New MySqlParameter("@empID", LoggedInUserID)
+        })
 
-            If dt.Rows.Count > 0 Then
-                Dim row = dt.Rows(0)
-
-                txtEmployeeID.Text = row("EmployeeID").ToString()
-                txtFirstName.Text = row("First Name").ToString()
-                txtMiddleName.Text = row("MiddleName").ToString()
-                txtLastName.Text = row("LastName").ToString()
-                txtAddress.Text = row("Address").ToString()
-                txtPhone.Text = row("Contact Number").ToString()
-                txtEmail.Text = row("Email Address").ToString()
-                txtAge.Text = row("Age").ToString()
-                cbSex.Text = row("Sex").ToString()
-                cbCivilStatus.Text = row("Civil Status").ToString()
-
-                If Not IsDBNull(row("BirthDate")) Then dtpBirthDate.Value = CDate(row("BirthDate"))
-
-                txtJobID.Text = If(row("JobID") IsNot DBNull.Value, row("JobID").ToString(), "")
-                txtJobTitle.Text = If(row("JobTitle") IsNot DBNull.Value, row("JobTitle").ToString(), "")
-                txtYearsOfSevice.Text = If(row("YearsOfService") IsNot DBNull.Value, row("YearsOfService").ToString(), "")
-                cbContractType.Text = If(row("ContractType") IsNot DBNull.Value, row("ContractType").ToString(), "")
-                cbEmployeeStatus.Text = If(row("EmploymentStatus") IsNot DBNull.Value, row("EmploymentStatus").ToString(), "")
-                If Not IsDBNull(row("DateHired")) Then dtpDateHired.Value = CDate(row("DateHired"))
-                txtDepartmentID.Text = If(row("DepartmentID") IsNot DBNull.Value, row("DepartmentID").ToString(), "")
-                txtDepartment.Text = If(row("DepartmentName") IsNot DBNull.Value, row("DepartmentName").ToString(), "")
-
-                txtUserID.Text = If(row("UserID") IsNot DBNull.Value, row("UserID").ToString(), "")
-                txtUsername.Text = If(row("Username") IsNot DBNull.Value, row("Username").ToString(), "")
-                txtPassword.Text = If(row("Password") IsNot DBNull.Value, row("Password").ToString(), "")
-                cbUserType.Text = If(row("UserType") IsNot DBNull.Value, row("UserType").ToString(), "")
-
-                txtECContactID.Text = If(row("EmergencyContactID") IsNot DBNull.Value, row("EmergencyContactID").ToString(), "")
-                txtECName.Text = If(row("ECName") IsNot DBNull.Value, row("ECName").ToString(), "")
-                txtECAddress.Text = If(row("ECAddress") IsNot DBNull.Value, row("ECAddress").ToString(), "")
-                txtECPhone.Text = If(row("ECPhone") IsNot DBNull.Value, row("ECPhone").ToString(), "")
-                txtECRelationship.Text = If(row("ECRelationship") IsNot DBNull.Value, row("ECRelationship").ToString(), "")
+            If dt.Rows.Count = 0 Then
+                MessageBox.Show("Employee data not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
             End If
 
+            Dim row = dt.Rows(0)
+
+            ' Personal Info
+            txtEmployeeID.Text = If(row("EmployeeID")?.ToString(), "")
+            txtFirstName.Text = If(row("FirstName")?.ToString(), "")
+            txtMiddleName.Text = If(row("MiddleName")?.ToString(), "")
+            txtLastName.Text = If(row("LastName")?.ToString(), "")
+            txtAddress.Text = If(row("Address")?.ToString(), "")
+            txtPhone.Text = If(row("ContactNumber")?.ToString(), "")
+            txtEmail.Text = If(row("EmailAddress")?.ToString(), "")
+            txtAge.Text = If(row("Age")?.ToString(), "")
+            cbSex.Text = If(row("Sex")?.ToString(), "")
+            cbCivilStatus.Text = If(row("CivilStatus")?.ToString(), "")
+
+            Dim birthDateStr = row("BirthDate").ToString()
+            Dim birthDateValue As DateTime
+            If DateTime.TryParse(birthDateStr, CultureInfo.InvariantCulture, Globalization.DateTimeStyles.None, birthDateValue) Then
+                dtpBirthDate.Value = birthDateValue
+            End If
+
+            ' Job Info
+            txtJobID.Text = If(row("JobID")?.ToString(), "")
+            txtJobTitle.Text = If(row("JobTitle")?.ToString(), "")
+            txtYearsOfSevice.Text = If(row("YearsOfService")?.ToString(), "")
+            cbContractType.Text = If(row("ContractType")?.ToString(), "")
+            cbEmployeeStatus.Text = If(row("EmploymentStatus")?.ToString(), "")
+            Dim dateHiredStr = row("DateHired").ToString()
+            Dim dateHiredValue As DateTime
+            If DateTime.TryParse(dateHiredStr, CultureInfo.InvariantCulture, Globalization.DateTimeStyles.None, dateHiredValue) Then
+                dtpDateHired.Value = dateHiredValue
+            End If
+
+            ' Department
+            txtDepartmentID.Text = If(row("DepartmentID")?.ToString(), "")
+            txtDepartment.Text = If(row("DepartmentName")?.ToString(), "")
+
+            ' Account Info
+            txtUserID.Text = If(row("UserID")?.ToString(), "")
+            txtUsername.Text = If(row("Username")?.ToString(), "")
+            txtPassword.Text = If(row("Password")?.ToString(), "")
+            cbUserType.Text = If(row("UserType")?.ToString(), "")
+
+            ' Emergency Contact
+            txtECContactID.Text = If(row("EmergencyContactID")?.ToString(), "")
+            txtECName.Text = If(row("ECName")?.ToString(), "")
+            txtECAddress.Text = If(row("ECAddress")?.ToString(), "")
+            txtECPhone.Text = If(row("ECPhone")?.ToString(), "")
+            txtECRelationship.Text = If(row("ECRelationship")?.ToString(), "")
+
+            ' Lock fields after loading
             LockAllFields()
 
         Catch ex As Exception
-            MessageBox.Show("Error loading profile. Please contact admin.")
+            MessageBox.Show("Error loading profile: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
     Private Sub btnEditContact_Click(sender As Object, e As EventArgs) Handles btnEditContact.Click
         txtECName.ReadOnly = False
         txtECRelationship.ReadOnly = False
@@ -321,12 +364,7 @@ Public Class MyProfile
     End Sub
 
     Private Sub btnSignout_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
-        Dim result As DialogResult = MessageBox.Show("Are you sure you want to sign out?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-
-        If result = DialogResult.Yes Then
-            HRMModule.SignOut(Me)
-            MessageBox.Show("You have been signed out.", "Logged Out", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        End If
+        HRMModule.SignOut(Me)
     End Sub
 
 End Class

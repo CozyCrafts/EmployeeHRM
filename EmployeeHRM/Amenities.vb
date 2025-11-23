@@ -189,14 +189,14 @@ Public Class Amenities
         If dgvAmenities.CurrentRow Is Nothing Then Return
 
         Dim row As DataGridViewRow = dgvAmenities.CurrentRow
-        txtAmenitiesID.Text = row.Cells("AmenitiesID").Value.ToString()
-        txtNameAmenities.Text = row.Cells("AmenityName").Value.ToString()
-        txtLocationAmenities.Text = row.Cells("Location").Value.ToString()
-        cbConditionAmenities.SelectedItem = row.Cells("Condition").Value.ToString()
+        txtAmenitiesID.Text = If(row.Cells("AmenitiesID").Value?.ToString(), "")
+        txtNameAmenities.Text = If(row.Cells("AmenityName").Value?.ToString(), "")
+        txtLocationAmenities.Text = If(row.Cells("Location").Value?.ToString(), "")
+        cbConditionAmenities.SelectedItem = If(row.Cells("Condition").Value?.ToString(), Nothing)
 
         originalAmenityValues("AmenityName") = txtNameAmenities.Text
         originalAmenityValues("Location") = txtLocationAmenities.Text
-        originalAmenityValues("Condition") = cbConditionAmenities.SelectedItem.ToString()
+        originalAmenityValues("Condition") = If(cbConditionAmenities.SelectedItem?.ToString(), "")
 
         LockControls()
         SetRecordSelectedAmenityButtons()
@@ -315,12 +315,7 @@ Public Class Amenities
     End Sub
 
     Private Sub btnSignout_Click(sender As Object, e As EventArgs) Handles btnSignOut.Click
-        Dim result As DialogResult = MessageBox.Show("Are you sure you want to sign out?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-
-        If result = DialogResult.Yes Then
-            HRMModule.SignOut(Me)
-            MessageBox.Show("You have been signed out.", "Logged Out", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        End If
+        HRMModule.SignOut(Me)
     End Sub
 
 
