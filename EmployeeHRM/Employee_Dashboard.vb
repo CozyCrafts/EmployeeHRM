@@ -411,7 +411,8 @@ Public Class Employee_Dashboard
     }
 
         Dim italicBoldWords As New List(Of String) From {
-        "Professionalism",
+       "Policies – Sundowners Resort",
+       "Professionalism",
         "Dress Code & Grooming",
         "Attendance & Punctuality",
         "Harassment & Discrimination",
