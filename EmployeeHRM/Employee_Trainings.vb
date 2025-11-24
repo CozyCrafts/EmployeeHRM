@@ -364,6 +364,10 @@ Handles rbInProgress.CheckedChanged, rbCompleted.CheckedChanged, rbPostponed.Che
         Attendance.Show()
         Me.Hide()
     End Sub
+    Private Sub lblLeaveManagement_Click(sender As Object, e As EventArgs) Handles lblLeaveManagement.Click
+        Leave_Management.Show()
+        Me.Hide()
+    End Sub
     Private Sub lblSalary_Click(sender As Object, e As EventArgs) Handles lblSalary.Click
         Salary.Show()
         Me.Hide()
@@ -404,5 +408,6 @@ Handles rbInProgress.CheckedChanged, rbCompleted.CheckedChanged, rbPostponed.Che
         Dim result As DialogResult = MessageBox.Show("Are you sure you want to sign out?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         HRMModule.SignOut(Me)
     End Sub
+
 
 End Class
