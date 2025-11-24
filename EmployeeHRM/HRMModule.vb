@@ -76,21 +76,22 @@ Module HRMModule
     End Function
     Public Sub SignOut(currentForm As Form)
 
-        Dim result As DialogResult = MessageBox.Show("Are you sure you want to sign out?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        Dim result As DialogResult = MessageBox.Show(
+            "Are you sure you want to exit the program?",
+            "Confirm Exit",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question
+        )
         If result <> DialogResult.Yes Then Return
-
         CurrentUser = New LoggedInUser()
-        If LoginFormInstance Is Nothing OrElse LoginFormInstance.IsDisposed Then
-            LoginFormInstance = New Login_frm()
-        End If
-        If LoginFormInstance IsNot Nothing Then
-            LoginFormInstance.ClearLoginFields()
-            LoginFormInstance.Show()
-        End If
-
-        currentForm.Close()
-        MessageBox.Show("You have been signed out.", "Logged Out", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
+        MessageBox.Show(
+            "You have been signed out. The program will now close.",
+            "Goodbye",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Information
+        )
+        Application.Exit()
     End Sub
+
 
 End Module
